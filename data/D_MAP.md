@@ -332,3 +332,73 @@ end)
 Проверено: `pool[6310]` — функция выбора квеста (`Category == "Combat"`,
 `Requirements.Level`, `Quests.CanAddQuest`), хотя в тексте рядом стоит `bmX = F6310`.
 Поэтому шаги выше опознаны **по содержимому**, а слоты считать черновыми.
+
+## 15. Пороги убийства и боевые твики (закрыто)
+
+**`Combat_Service` в артефакте НЕТ** (0 вхождений и в оригинале, и в пуле).
+Строки `Combat_Service/Combat` с `A3=1..5`, `A5=0.13/0.04` в трейсах — это
+собственный ремоут игры; рекордер видел его, потому что хукал `SignalEvent.ToServer`
+целиком. Ouroboros свингов не шлёт вообще.
+
+Влезает Ouroboros в бой через игровые таблицы:
+`cKb[51]["CombatInputs"]` (строка 34340: `cKb[42] = cKb[51]["CombatInputs"]`),
+`cKb[51]["SkillWork"]["entry"]`, `cKb[51]["BlockWork"]["entry"]`,
+`bno["CombatPresets"]["slow_walk_duration"]`, `bno["CombatSkills"]`.
+
+### Таблица твиков `cKb[99]["tweaks"]` (строка 37249), дефолты 1:1
+```
+noStun=true, noRagdoll=false, instantKill=false, killThreshold=10,
+chestKill=false, chestKillThreshold=10, infStamina=false, infClimb=false,
+infHorse=false, noDrown=false, noDashCd=false, noSun=false, alwaysRun=false,
+ownership=false, ownershipRange=250, [8562344]=false
+```
+Алиасы: `cKb[72] = cKb[99]["tweaks"]` (32666), `bop = cKb[99]["tweaks"]` (23692).
+
+### Сеттеры (F-слоты)
+| | | | |
+|---|---|---|---|
+| SetKillThreshold F51 (clamp 0..100, деф. 10) | SetChestKillThreshold F6033 | SetInstantKill F4760 | SetChestInstantKill F2680 |
+| SetNoStun F5991 | SetNoRagdoll F6168 | SetNoAttackSlowdown F5934 | SetNoDashCooldown F734 |
+| SetNoDrown F5927 | SetInfiniteStamina F4483 | SetInfiniteClimb F2327 | SetInfiniteHorseStamina F787 |
+| SetAlwaysRun F2206 | SetDisableShiftLock F4303 | SetNoSunDamage F127 | SetOwnershipRange F841 (clamp 50..2000) |
+
+### Семантика порога
+`meta = 1 - clamp(threshold,0,100)/100`; убиваем при `Health <= MaxHealth * meta`.
+То есть слайдер = «сколько % здоровья должно быть снято до казни»: 0 → сразу,
+10 → после 10% урона (дефолт), 100 → фактически никогда.
+MaxHealth лежит в **атрибуте `humanoid["Serpent"]`** (проверка `Serpent > 0`).
+
+### `bpX` — Instant Kill (строка 733)
+```
+если not tweaks["instantKill"] → выход
+meta = 1 - killThreshold/100
+для каждой записи mobs() (boo() = F76: обход cKb[132]["Debree"]/["Regions"],
+        модели с Humanoid):
+    если humanoid.Serpent > 0
+       и humanoid.Health <= humanoid.Serpent * meta
+       и (model:FindFirstChild("HumanoidRootPart") или model.PrimaryPart)
+       и model.ReceiveAge == 0:
+           task.defer(function() humanoid.Health = 0 end); break
+```
+Убийство делается **установкой Health = 0 в task.defer**, а не свингом — поэтому
+UI и пишет, что «instant kill пропатчен, но всё ещё работает».
+
+### `boZ` — Chest Kill (строка 813)
+```
+если not tweaks["chestKill"] → выход
+если not ChestController.running или ChestController.stopped → выход
+locked = позиции sealed-сундуков с ChestState == "Locked" (из bps()); пусто → выход
+meta = 1 - chestKillThreshold/100
+для каждого моба:
+    если Serpent > 0 и Health <= Serpent*meta и ReceiveAge == 0
+       и не PASSIVE_MOBS[name]
+       и (root.Position - любая locked-позиция).Magnitude <= CHEST_GUARD_RANGE (220):
+           task.defer(function() humanoid.Health = 0 end)
+```
+
+### Тикер
+`bon(); bpX(); boZ()` — внутри цикла под флагом `cKb[72]["AntiAfk"]` (пул: 2557 = "AntiAfk"),
+цикл запускается через `F2175(function() … end)`. То есть казнь и зачистка охраны
+идут каждый проход анти-АФК тика.
+
+Готовый читаемый порт: `ouroboros_combat.lua`.
