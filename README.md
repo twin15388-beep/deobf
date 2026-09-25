@@ -13,7 +13,8 @@
 | `ouroboros_clean_source.lua` | читаемое реконструированное ядро (clean-0.25, 25 worker-контроллеров) |
 | `ouwland_clean_main.lua` | standalone-сборка: Lumen UI + ядро + меню |
 | `NZL ui.txt` | библиотека Lumen UI (копия внутри standalone) |
-| `ouroboros_behavior_trace.lua` | рекордер вызовов сети/ввода для сверки протокола в игре |
+| `ouroboros_behavior_trace.lua` | рекордер v2: вызовы сети/ввода для сверки протокола в игре |
+| `ouroboros_behavior_trace_v3.lua` | **рекордер v3**: метки сцен, авто-хук ремоутов, авто-копирование, дубль в `ReplicatedStorage.NZL_Trace` |
 | `ouroboros_deep_extract.lua` | дамп графа замыканий через `getgc` |
 | `NZL_RECONSTRUCTION_STATUS.md`, `ouwland_recon_findings.md` | отчёт о реконструкции и recon-заметки по игре |
 | `ouroboros_deflattened.txt` | **де-flattened функции оригинала**: 427 машин состояний в читаемом виде (генерируется) |
