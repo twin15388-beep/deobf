@@ -15,6 +15,7 @@
 | `NZL ui.txt` | библиотека Lumen UI (копия внутри standalone) |
 | `ouroboros_behavior_trace.lua` | рекордер v2: вызовы сети/ввода для сверки протокола в игре |
 | `ouroboros_behavior_trace_v3.lua` | **рекордер v3**: метки сцен, авто-хук ремоутов, авто-копирование, дубль в `ReplicatedStorage.NZL_Trace` |
+- `ouroboros_behavior_trace_v4.lua` — рекордер v4: то же, что v3, плюс хуки ProximityPrompt (лут/сундуки берутся именно ими) и RemoteFunction.InvokeServer.
 | `ouroboros_deep_extract.lua` | дамп графа замыканий через `getgc` |
 | `NZL_RECONSTRUCTION_STATUS.md`, `ouwland_recon_findings.md` | отчёт о реконструкции и recon-заметки по игре |
 | `ouroboros_deflattened.txt` | **де-flattened функции оригинала**: 427 машин состояний в читаемом виде (генерируется) |

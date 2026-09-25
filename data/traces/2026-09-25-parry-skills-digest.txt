@@ -93,3 +93,23 @@ API-переключатели по порядку (это же путь мен�
 229.988 SetAutoPotion true   230.620 SetAutoPotion false
 282.259 SetAutoEquip true    285.946 SetAutoEquip false
 288.196 SetAutoMob true      293.079 SetAutoMob false
+
+=================== ХВОСТ ЭТОГО ЖЕ ПРОГОНА (145..241 с) =====================
+
+ 145.025  API.SetAutoSkillTree true      157.516  API.SetAutoSkillTree false
+ 166.195  API.SetAutoChest true         (далее телепорт-петля по LOCAL_MOVE,
+                                        в 167.997 Item_Equip 2; AutoChest не выключен!)
+ 171.507  API.SetInstantKill true        (повторное включение)
+ 225.490  API.SetAutoLoot true          239.570  API.SetAutoLoot false
+ 240.234  API.SetAutoLoot true          241.774  API.SetAutoLoot false
+
+ВАЖНО: при включённом AutoLoot (225..241 с) в трейсе НЕТ НИ ОДНОГО сигнала —
+только LOCAL_MOVE с тегами [SetAutoChest,SetAutoLoot,SetInstantKill].
+Два варианта: (а) рядом нечего было подбирать; (б) подбор идёт не через
+SignalEvent.ToServer (например, ProximityPrompt), и рекордер v2 его не видит.
+Это надо развести отдельным прогоном (см. задание на трейс №4).
+
+Сводка API-тогглов прогона (путь меню -> cKb[51][...]):
+ SetAutoLevel(true/false), SetAutoQuest, SetAutoMob, SetAutoSkills,
+ SetAutoEquip(x2), SetInstantKill(x2), SetAutoSkillTree, SetAutoChest,
+ SetAutoLoot(x3).
