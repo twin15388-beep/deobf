@@ -175,19 +175,30 @@ end
 --   Ждёт, пока скрипт загружен (bnB) и запуск контроллера валиден, но не
 --   дольше seconds. Возвращает true, если дождались.
 -- ---------------------------------------------------------------------------
+--   Точная логика (состояния 5671…5679): deadline = os.clock() + (секунды или 20);
+--   цикл: не ready() → false; время вышло → вернуть bpm() (Alive: есть Humanoid и
+--   корневая часть); bpm() → true; иначе task.wait(0.2) и снова.
 local function WaitReady(seconds)                 -- cKb[86]
     local record = bny["runs"][coroutine.running()]
     local function ready()
         if not bnB() then return false end
-        if not record then return true end
-        return bny["controllerValid"](record["controller"])
+        if record and not bny["controllerValid"](record["controller"]) then
+            return false
+        end
+        return true
     end
-    local deadline = os.clock() + (seconds or 0)
-    while os.clock() < deadline do
-        if ready() then return true end
-        task.wait()
+    local function alive()                       -- bpm = пул 796
+        local humanoid = cKb[124]()
+        if humanoid then return cKb[145]() ~= nil end
+        return false
     end
-    return false
+    local deadline = os.clock() + (seconds or 20)
+    while true do
+        if not ready() then return false end
+        if os.clock() >= deadline then return alive() end
+        if alive() then return true end
+        task.wait(0.2)
+    end
 end
 
 -- ---------------------------------------------------------------------------
