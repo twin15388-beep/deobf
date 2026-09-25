@@ -539,15 +539,315 @@ local function CarryPart(part, owner)                     -- bqn (строка 2
 end
 
 -- ---------------------------------------------------------------------------
--- КВЕСТЫ — шаг QuestController: bpn() (строка 23850)
+-- КВЕСТЫ — шаг QuestController: bpn
+--   В копии B — inline (смещение 1 660 803), в копии A слот bpn = пул-функция
+--   6279. Рендер: ouroboros_main_pruned.txt, строка 23850.
 -- ---------------------------------------------------------------------------
+-- Управляющая машина (вход pc=14066, зеркало bMR = 14066 - bMR), 1:1:
+--   14066  bMP = not bnB()                     -- модуль выгружен?
+--   14060  if bMP -> return
+--   14061  bMP = cKb[98](quests) == 0          -- квестов нет -> return
+--   14062  cKb[54]["commit"]("AutoQuest"); if not cKb[38]("AutoQuest") -> return
+--   14065  bMP, bMQ = pcall(<тело>); bpY("AutoQuest")
+--          if not bMP -> warn("[Ouroboros] quest step: " .. tostring(bMQ))
+-- Тело pcall (вход pc=3512, зеркало bMx = 3518 - bMx):
+--   3512  if not cKb[86](20) -> bpz["QuestStatus"] = "Waiting for character"; return
+--   3511  bMq = {}; for D4 in pairs(quests) do bMq[#bMq+1] = D4 end
+--         table.sort(bMq); bMr = <аксессор имени>; bMs = cKb[137]()
+--         for Ed, Ee in ipairs(bMq) do <машина bMFA, вход 7>; if bMG then break end end
+--         bMs = cKb[52]();  bMs -> 3514, иначе 3518
+--   3514  bMt = cKb[110](bMs); bpz["QuestStatus"] = "Clearing quest slot"
+--         cKb[94](bMr(bMt, bMs)); return
+--   3518  bMr = boW();  bMr > 0 -> 3516, иначе 3517
+--   3516  cKb[54]["uncommit"]("AutoQuest")
+--         bpz["QuestStatus"] = string.format("Quest cooldown %ds", math.ceil(bMr)); return
+--   3517  <машина bMFB, вход 4>; cKb[54]["uncommit"]("AutoQuest")
+--         bpz["QuestStatus"] = "Cannot take a selected quest"
+--
+-- Машина bMFA — первая петля по квестам (вход 7), состояния 1:1:
+--   7  QuestController.stopped -> 3 (return)
+--   18 bMt = cKb[110](bMK); bMp = bMr(bMt, bMK); bMu = bMs
+--   10 bMu = bMs:FindFirstChild(bMp)
+--   11 bMu -> 20, иначе 13 (пустой квест — дальше)
+--   20 bMu, bMw, bMv = bnq(bMK, "QuestStatus", QuestController)
+--      bMv (квест снят) -> 2;  bMw (пора сдавать) -> 14;  иначе 17
+--   2  bpz["QuestStatus"] = "Dropping stuck " .. cKb[142](bMK); cKb[94](bMp); return
+--   14 bpz["QuestStatus"] = "Handing in " .. cKb[142](bMK)
+--      bMu = cKb[13](<ждём, пока Holder:FindFirstChild(имя) == nil>, 6)
+--      bMu -> 12, иначе 0
+--   12 bMt = bMu;  bMt -> 4, иначе 19
+--   4  bpz["Quests"] = bpz["Quests"] + 1; bpz["QuestStatus"] = "Finished " .. cKb[142](bMK)
+--   5  -> 17 (return)
+--   0  bMu = bnn(bMt, bMp, "QuestStatus", QuestController) -> 12
+--   19 bMt = not QuestController["yield"];  bMt -> 8, иначе 15
+--   8  bMt = not QuestController["stopped"]; -> 15
+--   15 bMt -> 16, иначе 21
+--   16 cKb[54]["uncommit"]("AutoQuest") -> 21
+--   21 bpz["QuestStatus"] = "Cannot hand in " .. cKb[142](bMK); -> 5 (return)
+--   13 (пусто -> 9) и 9 — конец итерации;  1 bMG = true (break внешней петли)
+--
+-- Машина bMFB — петля «взять квест» (вход 4):
+--   4  QuestController.stopped -> 6 (return), иначе 8
+--   8  bMq = cKb[110](bMO); bMr = bMq;  bMr -> 7, иначе 3
+--   7  bMr = bp9(bMq) -> 3
+--   3  bMr -> 1, иначе 9 (дальше)
+--   1  bpz["QuestStatus"] = "Accepting " .. cKb[142](bMO)
+--      bpQ(bMO, QuestController, "QuestStatus") -> 10 (return), иначе 0 -> 9
+--   9  -> 2 (конец петли);  5 bMG = true;  2 break;  6/10 return
+-- После петли: cKb[54]["uncommit"]("AutoQuest"); "Cannot take a selected quest".
+--
+-- Константы (проверены по пулу): 4656="QuestStatus", 868="QuestController",
+-- 4265="quests", 3464="stopped", 4610="yield", 3287="Quests", 3546="AutoQuest",
+-- 5499="Dropping stuck ", 6229="Finished ", 6062="Handing in ",
+-- 2414="Cannot hand in ", 4554="Accepting ", 150="Cannot take a selected quest",
+-- 3142="Waiting for character", 3184="Clearing quest slot",
+-- 5289="Quest cooldown %ds", 6259="[Ouroboros] quest step: ".
+-- ---------------------------------------------------------------------------
+
+-- Счётчик элементов таблицы: cKb[98] = пул 363 (коп. A) / пул 1968 (коп. B);
+-- обе — посимвольно один и тот же код (проверено):
+--   local n = 0; for _ in pairs(t) do n = n + 1 end; return n
+local function count(container)
+    local n = 0
+    for _ in pairs(container) do n = n + 1 end
+    return n
+end
+
+-- Запись квеста: cKb[110] = пул 615 (коп. B) / 5-арг. inline (смещение 2 114 855)
+--   bno["Quests"]["Holder"][id]; при отсутствии bno["Quests"] или .Holder
+--   вызывается cKb[100]("Quests.Holder") и возвращается nil.
+local function QuestData(questId)                     -- cKb[110]
+    if type(bno["Quests"]) ~= "table" then
+        cKb[100]("Quests.Holder")
+        return nil
+    end
+    if type(bno["Quests"]["Holder"]) ~= "table" then
+        cKb[100]("Quests.Holder")
+        return nil
+    end
+    return bno["Quests"]["Holder"][questId]
+end
+
+-- Имя квеста или tostring: cKb[142] = пул 774 (коп. B) / 5-арг. inline (2 119 745).
+-- Вычитано дословно: bFg = cKb[110](ut); если type(bFg)=="table" и
+-- typeof(bFg["QuestInstance"])=="Instance" -> bFg["QuestInstance"]["Name"],
+-- иначе tostring(ut).
+local function QuestName(questId)                     -- cKb[142]
+    local data = QuestData(questId)
+    if type(data) == "table" and typeof(data["QuestInstance"]) == "Instance" then
+        return data["QuestInstance"]["Name"]
+    end
+    return tostring(questId)
+end
+
+-- Аксессор имени с запасным значением — bMr (состояния 15077…15084):
+--   D6 — запись квеста, D7 — запасное имя. D6["QuestInstance"]["Name"] если
+--   typeof(...)=="Instance", иначе D7.
+local function QuestNameOr(data, fallback)            -- bMr
+    if type(data) == "table" and typeof(data["QuestInstance"]) == "Instance" then
+        return data["QuestInstance"]["Name"]
+    end
+    return fallback
+end
+
+-- Держатель квестов: cKb[137] = пул 931 (коп. A; в коп. A позже перепривязан
+-- к пулу 4555 = LocalPlayer.Character — см. заметку ниже).
+-- Пул 931: btr = cKb[131]() -> :FindFirstChild("Quests") -> :FindFirstChild("Holder"),
+-- с проверками на nil на каждом шаге.
+local function QuestHolder()                          -- cKb[137]
+    local node = cKb[131]()                           -- Utility.GetData(LocalPlayer)
+    if not node then return nil end
+    local quests = node:FindFirstChild("Quests")
+    if not quests then return nil end
+    return quests:FindFirstChild("Holder")
+end
+
+-- Снять квест: cKb[94] = пул 2280 (коп. B; в коп. A — inline, смещение 1 124 747).
+-- Вычитано дословно: bn8(пул[1299], name); task.wait(0.5).
+--   пул[1299] — строка "RemoveQuest" ПОСЛЕ перестановки пула (до неё — 527),
+--   bn8 = отправка сигнала на сервер (см. ouroboros_core.lua).
+local function QuestRemove(playerQuestName)           -- cKb[94]
+    bn8("RemoveQuest", playerQuestName)
+    task.wait(0.5)
+end
+
+-- Кулдаун квестов — boW = пул 1412 (состояния 14757…14778). Вычитано дословно:
+--   если type(bno["Quests"]) ~= "table" -> 0
+--   bLz = cKb[131]() (Utility.GetData(LocalPlayer)); нет -> 0
+--   bLz = bLz:FindFirstChild("Quests"); нет -> 0
+--   bLz = bLz:FindFirstChild("LastTime"); нет -> 0
+--   если type(bno["Utility"]) ~= "table" -> 0
+--   если cKb[118](bno["Utility"]["Tick"]) == false -> 0
+--   ok, tick = cKb[119](bno["Utility"]["Tick"]); если not ok -> 0
+--   если not tonumber(tick) -> 0
+--   cd = tonumber(bno["Quests"]["QuestCD"]) или 30
+--   return math.max(0, cd - (tick - LastTime.Value))
+local function QuestCooldown()                        -- boW
+    if type(bno["Quests"]) ~= "table" then return 0 end
+    local node = cKb[131]()
+    if not node then return 0 end
+    node = node:FindFirstChild("Quests")
+    if not node then return 0 end
+    local stamp = node:FindFirstChild("LastTime")
+    if not stamp then return 0 end
+    if type(bno["Utility"]) ~= "table" then return 0 end
+    if not cKb[118](bno["Utility"]["Tick"]) then return 0 end
+    local ok, tick = cKb[119](bno["Utility"]["Tick"])
+    if not ok or not tonumber(tick) then return 0 end
+    local cooldown = tonumber(bno["Quests"]["QuestCD"]) or 30
+    return math.max(0, cooldown - (tick - stamp["Value"]))
+end
+
+-- Квест, лежащий в слоте — cKb[52] = пул 429 (коп. B; в коп. A — inline, 1 278 022).
+-- Вычитано дословно: bFM = cKb[3](); bFN = bFM[1]; если nil -> nil;
+-- иначе bFN[1]["questString"].
+local function QuestSlotBusy()                        -- cKb[52]
+    local list = cKb[3]()
+    local first = list and list[1]
+    if not first then return nil end
+    return first[1]["questString"]
+end
+
+-- Ожидание условия с таймаутом — cKb[13] = пул 4633 (коп. A) / пул 4512 (коп. B).
+-- Контракт вычитан из вызова: cKb[13](function() ... end, 6) -> истина, если
+-- условие выполнилось до истечения таймаута (тело пула не читано).
+local function WaitFor(condition, seconds)            -- cKb[13]
+    return cKb[13](condition, seconds)
+end
+
+-- Проверка «квест можно взять» — bp9. В артефакте два разных тела на один слот:
+--   коп. A: bp9 = F6275 (строка 11469 рендера) — перебирает vs:GetChildren(),
+--           берёт код задачи через cKb[76], требует наличие "Code"."Value"
+--           у каждой задачи; nil, если хоть одна не готова.
+--   коп. B: bp9 = F5388 (строка 37281) — требования по уровню/расе:
+--           bFQ = cKb[48]() (уровень), tonumber(bFP["Level"]), bFP["MaxLevel"],
+--           type(bFP["Race"]) == "table".
+-- Какое тело действует в момент вызова, решает порядок перепривязки слотов в
+-- машине артефакта; поэтому вызов оставлен слоту (не дочитано до конца).
+local function QuestAcceptable(data)                  -- bp9
+    return bp9(data)
+end
+
+-- Пробежка по задачам квеста — bnq (коп. A, смещение 1 445 494) / bpV (коп. B,
+-- смещение 1 678 198) — возвращает три значения: (ok, wantHandIn, dropped).
+-- Тело — отдельная подсистема «выполнение задания», здесь не читано.
+local function QuestRunTask(questId, statusKey, controller)   -- bnq / bpV
+    return bnq(questId, statusKey, controller)
+end
+
+-- Взять квест — bpQ (смещение 2 239 797 в коп. B). Возвращает истину, если квест
+-- принят (тело не читано).
+local function QuestTake(questId, controller, statusKey)      -- bpQ
+    return bpQ(questId, controller, statusKey)
+end
+
+-- Ожидание статуса квеста — bnn(a, b, "QuestStatus", controller) (см. заметку
+-- про уровень-ветку: bpz["LevelStatus"] = "Waiting for %d points").
+local function QuestStatusWait(alive, name, statusKey, controller)   -- bnn
+    return bnn(alive, name, statusKey, controller)
+end
+
+-- Шаг квеста: bpn()
 local function QuestStep()
-    if cKb[98](controllers.QuestController.quests) == 0 then return end    -- пусто → выходим
-    priority.commit("AutoQuest")                                          -- cKb[54]["commit"]
-    if not enabled("AutoQuest") then return end                           -- cKb[38]("AutoQuest")
-    warn("[Ouroboros] quest step:" .. tostring(bMQ))                      -- отладка
-    -- далее: сбор квестов, сортировка, bnn(quest, …, "QuestStatus", QuestController),
-    -- «Dropping stuck » .. cKb[142](quest) — см. «не дочитано»
+    -- 14066 / 14060 / 14061
+    if not bnB() then return end                                   -- выгружен?
+    if count(controllers.QuestController["quests"]) == 0 then return end
+    -- 14062
+    priority.commit("AutoQuest")
+    if not enabled("AutoQuest") then return end
+    -- 14065
+    local ok, err = pcall(function()
+        -- 3512
+        if not WaitReady(20) then                                  -- cKb[86](20)
+            bpz["QuestStatus"] = "Waiting for character"
+            return
+        end
+        -- 3511
+        local list = {}
+        for _, quest in pairs(controllers.QuestController["quests"]) do
+            list[#list + 1] = quest
+        end
+        table.sort(list)
+        local holder = QuestHolder()                               -- cKb[137]()
+
+        local stop = false
+        for _, quest in ipairs(list) do
+            -- машина bMFA (вход 7)
+            if not controllers.QuestController["stopped"] then     -- 7
+                local data = QuestData(quest)                      -- 18
+                local name = QuestNameOr(data, quest)
+                local present = holder and holder:FindFirstChild(name) or nil  -- 10/11
+                if present then                                    -- 20
+                    if not controllers.QuestController["yield"] then -- 19
+                        local _, wantHandIn, dropped = QuestRunTask(quest, "QuestStatus",
+                                                                    controllers.QuestController)
+                        if dropped then                            -- 2
+                            bpz["QuestStatus"] = "Dropping stuck " .. QuestName(quest)
+                            QuestRemove(name)
+                            return
+                        end
+                        if wantHandIn then                         -- 14
+                            bpz["QuestStatus"] = "Handing in " .. QuestName(quest)
+                            local gone = WaitFor(function()        -- 4278-замыкание
+                                local holderNow = QuestHolder()
+                                return holderNow == nil
+                                    or holderNow:FindFirstChild(name) == nil
+                            end, 6)
+                            if gone then                           -- 12 -> 4
+                                bpz["Quests"] = bpz["Quests"] + 1
+                                bpz["QuestStatus"] = "Finished " .. QuestName(quest)
+                                return                             -- 5 -> 17
+                            end
+                            -- 0 -> 12: ждём статус, если не сдался
+                            QuestStatusWait(false, name, "QuestStatus",
+                                            controllers.QuestController)
+                            -- 19/8/15/16/21
+                            if not controllers.QuestController["stopped"] then
+                                priority.uncommit("AutoQuest")     -- 16
+                            end
+                            bpz["QuestStatus"] = "Cannot hand in " .. QuestName(quest)
+                            return
+                        end
+                        return                                     -- 17 (нечего делать)
+                    end
+                end
+                -- 13 -> 9: пустой слот, идём к следующему квесту
+            end
+            if stop then break end
+        end
+
+        -- 3511 (хвост): слот занят?
+        local busy = QuestSlotBusy()                               -- cKb[52]()
+        if busy then                                               -- 3514
+            local data = QuestData(busy)
+            bpz["QuestStatus"] = "Clearing quest slot"
+            QuestRemove(QuestNameOr(data, busy))
+            return
+        end
+        -- 3518
+        local cooldown = QuestCooldown()                           -- boW()
+        if cooldown > 0 then                                       -- 3516
+            priority.uncommit("AutoQuest")
+            bpz["QuestStatus"] = string.format("Quest cooldown %ds", math.ceil(cooldown))
+            return
+        end
+        -- 3517: пробуем взять квест
+        for _, quest in ipairs(list) do
+            local data = QuestData(quest)                          -- 8
+            if data and QuestAcceptable(data) then                 -- 7/3
+                bpz["QuestStatus"] = "Accepting " .. QuestName(quest)  -- 1
+                if QuestTake(quest, controllers.QuestController, "QuestStatus") then
+                    return                                         -- 10
+                end
+            end
+        end
+        priority.uncommit("AutoQuest")
+        bpz["QuestStatus"] = "Cannot take a selected quest"
+    end)
+    bpY("AutoQuest")                                               -- снять заявку
+    if not ok then
+        warn("[Ouroboros] quest step: " .. tostring(err))
+    end
 end
 
 -- ---------------------------------------------------------------------------
@@ -636,10 +936,30 @@ return {
     cKb[145](arg) — переключатель CanCollide (проход сквозь препятствия) с
       восстановлением прежних значений.
 
+  ЗАКРЫТО ПО КВЕСТАМ (шаг bpn, рендер строка 23850; коп. B — inline 1 660 803,
+  коп. A — пул-функция 6279):
+    Управляющая машина 14066→14060→14061→14062→14065 (выгружен / пустой список /
+    commit+enabled / pcall+bpY+warn) — расписана в шапке квест-секции.
+    Тело pcall 3512→3511→3514/3518→3516/3517: ожидание персонажа cKb[86](20),
+    сбор квестов (pairs → bMq, table.sort), cKb[137]() = Quests.Holder, две
+    вложенные машины bMF (вход 7 — сопровождение квеста; вход 4 — взятие).
+    Хелперы вычитаны дословно: count (пул 363/1968), QuestData (пул 615),
+    QuestName/QuestNameOr (пул 774 / состояния 15077…15084),
+    QuestHolder (пул 931), QuestRemove (пул 2280: bn8("RemoveQuest", имя) +
+    task.wait(0.5); пул[1299] — после перестановки пула), QuestCooldown
+    (пул 1412: math.max(0, QuestCD∨30 − (Tick − LastTime.Value))),
+    QuestSlotBusy (пул 429: cKb[3]()[1][1]["questString"]).
+
   ОСТАЛОСЬ (движок перемещения, не фарм):
     * bob — арбитр движения (token/поколение), целиком не вычитан;
     * трасса ходьбы/твина (MovementMode, TweenSpeed) — отдельная подсистема;
     * cKb[59]() — источник списка регионов (для MobList в ouroboros_combat.lua).
+    * квест-хелперы bnq/bpV (тело «выполнения задания»), bpQ (взятие квеста) и
+      cKb[13] (пул 4633/4512, ожидание условия с таймаутом) — оставлены вызовами
+      слота: их тела целиком не читаны;
+    * bp9 — на один слот два разных тела (F6275 задачи-готовность / F5388
+      требования по уровню-расе); какой действует в момент вызова, зависит от
+      порядка перепривязки слотов в машине артефакта.
 
   ПРО КОПИИ: bmO/bp3 в двух копиях артефакта указывают на РАЗНЫЕ функции;
   везде используется первая копия, как и в остальных модулях.
