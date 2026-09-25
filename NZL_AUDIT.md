@@ -275,3 +275,55 @@ cKb [27] = function(ml, mm)
     -- state S4905: return true
 end
 ```
+
+## Milestone: the engine renders readably (2026-09-25, part 2)
+
+After the exact pool map landed, the renderer itself turned out to be corrupted by the
+*old* pool extraction: `_inline`/`const_literal` substituted pool reads with
+`entries[N-1]` from the mis-indexed listing, which pasted **unrelated function bodies**
+into rendered text (and fed that garbage into machine detection). Fixed -- all pool
+substitution now goes through `data/pool_index.json`.
+
+Two more renderer fixes:
+
+* `statement_value` now re-parses a statement's right-hand side locally from the `=`
+  token. Parsing the whole artifact in one pass drifts on very large blocks, so value
+  nodes could disagree with their own token span.
+* calls whose arguments are function literals (`task.spawn(function() ... end)`,
+  `F2175(pcall)`, `task["delay"](0, function() ... end)`) are printed with the bodies
+  expanded instead of one unreadable line. `luaast.ExprStmt` now keeps its expression.
+
+Artifacts: `ouroboros_main_pruned.txt` 3.07 MB -> 1.90 MB, 1488/1761 states,
+`ouroboros_deflattened.txt` 734 KB.
+
+### The public API surface, extracted
+
+`cKb[51]` (and 20 other tables) map feature names to pool closures:
+
+```lua
+cKb [51] ["HoldSkills"]   = F1669
+cKb [51] ["SetSkillHold"] = F6286
+cKb [51] ["EquipWeapon"]  = F1125
+```
+
+`python3 tools/api_map.py ouroboros_main_pruned.txt data/api_map.json --md API_MAP.md
+--compare ouwland_clean_main.lua` lists **575 setting closures in 21 tables** and 221
+tracked game-script keys, and reports which names the current reconstruction still
+lacks. `API_MAP.md` is the human-readable table.
+
+### Equipment path, readable
+
+```lua
+cKb [27] = function(ml, mm)
+    -- S4899: if bz7 then goto 4903
+    -- S4900: if bz6["Value"] == ml then goto 4911
+    -- S4901: return (F2175(function() bz6["Value"] = ml end))   -- pcall
+    -- S4902: bz7 = ml > #cKb[141]["SLOT_NAMES"]
+    -- S4903: return false
+    -- S4904: bn8("Item_Equip", ml)
+    -- S4905: return true
+end
+```
+`F2175` = `pcall` (pool slot 2175), `F4813` = `ipairs`, `F2602` = `pairs`,
+`F3916` = `task.wait`, `F6128` = the task library table, `cKb[141]` = the config
+constants table (`SLOT_NAMES`, `POSITION_TYPES`, `MOVEMENT_MODES`, `CAST_MIN_GAP`).
