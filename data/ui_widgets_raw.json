@@ -1,0 +1,2602 @@
+[
+{
+"kind": "Tab",
+"args": "\"Farming\", \"swords\""
+},
+{
+"kind": "Tab",
+"args": "\"Combat\", \"sword\""
+},
+{
+"kind": "Tab",
+"args": "\"Priority\", \"list-or dered\""
+},
+{
+"kind": "Tab",
+"args": "\"Player\", \"person-standing\""
+},
+{
+"kind": "Tab",
+"args": "\"ESP\", \"eye\""
+},
+{
+"kind": "Tab",
+"args": "\"Webhook\", \"webhook\""
+},
+{
+"kind": "Tab",
+"args": "\"Settings\", \"settings\""
+},
+{
+"kind": "LeftGroupbox",
+"args": "\"Discord\", \"message-circle\""
+},
+{
+"kind": "LeftGroupbox",
+"args": "\"Dungeon Run\", \"swords\""
+},
+{
+"kind": "Label",
+"args": "bpe [\"field\"] (\"Run\", cKb [51] [\"DungeonName\"] ()), true"
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"DungeonStatus\"]), true"
+},
+{
+"kind": "Toggle",
+"args": "\"AutoDungeon\", {[\"Text\"] = \"Auto Farm Nearby Enemies\", [\"Tooltip\"] = \"Fights whatever wave enemy is closest, skipping the ones the run excludes\", [\"Default\"] = false, [\"Callback\"] = function (aWH) cKb [51] [\"SetAutoDungeon\"] (aWH) end}"
+},
+{
+"kind": "Slider",
+"args": "\"DungeonRange\", {[\"Text\"] = \"Search Range\", [\"Tooltip\"] = \"How far to look for an enemy, 0 searches the whole floor\", [\"Default\"] = 250, [\"Min\"] = 0, [\"Max\"] = 2000, [\"Rounding\"] = 0, [\"Suffix\"] = \" studs\", [\"Callback\"] = function (aWJ) cKb [51] [\"SetDungeonRange\"] (aWJ) end}"
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"BringStatus\"]), true"
+},
+{
+"kind": "Toggle",
+"args": "\"AutoBringEnemies\", {[\"Text\"] = \"Bring Enemies\", [\"Tooltip\"] = \"Drags every wave enemy this client owns onto you in stead of chasing them; passive spawns are left alone\", [\"Default\"] = false, [\"Callback\"] = function (aWL) cKb [51] [\"SetAutoBringEnemies\"] (aWL) end}"
+},
+{
+"kind": "Slider",
+"args": "\"BringRange\", {[\"Text\"] = \"Bring Range\", [\"Tooltip\"] = \"How far out to pull enemies from, 0 brings the whole floor\", [\"Default\"] = 2000, [\"Min\"] = 0, [\"Max\"] = 5000, [\"Rounding\"] = 0, [\"Suffix\"] = \" studs\", [\"Callback\"] = function (aWN) cKb [51] [\"SetBringRange\"] (aWN) end}"
+},
+{
+"kind": "Divider",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"WaveStatus\"]), true"
+},
+{
+"kind": "Toggle",
+"args": "\"AutoSkipWaves\", {[\"Text\"] = \"Auto Skip Waves\", [\"Tooltip\"] = \"Votes to skip each wave break as it opens; the run still needs enough votes to pass\", [\"Default\"] = false, [\"Callback\"] = function (aWP) cKb [51] [\"SetAutoSkipWaves\"] (aWP) end}"
+},
+{
+"kind": "Divider",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"CardStatus\"]), true"
+},
+{
+"kind": "Toggle",
+"args": "\"AutoCards\", {[\"Text\"] = \"Auto Pick Cards\", [\"Tooltip\"] = \"Takes the best offered card you picked; leaves the hand alone if none of them show up\", [\"Default\"] = false, [\"Callback\"] = function (aWR) cKb [51] [\"SetAutoCards\"] (aWR) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"BlockBareHands\", {[\"Text\"] = \"Block Bare Hands Event\", [\"Tooltip\"] = \"Never takes Bare Hands, in cluding when it arrives on an Event card; that floor bans weapons for 2.2x points and leaves you empty handed after it\", [\"Default\"] = true, [\"Callback\"] = function (aWT) cKb [51] [\"SetBlockBareHands\"] (aWT) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"ForceHealCards\", {[\"Text\"] = \"Force Heal Cards\", [\"Tooltip\"] = \"While your health sits at or below the threshold this takes the hand away from your selection and picks the best heal card in stead; the moment you are back above it your selection has the hand again\", [\"Default\"] = false, [\"Callback\"] = function (aWV) cKb [51] [\"SetForceHealCards\"] (aWV) end}"
+},
+{
+"kind": "Slider",
+"args": "\"HealBelow\", {[\"Text\"] = \"Force Heal Below\", [\"Tooltip\"] = \"0% never forces a heal and 100% always takes one; a hand with no heal card in it is left to your selection either way\", [\"Default\"] = 40, [\"Min\"] = 0, [\"Max\"] = 100, [\"Rounding\"] = 0, [\"Suffix\"] = \"%\", [\"Callback\"] = function (aWX) cKb [51] [\"SetHealBelow\"] (aWX) end}"
+},
+{
+"kind": "Dropdown",
+"args": "\"CardTargets\", {[\"Text\"] = \"Select Cards\", [\"Values\"] = cKb [51] [\"CardNames\"] (), [\"Default\"] = {}, [\"Multi\"] = true, [\"AllowNull\"] = true, [\"Searchable\"] = true, [\"Callback\"] = function (aWZ) cKb [51] [\"SetCardSelection\"] (aWZ) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Slider",
+"args": "\"CardPriority\" .. cDk:gsub (\"%W\", \"\"), {[\"Text\"] = cDk .. \" Priority\", [\"Tooltip\"] = \"1 is taken first, 10 last; ties go to the rarer card\", [\"Default\"] = 5, [\"Min\"] = 1, [\"Max\"] = 10, [\"Rounding\"] = 0, [\"Callback\"] = function (aW5) cKb [51] [\"SetCardPriority\"] (cDk, aW5) end}"
+},
+{
+"kind": "LeftGroupbox",
+"args": "\"Dungeon\", \"swords\""
+},
+{
+"kind": "Button",
+"args": "{[\"Text\"] = \"Where Are Dungeons?\", [\"Tooltip\"] = \"Explains where the dungeon run features went\", [\"Func\"] = function () local cC1; cC1 = nil; local cC2 = nil; local cC3 = nil; cC3 = 4; while true do cC3 = 7385 - cC3; do if cC3 < 7383 then if cC3 < 6455 then break else if cC3 < 7380 then if cC3 < 7378 then break else if cC3 < 7379 then if cC3 == 7378 then cC1 = cC2; cC2 = cC1; cC3 = if cC2 then 3 else 6 else cC3 = 14605; continue end else cC3 = if cC2 then 0 else 1 end else if cC3 < 7381 then cC2 = aVP [\"Dialogues\"] [\"DungeonHelp\"]; cC3 = 7 else if cC3 < 7382 then if cC3 == 7381 then cC2 = aVP [\"Dialogues\"]; cC3 = if cC2 then 5 else 7 else cC3 = 7385; continue end else cC2 = cKb [118] (cC1 [\"Dismiss\"]); cC3 = 6 end else if cC3 < 9323 then if cC3 < 7385 then if cC3 < 7384 then break else if cC3 == 7384 then aV6:AddDialog (\"DungeonHelp\", {[\"Title\"] = \"Where Are Dungeons?\", [\"Description\"] = \"The dungeon features only exist in side a run, so there is not hing \" .. \"to show you out here.Join a dungeon game mode and a Dungeon Run box \" .. \"appears at the top of this tab with the run's own features in it.\", [\"AutoDismiss\"] = true, [\"OutsideClickDismiss\"] = true, [\"FooterButtons\"] = {{[\"Id\"] = \"Exit\", [\"Title\"] = \"Exit\", [\"Variant\"] = \"Primary\"}}}); cC3 = 2 else cC3 = 7381; continue end else if cC3 < 8798 then if cC3 == 7385 then F2175 (function () local cVM = cKb [136]; cC1:Dismiss () end); cC3 = 1 else break end else break end else break end end end end}"
+},
+{
+"kind": "LeftGroupbox",
+"args": "\"Auto Farming\", \"swords\""
+},
+{
+"kind": "Toggle",
+"args": "\"AutoLevel\", {[\"Text\"] = \"Auto Level\", [\"Default\"] = false, [\"Callback\"] = function (aW9) cKb [51] [\"SetAutoLevel\"] (aW9) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"LevelStatus\"]), true"
+},
+{
+"kind": "Toggle",
+"args": "\"LevelDropForeign\", {[\"Text\"] = F4672, [\"Default\"] = false, [\"Callback\"] = function (aXc) cKb [51] [\"SetLevelDropForeign\"] (aXc) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"AutoQuest\", {[\"Text\"] = \"Auto Farm Quests\", [\"Tooltip\"] = \"Farms the picked quests on repeat, taking each one again after it is do ne\", [\"Default\"] = false, [\"Callback\"] = function (aXf) cKb [51] [\"SetAutoQuest\"] (aXf) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"QuestStatus\"]), true"
+},
+{
+"kind": "Dropdown",
+"args": "\"QuestTargets\", {[\"Text\"] = \"Select Quests\", [\"Tooltip\"] = \"Combat quests whose kill tasks all resolve to a mob this can find\", [\"Values\"] = cKb [51] [\"QuestChoices\"] (), [\"Default\"] = {}, [\"Multi\"] = true, [\"AllowNull\"] = true, [\"Searchable\"] = true, [\"Callback\"] = function (aXi) cKb [51] [\"SetQuestSelection\"] (aXi) end}"
+},
+{
+"kind": "Button",
+"args": "{[\"Text\"] = \"Refresh Quests\", [\"Func\"] = function () local cVN = cKb [136]; cKb [51] [\"RefreshQuestChoices\"] (); local cVO = F6128 [\"wait\"]; F3916 (0.4); F2175 (function () local cC4 = nil; cC4 = 2; while true do cC4 = 1874 - cC4; do if cC4 < 7748 then if cC4 < 1874 then if cC4 < 1872 then if cC4 < 1871 then break else if cC4 == 1871 then aVT [\"QuestTargets\"]:SetValues (cKb [51] [\"QuestChoices\"] ()); cC4 = 1 else cC4 = 9854; continue end else if cC4 < 1873 then cC4 = if aVT [\"QuestTargets\"] then 3 else 1 else cC4 = 0 end else break end else break end end end end); aVP:Notify (\"Refreshed quest list\") end}"
+},
+{
+"kind": "Button",
+"args": "{[\"Text\"] = \"Abandon Quest\", [\"Func\"] = function () cKb [51] [\"AbandonQuest\"] () end}"
+},
+{
+"kind": "Toggle",
+"args": "\"AutoMob\", {[\"Text\"] = \"Auto Farm Mob\", [\"Default\"] = false, [\"Callback\"] = function (aXq) cKb [51] [\"SetAutoMob\"] (aXq) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"MobStatus\"]), true"
+},
+{
+"kind": "Dropdown",
+"args": "\"MobTarget\", {[\"Text\"] = \"Select Mob\", [\"Values\"] = cKb [51] [\"MobNames\"] (), [\"Default\"] = 1, [\"AllowNull\"] = true, [\"Searchable\"] = true, [\"Callback\"] = function (aXt) cKb [51] [\"SetMobTarget\"] (aXt) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"AutoBoss\", {[\"Text\"] = \"Auto Boss\", [\"Default\"] = false, [\"Callback\"] = function (aXv) cKb [51] [\"SetAutoBoss\"] (aXv) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"BossStatus\"]), true"
+},
+{
+"kind": "Dropdown",
+"args": "\"BossTargets\", {[\"Text\"] = \"Select Bosses\", [\"Values\"] = cKb [51] [\"BossNames\"] (), [\"Default\"] = {}, [\"Multi\"] = true, [\"AllowNull\"] = true, [\"Searchable\"] = true, [\"Callback\"] = function (aXy) cKb [51] [\"SetBossSelection\"] (aXy) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"AutoBossHunt\", {[\"Text\"] = \"Auto Boss Hunts\", [\"Tooltip\"] = \"Claims the hunt or ders posted on the crow board and kills the boss each one names, on repeat\", [\"Default\"] = false, [\"Callback\"] = function (aXA) cKb [51] [\"SetAutoBossHunt\"] (aXA) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"HuntStatus\"]), true"
+},
+{
+"kind": "Dropdown",
+"args": "\"HuntTiers\", {[\"Text\"] = \"Hunt Tiers\", [\"Tooltip\"] = \"Which posted hunts to take.Nothing picked takes any of them\", [\"Values\"] = cKb [141] [\"HUNT_TIERS\"], [\"Default\"] = {}, [\"Multi\"] = true, [\"AllowNull\"] = true, [\"Searchable\"] = true, [\"Callback\"] = function (aXF) cKb [51] [\"SetHuntTiers\"] (aXF) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"HuntDropForeign\", {[\"Text\"] = \"Abandon Quest For A Hunt\", [\"Tooltip\"] = \"There is one quest slot, so switch this on to drop an or dinary quest that is holding it\", [\"Default\"] = false, [\"Callback\"] = function (aXH) cKb [51] [\"SetHuntDropForeign\"] (aXH) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"AutoDelivery\", {[\"Text\"] = \"Auto Delivery Quest\", [\"Tooltip\"] = \"Takes Estate Worker Niko's supply run, carries the box to Shiori, reports back, and starts over\", [\"Default\"] = false, [\"Callback\"] = function (aXJ) cKb [51] [\"SetAutoDelivery\"] (aXJ) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"DeliveryStatus\"]), true"
+},
+{
+"kind": "Toggle",
+"args": "\"AutoChest\", {[\"Text\"] = \"Auto Sealed Cache\", [\"Default\"] = false, [\"Callback\"] = function (aXM) cKb [51] [\"SetAutoChest\"] (aXM) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"ChestStatus\"]), true"
+},
+{
+"kind": "Dropdown",
+"args": "\"ChestTiers\", {[\"Text\"] = \"Sealed Cache Tiers\", [\"Values\"] = cKb [141] [\"CHEST_TIERS\"], [\"Default\"] = {}, [\"Multi\"] = true, [\"AllowNull\"] = true, [\"Searchable\"] = true, [\"Callback\"] = function (aXP) cKb [51] [\"SetChestTiers\"] (aXP) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"ChestInstantKill\", {[\"Text\"] = \"Instant Kill Cache Guards\", [\"Tooltip\"] = \"Its own Instant Kill, only on the guards around a locked sealed cache and only while Auto Sealed Cache runs\", [\"Default\"] = false, [\"Callback\"] = function (aXR) cKb [51] [\"SetChestInstantKill\"] (aXR) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Slider",
+"args": "\"ChestKillThreshold\", {[\"Text\"] = \"Damage Before Kill\", [\"Tooltip\"] = \"How much of a guard's health to take off first, 0% kills it at full health\", [\"Default\"] = 10, [\"Min\"] = 0, [\"Max\"] = 100, [\"Rounding\"] = 0, [\"Suffix\"] = \"%\", [\"Callback\"] = function (aXU) cKb [51] [\"SetChestKillThreshold\"] (aXU) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"AutoLoot\", {[\"Text\"] = \"Auto Loot\", [\"Tooltip\"] = \"Collects eligible drops and boss chests within the pickup range, with highest priority when loot is ready\", [\"Default\"] = false, [\"Callback\"] = function (aXW) cKb [51] [\"SetAutoLoot\"] (aXW) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"LootStatus\"]), true"
+},
+{
+"kind": "Slider",
+"args": "\"LootRange\", {[\"Text\"] = \"Pickup Range\", [\"Tooltip\"] = \"How far to travel for a drop, 0 collects at any distance\", [\"Default\"] = 150, [\"Min\"] = 0, [\"Max\"] = 2000, [\"Rounding\"] = 0, [\"Suffix\"] = \" studs\", [\"Callback\"] = function (aXZ) cKb [51] [\"SetLootRange\"] (aXZ) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"AutoSoul\", {[\"Text\"] = \"Auto Claim Souls\", [\"Tooltip\"] = \"Picks up Weak, Strong and Brave Souls, the Demon progression drops\", [\"Default\"] = false, [\"Callback\"] = function (aX0) cKb [51] [\"SetAutoSoul\"] (aX0) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"SoulStatus\"]), true"
+},
+{
+"kind": "Slider",
+"args": "\"SoulRange\", {[\"Text\"] = \"Collect Range\", [\"Tooltip\"] = \"How far to travel for a soul, 0 collects at any distance\", [\"Default\"] = 250, [\"Min\"] = 0, [\"Max\"] = 2000, [\"Rounding\"] = 0, [\"Suffix\"] = \" studs\", [\"Callback\"] = function (aX3) cKb [51] [\"SetSoulRange\"] (aX3) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"AutoDemon\", {[\"Text\"] = \"Become A Demon\", [\"Tooltip\"] = \"Runs the whole Muzan route:reputation, the Biwa Bell, the lair, the Spider Lilies, Dr.Higoshima and the blood\", [\"Default\"] = false, [\"Callback\"] = function (aX5) cKb [51] [\"SetAutoDemon\"] (aX5) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"MaxHealth\"]), true"
+},
+{
+"kind": "Dropdown",
+"args": "\"DemonMob\", {[\"Text\"] = \"Reputation Mob\", [\"Tooltip\"] = \"Killed until reputation is low enough for Muzan.Mizunoto slayers move it fastest\", [\"Values\"] = cKb [51] [\"MobNames\"] (), [\"Default\"] = \"Mizunoto\", [\"Multi\"] = false, [\"AllowNull\"] = false, [\"Searchable\"] = true, [\"Callback\"] = function (aX8) cKb [51] [\"SetDemonMob\"] (aX8) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"DemonDrink\", {[\"Text\"] = \"Drink Muzan's Blood\", [\"Tooltip\"] = \"Off stops at the flask in stead of transforming, so the last step stays yours.Becoming a demon cannot be undone\", [\"Default\"] = true, [\"Callback\"] = function (aYa) cKb [51] [\"SetDemonDrink\"] (aYa) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"DemonDropForeign\", {[\"Text\"] = \"Abandon Quest For Muzan\", [\"Tooltip\"] = \"Muzan only gives the task with the quest slot free, so switch this on to drop whatever is holding it\", [\"Default\"] = false, [\"Callback\"] = function (aYc) cKb [51] [\"SetDemonDropForeign\"] (aYc) end}"
+},
+{
+"kind": "Divider",
+"args": ""
+},
+{
+"kind": "Button",
+"args": "{[\"Text\"] = \"Refresh Mob and Boss Lists\", [\"Func\"] = function () local cVP = cKb [136]; F2175 (function () local cC5 = nil; cC5 = 9; while true do cC5 = 16053 - cC5; do if cC5 < 16045 then if cC5 < 13392 then break else if cC5 < 14763 then break else if cC5 < 16044 then break else cC5 = if aVT [\"MobTarget\"] then 3 else 6 end else if cC5 < 16049 then if cC5 < 16047 then if cC5 < 16046 then cC5 = if aVT [\"DemonMob\"] then 0 else 2 else aVT [\"BossTargets\"]:SetValues (cKb [51] [\"BossNames\"] ()); cC5 = 5 end else if cC5 < 16048 then if cC5 == 16047 then cC5 = if aVT [\"WenMob\"] then 4 else 8 else cC5 = 16051; continue end else cC5 = 1 end else if cC5 < 16051 then if cC5 < 16050 then if cC5 == 16049 then aVT [\"WenMob\"]:SetValues (cKb [51] [\"MobNames\"] ()); cC5 = 8 else cC5 = 16051; continue end else if cC5 == 16050 then aVT [\"MobTarget\"]:SetValues (cKb [51] [\"MobNames\"] ()); cC5 = 6 else cC5 = 10657; continue end else if cC5 < 16052 then cC5 = if aVT [\"BossTargets\"] then 7 else 5 else if cC5 < 16053 then break else if cC5 == 16053 then aVT [\"DemonMob\"]:SetValues (cKb [51] [\"MobNames\"] ()); cC5 = 2 else cC5 = 16047; continue end end end end); aVP:Notify (\"Refreshed target lists\") end}"
+},
+{
+"kind": "LeftGroupbox",
+"args": "\"Breathing\", \"wind\""
+},
+{
+"kind": "Toggle",
+"args": "\"AutoBreathing\", {[\"Text\"] = \"Auto Breathing\", [\"Default\"] = false, [\"Callback\"] = function (aYk) cKb [51] [\"SetAutoBreathing\"] (aYk) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"BreathStatus\"]), true"
+},
+{
+"kind": "Dropdown",
+"args": "\"BreathingChoice\", {[\"Text\"] = \"Select Breathing\", [\"Values\"] = cKb [141] [\"BREATHINGS\"], [\"AllowNull\"] = true, [\"Searchable\"] = true, [\"Callback\"] = function (aYn) cKb [51] [\"SetBreathing\"] (aYn) end}"
+},
+{
+"kind": "Dropdown",
+"args": "\"WenMob\", {[\"Text\"] = \"Wen Farm Mob\", [\"Values\"] = cKb [51] [\"MobNames\"] (), [\"AllowNull\"] = true, [\"Searchable\"] = true, [\"Callback\"] = function (aYp) cKb [51] [\"SetWenMob\"] (aYp) end}"
+},
+{
+"kind": "LeftGroupbox",
+"args": "\"Skill Tree\", \"git-branch\""
+},
+{
+"kind": "Toggle",
+"args": "\"AutoSkillTree\", {[\"Text\"] = \"Auto Skill Tree\", [\"Default\"] = false, [\"Callback\"] = function (aYs) cKb [51] [\"SetAutoSkillTree\"] (aYs) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"SkillStatus\"]), true"
+},
+{
+"kind": "Toggle",
+"args": "\"UnlockSkills\", {[\"Text\"] = \"Unlock Skills\", [\"Default\"] = false, [\"Callback\"] = function (aYv) cKb [51] [\"SetUnlockSkills\"] (aYv) end}"
+},
+{
+"kind": "Dropdown",
+"args": "\"SkillNodes\", {[\"Text\"] = \"Select Nodes\", [\"Values\"] = cKb [51] [\"SkillNodes\"] (), [\"Default\"] = {}, [\"Multi\"] = true, [\"AllowNull\"] = true, [\"Searchable\"] = true, [\"Callback\"] = function (aYx) cKb [51] [\"SetSkillNodes\"] (aYx) end}"
+},
+{
+"kind": "Button",
+"args": "{[\"Text\"] = \"Refresh Nodes\", [\"Func\"] = function () local cVQ = cKb; local cVR = cVQ [136]; cVQ [51] [cVR [2375]] (); local cVS = cVR [6128] [cVR [2030]]; cVR [3916] (cVR [5941]); cVR [2175] (function () local cC7, cC8, cC9 = nil, nil, nil; local cC6 = nil; cC6 = 2; while true do cC6 = 13913 - cC6; do if cC6 < 13911 then if cC6 < 4538 then break else if cC6 < 8657 then break else if cC6 < 13910 then break else cC6 = 1 end else if cC6 < 13913 then if cC6 < 13912 then if cC6 == 13911 then local cVT = cKb [136]; cC9 = if aVT [\"SkillNodes\"] then 1 else 0; cC7 = 1838*cC9 + 1015*(1 - cC9); cC8 = 1707*cC9 + 3081*(1 - cC9); cC6 = if (cC7*2344 + cC8*3685 + cC7*cC8) % 16777213 == 13736033 then 0 else 3 else cC6 = 2357; continue end else break end else if cC6 < 14133 then if cC6 == 13913 then aVT [\"SkillNodes\"]:SetValues (cKb [51] [\"SkillNodes\"] ()); cC6 = 3 else break end else break end end end end); aVP:Notify (cVR [5365]) end}"
+},
+{
+"kind": "LeftGroupbox",
+"args": "\"Auto Training\", \"dumbbell\""
+},
+{
+"kind": "Toggle",
+"args": "\"AutoTraining\", {[\"Text\"] = \"Auto Training\", [\"Default\"] = false, [\"Tooltip\"] = \"Goes from one training station to the next, do es each one and moves on.Training credit counts towards quests that ask for it.\", [\"Callback\"] = function (aYF) cKb [51] [\"SetAutoTraining\"] (aYF) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"TrainStatus\"]), true"
+},
+{
+"kind": "Dropdown",
+"args": "\"Trainings\", {[\"Text\"] = \"Trainings\", [\"Values\"] = cKb [51] [\"TrainingNames\"] (), [\"Default\"] = {}, [\"Multi\"] = true, [\"AllowNull\"] = true, [\"Searchable\"] = true, [\"Callback\"] = function (aYI) cKb [51] [\"SetTrainings\"] (aYI) end}"
+},
+{
+"kind": "Dropdown",
+"args": "\"TrainingMode\", {[\"Text\"] = \"How To Play Them\", [\"Values\"] = cKb [51] [\"TrainingModes\"] (), [\"Default\"] = 1, [\"Tooltip\"] = \"Instantly finishes the moment a station opens.Play It Out plays the game's own minigame in stead, which takes as long as it normally would.\", [\"Callback\"] = function (aYK) cKb [51] [\"SetTrainingMode\"] (aYK) end}"
+},
+{
+"kind": "LeftGroupbox",
+"args": "\"Fishing\", \"fish\""
+},
+{
+"kind": "Toggle",
+"args": "\"AutoFish\", {[\"Text\"] = \"Auto Fish\", [\"Default\"] = false, [\"Tooltip\"] = \"Gets the fishing permit and a rod if you have none, then fishes at the harbor and always lands the bite\", [\"Callback\"] = function (aYN) cKb [51] [\"SetAutoFish\"] (aYN) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "bpe [\"field\"] (\"Status\", bpz [\"FishStatus\"]), true"
+},
+{
+"kind": "Dropdown",
+"args": "\"FishBait\", {[\"Text\"] = \"Bait\", [\"Values\"] = cKb [51] [\"BaitNames\"] (), [\"Default\"] = 1, [\"Tooltip\"] = \"Bait gets used up on every bite\", [\"Callback\"] = function (aYQ) cKb [51] [\"SetFishBait\"] (aYQ) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"AutoBuyBait\", {[\"Text\"] = \"Auto Buy Bait\", [\"Default\"] = false, [\"Tooltip\"] = \"Buys more of the selected bait when you run out\", [\"Callback\"] = function (aYS) cKb [51] [\"SetAutoBuyBait\"] (aYS) end}"
+},
+{
+"kind": "LeftGroupbox",
+"args": "\"Tower Exp\", \"gem\""
+},
+{
+"kind": "Toggle",
+"args": "\"AutoBuyExp\", {[\"Text\"] = F2092, [\"Default\"] = false, [\"Tooltip\"] = \"Spends Ouwigahara run points at the Tower Crystal on 1, 000 Exp bundles.\", [\"Callback\"] = function (aYV) cKb [51] [\"SetAutoBuyExp\"] (aYV) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"CrystalStatus\"]), true"
+},
+{
+"kind": "Slider",
+"args": "\"ExpBundles\", {[\"Text\"] = \"Bundles Per Trip\", [\"Default\"] = 99, [\"Min\"] = 1, [\"Max\"] = 99, [\"Rounding\"] = 0, [\"Tooltip\"] = \"99 is the most one purchase can carry; fewer only costs extra trips.\", [\"Callback\"] = function (aYY) cKb [51] [\"SetExpBundles\"] (aYY) end}"
+},
+{
+"kind": "Slider",
+"args": "\"PointReserve\", {[\"Text\"] = \"Keep Points\", [\"Default\"] = 0, [\"Min\"] = 0, [\"Max\"] = 500000, [\"Rounding\"] = 0, [\"Tooltip\"] = \"Points held back for the Outfitter racks and the tower chest.\", [\"Callback\"] = function (aY_) cKb [51] [\"SetPointReserve\"] (aY_) end}"
+},
+{
+"kind": "Button",
+"args": "{[\"Text\"] = \"Buy Now\", [\"Func\"] = function () cKb [51] [\"BuyExpNow\"] () end}"
+},
+{
+"kind": "LeftGroupbox",
+"args": "\"Schematics\", \"square-pen\""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"SchematicStatus\"]), true"
+},
+{
+"kind": "Dropdown",
+"args": "\"SchematicTargets\", {[\"Text\"] = \"Schematics To Collect\", [\"Tooltip\"] = \"Which set drawings to go and get.Ones you already have are skipped\", [\"Values\"] = cKb [51] [\"SchematicNames\"] (), [\"Default\"] = {}, [\"Multi\"] = true, [\"AllowNull\"] = true, [\"Searchable\"] = true, [\"Callback\"] = function (aY3) cKb [51] [\"SetSchematicTargets\"] (aY3) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"SchematicReturn\", {[\"Text\"] = \"Teleport Back When Done\", [\"Tooltip\"] = \"Puts you back where you started once the last drawing is studied\", [\"Default\"] = true, [\"Callback\"] = function (aY5) cKb [51] [\"SetSchematicReturn\"] (aY5) end}"
+},
+{
+"kind": "Button",
+"args": "{[\"Text\"] = \"Collect Schematics\", [\"Tooltip\"] = \"Teleports to each schematic you picked that you do n't have yet and studies it\", [\"Func\"] = function () aVP:Notify (cKb [51] [\"CollectSchematics\"] ()) end}"
+},
+{
+"kind": "Button",
+"args": "{[\"Text\"] = \"Stop\", [\"Tooltip\"] = \"Stops after the spot it's on.It won't take you back\", [\"Func\"] = function () aVP:Notify (cKb [51] [\"StopSchematics\"] ()) end}"
+},
+{
+"kind": "RightGroupbox",
+"args": "\"Player Info\", \"user\""
+},
+{
+"kind": "Label",
+"args": "bpe [\"field\"] (\"Level\", \"1\"), true"
+},
+{
+"kind": "Label",
+"args": "bpe [\"field\"] (\"Exp\", \"0 / 0\"), true"
+},
+{
+"kind": "Label",
+"args": "bpe [\"field\"] (\"Wen\", \"0\"), true"
+},
+{
+"kind": "Label",
+"args": "bpe [\"field\"] (\"Race\", \"-\"), true"
+},
+{
+"kind": "Label",
+"args": "bpe [\"field\"] (\"Skill Points\", \"0\"), true"
+},
+{
+"kind": "Label",
+"args": "bpe [\"field\"] (\"Run Points\", \"0\"), true"
+},
+{
+"kind": "RightGroupbox",
+"args": "\"Quest Progress\", \"scroll-text\""
+},
+{
+"kind": "Label",
+"args": "bpe [\"field\"] (\"Quest\", \"None\"), true"
+},
+{
+"kind": "Label",
+"args": "bpe [\"field\"] (\"Progress\", \"-\"), true"
+},
+{
+"kind": "Label",
+"args": "bpe [\"field\"] (\"Breathing Cost\", \"None\"), true"
+},
+{
+"kind": "RightGroupbox",
+"args": "\"Notifications\", \"bell\""
+},
+{
+"kind": "Toggle",
+"args": "\"NotifyBossSpawns\", {[\"Text\"] = \"Boss Spawns\", [\"Tooltip\"] = \"Tells you when one of your bosses spawns, even when it's too far away to see\", [\"Default\"] = false, [\"Callback\"] = function (aZe) cKb [51] [\"SetNotification\"] (\"boss\", aZe) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Dropdown",
+"args": "\"NotifyBosses\", {[\"Text\"] = \"Bosses\", [\"Values\"] = cKb [51] [\"BossNames\"] (), [\"Default\"] = {}, [\"Multi\"] = true, [\"AllowNull\"] = true, [\"Searchable\"] = true, [\"Callback\"] = function (aZh) cKb [51] [\"SetNotifyBosses\"] (aZh) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"NotifyMuzan\", {[\"Text\"] = \"Muzan\", [\"Tooltip\"] = \"Tells you when Muzan comes out at night and where he is.He walks around Mistfall Harbor, Hidden Mist Village or Iceveil Valley\", [\"Default\"] = false, [\"Callback\"] = function (aZj) cKb [51] [\"SetNotification\"] (\"muzan\", aZj) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"NotifyMarket\", {[\"Text\"] = \"Black Marketer\", [\"Tooltip\"] = \"Tells you when the Black Marketer comes to town, what he's selling, and when he leaves\", [\"Default\"] = false, [\"Callback\"] = function (aZl) cKb [51] [\"SetNotification\"] (\"market\", aZl) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"NotifyTailor\", {[\"Text\"] = \"Tailor Restocks\", [\"Tooltip\"] = \"Tells you the new clothes whenever Elara or Lynx restocks\", [\"Default\"] = false, [\"Callback\"] = function (aZn) cKb [51] [\"SetNotification\"] (\"tailor\", aZn) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"NotifySelection\", {[\"Text\"] = \"Final Selection\", [\"Tooltip\"] = \"Warns you before Final Selection starts.It happens every 2 hours, and it's how a Human of level 45 or higher becomes a Slayer\", [\"Default\"] = false, [\"Callback\"] = function (aZp) cKb [51] [\"SetNotification\"] (\"selection\", aZp) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Slider",
+"args": "\"NotifyWarnBefore\", {[\"Text\"] = 1829555, [\"Default\"] = 5, [\"Min\"] = 1, [\"Max\"] = 30, [\"Rounding\"] = 0, [\"Suffix\"] = \" min\", [\"Callback\"] = function (aZs) cKb [51] [\"SetNotifyWarn\"] (aZs) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"NotifyHunts\", {[\"Text\"] = \"Boss Hunts\", [\"Tooltip\"] = \"Tells you when a new boss hunt you can take is posted.Hunts are only for Slayers and Demons\", [\"Default\"] = false, [\"Callback\"] = function (aZu) cKb [51] [\"SetNotification\"] (\"hunt\", aZu) end}"
+},
+{
+"kind": "Button",
+"args": "{[\"Text\"] = \"Teleport to Last Notification\", [\"Tooltip\"] = \"Travels to whatever the last not ification was about\", [\"Func\"] = function () cKb [51] [\"TeleportToNotification\"] () end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Slider",
+"args": "cDD [\"key\"], {[\"Text\"] = cDD [\"name\"] .. \" Hold\", [\"Tooltip\"] = \"How long to hold this skill before releasing it\", [\"Default\"] = cDD [\"default\"], [\"Min\"] = 0, [\"Max\"] = cDD [\"max\"], [\"Rounding\"] = 2, [\"Suffix\"] = \"s\", [\"Callback\"] = function (a_x) cKb [51] [\"SetSkillHold\"] (cDD [\"name\"], a_x) end}"
+},
+{
+"kind": "Button",
+"args": "{[\"Text\"] = \"Refresh Skills\", [\"Func\"] = function () local cVV = cKb; local cVW = cVV [136]; cVV [51] [cVW [4599]] (); local cVX = cVW [6128] [cVW [2030]]; cVW [3916] (cVW [5941]); cVW [2175] (function () local cDq, cDr, cDs = nil, nil, nil; local cDp = nil; cDp = 2; while true do cDp = 9337 - cDp; do if cDp < 9533 then if cDp < 9112 then break else if cDp < 9335 then break else if cDp < 9336 then local cVY = cKb [136]; cDs = if aVT [\"SkillChoices\"] then 1 else 0; cDq = 2180*cDs + 1253*(1 - cDs); cDr = 386*cDs + 286*(1 - cDs); cDp = if (cDq*328 + cDr*2057 + cDq*cDr) % 16777213 == 2350522 then 0 else 1 else if cDp < 9337 then cDp = 3 else if cDp == 9337 then aVT [\"SkillChoices\"]:SetValues (cKb [51] [\"SkillChoices\"] ()); cDp = 1 else cDp = 4787; continue end else break end end end end); aVP:Notify (cVW [607]) end}"
+},
+{
+"kind": "RightGroupbox",
+"args": "\"Consumables\", \"flask-round\""
+},
+{
+"kind": "Toggle",
+"args": "\"AutoPotion\", {[\"Text\"] = \"Auto Potion\", [\"Default\"] = false, [\"Callback\"] = function (a_G) cKb [51] [\"SetAutoPotion\"] (a_G) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"PotionStatus\"]), true"
+},
+{
+"kind": "Dropdown",
+"args": "\"PotionChoice\", {[\"Text\"] = \"Select Potion\", [\"Values\"] = cKb [51] [\"PotionNames\"] (), [\"Default\"] = 1, [\"AllowNull\"] = true, [\"Searchable\"] = true, [\"Callback\"] = function (a_J) cKb [51] [\"SetPotion\"] (a_J) end}"
+},
+{
+"kind": "Slider",
+"args": "\"DrinkBelow\", {[\"Text\"] = \"Drink Below\", [\"Default\"] = 40, [\"Min\"] = 1, [\"Max\"] = 95, [\"Rounding\"] = 0, [\"Suffix\"] = \"%\", [\"Callback\"] = function (a_L) cKb [51] [\"SetDrinkBelow\"] (a_L) end}"
+},
+{
+"kind": "RightGroupbox",
+"args": "\"Shop\", \"store\""
+},
+{
+"kind": "Toggle",
+"args": "\"AutoBuy\", {[\"Text\"] = \"Auto Buy\", [\"Default\"] = false, [\"Callback\"] = function (a_O) cKb [51] [\"SetAutoBuy\"] (a_O) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"ShopStatus\"]), true"
+},
+{
+"kind": "Dropdown",
+"args": "\"ShopItems\", {[\"Text\"] = \"Select Items\", [\"Values\"] = cKb [51] [\"ShopItemNames\"] (), [\"Default\"] = {}, [\"Multi\"] = true, [\"AllowNull\"] = true, [\"Searchable\"] = true, [\"Callback\"] = function (a_R) cKb [51] [\"SetShopItems\"] (a_R) end}"
+},
+{
+"kind": "Slider",
+"args": "\"KeepAmount\", {[\"Text\"] = \"Keep Amount\", [\"Default\"] = 1, [\"Min\"] = 1, [\"Max\"] = 25, [\"Rounding\"] = 0, [\"Callback\"] = function (a_T) cKb [51] [\"SetKeepAmount\"] (a_T) end}"
+},
+{
+"kind": "LeftGroupbox",
+"args": "\"Farm Settings\", \"move\""
+},
+{
+"kind": "Dropdown",
+"args": "\"PositionType\", {[\"Text\"] = \"Position Type\", [\"Tooltip\"] = \"Where to stand relative to the target while fighting it\", [\"Values\"] = cKb [141] [\"POSITION_TYPES\"], [\"Default\"] = 1, [\"Searchable\"] = true, [\"Callback\"] = function (aZB) cKb [51] [\"SetPositionType\"] (aZB) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"LookAtEnemy\", {[\"Text\"] = \"Look At Enemy\", [\"Tooltip\"] = \"Always face the target, whatever the position type puts you\", [\"Default\"] = true, [\"Callback\"] = function (aZE) cKb [51] [\"SetLookAtEnemy\"] (aZE) end}"
+},
+{
+"kind": "Slider",
+"args": "\"OffsetDistance\", {[\"Text\"] = \"Offset Distance\", [\"Tooltip\"] = \"How far out from the target to sit, horizontally\", [\"Default\"] = 3, [\"Min\"] = 0, [\"Max\"] = 100, [\"Rounding\"] = 1, [\"Suffix\"] = \" studs\", [\"Callback\"] = function (aZG) cKb [51] [\"SetOffsetDistance\"] (aZG) end}"
+},
+{
+"kind": "Slider",
+"args": "\"HeightOffset\", {[\"Text\"] = \"Height Offset\", [\"Tooltip\"] = \"Vertical offset from the target, positive sits higher\", [\"Default\"] = 0, [\"Min\"] = - 50, [\"Max\"] = 50, [\"Rounding\"] = 1, [\"Suffix\"] = \" studs\", [\"Callback\"] = function (aZI) cKb [51] [\"SetHeightOffset\"] (aZI) end}"
+},
+{
+"kind": "Dropdown",
+"args": "\"MovementMode\", {[\"Text\"] = \"Movement Type\", [\"Tooltip\"] = \"How to cross ground:Tween glides there, Teleport blinks there in stantly\", [\"Values\"] = cKb [141] [\"MOVEMENT_MODES\"], [\"Default\"] = 1, [\"Callback\"] = function (aZK) cKb [51] [\"SetMovementMode\"] (aZK) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Slider",
+"args": "\"TweenSpeed\", {[\"Text\"] = \"Tween Speed\", [\"Tooltip\"] = \"How fast to glide, in studs per second\", [\"Default\"] = 400, [\"Min\"] = 50, [\"Max\"] = 1000, [\"Rounding\"] = 0, [\"Suffix\"] = \" studs/s\", [\"Callback\"] = function (aZN) cKb [51] [\"SetTweenSpeed\"] (aZN) end}"
+},
+{
+"kind": "LeftGroupbox",
+"args": "\"Equipment\", \"shirt\""
+},
+{
+"kind": "Toggle",
+"args": "\"AutoEquipBest\", {[\"Text\"] = \"Auto Equip Best Equipment\", [\"Default\"] = false, [\"Callback\"] = function (aZR) cKb [51] [\"SetAutoEquip\"] (aZR) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"EquipStatus\"]), true"
+},
+{
+"kind": "LeftGroupbox",
+"args": "\"Defence\", \"RemoveQuest\""
+},
+{
+"kind": "Toggle",
+"args": "\"AutoParry\", {[\"Text\"] = \"[Beta] Auto Parry V3\", [\"Tooltip\"] = \"Times a block tap onto each in coming swing so it lands as a perfect block\", [\"Default\"] = false, [\"Callback\"] = function (aZZ) cKb [51] [\"SetAutoParry\"] (aZZ) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"ParryStatus\"]), true"
+},
+{
+"kind": "Toggle",
+"args": "\"ParryNpcs\", {[\"Text\"] = \"Parry Mobs\", [\"Default\"] = true, [\"Callback\"] = function (aZ1) cKb [51] [\"SetParryNpcs\"] (aZ1) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"ParryPlayers\", {[\"Text\"] = \"Parry Players\", [\"Tooltip\"] = \"Player swings only give a 0.1s window, against 0.25s for a mob\", [\"Default\"] = true, [\"Callback\"] = function (aZ3) cKb [51] [\"SetParryPlayers\"] (aZ3) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"ParryMitigate\", {[\"Text\"] = \"Block When Parry Is Locked Out\", [\"Tooltip\"] = \"The game refuses a perfect window while you are stunned, and for one second after any hit lands.This soaks those swings as a normal block for half damage in stead of taking them clean\", [\"Default\"] = true, [\"Callback\"] = function (aZ5) cKb [51] [\"SetParryMitigate\"] (aZ5) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"ParryHold\", {[\"Text\"] = \"Keep Blocking After A Parry\", [\"Tooltip\"] = \"Costs block points and keeps the one second lockout alive, so the next swing cannot be parried.It also holds the block for a second and a half, and the game refuses every skill and every swing while a block is up, so leave it off when Auto Skills is on.\", [\"Default\"] = false, [\"Callback\"] = function (aZ7) cKb [51] [\"SetParryHold\"] (aZ7) end}"
+},
+{
+"kind": "Divider",
+"args": ""
+},
+{
+"kind": "Slider",
+"args": "\"ParryLead\", {[\"Text\"] = \"Parry Timing\", [\"Tooltip\"] = \"Leave at 0 Only touch it if parries keep missing:higher blocks later, lower blocks earlier\", [\"Default\"] = 0, [\"Min\"] = - 120, [\"Max\"] = 120, [\"Rounding\"] = 0, [\"Suffix\"] = \" ms\", [\"Callback\"] = function (aZ9) cKb [51] [\"SetParryLead\"] (aZ9) end}"
+},
+{
+"kind": "Slider",
+"args": "\"ParryRadius\", {[\"Text\"] = \"Parry Range\", [\"Tooltip\"] = \"How close an enemy has to be before auto parry watches it.The default is fine for melee\", [\"Default\"] = 40, [\"Min\"] = 10, [\"Max\"] = 150, [\"Rounding\"] = 0, [\"Suffix\"] = \" studs\", [\"Callback\"] = function (a_b) cKb [51] [\"SetParryRadius\"] (a_b) end}"
+},
+{
+"kind": "Button",
+"args": "{[\"Text\"] = \"Reset Counters\", [\"Func\"] = function () local cVZ = cKb [136]; cKb [51] [\"ResetParryStats\"] (); aVP:Notify (\"Parry counters reset\") end}"
+},
+{
+"kind": "RightGroupbox",
+"args": "\"Combat\", \"sword\""
+},
+{
+"kind": "Dropdown",
+"args": "\"WeaponChoice\", {[\"Text\"] = \"Select Weapon\", [\"Tooltip\"] = \"Leave empty to keep whatever you already have out\", [\"Values\"] = cKb [51] [\"WeaponNames\"] (), [\"AllowNull\"] = true, [\"Searchable\"] = true, [\"Callback\"] = function (a_h) cKb [51] [\"SetWeapon\"] (a_h) end}"
+},
+{
+"kind": "Button",
+"args": "{[\"Text\"] = \"Refresh Weapons\", [\"Func\"] = function () local cV_ = cKb [136]; cKb [51] [\"RefreshWeapons\"] (); local cV0 = F6128 [\"wait\"]; F3916 (0.4); F2175 (function () local cDo = nil; cDo = 1; while true do cDo = 8874 - cDo; do if cDo < 8873 then if cDo < 5828 then break else if cDo < 8871 then break else if cDo < 8872 then aVT [\"WeaponChoice\"]:SetValues (cKb [51] [\"WeaponNames\"] ()); cDo = 0 else break end else if cDo < 11020 then if cDo < 8874 then cDo = if aVT [\"WeaponChoice\"] then 3 else 0 else if cDo < 9495 then if cDo == 8874 then cDo = 2 else cDo = 8871; continue end else break end else break end end end end); aVP:Notify (\"Refreshed weapons\") end}"
+},
+{
+"kind": "Toggle",
+"args": "\"AutoSkills\", {[\"Text\"] = \"Auto Skills\", [\"Default\"] = false, [\"Callback\"] = function (a_o) cKb [51] [\"SetAutoSkills\"] (a_o) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"AutoSkillStatus\"]), true"
+},
+{
+"kind": "Dropdown",
+"args": "\"SkillChoices\", {[\"Text\"] = \"Select Skills\", [\"Tooltip\"] = \"Leave empty to use every equipped skill.Blocking is left to Auto Parry and never cast from here.\", [\"Values\"] = cKb [51] [\"SkillChoices\"] (), [\"Default\"] = {}, [\"Multi\"] = true, [\"AllowNull\"] = true, [\"Searchable\"] = true, [\"Callback\"] = function (a_r) cKb [51] [\"SetSkillSelection\"] (a_r) end}"
+},
+{
+"kind": "LeftGroupbox",
+"args": "\"Order\", \"list-or dered\""
+},
+{
+"kind": "Label",
+"args": "bpe [\"field\"] (\"Driving\", cKb [51] [\"PriorityHolder\"] ()), true"
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"PriorityStatus\"]), true"
+},
+{
+"kind": "Divider",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "bpe [\"field\"] (tostring (cEu), \"-\"), true"
+},
+{
+"kind": "RightGroupbox",
+"args": "\"Scheduling\", \"sliders-horizontal\""
+},
+{
+"kind": "Toggle",
+"args": "\"PriorityMode\", {[\"Text\"] = \"Priority Scheduling\", [\"Tooltip\"] = \"Lets several auto farms stay on at once and gives the character to the highest ranked one that has work\", [\"Default\"] = false, [\"Callback\"] = function (a0R) cKb [51] [\"SetPriorityMode\"] (a0R); cEl () end}"
+},
+{
+"kind": "Toggle",
+"args": "\"PriorityPreempt\", {[\"Text\"] = \"Comma separated feature keys, highest priority first.Auto Loot stays first.Saved with the config\", [\"Tooltip\"] = \"A higher ranked feature pauses the running one.Auto Loot always in terrupts when loot is ready\", [\"Default\"] = true, [\"Callback\"] = function (a0U) cKb [51] [\"SetPriorityPreempt\"] (a0U) end}"
+},
+{
+"kind": "Input",
+"args": "\"PriorityOrder\", {[\"Text\"] = \"Saved Order\", [\"Default\"] = cKb [51] [\"PriorityOrder\"] (), [\"Finished\"] = true, [\"AllowEmpty\"] = true, [\"Tooltip\"] = 11340532, [\"Callback\"] = function (a0W) local cD9, cEa, cEb, cEc = nil, nil, nil, nil; local cEd = nil; cEd = 6; while true do cEd = 8258 - cEd; do if cEd < 8254 then if cEd < 7522 then break else if cEd < 8252 then if cEd < 8251 then break else if cEd == 8251 then cEa = aVT [\"PriorityOrder\"]; cEd = 5 else cEd = 8255; continue end else if cEd < 8253 then cD9 = cKb [51] [\"SetPriorityOrder\"] (a0W); cEa = not cEi; cEd = if cEa then 7 else 5 else cEb = cD9  ~= a0W; cEc = cEa; cEd = if cEc then 4 else 1 end else if cEd < 8258 then if cEd < 8256 then if cEd < 8255 then if cEd == 8254 then cEc = cEb; cEd = 1 else cEd = 8253; continue end else cEl (); cEd = 0 end else if cEd < 8257 then cEi = true; aVT [\"PriorityOrder\"]:SetValue (cD9); cEi = false; cEd = 3 else cEd = if cEc then 2 else 3 end else break end end end end}"
+},
+{
+"kind": "Divider",
+"args": ""
+},
+{
+"kind": "Dropdown",
+"args": "\"PriorityPick\", {[\"Text\"] = \"Feature\", [\"Tooltip\"] = \"The feature the buttons below move\", [\"Values\"] = cKb [51] [\"PriorityLabels\"] (), [\"Default\"] = 1, [\"Multi\"] = false, [\"AllowNull\"] = false, [\"Searchable\"] = true}"
+},
+{
+"kind": "Button",
+"args": "{[\"Text\"] = \"Move Up\", [\"Func\"] = function () local cEe = nil; local cEf = nil; cEf = 1; while true do cEf = 4499 - cEf; do if cEf < 6181 then if cEf < 4498 then if cEf < 4496 then break else if cEf < 4497 then cEf = 0 else if cEf == 4497 then cEk (cKb [51] [\"MovePriority\"] (cEe, - 1)); cEf = 3 else cEf = 6181; continue end else if cEf < 5819 then if cEf < 4499 then if cEf == 4498 then cEe = cEn (); cEf = if cEe then 2 else 3 else cEf = 11394; continue end else break end else break end else break end end end end, [\"DoubleClick\"] = false}"
+},
+{
+"kind": "Button",
+"args": "{[\"Text\"] = \"Move Down\", [\"Func\"] = function () local cEg = nil; local cEh = nil; cEh = 1; while true do cEh = 12044 - cEh; do if cEh < 12043 then if cEh < 9521 then break else if cEh < 12041 then break else if cEh < 12042 then cEk (cKb [51] [\"MovePriority\"] (cEg, 1)); cEh = 0 else break end else if cEh < 13432 then if cEh < 12767 then if cEh < 12044 then cEg = cEn (); cEh = if cEg then 3 else 0 else if cEh == 12044 then cEh = 2 else break end else break end else break end end end end, [\"DoubleClick\"] = false}"
+},
+{
+"kind": "Button",
+"args": "{[\"Text\"] = \"Reset Order\", [\"Func\"] = function () cEk (cKb [51] [\"ResetPriorityOrder\"] ()) end, [\"DoubleClick\"] = true}"
+},
+{
+"kind": "LeftGroupbox",
+"args": "\"Movement\", \"footprints\""
+},
+{
+"kind": "Toggle",
+"args": "\"Fly\", {[\"Text\"] = \"Fly\", [\"Default\"] = false}"
+},
+{
+"kind": "KeyPicker",
+"args": "\"FlyKey\", {[\"Default\"] = \"H\", [\"SyncToggleState\"] = true, [\"Mode\"] = \"Toggle\", [\"Text\"] = \"Fly\"}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Slider",
+"args": "\"FlySpeed\", {[\"Text\"] = \"Fly Speed\", [\"Default\"] = 60, [\"Min\"] = 10, [\"Max\"] = 400, [\"Rounding\"] = 0}"
+},
+{
+"kind": "Toggle",
+"args": "\"NoClip\", {[\"Text\"] = \"Noclip\", [\"Default\"] = false}"
+},
+{
+"kind": "KeyPicker",
+"args": "\"NoClipKey\", {[\"Default\"] = \"N\", [\"SyncToggleState\"] = true, [\"Mode\"] = \"Toggle\", [\"Text\"] = \"Noclip\"}"
+},
+{
+"kind": "Toggle",
+"args": "\"WalkSpeedEnabled\", {[\"Text\"] = \"Speed\", [\"Default\"] = false}"
+},
+{
+"kind": "KeyPicker",
+"args": "\"SpeedKey\", {[\"Default\"] = \"K\", [\"SyncToggleState\"] = true, [\"Mode\"] = \"Toggle\", [\"Text\"] = \"Speed\"}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Slider",
+"args": "\"WalkSpeed\", {[\"Text\"] = \"Speed Amount\", [\"Default\"] = 32, [\"Min\"] = 16, [\"Max\"] = 250, [\"Rounding\"] = 0}"
+},
+{
+"kind": "Toggle",
+"args": "\"HighJump\", {[\"Text\"] = \"High Jump\", [\"Default\"] = false}"
+},
+{
+"kind": "KeyPicker",
+"args": "\"HighJumpKey\", {[\"Default\"] = \"J\", [\"SyncToggleState\"] = true, [\"Mode\"] = \"Toggle\", [\"Text\"] = \"High Jump\"}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Slider",
+"args": "\"JumpPower\", {[\"Text\"] = \"Jump Power\", [\"Default\"] = 90, [\"Min\"] = 50, [\"Max\"] = 400, [\"Rounding\"] = 0}"
+},
+{
+"kind": "Toggle",
+"args": "\"AlwaysRun\", {[\"Text\"] = \"Always Run\", [\"Tooltip\"] = \"Holds the game's own run toggle do wn so you never walk\", [\"Default\"] = false, [\"Callback\"] = function (a1j) cKb [51] [\"SetAlwaysRun\"] (a1j) end}"
+},
+{
+"kind": "LeftGroupbox",
+"args": "\"Interaction\", \"pointer\""
+},
+{
+"kind": "Toggle",
+"args": "\"InstantProximityPrompt\", {[\"Text\"] = \"Instant ProximityPrompt\", [\"Default\"] = false}"
+},
+{
+"kind": "Toggle",
+"args": "\"DisableShiftLock\", {[\"Text\"] = \"Disable Shift Lock\", [\"Tooltip\"] = \"Turns the game's Left Alt shift lock back off whenever it comes on\", [\"Default\"] = true, [\"Callback\"] = function (a1n) cKb [51] [\"SetDisableShiftLock\"] (a1n) end}"
+},
+{
+"kind": "LeftGroupbox",
+"args": "\"Sustain\", \"heart-pulse\""
+},
+{
+"kind": "Toggle",
+"args": "\"InfiniteStamina\", {[\"Text\"] = \"Infinite Stamina\", [\"Tooltip\"] = \"Holds your stamina bar full so skills and sprinting stop being refused\", [\"Default\"] = false, [\"Callback\"] = function (a1q) cKb [51] [\"SetInfiniteStamina\"] (a1q) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"InfiniteClimb\", {[\"Text\"] = \"Infinite Climb\", [\"Tooltip\"] = \"Keeps wall climb time topped up; needs the Wall Climb skill tree node\", [\"Default\"] = false, [\"Callback\"] = function (a1s) cKb [51] [\"SetInfiniteClimb\"] (a1s) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"InfiniteHorseStamina\", {[\"Text\"] = \"Infinite Horse Stamina\", [\"Tooltip\"] = \"Stops every horse speed mode draining stamina, so Run never times out\", [\"Default\"] = false, [\"Callback\"] = function (a1u) cKb [51] [\"SetInfiniteHorseStamina\"] (a1u) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"NoDrown\", {[\"Text\"] = \"No Drown\", [\"Tooltip\"] = \"Holds your breath bar full underwater\", [\"Default\"] = false, [\"Callback\"] = function (a1w) cKb [51] [\"SetNoDrown\"] (a1w) end}"
+},
+{
+"kind": "LeftGroupbox",
+"args": "\"Mitigation\", \"RemoveQuest\""
+},
+{
+"kind": "Toggle",
+"args": "\"NoStun\", {[\"Text\"] = \"No Stun\", [\"Default\"] = true, [\"Callback\"] = function (a1z) cKb [51] [\"SetNoStun\"] (a1z) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"NoRagdoll\", {[\"Text\"] = \"No Ragdoll\", [\"Default\"] = false, [\"Callback\"] = function (a1B) cKb [51] [\"SetNoRagdoll\"] (a1B) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"NoAttackSlowdown\", {[\"Text\"] = \"No Attack Slowdown\", [\"Default\"] = false, [\"Callback\"] = function (a1D) cKb [51] [\"SetNoAttackSlowdown\"] (a1D) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"NoDashCooldown\", {[\"Text\"] = \"No Dash Cooldown\", [\"Default\"] = false, [\"Callback\"] = function (a1F) cKb [51] [\"SetNoDashCooldown\"] (a1F) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"NoSunDamage\", {[\"Text\"] = \"No Sun Damage\", [\"Tooltip\"] = \"If you're a demon, the sun no longer burns you.Does not hing for other races\", [\"Default\"] = false, [\"Callback\"] = function (a1H) cKb [51] [\"SetNoSunDamage\"] (a1H) end}"
+},
+{
+"kind": "RightGroupbox",
+"args": "\"Codes\", \"ticket\""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"CodeStatus\"]), true"
+},
+{
+"kind": "Button",
+"args": "{[\"Text\"] = \"Redeem All Codes\", [\"Tooltip\"] = \"Redeems every active code, skipping ones already claimed or expired\", [\"DisabledTooltip\"] = \"Waiting out the redeem cooldown\", [\"Func\"] = function () cKb [51] [\"RedeemAllCodes\"] (function (a1P) local cWw = cKb [136]; aVP:Notify (a1P) end) end}"
+},
+{
+"kind": "Label",
+"args": "bpe [\"field\"] (\"Driving\", \"None\"), true"
+},
+{
+"kind": "RightGroupbox",
+"args": "\"Instant Kill\", \"zap\""
+},
+{
+"kind": "Toggle",
+"args": "\"InstantKill\", {[\"Text\"] = \"Instant Kill\", [\"Tooltip\"] = \"Kills any NPC your client has network ownership of\", [\"Default\"] = false, [\"Callback\"] = function (a1U) cKb [51] [\"SetInstantKill\"] (a1U) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "\" < font color = \\\"#e0788c\\\" > Instant kill is patched but it can still kill enemies, they just won't drop any items < /font > \", true"
+},
+{
+"kind": "Slider",
+"args": "\"KillThreshold\", {[\"Text\"] = \"Damage Before Kill\", [\"Default\"] = 10, [\"Min\"] = 0, [\"Max\"] = 100, [\"Rounding\"] = 0, [\"Suffix\"] = \"%\", [\"Callback\"] = function (a1X) cKb [51] [\"SetKillThreshold\"] (a1X) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"OwnershipViewer\", {[\"Text\"] = \"Ownership Viewer\", [\"Tooltip\"] = \"Outlines monsters near you:green ones can be end ed right now, red ones can't\", [\"Default\"] = false, [\"Callback\"] = function (a1Z) cKb [51] [\"SetOwnershipViewer\"] (a1Z) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Slider",
+"args": "\"OwnershipRange\", {[\"Text\"] = \"Viewer Range\", [\"Default\"] = 250, [\"Min\"] = 50, [\"Max\"] = 2000, [\"Rounding\"] = 0, [\"Suffix\"] = \" studs\", [\"Callback\"] = function (a11) cKb [51] [\"SetOwnershipRange\"] (a11) end}"
+},
+{
+"kind": "Tab",
+"args": "\"Zones\", \"map-pin\""
+},
+{
+"kind": "Tab",
+"args": "\"NPCs\", \"user\""
+},
+{
+"kind": "Tab",
+"args": "\"Mobs\", \"skull\""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"TeleportStatus\"]), true"
+},
+{
+"kind": "Dropdown",
+"args": "\"ZoneTarget\", {[\"Text\"] = \"Select Zone\", [\"Values\"] = cKb [51] [\"ZoneNames\"] (), [\"Default\"] = 1, [\"AllowNull\"] = true, [\"Searchable\"] = true}"
+},
+{
+"kind": "Button",
+"args": "{[\"Text\"] = \"Teleport\", [\"Func\"] = function () local cEv, cEw, cEx = nil, nil, nil; local cEy = nil; cEy = 7; while true do cEy = 10562 - cEy; do if cEy < 10556 then if cEy < 5799 then break else if cEy < 9258 then break else if cEy < 10554 then break else if cEy < 10555 then if cEy == 10554 then cEx = cEv; cEy = 1 else cEy = 10559; continue end else cEv = aVT [\"ZoneTarget\"]; cEy = if cEv then 3 else 5 end else if cEy < 10562 then if cEy < 10559 then if cEy < 10557 then break else if cEy < 10558 then if cEy == 10557 then cEw = cEv; cEv = cEw  ~= \"\"; cEx = cEw; cEy = if cEx then 8 else 1 else cEy = 4821; continue end else if cEy == 10558 then aVP:Notify (\"Pick a zone first\"); cEy = 2 else cEy = 10559; continue end else if cEy < 10560 then cEv = aVT [\"ZoneTarget\"] [\"Value\"]; cEy = 5 else if cEy < 10561 then cEy = 6 else cEy = if cEx then 0 else 4 end else if cEy < 12380 then if cEy < 12207 then if cEy == 10562 then cKb [51] [\"TeleportToZone\"] (cEw); cEy = 2 else break end else break end else break end end end end}"
+},
+{
+"kind": "Divider",
+"args": ""
+},
+{
+"kind": "Button",
+"args": "{[\"Text\"] = \"Teleport to Muzan\", [\"Tooltip\"] = \"Goes to Muzan while he is out, otherwise to his lair arrival point\", [\"Func\"] = function () cKb [51] [\"TeleportToMuzan\"] () end}"
+},
+{
+"kind": "Dropdown",
+"args": "\"NpcTarget\", {[\"Text\"] = \"Select NPC\", [\"Values\"] = cKb [51] [\"NpcNames\"] (), [\"Default\"] = 1, [\"AllowNull\"] = true, [\"Searchable\"] = true}"
+},
+{
+"kind": "Button",
+"args": "{[\"Text\"] = \"Teleport\", [\"Func\"] = function () local cEz, cEA, cEB = nil, nil, nil; local cEC = nil; cEC = 3; while true do cEC = 14126 - cEC; do if cEC < 13739 then break else if cEC < 14122 then if cEC < 14119 then if cEC < 14118 then break else cEA = cEz; cEz = cEA  ~= \"\"; cEB = cEA; cEC = if cEB then 6 else 5 end else if cEC < 14120 then if cEC == 14119 then aVP:Notify (\"Pick an NPC first\"); cEC = 2 else cEC = 2937; continue end else if cEC < 14121 then cEB = cEz; cEC = 5 else if cEC == 14121 then cEC = if cEB then 1 else 7 else cEC = 5363; continue end else if cEC < 14125 then if cEC < 14123 then break else if cEC < 14124 then cEz = aVT [\"NpcTarget\"]; cEC = if cEz then 0 else 8 else if cEC == 14124 then cEC = 4 else cEC = 14119; continue end else if cEC < 14126 then cKb [51] [\"TeleportToNpc\"] (cEA); cEC = 2 else if cEC < 15252 then if cEC == 14126 then cEz = aVT [\"NpcTarget\"] [\"Value\"]; cEC = 8 else break end else break end end end end}"
+},
+{
+"kind": "Dropdown",
+"args": "\"MobTeleport\", {[\"Text\"] = \"Select Mob\", [\"Values\"] = cKb [51] [\"MobNames\"] (), [\"Default\"] = 1, [\"AllowNull\"] = true, [\"Searchable\"] = true}"
+},
+{
+"kind": "Button",
+"args": "{[\"Text\"] = \"Teleport\", [\"Func\"] = function () local cED, cEE, cEF, cEH, cEI, cEJ = nil, nil, nil, nil, nil, nil; local cEG = nil; cEG = 5; while true do cEG = 9176 - cEG; do if cEG < 9173 then if cEG < 9169 then break else if cEG < 9171 then if cEG < 9170 then if cEG == 9169 then cEF = cED; cEG = 0 else cEG = 9173; continue end else cED = aVT [\"MobTeleport\"] [\"Value\"]; cEG = 3 end else if cEG < 9172 then if cEG == 9171 then cED = aVT [\"MobTeleport\"]; cEG = if cED then 6 else 3 else cEG = 9175; continue end else if cEG == 9172 then cEG = 8 else cEG = 9169; continue end else if cEG < 9632 then if cEG < 9175 then if cEG < 9174 then cEE = cED; local cWx = cKb [136]; cED = cEE  ~= \"\"; cEF = cEE; cEJ = if cEF then 1 else 0; cEH = 2376*cEJ + 3088*(1 - cEJ); cEI = 1804*cEJ + 787*(1 - cEJ); cEG = if (cEH*677 + cEI*1248 + cEH*cEI) % 16777213 == 8146248 then 7 else 0 else if cEG == 9174 then aVP:Notify (\"Pick a mob first\"); cEG = 4 else cEG = 14833; continue end else if cEG < 9176 then if cEG == 9175 then cKb [51] [\"TeleportToMob\"] (cEE); cEG = 4 else cEG = 14841; continue end else if cEG == 9176 then cEG = if cEF then 1 else 2 else cEG = 10856; continue end else break end end end end}"
+},
+{
+"kind": "RightGroupbox",
+"args": "\"Matchmaking\", \"swords\""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"QueueStatus\"]), true"
+},
+{
+"kind": "Dropdown",
+"args": "\"QueueModes\", {[\"Text\"] = \"Gamemodes\", [\"Tooltip\"] = \"Queues for these in turn, skipping any the hub has locked for you\", [\"Values\"] = cKb [51] [\"GamemodeNames\"] (), [\"Default\"] = {}, [\"Multi\"] = true, [\"AllowNull\"] = true, [\"Callback\"] = function (a2p) cKb [51] [\"SetQueueModes\"] (a2p) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"QueueRanked\", {[\"Text\"] = \"Ranked\", [\"Tooltip\"] = \"Queues ranked where the mode offers it; Zenith is ranked either way\", [\"Default\"] = false, [\"Callback\"] = function (a2r) cKb [51] [\"SetQueueRanked\"] (a2r) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"QueueFill\", {[\"Text\"] = \"Fill\", [\"Tooltip\"] = \"Lets the server fill the remaining slots with other players\", [\"Default\"] = false, [\"Callback\"] = function (a2t) cKb [51] [\"SetQueueFill\"] (a2t) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"AutoQueue\", {[\"Text\"] = \"Auto Queue\", [\"Tooltip\"] = \"Keeps you in queue and requeues as soon as one end s without a match\", [\"Default\"] = false, [\"Callback\"] = function (a2v) cKb [51] [\"SetAutoQueue\"] (a2v) end}"
+},
+{
+"kind": "Button",
+"args": "{[\"Text\"] = \"Leave Queue\", [\"Tooltip\"] = \"Drops the current queue; the joiner places a new one on its next turn\", [\"Func\"] = function () cKb [51] [\"CancelQueue\"] () end}"
+},
+{
+"kind": "Divider",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"WorldStatus\"]), true"
+},
+{
+"kind": "Dropdown",
+"args": "\"WorldTarget\", {[\"Text\"] = \"World\", [\"Tooltip\"] = \"The overworld to teleport in to\", [\"Values\"] = cKb [51] [\"WorldNames\"] (), [\"Default\"] = 1, [\"AllowNull\"] = true, [\"Callback\"] = function (a2y) cKb [51] [\"SetWorld\"] (a2y) end}"
+},
+{
+"kind": "Input",
+"args": "\"PrivateOwner\", {[\"Text\"] = \"Private Server Owner\", [\"Tooltip\"] = \"Username of whoever hosts the private server, yours or a fri end's; leave it empty to join a public server\", [\"Default\"] = \"\", [\"Placeholder\"] = \"Public servers\", [\"Callback\"] = function (a2A) cKb [51] [\"SetPrivateOwner\"] (a2A) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"AutoWorld\", {[\"Text\"] = \"Auto Join World\", [\"Tooltip\"] = \"Retries the teleport until it takes, for when the world is full or the hub is still settling\", [\"Default\"] = false, [\"Callback\"] = function (a2C) cKb [51] [\"SetAutoWorld\"] (a2C) end}"
+},
+{
+"kind": "Button",
+"args": "{[\"Text\"] = \"Join World\", [\"Tooltip\"] = \"Teleports once\", [\"Func\"] = function () cKb [51] [\"JoinWorld\"] () end}"
+},
+{
+"kind": "RightGroupbox",
+"args": "\"Unavailable\", \"triangle-alert\""
+},
+{
+"kind": "Label",
+"args": "\"Missing:\" .. table.concat (cKb [123] [\"missing\"], \", \"), true"
+},
+{
+"kind": "LeftGroupbox",
+"args": "\"ESP\", \"eye\""
+},
+{
+"kind": "ColorPicker",
+"args": "a38 .. \"Colour\", {[\"Default\"] = a4c, [\"Title\"] = a39 .. \" Colour\", [\"Callback\"] = function (a4k) cKb [51] [\"SetEspColour\"] (a4b, a4k) end}"
+},
+{
+"kind": "Toggle",
+"args": "a38, {[\"Text\"] = a39, [\"Default\"] = false, [\"Callback\"] = function (a4e) cKb [51] [\"SetEspOption\"] (a4a, a4e) end}"
+},
+{
+"kind": "Divider",
+"args": ""
+},
+{
+"kind": "Divider",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "\"Dying Colour\""
+},
+{
+"kind": "ColorPicker",
+"args": "\"EspDyingColour\", {[\"Default\"] = F149 (255, 0, 0), [\"Title\"] = \"Dying Colour\", [\"Callback\"] = function (a4n) cKb [51] [\"SetEspColour\"] (\"dying\", a4n) end}"
+},
+{
+"kind": "Divider",
+"args": ""
+},
+{
+"kind": "Slider",
+"args": "\"EspRange\", {[\"Text\"] = \"Max Distance\", [\"Tooltip\"] = \"Hides anything further away than this, 0 shows it at any distance\", [\"Default\"] = 5000, [\"Min\"] = 0, [\"Max\"] = 20000, [\"Rounding\"] = 0, [\"Suffix\"] = \" studs\", [\"Callback\"] = function (a4p) cKb [51] [\"SetEspRange\"] (a4p) end}"
+},
+{
+"kind": "Toggle",
+"args": "a4t, {[\"Text\"] = a4u, [\"Default\"] = false, [\"Callback\"] = function (a4x) cKb [51] [\"SetEspCategory\"] (a4v, a4x) end}"
+},
+{
+"kind": "ColorPicker",
+"args": "a4t .. \"Colour\", {[\"Default\"] = a4w, [\"Title\"] = a4u .. \" Colour\", [\"Callback\"] = function (a4B) cKb [51] [\"SetEspColour\"] (a4v, a4B) end}"
+},
+{
+"kind": "LeftGroupbox",
+"args": "\"World\", \"globe\""
+},
+{
+"kind": "RightGroupbox",
+"args": "\"Player ESP\", \"users\""
+},
+{
+"kind": "Toggle",
+"args": "\"EspPlayers\", {[\"Text\"] = \"Player ESP\", [\"Default\"] = false, [\"Callback\"] = function (a4G) cKb [51] [\"SetEspCategory\"] (\"Players\", a4G) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"EspPlayerInfo\", {[\"Text\"] = \"Level / Race / Clan\", [\"Default\"] = false, [\"Callback\"] = function (a4I) cKb [51] [\"SetEspOption\"] (\"playerInfo\", a4I) end}"
+},
+{
+"kind": "ColorPicker",
+"args": "\"EspPlayerInfoColour\", {[\"Default\"] = F149 (255, 255, 255), [\"Title\"] = \"Info Colour\", [\"Callback\"] = function (a4K) cKb [51] [\"SetEspColour\"] (\"in fo\", a4K) end}"
+},
+{
+"kind": "Label",
+"args": "\"Enemy Colour\""
+},
+{
+"kind": "ColorPicker",
+"args": "\"EspEnemyColour\", {[\"Default\"] = F149 (255, 0, 0), [\"Title\"] = \"Enemy Colour\", [\"Callback\"] = function (a4M) cKb [51] [\"SetEspColour\"] (\"Players\", a4M) end}"
+},
+{
+"kind": "Label",
+"args": "\"Party Colour\""
+},
+{
+"kind": "ColorPicker",
+"args": "\"EspPartyColour\", {[\"Default\"] = F149 (0, 255, 0), [\"Title\"] = \"Party Colour\", [\"Callback\"] = function (a4O) cKb [51] [\"SetEspColour\"] (\"Party\", a4O) end}"
+},
+{
+"kind": "Tab",
+"args": "\"Mobs\", \"skull\""
+},
+{
+"kind": "Tab",
+"args": "\"Bosses\", \"crown\""
+},
+{
+"kind": "Tab",
+"args": "\"NPCs\", \"user\""
+},
+{
+"kind": "RightGroupbox",
+"args": "\"Discord\", \"message-circle\""
+},
+{
+"kind": "Button",
+"args": "{[\"Text\"] = \"S end \" .. cGS .. \" Report Now\", [\"Func\"] = function () cKb [51] [\"SendWebhookReport\"] (cGS, function (a5l, a5m) local cGs = nil; local cGt = nil; cGt = 6; while true do cGt = 282 - cGt; do if cGt < 282 then if cGt < 279 then if cGt < 277 then if cGt == 276 then cGt = if a5l then 1 else 5 else cGt = 280; continue end else if cGt < 278 then cGs = a5m; cGt = if cGs then 3 else 2 else break end else if cGt < 280 then aVP:Notify (tostring (cGs), 6); cGt = 0 else if cGt < 281 then cGs = \"Report failed\"; cGt = 3 else if cGt == 281 then aVP:Notify (cGS .. \" report delivered\"); cGt = 0 else cGt = 280; continue end else if cGt < 6154 then if cGt < 3447 then if cGt == 282 then cGt = 4 else cGt = 278; continue end else break end else break end end end end) end}"
+},
+{
+"kind": "Input",
+"args": "cGJ, {[\"Text\"] = \"Webhook URL\", [\"Default\"] = \"\", [\"Placeholder\"] = cGL, [\"Tooltip\"] = \"Saved with your config, so do not share that file.\", [\"Callback\"] = function (a48) cKb [51] [\"SetWebhookUrl\"] (cGS, a48) end}"
+},
+{
+"kind": "Slider",
+"args": "\"WebhookInterval\" .. cGS, {[\"Text\"] = \"Report Every\", [\"Default\"] = cGH [\"in terval\"], [\"Min\"] = 1, [\"Max\"] = 240, [\"Rounding\"] = 0, [\"Suffix\"] = \" min\", [\"Callback\"] = function (a5b) cKb [51] [\"SetWebhookInterval\"] (cGS, a5b) end}"
+},
+{
+"kind": "Dropdown",
+"args": "\"WebhookEvents\" .. cGS, {[\"Text\"] = \"Include\", [\"Values\"] = cKb [51] [\"WebhookEventLabels\"] (cGS), [\"Default\"] = cKb [51] [\"WebhookEventLabels\"] (cGS), [\"Multi\"] = true, [\"AllowNull\"] = true, [\"Searchable\"] = true, [\"Tooltip\"] = \"Lines left out are not counted and do not keep an otherwise empty report alive.\", [\"Callback\"] = function (a5e) cKb [51] [\"SetWebhookEvents\"] (cGS, a5e) end}"
+},
+{
+"kind": "Tab",
+"args": "cGS, cGH [\"icon\"]"
+},
+{
+"kind": "Label",
+"args": "cGH [\"blurb\"], true"
+},
+{
+"kind": "Label",
+"args": "bpe [\"field\"] (\"Report\", cKb [51] [\"WebhookChannelStatus\"] (cGS)), true"
+},
+{
+"kind": "Toggle",
+"args": "\"Webhook\" .. cGS, {[\"Text\"] = \"Enable \" .. cGS .. \" Report\", [\"Default\"] = false, [\"Callback\"] = function (a45) cKb [51] [\"SetWebhookEnabled\"] (cGS, a45) end}"
+},
+{
+"kind": "Dropdown",
+"args": "\"WebhookItemCategories\", {[\"Text\"] = \"Name Drops From\", [\"Values\"] = cKb [51] [\"ItemCategories\"] (), [\"Default\"] = cKb [51] [\"DefaultItemCategories\"] (), [\"Multi\"] = true, [\"AllowNull\"] = true, [\"Searchable\"] = true, [\"Tooltip\"] = \"Only these categories are listed by name.Materials are left out by default.\", [\"Callback\"] = function (a5h) cKb [51] [\"SetItemCategories\"] (a5h) end}"
+},
+{
+"kind": "RightGroupbox",
+"args": "\"Shared\", \"settings-2\""
+},
+{
+"kind": "Toggle",
+"args": "\"WebhookSkipQuiet\", {[\"Text\"] = \"Skip Empty Reports\", [\"Default\"] = true, [\"Tooltip\"] = \"Stay silent when not hing on the in clude list happened.\", [\"Callback\"] = function (a5s) cKb [51] [\"SetWebhookSkipQuiet\"] (a5s) end}"
+},
+{
+"kind": "Input",
+"args": "\"WebhookPingId\", {[\"Text\"] = \"Discord User ID\", [\"Default\"] = \"\", [\"Numeric\"] = true, [\"Placeholder\"] = \"Your Discord ID\", [\"Callback\"] = function (a5u) cKb [51] [\"SetWebhookPingId\"] (a5u) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"WebhookPing\", {[\"Text\"] = \"Ping Me\", [\"Default\"] = false, [\"Tooltip\"] = \"Mentions the user ID above on every report.\", [\"Callback\"] = function (a5w) cKb [51] [\"SetWebhookPing\"] (a5w) end}"
+},
+{
+"kind": "RightGroupbox",
+"args": "\"Delivery\", \"s end\""
+},
+{
+"kind": "Label",
+"args": "cKb [51] [\"WebhookStatus\"] (), true"
+},
+{
+"kind": "LeftGroupbox",
+"args": "\"Menu\", \"logs\""
+},
+{
+"kind": "Toggle",
+"args": "\"AntiAfk\", {[\"Text\"] = \"Anti-AFK\", [\"Default\"] = true}"
+},
+{
+"kind": "Label",
+"args": "\"AFK triggers:0\""
+},
+{
+"kind": "Toggle",
+"args": "\"AntiGameplayPause\", {[\"Text\"] = \"No Gameplay Paused\", [\"Default\"] = true}"
+},
+{
+"kind": "Toggle",
+"args": "\"AutoReconnect\", {[\"Text\"] = \"Auto Reconnect on Kick\", [\"Default\"] = false}"
+},
+{
+"kind": "Toggle",
+"args": "\"Disable3D\", {[\"Text\"] = \"Disable 3D Rendering\", [\"Default\"] = false, [\"Callback\"] = function (a6x) F2175 (function () bmK [\"RunService\"]:Set3dRenderingEnabled (not a6x) end) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"FpsBoost\", {[\"Text\"] = \"FPS Boost\", [\"Default\"] = false, [\"Callback\"] = function (a6B) local cHi, cHj, cHk, cHm = nil, nil, nil, nil; local cHh = nil; cHh = 0; while true do cHh = 11057 - cHh; do if cHh < 11055 then if cHh < 11053 then if cHh < 11051 then break else if cHh < 11052 then local cW_ = cKb [136]; F2175 (function () settings () [\"Rendering\"] [\"QualityLevel\"] = F1269 [\"QualityLevel\"] [\"Level01\"] end); bmK [\"Lighting\"] [\"GlobalShadows\"] = false; bmK [\"Lighting\"] [\"FogEnd\"] = 9000000000; cHj = false; for a6F, a6G in F4813 (bmK [\"Workspace\"]:GetDescendants ()) do cHk = a6F; cHm = a6G; local cHl = cHk; local cHn = cHm; local cHi = nil; cHi = 2; while true do if cHi < 1 then cHj = true; cHi = 1 else if cHi < 2 then break else F2175 (cHW, cHn); cHi = 1 end end; if cHj then break end end; cHh = 5 else cHh = 3 end else if cHh < 11054 then cH4 = {[\"Quality\"] = settings () [\"Rendering\"] [\"QualityLevel\"], [\"Shadows\"] = bmK [\"Lighting\"] [\"GlobalShadows\"], [\"Fog\"] = bmK [\"Lighting\"] [\"FogEnd\"]}; cHh = 6 else break end else if cHh < 11131 then if cHh < 11056 then cHh = if not cH4 then 4 else 6 else if cHh < 11057 then cH6 (); cHh = 5 else if cHh == 11057 then cHh = if a6B then 2 else 1 else break end else break end end end end}"
+},
+{
+"kind": "Toggle",
+"args": "\"HideUiOnStart\", {[\"Text\"] = \"Hide UI On Start\", [\"Default\"] = false}"
+},
+{
+"kind": "Label",
+"args": "\"Menu bind\""
+},
+{
+"kind": "KeyPicker",
+"args": "\"MenuKeybind\", {[\"Default\"] = \"RightShift\", [\"NoUI\"] = true, [\"Text\"] = \"Menu keybind\"}"
+},
+{
+"kind": "LeftGroupbox",
+"args": "\"Script\", \"terminal\""
+},
+{
+"kind": "Button",
+"args": "{[\"Text\"] = \"Unload Script\", [\"Func\"] = function () local cW0 = cKb [136]; aVP:Unload () end}"
+},
+{
+"kind": "Divider",
+"args": ""
+},
+{
+"kind": "Input",
+"args": "\"SaveManager_ImportSource\", {[\"Text\"] = \"Paste exported config here\", [\"Finished\"] = true, [\"AllowEmpty\"] = true}"
+},
+{
+"kind": "Button",
+"args": "\"Export Config to Clipboard\", function () local cIL, cIM, cIN, cIO, cIQ, cIR, cIS = nil, nil, nil, nil, nil, nil, nil; local cIP = nil; cIP = 12; while true do cIP = 5995 - cIP; do if cIP < 5988 then if cIP < 5982 then if cIP < 5370 then break else if cIP < 5980 then break else if cIP < 5981 then if cIP == 5980 then local cW6 = cKb [136]; cIS = if cIN then 1 else 0; cIQ = 1859*cIS + 3277*(1 - cIS); cIR = 2072*cIS + 3386*(1 - cIS); cIP = if (cIQ*3029 + cIR*3754 + cIQ*cIR) % 16777213 == 483834 then 6 else 5 else cIP = 13140; continue end else cIL = cIN; cIN = type (cIL) == \"function\"; cIP = if cIN then 7 else 15 end else if cIP < 5985 then if cIP < 5983 then cIN = cIL; cIP = if cIN then 14 else 8 else if cIP < 5984 then local cW6 = cKb [136]; cIL, cIM = F2175 (bmK [\"HttpService\"] [\"JSONEncode\"], bmK [\"HttpService\"], cI8 ()); cIS = if cIL then 1 else 0; cIQ = 3675*cIS + 1940*(1 - cIS); cIR = 1501*cIS + 3324*(1 - cIS); cIP = if (cIQ*4060 + cIR*4094 + cIQ*cIR) % 16777213 == 9804556 then 11 else 0 else cIL = (cKb [118] (setclipboard)); cIP = if cIL then 4 else 13 end else if cIP < 5986 then cIL = toclipboard; cIP = 3 else if cIP < 5987 then break else if cIP == 5987 then cIL = (cKb [118] (toclipboard)); cIP = if cIL then 10 else 3 else cIP = 13140; continue end else if cIP < 5994 then if cIP < 5991 then if cIP < 5989 then cIN = F2175 (cIL, cIM); cIP = 15 else if cIP < 5990 then if cIP == 5989 then aVP:Notify (\"Config copied to clipboard\", 6); return else cIP = 5995; continue end else if cIP == 5990 then aVP:Notify (\"Your executor do es not support copying to the clipboard\"); return else cIP = 5987; continue end else if cIP < 5992 then cIL = setclipboard; cIP = 13 else if cIP < 5993 then if cIP == 5992 then cIO = cIL; cIP = if cIO then 1 else 2 else cIP = 5985; continue end else cIO = nil; cIP = 1 end else if cIP < 12702 then if cIP < 5995 then cIN = cIO; cIP = 14 else if cIP < 7990 then if cIP == 5995 then aVP:Notify (\"Failed to encode the config\"); cIP = 9 else break end else break end else break end end end end"
+},
+{
+"kind": "Button",
+"args": "\"Import Config from Clipboard Text\", function () local cIT, cIU, cIV, cIX, cIY, cIZ, cI_, cI0, cI1, cI3 = nil, nil, nil, nil, nil, nil, nil, nil, nil, nil; local cIW = nil; cIW = 7; while true do cIW = 15290 - cIW; do if cIW < 15274 then if cIW < 15269 then break else if cIW < 15271 then if cIW < 15270 then cIT, cIV = F2175 (bmK [\"HttpService\"] [\"JSONDecode\"], bmK [\"HttpService\"], cIU); cIU = not cIT; cIW = if cIU then 5 else 6 else cIV = \"s\"; cIW = 12 end else if cIW < 15272 then cIU = type (cIV [\"objects\"])  ~= \"table\"; cIW = 2 else if cIW < 15273 then if cIW == 15272 then cIT = \"\"; cIW = 9 else cIW = 8486; continue end else break end else if cIW < 15282 then if cIW < 15278 then if cIW < 15276 then if cIW < 15275 then if cIW == 15274 then aVP:Notify (\"That is not a valid exported config\"); return else cIW = 9462; continue end else if cIW == 15275 then cIV = cIU; cIW = if cIV then 12 else 20 else cIW = 15270; continue end else if cIW < 15277 then cIW = if # cIU > 262144 then 11 else 21 else local cW7 = cKb [136]; cIT = 0; cKb [51] [\"BeginPriorityLoad\"] (); cI0 = false; for a8O, a8P in F4813 (cIV [\"objects\"]) do cI1 = a8O; cI3 = a8P; local cI2 = cI1; local cI4 = cI3; local cI_ = nil; cI_ = 4; while true do if cI_ < 2 then if cI_ < 1 then cI_ = 3 else cI0 = true; cI_ = 3 end else if cI_ < 3 then cIT + = 1; cI_ = 0 else if cI_ < 4 then break else cI_ = if cJa (cI4) then 2 else 0 end end; if cI0 then break end end; cKb [51] [\"SettlePriority\"] (); cIZ = if cIT == 0 then 1 else 0; cIX = 2212*cIZ + 2931*(1 - cIZ); cIY = 3882*cIZ + 1638*(1 - cIZ); cIW = if (cIX*365 + cIY*222 + cIX*cIY) % 16777213 == 10256168 then 3 else 0 end else if cIW < 15280 then if cIW < 15279 then if cIW == 15278 then aVP:Notify (\"Imported %d setting%s\":format (cIT, cIV), 6); cIW = 17 else cIW = 6123; continue end else aVP:Notify (\"That config is too large\"); return end else if cIW < 15281 then cIU = \"\"; cIW = 15 else local cW7 = cKb [136]; cIU = tostring (cIT):match (\"^%s*(.-)%s*$\"); cIZ = if cIU == \"\" then 1 else 0; cIX = 2103*cIZ + 139*(1 - cIZ); cIY = 2294*cIZ + 1486*(1 - cIZ); cIW = if (cIX*810 + cIY*1480 + cIX*cIY) % 16777213 == 9922832 then 4 else 14 end else if cIW < 15286 then if cIW < 15284 then if cIW < 15283 then cIW = if # cIV [\"objects\"] > 2048 then 1 else 13 else cIT = aVT [\"SaveManager_ImportSource\"] [\"Value\"]; cIW = if cIT then 9 else 18 end else if cIW < 15285 then cIU = type (cIV)  ~= \"table\"; cIW = 5 else cIW = if cIU then 2 else 19 end else if cIW < 15288 then if cIW < 15287 then if cIW == 15286 then aVP:Notify (\"Paste an exported config in to the box first\"); return else cIW = 15279; continue end else if cIW == 15287 then aVP:Notify (\"No settings in that config matched this script\"); return else cIW = 15273; continue end else if cIW < 15289 then cIW = if cIU then 16 else 8 else if cIW < 15290 then aVP:Notify (\"That config has too many records\"); return else if cIW == 15290 then local cW7 = cKb [136]; aVT [\"SaveManager_ImportSource\"]:SetValue (\"\"); cIU = cIT == 1; cIW = if cIU then 10 else 15 else cIW = 8486; continue end end end end"
+},
+{
+"kind": "Tab",
+"args": "\"Farming\", \"swords\""
+},
+{
+"kind": "Tab",
+"args": "\"Combat\", \"sword\""
+},
+{
+"kind": "Tab",
+"args": "\"Priority\", \"list-or dered\""
+},
+{
+"kind": "Tab",
+"args": "\"Player\", \"person-standing\""
+},
+{
+"kind": "Tab",
+"args": "\"ESP\", \"eye\""
+},
+{
+"kind": "Tab",
+"args": "\"Webhook\", \"webhook\""
+},
+{
+"kind": "Tab",
+"args": "\"Settings\", \"settings\""
+},
+{
+"kind": "LeftGroupbox",
+"args": "\"Discord\", \"message-circle\""
+},
+{
+"kind": "LeftGroupbox",
+"args": "\"Dungeon Run\", \"swords\""
+},
+{
+"kind": "Label",
+"args": "bpe [\"field\"] (\"Run\", cKb [51] [\"DungeonName\"] ()), true"
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"DungeonStatus\"]), true"
+},
+{
+"kind": "Toggle",
+"args": "\"AutoDungeon\", {[\"Text\"] = \"Auto Farm Nearby Enemies\", [\"Tooltip\"] = \"Fights whatever wave enemy is closest, skipping the ones the run excludes\", [\"Default\"] = false, [\"Callback\"] = function (aWH) cKb [51] [\"SetAutoDungeon\"] (aWH) end}"
+},
+{
+"kind": "Slider",
+"args": "\"DungeonRange\", {[\"Text\"] = \"Search Range\", [\"Tooltip\"] = \"How far to look for an enemy, 0 searches the whole floor\", [\"Default\"] = 250, [\"Min\"] = 0, [\"Max\"] = 2000, [\"Rounding\"] = 0, [\"Suffix\"] = \" studs\", [\"Callback\"] = function (aWJ) cKb [51] [\"SetDungeonRange\"] (aWJ) end}"
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"BringStatus\"]), true"
+},
+{
+"kind": "Toggle",
+"args": "\"AutoBringEnemies\", {[\"Text\"] = \"Bring Enemies\", [\"Tooltip\"] = \"Drags every wave enemy this client owns onto you in stead of chasing them; passive spawns are left alone\", [\"Default\"] = false, [\"Callback\"] = function (aWL) cKb [51] [\"SetAutoBringEnemies\"] (aWL) end}"
+},
+{
+"kind": "Slider",
+"args": "\"BringRange\", {[\"Text\"] = \"Bring Range\", [\"Tooltip\"] = \"How far out to pull enemies from, 0 brings the whole floor\", [\"Default\"] = 2000, [\"Min\"] = 0, [\"Max\"] = 5000, [\"Rounding\"] = 0, [\"Suffix\"] = \" studs\", [\"Callback\"] = function (aWN) cKb [51] [\"SetBringRange\"] (aWN) end}"
+},
+{
+"kind": "Divider",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"WaveStatus\"]), true"
+},
+{
+"kind": "Toggle",
+"args": "\"AutoSkipWaves\", {[\"Text\"] = \"Auto Skip Waves\", [\"Tooltip\"] = \"Votes to skip each wave break as it opens; the run still needs enough votes to pass\", [\"Default\"] = false, [\"Callback\"] = function (aWP) cKb [51] [\"SetAutoSkipWaves\"] (aWP) end}"
+},
+{
+"kind": "Divider",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"CardStatus\"]), true"
+},
+{
+"kind": "Toggle",
+"args": "\"AutoCards\", {[\"Text\"] = \"Auto Pick Cards\", [\"Tooltip\"] = \"Takes the best offered card you picked; leaves the hand alone if none of them show up\", [\"Default\"] = false, [\"Callback\"] = function (aWR) cKb [51] [\"SetAutoCards\"] (aWR) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"BlockBareHands\", {[\"Text\"] = \"Block Bare Hands Event\", [\"Tooltip\"] = \"Never takes Bare Hands, in cluding when it arrives on an Event card; that floor bans weapons for 2.2x points and leaves you empty handed after it\", [\"Default\"] = true, [\"Callback\"] = function (aWT) cKb [51] [\"SetBlockBareHands\"] (aWT) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"ForceHealCards\", {[\"Text\"] = \"Force Heal Cards\", [\"Tooltip\"] = \"While your health sits at or below the threshold this takes the hand away from your selection and picks the best heal card in stead; the moment you are back above it your selection has the hand again\", [\"Default\"] = false, [\"Callback\"] = function (aWV) cKb [51] [\"SetForceHealCards\"] (aWV) end}"
+},
+{
+"kind": "Slider",
+"args": "\"HealBelow\", {[\"Text\"] = \"Force Heal Below\", [\"Tooltip\"] = \"0% never forces a heal and 100% always takes one; a hand with no heal card in it is left to your selection either way\", [\"Default\"] = 40, [\"Min\"] = 0, [\"Max\"] = 100, [\"Rounding\"] = 0, [\"Suffix\"] = \"%\", [\"Callback\"] = function (aWX) cKb [51] [\"SetHealBelow\"] (aWX) end}"
+},
+{
+"kind": "Dropdown",
+"args": "\"CardTargets\", {[\"Text\"] = \"Select Cards\", [\"Values\"] = cKb [51] [\"CardNames\"] (), [\"Default\"] = {}, [\"Multi\"] = true, [\"AllowNull\"] = true, [\"Searchable\"] = true, [\"Callback\"] = function (aWZ) cKb [51] [\"SetCardSelection\"] (aWZ) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Slider",
+"args": "\"CardPriority\" .. cDk:gsub (\"%W\", \"\"), {[\"Text\"] = cDk .. \" Priority\", [\"Tooltip\"] = \"1 is taken first, 10 last; ties go to the rarer card\", [\"Default\"] = 5, [\"Min\"] = 1, [\"Max\"] = 10, [\"Rounding\"] = 0, [\"Callback\"] = function (aW5) cKb [51] [\"SetCardPriority\"] (cDk, aW5) end}"
+},
+{
+"kind": "LeftGroupbox",
+"args": "\"Dungeon\", \"swords\""
+},
+{
+"kind": "Button",
+"args": "{[\"Text\"] = \"Where Are Dungeons?\", [\"Tooltip\"] = \"Explains where the dungeon run features went\", [\"Func\"] = function () local cC1; cC1 = nil; local cC2 = nil; local cC3 = nil; cC3 = 4; while true do cC3 = 7385 - cC3; do if cC3 < 7383 then if cC3 < 6455 then break else if cC3 < 7380 then if cC3 < 7378 then break else if cC3 < 7379 then if cC3 == 7378 then cC1 = cC2; cC2 = cC1; cC3 = if cC2 then 3 else 6 else cC3 = 14605; continue end else cC3 = if cC2 then 0 else 1 end else if cC3 < 7381 then cC2 = aVP [\"Dialogues\"] [\"DungeonHelp\"]; cC3 = 7 else if cC3 < 7382 then if cC3 == 7381 then cC2 = aVP [\"Dialogues\"]; cC3 = if cC2 then 5 else 7 else cC3 = 7385; continue end else cC2 = cKb [118] (cC1 [\"Dismiss\"]); cC3 = 6 end else if cC3 < 9323 then if cC3 < 7385 then if cC3 < 7384 then break else if cC3 == 7384 then aV6:AddDialog (\"DungeonHelp\", {[\"Title\"] = \"Where Are Dungeons?\", [\"Description\"] = \"The dungeon features only exist in side a run, so there is not hing \" .. \"to show you out here.Join a dungeon game mode and a Dungeon Run box \" .. \"appears at the top of this tab with the run's own features in it.\", [\"AutoDismiss\"] = true, [\"OutsideClickDismiss\"] = true, [\"FooterButtons\"] = {{[\"Id\"] = \"Exit\", [\"Title\"] = \"Exit\", [\"Variant\"] = \"Primary\"}}}); cC3 = 2 else cC3 = 7381; continue end else if cC3 < 8798 then if cC3 == 7385 then F2175 (function () local c3C = cKb [136]; cC1:Dismiss () end); cC3 = 1 else break end else break end else break end end end end}"
+},
+{
+"kind": "LeftGroupbox",
+"args": "\"Auto Farming\", \"swords\""
+},
+{
+"kind": "Toggle",
+"args": "\"AutoLevel\", {[\"Text\"] = \"Auto Level\", [\"Default\"] = false, [\"Callback\"] = function (aW9) cKb [51] [\"SetAutoLevel\"] (aW9) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"LevelStatus\"]), true"
+},
+{
+"kind": "Toggle",
+"args": "\"LevelDropForeign\", {[\"Text\"] = F4672, [\"Default\"] = false, [\"Callback\"] = function (aXc) cKb [51] [\"SetLevelDropForeign\"] (aXc) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"AutoQuest\", {[\"Text\"] = \"Auto Farm Quests\", [\"Tooltip\"] = \"Farms the picked quests on repeat, taking each one again after it is do ne\", [\"Default\"] = false, [\"Callback\"] = function (aXf) cKb [51] [\"SetAutoQuest\"] (aXf) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"QuestStatus\"]), true"
+},
+{
+"kind": "Dropdown",
+"args": "\"QuestTargets\", {[\"Text\"] = \"Select Quests\", [\"Tooltip\"] = \"Combat quests whose kill tasks all resolve to a mob this can find\", [\"Values\"] = cKb [51] [\"QuestChoices\"] (), [\"Default\"] = {}, [\"Multi\"] = true, [\"AllowNull\"] = true, [\"Searchable\"] = true, [\"Callback\"] = function (aXi) cKb [51] [\"SetQuestSelection\"] (aXi) end}"
+},
+{
+"kind": "Button",
+"args": "{[\"Text\"] = \"Refresh Quests\", [\"Func\"] = function () local c3D = cKb [136]; cKb [51] [\"RefreshQuestChoices\"] (); local c3E = F6128 [\"wait\"]; F3916 (0.4); F2175 (function () local cC4 = nil; cC4 = 2; while true do cC4 = 1874 - cC4; do if cC4 < 7748 then if cC4 < 1874 then if cC4 < 1872 then if cC4 < 1871 then break else if cC4 == 1871 then aVT [\"QuestTargets\"]:SetValues (cKb [51] [\"QuestChoices\"] ()); cC4 = 1 else cC4 = 9854; continue end else if cC4 < 1873 then cC4 = if aVT [\"QuestTargets\"] then 3 else 1 else cC4 = 0 end else break end else break end end end end); aVP:Notify (\"Refreshed quest list\") end}"
+},
+{
+"kind": "Button",
+"args": "{[\"Text\"] = \"Abandon Quest\", [\"Func\"] = function () cKb [51] [\"AbandonQuest\"] () end}"
+},
+{
+"kind": "Toggle",
+"args": "\"AutoMob\", {[\"Text\"] = \"Auto Farm Mob\", [\"Default\"] = false, [\"Callback\"] = function (aXq) cKb [51] [\"SetAutoMob\"] (aXq) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"MobStatus\"]), true"
+},
+{
+"kind": "Dropdown",
+"args": "\"MobTarget\", {[\"Text\"] = \"Select Mob\", [\"Values\"] = cKb [51] [\"MobNames\"] (), [\"Default\"] = 1, [\"AllowNull\"] = true, [\"Searchable\"] = true, [\"Callback\"] = function (aXt) cKb [51] [\"SetMobTarget\"] (aXt) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"AutoBoss\", {[\"Text\"] = \"Auto Boss\", [\"Default\"] = false, [\"Callback\"] = function (aXv) cKb [51] [\"SetAutoBoss\"] (aXv) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"BossStatus\"]), true"
+},
+{
+"kind": "Dropdown",
+"args": "\"BossTargets\", {[\"Text\"] = \"Select Bosses\", [\"Values\"] = cKb [51] [\"BossNames\"] (), [\"Default\"] = {}, [\"Multi\"] = true, [\"AllowNull\"] = true, [\"Searchable\"] = true, [\"Callback\"] = function (aXy) cKb [51] [\"SetBossSelection\"] (aXy) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"AutoBossHunt\", {[\"Text\"] = \"Auto Boss Hunts\", [\"Tooltip\"] = \"Claims the hunt or ders posted on the crow board and kills the boss each one names, on repeat\", [\"Default\"] = false, [\"Callback\"] = function (aXA) cKb [51] [\"SetAutoBossHunt\"] (aXA) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"HuntStatus\"]), true"
+},
+{
+"kind": "Dropdown",
+"args": "\"HuntTiers\", {[\"Text\"] = \"Hunt Tiers\", [\"Tooltip\"] = \"Which posted hunts to take.Nothing picked takes any of them\", [\"Values\"] = cKb [141] [\"HUNT_TIERS\"], [\"Default\"] = {}, [\"Multi\"] = true, [\"AllowNull\"] = true, [\"Searchable\"] = true, [\"Callback\"] = function (aXF) cKb [51] [\"SetHuntTiers\"] (aXF) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"HuntDropForeign\", {[\"Text\"] = \"Abandon Quest For A Hunt\", [\"Tooltip\"] = \"There is one quest slot, so switch this on to drop an or dinary quest that is holding it\", [\"Default\"] = false, [\"Callback\"] = function (aXH) cKb [51] [\"SetHuntDropForeign\"] (aXH) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"AutoDelivery\", {[\"Text\"] = \"Auto Delivery Quest\", [\"Tooltip\"] = \"Takes Estate Worker Niko's supply run, carries the box to Shiori, reports back, and starts over\", [\"Default\"] = false, [\"Callback\"] = function (aXJ) cKb [51] [\"SetAutoDelivery\"] (aXJ) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"DeliveryStatus\"]), true"
+},
+{
+"kind": "Toggle",
+"args": "\"AutoChest\", {[\"Text\"] = \"Auto Sealed Cache\", [\"Default\"] = false, [\"Callback\"] = function (aXM) cKb [51] [\"SetAutoChest\"] (aXM) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"ChestStatus\"]), true"
+},
+{
+"kind": "Dropdown",
+"args": "\"ChestTiers\", {[\"Text\"] = \"Sealed Cache Tiers\", [\"Values\"] = cKb [141] [\"CHEST_TIERS\"], [\"Default\"] = {}, [\"Multi\"] = true, [\"AllowNull\"] = true, [\"Searchable\"] = true, [\"Callback\"] = function (aXP) cKb [51] [\"SetChestTiers\"] (aXP) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"ChestInstantKill\", {[\"Text\"] = \"Instant Kill Cache Guards\", [\"Tooltip\"] = \"Its own Instant Kill, only on the guards around a locked sealed cache and only while Auto Sealed Cache runs\", [\"Default\"] = false, [\"Callback\"] = function (aXR) cKb [51] [\"SetChestInstantKill\"] (aXR) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Slider",
+"args": "\"ChestKillThreshold\", {[\"Text\"] = \"Damage Before Kill\", [\"Tooltip\"] = \"How much of a guard's health to take off first, 0% kills it at full health\", [\"Default\"] = 10, [\"Min\"] = 0, [\"Max\"] = 100, [\"Rounding\"] = 0, [\"Suffix\"] = \"%\", [\"Callback\"] = function (aXU) cKb [51] [\"SetChestKillThreshold\"] (aXU) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"AutoLoot\", {[\"Text\"] = \"Auto Loot\", [\"Tooltip\"] = \"Collects eligible drops and boss chests within the pickup range, with highest priority when loot is ready\", [\"Default\"] = false, [\"Callback\"] = function (aXW) cKb [51] [\"SetAutoLoot\"] (aXW) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"LootStatus\"]), true"
+},
+{
+"kind": "Slider",
+"args": "\"LootRange\", {[\"Text\"] = \"Pickup Range\", [\"Tooltip\"] = \"How far to travel for a drop, 0 collects at any distance\", [\"Default\"] = 150, [\"Min\"] = 0, [\"Max\"] = 2000, [\"Rounding\"] = 0, [\"Suffix\"] = \" studs\", [\"Callback\"] = function (aXZ) cKb [51] [\"SetLootRange\"] (aXZ) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"AutoSoul\", {[\"Text\"] = \"Auto Claim Souls\", [\"Tooltip\"] = \"Picks up Weak, Strong and Brave Souls, the Demon progression drops\", [\"Default\"] = false, [\"Callback\"] = function (aX0) cKb [51] [\"SetAutoSoul\"] (aX0) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"SoulStatus\"]), true"
+},
+{
+"kind": "Slider",
+"args": "\"SoulRange\", {[\"Text\"] = \"Collect Range\", [\"Tooltip\"] = \"How far to travel for a soul, 0 collects at any distance\", [\"Default\"] = 250, [\"Min\"] = 0, [\"Max\"] = 2000, [\"Rounding\"] = 0, [\"Suffix\"] = \" studs\", [\"Callback\"] = function (aX3) cKb [51] [\"SetSoulRange\"] (aX3) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"AutoDemon\", {[\"Text\"] = \"Become A Demon\", [\"Tooltip\"] = \"Runs the whole Muzan route:reputation, the Biwa Bell, the lair, the Spider Lilies, Dr.Higoshima and the blood\", [\"Default\"] = false, [\"Callback\"] = function (aX5) cKb [51] [\"SetAutoDemon\"] (aX5) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"MaxHealth\"]), true"
+},
+{
+"kind": "Dropdown",
+"args": "\"DemonMob\", {[\"Text\"] = \"Reputation Mob\", [\"Tooltip\"] = \"Killed until reputation is low enough for Muzan.Mizunoto slayers move it fastest\", [\"Values\"] = cKb [51] [\"MobNames\"] (), [\"Default\"] = \"Mizunoto\", [\"Multi\"] = false, [\"AllowNull\"] = false, [\"Searchable\"] = true, [\"Callback\"] = function (aX8) cKb [51] [\"SetDemonMob\"] (aX8) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"DemonDrink\", {[\"Text\"] = \"Drink Muzan's Blood\", [\"Tooltip\"] = \"Off stops at the flask in stead of transforming, so the last step stays yours.Becoming a demon cannot be undone\", [\"Default\"] = true, [\"Callback\"] = function (aYa) cKb [51] [\"SetDemonDrink\"] (aYa) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"DemonDropForeign\", {[\"Text\"] = \"Abandon Quest For Muzan\", [\"Tooltip\"] = \"Muzan only gives the task with the quest slot free, so switch this on to drop whatever is holding it\", [\"Default\"] = false, [\"Callback\"] = function (aYc) cKb [51] [\"SetDemonDropForeign\"] (aYc) end}"
+},
+{
+"kind": "Divider",
+"args": ""
+},
+{
+"kind": "Button",
+"args": "{[\"Text\"] = \"Refresh Mob and Boss Lists\", [\"Func\"] = function () local c3F = cKb [136]; F2175 (function () local cC5 = nil; cC5 = 9; while true do cC5 = 16053 - cC5; do if cC5 < 16045 then if cC5 < 13392 then break else if cC5 < 14763 then break else if cC5 < 16044 then break else cC5 = if aVT [\"MobTarget\"] then 3 else 6 end else if cC5 < 16049 then if cC5 < 16047 then if cC5 < 16046 then cC5 = if aVT [\"DemonMob\"] then 0 else 2 else aVT [\"BossTargets\"]:SetValues (cKb [51] [\"BossNames\"] ()); cC5 = 5 end else if cC5 < 16048 then if cC5 == 16047 then cC5 = if aVT [\"WenMob\"] then 4 else 8 else cC5 = 16051; continue end else cC5 = 1 end else if cC5 < 16051 then if cC5 < 16050 then if cC5 == 16049 then aVT [\"WenMob\"]:SetValues (cKb [51] [\"MobNames\"] ()); cC5 = 8 else cC5 = 16051; continue end else if cC5 == 16050 then aVT [\"MobTarget\"]:SetValues (cKb [51] [\"MobNames\"] ()); cC5 = 6 else cC5 = 10657; continue end else if cC5 < 16052 then cC5 = if aVT [\"BossTargets\"] then 7 else 5 else if cC5 < 16053 then break else if cC5 == 16053 then aVT [\"DemonMob\"]:SetValues (cKb [51] [\"MobNames\"] ()); cC5 = 2 else cC5 = 16047; continue end end end end); aVP:Notify (\"Refreshed target lists\") end}"
+},
+{
+"kind": "LeftGroupbox",
+"args": "\"Breathing\", \"wind\""
+},
+{
+"kind": "Toggle",
+"args": "\"AutoBreathing\", {[\"Text\"] = \"Auto Breathing\", [\"Default\"] = false, [\"Callback\"] = function (aYk) cKb [51] [\"SetAutoBreathing\"] (aYk) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"BreathStatus\"]), true"
+},
+{
+"kind": "Dropdown",
+"args": "\"BreathingChoice\", {[\"Text\"] = \"Select Breathing\", [\"Values\"] = cKb [141] [\"BREATHINGS\"], [\"AllowNull\"] = true, [\"Searchable\"] = true, [\"Callback\"] = function (aYn) cKb [51] [\"SetBreathing\"] (aYn) end}"
+},
+{
+"kind": "Dropdown",
+"args": "\"WenMob\", {[\"Text\"] = \"Wen Farm Mob\", [\"Values\"] = cKb [51] [\"MobNames\"] (), [\"AllowNull\"] = true, [\"Searchable\"] = true, [\"Callback\"] = function (aYp) cKb [51] [\"SetWenMob\"] (aYp) end}"
+},
+{
+"kind": "LeftGroupbox",
+"args": "\"Skill Tree\", \"git-branch\""
+},
+{
+"kind": "Toggle",
+"args": "\"AutoSkillTree\", {[\"Text\"] = \"Auto Skill Tree\", [\"Default\"] = false, [\"Callback\"] = function (aYs) cKb [51] [\"SetAutoSkillTree\"] (aYs) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"SkillStatus\"]), true"
+},
+{
+"kind": "Toggle",
+"args": "\"UnlockSkills\", {[\"Text\"] = \"Unlock Skills\", [\"Default\"] = false, [\"Callback\"] = function (aYv) cKb [51] [\"SetUnlockSkills\"] (aYv) end}"
+},
+{
+"kind": "Dropdown",
+"args": "\"SkillNodes\", {[\"Text\"] = \"Select Nodes\", [\"Values\"] = cKb [51] [\"SkillNodes\"] (), [\"Default\"] = {}, [\"Multi\"] = true, [\"AllowNull\"] = true, [\"Searchable\"] = true, [\"Callback\"] = function (aYx) cKb [51] [\"SetSkillNodes\"] (aYx) end}"
+},
+{
+"kind": "Button",
+"args": "{[\"Text\"] = \"Refresh Nodes\", [\"Func\"] = function () local c3G = cKb; local c3H = c3G [136]; c3G [51] [c3H [2375]] (); local c3I = c3H [6128] [c3H [2030]]; c3H [3916] (c3H [5941]); c3H [2175] (function () local cC7, cC8, cC9 = nil, nil, nil; local cC6 = nil; cC6 = 2; while true do cC6 = 13913 - cC6; do if cC6 < 13911 then if cC6 < 4538 then break else if cC6 < 8657 then break else if cC6 < 13910 then break else cC6 = 1 end else if cC6 < 13913 then if cC6 < 13912 then if cC6 == 13911 then local c3J = cKb [136]; cC9 = if aVT [\"SkillNodes\"] then 1 else 0; cC7 = 1838*cC9 + 1015*(1 - cC9); cC8 = 1707*cC9 + 3081*(1 - cC9); cC6 = if (cC7*2344 + cC8*3685 + cC7*cC8) % 16777213 == 13736033 then 0 else 3 else cC6 = 2357; continue end else break end else if cC6 < 14133 then if cC6 == 13913 then aVT [\"SkillNodes\"]:SetValues (cKb [51] [\"SkillNodes\"] ()); cC6 = 3 else break end else break end end end end); aVP:Notify (c3H [5365]) end}"
+},
+{
+"kind": "LeftGroupbox",
+"args": "\"Auto Training\", \"dumbbell\""
+},
+{
+"kind": "Toggle",
+"args": "\"AutoTraining\", {[\"Text\"] = \"Auto Training\", [\"Default\"] = false, [\"Tooltip\"] = \"Goes from one training station to the next, do es each one and moves on.Training credit counts towards quests that ask for it.\", [\"Callback\"] = function (aYF) cKb [51] [\"SetAutoTraining\"] (aYF) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"TrainStatus\"]), true"
+},
+{
+"kind": "Dropdown",
+"args": "\"Trainings\", {[\"Text\"] = \"Trainings\", [\"Values\"] = cKb [51] [\"TrainingNames\"] (), [\"Default\"] = {}, [\"Multi\"] = true, [\"AllowNull\"] = true, [\"Searchable\"] = true, [\"Callback\"] = function (aYI) cKb [51] [\"SetTrainings\"] (aYI) end}"
+},
+{
+"kind": "Dropdown",
+"args": "\"TrainingMode\", {[\"Text\"] = \"How To Play Them\", [\"Values\"] = cKb [51] [\"TrainingModes\"] (), [\"Default\"] = 1, [\"Tooltip\"] = \"Instantly finishes the moment a station opens.Play It Out plays the game's own minigame in stead, which takes as long as it normally would.\", [\"Callback\"] = function (aYK) cKb [51] [\"SetTrainingMode\"] (aYK) end}"
+},
+{
+"kind": "LeftGroupbox",
+"args": "\"Fishing\", \"fish\""
+},
+{
+"kind": "Toggle",
+"args": "\"AutoFish\", {[\"Text\"] = \"Auto Fish\", [\"Default\"] = false, [\"Tooltip\"] = \"Gets the fishing permit and a rod if you have none, then fishes at the harbor and always lands the bite\", [\"Callback\"] = function (aYN) cKb [51] [\"SetAutoFish\"] (aYN) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "bpe [\"field\"] (\"Status\", bpz [\"FishStatus\"]), true"
+},
+{
+"kind": "Dropdown",
+"args": "\"FishBait\", {[\"Text\"] = \"Bait\", [\"Values\"] = cKb [51] [\"BaitNames\"] (), [\"Default\"] = 1, [\"Tooltip\"] = \"Bait gets used up on every bite\", [\"Callback\"] = function (aYQ) cKb [51] [\"SetFishBait\"] (aYQ) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"AutoBuyBait\", {[\"Text\"] = \"Auto Buy Bait\", [\"Default\"] = false, [\"Tooltip\"] = \"Buys more of the selected bait when you run out\", [\"Callback\"] = function (aYS) cKb [51] [\"SetAutoBuyBait\"] (aYS) end}"
+},
+{
+"kind": "LeftGroupbox",
+"args": "\"Tower Exp\", \"gem\""
+},
+{
+"kind": "Toggle",
+"args": "\"AutoBuyExp\", {[\"Text\"] = F2092, [\"Default\"] = false, [\"Tooltip\"] = \"Spends Ouwigahara run points at the Tower Crystal on 1, 000 Exp bundles.\", [\"Callback\"] = function (aYV) cKb [51] [\"SetAutoBuyExp\"] (aYV) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"CrystalStatus\"]), true"
+},
+{
+"kind": "Slider",
+"args": "\"ExpBundles\", {[\"Text\"] = \"Bundles Per Trip\", [\"Default\"] = 99, [\"Min\"] = 1, [\"Max\"] = 99, [\"Rounding\"] = 0, [\"Tooltip\"] = \"99 is the most one purchase can carry; fewer only costs extra trips.\", [\"Callback\"] = function (aYY) cKb [51] [\"SetExpBundles\"] (aYY) end}"
+},
+{
+"kind": "Slider",
+"args": "\"PointReserve\", {[\"Text\"] = \"Keep Points\", [\"Default\"] = 0, [\"Min\"] = 0, [\"Max\"] = 500000, [\"Rounding\"] = 0, [\"Tooltip\"] = \"Points held back for the Outfitter racks and the tower chest.\", [\"Callback\"] = function (aY_) cKb [51] [\"SetPointReserve\"] (aY_) end}"
+},
+{
+"kind": "Button",
+"args": "{[\"Text\"] = \"Buy Now\", [\"Func\"] = function () cKb [51] [\"BuyExpNow\"] () end}"
+},
+{
+"kind": "LeftGroupbox",
+"args": "\"Schematics\", \"square-pen\""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"SchematicStatus\"]), true"
+},
+{
+"kind": "Dropdown",
+"args": "\"SchematicTargets\", {[\"Text\"] = \"Schematics To Collect\", [\"Tooltip\"] = \"Which set drawings to go and get.Ones you already have are skipped\", [\"Values\"] = cKb [51] [\"SchematicNames\"] (), [\"Default\"] = {}, [\"Multi\"] = true, [\"AllowNull\"] = true, [\"Searchable\"] = true, [\"Callback\"] = function (aY3) cKb [51] [\"SetSchematicTargets\"] (aY3) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"SchematicReturn\", {[\"Text\"] = \"Teleport Back When Done\", [\"Tooltip\"] = \"Puts you back where you started once the last drawing is studied\", [\"Default\"] = true, [\"Callback\"] = function (aY5) cKb [51] [\"SetSchematicReturn\"] (aY5) end}"
+},
+{
+"kind": "Button",
+"args": "{[\"Text\"] = \"Collect Schematics\", [\"Tooltip\"] = \"Teleports to each schematic you picked that you do n't have yet and studies it\", [\"Func\"] = function () aVP:Notify (cKb [51] [\"CollectSchematics\"] ()) end}"
+},
+{
+"kind": "Button",
+"args": "{[\"Text\"] = \"Stop\", [\"Tooltip\"] = \"Stops after the spot it's on.It won't take you back\", [\"Func\"] = function () aVP:Notify (cKb [51] [\"StopSchematics\"] ()) end}"
+},
+{
+"kind": "RightGroupbox",
+"args": "\"Player Info\", \"user\""
+},
+{
+"kind": "Label",
+"args": "bpe [\"field\"] (\"Level\", \"1\"), true"
+},
+{
+"kind": "Label",
+"args": "bpe [\"field\"] (\"Exp\", \"0 / 0\"), true"
+},
+{
+"kind": "Label",
+"args": "bpe [\"field\"] (\"Wen\", \"0\"), true"
+},
+{
+"kind": "Label",
+"args": "bpe [\"field\"] (\"Race\", \"-\"), true"
+},
+{
+"kind": "Label",
+"args": "bpe [\"field\"] (\"Skill Points\", \"0\"), true"
+},
+{
+"kind": "Label",
+"args": "bpe [\"field\"] (\"Run Points\", \"0\"), true"
+},
+{
+"kind": "RightGroupbox",
+"args": "\"Quest Progress\", \"scroll-text\""
+},
+{
+"kind": "Label",
+"args": "bpe [\"field\"] (\"Quest\", \"None\"), true"
+},
+{
+"kind": "Label",
+"args": "bpe [\"field\"] (\"Progress\", \"-\"), true"
+},
+{
+"kind": "Label",
+"args": "bpe [\"field\"] (\"Breathing Cost\", \"None\"), true"
+},
+{
+"kind": "RightGroupbox",
+"args": "\"Notifications\", \"bell\""
+},
+{
+"kind": "Toggle",
+"args": "\"NotifyBossSpawns\", {[\"Text\"] = \"Boss Spawns\", [\"Tooltip\"] = \"Tells you when one of your bosses spawns, even when it's too far away to see\", [\"Default\"] = false, [\"Callback\"] = function (aZe) cKb [51] [\"SetNotification\"] (\"boss\", aZe) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Dropdown",
+"args": "\"NotifyBosses\", {[\"Text\"] = \"Bosses\", [\"Values\"] = cKb [51] [\"BossNames\"] (), [\"Default\"] = {}, [\"Multi\"] = true, [\"AllowNull\"] = true, [\"Searchable\"] = true, [\"Callback\"] = function (aZh) cKb [51] [\"SetNotifyBosses\"] (aZh) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"NotifyMuzan\", {[\"Text\"] = \"Muzan\", [\"Tooltip\"] = \"Tells you when Muzan comes out at night and where he is.He walks around Mistfall Harbor, Hidden Mist Village or Iceveil Valley\", [\"Default\"] = false, [\"Callback\"] = function (aZj) cKb [51] [\"SetNotification\"] (\"muzan\", aZj) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"NotifyMarket\", {[\"Text\"] = \"Black Marketer\", [\"Tooltip\"] = \"Tells you when the Black Marketer comes to town, what he's selling, and when he leaves\", [\"Default\"] = false, [\"Callback\"] = function (aZl) cKb [51] [\"SetNotification\"] (\"market\", aZl) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"NotifyTailor\", {[\"Text\"] = \"Tailor Restocks\", [\"Tooltip\"] = \"Tells you the new clothes whenever Elara or Lynx restocks\", [\"Default\"] = false, [\"Callback\"] = function (aZn) cKb [51] [\"SetNotification\"] (\"tailor\", aZn) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"NotifySelection\", {[\"Text\"] = \"Final Selection\", [\"Tooltip\"] = \"Warns you before Final Selection starts.It happens every 2 hours, and it's how a Human of level 45 or higher becomes a Slayer\", [\"Default\"] = false, [\"Callback\"] = function (aZp) cKb [51] [\"SetNotification\"] (\"selection\", aZp) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Slider",
+"args": "\"NotifyWarnBefore\", {[\"Text\"] = 1829555, [\"Default\"] = 5, [\"Min\"] = 1, [\"Max\"] = 30, [\"Rounding\"] = 0, [\"Suffix\"] = \" min\", [\"Callback\"] = function (aZs) cKb [51] [\"SetNotifyWarn\"] (aZs) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"NotifyHunts\", {[\"Text\"] = \"Boss Hunts\", [\"Tooltip\"] = \"Tells you when a new boss hunt you can take is posted.Hunts are only for Slayers and Demons\", [\"Default\"] = false, [\"Callback\"] = function (aZu) cKb [51] [\"SetNotification\"] (\"hunt\", aZu) end}"
+},
+{
+"kind": "Button",
+"args": "{[\"Text\"] = \"Teleport to Last Notification\", [\"Tooltip\"] = \"Travels to whatever the last not ification was about\", [\"Func\"] = function () cKb [51] [\"TeleportToNotification\"] () end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Slider",
+"args": "cDD [\"key\"], {[\"Text\"] = cDD [\"name\"] .. \" Hold\", [\"Tooltip\"] = \"How long to hold this skill before releasing it\", [\"Default\"] = cDD [\"default\"], [\"Min\"] = 0, [\"Max\"] = cDD [\"max\"], [\"Rounding\"] = 2, [\"Suffix\"] = \"s\", [\"Callback\"] = function (a_x) cKb [51] [\"SetSkillHold\"] (cDD [\"name\"], a_x) end}"
+},
+{
+"kind": "Button",
+"args": "{[\"Text\"] = \"Refresh Skills\", [\"Func\"] = function () local c3L = cKb; local c3M = c3L [136]; c3L [51] [c3M [4599]] (); local c3N = c3M [6128] [c3M [2030]]; c3M [3916] (c3M [5941]); c3M [2175] (function () local cDq, cDr, cDs = nil, nil, nil; local cDp = nil; cDp = 2; while true do cDp = 9337 - cDp; do if cDp < 9533 then if cDp < 9112 then break else if cDp < 9335 then break else if cDp < 9336 then local c3O = cKb [136]; cDs = if aVT [\"SkillChoices\"] then 1 else 0; cDq = 2180*cDs + 1253*(1 - cDs); cDr = 386*cDs + 286*(1 - cDs); cDp = if (cDq*328 + cDr*2057 + cDq*cDr) % 16777213 == 2350522 then 0 else 1 else if cDp < 9337 then cDp = 3 else if cDp == 9337 then aVT [\"SkillChoices\"]:SetValues (cKb [51] [\"SkillChoices\"] ()); cDp = 1 else cDp = 4787; continue end else break end end end end); aVP:Notify (c3M [607]) end}"
+},
+{
+"kind": "RightGroupbox",
+"args": "\"Consumables\", \"flask-round\""
+},
+{
+"kind": "Toggle",
+"args": "\"AutoPotion\", {[\"Text\"] = \"Auto Potion\", [\"Default\"] = false, [\"Callback\"] = function (a_G) cKb [51] [\"SetAutoPotion\"] (a_G) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"PotionStatus\"]), true"
+},
+{
+"kind": "Dropdown",
+"args": "\"PotionChoice\", {[\"Text\"] = \"Select Potion\", [\"Values\"] = cKb [51] [\"PotionNames\"] (), [\"Default\"] = 1, [\"AllowNull\"] = true, [\"Searchable\"] = true, [\"Callback\"] = function (a_J) cKb [51] [\"SetPotion\"] (a_J) end}"
+},
+{
+"kind": "Slider",
+"args": "\"DrinkBelow\", {[\"Text\"] = \"Drink Below\", [\"Default\"] = 40, [\"Min\"] = 1, [\"Max\"] = 95, [\"Rounding\"] = 0, [\"Suffix\"] = \"%\", [\"Callback\"] = function (a_L) cKb [51] [\"SetDrinkBelow\"] (a_L) end}"
+},
+{
+"kind": "RightGroupbox",
+"args": "\"Shop\", \"store\""
+},
+{
+"kind": "Toggle",
+"args": "\"AutoBuy\", {[\"Text\"] = \"Auto Buy\", [\"Default\"] = false, [\"Callback\"] = function (a_O) cKb [51] [\"SetAutoBuy\"] (a_O) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"ShopStatus\"]), true"
+},
+{
+"kind": "Dropdown",
+"args": "\"ShopItems\", {[\"Text\"] = \"Select Items\", [\"Values\"] = cKb [51] [\"ShopItemNames\"] (), [\"Default\"] = {}, [\"Multi\"] = true, [\"AllowNull\"] = true, [\"Searchable\"] = true, [\"Callback\"] = function (a_R) cKb [51] [\"SetShopItems\"] (a_R) end}"
+},
+{
+"kind": "Slider",
+"args": "\"KeepAmount\", {[\"Text\"] = \"Keep Amount\", [\"Default\"] = 1, [\"Min\"] = 1, [\"Max\"] = 25, [\"Rounding\"] = 0, [\"Callback\"] = function (a_T) cKb [51] [\"SetKeepAmount\"] (a_T) end}"
+},
+{
+"kind": "LeftGroupbox",
+"args": "\"Farm Settings\", \"move\""
+},
+{
+"kind": "Dropdown",
+"args": "\"PositionType\", {[\"Text\"] = \"Position Type\", [\"Tooltip\"] = \"Where to stand relative to the target while fighting it\", [\"Values\"] = cKb [141] [\"POSITION_TYPES\"], [\"Default\"] = 1, [\"Searchable\"] = true, [\"Callback\"] = function (aZB) cKb [51] [\"SetPositionType\"] (aZB) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"LookAtEnemy\", {[\"Text\"] = \"Look At Enemy\", [\"Tooltip\"] = \"Always face the target, whatever the position type puts you\", [\"Default\"] = true, [\"Callback\"] = function (aZE) cKb [51] [\"SetLookAtEnemy\"] (aZE) end}"
+},
+{
+"kind": "Slider",
+"args": "\"OffsetDistance\", {[\"Text\"] = \"Offset Distance\", [\"Tooltip\"] = \"How far out from the target to sit, horizontally\", [\"Default\"] = 3, [\"Min\"] = 0, [\"Max\"] = 100, [\"Rounding\"] = 1, [\"Suffix\"] = \" studs\", [\"Callback\"] = function (aZG) cKb [51] [\"SetOffsetDistance\"] (aZG) end}"
+},
+{
+"kind": "Slider",
+"args": "\"HeightOffset\", {[\"Text\"] = \"Height Offset\", [\"Tooltip\"] = \"Vertical offset from the target, positive sits higher\", [\"Default\"] = 0, [\"Min\"] = - 50, [\"Max\"] = 50, [\"Rounding\"] = 1, [\"Suffix\"] = \" studs\", [\"Callback\"] = function (aZI) cKb [51] [\"SetHeightOffset\"] (aZI) end}"
+},
+{
+"kind": "Dropdown",
+"args": "\"MovementMode\", {[\"Text\"] = \"Movement Type\", [\"Tooltip\"] = \"How to cross ground:Tween glides there, Teleport blinks there in stantly\", [\"Values\"] = cKb [141] [\"MOVEMENT_MODES\"], [\"Default\"] = 1, [\"Callback\"] = function (aZK) cKb [51] [\"SetMovementMode\"] (aZK) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Slider",
+"args": "\"TweenSpeed\", {[\"Text\"] = \"Tween Speed\", [\"Tooltip\"] = \"How fast to glide, in studs per second\", [\"Default\"] = 400, [\"Min\"] = 50, [\"Max\"] = 1000, [\"Rounding\"] = 0, [\"Suffix\"] = \" studs/s\", [\"Callback\"] = function (aZN) cKb [51] [\"SetTweenSpeed\"] (aZN) end}"
+},
+{
+"kind": "LeftGroupbox",
+"args": "\"Equipment\", \"shirt\""
+},
+{
+"kind": "Toggle",
+"args": "\"AutoEquipBest\", {[\"Text\"] = \"Auto Equip Best Equipment\", [\"Default\"] = false, [\"Callback\"] = function (aZR) cKb [51] [\"SetAutoEquip\"] (aZR) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"EquipStatus\"]), true"
+},
+{
+"kind": "LeftGroupbox",
+"args": "\"Defence\", \"RemoveQuest\""
+},
+{
+"kind": "Toggle",
+"args": "\"AutoParry\", {[\"Text\"] = \"[Beta] Auto Parry V3\", [\"Tooltip\"] = \"Times a block tap onto each in coming swing so it lands as a perfect block\", [\"Default\"] = false, [\"Callback\"] = function (aZZ) cKb [51] [\"SetAutoParry\"] (aZZ) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"ParryStatus\"]), true"
+},
+{
+"kind": "Toggle",
+"args": "\"ParryNpcs\", {[\"Text\"] = \"Parry Mobs\", [\"Default\"] = true, [\"Callback\"] = function (aZ1) cKb [51] [\"SetParryNpcs\"] (aZ1) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"ParryPlayers\", {[\"Text\"] = \"Parry Players\", [\"Tooltip\"] = \"Player swings only give a 0.1s window, against 0.25s for a mob\", [\"Default\"] = true, [\"Callback\"] = function (aZ3) cKb [51] [\"SetParryPlayers\"] (aZ3) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"ParryMitigate\", {[\"Text\"] = \"Block When Parry Is Locked Out\", [\"Tooltip\"] = \"The game refuses a perfect window while you are stunned, and for one second after any hit lands.This soaks those swings as a normal block for half damage in stead of taking them clean\", [\"Default\"] = true, [\"Callback\"] = function (aZ5) cKb [51] [\"SetParryMitigate\"] (aZ5) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"ParryHold\", {[\"Text\"] = \"Keep Blocking After A Parry\", [\"Tooltip\"] = \"Costs block points and keeps the one second lockout alive, so the next swing cannot be parried.It also holds the block for a second and a half, and the game refuses every skill and every swing while a block is up, so leave it off when Auto Skills is on.\", [\"Default\"] = false, [\"Callback\"] = function (aZ7) cKb [51] [\"SetParryHold\"] (aZ7) end}"
+},
+{
+"kind": "Divider",
+"args": ""
+},
+{
+"kind": "Slider",
+"args": "\"ParryLead\", {[\"Text\"] = \"Parry Timing\", [\"Tooltip\"] = \"Leave at 0 Only touch it if parries keep missing:higher blocks later, lower blocks earlier\", [\"Default\"] = 0, [\"Min\"] = - 120, [\"Max\"] = 120, [\"Rounding\"] = 0, [\"Suffix\"] = \" ms\", [\"Callback\"] = function (aZ9) cKb [51] [\"SetParryLead\"] (aZ9) end}"
+},
+{
+"kind": "Slider",
+"args": "\"ParryRadius\", {[\"Text\"] = \"Parry Range\", [\"Tooltip\"] = \"How close an enemy has to be before auto parry watches it.The default is fine for melee\", [\"Default\"] = 40, [\"Min\"] = 10, [\"Max\"] = 150, [\"Rounding\"] = 0, [\"Suffix\"] = \" studs\", [\"Callback\"] = function (a_b) cKb [51] [\"SetParryRadius\"] (a_b) end}"
+},
+{
+"kind": "Button",
+"args": "{[\"Text\"] = \"Reset Counters\", [\"Func\"] = function () local c3P = cKb [136]; cKb [51] [\"ResetParryStats\"] (); aVP:Notify (\"Parry counters reset\") end}"
+},
+{
+"kind": "RightGroupbox",
+"args": "\"Combat\", \"sword\""
+},
+{
+"kind": "Dropdown",
+"args": "\"WeaponChoice\", {[\"Text\"] = \"Select Weapon\", [\"Tooltip\"] = \"Leave empty to keep whatever you already have out\", [\"Values\"] = cKb [51] [\"WeaponNames\"] (), [\"AllowNull\"] = true, [\"Searchable\"] = true, [\"Callback\"] = function (a_h) cKb [51] [\"SetWeapon\"] (a_h) end}"
+},
+{
+"kind": "Button",
+"args": "{[\"Text\"] = \"Refresh Weapons\", [\"Func\"] = function () local c3Q = cKb [136]; cKb [51] [\"RefreshWeapons\"] (); local c3R = F6128 [\"wait\"]; F3916 (0.4); F2175 (function () local cDo = nil; cDo = 1; while true do cDo = 8874 - cDo; do if cDo < 8873 then if cDo < 5828 then break else if cDo < 8871 then break else if cDo < 8872 then aVT [\"WeaponChoice\"]:SetValues (cKb [51] [\"WeaponNames\"] ()); cDo = 0 else break end else if cDo < 11020 then if cDo < 8874 then cDo = if aVT [\"WeaponChoice\"] then 3 else 0 else if cDo < 9495 then if cDo == 8874 then cDo = 2 else cDo = 8871; continue end else break end else break end end end end); aVP:Notify (\"Refreshed weapons\") end}"
+},
+{
+"kind": "Toggle",
+"args": "\"AutoSkills\", {[\"Text\"] = \"Auto Skills\", [\"Default\"] = false, [\"Callback\"] = function (a_o) cKb [51] [\"SetAutoSkills\"] (a_o) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"AutoSkillStatus\"]), true"
+},
+{
+"kind": "Dropdown",
+"args": "\"SkillChoices\", {[\"Text\"] = \"Select Skills\", [\"Tooltip\"] = \"Leave empty to use every equipped skill.Blocking is left to Auto Parry and never cast from here.\", [\"Values\"] = cKb [51] [\"SkillChoices\"] (), [\"Default\"] = {}, [\"Multi\"] = true, [\"AllowNull\"] = true, [\"Searchable\"] = true, [\"Callback\"] = function (a_r) cKb [51] [\"SetSkillSelection\"] (a_r) end}"
+},
+{
+"kind": "LeftGroupbox",
+"args": "\"Order\", \"list-or dered\""
+},
+{
+"kind": "Label",
+"args": "bpe [\"field\"] (\"Driving\", cKb [51] [\"PriorityHolder\"] ()), true"
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"PriorityStatus\"]), true"
+},
+{
+"kind": "Divider",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "bpe [\"field\"] (tostring (cEu), \"-\"), true"
+},
+{
+"kind": "RightGroupbox",
+"args": "\"Scheduling\", \"sliders-horizontal\""
+},
+{
+"kind": "Toggle",
+"args": "\"PriorityMode\", {[\"Text\"] = \"Priority Scheduling\", [\"Tooltip\"] = \"Lets several auto farms stay on at once and gives the character to the highest ranked one that has work\", [\"Default\"] = false, [\"Callback\"] = function (a0R) cKb [51] [\"SetPriorityMode\"] (a0R); cEl () end}"
+},
+{
+"kind": "Toggle",
+"args": "\"PriorityPreempt\", {[\"Text\"] = \"Comma separated feature keys, highest priority first.Auto Loot stays first.Saved with the config\", [\"Tooltip\"] = \"A higher ranked feature pauses the running one.Auto Loot always in terrupts when loot is ready\", [\"Default\"] = true, [\"Callback\"] = function (a0U) cKb [51] [\"SetPriorityPreempt\"] (a0U) end}"
+},
+{
+"kind": "Input",
+"args": "\"PriorityOrder\", {[\"Text\"] = \"Saved Order\", [\"Default\"] = cKb [51] [\"PriorityOrder\"] (), [\"Finished\"] = true, [\"AllowEmpty\"] = true, [\"Tooltip\"] = 11340532, [\"Callback\"] = function (a0W) local cD9, cEa, cEb, cEc = nil, nil, nil, nil; local cEd = nil; cEd = 6; while true do cEd = 8258 - cEd; do if cEd < 8254 then if cEd < 7522 then break else if cEd < 8252 then if cEd < 8251 then break else if cEd == 8251 then cEa = aVT [\"PriorityOrder\"]; cEd = 5 else cEd = 8255; continue end else if cEd < 8253 then cD9 = cKb [51] [\"SetPriorityOrder\"] (a0W); cEa = not cEi; cEd = if cEa then 7 else 5 else cEb = cD9  ~= a0W; cEc = cEa; cEd = if cEc then 4 else 1 end else if cEd < 8258 then if cEd < 8256 then if cEd < 8255 then if cEd == 8254 then cEc = cEb; cEd = 1 else cEd = 8253; continue end else cEl (); cEd = 0 end else if cEd < 8257 then cEi = true; aVT [\"PriorityOrder\"]:SetValue (cD9); cEi = false; cEd = 3 else cEd = if cEc then 2 else 3 end else break end end end end}"
+},
+{
+"kind": "Divider",
+"args": ""
+},
+{
+"kind": "Dropdown",
+"args": "\"PriorityPick\", {[\"Text\"] = \"Feature\", [\"Tooltip\"] = \"The feature the buttons below move\", [\"Values\"] = cKb [51] [\"PriorityLabels\"] (), [\"Default\"] = 1, [\"Multi\"] = false, [\"AllowNull\"] = false, [\"Searchable\"] = true}"
+},
+{
+"kind": "Button",
+"args": "{[\"Text\"] = \"Move Up\", [\"Func\"] = function () local cEe = nil; local cEf = nil; cEf = 1; while true do cEf = 4499 - cEf; do if cEf < 6181 then if cEf < 4498 then if cEf < 4496 then break else if cEf < 4497 then cEf = 0 else if cEf == 4497 then cEk (cKb [51] [\"MovePriority\"] (cEe, - 1)); cEf = 3 else cEf = 6181; continue end else if cEf < 5819 then if cEf < 4499 then if cEf == 4498 then cEe = cEn (); cEf = if cEe then 2 else 3 else cEf = 11394; continue end else break end else break end else break end end end end, [\"DoubleClick\"] = false}"
+},
+{
+"kind": "Button",
+"args": "{[\"Text\"] = \"Move Down\", [\"Func\"] = function () local cEg = nil; local cEh = nil; cEh = 1; while true do cEh = 12044 - cEh; do if cEh < 12043 then if cEh < 9521 then break else if cEh < 12041 then break else if cEh < 12042 then cEk (cKb [51] [\"MovePriority\"] (cEg, 1)); cEh = 0 else break end else if cEh < 13432 then if cEh < 12767 then if cEh < 12044 then cEg = cEn (); cEh = if cEg then 3 else 0 else if cEh == 12044 then cEh = 2 else break end else break end else break end end end end, [\"DoubleClick\"] = false}"
+},
+{
+"kind": "Button",
+"args": "{[\"Text\"] = \"Reset Order\", [\"Func\"] = function () cEk (cKb [51] [\"ResetPriorityOrder\"] ()) end, [\"DoubleClick\"] = true}"
+},
+{
+"kind": "LeftGroupbox",
+"args": "\"Movement\", \"footprints\""
+},
+{
+"kind": "Toggle",
+"args": "\"Fly\", {[\"Text\"] = \"Fly\", [\"Default\"] = false}"
+},
+{
+"kind": "KeyPicker",
+"args": "\"FlyKey\", {[\"Default\"] = \"H\", [\"SyncToggleState\"] = true, [\"Mode\"] = \"Toggle\", [\"Text\"] = \"Fly\"}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Slider",
+"args": "\"FlySpeed\", {[\"Text\"] = \"Fly Speed\", [\"Default\"] = 60, [\"Min\"] = 10, [\"Max\"] = 400, [\"Rounding\"] = 0}"
+},
+{
+"kind": "Toggle",
+"args": "\"NoClip\", {[\"Text\"] = \"Noclip\", [\"Default\"] = false}"
+},
+{
+"kind": "KeyPicker",
+"args": "\"NoClipKey\", {[\"Default\"] = \"N\", [\"SyncToggleState\"] = true, [\"Mode\"] = \"Toggle\", [\"Text\"] = \"Noclip\"}"
+},
+{
+"kind": "Toggle",
+"args": "\"WalkSpeedEnabled\", {[\"Text\"] = \"Speed\", [\"Default\"] = false}"
+},
+{
+"kind": "KeyPicker",
+"args": "\"SpeedKey\", {[\"Default\"] = \"K\", [\"SyncToggleState\"] = true, [\"Mode\"] = \"Toggle\", [\"Text\"] = \"Speed\"}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Slider",
+"args": "\"WalkSpeed\", {[\"Text\"] = \"Speed Amount\", [\"Default\"] = 32, [\"Min\"] = 16, [\"Max\"] = 250, [\"Rounding\"] = 0}"
+},
+{
+"kind": "Toggle",
+"args": "\"HighJump\", {[\"Text\"] = \"High Jump\", [\"Default\"] = false}"
+},
+{
+"kind": "KeyPicker",
+"args": "\"HighJumpKey\", {[\"Default\"] = \"J\", [\"SyncToggleState\"] = true, [\"Mode\"] = \"Toggle\", [\"Text\"] = \"High Jump\"}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Slider",
+"args": "\"JumpPower\", {[\"Text\"] = \"Jump Power\", [\"Default\"] = 90, [\"Min\"] = 50, [\"Max\"] = 400, [\"Rounding\"] = 0}"
+},
+{
+"kind": "Toggle",
+"args": "\"AlwaysRun\", {[\"Text\"] = \"Always Run\", [\"Tooltip\"] = \"Holds the game's own run toggle do wn so you never walk\", [\"Default\"] = false, [\"Callback\"] = function (a1j) cKb [51] [\"SetAlwaysRun\"] (a1j) end}"
+},
+{
+"kind": "LeftGroupbox",
+"args": "\"Interaction\", \"pointer\""
+},
+{
+"kind": "Toggle",
+"args": "\"InstantProximityPrompt\", {[\"Text\"] = \"Instant ProximityPrompt\", [\"Default\"] = false}"
+},
+{
+"kind": "Toggle",
+"args": "\"DisableShiftLock\", {[\"Text\"] = \"Disable Shift Lock\", [\"Tooltip\"] = \"Turns the game's Left Alt shift lock back off whenever it comes on\", [\"Default\"] = true, [\"Callback\"] = function (a1n) cKb [51] [\"SetDisableShiftLock\"] (a1n) end}"
+},
+{
+"kind": "LeftGroupbox",
+"args": "\"Sustain\", \"heart-pulse\""
+},
+{
+"kind": "Toggle",
+"args": "\"InfiniteStamina\", {[\"Text\"] = \"Infinite Stamina\", [\"Tooltip\"] = \"Holds your stamina bar full so skills and sprinting stop being refused\", [\"Default\"] = false, [\"Callback\"] = function (a1q) cKb [51] [\"SetInfiniteStamina\"] (a1q) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"InfiniteClimb\", {[\"Text\"] = \"Infinite Climb\", [\"Tooltip\"] = \"Keeps wall climb time topped up; needs the Wall Climb skill tree node\", [\"Default\"] = false, [\"Callback\"] = function (a1s) cKb [51] [\"SetInfiniteClimb\"] (a1s) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"InfiniteHorseStamina\", {[\"Text\"] = \"Infinite Horse Stamina\", [\"Tooltip\"] = \"Stops every horse speed mode draining stamina, so Run never times out\", [\"Default\"] = false, [\"Callback\"] = function (a1u) cKb [51] [\"SetInfiniteHorseStamina\"] (a1u) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"NoDrown\", {[\"Text\"] = \"No Drown\", [\"Tooltip\"] = \"Holds your breath bar full underwater\", [\"Default\"] = false, [\"Callback\"] = function (a1w) cKb [51] [\"SetNoDrown\"] (a1w) end}"
+},
+{
+"kind": "LeftGroupbox",
+"args": "\"Mitigation\", \"RemoveQuest\""
+},
+{
+"kind": "Toggle",
+"args": "\"NoStun\", {[\"Text\"] = \"No Stun\", [\"Default\"] = true, [\"Callback\"] = function (a1z) cKb [51] [\"SetNoStun\"] (a1z) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"NoRagdoll\", {[\"Text\"] = \"No Ragdoll\", [\"Default\"] = false, [\"Callback\"] = function (a1B) cKb [51] [\"SetNoRagdoll\"] (a1B) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"NoAttackSlowdown\", {[\"Text\"] = \"No Attack Slowdown\", [\"Default\"] = false, [\"Callback\"] = function (a1D) cKb [51] [\"SetNoAttackSlowdown\"] (a1D) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"NoDashCooldown\", {[\"Text\"] = \"No Dash Cooldown\", [\"Default\"] = false, [\"Callback\"] = function (a1F) cKb [51] [\"SetNoDashCooldown\"] (a1F) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"NoSunDamage\", {[\"Text\"] = \"No Sun Damage\", [\"Tooltip\"] = \"If you're a demon, the sun no longer burns you.Does not hing for other races\", [\"Default\"] = false, [\"Callback\"] = function (a1H) cKb [51] [\"SetNoSunDamage\"] (a1H) end}"
+},
+{
+"kind": "RightGroupbox",
+"args": "\"Codes\", \"ticket\""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"CodeStatus\"]), true"
+},
+{
+"kind": "Button",
+"args": "{[\"Text\"] = \"Redeem All Codes\", [\"Tooltip\"] = \"Redeems every active code, skipping ones already claimed or expired\", [\"DisabledTooltip\"] = \"Waiting out the redeem cooldown\", [\"Func\"] = function () cKb [51] [\"RedeemAllCodes\"] (function (a1P) local c4m = cKb [136]; aVP:Notify (a1P) end) end}"
+},
+{
+"kind": "Label",
+"args": "bpe [\"field\"] (\"Driving\", \"None\"), true"
+},
+{
+"kind": "RightGroupbox",
+"args": "\"Instant Kill\", \"zap\""
+},
+{
+"kind": "Toggle",
+"args": "\"InstantKill\", {[\"Text\"] = \"Instant Kill\", [\"Tooltip\"] = \"Kills any NPC your client has network ownership of\", [\"Default\"] = false, [\"Callback\"] = function (a1U) cKb [51] [\"SetInstantKill\"] (a1U) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "\" < font color = \\\"#e0788c\\\" > Instant kill is patched but it can still kill enemies, they just won't drop any items < /font > \", true"
+},
+{
+"kind": "Slider",
+"args": "\"KillThreshold\", {[\"Text\"] = \"Damage Before Kill\", [\"Default\"] = 10, [\"Min\"] = 0, [\"Max\"] = 100, [\"Rounding\"] = 0, [\"Suffix\"] = \"%\", [\"Callback\"] = function (a1X) cKb [51] [\"SetKillThreshold\"] (a1X) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"OwnershipViewer\", {[\"Text\"] = \"Ownership Viewer\", [\"Tooltip\"] = \"Outlines monsters near you:green ones can be end ed right now, red ones can't\", [\"Default\"] = false, [\"Callback\"] = function (a1Z) cKb [51] [\"SetOwnershipViewer\"] (a1Z) end}"
+},
+{
+"kind": "DependencyBox",
+"args": ""
+},
+{
+"kind": "Slider",
+"args": "\"OwnershipRange\", {[\"Text\"] = \"Viewer Range\", [\"Default\"] = 250, [\"Min\"] = 50, [\"Max\"] = 2000, [\"Rounding\"] = 0, [\"Suffix\"] = \" studs\", [\"Callback\"] = function (a11) cKb [51] [\"SetOwnershipRange\"] (a11) end}"
+},
+{
+"kind": "Tab",
+"args": "\"Zones\", \"map-pin\""
+},
+{
+"kind": "Tab",
+"args": "\"NPCs\", \"user\""
+},
+{
+"kind": "Tab",
+"args": "\"Mobs\", \"skull\""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"TeleportStatus\"]), true"
+},
+{
+"kind": "Dropdown",
+"args": "\"ZoneTarget\", {[\"Text\"] = \"Select Zone\", [\"Values\"] = cKb [51] [\"ZoneNames\"] (), [\"Default\"] = 1, [\"AllowNull\"] = true, [\"Searchable\"] = true}"
+},
+{
+"kind": "Button",
+"args": "{[\"Text\"] = \"Teleport\", [\"Func\"] = function () local cEv, cEw, cEx = nil, nil, nil; local cEy = nil; cEy = 7; while true do cEy = 10562 - cEy; do if cEy < 10556 then if cEy < 5799 then break else if cEy < 9258 then break else if cEy < 10554 then break else if cEy < 10555 then if cEy == 10554 then cEx = cEv; cEy = 1 else cEy = 10559; continue end else cEv = aVT [\"ZoneTarget\"]; cEy = if cEv then 3 else 5 end else if cEy < 10562 then if cEy < 10559 then if cEy < 10557 then break else if cEy < 10558 then if cEy == 10557 then cEw = cEv; cEv = cEw  ~= \"\"; cEx = cEw; cEy = if cEx then 8 else 1 else cEy = 4821; continue end else if cEy == 10558 then aVP:Notify (\"Pick a zone first\"); cEy = 2 else cEy = 10559; continue end else if cEy < 10560 then cEv = aVT [\"ZoneTarget\"] [\"Value\"]; cEy = 5 else if cEy < 10561 then cEy = 6 else cEy = if cEx then 0 else 4 end else if cEy < 12380 then if cEy < 12207 then if cEy == 10562 then cKb [51] [\"TeleportToZone\"] (cEw); cEy = 2 else break end else break end else break end end end end}"
+},
+{
+"kind": "Divider",
+"args": ""
+},
+{
+"kind": "Button",
+"args": "{[\"Text\"] = \"Teleport to Muzan\", [\"Tooltip\"] = \"Goes to Muzan while he is out, otherwise to his lair arrival point\", [\"Func\"] = function () cKb [51] [\"TeleportToMuzan\"] () end}"
+},
+{
+"kind": "Dropdown",
+"args": "\"NpcTarget\", {[\"Text\"] = \"Select NPC\", [\"Values\"] = cKb [51] [\"NpcNames\"] (), [\"Default\"] = 1, [\"AllowNull\"] = true, [\"Searchable\"] = true}"
+},
+{
+"kind": "Button",
+"args": "{[\"Text\"] = \"Teleport\", [\"Func\"] = function () local cEz, cEA, cEB = nil, nil, nil; local cEC = nil; cEC = 3; while true do cEC = 14126 - cEC; do if cEC < 13739 then break else if cEC < 14122 then if cEC < 14119 then if cEC < 14118 then break else cEA = cEz; cEz = cEA  ~= \"\"; cEB = cEA; cEC = if cEB then 6 else 5 end else if cEC < 14120 then if cEC == 14119 then aVP:Notify (\"Pick an NPC first\"); cEC = 2 else cEC = 2937; continue end else if cEC < 14121 then cEB = cEz; cEC = 5 else if cEC == 14121 then cEC = if cEB then 1 else 7 else cEC = 5363; continue end else if cEC < 14125 then if cEC < 14123 then break else if cEC < 14124 then cEz = aVT [\"NpcTarget\"]; cEC = if cEz then 0 else 8 else if cEC == 14124 then cEC = 4 else cEC = 14119; continue end else if cEC < 14126 then cKb [51] [\"TeleportToNpc\"] (cEA); cEC = 2 else if cEC < 15252 then if cEC == 14126 then cEz = aVT [\"NpcTarget\"] [\"Value\"]; cEC = 8 else break end else break end end end end}"
+},
+{
+"kind": "Dropdown",
+"args": "\"MobTeleport\", {[\"Text\"] = \"Select Mob\", [\"Values\"] = cKb [51] [\"MobNames\"] (), [\"Default\"] = 1, [\"AllowNull\"] = true, [\"Searchable\"] = true}"
+},
+{
+"kind": "Button",
+"args": "{[\"Text\"] = \"Teleport\", [\"Func\"] = function () local cED, cEE, cEF, cEH, cEI, cEJ = nil, nil, nil, nil, nil, nil; local cEG = nil; cEG = 5; while true do cEG = 9176 - cEG; do if cEG < 9173 then if cEG < 9169 then break else if cEG < 9171 then if cEG < 9170 then if cEG == 9169 then cEF = cED; cEG = 0 else cEG = 9173; continue end else cED = aVT [\"MobTeleport\"] [\"Value\"]; cEG = 3 end else if cEG < 9172 then if cEG == 9171 then cED = aVT [\"MobTeleport\"]; cEG = if cED then 6 else 3 else cEG = 9175; continue end else if cEG == 9172 then cEG = 8 else cEG = 9169; continue end else if cEG < 9632 then if cEG < 9175 then if cEG < 9174 then cEE = cED; local c4n = cKb [136]; cED = cEE  ~= \"\"; cEF = cEE; cEJ = if cEF then 1 else 0; cEH = 2376*cEJ + 3088*(1 - cEJ); cEI = 1804*cEJ + 787*(1 - cEJ); cEG = if (cEH*677 + cEI*1248 + cEH*cEI) % 16777213 == 8146248 then 7 else 0 else if cEG == 9174 then aVP:Notify (\"Pick a mob first\"); cEG = 4 else cEG = 14833; continue end else if cEG < 9176 then if cEG == 9175 then cKb [51] [\"TeleportToMob\"] (cEE); cEG = 4 else cEG = 14841; continue end else if cEG == 9176 then cEG = if cEF then 1 else 2 else cEG = 10856; continue end else break end end end end}"
+},
+{
+"kind": "RightGroupbox",
+"args": "\"Matchmaking\", \"swords\""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"QueueStatus\"]), true"
+},
+{
+"kind": "Dropdown",
+"args": "\"QueueModes\", {[\"Text\"] = \"Gamemodes\", [\"Tooltip\"] = \"Queues for these in turn, skipping any the hub has locked for you\", [\"Values\"] = cKb [51] [\"GamemodeNames\"] (), [\"Default\"] = {}, [\"Multi\"] = true, [\"AllowNull\"] = true, [\"Callback\"] = function (a2p) cKb [51] [\"SetQueueModes\"] (a2p) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"QueueRanked\", {[\"Text\"] = \"Ranked\", [\"Tooltip\"] = \"Queues ranked where the mode offers it; Zenith is ranked either way\", [\"Default\"] = false, [\"Callback\"] = function (a2r) cKb [51] [\"SetQueueRanked\"] (a2r) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"QueueFill\", {[\"Text\"] = \"Fill\", [\"Tooltip\"] = \"Lets the server fill the remaining slots with other players\", [\"Default\"] = false, [\"Callback\"] = function (a2t) cKb [51] [\"SetQueueFill\"] (a2t) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"AutoQueue\", {[\"Text\"] = \"Auto Queue\", [\"Tooltip\"] = \"Keeps you in queue and requeues as soon as one end s without a match\", [\"Default\"] = false, [\"Callback\"] = function (a2v) cKb [51] [\"SetAutoQueue\"] (a2v) end}"
+},
+{
+"kind": "Button",
+"args": "{[\"Text\"] = \"Leave Queue\", [\"Tooltip\"] = \"Drops the current queue; the joiner places a new one on its next turn\", [\"Func\"] = function () cKb [51] [\"CancelQueue\"] () end}"
+},
+{
+"kind": "Divider",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "bpe [\"status\"] (bpz [\"WorldStatus\"]), true"
+},
+{
+"kind": "Dropdown",
+"args": "\"WorldTarget\", {[\"Text\"] = \"World\", [\"Tooltip\"] = \"The overworld to teleport in to\", [\"Values\"] = cKb [51] [\"WorldNames\"] (), [\"Default\"] = 1, [\"AllowNull\"] = true, [\"Callback\"] = function (a2y) cKb [51] [\"SetWorld\"] (a2y) end}"
+},
+{
+"kind": "Input",
+"args": "\"PrivateOwner\", {[\"Text\"] = \"Private Server Owner\", [\"Tooltip\"] = \"Username of whoever hosts the private server, yours or a fri end's; leave it empty to join a public server\", [\"Default\"] = \"\", [\"Placeholder\"] = \"Public servers\", [\"Callback\"] = function (a2A) cKb [51] [\"SetPrivateOwner\"] (a2A) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"AutoWorld\", {[\"Text\"] = \"Auto Join World\", [\"Tooltip\"] = \"Retries the teleport until it takes, for when the world is full or the hub is still settling\", [\"Default\"] = false, [\"Callback\"] = function (a2C) cKb [51] [\"SetAutoWorld\"] (a2C) end}"
+},
+{
+"kind": "Button",
+"args": "{[\"Text\"] = \"Join World\", [\"Tooltip\"] = \"Teleports once\", [\"Func\"] = function () cKb [51] [\"JoinWorld\"] () end}"
+},
+{
+"kind": "RightGroupbox",
+"args": "\"Unavailable\", \"triangle-alert\""
+},
+{
+"kind": "Label",
+"args": "\"Missing:\" .. table.concat (cKb [123] [\"missing\"], \", \"), true"
+},
+{
+"kind": "LeftGroupbox",
+"args": "\"ESP\", \"eye\""
+},
+{
+"kind": "ColorPicker",
+"args": "a38 .. \"Colour\", {[\"Default\"] = a4c, [\"Title\"] = a39 .. \" Colour\", [\"Callback\"] = function (a4k) cKb [51] [\"SetEspColour\"] (a4b, a4k) end}"
+},
+{
+"kind": "Toggle",
+"args": "a38, {[\"Text\"] = a39, [\"Default\"] = false, [\"Callback\"] = function (a4e) cKb [51] [\"SetEspOption\"] (a4a, a4e) end}"
+},
+{
+"kind": "Divider",
+"args": ""
+},
+{
+"kind": "Divider",
+"args": ""
+},
+{
+"kind": "Label",
+"args": "\"Dying Colour\""
+},
+{
+"kind": "ColorPicker",
+"args": "\"EspDyingColour\", {[\"Default\"] = F149 (255, 0, 0), [\"Title\"] = \"Dying Colour\", [\"Callback\"] = function (a4n) cKb [51] [\"SetEspColour\"] (\"dying\", a4n) end}"
+},
+{
+"kind": "Divider",
+"args": ""
+},
+{
+"kind": "Slider",
+"args": "\"EspRange\", {[\"Text\"] = \"Max Distance\", [\"Tooltip\"] = \"Hides anything further away than this, 0 shows it at any distance\", [\"Default\"] = 5000, [\"Min\"] = 0, [\"Max\"] = 20000, [\"Rounding\"] = 0, [\"Suffix\"] = \" studs\", [\"Callback\"] = function (a4p) cKb [51] [\"SetEspRange\"] (a4p) end}"
+},
+{
+"kind": "Toggle",
+"args": "a4t, {[\"Text\"] = a4u, [\"Default\"] = false, [\"Callback\"] = function (a4x) cKb [51] [\"SetEspCategory\"] (a4v, a4x) end}"
+},
+{
+"kind": "ColorPicker",
+"args": "a4t .. \"Colour\", {[\"Default\"] = a4w, [\"Title\"] = a4u .. \" Colour\", [\"Callback\"] = function (a4B) cKb [51] [\"SetEspColour\"] (a4v, a4B) end}"
+},
+{
+"kind": "LeftGroupbox",
+"args": "\"World\", \"globe\""
+},
+{
+"kind": "RightGroupbox",
+"args": "\"Player ESP\", \"users\""
+},
+{
+"kind": "Toggle",
+"args": "\"EspPlayers\", {[\"Text\"] = \"Player ESP\", [\"Default\"] = false, [\"Callback\"] = function (a4G) cKb [51] [\"SetEspCategory\"] (\"Players\", a4G) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"EspPlayerInfo\", {[\"Text\"] = \"Level / Race / Clan\", [\"Default\"] = false, [\"Callback\"] = function (a4I) cKb [51] [\"SetEspOption\"] (\"playerInfo\", a4I) end}"
+},
+{
+"kind": "ColorPicker",
+"args": "\"EspPlayerInfoColour\", {[\"Default\"] = F149 (255, 255, 255), [\"Title\"] = \"Info Colour\", [\"Callback\"] = function (a4K) cKb [51] [\"SetEspColour\"] (\"in fo\", a4K) end}"
+},
+{
+"kind": "Label",
+"args": "\"Enemy Colour\""
+},
+{
+"kind": "ColorPicker",
+"args": "\"EspEnemyColour\", {[\"Default\"] = F149 (255, 0, 0), [\"Title\"] = \"Enemy Colour\", [\"Callback\"] = function (a4M) cKb [51] [\"SetEspColour\"] (\"Players\", a4M) end}"
+},
+{
+"kind": "Label",
+"args": "\"Party Colour\""
+},
+{
+"kind": "ColorPicker",
+"args": "\"EspPartyColour\", {[\"Default\"] = F149 (0, 255, 0), [\"Title\"] = \"Party Colour\", [\"Callback\"] = function (a4O) cKb [51] [\"SetEspColour\"] (\"Party\", a4O) end}"
+},
+{
+"kind": "Tab",
+"args": "\"Mobs\", \"skull\""
+},
+{
+"kind": "Tab",
+"args": "\"Bosses\", \"crown\""
+},
+{
+"kind": "Tab",
+"args": "\"NPCs\", \"user\""
+},
+{
+"kind": "RightGroupbox",
+"args": "\"Discord\", \"message-circle\""
+},
+{
+"kind": "Button",
+"args": "{[\"Text\"] = \"S end \" .. cGS .. \" Report Now\", [\"Func\"] = function () cKb [51] [\"SendWebhookReport\"] (cGS, function (a5l, a5m) local cGs = nil; local cGt = nil; cGt = 6; while true do cGt = 282 - cGt; do if cGt < 282 then if cGt < 279 then if cGt < 277 then if cGt == 276 then cGt = if a5l then 1 else 5 else cGt = 280; continue end else if cGt < 278 then cGs = a5m; cGt = if cGs then 3 else 2 else break end else if cGt < 280 then aVP:Notify (tostring (cGs), 6); cGt = 0 else if cGt < 281 then cGs = \"Report failed\"; cGt = 3 else if cGt == 281 then aVP:Notify (cGS .. \" report delivered\"); cGt = 0 else cGt = 280; continue end else if cGt < 6154 then if cGt < 3447 then if cGt == 282 then cGt = 4 else cGt = 278; continue end else break end else break end end end end) end}"
+},
+{
+"kind": "Input",
+"args": "cGJ, {[\"Text\"] = \"Webhook URL\", [\"Default\"] = \"\", [\"Placeholder\"] = cGL, [\"Tooltip\"] = \"Saved with your config, so do not share that file.\", [\"Callback\"] = function (a48) cKb [51] [\"SetWebhookUrl\"] (cGS, a48) end}"
+},
+{
+"kind": "Slider",
+"args": "\"WebhookInterval\" .. cGS, {[\"Text\"] = \"Report Every\", [\"Default\"] = cGH [\"in terval\"], [\"Min\"] = 1, [\"Max\"] = 240, [\"Rounding\"] = 0, [\"Suffix\"] = \" min\", [\"Callback\"] = function (a5b) cKb [51] [\"SetWebhookInterval\"] (cGS, a5b) end}"
+},
+{
+"kind": "Dropdown",
+"args": "\"WebhookEvents\" .. cGS, {[\"Text\"] = \"Include\", [\"Values\"] = cKb [51] [\"WebhookEventLabels\"] (cGS), [\"Default\"] = cKb [51] [\"WebhookEventLabels\"] (cGS), [\"Multi\"] = true, [\"AllowNull\"] = true, [\"Searchable\"] = true, [\"Tooltip\"] = \"Lines left out are not counted and do not keep an otherwise empty report alive.\", [\"Callback\"] = function (a5e) cKb [51] [\"SetWebhookEvents\"] (cGS, a5e) end}"
+},
+{
+"kind": "Tab",
+"args": "cGS, cGH [\"icon\"]"
+},
+{
+"kind": "Label",
+"args": "cGH [\"blurb\"], true"
+},
+{
+"kind": "Label",
+"args": "bpe [\"field\"] (\"Report\", cKb [51] [\"WebhookChannelStatus\"] (cGS)), true"
+},
+{
+"kind": "Toggle",
+"args": "\"Webhook\" .. cGS, {[\"Text\"] = \"Enable \" .. cGS .. \" Report\", [\"Default\"] = false, [\"Callback\"] = function (a45) cKb [51] [\"SetWebhookEnabled\"] (cGS, a45) end}"
+},
+{
+"kind": "Dropdown",
+"args": "\"WebhookItemCategories\", {[\"Text\"] = \"Name Drops From\", [\"Values\"] = cKb [51] [\"ItemCategories\"] (), [\"Default\"] = cKb [51] [\"DefaultItemCategories\"] (), [\"Multi\"] = true, [\"AllowNull\"] = true, [\"Searchable\"] = true, [\"Tooltip\"] = \"Only these categories are listed by name.Materials are left out by default.\", [\"Callback\"] = function (a5h) cKb [51] [\"SetItemCategories\"] (a5h) end}"
+},
+{
+"kind": "RightGroupbox",
+"args": "\"Shared\", \"settings-2\""
+},
+{
+"kind": "Toggle",
+"args": "\"WebhookSkipQuiet\", {[\"Text\"] = \"Skip Empty Reports\", [\"Default\"] = true, [\"Tooltip\"] = \"Stay silent when not hing on the in clude list happened.\", [\"Callback\"] = function (a5s) cKb [51] [\"SetWebhookSkipQuiet\"] (a5s) end}"
+},
+{
+"kind": "Input",
+"args": "\"WebhookPingId\", {[\"Text\"] = \"Discord User ID\", [\"Default\"] = \"\", [\"Numeric\"] = true, [\"Placeholder\"] = \"Your Discord ID\", [\"Callback\"] = function (a5u) cKb [51] [\"SetWebhookPingId\"] (a5u) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"WebhookPing\", {[\"Text\"] = \"Ping Me\", [\"Default\"] = false, [\"Tooltip\"] = \"Mentions the user ID above on every report.\", [\"Callback\"] = function (a5w) cKb [51] [\"SetWebhookPing\"] (a5w) end}"
+},
+{
+"kind": "RightGroupbox",
+"args": "\"Delivery\", \"s end\""
+},
+{
+"kind": "Label",
+"args": "cKb [51] [\"WebhookStatus\"] (), true"
+},
+{
+"kind": "LeftGroupbox",
+"args": "\"Menu\", \"logs\""
+},
+{
+"kind": "Toggle",
+"args": "\"AntiAfk\", {[\"Text\"] = \"Anti-AFK\", [\"Default\"] = true}"
+},
+{
+"kind": "Label",
+"args": "\"AFK triggers:0\""
+},
+{
+"kind": "Toggle",
+"args": "\"AntiGameplayPause\", {[\"Text\"] = \"No Gameplay Paused\", [\"Default\"] = true}"
+},
+{
+"kind": "Toggle",
+"args": "\"AutoReconnect\", {[\"Text\"] = \"Auto Reconnect on Kick\", [\"Default\"] = false}"
+},
+{
+"kind": "Toggle",
+"args": "\"Disable3D\", {[\"Text\"] = \"Disable 3D Rendering\", [\"Default\"] = false, [\"Callback\"] = function (a6x) F2175 (function () bmK [\"RunService\"]:Set3dRenderingEnabled (not a6x) end) end}"
+},
+{
+"kind": "Toggle",
+"args": "\"FpsBoost\", {[\"Text\"] = \"FPS Boost\", [\"Default\"] = false, [\"Callback\"] = function (a6B) local cHi, cHj, cHk, cHm = nil, nil, nil, nil; local cHh = nil; cHh = 0; while true do cHh = 11057 - cHh; do if cHh < 11055 then if cHh < 11053 then if cHh < 11051 then break else if cHh < 11052 then local c4Q = cKb [136]; F2175 (function () settings () [\"Rendering\"] [\"QualityLevel\"] = F1269 [\"QualityLevel\"] [\"Level01\"] end); bmK [\"Lighting\"] [\"GlobalShadows\"] = false; bmK [\"Lighting\"] [\"FogEnd\"] = 9000000000; cHj = false; for a6F, a6G in F4813 (bmK [\"Workspace\"]:GetDescendants ()) do cHk = a6F; cHm = a6G; local cHl = cHk; local cHn = cHm; local cHi = nil; cHi = 2; while true do if cHi < 1 then cHj = true; cHi = 1 else if cHi < 2 then break else F2175 (cHW, cHn); cHi = 1 end end; if cHj then break end end; cHh = 5 else cHh = 3 end else if cHh < 11054 then cH4 = {[\"Quality\"] = settings () [\"Rendering\"] [\"QualityLevel\"], [\"Shadows\"] = bmK [\"Lighting\"] [\"GlobalShadows\"], [\"Fog\"] = bmK [\"Lighting\"] [\"FogEnd\"]}; cHh = 6 else break end else if cHh < 11131 then if cHh < 11056 then cHh = if not cH4 then 4 else 6 else if cHh < 11057 then cH6 (); cHh = 5 else if cHh == 11057 then cHh = if a6B then 2 else 1 else break end else break end end end end}"
+},
+{
+"kind": "Toggle",
+"args": "\"HideUiOnStart\", {[\"Text\"] = \"Hide UI On Start\", [\"Default\"] = false}"
+},
+{
+"kind": "Label",
+"args": "\"Menu bind\""
+},
+{
+"kind": "KeyPicker",
+"args": "\"MenuKeybind\", {[\"Default\"] = \"RightShift\", [\"NoUI\"] = true, [\"Text\"] = \"Menu keybind\"}"
+},
+{
+"kind": "LeftGroupbox",
+"args": "\"Script\", \"terminal\""
+},
+{
+"kind": "Button",
+"args": "{[\"Text\"] = \"Unload Script\", [\"Func\"] = function () local c4R = cKb [136]; aVP:Unload () end}"
+},
+{
+"kind": "Divider",
+"args": ""
+},
+{
+"kind": "Input",
+"args": "\"SaveManager_ImportSource\", {[\"Text\"] = \"Paste exported config here\", [\"Finished\"] = true, [\"AllowEmpty\"] = true}"
+},
+{
+"kind": "Button",
+"args": "\"Export Config to Clipboard\", function () local cIL, cIM, cIN, cIO, cIQ, cIR, cIS = nil, nil, nil, nil, nil, nil, nil; local cIP = nil; cIP = 12; while true do cIP = 5995 - cIP; do if cIP < 5988 then if cIP < 5982 then if cIP < 5370 then break else if cIP < 5980 then break else if cIP < 5981 then if cIP == 5980 then local c4X = cKb [136]; cIS = if cIN then 1 else 0; cIQ = 1859*cIS + 3277*(1 - cIS); cIR = 2072*cIS + 3386*(1 - cIS); cIP = if (cIQ*3029 + cIR*3754 + cIQ*cIR) % 16777213 == 483834 then 6 else 5 else cIP = 13140; continue end else cIL = cIN; cIN = type (cIL) == \"function\"; cIP = if cIN then 7 else 15 end else if cIP < 5985 then if cIP < 5983 then cIN = cIL; cIP = if cIN then 14 else 8 else if cIP < 5984 then local c4X = cKb [136]; cIL, cIM = F2175 (bmK [\"HttpService\"] [\"JSONEncode\"], bmK [\"HttpService\"], cI8 ()); cIS = if cIL then 1 else 0; cIQ = 3675*cIS + 1940*(1 - cIS); cIR = 1501*cIS + 3324*(1 - cIS); cIP = if (cIQ*4060 + cIR*4094 + cIQ*cIR) % 16777213 == 9804556 then 11 else 0 else cIL = (cKb [118] (setclipboard)); cIP = if cIL then 4 else 13 end else if cIP < 5986 then cIL = toclipboard; cIP = 3 else if cIP < 5987 then break else if cIP == 5987 then cIL = (cKb [118] (toclipboard)); cIP = if cIL then 10 else 3 else cIP = 13140; continue end else if cIP < 5994 then if cIP < 5991 then if cIP < 5989 then cIN = F2175 (cIL, cIM); cIP = 15 else if cIP < 5990 then if cIP == 5989 then aVP:Notify (\"Config copied to clipboard\", 6); return else cIP = 5995; continue end else if cIP == 5990 then aVP:Notify (\"Your executor do es not support copying to the clipboard\"); return else cIP = 5987; continue end else if cIP < 5992 then cIL = setclipboard; cIP = 13 else if cIP < 5993 then if cIP == 5992 then cIO = cIL; cIP = if cIO then 1 else 2 else cIP = 5985; continue end else cIO = nil; cIP = 1 end else if cIP < 12702 then if cIP < 5995 then cIN = cIO; cIP = 14 else if cIP < 7990 then if cIP == 5995 then aVP:Notify (\"Failed to encode the config\"); cIP = 9 else break end else break end else break end end end end"
+},
+{
+"kind": "Button",
+"args": "\"Import Config from Clipboard Text\", function () local cIT, cIU, cIV, cIX, cIY, cIZ, cI_, cI0, cI1, cI3 = nil, nil, nil, nil, nil, nil, nil, nil, nil, nil; local cIW = nil; cIW = 7; while true do cIW = 15290 - cIW; do if cIW < 15274 then if cIW < 15269 then break else if cIW < 15271 then if cIW < 15270 then cIT, cIV = F2175 (bmK [\"HttpService\"] [\"JSONDecode\"], bmK [\"HttpService\"], cIU); cIU = not cIT; cIW = if cIU then 5 else 6 else cIV = \"s\"; cIW = 12 end else if cIW < 15272 then cIU = type (cIV [\"objects\"])  ~= \"table\"; cIW = 2 else if cIW < 15273 then if cIW == 15272 then cIT = \"\"; cIW = 9 else cIW = 8486; continue end else break end else if cIW < 15282 then if cIW < 15278 then if cIW < 15276 then if cIW < 15275 then if cIW == 15274 then aVP:Notify (\"That is not a valid exported config\"); return else cIW = 9462; continue end else if cIW == 15275 then cIV = cIU; cIW = if cIV then 12 else 20 else cIW = 15270; continue end else if cIW < 15277 then cIW = if # cIU > 262144 then 11 else 21 else local c4Y = cKb [136]; cIT = 0; cKb [51] [\"BeginPriorityLoad\"] (); cI0 = false; for a8O, a8P in F4813 (cIV [\"objects\"]) do cI1 = a8O; cI3 = a8P; local cI2 = cI1; local cI4 = cI3; local cI_ = nil; cI_ = 4; while true do if cI_ < 2 then if cI_ < 1 then cI_ = 3 else cI0 = true; cI_ = 3 end else if cI_ < 3 then cIT + = 1; cI_ = 0 else if cI_ < 4 then break else cI_ = if cJa (cI4) then 2 else 0 end end; if cI0 then break end end; cKb [51] [\"SettlePriority\"] (); cIZ = if cIT == 0 then 1 else 0; cIX = 2212*cIZ + 2931*(1 - cIZ); cIY = 3882*cIZ + 1638*(1 - cIZ); cIW = if (cIX*365 + cIY*222 + cIX*cIY) % 16777213 == 10256168 then 3 else 0 end else if cIW < 15280 then if cIW < 15279 then if cIW == 15278 then aVP:Notify (\"Imported %d setting%s\":format (cIT, cIV), 6); cIW = 17 else cIW = 6123; continue end else aVP:Notify (\"That config is too large\"); return end else if cIW < 15281 then cIU = \"\"; cIW = 15 else local c4Y = cKb [136]; cIU = tostring (cIT):match (\"^%s*(.-)%s*$\"); cIZ = if cIU == \"\" then 1 else 0; cIX = 2103*cIZ + 139*(1 - cIZ); cIY = 2294*cIZ + 1486*(1 - cIZ); cIW = if (cIX*810 + cIY*1480 + cIX*cIY) % 16777213 == 9922832 then 4 else 14 end else if cIW < 15286 then if cIW < 15284 then if cIW < 15283 then cIW = if # cIV [\"objects\"] > 2048 then 1 else 13 else cIT = aVT [\"SaveManager_ImportSource\"] [\"Value\"]; cIW = if cIT then 9 else 18 end else if cIW < 15285 then cIU = type (cIV)  ~= \"table\"; cIW = 5 else cIW = if cIU then 2 else 19 end else if cIW < 15288 then if cIW < 15287 then if cIW == 15286 then aVP:Notify (\"Paste an exported config in to the box first\"); return else cIW = 15279; continue end else if cIW == 15287 then aVP:Notify (\"No settings in that config matched this script\"); return else cIW = 15273; continue end else if cIW < 15289 then cIW = if cIU then 16 else 8 else if cIW < 15290 then aVP:Notify (\"That config has too many records\"); return else if cIW == 15290 then local c4Y = cKb [136]; aVT [\"SaveManager_ImportSource\"]:SetValue (\"\"); cIU = cIT == 1; cIW = if cIU then 10 else 15 else cIW = 8486; continue end end end end"
+}
+]

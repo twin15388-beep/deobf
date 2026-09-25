@@ -129,7 +129,26 @@
 `KeyPicker` → `SetValue({key, mode, modifiers})`, `Toggled = toggled`, `:Update()`
 (при `mode == "Toggle"` значение приводится к паре).
 
-## 7. Что осталось по UI
+## 7. Инвентарь виджетов (выгружен)
+
+`data/ui_widgets.json` — все 650 вызовов конструктора UI, дедуплицировано до
+уникальных записей (без повторов между копиями): 164 тумблера, 106 меток,
+58 дропдаунов, 52 кнопки, 50 слайдеров, 44 левых и 30 правых групп, 28 вкладок,
+24 разделителя, 12 цветовых пикеров, 10 инпутов, 10 кей-пикеров, 62 блока
+зависимостей. У каждой записи — `key`, `text`, `default`, `min`, `max`, `suffix`,
+`tooltip` (где они есть в литерале).
+
+Вкладки окна: **Farming, Combat, Priority, Player, ESP, Webhook, Settings**
+(+ подвкладки телепортов: Zones, NPCs, Mobs, Mobs, Bosses, NPCs).
+
+Левые группы: Discord, Dungeon Run, Dungeon, Auto Farming, Breathing, Skill Tree,
+Auto Training, Fishing, Tower Exp, Schematics, Farm Settings, Equipment, Defence,
+Order, Movement, Interaction, Sustain, Mitigation, ESP, World, Menu, Script.
+Правые группы: Player Info, Quest Progress, Notifications, Consumables, Shop,
+Combat, Scheduling, Codes, Instant Kill, Matchmaking, Unavailable, Player ESP,
+Discord, Shared, Delivery.
+
+## 8. Что осталось по UI
 
 * Сам `Library.lua` (ObsidianUltra) в артефакте отсутствует — при 1:1-копии он
   остаётся внешним (либо нужен свой минимальный аналог тех API, что вызываются).

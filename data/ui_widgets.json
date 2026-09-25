@@ -1,0 +1,2006 @@
+[
+ {
+  "kind": "Tab",
+  "raw": "\"Farming\""
+ },
+ {
+  "kind": "Tab",
+  "raw": "\"Combat\""
+ },
+ {
+  "kind": "Tab",
+  "raw": "\"Priority\""
+ },
+ {
+  "kind": "Tab",
+  "raw": "\"Player\""
+ },
+ {
+  "kind": "Tab",
+  "raw": "\"ESP\""
+ },
+ {
+  "kind": "Tab",
+  "raw": "\"Webhook\""
+ },
+ {
+  "kind": "Tab",
+  "raw": "\"Settings\""
+ },
+ {
+  "kind": "LeftGroupbox",
+  "raw": "\"Discord\""
+ },
+ {
+  "kind": "LeftGroupbox",
+  "raw": "\"Dungeon Run\""
+ },
+ {
+  "kind": "Label",
+  "raw": "bpe [\"field\"] (\"Run\", cKb [51] [\"DungeonName\"] ()), true"
+ },
+ {
+  "kind": "Label",
+  "raw": "bpe [\"status\"] (bpz [\"DungeonStatus\"]), true"
+ },
+ {
+  "kind": "Toggle",
+  "key": "AutoDungeon",
+  "text": "\"Auto Farm Nearby Enemies\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Fights whatever wave enemy is closest, skipping the ones the run excludes\""
+ },
+ {
+  "kind": "Slider",
+  "key": "DungeonRange",
+  "text": "\"Search Range\"",
+  "default": "250",
+  "min": "0",
+  "max": "2000",
+  "suffix": "\" studs\"",
+  "tooltip": "\"How far to look for an enemy, 0 searches the whole floor\""
+ },
+ {
+  "kind": "Label",
+  "raw": "bpe [\"status\"] (bpz [\"BringStatus\"]), true"
+ },
+ {
+  "kind": "Toggle",
+  "key": "AutoBringEnemies",
+  "text": "\"Bring Enemies\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Drags every wave enemy this client owns onto you in stead of chasing them; passive spawns are left alone\""
+ },
+ {
+  "kind": "Slider",
+  "key": "BringRange",
+  "text": "\"Bring Range\"",
+  "default": "2000",
+  "min": "0",
+  "max": "5000",
+  "suffix": "\" studs\"",
+  "tooltip": "\"How far out to pull enemies from, 0 brings the whole floor\""
+ },
+ {
+  "kind": "Label",
+  "raw": "bpe [\"status\"] (bpz [\"WaveStatus\"]), true"
+ },
+ {
+  "kind": "Toggle",
+  "key": "AutoSkipWaves",
+  "text": "\"Auto Skip Waves\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Votes to skip each wave break as it opens; the run still needs enough votes to pass\""
+ },
+ {
+  "kind": "Label",
+  "raw": "bpe [\"status\"] (bpz [\"CardStatus\"]), true"
+ },
+ {
+  "kind": "Toggle",
+  "key": "AutoCards",
+  "text": "\"Auto Pick Cards\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Takes the best offered card you picked; leaves the hand alone if none of them show up\""
+ },
+ {
+  "kind": "Toggle",
+  "key": "BlockBareHands",
+  "text": "\"Block Bare Hands Event\"",
+  "default": "true",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Never takes Bare Hands, in cluding when it arrives on an Event card; that floor bans weapons for 2.2x points and leaves you empty handed after it\""
+ },
+ {
+  "kind": "Toggle",
+  "key": "ForceHealCards",
+  "text": "\"Force Heal Cards\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"While your health sits at or below the threshold this takes the hand away from your selection and picks the best heal card in stead; the moment you are back above it your selection has the hand again\""
+ },
+ {
+  "kind": "Slider",
+  "key": "HealBelow",
+  "text": "\"Force Heal Below\"",
+  "default": "40",
+  "min": "0",
+  "max": "100",
+  "suffix": "\"%\"",
+  "tooltip": "\"0% never forces a heal and 100% always takes one; a hand with no heal card in it is left to your selection either way\""
+ },
+ {
+  "kind": "Dropdown",
+  "key": "CardTargets",
+  "text": "\"Select Cards\"",
+  "default": "{}",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "DependencyBox",
+  "raw": ""
+ },
+ {
+  "kind": "Slider",
+  "raw": "\"CardPriority\""
+ },
+ {
+  "kind": "LeftGroupbox",
+  "raw": "\"Dungeon\""
+ },
+ {
+  "kind": "Button",
+  "raw": "{[\"Text\"] = \"Where Are Dungeons?\", [\"Tooltip\"] = \"Explains where the dungeon run features went\", [\"Func\"] = function () "
+ },
+ {
+  "kind": "LeftGroupbox",
+  "raw": "\"Auto Farming\""
+ },
+ {
+  "kind": "Toggle",
+  "key": "AutoLevel",
+  "text": "\"Auto Level\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "Label",
+  "raw": "bpe [\"status\"] (bpz [\"LevelStatus\"]), true"
+ },
+ {
+  "kind": "Toggle",
+  "key": "LevelDropForeign",
+  "text": null,
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "Toggle",
+  "key": "AutoQuest",
+  "text": "\"Auto Farm Quests\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Farms the picked quests on repeat, taking each one again after it is do ne\""
+ },
+ {
+  "kind": "Label",
+  "raw": "bpe [\"status\"] (bpz [\"QuestStatus\"]), true"
+ },
+ {
+  "kind": "Dropdown",
+  "key": "QuestTargets",
+  "text": "\"Select Quests\"",
+  "default": "{}",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Combat quests whose kill tasks all resolve to a mob this can find\""
+ },
+ {
+  "kind": "Button",
+  "raw": "{[\"Text\"] = \"Refresh Quests\", [\"Func\"] = function () local cVN = cKb [136]; cKb [51] [\"RefreshQuestChoices\"] (); local c"
+ },
+ {
+  "kind": "Button",
+  "raw": "{[\"Text\"] = \"Abandon Quest\", [\"Func\"] = function () cKb [51] [\"AbandonQuest\"] () end}"
+ },
+ {
+  "kind": "Toggle",
+  "key": "AutoMob",
+  "text": "\"Auto Farm Mob\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "Label",
+  "raw": "bpe [\"status\"] (bpz [\"MobStatus\"]), true"
+ },
+ {
+  "kind": "Dropdown",
+  "key": "MobTarget",
+  "text": "\"Select Mob\"",
+  "default": "1",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "Toggle",
+  "key": "AutoBoss",
+  "text": "\"Auto Boss\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "Label",
+  "raw": "bpe [\"status\"] (bpz [\"BossStatus\"]), true"
+ },
+ {
+  "kind": "Dropdown",
+  "key": "BossTargets",
+  "text": "\"Select Bosses\"",
+  "default": "{}",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "Toggle",
+  "key": "AutoBossHunt",
+  "text": "\"Auto Boss Hunts\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Claims the hunt or ders posted on the crow board and kills the boss each one names, on repeat\""
+ },
+ {
+  "kind": "Label",
+  "raw": "bpe [\"status\"] (bpz [\"HuntStatus\"]), true"
+ },
+ {
+  "kind": "Dropdown",
+  "key": "HuntTiers",
+  "text": "\"Hunt Tiers\"",
+  "default": "{}",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Which posted hunts to take.Nothing picked takes any of them\""
+ },
+ {
+  "kind": "Toggle",
+  "key": "HuntDropForeign",
+  "text": "\"Abandon Quest For A Hunt\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"There is one quest slot, so switch this on to drop an or dinary quest that is holding it\""
+ },
+ {
+  "kind": "Toggle",
+  "key": "AutoDelivery",
+  "text": "\"Auto Delivery Quest\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Takes Estate Worker Niko's supply run, carries the box to Shiori, reports back, and starts over\""
+ },
+ {
+  "kind": "Label",
+  "raw": "bpe [\"status\"] (bpz [\"DeliveryStatus\"]), true"
+ },
+ {
+  "kind": "Toggle",
+  "key": "AutoChest",
+  "text": "\"Auto Sealed Cache\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "Label",
+  "raw": "bpe [\"status\"] (bpz [\"ChestStatus\"]), true"
+ },
+ {
+  "kind": "Dropdown",
+  "key": "ChestTiers",
+  "text": "\"Sealed Cache Tiers\"",
+  "default": "{}",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "Toggle",
+  "key": "ChestInstantKill",
+  "text": "\"Instant Kill Cache Guards\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Its own Instant Kill, only on the guards around a locked sealed cache and only while Auto Sealed Cache runs\""
+ },
+ {
+  "kind": "Slider",
+  "key": "ChestKillThreshold",
+  "text": "\"Damage Before Kill\"",
+  "default": "10",
+  "min": "0",
+  "max": "100",
+  "suffix": "\"%\"",
+  "tooltip": "\"How much of a guard's health to take off first, 0% kills it at full health\""
+ },
+ {
+  "kind": "Toggle",
+  "key": "AutoLoot",
+  "text": "\"Auto Loot\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Collects eligible drops and boss chests within the pickup range, with highest priority when loot is ready\""
+ },
+ {
+  "kind": "Label",
+  "raw": "bpe [\"status\"] (bpz [\"LootStatus\"]), true"
+ },
+ {
+  "kind": "Slider",
+  "key": "LootRange",
+  "text": "\"Pickup Range\"",
+  "default": "150",
+  "min": "0",
+  "max": "2000",
+  "suffix": "\" studs\"",
+  "tooltip": "\"How far to travel for a drop, 0 collects at any distance\""
+ },
+ {
+  "kind": "Toggle",
+  "key": "AutoSoul",
+  "text": "\"Auto Claim Souls\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Picks up Weak, Strong and Brave Souls, the Demon progression drops\""
+ },
+ {
+  "kind": "Label",
+  "raw": "bpe [\"status\"] (bpz [\"SoulStatus\"]), true"
+ },
+ {
+  "kind": "Slider",
+  "key": "SoulRange",
+  "text": "\"Collect Range\"",
+  "default": "250",
+  "min": "0",
+  "max": "2000",
+  "suffix": "\" studs\"",
+  "tooltip": "\"How far to travel for a soul, 0 collects at any distance\""
+ },
+ {
+  "kind": "Toggle",
+  "key": "AutoDemon",
+  "text": "\"Become A Demon\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Runs the whole Muzan route:reputation, the Biwa Bell, the lair, the Spider Lilies, Dr.Higoshima and the blood\""
+ },
+ {
+  "kind": "Label",
+  "raw": "bpe [\"status\"] (bpz [\"MaxHealth\"]), true"
+ },
+ {
+  "kind": "Dropdown",
+  "key": "DemonMob",
+  "text": "\"Reputation Mob\"",
+  "default": "\"Mizunoto\"",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Killed until reputation is low enough for Muzan.Mizunoto slayers move it fastest\""
+ },
+ {
+  "kind": "Toggle",
+  "key": "DemonDrink",
+  "text": "\"Drink Muzan's Blood\"",
+  "default": "true",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Off stops at the flask in stead of transforming, so the last step stays yours.Becoming a demon cannot be undone\""
+ },
+ {
+  "kind": "Toggle",
+  "key": "DemonDropForeign",
+  "text": "\"Abandon Quest For Muzan\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Muzan only gives the task with the quest slot free, so switch this on to drop whatever is holding it\""
+ },
+ {
+  "kind": "Button",
+  "raw": "{[\"Text\"] = \"Refresh Mob and Boss Lists\", [\"Func\"] = function () local cVP = cKb [136]; F2175 (function () local cC5 = n"
+ },
+ {
+  "kind": "LeftGroupbox",
+  "raw": "\"Breathing\""
+ },
+ {
+  "kind": "Toggle",
+  "key": "AutoBreathing",
+  "text": "\"Auto Breathing\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "Label",
+  "raw": "bpe [\"status\"] (bpz [\"BreathStatus\"]), true"
+ },
+ {
+  "kind": "Dropdown",
+  "key": "BreathingChoice",
+  "text": "\"Select Breathing\"",
+  "default": null,
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "Dropdown",
+  "key": "WenMob",
+  "text": "\"Wen Farm Mob\"",
+  "default": null,
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "LeftGroupbox",
+  "raw": "\"Skill Tree\""
+ },
+ {
+  "kind": "Toggle",
+  "key": "AutoSkillTree",
+  "text": "\"Auto Skill Tree\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "Label",
+  "raw": "bpe [\"status\"] (bpz [\"SkillStatus\"]), true"
+ },
+ {
+  "kind": "Toggle",
+  "key": "UnlockSkills",
+  "text": "\"Unlock Skills\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "Dropdown",
+  "key": "SkillNodes",
+  "text": "\"Select Nodes\"",
+  "default": "{}",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "Button",
+  "raw": "{[\"Text\"] = \"Refresh Nodes\", [\"Func\"] = function () local cVQ = cKb; local cVR = cVQ [136]; cVQ [51] [cVR [2375]] (); lo"
+ },
+ {
+  "kind": "LeftGroupbox",
+  "raw": "\"Auto Training\""
+ },
+ {
+  "kind": "Toggle",
+  "key": "AutoTraining",
+  "text": "\"Auto Training\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Goes from one training station to the next, do es each one and moves on.Training credit counts towards quests that ask for it.\""
+ },
+ {
+  "kind": "Label",
+  "raw": "bpe [\"status\"] (bpz [\"TrainStatus\"]), true"
+ },
+ {
+  "kind": "Dropdown",
+  "key": "Trainings",
+  "text": "\"Trainings\"",
+  "default": "{}",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "Dropdown",
+  "key": "TrainingMode",
+  "text": "\"How To Play Them\"",
+  "default": "1",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Instantly finishes the moment a station opens.Play It Out plays the game's own minigame in stead, which takes as long as it normally would.\""
+ },
+ {
+  "kind": "LeftGroupbox",
+  "raw": "\"Fishing\""
+ },
+ {
+  "kind": "Toggle",
+  "key": "AutoFish",
+  "text": "\"Auto Fish\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Gets the fishing permit and a rod if you have none, then fishes at the harbor and always lands the bite\""
+ },
+ {
+  "kind": "Label",
+  "raw": "bpe [\"field\"] (\"Status\", bpz [\"FishStatus\"]), true"
+ },
+ {
+  "kind": "Dropdown",
+  "key": "FishBait",
+  "text": "\"Bait\"",
+  "default": "1",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Bait gets used up on every bite\""
+ },
+ {
+  "kind": "Toggle",
+  "key": "AutoBuyBait",
+  "text": "\"Auto Buy Bait\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Buys more of the selected bait when you run out\""
+ },
+ {
+  "kind": "LeftGroupbox",
+  "raw": "\"Tower Exp\""
+ },
+ {
+  "kind": "Toggle",
+  "key": "AutoBuyExp",
+  "text": null,
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Spends Ouwigahara run points at the Tower Crystal on 1, 000 Exp bundles.\""
+ },
+ {
+  "kind": "Label",
+  "raw": "bpe [\"status\"] (bpz [\"CrystalStatus\"]), true"
+ },
+ {
+  "kind": "Slider",
+  "key": "ExpBundles",
+  "text": "\"Bundles Per Trip\"",
+  "default": "99",
+  "min": "1",
+  "max": "99",
+  "suffix": null,
+  "tooltip": "\"99 is the most one purchase can carry; fewer only costs extra trips.\""
+ },
+ {
+  "kind": "Slider",
+  "key": "PointReserve",
+  "text": "\"Keep Points\"",
+  "default": "0",
+  "min": "0",
+  "max": "500000",
+  "suffix": null,
+  "tooltip": "\"Points held back for the Outfitter racks and the tower chest.\""
+ },
+ {
+  "kind": "Button",
+  "raw": "{[\"Text\"] = \"Buy Now\", [\"Func\"] = function () cKb [51] [\"BuyExpNow\"] () end}"
+ },
+ {
+  "kind": "LeftGroupbox",
+  "raw": "\"Schematics\""
+ },
+ {
+  "kind": "Label",
+  "raw": "bpe [\"status\"] (bpz [\"SchematicStatus\"]), true"
+ },
+ {
+  "kind": "Dropdown",
+  "key": "SchematicTargets",
+  "text": "\"Schematics To Collect\"",
+  "default": "{}",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Which set drawings to go and get.Ones you already have are skipped\""
+ },
+ {
+  "kind": "Toggle",
+  "key": "SchematicReturn",
+  "text": "\"Teleport Back When Done\"",
+  "default": "true",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Puts you back where you started once the last drawing is studied\""
+ },
+ {
+  "kind": "Button",
+  "raw": "{[\"Text\"] = \"Collect Schematics\", [\"Tooltip\"] = \"Teleports to each schematic you picked that you do n't have yet and stu"
+ },
+ {
+  "kind": "Button",
+  "raw": "{[\"Text\"] = \"Stop\", [\"Tooltip\"] = \"Stops after the spot it's on.It won't take you back\", [\"Func\"] = function () aVP:Noti"
+ },
+ {
+  "kind": "RightGroupbox",
+  "raw": "\"Player Info\""
+ },
+ {
+  "kind": "Label",
+  "raw": "bpe [\"field\"] (\"Level\", \"1\"), true"
+ },
+ {
+  "kind": "Label",
+  "raw": "bpe [\"field\"] (\"Exp\", \"0 / 0\"), true"
+ },
+ {
+  "kind": "Label",
+  "raw": "bpe [\"field\"] (\"Wen\", \"0\"), true"
+ },
+ {
+  "kind": "Label",
+  "raw": "bpe [\"field\"] (\"Race\", \"-\"), true"
+ },
+ {
+  "kind": "Label",
+  "raw": "bpe [\"field\"] (\"Skill Points\", \"0\"), true"
+ },
+ {
+  "kind": "Label",
+  "raw": "bpe [\"field\"] (\"Run Points\", \"0\"), true"
+ },
+ {
+  "kind": "RightGroupbox",
+  "raw": "\"Quest Progress\""
+ },
+ {
+  "kind": "Label",
+  "raw": "bpe [\"field\"] (\"Quest\", \"None\"), true"
+ },
+ {
+  "kind": "Label",
+  "raw": "bpe [\"field\"] (\"Progress\", \"-\"), true"
+ },
+ {
+  "kind": "Label",
+  "raw": "bpe [\"field\"] (\"Breathing Cost\", \"None\"), true"
+ },
+ {
+  "kind": "RightGroupbox",
+  "raw": "\"Notifications\""
+ },
+ {
+  "kind": "Toggle",
+  "key": "NotifyBossSpawns",
+  "text": "\"Boss Spawns\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Tells you when one of your bosses spawns, even when it's too far away to see\""
+ },
+ {
+  "kind": "Dropdown",
+  "key": "NotifyBosses",
+  "text": "\"Bosses\"",
+  "default": "{}",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "Toggle",
+  "key": "NotifyMuzan",
+  "text": "\"Muzan\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Tells you when Muzan comes out at night and where he is.He walks around Mistfall Harbor, Hidden Mist Village or Iceveil Valley\""
+ },
+ {
+  "kind": "Toggle",
+  "key": "NotifyMarket",
+  "text": "\"Black Marketer\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Tells you when the Black Marketer comes to town, what he's selling, and when he leaves\""
+ },
+ {
+  "kind": "Toggle",
+  "key": "NotifyTailor",
+  "text": "\"Tailor Restocks\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Tells you the new clothes whenever Elara or Lynx restocks\""
+ },
+ {
+  "kind": "Toggle",
+  "key": "NotifySelection",
+  "text": "\"Final Selection\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Warns you before Final Selection starts.It happens every 2 hours, and it's how a Human of level 45 or higher becomes a Slayer\""
+ },
+ {
+  "kind": "Slider",
+  "key": "NotifyWarnBefore",
+  "text": "1829555",
+  "default": "5",
+  "min": "1",
+  "max": "30",
+  "suffix": "\" min\"",
+  "tooltip": null
+ },
+ {
+  "kind": "Toggle",
+  "key": "NotifyHunts",
+  "text": "\"Boss Hunts\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Tells you when a new boss hunt you can take is posted.Hunts are only for Slayers and Demons\""
+ },
+ {
+  "kind": "Button",
+  "raw": "{[\"Text\"] = \"Teleport to Last Notification\", [\"Tooltip\"] = \"Travels to whatever the last not ification was about\", [\"Fun"
+ },
+ {
+  "kind": "Slider",
+  "raw": "cDD [\"key\"], {[\"Text\"] = cDD [\"name\"] .. \" Hold\", [\"Tooltip\"] = \"How long to hold this skill before releasing it\", [\"Def"
+ },
+ {
+  "kind": "Button",
+  "raw": "{[\"Text\"] = \"Refresh Skills\", [\"Func\"] = function () local cVV = cKb; local cVW = cVV [136]; cVV [51] [cVW [4599]] (); l"
+ },
+ {
+  "kind": "RightGroupbox",
+  "raw": "\"Consumables\""
+ },
+ {
+  "kind": "Toggle",
+  "key": "AutoPotion",
+  "text": "\"Auto Potion\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "Label",
+  "raw": "bpe [\"status\"] (bpz [\"PotionStatus\"]), true"
+ },
+ {
+  "kind": "Dropdown",
+  "key": "PotionChoice",
+  "text": "\"Select Potion\"",
+  "default": "1",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "Slider",
+  "key": "DrinkBelow",
+  "text": "\"Drink Below\"",
+  "default": "40",
+  "min": "1",
+  "max": "95",
+  "suffix": "\"%\"",
+  "tooltip": null
+ },
+ {
+  "kind": "RightGroupbox",
+  "raw": "\"Shop\""
+ },
+ {
+  "kind": "Toggle",
+  "key": "AutoBuy",
+  "text": "\"Auto Buy\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "Label",
+  "raw": "bpe [\"status\"] (bpz [\"ShopStatus\"]), true"
+ },
+ {
+  "kind": "Dropdown",
+  "key": "ShopItems",
+  "text": "\"Select Items\"",
+  "default": "{}",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "Slider",
+  "key": "KeepAmount",
+  "text": "\"Keep Amount\"",
+  "default": "1",
+  "min": "1",
+  "max": "25",
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "LeftGroupbox",
+  "raw": "\"Farm Settings\""
+ },
+ {
+  "kind": "Dropdown",
+  "key": "PositionType",
+  "text": "\"Position Type\"",
+  "default": "1",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Where to stand relative to the target while fighting it\""
+ },
+ {
+  "kind": "Toggle",
+  "key": "LookAtEnemy",
+  "text": "\"Look At Enemy\"",
+  "default": "true",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Always face the target, whatever the position type puts you\""
+ },
+ {
+  "kind": "Slider",
+  "key": "OffsetDistance",
+  "text": "\"Offset Distance\"",
+  "default": "3",
+  "min": "0",
+  "max": "100",
+  "suffix": "\" studs\"",
+  "tooltip": "\"How far out from the target to sit, horizontally\""
+ },
+ {
+  "kind": "Slider",
+  "key": "HeightOffset",
+  "text": "\"Height Offset\"",
+  "default": "0",
+  "min": null,
+  "max": "50",
+  "suffix": "\" studs\"",
+  "tooltip": "\"Vertical offset from the target, positive sits higher\""
+ },
+ {
+  "kind": "Dropdown",
+  "key": "MovementMode",
+  "text": "\"Movement Type\"",
+  "default": "1",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"How to cross ground:Tween glides there, Teleport blinks there in stantly\""
+ },
+ {
+  "kind": "Slider",
+  "key": "TweenSpeed",
+  "text": "\"Tween Speed\"",
+  "default": "400",
+  "min": "50",
+  "max": "1000",
+  "suffix": "\" studs/s\"",
+  "tooltip": "\"How fast to glide, in studs per second\""
+ },
+ {
+  "kind": "LeftGroupbox",
+  "raw": "\"Equipment\""
+ },
+ {
+  "kind": "Toggle",
+  "key": "AutoEquipBest",
+  "text": "\"Auto Equip Best Equipment\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "Label",
+  "raw": "bpe [\"status\"] (bpz [\"EquipStatus\"]), true"
+ },
+ {
+  "kind": "LeftGroupbox",
+  "raw": "\"Defence\""
+ },
+ {
+  "kind": "Toggle",
+  "key": "AutoParry",
+  "text": "\"[Beta] Auto Parry V3\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Times a block tap onto each in coming swing so it lands as a perfect block\""
+ },
+ {
+  "kind": "Label",
+  "raw": "bpe [\"status\"] (bpz [\"ParryStatus\"]), true"
+ },
+ {
+  "kind": "Toggle",
+  "key": "ParryNpcs",
+  "text": "\"Parry Mobs\"",
+  "default": "true",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "Toggle",
+  "key": "ParryPlayers",
+  "text": "\"Parry Players\"",
+  "default": "true",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Player swings only give a 0.1s window, against 0.25s for a mob\""
+ },
+ {
+  "kind": "Toggle",
+  "key": "ParryMitigate",
+  "text": "\"Block When Parry Is Locked Out\"",
+  "default": "true",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"The game refuses a perfect window while you are stunned, and for one second after any hit lands.This soaks those swings as a normal block for half damage in stead of taking them clean\""
+ },
+ {
+  "kind": "Toggle",
+  "key": "ParryHold",
+  "text": "\"Keep Blocking After A Parry\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Costs block points and keeps the one second lockout alive, so the next swing cannot be parried.It also holds the block for a second and a half, and the game refuses every skill and every swing while a block is up, so leave it off when Auto Skills is on.\""
+ },
+ {
+  "kind": "Slider",
+  "key": "ParryLead",
+  "text": "\"Parry Timing\"",
+  "default": "0",
+  "min": null,
+  "max": "120",
+  "suffix": "\" ms\"",
+  "tooltip": "\"Leave at 0 Only touch it if parries keep missing:higher blocks later, lower blocks earlier\""
+ },
+ {
+  "kind": "Slider",
+  "key": "ParryRadius",
+  "text": "\"Parry Range\"",
+  "default": "40",
+  "min": "10",
+  "max": "150",
+  "suffix": "\" studs\"",
+  "tooltip": "\"How close an enemy has to be before auto parry watches it.The default is fine for melee\""
+ },
+ {
+  "kind": "Button",
+  "raw": "{[\"Text\"] = \"Reset Counters\", [\"Func\"] = function () local cVZ = cKb [136]; cKb [51] [\"ResetParryStats\"] (); aVP:Notify "
+ },
+ {
+  "kind": "RightGroupbox",
+  "raw": "\"Combat\""
+ },
+ {
+  "kind": "Dropdown",
+  "key": "WeaponChoice",
+  "text": "\"Select Weapon\"",
+  "default": null,
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Leave empty to keep whatever you already have out\""
+ },
+ {
+  "kind": "Button",
+  "raw": "{[\"Text\"] = \"Refresh Weapons\", [\"Func\"] = function () local cV_ = cKb [136]; cKb [51] [\"RefreshWeapons\"] (); local cV0 ="
+ },
+ {
+  "kind": "Toggle",
+  "key": "AutoSkills",
+  "text": "\"Auto Skills\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "Label",
+  "raw": "bpe [\"status\"] (bpz [\"AutoSkillStatus\"]), true"
+ },
+ {
+  "kind": "Dropdown",
+  "key": "SkillChoices",
+  "text": "\"Select Skills\"",
+  "default": "{}",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Leave empty to use every equipped skill.Blocking is left to Auto Parry and never cast from here.\""
+ },
+ {
+  "kind": "LeftGroupbox",
+  "raw": "\"Order\""
+ },
+ {
+  "kind": "Label",
+  "raw": "bpe [\"field\"] (\"Driving\", cKb [51] [\"PriorityHolder\"] ()), true"
+ },
+ {
+  "kind": "Label",
+  "raw": "bpe [\"status\"] (bpz [\"PriorityStatus\"]), true"
+ },
+ {
+  "kind": "Label",
+  "raw": "bpe [\"field\"] (tostring (cEu), \"-\"), true"
+ },
+ {
+  "kind": "RightGroupbox",
+  "raw": "\"Scheduling\""
+ },
+ {
+  "kind": "Toggle",
+  "key": "PriorityMode",
+  "text": "\"Priority Scheduling\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Lets several auto farms stay on at once and gives the character to the highest ranked one that has work\""
+ },
+ {
+  "kind": "Toggle",
+  "key": "PriorityPreempt",
+  "text": "\"Comma separated feature keys, highest priority first.Auto Loot stays first.Saved with the config\"",
+  "default": "true",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"A higher ranked feature pauses the running one.Auto Loot always in terrupts when loot is ready\""
+ },
+ {
+  "kind": "Input",
+  "key": "PriorityOrder",
+  "text": "\"Saved Order\"",
+  "default": null,
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "11340532"
+ },
+ {
+  "kind": "Dropdown",
+  "key": "PriorityPick",
+  "text": "\"Feature\"",
+  "default": "1",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"The feature the buttons below move\""
+ },
+ {
+  "kind": "Button",
+  "raw": "{[\"Text\"] = \"Move Up\", [\"Func\"] = function () local cEe = nil; local cEf = nil; cEf = 1; while true do cEf = 4499 - cEf;"
+ },
+ {
+  "kind": "Button",
+  "raw": "{[\"Text\"] = \"Move Down\", [\"Func\"] = function () local cEg = nil; local cEh = nil; cEh = 1; while true do cEh = 12044 - c"
+ },
+ {
+  "kind": "Button",
+  "raw": "{[\"Text\"] = \"Reset Order\", [\"Func\"] = function () cEk (cKb [51] [\"ResetPriorityOrder\"] ()) end, [\"DoubleClick\"] = true}"
+ },
+ {
+  "kind": "LeftGroupbox",
+  "raw": "\"Movement\""
+ },
+ {
+  "kind": "Toggle",
+  "key": "Fly",
+  "text": "\"Fly\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "KeyPicker",
+  "key": "FlyKey",
+  "text": "\"Fly\"",
+  "default": "\"H\"",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "Slider",
+  "key": "FlySpeed",
+  "text": "\"Fly Speed\"",
+  "default": "60",
+  "min": "10",
+  "max": "400",
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "Toggle",
+  "key": "NoClip",
+  "text": "\"Noclip\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "KeyPicker",
+  "key": "NoClipKey",
+  "text": "\"Noclip\"",
+  "default": "\"N\"",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "Toggle",
+  "key": "WalkSpeedEnabled",
+  "text": "\"Speed\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "KeyPicker",
+  "key": "SpeedKey",
+  "text": "\"Speed\"",
+  "default": "\"K\"",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "Slider",
+  "key": "WalkSpeed",
+  "text": "\"Speed Amount\"",
+  "default": "32",
+  "min": "16",
+  "max": "250",
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "Toggle",
+  "key": "HighJump",
+  "text": "\"High Jump\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "KeyPicker",
+  "key": "HighJumpKey",
+  "text": "\"High Jump\"",
+  "default": "\"J\"",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "Slider",
+  "key": "JumpPower",
+  "text": "\"Jump Power\"",
+  "default": "90",
+  "min": "50",
+  "max": "400",
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "Toggle",
+  "key": "AlwaysRun",
+  "text": "\"Always Run\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Holds the game's own run toggle do wn so you never walk\""
+ },
+ {
+  "kind": "LeftGroupbox",
+  "raw": "\"Interaction\""
+ },
+ {
+  "kind": "Toggle",
+  "key": "InstantProximityPrompt",
+  "text": "\"Instant ProximityPrompt\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "Toggle",
+  "key": "DisableShiftLock",
+  "text": "\"Disable Shift Lock\"",
+  "default": "true",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Turns the game's Left Alt shift lock back off whenever it comes on\""
+ },
+ {
+  "kind": "LeftGroupbox",
+  "raw": "\"Sustain\""
+ },
+ {
+  "kind": "Toggle",
+  "key": "InfiniteStamina",
+  "text": "\"Infinite Stamina\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Holds your stamina bar full so skills and sprinting stop being refused\""
+ },
+ {
+  "kind": "Toggle",
+  "key": "InfiniteClimb",
+  "text": "\"Infinite Climb\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Keeps wall climb time topped up; needs the Wall Climb skill tree node\""
+ },
+ {
+  "kind": "Toggle",
+  "key": "InfiniteHorseStamina",
+  "text": "\"Infinite Horse Stamina\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Stops every horse speed mode draining stamina, so Run never times out\""
+ },
+ {
+  "kind": "Toggle",
+  "key": "NoDrown",
+  "text": "\"No Drown\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Holds your breath bar full underwater\""
+ },
+ {
+  "kind": "LeftGroupbox",
+  "raw": "\"Mitigation\""
+ },
+ {
+  "kind": "Toggle",
+  "key": "NoStun",
+  "text": "\"No Stun\"",
+  "default": "true",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "Toggle",
+  "key": "NoRagdoll",
+  "text": "\"No Ragdoll\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "Toggle",
+  "key": "NoAttackSlowdown",
+  "text": "\"No Attack Slowdown\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "Toggle",
+  "key": "NoDashCooldown",
+  "text": "\"No Dash Cooldown\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "Toggle",
+  "key": "NoSunDamage",
+  "text": "\"No Sun Damage\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"If you're a demon, the sun no longer burns you.Does not hing for other races\""
+ },
+ {
+  "kind": "RightGroupbox",
+  "raw": "\"Codes\""
+ },
+ {
+  "kind": "Label",
+  "raw": "bpe [\"status\"] (bpz [\"CodeStatus\"]), true"
+ },
+ {
+  "kind": "Button",
+  "raw": "{[\"Text\"] = \"Redeem All Codes\", [\"Tooltip\"] = \"Redeems every active code, skipping ones already claimed or expired\", [\"D"
+ },
+ {
+  "kind": "Label",
+  "raw": "bpe [\"field\"] (\"Driving\", \"None\"), true"
+ },
+ {
+  "kind": "RightGroupbox",
+  "raw": "\"Instant Kill\""
+ },
+ {
+  "kind": "Toggle",
+  "key": "InstantKill",
+  "text": "\"Instant Kill\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Kills any NPC your client has network ownership of\""
+ },
+ {
+  "kind": "Label",
+  "raw": "\" < font color = \\\"#e0788c\\\" > Instant kill is patched but it can still kill enemies, they just won't drop any items < /"
+ },
+ {
+  "kind": "Slider",
+  "key": "KillThreshold",
+  "text": "\"Damage Before Kill\"",
+  "default": "10",
+  "min": "0",
+  "max": "100",
+  "suffix": "\"%\"",
+  "tooltip": null
+ },
+ {
+  "kind": "Toggle",
+  "key": "OwnershipViewer",
+  "text": "\"Ownership Viewer\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Outlines monsters near you:green ones can be end ed right now, red ones can't\""
+ },
+ {
+  "kind": "Slider",
+  "key": "OwnershipRange",
+  "text": "\"Viewer Range\"",
+  "default": "250",
+  "min": "50",
+  "max": "2000",
+  "suffix": "\" studs\"",
+  "tooltip": null
+ },
+ {
+  "kind": "Tab",
+  "raw": "\"Zones\""
+ },
+ {
+  "kind": "Tab",
+  "raw": "\"NPCs\""
+ },
+ {
+  "kind": "Tab",
+  "raw": "\"Mobs\""
+ },
+ {
+  "kind": "Label",
+  "raw": "bpe [\"status\"] (bpz [\"TeleportStatus\"]), true"
+ },
+ {
+  "kind": "Dropdown",
+  "key": "ZoneTarget",
+  "text": "\"Select Zone\"",
+  "default": "1",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "Button",
+  "raw": "{[\"Text\"] = \"Teleport\", [\"Func\"] = function () local cEv, cEw, cEx = nil, nil, nil; local cEy = nil; cEy = 7; while true"
+ },
+ {
+  "kind": "Button",
+  "raw": "{[\"Text\"] = \"Teleport to Muzan\", [\"Tooltip\"] = \"Goes to Muzan while he is out, otherwise to his lair arrival point\", [\"F"
+ },
+ {
+  "kind": "Dropdown",
+  "key": "NpcTarget",
+  "text": "\"Select NPC\"",
+  "default": "1",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "Button",
+  "raw": "{[\"Text\"] = \"Teleport\", [\"Func\"] = function () local cEz, cEA, cEB = nil, nil, nil; local cEC = nil; cEC = 3; while true"
+ },
+ {
+  "kind": "Dropdown",
+  "key": "MobTeleport",
+  "text": "\"Select Mob\"",
+  "default": "1",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "Button",
+  "raw": "{[\"Text\"] = \"Teleport\", [\"Func\"] = function () local cED, cEE, cEF, cEH, cEI, cEJ = nil, nil, nil, nil, nil, nil; local "
+ },
+ {
+  "kind": "RightGroupbox",
+  "raw": "\"Matchmaking\""
+ },
+ {
+  "kind": "Label",
+  "raw": "bpe [\"status\"] (bpz [\"QueueStatus\"]), true"
+ },
+ {
+  "kind": "Dropdown",
+  "key": "QueueModes",
+  "text": "\"Gamemodes\"",
+  "default": "{}",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Queues for these in turn, skipping any the hub has locked for you\""
+ },
+ {
+  "kind": "Toggle",
+  "key": "QueueRanked",
+  "text": "\"Ranked\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Queues ranked where the mode offers it; Zenith is ranked either way\""
+ },
+ {
+  "kind": "Toggle",
+  "key": "QueueFill",
+  "text": "\"Fill\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Lets the server fill the remaining slots with other players\""
+ },
+ {
+  "kind": "Toggle",
+  "key": "AutoQueue",
+  "text": "\"Auto Queue\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Keeps you in queue and requeues as soon as one end s without a match\""
+ },
+ {
+  "kind": "Button",
+  "raw": "{[\"Text\"] = \"Leave Queue\", [\"Tooltip\"] = \"Drops the current queue; the joiner places a new one on its next turn\", [\"Func"
+ },
+ {
+  "kind": "Label",
+  "raw": "bpe [\"status\"] (bpz [\"WorldStatus\"]), true"
+ },
+ {
+  "kind": "Dropdown",
+  "key": "WorldTarget",
+  "text": "\"World\"",
+  "default": "1",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"The overworld to teleport in to\""
+ },
+ {
+  "kind": "Input",
+  "key": "PrivateOwner",
+  "text": "\"Private Server Owner\"",
+  "default": "\"\"",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Username of whoever hosts the private server, yours or a fri end's; leave it empty to join a public server\""
+ },
+ {
+  "kind": "Toggle",
+  "key": "AutoWorld",
+  "text": "\"Auto Join World\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Retries the teleport until it takes, for when the world is full or the hub is still settling\""
+ },
+ {
+  "kind": "Button",
+  "raw": "{[\"Text\"] = \"Join World\", [\"Tooltip\"] = \"Teleports once\", [\"Func\"] = function () cKb [51] [\"JoinWorld\"] () end}"
+ },
+ {
+  "kind": "RightGroupbox",
+  "raw": "\"Unavailable\""
+ },
+ {
+  "kind": "Label",
+  "raw": "\"Missing:\""
+ },
+ {
+  "kind": "LeftGroupbox",
+  "raw": "\"ESP\""
+ },
+ {
+  "kind": "ColorPicker",
+  "raw": "a38 .. \"Colour\", {[\"Default\"] = a4c, [\"Title\"] = a39 .. \" Colour\", [\"Callback\"] = function (a4k) cKb [51] [\"SetEspColour"
+ },
+ {
+  "kind": "Toggle",
+  "raw": "a38, {[\"Text\"] = a39, [\"Default\"] = false, [\"Callback\"] = function (a4e) cKb [51] [\"SetEspOption\"] (a4a, a4e) end}"
+ },
+ {
+  "kind": "Label",
+  "raw": "\"Dying Colour\""
+ },
+ {
+  "kind": "ColorPicker",
+  "key": "EspDyingColour",
+  "text": null,
+  "default": null,
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "Slider",
+  "key": "EspRange",
+  "text": "\"Max Distance\"",
+  "default": "5000",
+  "min": "0",
+  "max": "20000",
+  "suffix": "\" studs\"",
+  "tooltip": "\"Hides anything further away than this, 0 shows it at any distance\""
+ },
+ {
+  "kind": "Toggle",
+  "raw": "a4t, {[\"Text\"] = a4u, [\"Default\"] = false, [\"Callback\"] = function (a4x) cKb [51] [\"SetEspCategory\"] (a4v, a4x) end}"
+ },
+ {
+  "kind": "ColorPicker",
+  "raw": "a4t .. \"Colour\", {[\"Default\"] = a4w, [\"Title\"] = a4u .. \" Colour\", [\"Callback\"] = function (a4B) cKb [51] [\"SetEspColour"
+ },
+ {
+  "kind": "LeftGroupbox",
+  "raw": "\"World\""
+ },
+ {
+  "kind": "RightGroupbox",
+  "raw": "\"Player ESP\""
+ },
+ {
+  "kind": "Toggle",
+  "key": "EspPlayers",
+  "text": "\"Player ESP\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "Toggle",
+  "key": "EspPlayerInfo",
+  "text": "\"Level / Race / Clan\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "ColorPicker",
+  "key": "EspPlayerInfoColour",
+  "text": null,
+  "default": null,
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "Label",
+  "raw": "\"Enemy Colour\""
+ },
+ {
+  "kind": "ColorPicker",
+  "key": "EspEnemyColour",
+  "text": null,
+  "default": null,
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "Label",
+  "raw": "\"Party Colour\""
+ },
+ {
+  "kind": "ColorPicker",
+  "key": "EspPartyColour",
+  "text": null,
+  "default": null,
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "Tab",
+  "raw": "\"Bosses\""
+ },
+ {
+  "kind": "RightGroupbox",
+  "raw": "\"Discord\""
+ },
+ {
+  "kind": "Button",
+  "raw": "{[\"Text\"] = \"S end \" .. cGS .. \" Report Now\", [\"Func\"] = function () cKb [51] [\"SendWebhookReport\"] (cGS, function (a5l,"
+ },
+ {
+  "kind": "Input",
+  "raw": "cGJ, {[\"Text\"] = \"Webhook URL\", [\"Default\"] = \"\", [\"Placeholder\"] = cGL, [\"Tooltip\"] = \"Saved with your config, so do no"
+ },
+ {
+  "kind": "Slider",
+  "raw": "\"WebhookInterval\""
+ },
+ {
+  "kind": "Dropdown",
+  "raw": "\"WebhookEvents\""
+ },
+ {
+  "kind": "Tab",
+  "raw": "cGS, cGH [\"icon\"]"
+ },
+ {
+  "kind": "Label",
+  "raw": "cGH [\"blurb\"], true"
+ },
+ {
+  "kind": "Label",
+  "raw": "bpe [\"field\"] (\"Report\", cKb [51] [\"WebhookChannelStatus\"] (cGS)), true"
+ },
+ {
+  "kind": "Toggle",
+  "raw": "\"Webhook\""
+ },
+ {
+  "kind": "Dropdown",
+  "key": "WebhookItemCategories",
+  "text": "\"Name Drops From\"",
+  "default": null,
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Only these categories are listed by name.Materials are left out by default.\""
+ },
+ {
+  "kind": "RightGroupbox",
+  "raw": "\"Shared\""
+ },
+ {
+  "kind": "Toggle",
+  "key": "WebhookSkipQuiet",
+  "text": "\"Skip Empty Reports\"",
+  "default": "true",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Stay silent when not hing on the in clude list happened.\""
+ },
+ {
+  "kind": "Input",
+  "key": "WebhookPingId",
+  "text": "\"Discord User ID\"",
+  "default": "\"\"",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "Toggle",
+  "key": "WebhookPing",
+  "text": "\"Ping Me\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": "\"Mentions the user ID above on every report.\""
+ },
+ {
+  "kind": "RightGroupbox",
+  "raw": "\"Delivery\""
+ },
+ {
+  "kind": "Label",
+  "raw": "cKb [51] [\"WebhookStatus\"] (), true"
+ },
+ {
+  "kind": "LeftGroupbox",
+  "raw": "\"Menu\""
+ },
+ {
+  "kind": "Toggle",
+  "key": "AntiAfk",
+  "text": "\"Anti-AFK\"",
+  "default": "true",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "Label",
+  "raw": "\"AFK triggers:0\""
+ },
+ {
+  "kind": "Toggle",
+  "key": "AntiGameplayPause",
+  "text": "\"No Gameplay Paused\"",
+  "default": "true",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "Toggle",
+  "key": "AutoReconnect",
+  "text": "\"Auto Reconnect on Kick\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "Toggle",
+  "key": "Disable3D",
+  "text": "\"Disable 3D Rendering\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "Toggle",
+  "key": "FpsBoost",
+  "text": "\"FPS Boost\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "Toggle",
+  "key": "HideUiOnStart",
+  "text": "\"Hide UI On Start\"",
+  "default": "false",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "Label",
+  "raw": "\"Menu bind\""
+ },
+ {
+  "kind": "KeyPicker",
+  "key": "MenuKeybind",
+  "text": "\"Menu keybind\"",
+  "default": "\"RightShift\"",
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "LeftGroupbox",
+  "raw": "\"Script\""
+ },
+ {
+  "kind": "Button",
+  "raw": "{[\"Text\"] = \"Unload Script\", [\"Func\"] = function () local cW0 = cKb [136]; aVP:Unload () end}"
+ },
+ {
+  "kind": "Input",
+  "key": "SaveManager_ImportSource",
+  "text": "\"Paste exported config here\"",
+  "default": null,
+  "min": null,
+  "max": null,
+  "suffix": null,
+  "tooltip": null
+ },
+ {
+  "kind": "Button",
+  "raw": "\"Export Config to Clipboard\""
+ },
+ {
+  "kind": "Button",
+  "raw": "\"Import Config from Clipboard Text\""
+ },
+ {
+  "kind": "Button",
+  "raw": "{[\"Text\"] = \"Refresh Quests\", [\"Func\"] = function () local c3D = cKb [136]; cKb [51] [\"RefreshQuestChoices\"] (); local c"
+ },
+ {
+  "kind": "Button",
+  "raw": "{[\"Text\"] = \"Refresh Mob and Boss Lists\", [\"Func\"] = function () local c3F = cKb [136]; F2175 (function () local cC5 = n"
+ },
+ {
+  "kind": "Button",
+  "raw": "{[\"Text\"] = \"Refresh Nodes\", [\"Func\"] = function () local c3G = cKb; local c3H = c3G [136]; c3G [51] [c3H [2375]] (); lo"
+ },
+ {
+  "kind": "Button",
+  "raw": "{[\"Text\"] = \"Refresh Skills\", [\"Func\"] = function () local c3L = cKb; local c3M = c3L [136]; c3L [51] [c3M [4599]] (); l"
+ },
+ {
+  "kind": "Button",
+  "raw": "{[\"Text\"] = \"Reset Counters\", [\"Func\"] = function () local c3P = cKb [136]; cKb [51] [\"ResetParryStats\"] (); aVP:Notify "
+ },
+ {
+  "kind": "Button",
+  "raw": "{[\"Text\"] = \"Refresh Weapons\", [\"Func\"] = function () local c3Q = cKb [136]; cKb [51] [\"RefreshWeapons\"] (); local c3R ="
+ },
+ {
+  "kind": "Button",
+  "raw": "{[\"Text\"] = \"Unload Script\", [\"Func\"] = function () local c4R = cKb [136]; aVP:Unload () end}"
+ }
+]
