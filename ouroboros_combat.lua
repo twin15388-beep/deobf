@@ -134,7 +134,7 @@ local function ChestKillStep(mobs, chestList)         -- boZ
         and humanoid and humanoid["Serpent"] > 0
         and humanoid["Health"] <= humanoid["Serpent"] * meta
         and model["ReceiveAge"] == 0
-        and not cKb[141]["PASSIVE_MOBS"][entry["name"]] then     -- охрана, а не пассивка
+        and not cKb[141]["PASSIVE_MOBS"][entry["model"]["Name"]] then -- охрана, а не пассивка
             for _, position in ipairs(locked) do
                 if (root["Position"] - position).Magnitude
                    <= cKb[141]["CHEST_GUARD_RANGE"] then         -- 220
@@ -147,14 +147,66 @@ local function ChestKillStep(mobs, chestList)         -- boZ
 end
 
 -- ---------------------------------------------------------------------------
+-- КОНТЕЙНЕР: cKb[132] = cloneref(LocalPlayer)  (строка 8144 оригинала:
+--   cKb[132] = bpZ(bmK[<"LocalPlayer">]), где bpZ = F5378 = cloneref)
+-- Поэтому проверки вида obj:IsDescendantOf(cKb[132]) означают
+-- «объект уже у нас / принадлежит локальному игроку».
+-- ---------------------------------------------------------------------------
+local LocalPlayerRef = cloneref and cloneref(game:GetService("Players").LocalPlayer)
+                          or game:GetService("Players").LocalPlayer
+
+-- ---------------------------------------------------------------------------
+-- СПИСОК МОБОВ — boo() = F3280 (вторая копия; в первой F76 — та же идея,
+-- но запутаннее и без полей name/region)
+--   bxc[i] = { name = <имя папки>, region = <регион>, model = <Model>, humanoid = <Humanoid> }
+-- ---------------------------------------------------------------------------
+local function MobList()                                  -- boo (F3280)
+    local found = {}
+    for _, region in ipairs(cKb[59]()) do                 -- список регионов/папок
+        for _, model in ipairs(region["folder"]:GetChildren()) do
+            if model:IsA("Model") and model:GetAttribute("IsMob") then
+                local humanoid = model:FindFirstChildOfClass("Humanoid")
+                if humanoid and humanoid["Health"] > 0 then
+                    found[#found + 1] = {
+                        name = region["folder"]["Name"],      -- имя папки региона
+                        region = region["region"],
+                        model = model,
+                        humanoid = humanoid,
+                    }
+                end
+            end
+        end
+    end
+    return found
+end
+
+-- ---------------------------------------------------------------------------
+-- АНТИ-АФК — bon() = F2440: переключает RunHandler.Toggled, чтобы персонаж
+-- не «засыпал». Флаг cKb[71] хранит состояние переключателя.
+-- ---------------------------------------------------------------------------
+local antiAfkFlag = false                                 -- cKb[71]
+local function AntiAfk()                                  -- bon (F2440)
+    if type(bno["RunHandler"]) ~= "table" then return end
+    if antiAfkFlag then
+        antiAfkFlag = false
+        task.defer(function() bno["RunHandler"]["Toggled"] = false end)
+    else
+        if bno["RunHandler"]["Toggled"] ~= true then
+            bno["RunHandler"]["Toggled"] = true
+        end
+        antiAfkFlag = true
+    end
+end
+
+-- ---------------------------------------------------------------------------
 -- ТИКЕР (в оригинале — цикл под флагом cKb[72]["AntiAfk"], строка ~9300)
 --   bon(); bpX(); boZ()   -- каждый проход
 -- ---------------------------------------------------------------------------
-local function CombatTick(mobs, chestList)            -- обёртка анти-АФК прохода
+local function CombatTick()                               -- обёртка анти-АФК прохода
     if not tweaks["AntiAfk"] then return end
-    bon()                                             -- анти-АФК действие (движение)
-    InstantKillStep(mobs)
-    ChestKillStep(mobs, chestList)
+    AntiAfk()                                             -- анти-АФК действие
+    InstantKillStep(MobList)                              -- bpX
+    ChestKillStep(MobList, bps)                           -- boZ
 end
 
 -- ---------------------------------------------------------------------------
@@ -176,6 +228,9 @@ return {
     InstantKillStep = InstantKillStep,
     ChestKillStep = ChestKillStep,
     CombatTick = CombatTick,
+    MobList = MobList,
+    AntiAfk = AntiAfk,
+    LocalPlayerRef = LocalPlayerRef,
     SetKillThreshold = SetKillThreshold,
     SetChestKillThreshold = SetChestKillThreshold,
     SetInstantKill = SetInstantKill,
@@ -197,10 +252,15 @@ return {
 }
 
 --[[ ============================================================================
+  ЗАКРЫТО в этом заходе:
+    MobList (boo = F3280: обход cKb[59](), фильтр Model + атрибут "IsMob" +
+    живой Humanoid, запись {name=имя папки, region, model, humanoid});
+    AntiAfk (bon = F2440: переключатель RunHandler.Toggled);
+    cKb[132] = cloneref(LocalPlayer) — значит IsDescendantOf(cKb[132]) читается
+    как «уже у нас».
+
   ЧТО ЗДЕСЬ ЕЩЁ НЕ ДОЧИТАНО:
-  1. boo() — сборка списка мобов (F76: обход cKb[132]["Debree"]/"Regions",
-     ищет модели с Humanoid; формат записи {model=…, humanoid=…, name=…}).
-  2. bon() — действие анти-АФК (в артефакте определяется в другой ветке).
+  1. cKb[59]() — откуда берётся список регионов ({folder=…, region=…}).
   3. Точный тик: цикл запускается через F2175(function() … end) и гейтится
      cKb[72]["AntiAfk"]; внутри — пошаговая машина состояний (per-frame).
   4. Патч "instant kill is patched": в UI есть подпись, что мгновенное убийство
