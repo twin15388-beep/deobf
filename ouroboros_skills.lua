@@ -67,6 +67,133 @@ local function SetAutoSkillTree(value)                     -- F2053
     module["autoSkillTree"] = value == true
 end
 
+
+-- ---------------------------------------------------------------------------
+-- ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ СОСТОЯНИЯ (вычитаны из артефакта, слоты cKb[77])
+-- ---------------------------------------------------------------------------
+local REFUSAL_GAP = 0.35      -- cKb[141]["REFUSAL_GAP"]: пауза после отказа
+
+-- owns(record) — F5285: запись всё ещё «наша»
+function skills.owns(record)
+    local character = cKb[9]()
+    local shc = character and character:FindFirstChild("SHC")
+    if cKb[51]["SkillWork"]["entry"] ~= record then return false end
+    if character ~= record["character"] then return false end
+    if record["stamp"] == nil then return false end
+    if shc ~= record["shc"] then return false end
+    if shc == nil then return false end
+    if shc["Value"] ~= record["name"] then return false end
+    return shc:GetAttribute("last_performed") == record["stamp"]
+end
+
+-- retire(record) — F3455: снять запись отовсюду
+function skills.retire(record)
+    if skills["active"] == record then skills["active"] = nil end
+    if cKb[51]["SkillWork"]["entry"] == record then
+        cKb[51]["SkillWork"]["entry"] = nil
+    end
+end
+
+-- valid(record) — F3170: можно ли продолжать возиться с этой записью
+function skills.valid(record)                     -- bpm() = F796: игрок жив и персонаж есть
+    local alive = playerValues() ~= nil and playerValues()["Health"] > 0
+                  and cKb[145]() ~= nil
+    return bnB()
+       and module["autoSkills"]
+       and not record["cancelled"]
+       and cKb[9]() == record["character"]
+       and alive
+       and record["session"]["valid"]()
+       and cKb[51]["SkillWork"]["entry"] == record
+end
+
+-- claim(record) — F4419: занять скилл под каст
+function skills.claim(record)
+    if not skills["owns"](record) then return false end
+    if not bnB() then return false end
+    local runner = bno["SkillRunner"]
+    runner["HeldSkill"] = record["name"]
+    runner["CurrentMax"] = (tonumber(record["hold"]) or 0) > 0 and record["hold"] or nil
+    return true
+end
+
+-- remaining(name) — F5168: сколько секунд кулдауна осталось
+function skills.remaining(name)
+    local skill = cKb[24](name)                    -- игровой объект скилла по имени
+    if not skill then return 0 end
+    local cooldown = tonumber(skill["Cooldown"])
+    if not cooldown then cooldown = 0 end
+    if cooldown <= 0 then return 0 end
+    local lastUsed = tonumber(skill["lastUsed"])
+    if not lastUsed then return 0 end
+    return math.max(cooldown - (os.clock() - lastUsed), 0)
+end
+
+-- backoff(name, seconds, stallText) — F5871: поставить кулдаун и, если нужно, паузу
+function skills.backoff(name, seconds, stallText)
+    local wait = math.max(tonumber(seconds) or 0, 0)
+    cKb[77]["cooldowns"] = cKb[77]["cooldowns"] or {}
+    cKb[77]["cooldowns"][name] = os.clock() + wait
+    if stallText then
+        skills["stall"], skills["stallUntil"] = stallText, os.clock() + wait
+    end
+end
+
+-- held(name) — F1166: этот скилл сейчас удерживается персонажем
+function skills.held(name)
+    local character = cKb[9]()
+    local shc = character and character:FindFirstChild("SHC")
+    if not shc then return false end
+    return shc["Value"] == name
+end
+
+-- busy(record) — F2775: каст ещё в процессе (по нему и решается «ждать»)
+function skills.busy(record)
+    if not record then return false end
+    if cKb[9]() ~= record["character"] then
+        if record["releaseFailed"] then
+            skills["retire"](record)
+            return false
+        end
+        if not skills["owns"](record) then
+            if record["releaseFailed"] then
+                skills["retire"](record)
+                return false
+            end
+            if record["cancelled"] then return false end
+            return true
+        end
+    end
+    if record["cancelled"] then return false end
+    return true
+end
+
+-- refused(name) — F6399: причина отказа в касте + пауза
+function skills.refused(name)
+    local values = cKb[123]["playerValues"]()        -- bCH = cKb[77]["remaining"](pO)
+    if not values then return "No player values", REFUSAL_GAP end
+    if values:FindFirstChild("Blocking") then return "Not enough stamina", REFUSAL_GAP end
+    local remaining = skills["remaining"](name)
+    if remaining > 0 then
+        return "Waiting for " .. tostring(name) .. " cooldown", REFUSAL_GAP
+    end
+    local stamina = tonumber(values["Stamina"])
+    if stamina and stamina < (tonumber(values["Value"]) or 0) then
+        return "Not enough stamina", REFUSAL_GAP
+    end
+    return nil, REFUSAL_GAP
+end
+
+-- playerValues() — cKb[123]["playerValues"], с кэшем на кадр
+local cachedValues, cachedAt
+function playerValues()
+    local now = os.clock()
+    if cachedValues and cachedAt == now then return cachedValues end
+    cachedValues = cKb[123]["playerValues"]()
+    cachedAt = now
+    return cachedValues
+end
+
 -- ---------------------------------------------------------------------------
 -- ЗАПИСЬ КАСТА (строка 16263) и вход в каст
 -- ---------------------------------------------------------------------------
@@ -296,6 +423,10 @@ return {
     CastSkill = CastSkill,
     SkillStep = SkillStep,
     SetAutoSkills = SetAutoSkills,
+    -- вспомогательные (вычитаны)
+    owns = skills.owns, retire = skills.retire, valid = skills.valid,
+    claim = skills.claim, remaining = skills.remaining, backoff = skills.backoff,
+    held = skills.held, busy = skills.busy, refused = skills.refused,
     SetSkillSelection = SetSkillSelection,
     SetSkillHold = SetSkillHold,
     SetUnlockSkills = SetUnlockSkills,
@@ -305,10 +436,14 @@ return {
 }
 
 --[[ ============================================================================
+  ЗАКРЫТО в этом заходе (вычитано из артефакта):
+    owns (F5285), retire (F3455), valid (F3170), claim (F4419),
+    remaining (F5168), backoff (F5871), held (F1166), busy (F2775),
+    refused (F6399, строки "No player values" / "Not enough stamina",
+    REFUSAL_GAP = 0.35), игрок жив = bpm (F796: playerValues ~= nil и
+    Health > 0 и cKb[145]() ~= nil).
+
   НЕ ДОЧИТАНО (A):
-  1. cKb[77]["valid"] / ["owns"] / ["claim"] / ["refused"] / ["retire"] /
-     ["remaining"] / ["backoff"] / ["held"] / ["busy"] — тела (слоты в артефакте
-     определены как F-функции, см. строки 964-968 и 3320-3326).
   2. Выбор конкретного скилла внутри SkillStep: cKb[106]() даёт список,
      дальше фильтр по hold-настройкам (SetSkillHold F6286), приоритет и
      bnO(q9)/bny["timing"](q9) — временная логика перед кастом.
