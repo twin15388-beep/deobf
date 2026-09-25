@@ -45,6 +45,7 @@ python3 tools/prune_junk.py "ouroboros_ps2 (1).luau" \
         --out ouroboros_main_pruned.txt                              # движок без junk-состояний
 python3 tools/api_map.py ouroboros_main_pruned.txt data/api_map.json \
         --md API_MAP.md --compare ouwland_clean_main.lua             # публичный API -> F-слоты
+python3 tools/deflatten.py "ouroboros_ps2 (1).luau" --pool 1125      # функция из пула по индексу
 ```
 
 Формат де-flattened вывода: каждый state — это значение, которое проверяет диспетчер;

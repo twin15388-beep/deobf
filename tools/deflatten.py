@@ -30,6 +30,8 @@ import sys
 
 sys.path.insert(0, __file__.rsplit("/", 1)[0])
 import luaast  # noqa: E402
+import luascan  # noqa: E402
+import luaflat  # noqa: E402
 from inline_constants import build_function_legend, build_maps, find_aliases  # noqa: E402
 
 BIG = 10 ** 9
@@ -1066,6 +1068,40 @@ def main(path, argv):
                   % (target, len(text), len(machines), folded))
         else:
             print(text)
+        return
+    if "--pool" in argv:
+        slot = int(argv[argv.index("--pool") + 1])
+        toks = list(luaflat.tokenize(src))
+        alias = "cKb[136]"
+        if len(argv) > argv.index("--pool") + 2 and argv[argv.index("--pool") + 2].startswith("cKb"):
+            alias = argv[argv.index("--pool") + 2]
+        starts = [i + 1 for i in range(len(toks))
+                  if toks[i][1] == "="
+                  and "".join(t[1] for t in toks[max(0, i - 4):i]).endswith(alias)
+                  and i + 1 < len(toks) and toks[i + 1][1] == "{"]
+        fields = []
+        for start in starts:
+            end = luascan.table_end(toks, start)
+            fields.extend(luascan.scan_fields(toks, start, end))
+        if slot > len(fields):
+            print("pool has only %d fields" % len(fields))
+            return
+        key, raw, a, b = fields[slot - 1]
+        print("-- pool [%d] = %s" % (slot, raw[:120].replace("\n", " ")))
+        fl = Flattener(toks, entries, aliases)
+        parser = luaast.ExprAstParser(toks)
+        parser.i = a
+        try:
+            node = parser.parse_simple_expr()
+        except Exception as exc:                                 # noqa: BLE001
+            print("-- (could not parse: %s)" % exc)
+            return
+        if isinstance(node, luaast.FunctionExpr):
+            if node.params:
+                print("function(%s)" % ", ".join(node.params))
+            print("\n".join(fl.render_stmts(node.body, "  ", set())))
+        else:
+            print(fl.render(node))
         return
     if "--slot" in argv:
         slot = int(argv[argv.index("--slot") + 1])
