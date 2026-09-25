@@ -76,6 +76,7 @@ local function CastSkill(name, hold, session)              -- начало ша�
         bpz["AutoSkillStatus"] = "Skill controller unavailable"
         return false
     end
+    -- cKb[118] — проверка вызываемости (F5470); см. предупреждение в ouroboros_core.lua
     if not cKb[118](bno["SkillRunner"]["Attempt_Hold"]) then
         bpz["AutoSkillStatus"] = "Skill controller unavailable"
         return false
@@ -179,7 +180,7 @@ end
 -- ---------------------------------------------------------------------------
 -- ОСВОБОЖДЕНИЕ СКИЛЛА (cKb[77]["release"], строка 969) — до 3 попыток
 -- ---------------------------------------------------------------------------
-function skills["release"](record)                          -- cKb[77].release
+function skills.release(record)                          -- cKb[77].release
     if not record then return end
     if record["releasing"] then return end
     if not record["return ed"] then return end
@@ -279,7 +280,7 @@ end
 -- ---------------------------------------------------------------------------
 -- СБРОС (cKb[77]["reset"], F215) — вспомогательная заглушка под реконструкцию
 -- ---------------------------------------------------------------------------
-function skills["reset"]()
+function skills.reset()
     skills["count"] = 0
     skills["stall"] = nil
     skills["stallUntil"] = 0

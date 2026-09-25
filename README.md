@@ -58,3 +58,5 @@ python3 tools/deflatten.py "ouroboros_ps2 (1).luau" --pool 1125      # функ�
 - `ouroboros_farm.lua` — читаемый порт подсистемы фарма (D): реестр 24 контроллеров, лут/сундуки/души/схематики/квесты, арбитр приоритетов; карта — `data/D_MAP.md`.
 - `ouroboros_skills.lua` — читаемый порт подсистемы скиллов (A): запись каста, автокаст через `asGameScript(Attempt_Hold, имя, "")`, release в 3 попытки, сторож таймаута (CAST_GRACE=6), гейт «Holding off for auto parry»; константы CAST_MIN_GAP=0.2.
 - `ouroboros_combat.lua` — боевые твики и пороги убийства: таблица `tweaks` с дефолтами, `bpX` (Instant Kill по `killThreshold`), `boZ` (Chest Kill по `chestKillThreshold` + `CHEST_GUARD_RANGE`), тикер под флагом AntiAfk.
+- `ouroboros_core.lua` — общее ядро реконструкции: сервисы, кэш игровых модулей (`bno`), статусы (`bpz`), константы `cKb[141]`, арбитр приоритетов `cKb[54]`, реестр запусков `bny`, `Signal` (F651) и слот-карта `cKb`.
+- `tools/check_lua.sh` — проверка синтаксиса всех модулей настоящим компилятором Luau (инструкция по сборке внутри).

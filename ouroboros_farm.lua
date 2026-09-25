@@ -140,7 +140,9 @@ end
 -- Триггер промпта (cKb[69], строка 19540) — им берётся и лут, и сундуки, и души
 -- ---------------------------------------------------------------------------
 local function TriggerPrompt(prompt)                 -- cKb[69]
-    if not cKb[118](fireproximityprompt) then        -- функция доступна?
+    -- cKb[118]: в этой копии артефакта — проверка type(x)=="function" (F5470);
+    -- в другой копии тот же слот = F1959 «скрипт не выгружен». См. ouroboros_core.lua.
+    if not cKb[118](fireproximityprompt) then
         cKb[100]("fireproximityprompt")
         return false
     end
@@ -261,7 +263,7 @@ end
 -- СУНДУК — controllers["open"](chest, statusKey, cancel)
 --   (состояния S7535…S7566, строка 23125-ветка)
 -- ---------------------------------------------------------------------------
-function controllers["open"](chest, statusKey, cancel)
+function controllers.open(chest, statusKey, cancel)
     if chest:GetAttribute("ChestState") == "Locked" then                  -- S7536
         return false
     end

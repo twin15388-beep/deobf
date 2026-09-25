@@ -137,8 +137,9 @@ local function EquipBest()                                   -- cKb[83]
                 task.wait(0.35)                              -- пауза между слотами
             end
         end
+        -- в артефакте здесь проверяется флаг выхода (S4): прерываем обход слотов
+        if done then break end
     end
-    if done then break end
 
     -- 5.3 статус
     if equipped > 0 then
