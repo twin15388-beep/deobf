@@ -119,7 +119,9 @@ class Label(Node):
 
 
 class ExprStmt(Node):
-    pass
+    def __init__(self, start, end, expr):
+        super().__init__(start, end)
+        self.expr = expr
 
 
 class AstParser(luaflat.Parser):
@@ -281,7 +283,12 @@ class AstParser(luaflat.Parser):
 
         # expression statement / assignment / compound assignment
         s0 = self.i
-        self.parse_simple()
+        expr0 = None
+        try:                                 # keep the expression node for call rewriting
+            expr0 = self.parse_simple_expr()
+        except Exception:                    # noqa: BLE001 -- fall back to the skipper
+            self.i = s0
+            self.parse_simple()
         if self.val() in luaflat.COMPOUND:
             op = self.val()
             self.next()
@@ -300,7 +307,9 @@ class AstParser(luaflat.Parser):
                 if not self.accept(","):
                     break
             return Assign(start, self.i, targets, values)
-        return ExprStmt(start, self.i)
+        node = ExprStmt(start, self.i, expr0)
+        # a call may be followed by a method/index chain that parse_simple already ate
+        return node
 
     def span_of_condition(self):
         start = self.i

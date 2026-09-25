@@ -1,0 +1,2094 @@
+{
+ "settings": {
+  "51": {
+   "SchematicNames": 1823,
+   "SetSchematicTargets": 1267,
+   "SetSchematicReturn": 2078,
+   "CollectSchematics": 3068,
+   "StopSchematics": 2545,
+   "SetAutoLevel": 1521,
+   "SetLevelDropForeign": 672,
+   "SetAutoMob": 6089,
+   "SetAutoQuest": 5937,
+   "SetAutoBossHunt": 3652,
+   "SetHuntTiers": 1785,
+   "SetHuntDropForeign": 541,
+   "SetAutoDelivery": 275,
+   "SetAutoDemon": 6492,
+   "SetDemonMob": 5735,
+   "SetDemonDrink": 3996,
+   "SetDemonDropForeign": 4207,
+   "InDungeon": 2746,
+   "DungeonName": 1801,
+   "SetAutoDungeon": 4387,
+   "CardNames": 4629,
+   "SetAutoCards": 2182,
+   "SetAutoSkipWaves": 4369,
+   "SetCardSelection": 1759,
+   "SetBlockBareHands": 2258,
+   "SetForceHealCards": 1018,
+   "SetHealBelow": 5165,
+   "SetCardPriority": 776,
+   "SetAutoBringEnemies": 4058,
+   "SetBringRange": 5674,
+   "SetDungeonRange": 334,
+   "SetQuestSelection": 5050,
+   "QuestChoices": 5127,
+   "RefreshQuestChoices": 498,
+   "SetMobTarget": 6262,
+   "SetAutoBoss": 2450,
+   "SetBossSelection": 2510,
+   "SetAutoChest": 3785,
+   "SetChestTiers": 2199,
+   "SetAutoBreathing": 4551,
+   "SetBreathing": 1735,
+   "SetWenMob": 238,
+   "SetAutoSkillTree": 2053,
+   "SetSkillNodes": 6271,
+   "SetUnlockSkills": 5505,
+   "SetPositionType": 803,
+   "SetLookAtEnemy": 1078,
+   "SetOffsetDistance": 1329,
+   "SetHeightOffset": 5852,
+   "SetMovementMode": 1906,
+   "SetTweenSpeed": 2380,
+   "SetAutoSkills": 6333,
+   "SetSkillSelection": 3620,
+   "HoldSkills": 1669,
+   "SetSkillHold": 6286,
+   "SkillChoices": 544,
+   "RefreshSkillChoices": 5733,
+   "WeaponNames": 4529,
+   "RefreshWeapons": 6299,
+   "PotionNames": 174,
+   "ShopItemNames": 5836,
+   "SetAutoEquip": 5830,
+   "SetAutoPotion": 693,
+   "SetPotion": 4014,
+   "SetDrinkBelow": 2906,
+   "SetAutoBuy": 391,
+   "SetShopItems": 492,
+   "SetKeepAmount": 5340,
+   "BaitNames": 2547,
+   "SetAutoFish": 4964,
+   "TrainingNames": 593,
+   "TrainingModes": 5655,
+   "SetTrainings": 1931,
+   "SetTrainingMode": 4270,
+   "SetFishBait": 4321,
+   "SetAutoBuyBait": 3188,
+   "SetAutoBuyExp": 1162,
+   "SetExpBundles": 3509,
+   "SetPointReserve": 3182,
+   "RunPoints": 5438,
+   "ExpBundleCost": 5798,
+   "BuyExpNow": 5534,
+   "WebhookChannels": 2386,
+   "WebhookEventLabels": 918,
+   "SetWebhookEvents": 3562,
+   "ItemCategories": 5740,
+   "DefaultItemCategories": 6048,
+   "SetItemCategories": 845,
+   "SetWebhookUrl": 2025,
+   "SetWebhookInterval": 4506,
+   "SetWebhookEnabled": 3147,
+   "SetWebhookPingId": 4638,
+   "SetWebhookPing": 467,
+   "SetWebhookSkipQuiet": 711,
+   "WebhookStatus": 2468,
+   "WebhookChannelStatus": 6221,
+   "SetAutoParry": 3938,
+   "SetParryNpcs": 5967,
+   "SetParryPlayers": 3714,
+   "SetParryMitigate": 4482,
+   "SetParryHold": 6034,
+   "SetParryLead": 2812,
+   "SetParryRadius": 1736,
+   "ResetParryStats": 5094,
+   "SetNoStun": 5991,
+   "SetNoRagdoll": 6168,
+   "SetNoAttackSlowdown": 5934,
+   "SetInstantKill": 4760,
+   "SetChestInstantKill": 2680,
+   "SetChestKillThreshold": 6033,
+   "SetKillThreshold": 51,
+   "SetInfiniteStamina": 4483,
+   "SetInfiniteClimb": 2327,
+   "SetInfiniteHorseStamina": 787,
+   "SetNoDrown": 5927,
+   "SetDisableShiftLock": 4303,
+   "SetNoDashCooldown": 734,
+   "SetNoSunDamage": 127,
+   "SetAlwaysRun": 2206,
+   "SetOwnershipViewer": 3137,
+   "SetOwnershipRange": 841,
+   "SetNotification": 2592,
+   "SetNotifyBosses": 3264,
+   "SetNotifyWarn": 6606,
+   "TakeNotifications": 747,
+   "LastNotification": 6406,
+   "TeleportToNotification": 4809,
+   "EspCategories": 4574,
+   "SetEsp": 2344,
+   "SetEspRange": 5888,
+   "SetEspOption": 921,
+   "SetEspColour": 5085,
+   "SetEspCategory": 1594,
+   "SetEspDistance": 3742,
+   "TeleportToMuzan": 4994,
+   "ZoneNames": 6130,
+   "NpcNames": 5801,
+   "SetAutoLoot": 5861,
+   "SetLootRange": 2617,
+   "SetAutoSoul": 2208,
+   "SetSoulRange": 4068,
+   "InMenuPlace": 5539,
+   "GamemodeNames": 929,
+   "WorldNames": 5842,
+   "SetQueueModes": 2429,
+   "SetQueueRanked": 1985,
+   "SetQueueFill": 5969,
+   "SetAutoQueue": 4733,
+   "CancelQueue": 1277,
+   "SetWorld": 479,
+   "SetPrivateOwner": 944,
+   "SetAutoWorld": 2229,
+   "JoinWorld": 3270,
+   "EquipWeapon": 1125,
+   "CodeCooldown": 3027,
+   "AbandonQuest": 2125,
+   "MobNames": 2177,
+   "BossNames": 306,
+   "SkillNodes": 4215,
+   "RefreshSkillNodes": 708,
+   "PlayerSummary": 4476,
+   "QuestSummary": 3729,
+   "BreathingCost": 4597,
+   "resourceTick": 6007,
+   "set": 2412,
+   "bounds": 790,
+   "health": 675,
+   "hide": 163,
+   "tint": 4525,
+   "render": 5471,
+   "CRYSTAL_POSITION": 3022,
+   "remaining": 5168,
+   "backoff": 5871,
+   "held": 1166,
+   "owns": 5285,
+   "retire": 3455,
+   "claim": 4419,
+   "refused": 6399,
+   "valid": 3170,
+   "busy": 2775,
+   "reset": 215,
+   "step": 434,
+   "PriorityLabels": 1620,
+   "PriorityRows": 177,
+   "PriorityOrder": 1222,
+   "PriorityKeyFor": 3823,
+   "SetPriorityOrder": 5876,
+   "MovePriority": 5774,
+   "ResetPriorityOrder": 5339,
+   "SetPriorityPreempt": 3206,
+   "SetPriorityMode": 6236,
+   "BeginPriorityLoad": 3557,
+   "SettlePriority": 2301,
+   "PriorityActive": 3094,
+   "PriorityHolder": 6565,
+   "zonePoints": 5678,
+   "npcPoints": 4243,
+   "sortedKeys": 1775,
+   "isParty": 266,
+   "muzanPoint": 4839,
+   "applySlowdown": 84
+  },
+  "99": {
+   "setNoSun": 4261,
+   "applySlowdown": 84,
+   "isParty": 266,
+   "muzanPoint": 4839,
+   "zonePoints": 5678,
+   "npcPoints": 4243,
+   "sortedKeys": 1775,
+   "resourceTick": 6007
+  },
+  "77": {
+   "remaining": 5168,
+   "backoff": 5871,
+   "held": 1166,
+   "owns": 5285,
+   "retire": 3455,
+   "claim": 4419,
+   "refused": 6399,
+   "valid": 3170,
+   "busy": 2775,
+   "reset": 215,
+   "step": 434,
+   "resolvePunch": 1424,
+   "stamp": 3800,
+   "timing": 5500,
+   "skillState": 6199,
+   "ready": 739,
+   "cancelSkill": 1204
+  },
+  "123": {
+   "worldsModule": 1381,
+   "hudGridModule": 4206,
+   "queueSignal": 5195,
+   "queueWatcher": 5675,
+   "menuValidators": 2732,
+   "teleporter": 1198,
+   "gamemodeRows": 1522,
+   "gamemodeName": 494,
+   "worldRows": 6295,
+   "gamemodeAllowed": 6326,
+   "queuedSince": 6197,
+   "announceHudState": 3118,
+   "cancelQueue": 518,
+   "queueStep": 3085,
+   "worldStep": 2948,
+   "questCompleted": 3313,
+   "holdingWeapon": 2845,
+   "in Dungeon": 2807,
+   "playerValues": 1157,
+   "asGameScript": 358,
+   "toolBlocked": 2724,
+   "in MenuPlace": 4550
+  },
+  "111": {
+   "in MenuPlace": 4550
+  },
+  "148": {
+   "module": 80,
+   "regions": 428
+  },
+  "141": {
+   "controllerValid": 5972,
+   "stop": 2055,
+   "clearInputs": 5412,
+   "bring": 103,
+   "healGate": 2192,
+   "waves": 5803,
+   "FISHING_DOCK": 3022,
+   "MUZAN_LAIR": 3022,
+   "Zone": 2223,
+   "Current": 575,
+   "ValidUrl": 3761,
+   "UrlFor": 2239,
+   "Post": 1767,
+   "Drain": 249,
+   "Queued": 1917,
+   "Mention": 1751,
+   "Commas": 2334,
+   "Clock": 4751,
+   "Add": 2581,
+   "Delta": 3914,
+   "Drop": 1282,
+   "Gauge": 3431,
+   "Changed": 4284,
+   "ItemCategory": 6498,
+   "OnItem": 3660,
+   "BindItems": 1371,
+   "CardLabel": 4924,
+   "Sample": 5122,
+   "Counted": 5259,
+   "ActivityField": 4711,
+   "ItemField": 3155,
+   "CardField": 3110,
+   "Fields": 6228,
+   "Payload": 1178,
+   "S end": 1213,
+   "Running": 1072,
+   "Start": 6547,
+   "Stop": 3322,
+   "CRYSTAL_POSITION": 3022
+  },
+  "10": {
+   "props": 5461,
+   "owned": 2118
+  },
+  "54": {
+   "PriorityLabels": 1620,
+   "PriorityRows": 177,
+   "PriorityOrder": 1222,
+   "PriorityKeyFor": 3823,
+   "SetPriorityOrder": 5876,
+   "MovePriority": 5774,
+   "ResetPriorityOrder": 5339,
+   "SetPriorityPreempt": 3206,
+   "SetPriorityMode": 6236,
+   "BeginPriorityLoad": 3557,
+   "SettlePriority": 2301,
+   "PriorityActive": 3094,
+   "PriorityHolder": 6565,
+   "label": 6439,
+   "reindex": 408,
+   "setOrder": 2315,
+   "parse": 1192,
+   "serialize": 2895,
+   "move": 3593,
+   "rankOf": 1821,
+   "want": 1615,
+   "do ne": 4374,
+   "wanted": 5439,
+   "blocked": 1705,
+   "contended": 4184,
+   "commit": 5075,
+   "uncommit": 970,
+   "committed": 514,
+   "turn": 4290
+  },
+  "55": {
+   "holdingWeapon": 2845
+  },
+  "35": {
+   "Fresh": 2197,
+   "FISHING_DOCK": 3022,
+   "Zone": 2223,
+   "Current": 575,
+   "ValidUrl": 3761,
+   "UrlFor": 2239,
+   "Post": 1767,
+   "Drain": 249,
+   "Queued": 1917,
+   "Mention": 1751,
+   "Commas": 2334,
+   "Clock": 4751,
+   "Add": 2581,
+   "Delta": 3914,
+   "Drop": 1282,
+   "Gauge": 3431,
+   "Changed": 4284,
+   "ItemCategory": 6498,
+   "OnItem": 3660,
+   "BindItems": 1371,
+   "CardLabel": 4924,
+   "Sample": 5122,
+   "Counted": 5259,
+   "ActivityField": 4711,
+   "ItemField": 3155,
+   "CardField": 3110,
+   "Fields": 6228,
+   "Payload": 1178,
+   "S end": 1213,
+   "Running": 1072,
+   "Start": 6547,
+   "Stop": 3322
+  },
+  "102": {
+   "module": 80,
+   "regions": 428,
+   "SchematicNames": 1823,
+   "SetSchematicTargets": 1267,
+   "SetSchematicReturn": 2078,
+   "CollectSchematics": 3068,
+   "StopSchematics": 2545,
+   "SetAutoLevel": 1521,
+   "SetLevelDropForeign": 672,
+   "SetAutoMob": 6089,
+   "SetAutoQuest": 5937,
+   "SetAutoBossHunt": 3652,
+   "SetHuntTiers": 1785,
+   "SetHuntDropForeign": 541,
+   "SetAutoDelivery": 275,
+   "SetAutoDemon": 6492,
+   "SetDemonMob": 5735,
+   "SetDemonDrink": 3996,
+   "SetDemonDropForeign": 4207,
+   "InDungeon": 2746,
+   "DungeonName": 1801,
+   "SetAutoDungeon": 4387,
+   "CardNames": 4629,
+   "SetAutoCards": 2182,
+   "SetAutoSkipWaves": 4369,
+   "SetCardSelection": 1759,
+   "SetBlockBareHands": 2258,
+   "SetForceHealCards": 1018,
+   "SetHealBelow": 5165,
+   "SetCardPriority": 776,
+   "SetAutoBringEnemies": 4058,
+   "SetBringRange": 5674,
+   "SetDungeonRange": 334,
+   "SetQuestSelection": 5050,
+   "QuestChoices": 5127,
+   "RefreshQuestChoices": 498,
+   "SetMobTarget": 6262,
+   "SetAutoBoss": 2450,
+   "SetBossSelection": 2510,
+   "SetAutoChest": 3785,
+   "SetChestTiers": 2199,
+   "SetAutoBreathing": 4551,
+   "SetBreathing": 1735,
+   "SetWenMob": 238,
+   "SetAutoSkillTree": 2053,
+   "SetSkillNodes": 6271,
+   "SetUnlockSkills": 5505,
+   "SetPositionType": 803,
+   "SetLookAtEnemy": 1078,
+   "SetOffsetDistance": 1329,
+   "SetHeightOffset": 5852,
+   "SetMovementMode": 1906,
+   "SetTweenSpeed": 2380,
+   "SetAutoSkills": 6333,
+   "SetSkillSelection": 3620,
+   "HoldSkills": 1669,
+   "SetSkillHold": 6286,
+   "SkillChoices": 544,
+   "RefreshSkillChoices": 5733,
+   "WeaponNames": 4529,
+   "RefreshWeapons": 6299,
+   "PotionNames": 174,
+   "ShopItemNames": 5836,
+   "SetAutoEquip": 5830,
+   "SetAutoPotion": 693,
+   "SetPotion": 4014,
+   "SetDrinkBelow": 2906,
+   "SetAutoBuy": 391,
+   "SetShopItems": 492,
+   "SetKeepAmount": 5340,
+   "BaitNames": 2547,
+   "SetAutoFish": 4964,
+   "TrainingNames": 593,
+   "TrainingModes": 5655,
+   "SetTrainings": 1931,
+   "SetTrainingMode": 4270,
+   "SetFishBait": 4321,
+   "SetAutoBuyBait": 3188,
+   "SetAutoBuyExp": 1162,
+   "SetExpBundles": 3509,
+   "SetPointReserve": 3182,
+   "RunPoints": 5438,
+   "ExpBundleCost": 5798,
+   "BuyExpNow": 5534,
+   "WebhookChannels": 2386,
+   "WebhookEventLabels": 918,
+   "SetWebhookEvents": 3562,
+   "ItemCategories": 5740,
+   "DefaultItemCategories": 6048,
+   "SetItemCategories": 845,
+   "SetWebhookUrl": 2025,
+   "SetWebhookInterval": 4506,
+   "SetWebhookEnabled": 3147,
+   "SetWebhookPingId": 4638,
+   "SetWebhookPing": 467,
+   "SetWebhookSkipQuiet": 711,
+   "WebhookStatus": 2468,
+   "WebhookChannelStatus": 6221,
+   "SetAutoParry": 3938,
+   "SetParryNpcs": 5967,
+   "SetParryPlayers": 3714,
+   "SetParryMitigate": 4482,
+   "SetParryHold": 6034,
+   "SetParryLead": 2812,
+   "SetParryRadius": 1736,
+   "ResetParryStats": 5094,
+   "SetNoStun": 5991,
+   "SetNoRagdoll": 6168,
+   "SetNoAttackSlowdown": 5934,
+   "SetInstantKill": 4760,
+   "SetChestInstantKill": 2680,
+   "SetChestKillThreshold": 6033,
+   "SetKillThreshold": 51,
+   "SetInfiniteStamina": 4483,
+   "SetInfiniteClimb": 2327,
+   "SetInfiniteHorseStamina": 787,
+   "SetNoDrown": 5927,
+   "SetDisableShiftLock": 4303,
+   "SetNoDashCooldown": 734,
+   "SetNoSunDamage": 127,
+   "SetAlwaysRun": 2206,
+   "SetOwnershipViewer": 3137,
+   "SetOwnershipRange": 841,
+   "SetNotification": 2592,
+   "SetNotifyBosses": 3264,
+   "SetNotifyWarn": 6606,
+   "TakeNotifications": 747,
+   "LastNotification": 6406,
+   "TeleportToNotification": 4809,
+   "EspCategories": 4574,
+   "SetEsp": 2344,
+   "SetEspRange": 5888,
+   "SetEspOption": 921,
+   "SetEspColour": 5085,
+   "SetEspCategory": 1594,
+   "SetEspDistance": 3742,
+   "TeleportToMuzan": 4994,
+   "ZoneNames": 6130,
+   "NpcNames": 5801,
+   "SetAutoLoot": 5861,
+   "SetLootRange": 2617,
+   "SetAutoSoul": 2208,
+   "SetSoulRange": 4068,
+   "InMenuPlace": 5539,
+   "GamemodeNames": 929,
+   "WorldNames": 5842,
+   "SetQueueModes": 2429,
+   "SetQueueRanked": 1985,
+   "SetQueueFill": 5969,
+   "SetAutoQueue": 4733,
+   "CancelQueue": 1277,
+   "SetWorld": 479,
+   "SetPrivateOwner": 944,
+   "SetAutoWorld": 2229,
+   "JoinWorld": 3270,
+   "EquipWeapon": 1125,
+   "CodeCooldown": 3027,
+   "AbandonQuest": 2125,
+   "MobNames": 2177,
+   "BossNames": 306,
+   "SkillNodes": 4215,
+   "RefreshSkillNodes": 708,
+   "PlayerSummary": 4476,
+   "QuestSummary": 3729,
+   "BreathingCost": 4597,
+   "worldsModule": 1381,
+   "hudGridModule": 4206,
+   "queueSignal": 5195,
+   "queueWatcher": 5675,
+   "menuValidators": 2732,
+   "teleporter": 1198,
+   "gamemodeRows": 1522,
+   "gamemodeName": 494,
+   "worldRows": 6295,
+   "gamemodeAllowed": 6326,
+   "queuedSince": 6197,
+   "announceHudState": 3118,
+   "cancelQueue": 518,
+   "queueStep": 3085,
+   "worldStep": 2948
+  },
+  "26": {
+   "set": 2412
+  },
+  "139": {
+   "RotationType": 1269
+  },
+  "100": {
+   "in Dungeon": 2807,
+   "playerValues": 1157,
+   "asGameScript": 358,
+   "toolBlocked": 2724
+  },
+  "112": {
+   "clear": 1060
+  },
+  "91": {
+   "isOpened": 138,
+   "bossIds": 2849,
+   "isBoss": 5531,
+   "bossNearby": 3467,
+   "questCompleted": 3313
+  },
+  "117": {
+   "MUZAN_LAIR": 3022
+  },
+  "147": {
+   "camera": 5089,
+   "container": 6613,
+   "newFrame": 4132,
+   "newLabel": 2752,
+   "line": 5265,
+   "anchorPart": 5538,
+   "add": 4872,
+   "bossNames": 4162,
+   "refreshAnyOn": 1243
+  },
+  "92": {
+   "clear": 3998,
+   "set": 1038,
+   "setCategory": 2736,
+   "setOption": 2727,
+   "setColour": 5502,
+   "setDistance": 5622
+  },
+  "126": {
+   "Players": 4167,
+   "ReplicatedStorage": 4167,
+   "RunService": 4167,
+   "UserInputService": 4167,
+   "VirtualUser": 4167,
+   "HttpService": 4167,
+   "GuiService": 4167,
+   "CoreGui": 4167,
+   "CollectionService": 4167,
+   "TweenService": 4167,
+   "TeleportService": 4167,
+   "Lighting": 4167,
+   "Workspace": 4167
+  }
+ },
+ "script_keys": {
+  "51": [
+   "AbandonQuest",
+   "BaitNames",
+   "BeginPriorityLoad",
+   "BossNames",
+   "BuyExpNow",
+   "CancelQueue",
+   "CardNames",
+   "CodeCooldown",
+   "CollectSchematics",
+   "DefaultItemCategories",
+   "DungeonName",
+   "GamemodeNames",
+   "HoldSkills",
+   "InDungeon",
+   "InMenuPlace",
+   "ItemCategories",
+   "JoinWorld",
+   "MobNames",
+   "MovePriority",
+   "NpcNames",
+   "PotionNames",
+   "PriorityHolder",
+   "PriorityLabels",
+   "PriorityOrder",
+   "PriorityRows",
+   "QuestChoices",
+   "RedeemAllCodes",
+   "RefreshQuestChoices",
+   "RefreshSkillChoices",
+   "RefreshSkillNodes",
+   "RefreshWeapons",
+   "ResetParryStats",
+   "ResetPriorityOrder",
+   "SchematicNames",
+   "SendWebhookReport",
+   "SetAlwaysRun",
+   "SetAutoBoss",
+   "SetAutoBossHunt",
+   "SetAutoBreathing",
+   "SetAutoBringEnemies",
+   "SetAutoBuy",
+   "SetAutoBuyBait",
+   "SetAutoBuyExp",
+   "SetAutoCards",
+   "SetAutoChest",
+   "SetAutoDelivery",
+   "SetAutoDemon",
+   "SetAutoDungeon",
+   "SetAutoEquip",
+   "SetAutoFish",
+   "SetAutoLevel",
+   "SetAutoLoot",
+   "SetAutoMob",
+   "SetAutoParry",
+   "SetAutoPotion",
+   "SetAutoQuest",
+   "SetAutoQueue",
+   "SetAutoSkillTree",
+   "SetAutoSkills",
+   "SetAutoSkipWaves",
+   "SetAutoSoul",
+   "SetAutoTraining",
+   "SetAutoWorld",
+   "SetBlockBareHands",
+   "SetBossSelection",
+   "SetBreathing",
+   "SetBringRange",
+   "SetCardPriority",
+   "SetCardSelection",
+   "SetChestInstantKill",
+   "SetChestKillThreshold",
+   "SetChestTiers",
+   "SetDemonDrink",
+   "SetDemonDropForeign",
+   "SetDemonMob",
+   "SetDisableShiftLock",
+   "SetDrinkBelow",
+   "SetDungeonRange",
+   "SetEspCategory",
+   "SetEspColour",
+   "SetEspOption",
+   "SetEspRange",
+   "SetExpBundles",
+   "SetFishBait",
+   "SetForceHealCards",
+   "SetHealBelow",
+   "SetHeightOffset",
+   "SetHuntDropForeign",
+   "SetHuntTiers",
+   "SetInfiniteClimb",
+   "SetInfiniteHorseStamina",
+   "SetInfiniteStamina",
+   "SetInstantKill",
+   "SetItemCategories",
+   "SetKeepAmount",
+   "SetKillThreshold",
+   "SetLevelDropForeign",
+   "SetLookAtEnemy",
+   "SetLootRange",
+   "SetMobTarget",
+   "SetMovementMode",
+   "SetNoAttackSlowdown",
+   "SetNoDashCooldown",
+   "SetNoDrown",
+   "SetNoRagdoll",
+   "SetNoStun",
+   "SetNoSunDamage",
+   "SetNotification",
+   "SetNotifyBosses",
+   "SetNotifyWarn",
+   "SetOffsetDistance",
+   "SetOwnershipRange",
+   "SetOwnershipViewer",
+   "SetParryHold",
+   "SetParryLead",
+   "SetParryMitigate",
+   "SetParryNpcs",
+   "SetParryPlayers",
+   "SetParryRadius",
+   "SetPointReserve",
+   "SetPositionType",
+   "SetPotion",
+   "SetPriorityMode",
+   "SetPriorityOrder",
+   "SetPriorityPreempt",
+   "SetPrivateOwner",
+   "SetQuestSelection",
+   "SetQueueFill",
+   "SetQueueModes",
+   "SetQueueRanked",
+   "SetSchematicReturn",
+   "SetSchematicTargets",
+   "SetShopItems",
+   "SetSkillHold",
+   "SetSkillNodes",
+   "SetSkillSelection",
+   "SetSoulRange",
+   "SetTrainingMode",
+   "SetTrainings",
+   "SetTweenSpeed",
+   "SetUnlockSkills",
+   "SetWeapon",
+   "SetWebhookEnabled",
+   "SetWebhookEvents",
+   "SetWebhookInterval",
+   "SetWebhookPing",
+   "SetWebhookPingId",
+   "SetWebhookSkipQuiet",
+   "SetWebhookUrl",
+   "SetWenMob",
+   "SetWorld",
+   "SettlePriority",
+   "ShopItemNames",
+   "SkillChoices",
+   "SkillNodes",
+   "StopSchematics",
+   "TeleportToMob",
+   "TeleportToMuzan",
+   "TeleportToNotification",
+   "TeleportToNpc",
+   "TeleportToZone",
+   "Track",
+   "TrainingModes",
+   "TrainingNames",
+   "WeaponNames",
+   "WebhookChannelStatus",
+   "WebhookChannels",
+   "WebhookEventLabels",
+   "WebhookStatus",
+   "WorldNames",
+   "ZoneNames"
+  ],
+  "99": [
+   "Track",
+   "npcPoints",
+   "sortedKeys",
+   "zonePoints"
+  ],
+  "123": [
+   "asGameScript",
+   "closeOnNpc",
+   "holdingWeapon",
+   "in MenuPlace",
+   "playerValues",
+   "questCompleted",
+   "reachNpc"
+  ],
+  "102": [
+   "gamemodeRows",
+   "module",
+   "worldRows"
+  ],
+  "77": [
+   "claim",
+   "owns",
+   "refused",
+   "release",
+   "retire",
+   "valid"
+  ],
+  "54": [
+   "blocked",
+   "commit",
+   "contended",
+   "do ne",
+   "in terrupt",
+   "label",
+   "rankOf",
+   "setOrder",
+   "turn",
+   "uncommit"
+  ],
+  "10": [
+   "Track",
+   "owned",
+   "props"
+  ],
+  "157": [
+   "RefreshQuestChoices",
+   "RefreshSkillChoices",
+   "RefreshSkillNodes",
+   "RefreshWeapons",
+   "Track"
+  ],
+  "91": [
+   "setOrder"
+  ],
+  "35": [
+   "Fresh",
+   "Track"
+  ],
+  "26": [
+   "Track"
+  ],
+  "88": [
+   "Track"
+  ],
+  "4": [
+   "npcPoints",
+   "sortedKeys",
+   "zonePoints"
+  ],
+  "141": [
+   "gamemodeRows",
+   "worldRows"
+  ],
+  "120": [
+   "Track"
+  ],
+  "67": [
+   "Track"
+  ]
+ },
+ "slot_names": {
+  "1823": [
+   "SchematicNames"
+  ],
+  "1267": [
+   "SetSchematicTargets"
+  ],
+  "2078": [
+   "SetSchematicReturn"
+  ],
+  "3068": [
+   "CollectSchematics"
+  ],
+  "2545": [
+   "StopSchematics"
+  ],
+  "1521": [
+   "SetAutoLevel"
+  ],
+  "672": [
+   "SetLevelDropForeign"
+  ],
+  "6089": [
+   "SetAutoMob"
+  ],
+  "5937": [
+   "SetAutoQuest"
+  ],
+  "3652": [
+   "SetAutoBossHunt"
+  ],
+  "1785": [
+   "SetHuntTiers"
+  ],
+  "541": [
+   "SetHuntDropForeign"
+  ],
+  "275": [
+   "SetAutoDelivery"
+  ],
+  "6492": [
+   "SetAutoDemon"
+  ],
+  "5735": [
+   "SetDemonMob"
+  ],
+  "3996": [
+   "SetDemonDrink"
+  ],
+  "4207": [
+   "SetDemonDropForeign"
+  ],
+  "2746": [
+   "InDungeon"
+  ],
+  "1801": [
+   "DungeonName"
+  ],
+  "4387": [
+   "SetAutoDungeon"
+  ],
+  "4629": [
+   "CardNames"
+  ],
+  "2182": [
+   "SetAutoCards"
+  ],
+  "4369": [
+   "SetAutoSkipWaves"
+  ],
+  "1759": [
+   "SetCardSelection"
+  ],
+  "2258": [
+   "SetBlockBareHands"
+  ],
+  "1018": [
+   "SetForceHealCards"
+  ],
+  "5165": [
+   "SetHealBelow"
+  ],
+  "776": [
+   "SetCardPriority"
+  ],
+  "4058": [
+   "SetAutoBringEnemies"
+  ],
+  "5674": [
+   "SetBringRange"
+  ],
+  "334": [
+   "SetDungeonRange"
+  ],
+  "5050": [
+   "SetQuestSelection"
+  ],
+  "5127": [
+   "QuestChoices"
+  ],
+  "498": [
+   "RefreshQuestChoices"
+  ],
+  "6262": [
+   "SetMobTarget"
+  ],
+  "2450": [
+   "SetAutoBoss"
+  ],
+  "2510": [
+   "SetBossSelection"
+  ],
+  "3785": [
+   "SetAutoChest"
+  ],
+  "2199": [
+   "SetChestTiers"
+  ],
+  "4551": [
+   "SetAutoBreathing"
+  ],
+  "1735": [
+   "SetBreathing"
+  ],
+  "238": [
+   "SetWenMob"
+  ],
+  "2053": [
+   "SetAutoSkillTree"
+  ],
+  "6271": [
+   "SetSkillNodes"
+  ],
+  "5505": [
+   "SetUnlockSkills"
+  ],
+  "803": [
+   "SetPositionType"
+  ],
+  "1078": [
+   "SetLookAtEnemy"
+  ],
+  "1329": [
+   "SetOffsetDistance"
+  ],
+  "5852": [
+   "SetHeightOffset"
+  ],
+  "1906": [
+   "SetMovementMode"
+  ],
+  "2380": [
+   "SetTweenSpeed"
+  ],
+  "6333": [
+   "SetAutoSkills"
+  ],
+  "3620": [
+   "SetSkillSelection"
+  ],
+  "1669": [
+   "HoldSkills"
+  ],
+  "6286": [
+   "SetSkillHold"
+  ],
+  "544": [
+   "SkillChoices"
+  ],
+  "5733": [
+   "RefreshSkillChoices"
+  ],
+  "4529": [
+   "WeaponNames"
+  ],
+  "6299": [
+   "RefreshWeapons"
+  ],
+  "174": [
+   "PotionNames"
+  ],
+  "5836": [
+   "ShopItemNames"
+  ],
+  "5830": [
+   "SetAutoEquip"
+  ],
+  "693": [
+   "SetAutoPotion"
+  ],
+  "4014": [
+   "SetPotion"
+  ],
+  "2906": [
+   "SetDrinkBelow"
+  ],
+  "391": [
+   "SetAutoBuy"
+  ],
+  "492": [
+   "SetShopItems"
+  ],
+  "5340": [
+   "SetKeepAmount"
+  ],
+  "2547": [
+   "BaitNames"
+  ],
+  "4964": [
+   "SetAutoFish"
+  ],
+  "593": [
+   "TrainingNames"
+  ],
+  "5655": [
+   "TrainingModes"
+  ],
+  "1931": [
+   "SetTrainings"
+  ],
+  "4270": [
+   "SetTrainingMode"
+  ],
+  "4321": [
+   "SetFishBait"
+  ],
+  "3188": [
+   "SetAutoBuyBait"
+  ],
+  "1162": [
+   "SetAutoBuyExp"
+  ],
+  "3509": [
+   "SetExpBundles"
+  ],
+  "3182": [
+   "SetPointReserve"
+  ],
+  "5438": [
+   "RunPoints"
+  ],
+  "5798": [
+   "ExpBundleCost"
+  ],
+  "5534": [
+   "BuyExpNow"
+  ],
+  "2386": [
+   "WebhookChannels"
+  ],
+  "918": [
+   "WebhookEventLabels"
+  ],
+  "3562": [
+   "SetWebhookEvents"
+  ],
+  "5740": [
+   "ItemCategories"
+  ],
+  "6048": [
+   "DefaultItemCategories"
+  ],
+  "845": [
+   "SetItemCategories"
+  ],
+  "2025": [
+   "SetWebhookUrl"
+  ],
+  "4506": [
+   "SetWebhookInterval"
+  ],
+  "3147": [
+   "SetWebhookEnabled"
+  ],
+  "4638": [
+   "SetWebhookPingId"
+  ],
+  "467": [
+   "SetWebhookPing"
+  ],
+  "711": [
+   "SetWebhookSkipQuiet"
+  ],
+  "2468": [
+   "WebhookStatus"
+  ],
+  "6221": [
+   "WebhookChannelStatus"
+  ],
+  "3938": [
+   "SetAutoParry"
+  ],
+  "5967": [
+   "SetParryNpcs"
+  ],
+  "3714": [
+   "SetParryPlayers"
+  ],
+  "4482": [
+   "SetParryMitigate"
+  ],
+  "6034": [
+   "SetParryHold"
+  ],
+  "2812": [
+   "SetParryLead"
+  ],
+  "1736": [
+   "SetParryRadius"
+  ],
+  "5094": [
+   "ResetParryStats"
+  ],
+  "5991": [
+   "SetNoStun"
+  ],
+  "6168": [
+   "SetNoRagdoll"
+  ],
+  "5934": [
+   "SetNoAttackSlowdown"
+  ],
+  "4760": [
+   "SetInstantKill"
+  ],
+  "2680": [
+   "SetChestInstantKill"
+  ],
+  "6033": [
+   "SetChestKillThreshold"
+  ],
+  "51": [
+   "SetKillThreshold"
+  ],
+  "4483": [
+   "SetInfiniteStamina"
+  ],
+  "2327": [
+   "SetInfiniteClimb"
+  ],
+  "787": [
+   "SetInfiniteHorseStamina"
+  ],
+  "5927": [
+   "SetNoDrown"
+  ],
+  "4303": [
+   "SetDisableShiftLock"
+  ],
+  "734": [
+   "SetNoDashCooldown"
+  ],
+  "127": [
+   "SetNoSunDamage"
+  ],
+  "2206": [
+   "SetAlwaysRun"
+  ],
+  "3137": [
+   "SetOwnershipViewer"
+  ],
+  "841": [
+   "SetOwnershipRange"
+  ],
+  "2592": [
+   "SetNotification"
+  ],
+  "3264": [
+   "SetNotifyBosses"
+  ],
+  "6606": [
+   "SetNotifyWarn"
+  ],
+  "747": [
+   "TakeNotifications"
+  ],
+  "6406": [
+   "LastNotification"
+  ],
+  "4809": [
+   "TeleportToNotification"
+  ],
+  "4574": [
+   "EspCategories"
+  ],
+  "2344": [
+   "SetEsp"
+  ],
+  "5888": [
+   "SetEspRange"
+  ],
+  "921": [
+   "SetEspOption"
+  ],
+  "5085": [
+   "SetEspColour"
+  ],
+  "1594": [
+   "SetEspCategory"
+  ],
+  "3742": [
+   "SetEspDistance"
+  ],
+  "4994": [
+   "TeleportToMuzan"
+  ],
+  "6130": [
+   "ZoneNames"
+  ],
+  "5801": [
+   "NpcNames"
+  ],
+  "5861": [
+   "SetAutoLoot"
+  ],
+  "2617": [
+   "SetLootRange"
+  ],
+  "2208": [
+   "SetAutoSoul"
+  ],
+  "4068": [
+   "SetSoulRange"
+  ],
+  "5539": [
+   "InMenuPlace"
+  ],
+  "929": [
+   "GamemodeNames"
+  ],
+  "5842": [
+   "WorldNames"
+  ],
+  "2429": [
+   "SetQueueModes"
+  ],
+  "1985": [
+   "SetQueueRanked"
+  ],
+  "5969": [
+   "SetQueueFill"
+  ],
+  "4733": [
+   "SetAutoQueue"
+  ],
+  "1277": [
+   "CancelQueue"
+  ],
+  "479": [
+   "SetWorld"
+  ],
+  "944": [
+   "SetPrivateOwner"
+  ],
+  "2229": [
+   "SetAutoWorld"
+  ],
+  "3270": [
+   "JoinWorld"
+  ],
+  "1125": [
+   "EquipWeapon"
+  ],
+  "3027": [
+   "CodeCooldown"
+  ],
+  "2125": [
+   "AbandonQuest"
+  ],
+  "2177": [
+   "MobNames"
+  ],
+  "306": [
+   "BossNames"
+  ],
+  "4215": [
+   "SkillNodes"
+  ],
+  "708": [
+   "RefreshSkillNodes"
+  ],
+  "4476": [
+   "PlayerSummary"
+  ],
+  "3729": [
+   "QuestSummary"
+  ],
+  "4597": [
+   "BreathingCost"
+  ],
+  "4261": [
+   "setNoSun"
+  ],
+  "5168": [
+   "remaining"
+  ],
+  "5871": [
+   "backoff"
+  ],
+  "1166": [
+   "held"
+  ],
+  "5285": [
+   "owns"
+  ],
+  "3455": [
+   "retire"
+  ],
+  "4419": [
+   "claim"
+  ],
+  "6399": [
+   "refused"
+  ],
+  "3170": [
+   "valid"
+  ],
+  "2775": [
+   "busy"
+  ],
+  "215": [
+   "reset"
+  ],
+  "1204": [
+   "cancelSkill"
+  ],
+  "434": [
+   "step"
+  ],
+  "4941": [
+   "status"
+  ],
+  "4008": [
+   "field"
+  ],
+  "1381": [
+   "worldsModule"
+  ],
+  "4206": [
+   "hudGridModule"
+  ],
+  "5195": [
+   "queueSignal"
+  ],
+  "5675": [
+   "queueWatcher"
+  ],
+  "2732": [
+   "menuValidators"
+  ],
+  "1198": [
+   "teleporter"
+  ],
+  "4550": [
+   "inMenuPlace"
+  ],
+  "1522": [
+   "gamemodeRows"
+  ],
+  "494": [
+   "gamemodeName"
+  ],
+  "6295": [
+   "worldRows"
+  ],
+  "6326": [
+   "gamemodeAllowed"
+  ],
+  "6197": [
+   "queuedSince"
+  ],
+  "3118": [
+   "announceHudState"
+  ],
+  "518": [
+   "cancelQueue"
+  ],
+  "3085": [
+   "queueStep"
+  ],
+  "2948": [
+   "worldStep"
+  ],
+  "1384": [
+   "enabled"
+  ],
+  "3872": [
+   "push"
+  ],
+  "5660": [
+   "fresh"
+  ],
+  "3503": [
+   "timedVendor"
+  ],
+  "130": [
+   "rotatingShop"
+  ],
+  "6354": [
+   "schedule"
+  ],
+  "5929": [
+   "clock"
+  ],
+  "3152": [
+   "names"
+  ],
+  "44": [
+   "vendorModel"
+  ],
+  "2354": [
+   "bossWatch"
+  ],
+  "4743": [
+   "muzanWatch"
+  ],
+  "6032": [
+   "marketWatch"
+  ],
+  "1694": [
+   "tailorWatch"
+  ],
+  "828": [
+   "selectionWatch"
+  ],
+  "3434": [
+   "huntWatch"
+  ],
+  "4230": [
+   "step"
+  ],
+  "5250": [
+   "sync"
+  ],
+  "80": [
+   "module"
+  ],
+  "428": [
+   "regions"
+  ],
+  "5972": [
+   "controllerValid"
+  ],
+  "2055": [
+   "stop"
+  ],
+  "5412": [
+   "clearInputs"
+  ],
+  "534": [
+   "Front"
+  ],
+  "4272": [
+   "Below"
+  ],
+  "4166": [
+   "Side"
+  ],
+  "6602": [
+   "Behind"
+  ],
+  "3125": [
+   "Inside"
+  ],
+  "5956": [
+   "Above"
+  ],
+  "2903": [
+   "Orbit"
+  ],
+  "5461": [
+   "props"
+  ],
+  "2118": [
+   "owned"
+  ],
+  "816": [
+   "folder"
+  ],
+  "3008": [
+   "prompt"
+  ],
+  "4795": [
+   "value"
+  ],
+  "5048": [
+   "overlay"
+  ],
+  "2572": [
+   "part"
+  ],
+  "3475": [
+   "screen"
+  ],
+  "4901": [
+   "tap"
+  ],
+  "653": [
+   "Pushups"
+  ],
+  "2097": [
+   "Meditation"
+  ],
+  "4458": [
+   "Squat"
+  ],
+  "2162": [
+   "Boulder Split"
+  ],
+  "5090": [
+   "Target Shooting"
+  ],
+  "1306": [
+   "touchGoal"
+  ],
+  "2041": [
+   "pushPlan"
+  ],
+  "1593": [
+   "boulder"
+  ],
+  "5755": [
+   "finish"
+  ],
+  "4672": [
+   "Text"
+  ],
+  "2092": [
+   "Text",
+   "label"
+  ],
+  "1620": [
+   "PriorityLabels"
+  ],
+  "177": [
+   "PriorityRows"
+  ],
+  "1222": [
+   "PriorityOrder"
+  ],
+  "3823": [
+   "PriorityKeyFor"
+  ],
+  "5876": [
+   "SetPriorityOrder"
+  ],
+  "5774": [
+   "MovePriority"
+  ],
+  "5339": [
+   "ResetPriorityOrder"
+  ],
+  "3206": [
+   "SetPriorityPreempt"
+  ],
+  "6236": [
+   "SetPriorityMode"
+  ],
+  "3557": [
+   "BeginPriorityLoad"
+  ],
+  "2301": [
+   "SettlePriority"
+  ],
+  "3094": [
+   "PriorityActive"
+  ],
+  "6565": [
+   "PriorityHolder"
+  ],
+  "2845": [
+   "holdingWeapon"
+  ],
+  "84": [
+   "applySlowdown"
+  ],
+  "6439": [
+   "label"
+  ],
+  "408": [
+   "reindex"
+  ],
+  "2315": [
+   "setOrder"
+  ],
+  "1192": [
+   "parse"
+  ],
+  "2895": [
+   "serialize"
+  ],
+  "3593": [
+   "move"
+  ],
+  "1821": [
+   "rankOf"
+  ],
+  "1615": [
+   "want"
+  ],
+  "4374": [
+   "done"
+  ],
+  "5439": [
+   "wanted"
+  ],
+  "1705": [
+   "blocked"
+  ],
+  "4184": [
+   "contended"
+  ],
+  "5075": [
+   "commit"
+  ],
+  "970": [
+   "uncommit"
+  ],
+  "514": [
+   "committed"
+  ],
+  "4290": [
+   "turn"
+  ],
+  "2197": [
+   "Fresh"
+  ],
+  "3070": [
+   "offers"
+  ],
+  "261": [
+   "canClaim"
+  ],
+  "2253": [
+   "denial"
+  ],
+  "2254": [
+   "active"
+  ],
+  "6151": [
+   "target"
+  ],
+  "6280": [
+   "wanted"
+  ],
+  "6615": [
+   "reward"
+  ],
+  "2699": [
+   "claim"
+  ],
+  "5742": [
+   "step"
+  ],
+  "2217": [
+   "settings"
+  ],
+  "3180": [
+   "number"
+  ],
+  "4921": [
+   "attribute"
+  ],
+  "5152": [
+   "owns"
+  ],
+  "3941": [
+   "reputation"
+  ],
+  "6575": [
+   "inLair"
+  ],
+  "5008": [
+   "inCombat"
+  ],
+  "2974": [
+   "night"
+  ],
+  "636": [
+   "phaseIn"
+  ],
+  "4742": [
+   "promptIn"
+  ],
+  "5724": [
+   "questNode"
+  ],
+  "3251": [
+   "hold"
+  ],
+  "5079": [
+   "useTool"
+  ],
+  "2936": [
+   "putBack"
+  ],
+  "646": [
+   "roam"
+  ],
+  "4583": [
+   "sweep"
+  ],
+  "608": [
+   "route"
+  ],
+  "4440": [
+   "remember"
+  ],
+  "3735": [
+   "muzanRoute"
+  ],
+  "3440": [
+   "muzan"
+  ],
+  "5920": [
+   "named"
+  ],
+  "1679": [
+   "nearestLily"
+  ],
+  "595": [
+   "getBell"
+  ],
+  "465": [
+   "ringBell"
+  ],
+  "3617": [
+   "askMuzan"
+  ],
+  "1320": [
+   "workQuest"
+  ],
+  "493": [
+   "drinkBlood"
+  ],
+  "3305": [
+   "step"
+  ],
+  "103": [
+   "bring"
+  ],
+  "2192": [
+   "healGate"
+  ],
+  "5803": [
+   "waves"
+  ],
+  "2412": [
+   "set"
+  ],
+  "790": [
+   "bounds"
+  ],
+  "675": [
+   "health"
+  ],
+  "163": [
+   "hide"
+  ],
+  "4525": [
+   "tint"
+  ],
+  "5471": [
+   "render"
+  ],
+  "1578": [
+   "rod"
+  ],
+  "3313": [
+   "questCompleted"
+  ],
+  "4508": [
+   "waterAt"
+  ],
+  "5486": [
+   "castPoint"
+  ],
+  "4693": [
+   "ours"
+  ],
+  "6044": [
+   "bobber"
+  ],
+  "2046": [
+   "catch"
+  ],
+  "1972": [
+   "cast"
+  ],
+  "1424": [
+   "resolvePunch"
+  ],
+  "3800": [
+   "stamp"
+  ],
+  "5500": [
+   "timing"
+  ],
+  "6199": [
+   "skillState"
+  ],
+  "739": [
+   "ready"
+  ],
+  "2807": [
+   "inDungeon"
+  ],
+  "1157": [
+   "playerValues"
+  ],
+  "358": [
+   "asGameScript"
+  ],
+  "2724": [
+   "toolBlocked"
+  ],
+  "1060": [
+   "clear"
+  ],
+  "266": [
+   "isParty"
+  ],
+  "4839": [
+   "muzanPoint"
+  ],
+  "6007": [
+   "resourceTick"
+  ],
+  "4744": [
+   "invalidate"
+  ],
+  "288": [
+   "step"
+  ],
+  "6287": [
+   "reset"
+  ],
+  "138": [
+   "isOpened"
+  ],
+  "2849": [
+   "bossIds"
+  ],
+  "5531": [
+   "isBoss"
+  ],
+  "482": [
+   "afterKill"
+  ],
+  "3467": [
+   "bossNearby"
+  ],
+  "2223": [
+   "Zone"
+  ],
+  "575": [
+   "Current"
+  ],
+  "3761": [
+   "ValidUrl"
+  ],
+  "2239": [
+   "UrlFor"
+  ],
+  "1767": [
+   "Post"
+  ],
+  "249": [
+   "Drain"
+  ],
+  "1917": [
+   "Queued"
+  ],
+  "1751": [
+   "Mention"
+  ],
+  "2334": [
+   "Commas"
+  ],
+  "4751": [
+   "Clock"
+  ],
+  "2581": [
+   "Add"
+  ],
+  "3914": [
+   "Delta"
+  ],
+  "1282": [
+   "Drop"
+  ],
+  "3431": [
+   "Gauge"
+  ],
+  "4284": [
+   "Changed"
+  ],
+  "6498": [
+   "ItemCategory"
+  ],
+  "3660": [
+   "OnItem"
+  ],
+  "1371": [
+   "BindItems"
+  ],
+  "4924": [
+   "CardLabel"
+  ],
+  "5122": [
+   "Sample"
+  ],
+  "5259": [
+   "Counted"
+  ],
+  "4711": [
+   "ActivityField"
+  ],
+  "3155": [
+   "ItemField"
+  ],
+  "3110": [
+   "CardField"
+  ],
+  "6228": [
+   "Fields"
+  ],
+  "1178": [
+   "Payload"
+  ],
+  "1213": [
+   "Send"
+  ],
+  "1072": [
+   "Running"
+  ],
+  "6547": [
+   "Start"
+  ],
+  "3322": [
+   "Stop"
+  ],
+  "673": [
+   "points"
+  ],
+  "657": [
+   "price"
+  ],
+  "4692": [
+   "locked"
+  ],
+  "1275": [
+   "affordable"
+  ],
+  "3832": [
+   "prompt"
+  ],
+  "2406": [
+   "crystalPoint"
+  ],
+  "2971": [
+   "step"
+  ],
+  "5089": [
+   "camera"
+  ],
+  "6613": [
+   "container"
+  ],
+  "4132": [
+   "newFrame"
+  ],
+  "2752": [
+   "newLabel"
+  ],
+  "5265": [
+   "line"
+  ],
+  "3998": [
+   "clear"
+  ],
+  "5538": [
+   "anchorPart"
+  ],
+  "4872": [
+   "add"
+  ],
+  "4162": [
+   "bossNames"
+  ],
+  "1243": [
+   "refreshAnyOn"
+  ],
+  "1038": [
+   "set"
+  ],
+  "2736": [
+   "setCategory"
+  ],
+  "2727": [
+   "setOption"
+  ],
+  "5502": [
+   "setColour"
+  ],
+  "5622": [
+   "setDistance"
+  ],
+  "5678": [
+   "zonePoints"
+  ],
+  "4243": [
+   "npcPoints"
+  ],
+  "1775": [
+   "sortedKeys"
+  ]
+ }
+}

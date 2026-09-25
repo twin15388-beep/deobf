@@ -170,12 +170,16 @@ class Flattener:
         return pretty(text)
 
     def _inline(self, text):
-        text = re.sub(r"cKb\s*\[\s*136\s*\]\s*\[\s*(\d+\.?\d*)\s*\]",
-                      lambda m: self.entries[int(float(m.group(1))) - 1], text)
+        """Replace pool reads with the value they hold (exact index map)."""
+        def lit(m):
+            literal = pool_literal(int(float(m.group(1))))
+            return literal if literal is not None else m.group(0)
+
+        text = re.sub(r"cKb\s*\[\s*136\.?\s*\]\s*\[\s*(\d+\.?\d*)\s*\]", lit, text)
         if self.aliases:
-            alt = "|".join(re.escape(a) for a in self.aliases)
-            text = re.sub(r"\b(?:" + alt + r")\s*\[\s*(\d+\.?\d*)\s*\]",
-                          lambda m: self.entries[int(float(m.group(1))) - 1], text)
+            alt = "|".join(re.escape(a) for a in sorted(self.aliases, key=len, reverse=True))
+            text = re.sub(r"(?<![A-Za-z0-9_.])(?:" + alt
+                          + r")\s*\[\s*(\d+\.?\d*)\s*\]", lit, text)
         return text
 
     # -- machine discovery -------------------------------------------------
@@ -404,8 +408,11 @@ class Flattener:
             inner = self.const_literal(node.operand)
             return None if inner is None else -inner
         idx = self.pool_index(node)
-        if idx is not None and 1 <= idx <= len(self.entries):
-            return as_number(self.entries[idx - 1])
+        if idx is not None:
+            value = load_pool().get(str(idx))
+            if isinstance(value, (int, float)) and not isinstance(value, bool):
+                return value
+            return None
         # fall back to the rendered text: pool aliases declared in other scopes still inline
         text = flat(self.render(node))
         if re.fullmatch(r"-?\d+\.?\d*", text):
@@ -656,11 +663,65 @@ class Flattener:
         return verdict
 
     # -- statement rendering (expands nested machines, folds opaque predicates)
-    def statement_value(self, st):
-        """The single value expression of an Assign/Local/Return statement, if literal."""
-        if isinstance(st, (luaast.Assign, luaast.Local)) and len(st.values if isinstance(st, luaast.Assign) else st.exprs) == 1:
-            return (st.values if isinstance(st, luaast.Assign) else st.exprs)[0]
+    def reparse_rhs(self, st):
+        """Parse a statement's right-hand side on its own.
+
+        Parsing the whole artifact in one pass drifts on very large blocks, which
+        makes value nodes disagree with their own token span; a local re-parse from
+        the `=` token is cheap and exact.
+        """
+        depth = 0
+        for i in range(st.start, min(st.end, len(self.toks))):
+            text = self.toks[i][1]
+            if text in ("(", "[", "{"):
+                depth += 1
+            elif text in (")", "]", "}"):
+                depth -= 1
+            elif text == "=" and depth == 0:
+                parser = luaast.ExprAstParser(self.toks)
+                parser.i = i + 1
+                for parse in (parser.parse_simple_expr, parser.parse_expr):
+                    try:
+                        return parse()
+                    except Exception:                            # noqa: BLE001
+                        continue
+                return None
         return None
+
+    def statement_value(self, st):
+        """The single value expression of an Assign/Local statement."""
+        if isinstance(st, luaast.Assign):
+            if len(st.values) != 1:
+                return None
+            return self.reparse_rhs(st) or st.values[0]
+        if isinstance(st, luaast.Local) and len(st.exprs) == 1:
+            return self.reparse_rhs(st) or st.exprs[0]
+        return None
+
+    def render_call_expanded(self, call, indent, seen):
+        """Render a call whose arguments include function literals, expanding bodies.
+
+        `task.spawn(function() ... end)` and friends hide flattened machines inside
+        call arguments; without this they would be printed as one unreadable line.
+        """
+        funcs = [a for a in call.args if isinstance(a, luaast.FunctionExpr)]
+        if not funcs:
+            return None
+        if isinstance(call, luaast.MethodCall):
+            head = "%s:%s" % (flat(self.render(call.obj)), call.method)
+        else:
+            head = flat(self.render(call.func))
+        lines = ["%s%s(" % (indent, head)]
+        for pos, arg in enumerate(call.args):
+            comma = "," if pos + 1 < len(call.args) else ""
+            if isinstance(arg, luaast.FunctionExpr):
+                lines.append("%s    function(%s)" % (indent, ", ".join(arg.params)))
+                lines.extend(self.render_stmts(arg.body, indent + "        ", seen))
+                lines.append("%s    end%s" % (indent, comma))
+            else:
+                lines.append("%s    %s%s" % (indent, flat(self.render(arg)), comma))
+        lines.append("%s)" % indent)
+        return lines
 
     def render_stmts(self, block, indent, seen_machines=None, verdicts=None):
         if verdicts:
@@ -774,12 +835,30 @@ class Flattener:
                     out.append("%s-- [dropped helper: %s]" % (indent, target))
                     i += 1
                     continue
+                if isinstance(value, (luaast.Call, luaast.MethodCall)) \
+                        and isinstance(getattr(value, "args", None), list) \
+                        and any(isinstance(a, luaast.FunctionExpr) for a in value.args):
+                    expanded = self.render_call_expanded(value, indent + "    ", seen_machines)
+                    if expanded is not None:
+                        text = flat(self.render(st))
+                        head = text[:text.find("=") + 1] if "=" in text else ""
+                        expanded[0] = "%s%s %s" % (indent, head,
+                                                   expanded[0].strip() or "")
+                        out.extend(expanded)
+                        i += 1
+                        continue
                 if isinstance(value, luaast.FunctionExpr):
                     lhs = self.render(st)[:self.render(st).find("function")]
                     out.append("%s%send" % (indent, ""))
                     out[-1] = "%s%sfunction(%s)" % (indent, lhs, ", ".join(value.params))
                     out.extend(self.render_stmts(value.body, indent + "    ", seen_machines))
                     out.append(indent + "end")
+                    i += 1
+                    continue
+            if isinstance(st, luaast.ExprStmt) and isinstance(st.expr, luaast.Call):
+                expanded = self.render_call_expanded(st.expr, indent, seen_machines)
+                if expanded is not None:
+                    out.extend(expanded)
                     i += 1
                     continue
             built = self.build_machine(stmts, i, "nested%d" % i)

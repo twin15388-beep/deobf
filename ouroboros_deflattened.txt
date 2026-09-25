@@ -465,7 +465,7 @@
   -- opaque predicate reduced to its real condition
 -- state S2315
   cq4 = false
-  for aGL, aGM in ipairs (cqY:GetChildren ()) do
+  for aGL, aGM in F4813 (cqY:GetChildren ()) do
       -- nested state machine (pc=cq3, entry=2)
           -- state S<1
             --> if cqY:IsA ("Model") then goto 6
@@ -479,7 +479,7 @@
             --> if not (cqY) then goto 4
           -- state S3
             cra = false
-            for aGO, aGP in ipairs (cqY:GetChildren ()) do
+            for aGO, aGP in F4813 (cqY:GetChildren ()) do
                 -- nested state machine (pc=cq9, entry=4)
                     -- state S<1
                       cra = true
@@ -532,8 +532,8 @@
   return bD0
   --> RETURN
 -- state S>=14813
-  local cKd = coroutine ["running"]
-  bD_ = bny ["runs"] [coroutine.running ()]
+  local cKd = F3109 ["running"]
+  bD_ = bny ["runs"] [F5473 ()]
   bD0 = bD_  ~= nil
   --> if bD0 then goto 14811
   --> if not (bD0) then goto 14812
@@ -577,7 +577,7 @@
   --> if not (bwZ) then goto 4704
 -- state S4703
   bw1 = false
-  for iE, iF in ipairs (bwY:GetChildren ()) do
+  for iE, iF in F4813 (bwY:GetChildren ()) do
       -- nested state machine (pc=bw0, entry=5)
           -- state S<1
             bwY = bwZ
@@ -585,7 +585,7 @@
             --> if not (bwY) then goto 6
           -- state S1
             bw7 = false
-            for iJ, iK in ipairs (bwY:GetChildren ()) do
+            for iJ, iK in F4813 (bwY:GetChildren ()) do
                 -- nested state machine (pc=bw6, entry=6)
                     -- state S<1
                       bw7 = true
@@ -681,7 +681,7 @@
   bsJ = bnm
   bsR = false
   -- (constant pool alias cKg)
-  for bX, bY in ipairs (bS) do
+  for bX, bY in F4813 (bS) do
       -- nested state machine (pc=bsQ, entry=4)
           -- state S<1
             bsJ = bsK
@@ -815,7 +815,7 @@
   bTb = cKb [91] ["BringController"] ["range"]
   bTc = 0
   bTm = false
-  for Nd, Ne in ipairs (boo ()) do
+  for Nd, Ne in F4813 (boo ()) do
       -- nested state machine (pc=bTl, entry=11)
           -- state S<1
             --> if bTg then goto 4
@@ -824,7 +824,7 @@
             bTe = (bTd ["Position"] - bTa) ["Magnitude"] < =  bTb
             --> goto 7
           -- state S2
-            bTe, bTf = pcall (isnetworkowner, bTd)
+            bTe, bTf = F2175 (isnetworkowner, bTd)
             bTg = bTe
             --> if bTg then goto 6
             --> if not (bTg) then goto 0  (outside dispatcher -> EXIT)
@@ -959,7 +959,7 @@
   aza ["healthBack"] ["Visible"] = false
   aza ["healthFill"] ["Visible"] = false
   ck2 = false
-  for azb, azc in ipairs (aza ["lines"]) do
+  for azb, azc in F4813 (aza ["lines"]) do
       -- nested state machine (pc=ck1, entry=1)
           -- state S<1
             --> EXIT
@@ -986,7 +986,7 @@
 -- state S9470
   csW = {}
   cs1 = false
-  for aIL, aIM in ipairs (cKb [54] ["or der"]) do
+  for aIL, aIM in F4813 (cKb [54] ["or der"]) do
       -- nested state machine (pc=cs0, entry=None)
           -- state S<1
             csZ = csX [cKl [1441]] [cKl [4817]] == true
@@ -1070,8 +1070,8 @@
 -- state S8214
   -- (constant pool alias cKm)
   bn8 ("EquipBait", b6n)
-  local cKn = task ["wait"]
-  task.wait (0.4)
+  local cKn = F6128 ["wait"]
+  F3916 (0.4)
   --> goto 8215
 -- state S8215
   --> goto 8243
@@ -1199,7 +1199,7 @@
   --> if not (not byk) then goto 4772
 -- state S4772
   byr = false
-  for kd, ke in ipairs (byk:GetChildren ()) do
+  for kd, ke in F4813 (byk:GetChildren ()) do
       -- nested state machine (pc=byq, entry=3)
           -- state S<1
             byl = byk:FindFirstChild (j8)
@@ -1323,8 +1323,55 @@
 -- state S1328
   -- (constant pool alias cKr)
   cKb [35] ["Draining"] = true
-  local cKs = task ["spawn"]
-  task.spawn (function () local b7s, b7u, b7v, b7w = nil, nil, nil, nil; local b7t = nil; b7t = 8; while true do b7t = 13372 - b7t; do if b7t < 13368 then if b7t < 13365 then if b7t < 13363 then break else if b7t < 13364 then b7t = 5 else b7t = 5 end else if b7t < 13367 then if b7t < 13366 then if b7t == 13365 then cKb [35] ["Draining"] = false; b7t = 2 else b7t = 3122; continue end else if b7t == 13366 then b7t = 7 else b7t = 13371; continue end else b7t = if true then 0 else 7 end else if b7t < 13371 then if b7t < 13369 then local cKt = cKb; local cKu = cKt [136]; b7s = table.remove (cKt [35] ["Queue"], 1); cKt [35] ["Post"] (b7s ["url"], b7s ["payload"]); local cKv = task ["wait"]; task.wait (1.2); b7t = 9 else if b7t < 13370 then b7s = # cKb [35] ["Queue"] > 0; b7t = 1 else break end else if b7t < 13726 then if b7t < 13372 then if b7t == 13371 then local cKu = cKb [136]; b7w = if b7s then 1 else 0; b7u = 43*b7w + 1562*(1 - b7w); b7v = 3476*b7w + 2491*(1 - b7w); b7t = if (b7u*153 + b7v*866 + b7u*b7v) % 16777213 == 3166263 then 4 else 6 else b7t = 3122; continue end else if b7t == 13372 then b7s = (bnB ()); b7t = if b7s then 3 else 1 else b7t = 9854; continue end else break end end end end)
+  local cKs = F6128 ["spawn"]
+  F3374(
+      function()
+          -- nested state machine (pc=b7t, entry=13364)
+              -- state S<13363
+                --> EXIT
+              -- state S13363
+                --> goto 13367
+              -- state S13364
+                --> goto 13367
+              -- state S13365
+                cKb [35] ["Draining"] = false
+                --> goto 13370
+              -- state S13366
+                --> goto 13365
+              -- state S13367
+                --> if true then goto 13372
+                --> if not (true) then goto 13365
+              -- state S13368
+                local cKt = cKb
+                local cKu = cKt [136]
+                b7s = table.remove (cKt [35] ["Queue"], 1)
+                cKt [35] ["Post"] (b7s ["url"], b7s ["payload"])
+                local cKv = F6128 ["wait"]
+                F3916 (1.2)
+                --> goto 13363
+              -- state S13369
+                b7s = # cKb [35] ["Queue"] > 0
+                --> goto 13371
+              -- state S13370
+                --> EXIT
+              -- state S13371
+                -- (constant pool alias cKu)
+                -- [dropped obfuscation helper: b7w = if b7s then 1 else 0]
+                -- [dropped obfuscation helper: b7u = 43*b7w + 1562*(1 - b7w)]
+                -- [dropped obfuscation helper: b7v = 3476*b7w + 2491*(1 - b7w)]
+                --> if b7s then goto 13368
+                --> if not (b7s) then goto 13366
+                -- opaque predicate reduced to its real condition
+              -- state S13372
+                b7s = (bnB ())
+                --> if b7s then goto 13369
+                --> if not (b7s) then goto 13371
+              -- state S13373..13725
+                --> goto 3518  (outside dispatcher -> EXIT)
+              -- state S>=13726
+                --> EXIT
+      end
+  )
   --> goto 1326  (outside dispatcher -> EXIT)
 -- state S1329
   return
@@ -1379,7 +1426,7 @@
   cmh = cmg
   --> goto 3965
 -- state S3964
-  cme, cmf = pcall (cKb [126] ["IsFriendsWith"], cKb [126], aAL ["UserId"])
+  cme, cmf = F2175 (cKb [126] ["IsFriendsWith"], cKb [126], aAL ["UserId"])
   cmg = cmf == true
   cmh = cme
   --> if cmh then goto 3963
@@ -1570,7 +1617,7 @@
   cBM = {}
   cBQ = false
   -- (constant pool alias cKy)
-  for aUA, aUB in ipairs (cKb [141] ["BOSS_NAMES"]) do
+  for aUA, aUB in F4813 (cKb [141] ["BOSS_NAMES"]) do
       -- nested state machine (pc=cBP, entry=0)
           -- state S<1
             --> if not cBM [cBU] then goto 1
@@ -1591,7 +1638,7 @@
       end
   end
   cBW = false
-  for aUD, aUE in ipairs (cKb [59] ()) do
+  for aUD, aUE in F4813 (cKb [59] ()) do
       -- nested state machine (pc=cBV, entry=5)
           -- state S<1
             cBN = not cBM [cB_ ["folder"] ["Name"]]
@@ -1750,7 +1797,7 @@
 -- state S<4717
   --> EXIT
 -- state S4717
-  brW, brY = pcall (getthreadidentity)
+  brW, brY = F2175 (getthreadidentity)
   brZ = brW
   --> if brZ then goto 4734
   --> if not (brZ) then goto 4724
@@ -1775,7 +1822,7 @@
   --> goto 4718
 -- state S4723
   -- (constant pool alias cKB)
-  brW = table.pack (pcall (aG, .. .))
+  brW = table.pack (F2175 (aG, .. .))
   -- [dropped obfuscation helper: br2 = if brV then 1 else 0]
   -- [dropped obfuscation helper: br0 = 2283*br2 + 2987*(1 - br2)]
   -- [dropped obfuscation helper: br1 = 2373*br2 + 4064*(1 - br2)]
@@ -1820,7 +1867,7 @@
   --> if brW then goto 4728
   --> if not (brW) then goto 4727
 -- state S4733
-  pcall (brV, brY)
+  F2175 (brV, brY)
   --> goto 4731
 -- state S4734
   brZ = brY
@@ -1828,7 +1875,7 @@
 -- state S4735
   --> EXIT
 -- state S4736
-  pcall (brV, 2)
+  F2175 (brV, 2)
   --> goto 4723
 -- state S4737..14300
   --> EXIT
@@ -1949,7 +1996,7 @@
   --> if not (not bzW) then goto 1232
 -- state S1226
   bz1 = false
-  for mg, mh in ipairs (cKb [141] ["SLOT_NAMES"]) do
+  for mg, mh in F4813 (cKb [141] ["SLOT_NAMES"]) do
       -- nested state machine (pc=bz0, entry=0)
           -- state S<1
             bzY = bzX:FindFirstChild (bz5)
@@ -2018,7 +2065,7 @@
   -- (constant pool alias cKF)
   table.clear (cKb [54] ["rank"])
   bIc = false
-  for ye, yf in ipairs (cKb [54] ["or der"]) do
+  for ye, yf in F4813 (cKb [54] ["or der"]) do
       -- nested state machine (pc=bIb, entry=1)
           -- state S<1
             bIc = true
@@ -2046,7 +2093,7 @@
   --> EXIT
 -- state S15358
   bzR = false
-  for l2, l3 in ipairs (bzO:GetChildren ()) do
+  for l2, l3 in F4813 (bzO:GetChildren ()) do
       -- nested state machine (pc=bzQ, entry=1)
           -- state S<1
             bzR = true
@@ -2236,7 +2283,7 @@
   bDM = bDN + bDO (bDP, bDL) + 0.05
   bDL = false
   bDS = false
-  for rr, rs in ipairs (cKb [77] ["skills"]) do
+  for rr, rs in F4813 (cKb [77] ["skills"]) do
       -- nested state machine (pc=bDR, entry=9)
           -- state S<1
             --> if bDN then goto 11
@@ -2325,7 +2372,7 @@
   --> if not (b3w) then goto 8404
 -- state S8390
   -- (constant pool alias cKI)
-  pcall (bqA, cKb [91] ["PotionController"] ["potion"])
+  F2175 (bqA, cKb [91] ["PotionController"] ["potion"])
   bpY ("AutoPotion")
   --> goto 8408
 -- state S8391
@@ -2346,9 +2393,9 @@
   --> if not (b3x) then goto 8402
   -- opaque predicate reduced to its real condition
 -- state S8395
-  local cKJ = task ["wait"]
+  local cKJ = F6128 ["wait"]
   -- (constant pool alias cKI)
-  task.wait (0.2)
+  F3916 (0.2)
   b3v + = 0.2
   --> goto 8388
 -- state S8396
@@ -2432,7 +2479,12 @@
   --> goto 1647
 -- state S1644
   -- (constant pool alias cKK)
-  bRA = cKb [13] (function () return cKb [91] ["DemonController"] ["in Lair"] () end, 12)
+  bRA= cKb[13](
+          function()
+              return cKb [91] ["DemonController"] ["in Lair"] ()
+          end,
+          12
+      )
   cKb [91] ["DemonController"] ["putBack"] ()
   bRB = bRA
   --> if bRB then goto 1642
@@ -2470,8 +2522,8 @@
 -- state S1652
   -- (constant pool alias cKK)
   bpz ["MaxHealth"] = "Waiting to leave combat"
-  local cKL = task ["wait"]
-  task.wait (2)
+  local cKL = F6128 ["wait"]
+  F3916 (2)
   return
   --> RETURN
 -- state S1653
@@ -2588,7 +2640,33 @@
   --> if not (bSv) then goto 12113
 -- state S12107
   -- (constant pool alias cKP)
-  bSv = cKb [13] (function () local bSr, bSs, bSt = nil, nil, nil; local bSu = nil; bSu = 2; while true do bSu = 1838 - bSu; do if bSu < 2200 then if bSu < 1836 then if bSu < 1835 then break else if bSu == 1835 then return bSt else bSu = 337; continue end else if bSu < 1837 then if bSu == 1836 then bSr = cKb [29] (); local cKQ = cKb [136]; bSs = bSr == "Hybrid"; bSt = bSr == "Demon"; bSu = if bSt then 3 else 0 else bSu = 1835; continue end else if bSu < 1838 then break else if bSu == 1838 then bSt = bSs; bSu = 3 else break end else break end end end end, cKb [91] ["DemonController"] ["number"] ("TransformCutsceneAt", 3) + 5)
+  bSv= cKb[13](
+          function()
+              -- nested state machine (pc=bSu, entry=1836)
+                  -- state S<1835
+                    --> EXIT
+                  -- state S1835
+                    return bSt
+                    --> RETURN
+                  -- state S1836
+                    bSr = cKb [29] ()
+                    -- (constant pool alias cKQ)
+                    bSs = bSr == "Hybrid"
+                    bSt = bSr == "Demon"
+                    --> if bSt then goto 1835
+                    --> if not (bSt) then goto 1838
+                  -- state S1837
+                    --> EXIT
+                  -- state S1838
+                    bSt = bSs
+                    --> goto 1835
+                  -- state S1839..2199
+                    --> EXIT
+                  -- state S>=2200
+                    --> EXIT
+          end,
+          cKb[91]["DemonController"]["number"]("TransformCutsceneAt",3)+5
+      )
   cKb [91] ["DemonController"] ["putBack"] ()
   bSw = bSv
   --> if bSw then goto 12105
@@ -2598,8 +2676,8 @@
 -- state S12109
   -- (constant pool alias cKP)
   bpz ["MaxHealth"] = "Waiting to leave combat"
-  local cKR = task ["wait"]
-  task.wait (2)
+  local cKR = F6128 ["wait"]
+  F3916 (2)
   return
   --> RETURN
 -- state S12110
@@ -2632,7 +2710,7 @@
   --> EXIT
 -- state S15585
   co7 = false
-  for aEF, aEG in ipairs (bpz ["GamemodeCache"]) do
+  for aEF, aEG in F4813 (bpz ["GamemodeCache"]) do
       -- nested state machine (pc=co6, entry=4)
           -- state S<1
             return cpb ["name"]
@@ -2757,7 +2835,7 @@
   --> if cpJ then goto 14165
   --> if not (cpJ) then goto 14163
 -- state S14162
-  return pcall (cpI ["ToServer"], "Cancel")
+  return F2175 (cpI ["ToServer"], "Cancel")
   --> RETURN
 -- state S14163
   cpJ = not cKb [118] (cpI ["ToServer"])
@@ -2842,11 +2920,16 @@
 -- state S4135
   bRs = bRt
   cKb [69] (bRs)
-  local cKZ = task ["wait"]
+  local cKZ = F6128 ["wait"]
   -- (constant pool alias cKY)
-  task.wait (1)
+  F3916 (1)
   bn8 ("MuzanGiveBell")
-  bRr = cKb [13] (function () return cKb [91] ["DemonController"] ["owns"] ("Biwa Bell") end, 6)
+  bRr= cKb[13](
+          function()
+              return cKb [91] ["DemonController"] ["owns"] ("Biwa Bell")
+          end,
+          6
+      )
   bn8 ("NpcTalking", "Ended")
   bRs = bRr
   --> if bRs then goto 4140
@@ -2854,8 +2937,8 @@
 -- state S4136
   -- (constant pool alias cKY)
   bpz ["MaxHealth"] = "Asking Muzan for the bell"
-  local cK_ = Vector3 ["new"]
-  bqd (bRr:GetPivot () ["Position"] + Vector3.new (0, 2, 4), 0.4, bmO (cKb [91] ["DemonController"]))
+  local cK_ = F3022 ["new"]
+  bqd (bRr:GetPivot () ["Position"] + F4803 (0, 2, 4), 0.4, bmO (cKb [91] ["DemonController"]))
   --> if cKb [91] ["DemonController"] ["stopped"] then goto 4132
   --> if not (cKb [91] ["DemonController"] ["stopped"]) then goto 4129
 -- state S4137
@@ -2897,8 +2980,8 @@
 -- state S4145
   -- (constant pool alias cKY)
   bpz ["MaxHealth"] = bRt
-  local cK0 = task ["wait"]
-  task.wait (2)
+  local cK0 = F6128 ["wait"]
+  F3916 (2)
   return
   --> RETURN
 -- state S4146
@@ -2916,9 +2999,9 @@
 -- state S4149
   --> goto 4136
 -- state S4150
-  local cK1 = Vector3 ["new"]
+  local cK1 = F3022 ["new"]
   -- (constant pool alias cKY)
-  bqd (bRr:GetPivot () ["Position"] + Vector3.new (0, 2, 4), 0.3, bmO (cKb [91] ["DemonController"]))
+  bqd (bRr:GetPivot () ["Position"] + F4803 (0, 2, 4), 0.3, bmO (cKb [91] ["DemonController"]))
   --> if cKb [91] ["DemonController"] ["stopped"] then goto 4152
   --> if not (cKb [91] ["DemonController"] ["stopped"]) then goto 4131
 -- state S4151
@@ -3000,7 +3083,7 @@
   bPP = {}
   bPU = false
   -- (constant pool alias cK2)
-  for I0, I1 in pairs (bPQ) do
+  for I0, I1 in F2602 (bPQ) do
       -- nested state machine (pc=bPT, entry=3)
           -- state S<1
             bPP [# bPP + 1] = bPW
@@ -3028,7 +3111,7 @@
   end
   table.sort (bPP)
   bP_ = false
-  for I3, I4 in ipairs (bPP) do
+  for I3, I4 in F4813 (bPP) do
       -- nested state machine (pc=bPZ, entry=1)
           -- state S<1
             bP_ = true
@@ -3068,7 +3151,7 @@
   bHY = os ["time"] ()
   bHZ = true
   bH2 = false
-  for xU, xV in ipairs (bHT) do
+  for xU, xV in F4813 (bHT) do
       -- nested state machine (pc=bH1, entry=2)
           -- state S<1
             --> goto 10
@@ -3091,8 +3174,8 @@
             --> if bHT then goto 3
             --> if not (bHT) then goto 18
           -- state S7
-            local cK4 = task ["wait"]
-            task.wait (cKb [141] ["CODE_GAP"])
+            local cK4 = F6128 ["wait"]
+            F3916 (cKb [141] ["CODE_GAP"])
             --> goto 17
           -- state S8
             --> goto 9
@@ -3193,7 +3276,7 @@
 -- state S9710
   b3O = false
   b3W = false
-  for acZ in pairs (cKb [91] ["ShopController"] ["items"]) do
+  for acZ in F2602 (cKb [91] ["ShopController"] ["items"]) do
       -- nested state machine (pc=b3V, entry=2)
           -- state S<1
             --> EXIT
@@ -3230,9 +3313,9 @@
   --> if not b3P then goto 9724
   --> if not (not b3P) then goto 9726
 -- state S9714
-  local cK8 = task ["wait"]
+  local cK8 = F6128 ["wait"]
   -- (constant pool alias cK7)
-  task.wait (0.25)
+  F3916 (0.25)
   b3O + = 0.25
   --> goto 9715
 -- state S9715
@@ -3270,7 +3353,70 @@
   --> EXIT
 -- state S9726
   -- (constant pool alias cK7)
-  pcall (function () local b3C, b3E, b3F, b3G, b3I, b3J, b3K, b3M = nil, nil, nil, nil, nil, nil, nil, nil; local b3D = nil; b3D = 0; while true do b3D = 11014 - b3D; do if b3D < 11205 then if b3D < 11014 then break else if b3D == 11014 then b3C = {}; b3F = false; local cK9 = cKb; local cLa = cK9 [136]; for ac8 in cLa [2602] (cK9 [91] [cLa [1067]] [cLa [1100]]) do b3G = ac8; local b3H = b3G; local b3E = nil; b3E = cLa [6629]; while true do if b3E < 1 then break else if b3E < 2 then b3C [# b3C + cLa [6629]] = b3H; b3E = cLa [466] else b3F = true; b3E = cLa [466] end end; if b3F then break end end; table.sort (b3C); b3J = false; for ac9, ada in cLa [4813] (b3C) do b3K = ac9; b3M = ada; local b3L = b3K; local b3N = b3M; local b3I = nil; b3I = cLa [5291]; while true do if b3I < 3 then if b3I < 1 then b3I = if cK9 [121] (b3N) < cK9 [91] [cLa [1067]] [cLa [4720]] then cLa [4093] else cLa [6629] else if b3I < 2 then b3I = cLa [1355] else b3I = if not bny [cLa [6637]] (cK9 [91] [cLa [1067]]) then cLa [1219] else cLa [466] end else if b3I < 5 then if b3I < 4 then break else bqc (b3N, cK9 [91] [cLa [1067]] [cLa [4720]]); return end else if b3I < 6 then return else b3J = true; b3I = cLa [1355] end end; if b3J then break end end; bpz [cLa [5807]] = cLa [6352]; b3D = 1 else break end else break end end end end)
+  F2175(
+      function()
+          -- nested state machine (pc=b3D, entry=11014)
+              -- state S<11014
+                --> EXIT
+              -- state S11014
+                b3C = {}
+                b3F = false
+                local cK9 = cKb
+                local cLa = cK9 [136]
+                for ac8 in cLa [2602] (cK9 [91] [cLa [1067]] [cLa [1100]]) do
+                    -- nested state machine (pc=b3E, entry=None)
+                        -- state S<1
+                          --> EXIT
+                        -- state S1
+                          b3C [# b3C + cLa [6629]] = b3H
+                          b3E = cLa [466]
+                          -- jump target not constant: cLa [466]
+                        -- state S>=2
+                          b3F = true
+                          b3E = cLa [466]
+                          -- jump target not constant: cLa [466]
+                    if b3F then
+                        break
+                    end
+                end
+                table.sort (b3C)
+                b3J = false
+                for ac9, ada in cLa [4813] (b3C) do
+                    -- nested state machine (pc=b3I, entry=None)
+                        -- state S<1
+                          b3I = if cK9 [121] (b3N) < cK9 [91] [cLa [1067]] [cLa [4720]] then cLa [4093] else cLa [6629]
+                          -- conditional jump, unevaluated targets: if cK9 [121] (b3N) < cK9 [91] [cLa [1067]] [cLa [4720]] then cLa [4093] else cLa [6629]
+                        -- state S1
+                          b3I = cLa [1355]
+                          -- jump target not constant: cLa [1355]
+                        -- state S2
+                          b3I = if not bny [cLa [6637]] (cK9 [91] [cLa [1067]]) then cLa [1219] else cLa [466]
+                          -- conditional jump, unevaluated targets: if not bny [cLa [6637]] (cK9 [91] [cLa [1067]]) then cLa [1219] else cLa [466]
+                        -- state S3
+                          --> EXIT
+                        -- state S4
+                          bqc (b3N, cK9 [91] [cLa [1067]] [cLa [4720]])
+                          return
+                          --> RETURN
+                        -- state S5
+                          return
+                          --> RETURN
+                        -- state S>=6
+                          b3J = true
+                          b3I = cLa [1355]
+                          -- jump target not constant: cLa [1355]
+                    if b3J then
+                        break
+                    end
+                end
+                bpz [cLa [5807]] = cLa [6352]
+                --> goto 11013  (outside dispatcher -> EXIT)
+              -- state S11015..11204
+                --> EXIT
+              -- state S>=11205
+                --> EXIT
+      end
+  )
   bpY ("AutoBuy")
   --> goto 9725
 -- state S9727
@@ -3296,7 +3442,7 @@
   --> RETURN
 -- state S4246
   bFE = false
-  for uZ, u_ in ipairs (bFy:GetChildren ()) do
+  for uZ, u_ in F4813 (bFy:GetChildren ()) do
       -- nested state machine (pc=bFD, entry=4)
           -- state S<1
             bFB = bFy ["Value"]
@@ -3429,8 +3575,8 @@
   return false
   --> RETURN
 -- state S2683
-  local cLf = Vector3 ["new"]
-  return bqd (bPB + Vector3.new (0, 4, 0), ID, bmO (cKb [91] ["DemonController"]))
+  local cLf = F3022 ["new"]
+  return bqd (bPB + F4803 (0, 4, 0), ID, bmO (cKb [91] ["DemonController"]))
   --> RETURN
 -- state S2684
   -- (constant pool alias cLe)
@@ -3467,7 +3613,7 @@
   bsW = not cKb [118] (bno ["SignalEvent"] ["ToServer"])
   --> goto 8645
 -- state S8642
-  bsW = pcall (bno ["SignalEvent"] ["ToServer"], cn, .. .)
+  bsW = F2175 (bno ["SignalEvent"] ["ToServer"], cn, .. .)
   return bsW
   --> RETURN
 -- state S8643
@@ -3509,7 +3655,7 @@
   -- opaque predicate reduced to its real condition
 -- state S15302
   bZe = false
-  for VN, VO in ipairs (bY5:GetDescendants ()) do
+  for VN, VO in F4813 (bY5:GetDescendants ()) do
       -- nested state machine (pc=bZd, entry=11)
           -- state S<1
             --> if bY8 then goto 13
@@ -3548,7 +3694,7 @@
             --> if bZi ["Name"] == "Pod" then goto 5
             --> if not (bZi ["Name"] == "Pod") then goto 2
           -- state S12
-            pcall (firesignal, bY7 ["MouseButton1Up"])
+            F2175 (firesignal, bY7 ["MouseButton1Up"])
             --> goto 10
           -- state S13
             --> if cLi [118] (firesignal) then goto 12
@@ -3777,8 +3923,8 @@
 -- state S1383
   --> EXIT
 -- state S1384
-  --> if next (cKb [81] ["skills"])  ~= nil then goto 1387
-  --> if not (next (cKb [81] ["skills"])  ~= nil) then goto 1382
+  --> if F3173 (cKb [81] ["skills"])  ~= nil then goto 1387
+  --> if not (F3173 (cKb [81] ["skills"])  ~= nil) then goto 1382
 -- state S1385
   --> if cKb [141] ["NEVER_CAST"] [oO] then goto 1386
   --> if not (cKb [141] ["NEVER_CAST"] [oO]) then goto 1384
@@ -3875,7 +4021,7 @@
 -- state S11987
   csJ = false
   -- (constant pool alias cLq)
-  for aIy, aIz in pairs (bp0) do
+  for aIy, aIz in F2602 (bp0) do
       -- nested state machine (pc=csI, entry=0)
           -- state S<1
             csG = csL  ~= aIu
@@ -3906,7 +4052,7 @@
   --> if cKb [118] (cKb [51] ["OnFarmClaim"]) then goto 11988
   --> if not (cKb [118] (cKb [51] ["OnFarmClaim"])) then goto 11985
 -- state S11988
-  pcall (cKb [51] ["OnFarmClaim"], aIu)
+  F2175 (cKb [51] ["OnFarmClaim"], aIu)
   --> goto 11985
 -- state S11989
   --> EXIT
@@ -4096,7 +4242,7 @@
   --> if not (ckM) then goto 343
 -- state S339
   -- (constant pool alias cLv)
-  ckM, ckN, ckO = pcall (ayZ ["GetBoundingBox"], ayZ)
+  ckM, ckN, ckO = F2175 (ayZ ["GetBoundingBox"], ayZ)
   ckP = ckM
   -- [dropped obfuscation helper: ckT = if ckP then 1 else 0]
   -- [dropped obfuscation helper: ckR = 675*ckT + 2684*(1 - ckT)]
@@ -4111,7 +4257,7 @@
   ckM = ckO ["Magnitude"] < 0.1
   --> goto 338
 -- state S342
-  return ckN, Vector3 ["new"] (4, 8, 4)
+  return ckN, F3022 ["new"] (4, 8, 4)
   --> RETURN
 -- state S343
   return ckN, ckO
@@ -4192,8 +4338,8 @@
 -- state S8117
   --> goto 8124
 -- state S8118
-  local cLx = task ["wait"]
-  task.wait (0.25)
+  local cLx = F6128 ["wait"]
+  F3916 (0.25)
   --> goto 8117
 -- state S8119
   --> if cKb [131] () then goto 8122
@@ -4308,7 +4454,7 @@
   -- (constant pool alias cLA)
   bny ["stop"] ()
   bu1 = false
-  for eK in pairs (bny ["in puts"]) do
+  for eK in F2602 (bny ["in puts"]) do
       -- nested state machine (pc=bu0, entry=2)
           -- state S<1
             bu1 = true
@@ -4389,7 +4535,7 @@
   -- (constant pool alias cLB)
   bXn = TN:gsub ("%s", ""):lower ()
   bXs = false
-  for TS, TT in ipairs (bXm:GetChildren ()) do
+  for TS, TT in F4813 (bXm:GetChildren ()) do
       -- nested state machine (pc=bXr, entry=0)
           -- state S<1
             bXo = bXw ["Name"]:gsub ("%s", ""):lower ()
@@ -4423,11 +4569,11 @@
       end
   end
   bXy = false
-  for TW, TX in ipairs (bXm:GetChildren ()) do
+  for TW, TX in F4813 (bXm:GetChildren ()) do
       -- nested state machine (pc=bXx, entry=0)
           -- state S<1
             bXE = false
-            for TY, TZ in ipairs (bXC:GetChildren ()) do
+            for TY, TZ in F4813 (bXC:GetChildren ()) do
                 -- nested state machine (pc=bXD, entry=4)
                     -- state S<1
                       --> EXIT
@@ -4556,7 +4702,7 @@
 -- state S5782
   -- (constant pool alias cLE)
   cf7 = cf6 ["CFrame"] ["LookVector"]
-  cf6 = Vector3 ["new"] (cf7 ["X"], 0, cf7 ["Z"])
+  cf6 = F3022 ["new"] (cf7 ["X"], 0, cf7 ["Z"])
   cf7 = cf6 ["Magnitude"] < 0.01
   --> if cf7 then goto 5786
   --> if not (cf7) then goto 5795
@@ -4591,7 +4737,7 @@
 -- state S5791
   -- (constant pool alias cLE)
   cf7 = cf5 ["Position"] - cf6 ["Position"]
-  cf5 = Vector3 ["new"] (cf7 ["X"], 0, cf7 ["Z"])
+  cf5 = F3022 ["new"] (cf7 ["X"], 0, cf7 ["Z"])
   cf7 = cf5 ["Magnitude"]
   --> if cf7 > asS + asT then goto 5789
   --> if not (cf7 > asS + asT) then goto 5792
@@ -4621,7 +4767,7 @@
   --> EXIT
 -- state S11903
   cnM = false
-  for aCW, aCX in ipairs (aCT:GetChildren ()) do
+  for aCW, aCX in F4813 (aCT:GetChildren ()) do
       -- nested state machine (pc=cnL, entry=2)
           -- state S<1
             --> goto 1
@@ -4647,7 +4793,7 @@
 -- state S11905
   cnG = false
   -- (constant pool alias cLF)
-  for aCU, aCV in ipairs (aCT:GetDescendants ()) do
+  for aCU, aCV in F4813 (aCT:GetDescendants ()) do
       -- nested state machine (pc=cnF, entry=3)
           -- state S<1
             cnG = true
@@ -4692,7 +4838,7 @@
   -- (constant pool alias cLG)
   b12 = 0
   b15 = false
-  for aaQ, aaR in pairs (b11) do
+  for aaQ, aaR in F2602 (b11) do
       -- nested state machine (pc=b14, entry=3)
           -- state S<1
             --> goto 2
@@ -4741,7 +4887,7 @@
   --> if os ["clock"] () < bqm then goto 6162
   --> if not (os ["clock"] () < bqm) then goto 6165
 -- state S6160
-  c do, cdp = pcall (getgc, true)
+  c do, cdp = F2175 (getgc, true)
   cdq = not c do
   --> if cdq then goto 6161
   --> if not (cdq) then goto 6166
@@ -4753,7 +4899,7 @@
   --> RETURN
 -- state S6163
   cdu = false
-  for ao_, ao0 in pairs (cdp) do
+  for ao_, ao0 in F2602 (cdp) do
       -- nested state machine (pc=cdt, entry=None)
           -- state S<1
             cdt = cLI [6629]
@@ -4868,7 +5014,7 @@
   --> goto 13502
 -- state S13502
   cx0 = false
-  for aPP, aPQ in ipairs (cxY) do
+  for aPP, aPQ in F4813 (cxY) do
       -- nested state machine (pc=cx_, entry=1)
           -- state S<1
             --> EXIT
@@ -4932,7 +5078,7 @@
 -- state S2864
   cAu = {}
   cAx = false
-  for aTi, aTj in ipairs (bpz ["GamemodeCache"]) do
+  for aTi, aTj in F4813 (bpz ["GamemodeCache"]) do
       -- nested state machine (pc=cAw, entry=2)
           -- state S<1
             --> EXIT
@@ -5076,7 +5222,7 @@
   --> EXIT
 -- state S4311
   ciF = false
-  for awr in pairs (bpp ["marks"]) do
+  for awr in F2602 (bpp ["marks"]) do
       -- nested state machine (pc=ciE, entry=None)
           -- state S<1
             cLP [112] (ciH)
@@ -5104,7 +5250,7 @@
   --> EXIT
 -- state S16116
   b9w = false
-  for aj_, aj0 in ipairs (cKb [35] ["Order"]) do
+  for aj_, aj0 in F4813 (cKb [35] ["Order"]) do
       -- nested state machine (pc=b9v, entry=4)
           -- state S<1
             --> EXIT
@@ -5308,7 +5454,7 @@
   --> goto 8284
 -- state S8282
   b2Z = false
-  for abU, abV in ipairs (b2V:GetChildren ()) do
+  for abU, abV in F4813 (b2V:GetChildren ()) do
       -- nested state machine (pc=b2Y, entry=0)
           -- state S<1
             b2V = b22:FindFirstChild ("StationaryNpcs")
@@ -5321,7 +5467,7 @@
             --> goto 1
           -- state S3
             b24 = false
-            for abX, abY in ipairs (b2V:GetDescendants ()) do
+            for abX, abY in F4813 (b2V:GetDescendants ()) do
                 -- nested state machine (pc=b23, entry=4)
                     -- state S<1
                       b24 = true
@@ -5396,7 +5542,7 @@
   --> goto 10288
 -- state S10287
   -- (constant pool alias cLZ)
-  bna ["anyOn"] = next (bna ["on"])  ~= nil
+  bna ["anyOn"] = F3173 (bna ["on"])  ~= nil
   --> if not bna ["anyOn"] then goto 10286
   --> if not (not bna ["anyOn"]) then goto 10288
 -- state S10288
@@ -5411,12 +5557,12 @@
 -- state S14689
   --> goto 14692
 -- state S14690
-  local cL_ = coroutine ["status"]
-  --> if coroutine.status (boz)  ~= "TextColor3" then goto 14691
-  --> if not (coroutine.status (boz)  ~= "TextColor3") then goto 14689
+  local cL_ = F3109 ["status"]
+  --> if F6075 (boz)  ~= "TextColor3" then goto 14691
+  --> if not (F6075 (boz)  ~= "TextColor3") then goto 14689
 -- state S14691
-  local cL0 = task ["cancel"]
-  pcall (task.cancel, boz)
+  local cL0 = F6128 ["cancel"]
+  F2175 (F5108, boz)
   --> goto 14689
 -- state S14692..14899
   --> EXIT
@@ -5475,7 +5621,7 @@
   bpz ["QueueStatus"] = cAV
   --> goto 14185
 -- state S14184
-  local cL4 = task ["delay"]
+  local cL4 = F6128 ["delay"]
   local cL5 = cKb
   local cL6 = cL5 [136]
   cL6 [4004] (cL6 [466], cL5 [102] [cL6 [4886]])
@@ -5565,7 +5711,7 @@
 -- state S11970
   cqD, cqC = nil, nil
   cqI = false
-  for aGu, aGv in pairs (cKb [99] ["zonePoints"] ()) do
+  for aGu, aGv in F2602 (cKb [99] ["zonePoints"] ()) do
       -- nested state machine (pc=cqH, entry=4)
           -- state S<1
             cqE = (cqM - aGq) ["Magnitude"]
@@ -5643,10 +5789,10 @@
   --> RETURN
 -- state S4670
   -- (constant pool alias cMc)
-  pcall (firetouchinterest, b_o, b_p, 0)
-  local cMd = task ["wait"]
-  task.wait (0.1)
-  pcall (firetouchinterest, b_o, b_p, 1)
+  F2175 (firetouchinterest, b_o, b_p, 0)
+  local cMd = F6128 ["wait"]
+  F3916 (0.1)
+  F2175 (firetouchinterest, b_o, b_p, 1)
   return true
   --> RETURN
 -- state S4671
@@ -5683,7 +5829,7 @@
   --> if not (not bwJ) then goto 15302
 -- state S15302
   bwM = false
-  for it, iu in ipairs (bwJ:GetChildren ()) do
+  for it, iu in F4813 (bwJ:GetChildren ()) do
       -- nested state machine (pc=bwL, entry=3)
           -- state S<1
             --> EXIT
@@ -5698,7 +5844,7 @@
             --> if not (bwJ) then goto 2
           -- state S>=4
             bwS = false
-            for iw, ix in ipairs (bwJ:GetChildren ()) do
+            for iw, ix in F4813 (bwJ:GetChildren ()) do
                 -- nested state machine (pc=bwR, entry=2)
                     -- state S<1
                       bwS = true
@@ -5736,14 +5882,14 @@
 -- state S13836
   -- (constant pool alias cMf)
   bpz ["MaxHealth"] = "Waiting for the quest to load"
-  local cMg = task ["wait"]
-  task.wait (1)
+  local cMg = F6128 ["wait"]
+  F3916 (1)
   return
   --> RETURN
 -- state S13837
   bSm = false
   -- (constant pool alias cMf)
-  for LJ, LK in ipairs (bSh:GetChildren ()) do
+  for LJ, LK in F4813 (bSh:GetChildren ()) do
       -- nested state machine (pc=bSl, entry=13)
           -- state S<1
             bSj = cMh [90] (bSq)
@@ -5793,8 +5939,8 @@
       end
   end
   bpz ["MaxHealth"] = "Waiting for Muzan's Blood"
-  local cMi = task ["wait"]
-  task.wait (1)
+  local cMi = F6128 ["wait"]
+  F3916 (1)
   --> goto 13834  (outside dispatcher -> EXIT)
 -- state S13838..14487
   --> EXIT
@@ -5839,7 +5985,7 @@
   --> if not (bxs) then goto 3959
   -- opaque predicate reduced to its real condition
 -- state S3959
-  bxs = Vector3 ["zero"]
+  bxs = F3022 ["zero"]
   --> goto 3963
 -- state S3960
   bxt = bxs ["Position"]
@@ -5855,7 +6001,7 @@
   bxt = bxs
   bxv, bxu = nil, nil
   bxC = false
-  for i6, i7 in ipairs (boo ()) do
+  for i6, i7 in F4813 (boo ()) do
       -- nested state machine (pc=bxB, entry=9)
           -- state S<1
             bxv, bxu = bxG, bxs
@@ -5919,7 +6065,11 @@
   --> if not (not b8g) then goto 9745
   -- opaque predicate reduced to its real condition
 -- state S9745
-  cKb [35] ["ItemHook"] = b8g ["ChildAdded"]:Connect (function (aiJ) pcall (cKb [35] ["OnItem"], aiJ ["Name"]) end)
+  cKb[35]["ItemHook"]= b8g["ChildAdded"]:Connect(
+          function(aiJ)
+              F2175 (cKb [35] ["OnItem"], aiJ ["Name"])
+          end
+      )
   --> goto 9747
 -- state S9746
   return
@@ -5935,7 +6085,11 @@
   --> if not (b8g == cKb [35] ["ItemFolder"]) then goto 9748
 -- state S9750
   -- (constant pool alias cMk)
-  pcall (function () cKb [35] ["ItemHook"]:Disconnect () end)
+  F2175(
+      function()
+          cKb [35] ["ItemHook"]:Disconnect ()
+      end
+  )
   cKb [35] ["ItemHook"] = nil
   --> goto 9744
 -- state S9751
@@ -5954,7 +6108,7 @@
   --> EXIT
 -- state S7676
   cqg = false
-  for aF1, aF2 in pairs (cKb [91] ["Alerts"] ["on"]) do
+  for aF1, aF2 in F2602 (cKb [91] ["Alerts"] ["on"]) do
       -- nested state machine (pc=cqf, entry=4)
           -- state S<1
             cqg = true
@@ -6098,7 +6252,7 @@
   bAK = bny ["findFunctions"]
   --> goto 2527
 -- state S2529
-  bAK, bAL = pcall (bny ["getEnvironment"], bAJ)
+  bAK, bAL = F2175 (bny ["getEnvironment"], bAJ)
   bAM = bAK
   --> if bAM then goto 2540
   --> if not (bAM) then goto 2555
@@ -6109,7 +6263,7 @@
   --> goto 2553
 -- state S2531
   bAV = false
-  for nz, nA in ipairs (bAL) do
+  for nz, nA in F4813 (bAL) do
       -- nested state machine (pc=bAU, entry=10)
           -- state S<1
             bAM = type (bAL) == "table"
@@ -6140,7 +6294,7 @@
             bAV = true
             --> goto 6
           -- state S>=10
-            bAK, bAL = pcall (bny ["getFunctionEnvironment"], bAZ)
+            bAK, bAL = F2175 (bny ["getFunctionEnvironment"], bAZ)
             bAM = bAK
             --> if bAM then goto 0  (outside dispatcher -> EXIT)
             --> if not (bAM) then goto 4
@@ -6186,7 +6340,7 @@
   -- opaque predicate folded (jump is unconditional)
 -- state S2542
   -- (constant pool alias cMn)
-  bAK, bAL = pcall (bny ["findFunctions"], "function", {["Name"] = "punch", ["IgnoreExecutor"] = true}, false)
+  bAK, bAL = F2175 (bny ["findFunctions"], "function", {["Name"] = "punch", ["IgnoreExecutor"] = true}, false)
   bAM = bAK
   -- [dropped obfuscation helper: bAT = if bAM then 1 else 0]
   -- [dropped obfuscation helper: bAR = 2222*bAT + 3258*(1 - bAT)]
@@ -6266,7 +6420,7 @@
   --> if clO then goto 8394
   --> if not (clO) then goto 8392
 -- state S8392
-  pcall (bpc ["render"])
+  F2175 (bpc ["render"])
   --> goto 8393
 -- state S8393
   --> EXIT
@@ -6349,8 +6503,8 @@
 -- state S1858
   --> goto 1853
 -- state S1859
-  local cMq = task ["wait"]
-  task.wait (0.4)
+  local cMq = F6128 ["wait"]
+  F3916 (0.4)
   --> goto 1850
 -- state S1860
   --> if (bAG*3908 + bAH*2649 + bAG*bAH) % 16777213 == 2617248 then goto 1855
@@ -6390,8 +6544,8 @@
   return cKb [107] ()  ~= nil
   --> RETURN
 -- state S1869
-  local cMr = task ["wait"]
-  task.wait (0.2)
+  local cMr = F6128 ["wait"]
+  F3916 (0.2)
   --> goto 1858
 -- state S1870
   bAB = nil
@@ -6496,7 +6650,7 @@
 -- state S5982
   coW = {}
   co0 = false
-  for aEw, aEx in pairs (coV ["Grid"]) do
+  for aEw, aEx in F2602 (coV ["Grid"]) do
       -- nested state machine (pc=co_, entry=3)
           -- state S<1
             coY = co2
@@ -6544,7 +6698,29 @@
           break
       end
   end
-  table.sort (coW, function (aEB, aEC) local coU = nil; coU = 1; while true do coU = 4986 - coU; do if coU < 5470 then if coU < 4983 then break else if coU < 4985 then if coU < 4984 then break else if coU == 4984 then return aEB ["label"] < aEC ["label"] else coU = 4983; continue end else if coU < 4986 then coU = if aEB ["or der"]  ~= aEC ["or der"] then 0 else 2 else if coU == 4986 then return aEB ["or der"] < aEC ["or der"] else break end else break end end end end)
+  table.sort(
+      coW,
+      function(aEB, aEC)
+          -- nested state machine (pc=coU, entry=4985)
+              -- state S<4983
+                --> EXIT
+              -- state S4983
+                --> EXIT
+              -- state S4984
+                return aEB ["label"] < aEC ["label"]
+                --> RETURN
+              -- state S4985
+                --> if aEB ["or der"]  ~= aEC ["or der"] then goto 4986
+                --> if not (aEB ["or der"]  ~= aEC ["or der"]) then goto 4984
+              -- state S4986
+                return aEB ["or der"] < aEC ["or der"]
+                --> RETURN
+              -- state S4987..5469
+                --> EXIT
+              -- state S>=5470
+                --> EXIT
+      end
+  )
   return coW
   --> RETURN
 -- state S5983
@@ -6597,7 +6773,7 @@
   --> EXIT
 -- state S3981
   b30 = false
-  for adj, adk in ipairs (cKb [141] ["FISHING_RODS"]) do
+  for adj, adk in F4813 (cKb [141] ["FISHING_RODS"]) do
       -- nested state machine (pc=b3_, entry=None)
           -- state S<1
             return b34
@@ -6687,8 +6863,8 @@
   --> if not (bKr) then goto 3931
   -- opaque predicate reduced to its real condition
 -- state S3922
-  local cMx = coroutine ["running"]
-  bKr = bny ["runs"] [coroutine.running ()]
+  local cMx = F3109 ["running"]
+  bKr = bny ["runs"] [F5473 ()]
   bKs = not AA
   --> if bKs then goto 3912
   --> if not (bKs) then goto 3929
@@ -6701,8 +6877,8 @@
   --> if not (bKr) then goto 3922
   -- opaque predicate reduced to its real condition
 -- state S3924
-  local cMy = coroutine ["running"]
-  bKs = cKb [54] [2330] ["thread"]  ~= coroutine.running ()
+  local cMy = F3109 ["running"]
+  bKs = cKb [54] [2330] ["thread"]  ~= F5473 ()
   --> goto 3917
 -- state S3925
   --> if bKr then goto 3932
@@ -6809,7 +6985,7 @@
   -- opaque predicate reduced to its real condition
 -- state S3281
   b_J = false
-  for Xr, Xs in ipairs (b_B:GetChildren ()) do
+  for Xr, Xs in F4813 (b_B:GetChildren ()) do
       -- nested state machine (pc=b_I, entry=1)
           -- state S<1
             --> EXIT
@@ -6878,7 +7054,7 @@
   --> if not (yC) then goto 7786
 -- state S7788
   -- (constant pool alias cMA)
-  bIT = coroutine ["running"] ()
+  bIT = F3109 ["running"] ()
   bIU = {["thread"] = bIT, ["run"] = bny ["runs"] [bIT]}
   cKb [54] ["wants"] [yC] = bIU
   return bIU
@@ -6895,7 +7071,7 @@
 -- state S2282
   csO = {}
   csR = false
-  for aIH, aII in ipairs (cKb [54] ["or der"]) do
+  for aIH, aII in F4813 (cKb [54] ["or der"]) do
       -- nested state machine (pc=csQ, entry=None)
           -- state S<1
             csR = true
@@ -6929,7 +7105,7 @@
 -- state S11241
   bxU = cKb [132]
   bxX = false
-  for jE, jF in ipairs (bxT ["path"]) do
+  for jE, jF in F4813 (bxT ["path"]) do
       -- nested state machine (pc=bxW, entry=0)
           -- state S<1
             bxU = bxU:FindFirstChild (bx0)
@@ -6981,7 +7157,7 @@
 -- state S12790
   cwA = {}
   cwF = false
-  for aN9, aOa in pairs (bno ["PlayerProfile"] ["skill_info"]) do
+  for aN9, aOa in F2602 (bno ["PlayerProfile"] ["skill_info"]) do
       -- nested state machine (pc=cwE, entry=6)
           -- state S<1
             --> if cwC then goto 17
@@ -7043,7 +7219,12 @@
           break
       end
   end
-  table.sort (cwz, function (aOg, aOh) return aOg ["name"] < aOh ["name"] end)
+  table.sort(
+      cwz,
+      function(aOg, aOh)
+          return aOg ["name"] < aOh ["name"]
+      end
+  )
   return cwz
   --> RETURN
 -- state S12791
@@ -7103,7 +7284,7 @@
   return nil
   --> RETURN
 -- state S223
-  bQ4 = Vector3 ["zero"]
+  bQ4 = F3022 ["zero"]
   --> goto 226
 -- state S224
   bQ5 = bQ4 ["Position"]
@@ -7114,7 +7295,7 @@
   bQ5 = bQ4
   bQ7, bQ6 = nil, nil
   bRd = false
-  for JR, JS in ipairs (bQ3:GetChildren ()) do
+  for JR, JS in F4813 (bQ3:GetChildren ()) do
       -- nested state machine (pc=bRc, entry=1)
           -- state S<1
             --> if bQ3 then goto 2
@@ -7178,7 +7359,7 @@
   --> goto 2981
 -- state S2983
   cr3 = false
-  for aHN, aHO in ipairs (cKb [91] ["Alerts"] ["TAILORS"]) do
+  for aHN, aHO in F4813 (cKb [91] ["Alerts"] ["TAILORS"]) do
       -- nested state machine (pc=cr2, entry=19)
           -- state S<1
             crY = cMJ [91] ["Alerts"] ["names"] (cr0, 8)
@@ -7398,7 +7579,7 @@
   local cMM = cMN [136]
   bI7 = cMN [54] ["rankOf"] (y_)
   bJh = false
-  for y4 in pairs (cMN [54] ["wants"]) do
+  for y4 in F2602 (cMN [54] ["wants"]) do
       -- nested state machine (pc=bJg, entry=1)
           -- state S<1
             bI8 = cMN [54] ["wanted"] (bJj)
@@ -7431,7 +7612,7 @@
       end
   end
   bJl = false
-  for y6 in pairs (cMN [54] ["commitments"]) do
+  for y6 in F2602 (cMN [54] ["commitments"]) do
       -- nested state machine (pc=bJk, entry=6)
           -- state S<1
             --> EXIT
@@ -7609,7 +7790,7 @@
   --> if not (b2x) then goto 5547
 -- state S5546
   b2B = false
-  for abp, abq in ipairs (b2x:GetChildren ()) do
+  for abp, abq in F4813 (b2x:GetChildren ()) do
       -- nested state machine (pc=b2A, entry=1)
           -- state S<1
             --> if b2y then goto 4
@@ -7646,7 +7827,7 @@
   --> goto 5547
 -- state S5547
   b2H = false
-  for abv, abw in ipairs (cKb [141] ["POTION_NAMES"]) do
+  for abv, abw in F4813 (cKb [141] ["POTION_NAMES"]) do
       -- nested state machine (pc=b2G, entry=3)
           -- state S<1
             b2H = true
@@ -7702,7 +7883,7 @@
   b7l = "not hing"
   --> goto 3741
 -- state S3730
-  b7l, b7n = pcall (b7k, {["Url"] = ahB, ["Method"] = "POST", ["Headers"] = {["Content-Type"] = "application/json"}, ["Body"] = b7m})
+  b7l, b7n = F2175 (b7k, {["Url"] = ahB, ["Method"] = "POST", ["Headers"] = {["Content-Type"] = "application/json"}, ["Body"] = b7m})
   --> if not b7l then goto 3726
   --> if not (not b7l) then goto 3736
 -- state S3731
@@ -7750,7 +7931,7 @@
   --> RETURN
 -- state S3742
   -- (constant pool alias cMW)
-  b7l, b7m = pcall (bmK ["HttpService"] ["JSONEncode"], bmK ["HttpService"], ahC)
+  b7l, b7m = F2175 (bmK ["HttpService"] ["JSONEncode"], bmK ["HttpService"], ahC)
   -- [dropped obfuscation helper: b7r = if not b7l then 1 else 0]
   -- [dropped obfuscation helper: b7p = 796*b7r + 146*(1 - b7r)]
   -- [dropped obfuscation helper: b7q = 2410*b7r + 183*(1 - b7r)]
@@ -7779,7 +7960,7 @@
 -- state S8216
   ccZ = {}
   cc1 = false
-  for aom in pairs (aok) do
+  for aom in F2602 (aok) do
       -- nested state machine (pc=cc0, entry=1)
           -- state S<1
             cc1 = true
@@ -7844,7 +8025,7 @@
 -- state S4626
   bx8 = bx6:lower ()
   byb = false
-  for j4 in pairs (bx7 ["NpcSpawns"]) do
+  for j4 in F2602 (bx7 ["NpcSpawns"]) do
       -- nested state machine (pc=bya, entry=1)
           -- state S<1
             return byd
@@ -7895,7 +8076,7 @@
   --> RETURN
 -- state S4636
   byf = false
-  for j5, j6 in ipairs (cKb [141] ["MOB_NAMES"]) do
+  for j5, j6 in F4813 (cKb [141] ["MOB_NAMES"]) do
       -- nested state machine (pc=bye, entry=0)
           -- state S<1
             --> if byj:gsub ("%s", ""):lower () == bx6:lower () then goto 2
@@ -7959,7 +8140,7 @@
 -- state S13745
   cut = {}
   cuw = false
-  for aKz, aKA in ipairs (cKb [91] ["SchematicRunner"] ["props"] ()) do
+  for aKz, aKA in F4813 (cKb [91] ["SchematicRunner"] ["props"] ()) do
       -- nested state machine (pc=cuv, entry=1)
           -- state S<1
             cuw = true
@@ -8048,7 +8229,7 @@
   -- (constant pool alias cM2)
   bKZ = 0
   bK1 = false
-  for Br in pairs (Bp) do
+  for Br in F2602 (Bp) do
       -- nested state machine (pc=bK0, entry=1)
           -- state S<1
             bK1 = true
@@ -8089,8 +8270,8 @@
 -- state S12250
   --> EXIT
 -- state S12251
-  local cM3 = task ["wait"]
-  task.wait (0.35)
+  local cM3 = F6128 ["wait"]
+  F3916 (0.35)
   --> goto 12260
 -- state S12252
   b5m = 1
@@ -8134,7 +8315,13 @@
   local cM4 = cM5 [136]
   bn8 ("Tool_Mouse", "Up", aeP)
   b5o = b5n
-  b5e = cM5 [13] (function () return cKb [91] ["FishController"] ["bobber"] ()  ~= nil end, 2.5, aeQ)
+  b5e= cM5[13](
+          function()
+              return cKb [91] ["FishController"] ["bobber"] ()  ~= nil
+          end,
+          2.5,
+          aeQ
+      )
   --> if b5e then goto 12255
   --> if not (b5e) then goto 12251
 -- state S12263
@@ -8144,7 +8331,36 @@
   local cM5 = cKb
   local cM4 = cM5 [136]
   bn8 ("Tool_Mouse", "Up", aeP)
-  cM5 [13] (function () local b49, b5b, b5c, b5d = nil, nil, nil, nil; local b5a = nil; b5a = 2; while true do b5a = 12402 - b5a; do if b5a < 12399 then break else if b5a < 12401 then if b5a < 12400 then break else local cM6 = cKb [136]; b49 = cKb [91] ["FishController"] ["bobber"] () == nil; b5d = if b49 then 1 else 0; b5b = 3879*b5d + 472*(1 - b5d); b5c = 3098*b5d + 222*(1 - b5d); b5a = if (b5b*355 + b5c*3453 + b5b*b5c) % 16777213 == 7314368 then 1 else 0 end else if b5a < 12402 then if b5a == 12401 then b49 = cKb [91] ["FishController"] ["catch"] () == nil; b5a = 0 else b5a = 12400; continue end else if b5a < 13869 then if b5a == 12402 then return b49 else break end else break end end end end, 3, aeQ)
+  cM5[13](
+      function()
+          -- nested state machine (pc=b5a, entry=12400)
+              -- state S<12399
+                --> EXIT
+              -- state S12399
+                --> EXIT
+              -- state S12400
+                -- (constant pool alias cM6)
+                b49 = cKb [91] ["FishController"] ["bobber"] () == nil
+                -- [dropped obfuscation helper: b5d = if b49 then 1 else 0]
+                -- [dropped obfuscation helper: b5b = 3879*b5d + 472*(1 - b5d)]
+                -- [dropped obfuscation helper: b5c = 3098*b5d + 222*(1 - b5d)]
+                --> if b49 then goto 12401
+                --> if not (b49) then goto 12402
+                -- opaque predicate reduced to its real condition
+              -- state S12401
+                b49 = cKb [91] ["FishController"] ["catch"] () == nil
+                --> goto 12402
+              -- state S12402
+                return b49
+                --> RETURN
+              -- state S12403..13868
+                --> EXIT
+              -- state S>=13869
+                --> EXIT
+      end,
+      3,
+      aeQ
+  )
   --> goto 12252
 -- state S12265
   return false
@@ -8351,7 +8567,7 @@
   --> if not cKb [60] (aby) then goto 16182
   --> if not (not cKb [60] (aby)) then goto 16191
 -- state S16188
-  local cNb = task ["wait"]
+  local cNb = F6128 ["wait"]
   local cNc = cKb
   local cNd = cNc [136]
   cNd [3916] (cNd [2655])
@@ -8402,7 +8618,7 @@
 -- state S16094
   buN = false
   -- (constant pool alias cNe)
-  for eB, eC in pairs (bny ["in puts"]) do
+  for eB, eC in F2602 (bny ["in puts"]) do
       -- nested state machine (pc=buM, entry=2)
           -- state S<1
             --> goto 4
@@ -8480,7 +8696,7 @@
   cmS = cmR ["Position"]
   cmR = cKb [91] ["LootController"] ["range"]
   cmZ = false
-  for aBB, aBC in ipairs (bmK ["CollectionService"]:GetTagged ("LootDrop")) do
+  for aBB, aBC in F4813 (bmK ["CollectionService"]:GetTagged ("LootDrop")) do
       -- nested state machine (pc=cmY, entry=17)
           -- state S<1
             --> if cmT then goto 9
@@ -8561,7 +8777,12 @@
           break
       end
   end
-  table.sort (cmQ, function (aBM, aBN) return aBM ["gap"] < aBN ["gap"] end)
+  table.sort(
+      cmQ,
+      function(aBM, aBN)
+          return aBM ["gap"] < aBN ["gap"]
+      end
+  )
   return cmQ
   --> RETURN
 -- state S5229
@@ -8626,7 +8847,7 @@
   --> if not ((bZn*3837 + bZo*2342 + bZn*bZo) % 16777213 == 14284453) then goto 13942
 -- state S13937
   bZr = false
-  for VY, VZ in ipairs (bZj:GetChildren ()) do
+  for VY, VZ in F4813 (bZj:GetChildren ()) do
       -- nested state machine (pc=bZq, entry=4)
           -- state S<1
             cKb [91] ["TrainController"] ["pointer"] ["tap"] (cKb [91] ["TrainController"] ["clearPoint"] ())
@@ -8681,16 +8902,16 @@
 -- F2102(params: -)  states=5  pc=ci5  C=2772  entry=2770
 -- locals: local ci5 = nil; ci5 = 2
 -- state S2769
-  local cNj = task ["cancel"]
-  pcall (task.cancel, bnA)
+  local cNj = F6128 ["cancel"]
+  F2175 (F5108, bnA)
   --> goto 2771
 -- state S2770
   -- (constant pool alias cNk)
   cKb [99] ["tweaks"] ["ownership"] = false
   bpp ["clear"] ()
-  local cNl = coroutine ["status"]
-  --> if coroutine.status (bnA)  ~= "TextColor3" then goto 2769
-  --> if not (coroutine.status (bnA)  ~= "TextColor3") then goto 2771
+  local cNl = F3109 ["status"]
+  --> if F6075 (bnA)  ~= "TextColor3" then goto 2769
+  --> if not (F6075 (bnA)  ~= "TextColor3") then goto 2771
 -- state S2771
   --> goto 2772
 -- state S2772..2936
@@ -8744,7 +8965,7 @@
   local cNr = cNq [136]
   bZC = bZD ["AbsolutePosition"] + bZD ["AbsoluteSize"] / 2
   bZE = math.rad (bZD ["AbsoluteRotation"])
-  bZD = Vector2 ["new"] (math.cos (bZE), math.sin (bZE))
+  bZD = F6475 ["new"] (math.cos (bZE), math.sin (bZE))
   bZE = bZB ["AbsoluteSize"] ["X"] / 2 - 6
   bZF = cNq [91] ["TrainController"] ["pointer"]
   bZF ["move"] (bZC - bZD*bZE)
@@ -8997,7 +9218,7 @@
   b6Q = {}
   b6T = false
   -- (constant pool alias cNx)
-  for ahg, ahh in ipairs (cKb [35] ["Catalog"] [ahb]) do
+  for ahg, ahh in F4813 (cKb [35] ["Catalog"] [ahb]) do
       -- nested state machine (pc=b6S, entry=0)
           -- state S<1
             b6Q [b6X ["key"]] = true
@@ -9228,7 +9449,7 @@
   --> if not (not bNW) then goto 535
 -- state S535
   bN0 = false
-  for Ga, Gb in ipairs (bNW:GetChildren ()) do
+  for Ga, Gb in F4813 (bNW:GetChildren ()) do
       -- nested state machine (pc=bN_, entry=None)
           -- state S<1
             bNY = bNW [cNF [4730]] == cNF [4681]
@@ -9308,7 +9529,7 @@
 -- state S2301
   cKb [133] [jd] = nil
   bxL = false
-  for jj, jk in ipairs (cKb [59] ()) do
+  for jj, jk in F4813 (cKb [59] ()) do
       -- nested state machine (pc=bxK, entry=4)
           -- state S<1
             --> if bxH then goto 6
@@ -9371,7 +9592,7 @@
 -- state S15555
   btc = false
   -- (constant pool alias cNJ)
-  for cQ, cR in ipairs (cM) do
+  for cQ, cR in F4813 (cM) do
       -- nested state machine (pc=btb, entry=0)
           -- state S<1
             bs9 = bs9:FindFirstChild (btg)
@@ -9417,7 +9638,7 @@
   --> if not (cKb [54] ["active"]) then goto 6847
 -- state S6847
   cty = false
-  for aJh, aJi in ipairs (cKb [54] ["or der"]) do
+  for aJh, aJi in F4813 (cKb [54] ["or der"]) do
       -- nested state machine (pc=ctw, entry=5)
           -- state S<1
             cty = true
@@ -9464,7 +9685,7 @@
   --> EXIT
 -- state S5712
   bIm = false
-  for yj, yk in ipairs (yg) do
+  for yj, yk in F4813 (yg) do
       -- nested state machine (pc=bIl, entry=8)
           -- state S<1
             bIj = not bIh [bIq]
@@ -9511,7 +9732,7 @@
   bIv = false
   local cNO = cKb
   local cNP = cNO [136]
-  for yn, yo in ipairs (cNO [54] ["defaultOrder"]) do
+  for yn, yo in F4813 (cNO [54] ["defaultOrder"]) do
       -- nested state machine (pc=bIu, entry=4)
           -- state S<1
             --> EXIT
@@ -9593,7 +9814,7 @@
   -- (constant pool alias cNT)
   crf = os ["time"] ()
   crp = false
-  for aGS in pairs (cKb [91] ["Alerts"] ["bosses"]) do
+  for aGS in F2602 (cKb [91] ["Alerts"] ["bosses"]) do
       -- nested state machine (pc=cro, entry=19)
           -- state S<1
             crg = crh
@@ -9758,7 +9979,7 @@
 -- state S13906
   bse = false
   -- (constant pool alias cNW)
-  for aZ, a_ in ipairs (cKb [123] ["missing"]) do
+  for aZ, a_ in F4813 (cKb [123] ["missing"]) do
       -- nested state machine (pc=bsd, entry=0)
           -- state S<1
             --> if bsi == aX then goto 2
@@ -9851,7 +10072,52 @@
 -- state S4889..7110
   --> EXIT
 -- state S7111
-  cKb [26] ["connection"] = cKb [139]:GetPropertyChangedSignal ("RotationType"):Connect (function () local cee, ceg, ceh, cei, cej, cek, cel = nil, nil, nil, nil, nil, nil, nil; local cef = nil; cef = 7; while true do cef = 13393 - cef; do if cef < 13386 then if cef < 7596 then break else if cef < 13384 then break else if cef < 13385 then if cef == 13384 then local cNX = cKb [136]; cel = if cee then 1 else 0; cej = 717*cel + 267*(1 - cel); cef = 8 else cef = 13391; continue end else if cef == 13385 then cek = 278*cel + 3002*(1 - cel); cef = 3 else cef = 13391; continue end else if cef < 13390 then if cef < 13388 then if cef < 13387 then if cef == 13386 then cee = cKb [26] ["on"]; cef = if cee then 2 else 6 else cef = 7242; continue end else local cNX = cKb [136]; cei = if cee then 1 else 0; ceg = 429*cei + 510*(1 - cei); ceh = 3295*cei + 3665*(1 - cei); cef = if (ceg*255 + ceh*3945 + ceg*ceh) % 16777213 == 14521725 then 0 else 9 end else if cef < 13389 then cKb [74] (); cef = 1 else break end else if cef < 13392 then if cef < 13391 then if cef == 13390 then cef = if (cej*859 + cek*834 + cej*cek) % 16777213 == 1047081 then 5 else 1 else cef = 13393; continue end else cee = bnB (); cef = 6 end else if cef < 13393 then cef = 4 else cee = bqC (); cef = 9 end end end end)
+  cKb[26]["connection"]= cKb[139]:GetPropertyChangedSignal("RotationType"):Connect(
+          function()
+              -- nested state machine (pc=cef, entry=13386)
+                  -- state S<7596
+                    --> EXIT
+                  -- state S7596..13383
+                    --> EXIT
+                  -- state S13384
+                    -- (constant pool alias cNX)
+                    -- [dropped obfuscation helper: cel = if cee then 1 else 0]
+                    -- [dropped obfuscation helper: cej = 717*cel + 267*(1 - cel)]
+                    --> goto 13385
+                    -- opaque predicate folded (jump is unconditional)
+                  -- state S13385
+                    cek = 278*cel + 3002*(1 - cel)
+                    --> goto 13390
+                  -- state S13386
+                    cee = cKb [26] ["on"]
+                    --> if cee then goto 13391
+                    --> if not (cee) then goto 13387
+                  -- state S13387
+                    -- (constant pool alias cNX)
+                    -- [dropped obfuscation helper: cei = if cee then 1 else 0]
+                    -- [dropped obfuscation helper: ceg = 429*cei + 510*(1 - cei)]
+                    -- [dropped obfuscation helper: ceh = 3295*cei + 3665*(1 - cei)]
+                    --> if cee then goto 13393
+                    --> if not (cee) then goto 13384
+                    -- opaque predicate reduced to its real condition
+                  -- state S13388
+                    cKb [74] ()
+                    --> goto 13392
+                  -- state S13389
+                    --> EXIT
+                  -- state S13390
+                    --> if (cej*859 + cek*834 + cej*cek) % 16777213 == 1047081 then goto 13388
+                    --> if not ((cej*859 + cek*834 + cej*cek) % 16777213 == 1047081) then goto 13392
+                  -- state S13391
+                    cee = bnB ()
+                    --> goto 13387
+                  -- state S13392
+                    --> goto 13389
+                  -- state S>=13393
+                    cee = bqC ()
+                    --> goto 13384
+          end
+      )
   --> if bqC () then goto 7114
   --> if not (bqC ()) then goto 7116
 -- state S7112
@@ -9915,7 +10181,7 @@
   --> goto 4746
 -- state S4749
   bHE = false
-  for xy, xz in pairs (bHz ["codes"]) do
+  for xy, xz in F2602 (bHz ["codes"]) do
       -- nested state machine (pc=bHD, entry=0)
           -- state S<1
             bHz = type (bHI) == "table"
@@ -10027,7 +10293,11 @@
   --> EXIT
 -- state S7435
   cKb [71] = false
-  pcall (function () bno ["RunHandler"] ["Toggled"] = false end)
+  F2175(
+      function()
+          bno ["RunHandler"] ["Toggled"] = false
+      end
+  )
   --> goto 7426
 -- state S7436
   -- (constant pool alias cN2)
@@ -10131,14 +10401,14 @@
 -- state S7791
   --> goto 7793
 -- state S7792
-  local cN9 = coroutine ["status"]
-  --> if coroutine.status (cKb [28])  ~= "TextColor3" then goto 7794
-  --> if not (coroutine.status (cKb [28])  ~= "TextColor3") then goto 7791
+  local cN9 = F3109 ["status"]
+  --> if F6075 (cKb [28])  ~= "TextColor3" then goto 7794
+  --> if not (F6075 (cKb [28])  ~= "TextColor3") then goto 7791
 -- state S7793
   --> EXIT
 -- state S7794
-  local cOa = task ["cancel"]
-  pcall (task.cancel, cKb [28])
+  local cOa = F6128 ["cancel"]
+  F2175 (F5108, cKb [28])
   --> goto 7791
 -- state S7795..10132
   --> EXIT
@@ -10165,7 +10435,7 @@
   --> RETURN
 -- state S1338
   bYk = false
-  for UF, UG in ipairs (bYe:GetDescendants ()) do
+  for UF, UG in F4813 (bYe:GetDescendants ()) do
       -- nested state machine (pc=bYj, entry=1)
           -- state S<1
             --> goto 4
@@ -10380,7 +10650,7 @@
   --> goto 37
 -- state S39
   czF = false
-  for aRD in pairs (cKb [91] ["Alerts"] ["marks"]) do
+  for aRD in F2602 (cKb [91] ["Alerts"] ["marks"]) do
       -- nested state machine (pc=czE, entry=None)
           -- state S<1
             czE = if czC then cOg [6629] else cOg [1219]
@@ -10671,7 +10941,7 @@
   -- (constant pool alias cOn)
   bna ["on"] [ayJ] = nil
   ckA = false
-  for ayM, ayN in pairs (bna ["entries"]) do
+  for ayM, ayN in F2602 (bna ["entries"]) do
       -- nested state machine (pc=ckz, entry=0)
           -- state S<1
             --> if ckE ["category"] == ayJ then goto 2
@@ -10714,7 +10984,7 @@
 -- locals: local byO, byP, byQ, byS = nil, nil, nil, nil; local byN = nil; byN = 1
 -- state S357
   byP = false
-  for ky, kz in ipairs (kx:GetDescendants ()) do
+  for ky, kz in F4813 (kx:GetDescendants ()) do
       -- nested state machine (pc=byO, entry=2)
           -- state S<1
             byP = true
@@ -10852,7 +11122,7 @@
   --> goto 16201
 -- state S16198
   ch_ = false
-  for avJ, avK in ipairs (bmK ["Players"]:GetPlayers ()) do
+  for avJ, avK in F4813 (bmK ["Players"]:GetPlayers ()) do
       -- nested state machine (pc=chZ, entry=3)
           -- state S<1
             ch_ = true
@@ -10911,7 +11181,7 @@
   -- opaque predicate folded (jump is unconditional)
 -- state S16201
   chU = false
-  for avx, avy in ipairs (chL) do
+  for avx, avy in F4813 (chL) do
       -- nested state machine (pc=chT, entry=3)
           -- state S<1
             chU = true
@@ -10934,11 +11204,11 @@
             --> goto 1
           -- state S5
             ch_ = false
-            for avB, avC in ipairs (chL) do
+            for avB, avC in F4813 (chL) do
                 -- nested state machine (pc=chZ, entry=0)
                     -- state S<1
                       ch5 = false
-                      for avD, avE in ipairs (ch3:GetChildren ()) do
+                      for avD, avE in F4813 (ch3:GetChildren ()) do
                           -- nested state machine (pc=ch4, entry=3)
                               -- state S<1
                                 --> goto 7
@@ -11027,7 +11297,7 @@
   --> if not (chH) then goto 16210
 -- state S16210
   ch_ = false
-  for avQ in pairs (cKb [50]) do
+  for avQ in F2602 (cKb [50]) do
       -- nested state machine (pc=chZ, entry=1)
           -- state S<1
             ch_ = true
@@ -11169,7 +11439,7 @@
 -- state S11201
   bUm = {}
   bUs = false
-  for OV, OW in ipairs (cKb [59] ()) do
+  for OV, OW in F4813 (cKb [59] ()) do
       -- nested state machine (pc=bUr, entry=3)
           -- state S<1
             --> EXIT
@@ -11247,7 +11517,7 @@
   -- (constant pool alias cOy)
   arX ["phase"] = "releasing"
   arX ["deadline"] = cfJ + cKb [61] ["acknowledgement"]
-  bn8 ("server_skill_controller_signaler", "Blocking", "UnHold", Vector3 ["zero"])
+  bn8 ("server_skill_controller_signaler", "Blocking", "UnHold", F3022 ["zero"])
   return
   --> RETURN
 -- state S10409
@@ -11546,7 +11816,7 @@
   cp3 = cp8
   -- (constant pool alias cOF)
   bpz ["WorldStatus"] = "Joining " .. cp3
-  cp4, cp8, cp9 = pcall (cp5 ["Request"], {["placeId"] = cp6, ["privateOwner"] = cp7})
+  cp4, cp8, cp9 = F2175 (cp5 ["Request"], {["placeId"] = cp6, ["privateOwner"] = cp7})
   --> if not cp4 then goto 2945
   --> if not (not cp4) then goto 2948
 -- state S2976
@@ -11664,13 +11934,13 @@
   --> if not (cay) then goto 14254
 -- state S14247
   -- (constant pool alias cOG)
-  pcall (cau ["buy"], cav)
+  F2175 (cau ["buy"], cav)
   bpY ("AutoBuyExp")
   --> goto 14256
 -- state S14248
-  local cOH = task ["wait"]
+  local cOH = F6128 ["wait"]
   -- (constant pool alias cOG)
-  task.wait (0.25)
+  F3916 (0.25)
   caw + = 0.25
   --> goto 14249
 -- state S14249
@@ -11679,8 +11949,8 @@
   cay = caz
   --> goto 14255
 -- state S14251
-  local cOI = coroutine ["running"]
-  caz = not bny ["runs"] [coroutine.running ()]
+  local cOI = F3109 ["running"]
+  caz = not bny ["runs"] [F5473 ()]
   --> if caz then goto 14250
   --> if not (caz) then goto 14241
 -- state S14252
@@ -11808,7 +12078,7 @@
   return
   --> RETURN
 -- state S8253
-  pcall (cKb [83])
+  F2175 (cKb [83])
   --> goto 8250  (outside dispatcher -> EXIT)
 -- state S8254..13328
   --> goto 3127  (outside dispatcher -> EXIT)
@@ -11844,7 +12114,7 @@
 -- state S15572
   bXW, bXV = nil, nil
   bX3 = false
-  for Un, Uo in ipairs (bXU:GetDescendants ()) do
+  for Un, Uo in F4813 (bXU:GetDescendants ()) do
       -- nested state machine (pc=bX2, entry=9)
           -- state S<1
             bX3 = true
@@ -12030,7 +12300,7 @@
 -- state S10047
   bNt = cKb [132]:GetServerTimeNow ()
   bND = false
-  for FP, FQ in ipairs (bNs:GetChildren ()) do
+  for FP, FQ in F4813 (bNs:GetChildren ()) do
       -- nested state machine (pc=bNC, entry=16)
           -- state S<1
             bNA = math.huge
@@ -12282,7 +12552,7 @@
   -- (constant pool alias cOO)
   cpL ["cursor"] = cpP
   cpL ["current"] = cpQ
-  cpP, cpS = pcall (cpM ["ToServer"], "Queue", cpR, cpL ["fill"], cpL ["ranked"])
+  cpP, cpS = F2175 (cpM ["ToServer"], "Queue", cpR, cpL ["fill"], cpL ["ranked"])
   cpR = cpS  ~= false
   cpU = cpP
   --> if cpU then goto 10130
@@ -12295,10 +12565,10 @@
 -- F3110(params: ajs)  states=20  pc=b9e  C=1890  entry=1877
 -- locals: local cJT = table.in sert; local b88, b89, b9a, b9b, b9c, b9d, b9f, b9g, b9h, b9i, b9j = nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil; local b9e = nil; b9e = 13
 -- state S1874
-  return {["name"] = "Cards Picked", ["value"] = table.concat (b88, "\n"), ["in line"] = false}
+  return {["name"] = "Cards Picked", ["value"] = table.concat (b88, " "), ["in line"] = false}
   --> RETURN
 -- state S1875
-  b9a (b88, "\u{203A}**%s**%s":format (b9b, b9d))
+  b9a (b88, "\\u{203A}**%s**%s":format (b9b, b9d))
   --> goto 1884
 -- state S1876
   b88 = # ajs ["Cards"] == 0
@@ -12322,7 +12592,7 @@
   b9f = b9a
   --> goto 1879
 -- state S1881
-  b9c = " \u{B7} " .. b89 ["rarity"]
+  b9c = " \\u{B7} " .. b89 ["rarity"]
   --> goto 1886
 -- state S1882
   b9d = ""
@@ -12347,7 +12617,7 @@
   --> if b9d then goto 1875
   --> if not (b9d) then goto 1882
 -- state S1887
-  cJT (b88, 1, "\u{203A}*%d earlier picks*":format (# ajs ["Cards"] - # b88))
+  cJT (b88, 1, "\\u{203A}*%d earlier picks*":format (# ajs ["Cards"] - # b88))
   --> goto 1874
 -- state S1888
   --> EXIT
@@ -12371,7 +12641,7 @@
 -- state S5138..5925
   --> EXIT
 -- state S5926
-  pcall (cpC ["ToServer"], "HudState", true)
+  F2175 (cpC ["ToServer"], "HudState", true)
   --> goto 5929
 -- state S5927
   --> if cpD then goto 5928
@@ -12457,7 +12727,7 @@
   --> goto 6637
 -- state S6637
   cqT = false
-  for aGB, aGC in ipairs (cqQ) do
+  for aGB, aGC in F4813 (cqQ) do
       -- nested state machine (pc=cqS, entry=7)
           -- state S<1
             cqO = # cqN > =  aGz
@@ -12538,7 +12808,7 @@
   b8R, b8S = {}, {}
   b8Y = false
   -- (constant pool alias cOT)
-  for ajk, ajl in ipairs (ajg ["Items"]) do
+  for ajk, ajl in F4813 (ajg ["Items"]) do
       -- nested state machine (pc=b8X, entry=2)
           -- state S<1
             --> EXIT
@@ -12564,7 +12834,7 @@
   table.sort (b8S)
   b8T = {}
   b83 = false
-  for ajo, ajp in ipairs (b8S) do
+  for ajo, ajp in F4813 (b8S) do
       -- nested state machine (pc=b82, entry=4)
           -- state S<1
             --> EXIT
@@ -12576,23 +12846,23 @@
             --> goto 0  (outside dispatcher -> EXIT)
           -- state S3
             b8U = b8R [b87]
-            b8V = "\u{203A}**%s**\u{B7} %s":format (b87, b8U ["category"])
+            b8V = "\\u{203A}**%s**\\u{B7} %s":format (b87, b8U ["category"])
             --> if b8U ["count"] > 1 then goto 5
             --> if not (b8U ["count"] > 1) then goto 2
           -- state S4
             --> if # b8T > =  10 then goto 6
             --> if not (# b8T > =  10) then goto 3
           -- state S5
-            b8V .. = " \u{D7}%d":format (b8U ["count"])
+            b8V .. = " \\u{D7}%d":format (b8U ["count"])
             --> goto 2
           -- state S>=6
-            cJS (b8T, "\u{203A}*and %d more*":format (# b8S - # b8T))
+            cJS (b8T, "\\u{203A}*and %d more*":format (# b8S - # b8T))
             --> goto 1
       if b83 then
           break
       end
   end
-  return {["name"] = "Items Obtained", ["value"] = table.concat (b8T, "\n"), ["in line"] = false}
+  return {["name"] = "Items Obtained", ["value"] = table.concat (b8T, " "), ["in line"] = false}
   --> RETURN
 -- state S3467
   --> EXIT
@@ -12723,11 +12993,11 @@
 -- state S>=14568
   bxc = {}
   bxh = false
-  for iQ, iR in ipairs (cKb [59] ()) do
+  for iQ, iR in F4813 (cKb [59] ()) do
       -- nested state machine (pc=bxg, entry=0)
           -- state S<1
             bxn = false
-            for iS, iT in ipairs (bxl ["folder"]:GetChildren ()) do
+            for iS, iT in F4813 (bxl ["folder"]:GetChildren ()) do
                 -- nested state machine (pc=bxm, entry=9)
                     -- state S<1
                       --> if bxe then goto 3
@@ -12826,7 +13096,76 @@
   --> if not (not cKb [38] ("AutoDemon")) then goto 9464
 -- state S9464
   -- (constant pool alias cO_)
-  bSz, bSA = pcall (function () local bSy = nil; bSy = 13; while true do bSy = 4243 - bSy; do if bSy < 4238 then if bSy < 4231 then if bSy < 4228 then if bSy < 4048 then break else if bSy < 4227 then break else if bSy == 4227 then bSy = if cKb [91] ["DemonController"] ["stopped"] then 14 else 5 else bSy = 11241; continue end else if bSy < 4229 then if bSy == 4228 then bSy = if cKb [91] ["DemonController"] ["owns"] ("Biwa Bell") then 2 else 0 else bSy = 4239; continue end else if bSy < 4230 then if bSy == 4229 then return else bSy = 4235; continue end else bSy = if not cKb [86] (20) then 1 else 16 end else if bSy < 4234 then if bSy < 4232 then if bSy == 4231 then local cO0 = cKb [136]; bpz ["MaxHealth"] = "Muzan's Blood in hand, drinking is off"; local cO1 = task ["wait"]; task.wait (2); return else bSy = 4241; continue end else if bSy < 4233 then if bSy == 4232 then bSy = if not cKb [91] ["DemonController"] ["drink"] then 12 else 3 else bSy = 8959; continue end else bSy = if cKb [91] ["DemonController"] ["questNode"] () then 4 else 15 end else if bSy < 4236 then if bSy < 4235 then return else break end else if bSy < 4237 then if bSy == 4236 then cKb [91] ["DemonController"] ["ringBell"] (); bSy = 9 else bSy = 11241; continue end else cKb [91] ["DemonController"] ["askMuzan"] (); bSy = 9 end else if bSy < 4566 then if bSy < 4241 then if bSy < 4239 then bSy = if cKb [91] ["DemonController"] ["owns"] ("Muzan's Blood") then 11 else 10 else if bSy < 4240 then if bSy == 4239 then cKb [91] ["DemonController"] ["workQuest"] (); return else bSy = 4231; continue end else if bSy == 4240 then cKb [91] ["DemonController"] ["drinkBlood"] (); return else bSy = 8959; continue end else if bSy < 4242 then bSy = if cKb [91] ["DemonController"] ["in Lair"] () then 6 else 7 else if bSy < 4243 then bpz ["MaxHealth"] = "Waiting for character"; return else if bSy == 4243 then cKb [91] ["DemonController"] ["getBell"] (); bSy = 8 else bSy = 4237; continue end else break end end end end)
+  bSz,bSA= F2175(
+          function()
+              -- nested state machine (pc=bSy, entry=4230)
+                  -- state S<4048
+                    --> EXIT
+                  -- state S4048..4226
+                    --> EXIT
+                  -- state S4227
+                    --> if cKb [91] ["DemonController"] ["stopped"] then goto 4229
+                    --> if not (cKb [91] ["DemonController"] ["stopped"]) then goto 4238
+                  -- state S4228
+                    --> if cKb [91] ["DemonController"] ["owns"] ("Biwa Bell") then goto 4241
+                    --> if not (cKb [91] ["DemonController"] ["owns"] ("Biwa Bell")) then goto 4243
+                  -- state S4229
+                    return
+                    --> RETURN
+                  -- state S4230
+                    --> if not cKb [86] (20) then goto 4242
+                    --> if not (not cKb [86] (20)) then goto 4227
+                  -- state S4231
+                    -- (constant pool alias cO0)
+                    bpz ["MaxHealth"] = "Muzan's Blood in hand, drinking is off"
+                    local cO1 = F6128 ["wait"]
+                    F3916 (2)
+                    return
+                    --> RETURN
+                  -- state S4232
+                    --> if not cKb [91] ["DemonController"] ["drink"] then goto 4231
+                    --> if not (not cKb [91] ["DemonController"] ["drink"]) then goto 4240
+                  -- state S4233
+                    --> if cKb [91] ["DemonController"] ["questNode"] () then goto 4239
+                    --> if not (cKb [91] ["DemonController"] ["questNode"] ()) then goto 4228
+                  -- state S4234
+                    return
+                    --> RETURN
+                  -- state S4235
+                    --> EXIT
+                  -- state S4236
+                    cKb [91] ["DemonController"] ["ringBell"] ()
+                    --> goto 4234
+                  -- state S4237
+                    cKb [91] ["DemonController"] ["askMuzan"] ()
+                    --> goto 4234
+                  -- state S4238
+                    --> if cKb [91] ["DemonController"] ["owns"] ("Muzan's Blood") then goto 4232
+                    --> if not (cKb [91] ["DemonController"] ["owns"] ("Muzan's Blood")) then goto 4233
+                  -- state S4239
+                    cKb [91] ["DemonController"] ["workQuest"] ()
+                    return
+                    --> RETURN
+                  -- state S4240
+                    cKb [91] ["DemonController"] ["drinkBlood"] ()
+                    return
+                    --> RETURN
+                  -- state S4241
+                    --> if cKb [91] ["DemonController"] ["in Lair"] () then goto 4237
+                    --> if not (cKb [91] ["DemonController"] ["in Lair"] ()) then goto 4236
+                  -- state S4242
+                    bpz ["MaxHealth"] = "Waiting for character"
+                    return
+                    --> RETURN
+                  -- state S4243
+                    cKb [91] ["DemonController"] ["getBell"] ()
+                    --> goto 4235
+                  -- state S4244..4565
+                    --> goto 6  (outside dispatcher -> EXIT)
+                  -- state S>=4566
+                    --> EXIT
+          end
+      )
   bpY ("AutoDemon")
   --> if not bSz then goto 9453
   --> if not (not bSz) then goto 9465
@@ -12887,12 +13226,16 @@
 -- state S<6026
   --> EXIT
 -- state S6026
-  local cO3 = coroutine ["status"]
-  --> if coroutine.status (cKb [35] ["Loop"])  ~= "TextColor3" then goto 6030
-  --> if not (coroutine.status (cKb [35] ["Loop"])  ~= "TextColor3") then goto 6028
+  local cO3 = F3109 ["status"]
+  --> if F6075 (cKb [35] ["Loop"])  ~= "TextColor3" then goto 6030
+  --> if not (F6075 (cKb [35] ["Loop"])  ~= "TextColor3") then goto 6028
 -- state S6027
   -- (constant pool alias cO4)
-  pcall (function () cKb [35] ["ItemHook"]:Disconnect () end)
+  F2175(
+      function()
+          cKb [35] ["ItemHook"]:Disconnect ()
+      end
+  )
   cKb [35] ["ItemHook"] = nil
   --> goto 6029
 -- state S6028
@@ -12905,8 +13248,8 @@
   cKb [35] ["Draining"] = false
   --> goto 6032
 -- state S6030
-  local cO5 = task ["cancel"]
-  pcall (task.cancel, cKb [35] ["Loop"])
+  local cO5 = F6128 ["cancel"]
+  F2175 (F5108, cKb [35] ["Loop"])
   --> goto 6028
 -- state S6031
   --> if cKb [35] ["ItemHook"] then goto 6027
@@ -12916,7 +13259,7 @@
 -- state S6033
   b9N = false
   -- (constant pool alias cO4)
-  for akb, akc in ipairs (cKb [35] ["Order"]) do
+  for akb, akc in F4813 (cKb [35] ["Order"]) do
       -- nested state machine (pc=b9M, entry=2)
           -- state S<1
             b9N = true
@@ -13035,7 +13378,7 @@
   csf ["hunt"] = true
   csh = {}
   csm = false
-  for aIc, aId in ipairs (cKb [91] ["HuntController"] ["offers"] ()) do
+  for aIc, aId in F4813 (cKb [91] ["HuntController"] ["offers"] ()) do
       -- nested state machine (pc=csl, entry=1)
           -- state S<1
             --> goto 6
@@ -13071,7 +13414,7 @@
       end
   end
   css = false
-  for aIg in pairs (csf) do
+  for aIg in F2602 (csf) do
       -- nested state machine (pc=csr, entry=5)
           -- state S<1
             css = true
@@ -13115,7 +13458,7 @@
 -- state S6740
   bQH = nil
   bQL = false
-  for Jv, Jw in ipairs (bQG:GetChildren ()) do
+  for Jv, Jw in F4813 (bQG:GetChildren ()) do
       -- nested state machine (pc=bQK, entry=0)
           -- state S<1
             bQG = bQP:FindFirstChild ("ActiveNpcs")
@@ -13135,7 +13478,7 @@
             --> goto 3
           -- state S5
             bQR = false
-            for JA, JB in ipairs (bQG:GetChildren ()) do
+            for JA, JB in F4813 (bQG:GetChildren ()) do
                 -- nested state machine (pc=bQQ, entry=1)
                     -- state S<1
                       --> if bQG then goto 7
@@ -13261,7 +13604,7 @@
   ceE = {}
   ceR = false
   -- (constant pool alias cPd)
-  for aqG, aqH in ipairs (ceD:GetChildren ()) do
+  for aqG, aqH in F4813 (ceD:GetChildren ()) do
       -- nested state machine (pc=ceQ, entry=7)
           -- state S<1
             ceF = bno ["Items"] [ceD]
@@ -13270,7 +13613,7 @@
             --> EXIT
           -- state S2
             ceX = false
-            for aqT, aqU in ipairs (ceV:GetChildren ()) do
+            for aqT, aqU in F4813 (ceV:GetChildren ()) do
                 -- nested state machine (pc=ceW, entry=33)
                     -- state S<1
                       ceE [ceF] = ceI
@@ -13489,8 +13832,8 @@
           break
       end
   end
-  --> if next (ceE) then goto 5143
-  --> if not (next (ceE)) then goto 5148
+  --> if F3173 (ceE) then goto 5143
+  --> if not (F3173 (ceE)) then goto 5148
 -- state S5146
   return nil
   --> RETURN
@@ -13544,7 +13887,7 @@
   bUG = cKb [91] ["LootController"] ["range"]
   bUI = {}
   bUO = false
-  for Pf, Pg in ipairs (bqo ()) do
+  for Pf, Pg in F4813 (bqo ()) do
       -- nested state machine (pc=bUN, entry=6)
           -- state S<1
             bUL = 0
@@ -13617,7 +13960,12 @@
           break
       end
   end
-  table.sort (bUI, function (Po, Pp) return Po ["gap"] < Pp ["gap"] end)
+  table.sort(
+      bUI,
+      function(Po, Pp)
+          return Po ["gap"] < Pp ["gap"]
+      end
+  )
   return bUI
   --> RETURN
 -- state S13952
@@ -13640,7 +13988,11 @@
   bYr = bYq
   --> goto 2623
 -- state S2622
-  bYp, bYq = pcall (function () return bmK ["GuiService"]:GetGuiInset () end)
+  bYp,bYq= F2175(
+          function()
+              return bmK ["GuiService"]:GetGuiInset ()
+          end
+      )
   bYr = bYp
   --> if bYr then goto 2621
   --> if not (bYr) then goto 2623
@@ -13649,7 +14001,7 @@
   --> if bYp then goto 2619
   --> if not (bYp) then goto 2624
 -- state S2624
-  bYp = Vector2 ["zero"]
+  bYp = F6475 ["zero"]
   --> goto 2619
 -- state S2625..3887
   --> EXIT
@@ -13668,7 +14020,7 @@
 -- state S523
   ce8 = false
   -- (constant pool alias cPf)
-  for ari, arj in ipairs (ce2) do
+  for ari, arj in F4813 (ce2) do
       -- nested state machine (pc=ce7, entry=3)
           -- state S<1
             return cfc
@@ -13696,7 +14048,7 @@
   end
   ce1 = ce2 [1]
   cfe = false
-  for arm, arn in ipairs (ce2) do
+  for arm, arn in F4813 (ce2) do
       -- nested state machine (pc=cfd, entry=5)
           -- state S<1
             ce2 = cfi ["combo"]  ~= ce1 ["combo"]
@@ -13810,14 +14162,46 @@
   return
   --> RETURN
 -- state S8828
-  local cPh = task ["wait"]
+  local cPh = F6128 ["wait"]
   -- (constant pool alias cPi)
-  task.wait (0.2)
+  F3916 (0.2)
   coJ + = 0.2
   --> goto 8830
 -- state S8829
   -- (constant pool alias cPi)
-  pcall (function () local coD, coE, coF, coH = nil, nil, nil, nil; local coC = nil; coC = 0; while true do coC = 15447 - coC; do if coC < 15447 then break else if coC < 15796 then if coC == 15447 then coE = false; for aD7, aD8 in ipairs (cKb [95] ()) do coF = aD7; coH = aD8; local coG = coF; local coI = coH; local coD = nil; local cPj = cKb [136]; coD = 0; while true do if coD < 2 then if coD < 1 then coD = if not bny ["controllerValid"] (cKb [91] ["SoulController"]) then 2 else 4 else coE = true; coD = 3 end else if coD < 3 then coD = 1 else if coD < 4 then break else boc (coI); coD = 3 end end; if coE then break end end; coC = 1 else break end else break end end end end)
+  F2175(
+      function()
+          -- nested state machine (pc=coC, entry=15447)
+              -- state S<15447
+                --> EXIT
+              -- state S15447
+                coE = false
+                for aD7, aD8 in F4813 (cKb [95] ()) do
+                    -- nested state machine (pc=coD, entry=0)
+                        -- state S<1
+                          --> if not bny ["controllerValid"] (cKb [91] ["SoulController"]) then goto 2
+                          --> if not (not bny ["controllerValid"] (cKb [91] ["SoulController"])) then goto 4
+                        -- state S1
+                          coE = true
+                          --> goto 3
+                        -- state S2
+                          --> goto 1
+                        -- state S3
+                          --> EXIT
+                        -- state S>=4
+                          boc (coI)
+                          --> goto 3
+                    if coE then
+                        break
+                    end
+                end
+                --> goto 15446  (outside dispatcher -> EXIT)
+              -- state S15448..15795
+                --> EXIT
+              -- state S>=15796
+                --> EXIT
+      end
+  )
   bpY ("AutoSoul")
   --> goto 8836
 -- state S8830
@@ -13867,7 +14251,7 @@
 -- state S8490
   cx6 = boa (aPS)
   cx9 = false
-  for aPX, aPY in ipairs (cKb [35] ["Catalog"] [aPR]) do
+  for aPX, aPY in F4813 (cKb [35] ["Catalog"] [aPR]) do
       -- nested state machine (pc=cx8, entry=0)
           -- state S<1
             cx5 ["Events"] [cyd ["key"]] = cx6 [cyd ["label"]] == true
@@ -13939,8 +14323,8 @@
   -- [dropped obfuscation helper: bIQ = if bIM then 1 else 0]
   -- [dropped obfuscation helper: bIO = 233*bIQ + 1062*(1 - bIQ)]
   -- [dropped obfuscation helper: bIP = 1892*bIQ + 3533*(1 - bIQ)]
-  --> if (bIO*1827 + bIP*509 + bIO*bIP) % 16777213 == function ()local brP, brQ = nil, nil; local brR = nil; brR = 1; while truedobrR = 13386-brR; do ifbrR < 13381thenbreakelseifbrR < 13385thenifbrR < 13383thenifbrR < 13382thenifbrR == 13381thenreturnbrPelsebrR = 9180; continueendelsebrP = brQ; brR = ifbrPthen5else2endelseifbrR < 13384thenbreakelseifbrR == 13384thenbrP = nil; brR = 5elsebrR = 12218; continueendelseifbrR < 15937thenifbrR < 13386thenifbrR == 13385thenlocalcRe = cKb[136]; brP = cKb[132]:GetAttribute("MinigameKey"); brQ = type(brP) == "string"; brR = ifbrQthen0.else 4elsebrR = 10078; continueendelseifbrR == 13386thenbrQ = brP; brR = 4elsebreakendelsebreakendendend end then goto 8787
-  --> if not ((bIO*1827 + bIP*509 + bIO*bIP) % 16777213 == function ()local brP, brQ = nil, nil; local brR = nil; brR = 1; while truedobrR = 13386-brR; do ifbrR < 13381thenbreakelseifbrR < 13385thenifbrR < 13383thenifbrR < 13382thenifbrR == 13381thenreturnbrPelsebrR = 9180; continueendelsebrP = brQ; brR = ifbrPthen5else2endelseifbrR < 13384thenbreakelseifbrR == 13384thenbrP = nil; brR = 5elsebrR = 12218; continueendelseifbrR < 15937thenifbrR < 13386thenifbrR == 13385thenlocalcRe = cKb[136]; brP = cKb[132]:GetAttribute("MinigameKey"); brQ = type(brP) == "string"; brR = ifbrQthen0.else 4elsebrR = 10078; continueendelseifbrR == 13386thenbrQ = brP; brR = 4elsebreakendelsebreakendendend end) then goto 8788
+  --> if (bIO*1827 + bIP*509 + bIO*bIP) % 16777213 == F4875 then goto 8787
+  --> if not ((bIO*1827 + bIP*509 + bIO*bIP) % 16777213 == F4875) then goto 8788
 -- state S8796
   bIL = bIK + yu
   bIM = bIL < 2
@@ -14007,8 +14391,8 @@
   --> goto 4271
 -- state S4270
   cKb [69] (bRG)
-  local cPo = task ["wait"]
-  task.wait (1)
+  local cPo = F6128 ["wait"]
+  F3916 (1)
   --> goto 4289
 -- state S4271
   bRG = bRH
@@ -14064,9 +14448,9 @@
   --> if not (bRH) then goto 4282
 -- state S4285
   bRG = bRH
-  local cPp = Vector3 ["new"]
+  local cPp = F3022 ["new"]
   -- (constant pool alias cPn)
-  bqd (bRG + Vector3.new (0, 2, 6), 0.4, bmO (cKb [91] ["DemonController"]))
+  bqd (bRG + F4803 (0, 2, 6), 0.4, bmO (cKb [91] ["DemonController"]))
   --> if cKb [91] ["DemonController"] ["stopped"] then goto 4293
   --> if not (cKb [91] ["DemonController"] ["stopped"]) then goto 4263
 -- state S4286
@@ -14082,7 +14466,12 @@
 -- state S4289
   -- (constant pool alias cPn)
   bn8 ("MuzanLairAssign")
-  bRG = cKb [13] (function () return cKb [91] ["DemonController"] ["questNode"] ()  ~= nil end, 8)
+  bRG= cKb[13](
+          function()
+              return cKb [91] ["DemonController"] ["questNode"] ()  ~= nil
+          end,
+          8
+      )
   bn8 ("NpcTalking", "Ended")
   --> if bRG then goto 4274
   --> if not (bRG) then goto 4273
@@ -14342,7 +14731,7 @@
   --> if not (not cCb) then goto 9914
 -- state S9910
   cCh = false
-  for aU4, aU5 in ipairs (cCa:GetChildren ()) do
+  for aU4, aU5 in F4813 (cCa:GetChildren ()) do
       -- nested state machine (pc=cCg, entry=1)
           -- state S<1
             --> if cCe then goto 5
@@ -14408,7 +14797,7 @@
   --> EXIT
 -- state S3858
   bQn = false
-  for Jj, Jk in ipairs (bQe) do
+  for Jj, Jk in F4813 (bQe) do
       -- nested state machine (pc=bQm, entry=5)
           -- state S<1
             bQd = # bQr
@@ -14423,7 +14812,7 @@
           -- state S3
             bQe = false
             bQy = false
-            for Jo, Jp in ipairs (bQc) do
+            for Jo, Jp in F4813 (bQc) do
                 -- nested state machine (pc=bQx, entry=4)
                     -- state S<1
                       bQe = true
@@ -14493,7 +14882,7 @@
   bQc = {}
   bQh = false
   -- (constant pool alias cPz)
-  for Jd, Je in ipairs (cKb [141] ["MUZAN_ROUTES"]) do
+  for Jd, Je in F4813 (cKb [141] ["MUZAN_ROUTES"]) do
       -- nested state machine (pc=bQg, entry=0)
           -- state S<1
             bQc [# bQc + 1] = bQl
@@ -14644,7 +15033,7 @@
   --> EXIT
 -- state S7943
   bKR = false
-  for Bl, Bm in pairs (Bj) do
+  for Bl, Bm in F2602 (Bj) do
       -- nested state machine (pc=bKQ, entry=1)
           -- state S<1
             --> goto 3
@@ -14719,7 +15108,7 @@
   --> EXIT
 -- state S12855
   b97 = false
-  for akx, aky in ipairs (b94:GetDescendants ()) do
+  for akx, aky in F4813 (b94:GetDescendants ()) do
       -- nested state machine (pc=b96, entry=None)
           -- state S<1
             b93 = (cab:IsA (cPE [5224]))
@@ -14776,9 +15165,131 @@
   --> goto 228
 -- state S225
   -- (constant pool alias cPF)
-  pcall (function () local ciO, ciP, ciQ, ciR, ciS, ciT, ciV, ciW, ciX, ciZ, ci0, ci1, ci2 = nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil; local ciU = nil; ciU = 7; while true do ciU = 759 - ciU; do if ciU < 759 then if ciU < 756 then if ciU < 754 then if ciU < 753 then if ciU == 752 then ciU = if not cKb [99] ["tweaks"] ["ownership"] then 1 else 5 else ciU = 757; continue end else return end else if ciU < 755 then ciO = cKb [145] (); ciU = if not ciO then 3 else 0 else break end else if ciU < 757 then if ciU == 756 then bpp ["clear"] (); return else ciU = 757; continue end else if ciU < 758 then if ciU == 757 then bpp ["clear"] (); ciU = 6 else ciU = 755; continue end else if ciU == 758 then ciU = if next (bpp ["marks"])  ~= nil then 2 else 6 else ciU = 757; continue end else if ciU < 3066 then if ciU == 759 then local cPG = cKb [136]; ciP = cKb [99] ["tweaks"] ["ownershipRange"]; ciQ = {}; ciW = false; for awL, awM in ipairs (boo ()) do ciX = awL; ciZ = awM; local ciY = ciX; local ci_ = ciZ; local ciV = nil; ciV = 3; while true do if ciV < 7 then if ciV < 3 then if ciV < 1 then ciV = if ciS then 13 else 5 else if ciV < 2 then ciT = ciR; ciV = if ciT then 8 else 9 else ciR = bm8; ciV = 1 end else if ciV < 5 then if ciV < 4 then ciR = ci_ ["model"]; ciS = (ciR:FindFirstChild ("HumanoidRootPart")); ciV = if ciS then 10 else 6 else ciS = (ciT ["Position"] - ciO ["Position"]) ["Magnitude"] < =  ciP; ciV = 0 end else if ciV < 6 then ciV = 7 else ciS = ciR ["PrimaryPart"]; ciV = 10 end else if ciV < 11 then if ciV < 9 then if ciV < 8 then break else ciR = ciT; ciS ["FillColor"] = ciR; ciS ["OutlineColor"] = ciR; ciV = 5 end else if ciV < 10 then ciT = bo9; ciV = 8 else ciT = ciS; ciS = ciT; ciV = if ciS then 11 else 12 end else if ciV < 13 then if ciV < 12 then ciS = ciT:IsA ("BasePart"); ciV = 12 else ciV = if ciS then 4 else 0 end else if ciV < 14 then ciQ [ciR] = true; ciS = cKb [78] (ciR); ciR = ciT ["ReceiveAge"] == 0; ciV = if ciR then 2 else 1 else ciW = true; ciV = 7 end end; if ciW then break end end; ci1 = false; for awY in pairs (bpp ["marks"]) do ci2 = awY; local ci3 = ci2; local ci0 = nil; ci0 = 6; while true do if ci0 < 3 then if ci0 < 1 then ci1 = true; ci0 = 4 else if ci0 < 2 then cKb [112] (ci3); ci0 = 2 else ci0 = 4 end else if ci0 < 5 then if ci0 < 4 then ci0 = if ciO then 1 else 2 else break end else if ci0 < 6 then ciO = ci3 ["Parent"] == nil; ci0 = 3 else ciO = not ciQ [ci3]; ci0 = if ciO then 3 else 5 end end; if ci1 then break end end; ciU = 4 else ciU = 754; continue end else break end end end end)
-  local cPH = task ["wait"]
-  task.wait (0.2)
+  F2175(
+      function()
+          -- nested state machine (pc=ciU, entry=752)
+              -- state S752
+                --> if not cKb [99] ["tweaks"] ["ownership"] then goto 758
+                --> if not (not cKb [99] ["tweaks"] ["ownership"]) then goto 754
+              -- state S753
+                return
+                --> RETURN
+              -- state S754
+                ciO = cKb [145] ()
+                --> if not ciO then goto 756
+                --> if not (not ciO) then goto 759
+              -- state S755
+                --> EXIT
+              -- state S756
+                bpp ["clear"] ()
+                return
+                --> RETURN
+              -- state S757
+                bpp ["clear"] ()
+                --> goto 753
+              -- state S758
+                --> if F3173 (bpp ["marks"])  ~= nil then goto 757
+                --> if not (F3173 (bpp ["marks"])  ~= nil) then goto 753
+              -- state S759
+                -- (constant pool alias cPG)
+                ciP = cKb [99] ["tweaks"] ["ownershipRange"]
+                ciQ = {}
+                ciW = false
+                for awL, awM in F4813 (boo ()) do
+                    -- nested state machine (pc=ciV, entry=3)
+                        -- state S<1
+                          --> if ciS then goto 13
+                          --> if not (ciS) then goto 5
+                        -- state S1
+                          ciT = ciR
+                          --> if ciT then goto 8
+                          --> if not (ciT) then goto 9
+                        -- state S2
+                          ciR = bm8
+                          --> goto 1
+                        -- state S3
+                          ciR = ci_ ["model"]
+                          ciS = (ciR:FindFirstChild ("HumanoidRootPart"))
+                          --> if ciS then goto 10
+                          --> if not (ciS) then goto 6
+                        -- state S4
+                          ciS = (ciT ["Position"] - ciO ["Position"]) ["Magnitude"] < =  ciP
+                          --> goto 0  (outside dispatcher -> EXIT)
+                        -- state S5
+                          --> goto 7
+                        -- state S6
+                          ciS = ciR ["PrimaryPart"]
+                          --> goto 10
+                        -- state S7
+                          --> EXIT
+                        -- state S8
+                          ciR = ciT
+                          ciS ["FillColor"] = ciR
+                          ciS ["OutlineColor"] = ciR
+                          --> goto 5
+                        -- state S9
+                          ciT = bo9
+                          --> goto 8
+                        -- state S10
+                          ciT = ciS
+                          ciS = ciT
+                          --> if ciS then goto 11
+                          --> if not (ciS) then goto 12
+                        -- state S11
+                          ciS = ciT:IsA ("BasePart")
+                          --> goto 12
+                        -- state S12
+                          --> if ciS then goto 4
+                          --> if not (ciS) then goto 0  (outside dispatcher -> EXIT)
+                        -- state S13
+                          ciQ [ciR] = true
+                          ciS = cKb [78] (ciR)
+                          ciR = ciT ["ReceiveAge"] == 0
+                          --> if ciR then goto 2
+                          --> if not (ciR) then goto 1
+                        -- state S>=14
+                          ciW = true
+                          --> goto 7
+                    if ciW then
+                        break
+                    end
+                end
+                ci1 = false
+                for awY in F2602 (bpp ["marks"]) do
+                    -- nested state machine (pc=ci0, entry=6)
+                        -- state S<1
+                          ci1 = true
+                          --> goto 4
+                        -- state S1
+                          cKb [112] (ci3)
+                          --> goto 2
+                        -- state S2
+                          --> goto 4
+                        -- state S3
+                          --> if ciO then goto 1
+                          --> if not (ciO) then goto 2
+                        -- state S4
+                          --> EXIT
+                        -- state S5
+                          ciO = ci3 ["Parent"] == nil
+                          --> goto 3
+                        -- state S>=6
+                          ciO = not ciQ [ci3]
+                          --> if ciO then goto 3
+                          --> if not (ciO) then goto 5
+                    if ci1 then
+                        break
+                    end
+                end
+                --> goto 755
+              -- state S760..3065
+                --> goto 5  (outside dispatcher -> EXIT)
+              -- state S>=3066
+                --> EXIT
+      end
+  )
+  local cPH = F6128 ["wait"]
+  F3916 (0.2)
   --> goto 226
 -- state S226
   --> goto 223
@@ -14827,7 +15338,7 @@
   --> if not (not cKb [58] (cgJ)) then goto 371
 -- state S367
   cgV = false
-  for auH, auI in ipairs (cgK) do
+  for auH, auI in F4813 (cgK) do
       -- nested state machine (pc=cgU, entry=0)
           -- state S<1
             bmL (cg5, false)
@@ -14877,7 +15388,7 @@
   cgI = os ["clock"] ()
   cgJ = nil
   cgP = false
-  for auj, auk in pairs (bm0) do
+  for auj, auk in F2602 (bm0) do
       -- nested state machine (pc=cgO, entry=21)
           -- state S<1
             --> goto 11
@@ -14970,7 +15481,7 @@
   local cPI = cPK [136]
   cgM = cgJ ["protectUntil"]
   cgV = false
-  for auE, auF in pairs (bm0) do
+  for auE, auF in F2602 (bm0) do
       -- nested state machine (pc=cgU, entry=7)
           -- state S<1
             --> goto 11
@@ -15247,9 +15758,78 @@
   --> goto 2489
 -- state S2494
   -- (constant pool alias cPR)
-  pcall (function () local clQ, clR, clT, clU, clV, clX, clY, clZ, cl0 = nil, nil, nil, nil, nil, nil, nil, nil, nil; local clS = nil; clS = 2; while true do clS = 14868 - clS; do if clS < 14866 then break else if clS < 16048 then if clS < 14867 then clS = if not bna ["anyOn"] then 1 else 0 else if clS < 14868 then if clS == 14867 then return else clS = 14868; continue end else if clS == 14868 then local cPS = cKb; local cPT = cPS [136]; clQ = bpc [cPT [21]] (); clU = false; for aAq in cPT [2602] (bna [cPT [1865]]) do clV = aAq; local clW = clV; local clT = nil; clT = cPT [466]; while true do if clT < 3 then if clT < 1 then clR = not clQ [clW]; clT = if clR then cPT [1490] else cPT [6629] else if clT < 2 then clR = not clW:IsDescendantOf (cPS [132]); clT = cPT [1490] else break end else if clT < 5 then if clT < 4 then bpc [cPT [350]] (clW); clT = cPT [1219] else clU = true; clT = cPT [5291] end else if clT < 6 then clT = cPT [5291] else clT = if clR then cPT [1355] else cPT [1219] end end; if clU then break end end; clY = false; for aAu, aAv in cPT [2602] (clQ) do clZ = aAu; cl0 = aAv; local cl_ = clZ; local cl1 = cl0; local clX = nil; clX = cPT [6629]; while true do if clX < 1 then break else if clX < 2 then bpc [cPT [330]] (cl_, cl1 [cPT [248]], cl1 [cPT [3661]], cl1 [cPT [4299]]); clX = cPT [466] else clY = true; clX = cPT [466] end end; if clY then break end end; clS = 3 else clS = 6684; continue end else break end end end end)
-  local cPU = task ["wait"]
-  task.wait (1)
+  F2175(
+      function()
+          -- nested state machine (pc=clS, entry=14866)
+              -- state S<14866
+                --> EXIT
+              -- state S14866
+                --> if not bna ["anyOn"] then goto 14867
+                --> if not (not bna ["anyOn"]) then goto 14868
+              -- state S14867
+                return
+                --> RETURN
+              -- state S14868
+                local cPS = cKb
+                local cPT = cPS [136]
+                clQ = bpc [cPT [21]] ()
+                clU = false
+                for aAq in cPT [2602] (bna [cPT [1865]]) do
+                    -- nested state machine (pc=clT, entry=None)
+                        -- state S<1
+                          clR = not clQ [clW]
+                          clT = if clR then cPT [1490] else cPT [6629]
+                          -- conditional jump, unevaluated targets: if clR then cPT [1490] else cPT [6629]
+                        -- state S1
+                          clR = not clW:IsDescendantOf (cPS [132])
+                          clT = cPT [1490]
+                          -- jump target not constant: cPT [1490]
+                        -- state S2
+                          --> EXIT
+                        -- state S3
+                          bpc [cPT [350]] (clW)
+                          clT = cPT [1219]
+                          -- jump target not constant: cPT [1219]
+                        -- state S4
+                          clU = true
+                          clT = cPT [5291]
+                          -- jump target not constant: cPT [5291]
+                        -- state S5
+                          clT = cPT [5291]
+                          -- jump target not constant: cPT [5291]
+                        -- state S>=6
+                          clT = if clR then cPT [1355] else cPT [1219]
+                          -- conditional jump, unevaluated targets: if clR then cPT [1355] else cPT [1219]
+                    if clU then
+                        break
+                    end
+                end
+                clY = false
+                for aAu, aAv in cPT [2602] (clQ) do
+                    -- nested state machine (pc=clX, entry=None)
+                        -- state S<1
+                          --> EXIT
+                        -- state S1
+                          bpc [cPT [330]] (cl_, cl1 [cPT [248]], cl1 [cPT [3661]], cl1 [cPT [4299]])
+                          clX = cPT [466]
+                          -- jump target not constant: cPT [466]
+                        -- state S>=2
+                          clY = true
+                          clX = cPT [466]
+                          -- jump target not constant: cPT [466]
+                    if clY then
+                        break
+                    end
+                end
+                --> goto 14865  (outside dispatcher -> EXIT)
+              -- state S14869..16047
+                --> goto 8184  (outside dispatcher -> EXIT)
+              -- state S>=16048
+                --> EXIT
+      end
+  )
+  local cPU = F6128 ["wait"]
+  F3916 (1)
   --> goto 2493
 -- state S2495
   --> if bnB () then goto 2494
@@ -15271,7 +15851,11 @@
   --> EXIT
 -- state S14794
   -- (constant pool alias cPV)
-  pcall (function () bna ["screen"]:Destroy () end)
+  F2175(
+      function()
+          bna ["screen"]:Destroy ()
+      end
+  )
   bna ["screen"] = nil
   --> goto 14796
 -- state S14795
@@ -15281,7 +15865,7 @@
 -- state S14797
   cji = false
   -- (constant pool alias cPV)
-  for axv in pairs (bna ["entries"]) do
+  for axv in F2602 (bna ["entries"]) do
       -- nested state machine (pc=cjh, entry=2)
           -- state S<1
             cji = true
@@ -15388,9 +15972,9 @@
   -- opaque predicate reduced to its real condition
 -- state S10510
   -- (constant pool alias cPX)
-  ciI = Instance ["new"] ("Highlight")
+  ciI = F5725 ["new"] ("Highlight")
   ciI ["Name"] = "OuroborosOuwlandOwnership"
-  ciI ["DepthMode"] = Enum ["HighlightDepthMode"] ["AlwaysOnTop"]
+  ciI ["DepthMode"] = F1269 ["HighlightDepthMode"] ["AlwaysOnTop"]
   ciI ["FillTransparency"] = 0.7
   ciI ["OutlineTransparency"] = 0
   ciI ["Adornee"] = awu
@@ -15508,7 +16092,7 @@
 -- state S1672
   cjz = {}
   cjC = false
-  for axP, axQ in ipairs (cKb [59] ()) do
+  for axP, axQ in F4813 (cKb [59] ()) do
       -- nested state machine (pc=cjB, entry=3)
           -- state S<1
             cjz [cjG ["folder"] ["Name"]] = true
@@ -15549,7 +16133,7 @@
   -- (constant pool alias cP3)
   bJo = os ["clock"] ()
   bJt = false
-  for zb, zc in ipairs (cKb [54] ["features"]) do
+  for zb, zc in F4813 (cKb [54] ["features"]) do
       -- nested state machine (pc=bJs, entry=4)
           -- state S<1
             --> EXIT
@@ -15650,7 +16234,7 @@
   b2e = {}
   b2k = false
   -- (constant pool alias cP4)
-  for aa2, aa3 in ipairs (b2c:GetChildren ()) do
+  for aa2, aa3 in F4813 (b2c:GetChildren ()) do
       -- nested state machine (pc=b2j, entry=0)
           -- state S<1
             b2c = cP5 [104] (b2o ["Name"])
@@ -15681,12 +16265,17 @@
   --> if # b2e == 0 then goto 12034
   --> if not (# b2e == 0) then goto 12028
 -- state S12028
-  table.sort (b2e, function (aa8, aa9) return aa8 ["score"] > aa9 ["score"] end)
+  table.sort(
+      b2e,
+      function(aa8, aa9)
+          return aa8 ["score"] > aa9 ["score"]
+      end
+  )
   local cP5 = cKb
   local cP4 = cP5 [136]
   b2c = 0
   b2q = false
-  for abc, abd in ipairs (cP5 [141] ["SLOT_NAMES"]) do
+  for abc, abd in F4813 (cP5 [141] ["SLOT_NAMES"]) do
       -- nested state machine (pc=b2p, entry=0)
           -- state S<1
             b2f = b2e [b2s]
@@ -15702,8 +16291,8 @@
           -- state S4
             bn8 ("AccessoryEquip", b2f ["id"], b2s, "Stats")
             b2c + = 1
-            local cP6 = task ["wait"]
-            task.wait (0.35)
+            local cP6 = F6128 ["wait"]
+            F3916 (0.35)
             --> goto 3
           -- state S5
             b2h = b2g
@@ -15788,7 +16377,7 @@
   --> EXIT
 -- state S12867
   -- (constant pool alias cP7)
-  bs0 = table.pack (pcall (bno ["SignalFunction"] ["ToServer"], cv, .. .))
+  bs0 = table.pack (F2175 (bno ["SignalFunction"] ["ToServer"], cv, .. .))
   --> if not bs0 [1] then goto 12865
   --> if not (not bs0 [1]) then goto 12868
 -- state S12868
@@ -15832,10 +16421,10 @@
   -- (constant pool alias cP8)
   csx = {{csw, cKb [91] ["Alerts"] ["bossWatch"]}, {csv ["muzan"], cKb [91] ["Alerts"] ["muzanWatch"]}, {csv ["market"], cKb [91] ["Alerts"] ["marketWatch"]}, {csv ["tailor"], cKb [91] ["Alerts"] ["tailorWatch"]}, {csv ["selection"], cKb [91] ["Alerts"] ["selectionWatch"]}, {csv ["hunt"], cKb [91] ["Alerts"] ["huntWatch"]}}
   csA = false
-  for aIl, aIm in ipairs (csx) do
+  for aIl, aIm in F4813 (csx) do
       -- nested state machine (pc=csz, entry=6)
           -- state S<1
-            csv, csw = pcall (csE [2])
+            csv, csw = F2175 (csE [2])
             --> if not csv then goto 3
             --> if not (not csv) then goto 2
           -- state S1
@@ -15879,11 +16468,11 @@
   --> EXIT
 -- state S10892
   ccO = false
-  for aoc, aod in pairs (ccK ["Regions"]) do
+  for aoc, aod in F2602 (ccK ["Regions"]) do
       -- nested state machine (pc=ccN, entry=4)
           -- state S<1
             ccU = false
-            for aof, aog in pairs (ccS ["Npcs"]) do
+            for aof, aog in F2602 (ccS ["Npcs"]) do
                 -- nested state machine (pc=ccT, entry=5)
                     -- state S<1
                       ccK = type (ccY ["Name"]) == "string"
@@ -15973,7 +16562,7 @@
 -- F4261(params: amH)  states=9  pc=cbG  C=5446  entry=5444
 -- locals: local cbG = nil; cbG = 2
 -- state S5441
-  pcall (cKb [101], "SunDamage", "setInSun", false)
+  F2175 (cKb [101], "SunDamage", "setInSun", false)
   --> goto 5443
 -- state S5442
   return
@@ -16101,8 +16690,8 @@
 -- state S9500
   -- (constant pool alias cQf)
   cKb [54] ["want"] (zz)
-  local cQg = task ["wait"]
-  task.wait (cKb [54] ["settle"])
+  local cQg = F6128 ["wait"]
+  F3916 (cKb [54] ["settle"])
   --> goto 9505
 -- state S9501
   bJL = bJK
@@ -16137,9 +16726,64 @@
   --> EXIT
 -- state S9228
   -- (constant pool alias cQh)
-  pcall (function () local cl4, cl6, cl7, cl8, cma = nil, nil, nil, nil, nil; local cl5 = nil; cl5 = 4; while true do cl5 = 15932 - cl5; do if cl5 < 15928 then break else if cl5 < 15932 then if cl5 < 15930 then if cl5 < 15929 then cl4 = not bna ["anyOn"]; cl5 = if cl4 then 2 else 3 else if cl5 == 15929 then cl4 = not cKb [92] ["playerInfo"]; cl5 = 2 else cl5 = 2802; continue end else if cl5 < 15931 then if cl5 == 15930 then cl5 = if cl4 then 0 else 1 else cl5 = 10415; continue end else cl7 = false; for aAE, aAF in pairs (bna ["entries"]) do cl8 = aAE; cma = aAF; local cl9 = cl8; local cmb = cma; local cl6 = nil; local cQi = cKb; local cQj = cQi [136]; cl6 = cQj [1219]; while true do if cl6 < 3 then if cl6 < 1 then cmb [cQj [4296]] = cQi [99] [cQj [1148]] (cmb [cQj [4299]]); cmb [cQj [5878]] = cQi [99] [cQj [63]] (cmb [cQj [4299]]); cl6 = cQj [5291] else if cl6 < 2 then cl6 = if cl4 then cQj [466] else cQj [5291] else cl6 = cQj [1490] end else if cl6 < 5 then if cl6 < 4 then cl7 = true; cl6 = cQj [1490] else cl4 = cmb [cQj [4299]]; cl6 = cQj [6629] end else if cl6 < 6 then cl4 = cmb [cQj [3661]] == cQj [6570]; cl6 = if cl4 then cQj [4093] else cQj [6629] else break end end; if cl7 then break end end; cl5 = 5 end else if cl5 == 15932 then return else cl5 = 15931; continue end end end end)
-  local cQk = task ["wait"]
-  task.wait (3)
+  F2175(
+      function()
+          -- nested state machine (pc=cl5, entry=15928)
+              -- state S<15928
+                --> EXIT
+              -- state S15928
+                cl4 = not bna ["anyOn"]
+                --> if cl4 then goto 15930
+                --> if not (cl4) then goto 15929
+              -- state S15929
+                cl4 = not cKb [92] ["playerInfo"]
+                --> goto 15930
+              -- state S15930
+                --> if cl4 then goto 15932
+                --> if not (cl4) then goto 15931
+              -- state S15931
+                cl7 = false
+                for aAE, aAF in F2602 (bna ["entries"]) do
+                    -- nested state machine (pc=cl6, entry=None)
+                        -- state S<1
+                          cmb [cQj [4296]] = cQi [99] [cQj [1148]] (cmb [cQj [4299]])
+                          cmb [cQj [5878]] = cQi [99] [cQj [63]] (cmb [cQj [4299]])
+                          cl6 = cQj [5291]
+                          -- jump target not constant: cQj [5291]
+                        -- state S1
+                          cl6 = if cl4 then cQj [466] else cQj [5291]
+                          -- conditional jump, unevaluated targets: if cl4 then cQj [466] else cQj [5291]
+                        -- state S2
+                          cl6 = cQj [1490]
+                          -- jump target not constant: cQj [1490]
+                        -- state S3
+                          cl7 = true
+                          cl6 = cQj [1490]
+                          -- jump target not constant: cQj [1490]
+                        -- state S4
+                          cl4 = cmb [cQj [4299]]
+                          cl6 = cQj [6629]
+                          -- jump target not constant: cQj [6629]
+                        -- state S5
+                          cl4 = cmb [cQj [3661]] == cQj [6570]
+                          cl6 = if cl4 then cQj [4093] else cQj [6629]
+                          -- conditional jump, unevaluated targets: if cl4 then cQj [4093] else cQj [6629]
+                        -- state S>=6
+                          --> EXIT
+                    if cl7 then
+                        break
+                    end
+                end
+                --> goto 15927  (outside dispatcher -> EXIT)
+              -- state S15932
+                return
+                --> RETURN
+              -- state S>=15933
+                --> goto 1  (outside dispatcher -> EXIT)
+      end
+  )
+  local cQk = F6128 ["wait"]
+  F3916 (3)
   --> goto 9235
 -- state S9229
   --> goto 9230
@@ -16211,7 +16855,7 @@
 -- state S13854
   bBI = {}
   bBT = false
-  for oE, oF in ipairs (bBJ) do
+  for oE, oF in F4813 (bBJ) do
       -- nested state machine (pc=bBS, entry=1)
           -- state S<1
             bBT = true
@@ -16287,7 +16931,7 @@
   return {}
   --> RETURN
 -- state S13856
-  bBI, bBJ = pcall (bno ["SkillsProvider"] ["get_current_keys"])
+  bBI, bBJ = F2175 (bno ["SkillsProvider"] ["get_current_keys"])
   bBK = not bBI
   --> if bBK then goto 13853
   --> if not (bBK) then goto 13859
@@ -16367,8 +17011,8 @@
 -- state S6482
   --> goto 6490
 -- state S6483
-  local cQp = coroutine ["running"]
-  bIY = bIX ["thread"] == coroutine.running ()
+  local cQp = F3109 ["running"]
+  bIY = bIX ["thread"] == F5473 ()
   --> goto 6487
 -- state S6484
   bIW = cKb [54] ["wants"] [yH]
@@ -16619,7 +17263,7 @@
   -- (constant pool alias cQt)
   bP4 = cKb [91] ["DemonController"] ["route"] ()
   bP7 = false
-  for I8, I9 in ipairs (bP4) do
+  for I8, I9 in F4813 (bP4) do
       -- nested state machine (pc=bP6, entry=3)
           -- state S<1
             --> EXIT
@@ -16851,8 +17495,8 @@
   bsB = os ["clock"] () + cKb [141] ["BOOT_TIMEOUT"]
   --> goto 104
 -- state S95
-  local cQy = task ["wait"]
-  task.wait (0.25)
+  local cQy = F6128 ["wait"]
+  F3916 (0.25)
   --> goto 90
 -- state S96
   --> if bsE then goto 105
@@ -16949,10 +17593,10 @@
   --> if not (b4c) then goto 7199
 -- state S7188
   -- (constant pool alias cQA)
-  b4c = RaycastParams ["new"] ()
-  b4c ["FilterType"] = Enum ["RaycastFilterType"] ["Exclude"]
+  b4c = F546 ["new"] ()
+  b4c ["FilterType"] = F1269 ["RaycastFilterType"] ["Exclude"]
   b4c ["FilterDescendantsInstances"] = {cKb [132]:FindFirstChild ("Debree"), cKb [126] ["Character"]}
-  b4f = workspace:Raycast (b4d, b4e, b4c)
+  b4f = F2090:Raycast (b4d, b4e, b4c)
   b4c = b4f
   --> if b4c then goto 7185
   --> if not (b4c) then goto 7187
@@ -16984,14 +17628,14 @@
   --> RETURN
 -- state S7198
   -- (constant pool alias cQA)
-  b4c = RaycastParams ["new"] ()
-  b4c ["FilterType"] = Enum ["RaycastFilterType"] ["Include"]
+  b4c = F546 ["new"] ()
+  b4c ["FilterType"] = F1269 ["RaycastFilterType"] ["Include"]
   b4c ["FilterDescendantsInstances"] = b4b
   b4c ["BruteForceAllSlow"] = true
   b4b = math.max (adu ["Y"], adv ["Y"]) + 50
-  b4d = Vector3 ["new"] (adu ["X"], b4b, adu ["Z"])
-  b4e = Vector3 ["new"] (0, - (b4b - adu ["Y"] + 25), 0)
-  b4b = workspace:Raycast (b4d, b4e, b4c)
+  b4d = F3022 ["new"] (adu ["X"], b4b, adu ["Z"])
+  b4e = F3022 ["new"] (0, - (b4b - adu ["Y"] + 25), 0)
+  b4b = F2090:Raycast (b4d, b4e, b4c)
   b4c = b4b
   --> if b4c then goto 7195
   --> if not (b4c) then goto 7205
@@ -17008,7 +17652,7 @@
   b4b = {}
   b4i = false
   -- (constant pool alias cQA)
-  for ady, adz in ipairs (bmK ["CollectionService"]:GetTagged ("SwimParts")) do
+  for ady, adz in F4813 (bmK ["CollectionService"]:GetTagged ("SwimParts")) do
       -- nested state machine (pc=b4h, entry=2)
           -- state S<1
             b4i = true
@@ -17056,7 +17700,7 @@
 -- state S<5571
   --> EXIT
 -- state S5571
-  return Vector3 ["zero"]
+  return F3022 ["zero"]
   --> RETURN
 -- state S5572
   --> if bwp then goto 5576
@@ -17136,8 +17780,8 @@
 -- state S6140
   --> EXIT
 -- state S6141
-  local cQD = Color3 ["fromRGB"]
-  ck7 = Color3.fromRGB (255, 255, 255)
+  local cQD = F2998 ["fromRGB"]
+  ck7 = F149 (255, 255, 255)
   --> goto 6134
 -- state S6142
   --> if azd ["category"] == "Players" then goto 6139
@@ -17251,7 +17895,11 @@
   --> goto 5388
   -- opaque predicate folded (jump is unconditional)
 -- state S5375
-  ceq, cer = pcall (function () return game:GetService ("Stats") ["Network"] ["ServerStatsItem"] ["Data Ping"]:GetValue () / 1000 end)
+  ceq,cer= F2175(
+          function()
+              return F4167:GetService ("Stats") ["Network"] ["ServerStatsItem"] ["Data Ping"]:GetValue () / 1000
+          end
+      )
   ces = ceq
   --> if ces then goto 5376
   --> if not (ces) then goto 5379
@@ -17397,8 +18045,8 @@
   return false
   --> RETURN
 -- state S9285
-  local cQJ = Vector3 ["new"]
-  cKb [120] (bPF + Vector3.new (0, 4, 0), 0, bPE)
+  local cQJ = F3022 ["new"]
+  cKb [120] (bPF + F4803 (0, 4, 0), 0, bPE)
   --> if bPE () then goto 9274
   --> if not (bPE ()) then goto 9270
 -- state S9286
@@ -17550,7 +18198,7 @@
   --> goto 7166
 -- state S7169
   -- (constant pool alias cQN)
-  caP = Instance ["new"] ("BoolValue")
+  caP = F5725 ["new"] ("BoolValue")
   caP ["Name"] = "noragdoll"
   caP ["Value"] = true
   caP ["Parent"] = caO
@@ -17572,7 +18220,7 @@
 -- state S7173
   caV = false
   -- (constant pool alias cQN)
-  for alU, alV in ipairs (caO:GetChildren ()) do
+  for alU, alV in F4813 (caO:GetChildren ()) do
       -- nested state machine (pc=caU, entry=1)
           -- state S<1
             caV = true
@@ -17641,7 +18289,7 @@
   --> goto 9178
 -- state S9184
   cuY = false
-  for aLU, aLV in ipairs (cuU:GetDescendants ()) do
+  for aLU, aLV in F4813 (cuU:GetDescendants ()) do
       -- nested state machine (pc=cuX, entry=0)
           -- state S<1
             cuU = (cu1:IsA ("ModuleScript"))
@@ -17673,7 +18321,7 @@
   -- (constant pool alias cQO)
   cKb [100] ("Ouwigahara Rewards")
   cu3 = false
-  for aLZ, aL_ in ipairs (cKb [141] ["CARD_NAMES"]) do
+  for aLZ, aL_ in F4813 (cKb [141] ["CARD_NAMES"]) do
       -- nested state machine (pc=cu2, entry=1)
           -- state S<1
             --> EXIT
@@ -17740,8 +18388,8 @@
   --> if bwl then goto 703
   --> if not (bwl) then goto 710
 -- state S713
-  local cQP = task ["wait"]
-  task.wait (0.1)
+  local cQP = F6128 ["wait"]
+  F3916 (0.1)
   --> goto 714
 -- state S714
   --> goto 702
@@ -17837,7 +18485,7 @@
   b1M = {}
   b1Q = false
   -- (constant pool alias cQS)
-  for aaz in pairs (cKb [91] ["SkillController"] ["nodes"]) do
+  for aaz in F2602 (cKb [91] ["SkillController"] ["nodes"]) do
       -- nested state machine (pc=b1P, entry=2)
           -- state S<1
             --> if b1N then goto 1
@@ -17876,7 +18524,7 @@
   --> EXIT
 -- state S10788
   b1X = false
-  for aaE, aaF in ipairs (b1M) do
+  for aaE, aaF in F4813 (b1M) do
       -- nested state machine (pc=b1W, entry=0)
           -- state S<1
             b1M = not bnB ()
@@ -17894,8 +18542,8 @@
             --> RETURN
           -- state S4
             bpz ["SkillStatus"] = "Cannot unlock " .. b10
-            local cQT = task ["wait"]
-            task.wait (0.2)
+            local cQT = F6128 ["wait"]
+            F3916 (0.2)
             --> goto 7
           -- state S5
             b1M = bpC ("UnlockSkillTreeNode", b10)
@@ -17914,8 +18562,8 @@
           -- state S10
             bpz ["Nodes"] = bpz ["Nodes"] + 1
             bpz ["SkillStatus"] = "Unlocked " .. b10
-            local cQU = task ["wait"]
-            task.wait (0.4)
+            local cQU = F6128 ["wait"]
+            F3916 (0.4)
             --> goto 7
           -- state S>=11
             --> if b1M then goto 6
@@ -17995,7 +18643,7 @@
   --> if not (b4I) then goto 9358
 -- state S9358
   b4O = false
-  for ad2, ad3 in ipairs (b4F:GetChildren ()) do
+  for ad2, ad3 in F4813 (b4F:GetChildren ()) do
       -- nested state machine (pc=b4N, entry=9)
           -- state S<1
             b4F = (b4S:IsA ("BasePart"))
@@ -18100,13 +18748,13 @@
 -- state S<6191
   --> EXIT
 -- state S6191
-  return {["name"] = "Activity", ["value"] = table.concat (b8H, "\n"), ["in line"] = false}
+  return {["name"] = "Activity", ["value"] = table.concat (b8H, " "), ["in line"] = false}
   --> RETURN
 -- state S6192
   b8H = {}
   b8M = false
   -- (constant pool alias cQY)
-  for ajc, ajd in ipairs (cKb [35] ["Catalog"] [aja ["Label"]]) do
+  for ajc, ajd in F4813 (cKb [35] ["Catalog"] [aja ["Label"]]) do
       -- nested state machine (pc=b8L, entry=0)
           -- state S<1
             b8I = aja ["Tally"] [b8Q ["key"]]
@@ -18123,7 +18771,7 @@
           -- state S4
             --> goto 2
           -- state S5
-            table.in sert (b8H, "\u{203A} %s**%s**":format (b8Q ["label"], cQZ [35] ["Commas"] (b8J)))
+            table.in sert (b8H, "\\u{203A} %s**%s**":format (b8Q ["label"], cQZ [35] ["Commas"] (b8J)))
             --> goto 4
           -- state S6
             b8J = b8I
@@ -18145,7 +18793,7 @@
 -- state S6193
   --> EXIT
 -- state S6194
-  return {["name"] = "Activity", ["value"] = "\u{203A} Nothing since the last report", ["in line"] = false}
+  return {["name"] = "Activity", ["value"] = "\\u{203A} Nothing since the last report", ["in line"] = false}
   --> RETURN
 -- state S6195..8027
   --> EXIT
@@ -18164,16 +18812,16 @@
   -- (constant pool alias cQ_)
   bpz ["QueueStatus"] = "Starting"
   cKb [91] ["QueueController"] ["running"] = true
-  local cQ0 = task ["delay"]
-  task.delay (0, cKb [102] ["announceHudState"])
+  local cQ0 = F6128 ["delay"]
+  F4004 (0, cKb [102] ["announceHudState"])
   cKb [84] (cKb [91] ["QueueController"], cKb [102] ["queueStep"])
   --> goto 14465
 -- state S14467
   -- (constant pool alias cQ_)
   cKb [91] ["QueueController"] ["running"] = false
   bmX (cKb [91] ["QueueController"])
-  local cQ1 = task ["delay"]
-  task.delay (0, cKb [102] ["cancelQueue"])
+  local cQ1 = F6128 ["delay"]
+  F4004 (0, cKb [102] ["cancelQueue"])
   bpz ["QueueStatus"] = "Idle"
   --> goto 14465
 -- state S14468
@@ -18198,7 +18846,7 @@
   --> if not (bPh) then goto 1441
 -- state S1441
   bPk = false
-  for Ih, Ii in ipairs (If:GetDescendants ()) do
+  for Ih, Ii in F4813 (If:GetDescendants ()) do
       -- nested state machine (pc=bPj, entry=0)
           -- state S<1
             bPh = (bPo:IsA ("ProximityPrompt"))
@@ -18259,7 +18907,7 @@
   cru, crt = nil, nil
   cry = false
   -- (constant pool alias cQ3)
-  for aHi, aHj in ipairs (crs:GetChildren ()) do
+  for aHi, aHj in F4813 (crs:GetChildren ()) do
       -- nested state machine (pc=crx, entry=3)
           -- state S<1
             crv = crs:FindFirstChild ("Muzan")
@@ -18279,7 +18927,7 @@
             --> if not (cru) then goto 2
           -- state S5
             crE = false
-            for aHn, aHo in ipairs (crs:GetChildren ()) do
+            for aHn, aHo in F4813 (crs:GetChildren ()) do
                 -- nested state machine (pc=crD, entry=0)
                     -- state S<1
                       --> if crI:IsA ("Model") then goto 6
@@ -18627,13 +19275,13 @@
   --> EXIT
 -- state S8717
   -- (constant pool alias cRd)
-  cjn = Instance ["new"] ("Folder")
+  cjn = F5725 ["new"] ("Folder")
   cjn ["Name"] = "Entry"
   cjn ["Parent"] = bpc ["container"] ()
   cjo = bpc ["newFrame"] (cjn, 2)
-  cjp = Instance ["new"] ("UIStroke")
+  cjp = F5725 ["new"] ("UIStroke")
   cjp ["Thickness"] = 1
-  cjp ["Color"] = Color3 ["fromRGB"] (255, 255, 255)
+  cjp ["Color"] = F2998 ["fromRGB"] (255, 255, 255)
   cjp ["Parent"] = cjo
   cjq = table.create (12)
   cjw = 1
@@ -18649,9 +19297,9 @@
 -- state S8721
   -- (constant pool alias cRd)
   cjr = bpc ["newFrame"] (cjn, 2)
-  cjr ["BackgroundColor3"] = Color3 ["fromRGB"] (15, 15, 15)
+  cjr ["BackgroundColor3"] = F2998 ["fromRGB"] (15, 15, 15)
   cjs = bpc ["newFrame"] (cjn, 3)
-  cjs ["AnchorPoint"] = Vector2 ["new"] (0.5, 1)
+  cjs ["AnchorPoint"] = F6475 ["new"] (0.5, 1)
   bna ["entries"] [axA] = {["in stance"] = axA, ["part"] = bpc ["anchorPart"] (axA), ["label"] = axB, ["category"] = axC, ["player"] = axD, ["humanoid"] = axA:FindFirstChildOfClass ("Humanoid"), ["holder"] = cjn, ["box"] = cjo, ["stroke"] = cjp, ["lines"] = cjq, ["tracer"] = bpc ["newFrame"] (cjn, 2), ["name"] = bpc ["newLabel"] (cjn, 4), ["distance"] = bpc ["newLabel"] (cjn, 4), ["in fo"] = bpc ["newLabel"] (cjn, 4), ["healthText"] = bpc ["newLabel"] (cjn, 4), ["healthBack"] = cjr, ["healthFill"] = cjs}
   --> goto 8718
 -- state S8722
@@ -18713,9 +19361,9 @@
 -- state S4843..6387
   --> EXIT
 -- state S6388
-  local cRf = task ["wait"]
+  local cRf = F6128 ["wait"]
   -- (constant pool alias cRg)
-  task.wait (0.03)
+  F3916 (0.03)
   bYL ["hold"] (false, Vh)
   return true
   --> RETURN
@@ -18739,7 +19387,7 @@
   --> RETURN
 -- state S787
   bn9 = true
-  cix, ciy = pcall (cKb [65])
+  cix, ciy = F2175 (cKb [65])
   bn9 = false
   ciz = not cix
   --> if ciz then goto 789
@@ -18913,8 +19561,8 @@
   cKb [91] ["FishController"] ["running"] = false
   bmX (cKb [91] ["FishController"])
   bpz ["FishStatus"] = "Idle"
-  local cRk = task ["spawn"]
-  task.spawn (cKb [31])
+  local cRk = F6128 ["spawn"]
+  F3374 (cKb [31])
   --> goto 6492
 -- state S6494
   -- (constant pool alias cRj)
@@ -19057,7 +19705,7 @@
   --> EXIT
 -- state S8134
   bHO = false
-  for xF, xG in ipairs (cKb [141] ["CODE_BACKOFF"]) do
+  for xF, xG in F4813 (cKb [141] ["CODE_BACKOFF"]) do
       -- nested state machine (pc=bHN, entry=0)
           -- state S<1
             --> if not bnB () then goto 1
@@ -19069,8 +19717,8 @@
             --> EXIT
           -- state S3
             bpz ["CodeStatus"] = string.format ("Cooling do wn %ds", bHS)
-            local cRq = task ["wait"]
-            task.wait (bHS)
+            local cRq = F6128 ["wait"]
+            F3916 (bHS)
             --> if not bnB () then goto 7
             --> if not (not bnB ()) then goto 10
           -- state S4
@@ -19128,7 +19776,11 @@
   --> if not (cfs) then goto 14894
   -- opaque predicate reduced to its real condition
 -- state S14889
-  cfq, cfr = pcall (function () return bno ["Utility"] ["Tick"] () end)
+  cfq,cfr= F2175(
+          function()
+              return bno ["Utility"] ["Tick"] ()
+          end
+      )
   cfs = not cfq
   --> if cfs then goto 14888
   --> if not (cfs) then goto 14891
@@ -19157,7 +19809,7 @@
   --> if not (cfq) then goto 14901
 -- state S14897
   cfz = false
-  for arI in pairs (cKb [80]) do
+  for arI in F2602 (cKb [80]) do
       -- nested state machine (pc=cfy, entry=4)
           -- state S<1
             return "block"
@@ -19187,7 +19839,7 @@
 -- state S14900
   cfv = false
   -- (constant pool alias cRs)
-  for arC in pairs (boL) do
+  for arC in F2602 (boL) do
       -- nested state machine (pc=cfu, entry=2)
           -- state S<1
             return "none"
@@ -19386,8 +20038,8 @@
   --> if bEE then goto 5226
   --> if not (bEE) then goto 5251
 -- state S5260
-  local cRv = Vector3 ["new"]
-  bEF = sT ["model"]:GetPivot () ["Position"] + Vector3.new (0, 3, 0)
+  local cRv = F3022 ["new"]
+  bEF = sT ["model"]:GetPivot () ["Position"] + F4803 (0, 3, 0)
   --> goto 5234
 -- state S5261
   return false
@@ -19457,12 +20109,12 @@
   --> if bPu then goto 7220
   --> if not (bPu) then goto 7222
 -- state S7215
-  local cRw = task ["wait"]
+  local cRw = F6128 ["wait"]
   -- (constant pool alias cRx)
-  task.wait (0.8)
+  F3916 (0.8)
   bn8 ("Tool_Mouse", "Down", cKb [117] ())
-  cRw = task ["wait"]
-  task.wait (Iq)
+  cRw = F6128 ["wait"]
+  F3916 (Iq)
   bn8 ("Tool_Mouse", "Up", cKb [117] ())
   return true
   --> RETURN
@@ -19531,10 +20183,10 @@
   --> if not (bZN) then goto 15785
 -- state S15783
   bZQ = false
-  for Ws, Wt in ipairs (bZM:GetChildren ()) do
+  for Ws, Wt in F4813 (bZM:GetChildren ()) do
       -- nested state machine (pc=bZP, entry=4)
           -- state S<1
-            pcall (fireclickdetector, bZM)
+            F2175 (fireclickdetector, bZM)
             --> goto 2
           -- state S1
             --> EXIT
@@ -19757,9 +20409,16 @@
   --> EXIT
 -- state S5109
   -- (constant pool alias cRF)
-  pcall (function () local cRG = cKb [136]; bpz ["Summary"] = cKb [51] ["PlayerSummary"] (); bpz ["Quest"] = cKb [51] ["QuestSummary"] (); bpz ["CostText"] = cKb [51] ["BreathingCost"] () end)
-  local cRH = task ["wait"]
-  task.wait (1)
+  F2175(
+      function()
+          -- (constant pool alias cRG)
+          bpz ["Summary"] = cKb [51] ["PlayerSummary"] ()
+          bpz ["Quest"] = cKb [51] ["QuestSummary"] ()
+          bpz ["CostText"] = cKb [51] ["BreathingCost"] ()
+      end
+  )
+  local cRH = F6128 ["wait"]
+  F3916 (1)
   --> goto 5111
 -- state S5110
   --> if bnB () then goto 5109
@@ -19789,7 +20448,17 @@
   return true
   --> RETURN
 -- state S10239
-  cdX = pcall (function () local cRI = cKb; local cRJ = cRI [136]; local apD = bpZ (cRJ [4167]:GetService (cRJ [2537])); apD:SendKeyEvent (true, cRJ [1269] [cRJ [310]] [cRJ [5158]], false, cRJ [4167]); local cRK = cRJ [6128] [cRJ [2030]]; cRJ [3916] (cRJ [2940]); apD:SendKeyEvent (false, cRJ [1269] [cRJ [310]] [cRJ [5158]], false, cRJ [4167]) end)
+  cdX= F2175(
+          function()
+              local cRI = cKb
+              local cRJ = cRI [136]
+              local apD = bpZ (cRJ [4167]:GetService (cRJ [2537]))
+              apD:SendKeyEvent (true, cRJ [1269] [cRJ [310]] [cRJ [5158]], false, cRJ [4167])
+              local cRK = cRJ [6128] [cRJ [2030]]
+              cRJ [3916] (cRJ [2940])
+              apD:SendKeyEvent (false, cRJ [1269] [cRJ [310]] [cRJ [5158]], false, cRJ [4167])
+          end
+      )
   --> if cdX then goto 10245
   --> if not (cdX) then goto 10241
 -- state S10240
@@ -19807,7 +20476,16 @@
   -- opaque predicate reduced to its real condition
 -- state S10242
   -- (constant pool alias cRL)
-  cdX = pcall (function () local cRM = cKb; local cRN = cRM [136]; keypress (cRN [648]); local cRO = cRN [6128] [cRN [2030]]; cRN [3916] (cRN [2940]); keyrelease (cRN [648]) end)
+  cdX= F2175(
+          function()
+              local cRM = cKb
+              local cRN = cRM [136]
+              keypress (cRN [648])
+              local cRO = cRN [6128] [cRN [2030]]
+              cRN [3916] (cRN [2940])
+              keyrelease (cRN [648])
+          end
+      )
   -- [dropped obfuscation helper: cd1 = if cdX then 1 else 0]
   -- [dropped obfuscation helper: cd_ = 2153*cd1 + 788*(1 - cd1)]
   -- [dropped obfuscation helper: cd0 = 263*cd1 + 3297*(1 - cd1)]
@@ -20269,7 +20947,7 @@
   bFQ = cKb [29] ()
   bFR = false
   bFY = false
-  for vp, vq in ipairs (bFP ["Race"]) do
+  for vp, vq in F4813 (bFP ["Race"]) do
       -- nested state machine (pc=bFX, entry=2)
           -- state S<1
             --> EXIT
@@ -20351,7 +21029,7 @@
 -- locals: local buS, buU, buV, buW, buY = nil, nil, nil, nil, nil; local buT = nil; buT = 1
 -- state S2312
   buV = false
-  for eE, eF in pairs (bny ["in puts"]) do
+  for eE, eF in F2602 (bny ["in puts"]) do
       -- nested state machine (pc=buU, entry=6)
           -- state S<1
             --> if buS then goto 2
@@ -20360,7 +21038,7 @@
             buS = cKb [118] (bno ["InputHandler"] ["VirtualRelease"])
             --> goto 0  (outside dispatcher -> EXIT)
           -- state S2
-            pcall (bno ["InputHandler"] ["VirtualRelease"], buX)
+            F2175 (bno ["InputHandler"] ["VirtualRelease"], buX)
             --> goto 4
           -- state S3
             buV = true
@@ -20404,8 +21082,8 @@
 -- state S12065
   -- (constant pool alias cRZ)
   bI0 = bI_ ["run"]
-  local cR_ = coroutine ["status"]
-  bI1 = coroutine.status (bI_ ["thread"]) == "TextColor3"
+  local cR_ = F3109 ["status"]
+  bI1 = F6075 (bI_ ["thread"]) == "TextColor3"
   -- [dropped obfuscation helper: bI6 = if bI1 then 1 else 0]
   -- [dropped obfuscation helper: bI4 = 132*bI6 + 1249*(1 - bI6)]
   -- [dropped obfuscation helper: bI5 = 3768*bI6 + 206*(1 - bI6)]
@@ -20462,7 +21140,7 @@
 -- state S11162
   cdj = false
   -- (constant pool alias cR0)
-  for aoR, aoS in ipairs (aoP) do
+  for aoR, aoS in F4813 (aoP) do
       -- nested state machine (pc=cdi, entry=4)
           -- state S<1
             --> EXIT
@@ -20493,7 +21171,7 @@
 -- state S1920
   ctG = {}
   ctL = false
-  for aJu, aJv in ipairs (bmK ["CollectionService"]:GetTagged ("StudyProp")) do
+  for aJu, aJv in F4813 (bmK ["CollectionService"]:GetTagged ("StudyProp")) do
       -- nested state machine (pc=ctK, entry=1)
           -- state S<1
             ctL = true
@@ -20520,7 +21198,12 @@
           break
       end
   end
-  table.sort (ctG, function (aJy, aJz) return aJy ["name"] < aJz ["name"] end)
+  table.sort(
+      ctG,
+      function(aJy, aJz)
+          return aJy ["name"] < aJz ["name"]
+      end
+  )
   return ctG
   --> RETURN
 -- state S1921..1971
@@ -20556,7 +21239,7 @@
   -- (constant pool alias cR2)
   cg6 ["played"]:Disconnect ()
   chc = false
-  for auN, auO in pairs (cg6 ["stopped"]) do
+  for auN, auO in F2602 (cg6 ["stopped"]) do
       -- nested state machine (pc=chb, entry=0)
           -- state S<1
             chg:Disconnect ()
@@ -20573,7 +21256,7 @@
   end
   cKb [50] [auK] = nil
   chi = false
-  for auR, auS in pairs (bm0) do
+  for auR, auS in F2602 (bm0) do
       -- nested state machine (pc=chh, entry=4)
           -- state S<1
             --> EXIT
@@ -20618,12 +21301,12 @@
 -- state S1568
   clg = clf
   clx = false
-  for azr, azs in pairs (bna ["entries"]) do
+  for azr, azs in F2602 (bna ["entries"]) do
       -- nested state machine (pc=clw, entry=23)
           -- state S<1
             clB ["tracer"] ["BackgroundColor3"] = clf
-            local cR4 = Vector2 ["new"]
-            bpc ["line"] (clB ["tracer"], Vector2.new (cle ["X"]*0.5, cle ["Y"]), Vector2 ["new"] (clp, clm))
+            local cR4 = F6475 ["new"]
+            bpc ["line"] (clB ["tracer"], F3583 (cle ["X"]*0.5, cle ["Y"]), F6475 ["new"] (clp, clm))
             --> goto 35
           -- state S1
             clj = clh ["Position"]
@@ -20668,10 +21351,10 @@
           -- state S10
             cli = cln - 5
             clo = cKb [147] ["health"]:Lerp (cKb [147] ["dying"], 1 - cll)
-            clB ["healthBack"] ["Position"] = UDim2 ["fromOffset"] (cli, clj)
-            clB ["healthBack"] ["Size"] = UDim2 ["fromOffset"] (3, clk)
-            clB ["healthFill"] ["Position"] = UDim2 ["fromOffset"] (cli, clm)
-            clB ["healthFill"] ["Size"] = UDim2 ["fromOffset"] (3, clk*cll)
+            clB ["healthBack"] ["Position"] = F32 ["fromOffset"] (cli, clj)
+            clB ["healthBack"] ["Size"] = F32 ["fromOffset"] (3, clk)
+            clB ["healthFill"] ["Position"] = F32 ["fromOffset"] (cli, clm)
+            clB ["healthFill"] ["Size"] = F32 ["fromOffset"] (3, clk*cll)
             clB ["healthFill"] ["BackgroundColor3"] = clo
             --> goto 9
           -- state S11
@@ -20679,7 +21362,7 @@
             clB ["stroke"] ["Enabled"] = cKb [92] ["box"]
             clB ["stroke"] ["Color"] = clf
             clJ = false
-            for az0, az1 in ipairs (cKb [39]) do
+            for az0, az1 in F4813 (cKb [39]) do
                 -- nested state machine (pc=clI, entry=2)
                     -- state S<1
                       --> goto 4
@@ -20736,13 +21419,13 @@
           -- state S21
             clB ["healthText"] ["Text"] = cJ1 ("%d / %d", cJZ (clf), cJZ (clh))
             clB ["healthText"] [3890] = cKb [147] ["healthText"]
-            clB ["healthText"] ["Position"] = UDim2 ["fromOffset"] (cln - 40, clj)
+            clB ["healthText"] ["Position"] = F32 ["fromOffset"] (cln - 40, clj)
             --> goto 13
           -- state S22
             clB ["in fo"] ["Text"] = clf
             clB ["in fo"] [3890] = cKb [147] ["in fo"]
             clf = clB ["in fo"]
-            clh = UDim2 ["fromOffset"]
+            clh = F32 ["fromOffset"]
             clo = cKb [92] ["name"]
             --> if clo then goto 60
             --> if not (clo) then goto 7
@@ -20753,7 +21436,7 @@
           -- state S24
             clB ["name"] ["Text"] = clB ["label"]
             clB ["name"] [3890] = cKb [147] ["name"]
-            clB ["name"] ["Position"] = UDim2 ["fromOffset"] (clp, cll - 9)
+            clB ["name"] ["Position"] = F32 ["fromOffset"] (clp, cll - 9)
             --> goto 47
           -- state S25
             clx = true
@@ -20763,8 +21446,8 @@
             --> goto 43
           -- state S27
             clq ["Visible"] = clr
-            clB ["box"] ["Position"] = UDim2 ["fromOffset"] (clp, clj)
-            clB ["box"] ["Size"] = UDim2 ["fromOffset"] (clh, clk)
+            clB ["box"] ["Position"] = F32 ["fromOffset"] (clp, clj)
+            clB ["box"] ["Size"] = F32 ["fromOffset"] (clh, clk)
             clB ["box"] ["BackgroundColor3"] = clf
             clh = clB ["box"]
             clq = cKb [92] ["Warn Me Before"]
@@ -20783,7 +21466,7 @@
           -- state S31
             clB ["distance"] ["Text"] = cJ1 ("%d studs", cJZ (cli))
             clB ["distance"] [3890] = cKb [147] ["distance"]
-            clB ["distance"] ["Position"] = UDim2 ["fromOffset"] (clp, clm + 9)
+            clB ["distance"] ["Position"] = F32 ["fromOffset"] (clp, clm + 9)
             --> goto 53
           -- state S32
             clr = clq
@@ -20803,7 +21486,7 @@
             cln, cll, clj, clm = nil, nil, nil, nil
             clo = table.create (8)
             clD = false
-            for azK, azL in ipairs (cKb [57]) do
+            for azK, azL in F4813 (cKb [57]) do
                 -- nested state machine (pc=clC, entry=4)
                     -- state S<1
                       cln = clr
@@ -20839,7 +21522,7 @@
                       clk = false
                       --> goto 14
                     -- state S9
-                      clo [clF] = Vector2 ["new"] (clp ["X"], clp ["Y"])
+                      clo [clF] = F6475 ["new"] (clp ["X"], clp ["Y"])
                       clq = cln
                       --> if clq then goto 16
                       --> if not (clq) then goto 15
@@ -21437,7 +22120,7 @@
 -- state S916
   bWI = {}
   bWO = false
-  for Su, Sv in ipairs (bqo ()) do
+  for Su, Sv in F4813 (bqo ()) do
       -- nested state machine (pc=bWN, entry=None)
           -- state S<1
             bWK = bWL
@@ -21545,8 +22228,8 @@
   b0G = b0F
   -- (constant pool alias cSe)
   bn8 ("QuestProgress", YV, YW, b0G)
-  local cSf = task ["wait"]
-  task.wait (0.6)
+  local cSf = F6128 ["wait"]
+  F3916 (0.6)
   --> goto 10316
 -- state S10322
   return true
@@ -21599,15 +22282,15 @@
   b0L = b0K
   -- (constant pool alias cSe)
   bn8 ("QuestProgress", YV, YW, b0L)
-  local cSg = task ["wait"]
-  task.wait (0.6)
+  local cSg = F6128 ["wait"]
+  F3916 (0.6)
   --> goto 10315
 -- state S10334
   b0G = b0F
   -- (constant pool alias cSe)
   bpz [YY] = string.format ("%s %d", YW, b0G)
-  local cSh = Vector3 ["new"]
-  bqd (b0w + Vector3.new (0, 3, 0), 0.4)
+  local cSh = F3022 ["new"]
+  bqd (b0w + F4803 (0, 3, 0), 0.4)
   --> goto 10321
 -- state S10335
   b0v = YY
@@ -21691,7 +22374,7 @@
   --> RETURN
 -- state S11497
   by3 = false
-  for kR, kS in ipairs (string.split (tostring (bno ["CurPower"] ["Value"]), ", ")) do
+  for kR, kS in F4813 (string.split (tostring (bno ["CurPower"] ["Value"]), ", ")) do
       -- nested state machine (pc=by2, entry=1)
           -- state S<1
             by3 = true
@@ -21855,11 +22538,11 @@
   --> RETURN
 -- state S2898
   ccy = false
-  for anZ, an_ in pairs (ccu ["Regions"]) do
+  for anZ, an_ in F2602 (ccu ["Regions"]) do
       -- nested state machine (pc=ccx, entry=15)
           -- state S<1
             ccE = false
-            for an3, an4 in pairs (ccC ["Npcs"]) do
+            for an3, an4 in F2602 (ccC ["Npcs"]) do
                 -- nested state machine (pc=ccD, entry=8)
                     -- state S<1
                       --> goto 2
@@ -22043,7 +22726,7 @@
   --> EXIT
 -- state S7657
   cyk = false
-  for aP1, aP2 in pairs (bno ["Items"]) do
+  for aP1, aP2 in F2602 (bno ["Items"]) do
       -- nested state machine (pc=cyj, entry=1)
           -- state S<1
             cyg = not cye [cyh]
@@ -22101,7 +22784,7 @@
   -- opaque predicate reduced to its real condition
 -- state S7659
   cyt = false
-  for aP7 in pairs (cKb [35] ["DefaultItemCategories"]) do
+  for aP7 in F2602 (cKb [35] ["DefaultItemCategories"]) do
       -- nested state machine (pc=cys, entry=0)
           -- state S<1
             cyf [# cyf + 1] = cyv
@@ -22147,7 +22830,290 @@
   --> EXIT
 -- state S6250
   -- (constant pool alias cSr)
-  bOG, bOH = pcall (function () local bOo, bOp, bOq, bOr, bOs, bOt, bOu, bOv, bOx, bOy, bOz, bOA, bOB, bOC, bOE = nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil; local bOw = nil; bOw = 17; while true do bOw = 5373 - bOw; do if bOw < 5353 then if bOw < 5336 then if bOw < 5328 then if bOw < 4121 then break else if bOw < 5326 then if bOw < 5325 then break else if bOw == 5325 then bOp = bOo; bOw = 8 else bOw = 5333; continue end else if bOw < 5327 then local cSs = cKb [136]; bOz = if bOp then 1 else 0; bOx = 2822*bOz + 1738*(1 - bOz); bOy = 1689*bOz + 687*(1 - bOz); bOw = if (bOx*814 + bOy*2280 + bOx*bOy) % 16777213 == 10914386 then 27 else 6 else return end else if bOw < 5332 then if bOw < 5330 then if bOw < 5329 then bOo = "Idle"; bOw = 28 else if bOw == 5329 then bOo = not cKb [91] ["HuntController"] ["yield"]; bOw = if bOo then 9 else 30 else bOw = 13722; continue end else if bOw < 5331 then if bOw == 5330 then bOp = "Cannot claim " .. bOq ["boss"]; bOw = 29 else bOw = 5343; continue end else bOo = cKb [52] (); bOw = if bOo then 41 else 10 end else if bOw < 5334 then if bOw < 5333 then local cSs = cKb [136]; bOz = if not cKb [91] ["HuntController"] ["dropForeign"] then 1 else 0; bOx = 697*bOz + 1508*(1 - bOz); bOy = 3811*bOz + 126*(1 - bOz); bOw = if (bOx*3859 + bOy*709 + bOx*bOy) % 16777213 == 8047989 then 32 else 35 else if bOw == 5333 then bOp = not bny ["controllerValid"] (cKb [91] ["HuntController"]); bOw = 47 else bOw = 13480; continue end else if bOw < 5335 then if bOw == 5334 then bOo = not cKb [91] ["HuntController"] ["stopped"]; bOw = if bOo then 34 else 1 else bOw = 5337; continue end else if bOw == 5335 then local cSt = cKb; local cSs = cSt [136]; cSt [91] ["HuntController"] ["lootUntil"] = cSt [91] ["LootController"] ["afterKill"] (); cSt [13] (function () return cKb [91] ["HuntController"] ["active"] () == nil end, 4, bOo); bOp = (bOo ()); bOw = if bOp then 47 else 40 else bOw = 5363; continue end else if bOw < 5344 then if bOw < 5340 then if bOw < 5338 then if bOw < 5337 then local cSt = cKb; local cSs = cSt [136]; cSt [54] ["uncommit"] ("AutoBossHunt"); bpz ["HuntStatus"] = "Cannot read " .. cSt [142] (bOp); return else bOw = if bOp then 31 else 23 end else if bOw < 5339 then if bOw == 5338 then local cSt = cKb; bOp = cSt [110] (bOo); local cSs = cSt [136]; bpz ["HuntStatus"] = "Clearing quest slot"; bOq = type (bOp) == "table"; bOw = if bOq then 4 else 21 else bOw = 5349; continue end else if bOw == 5339 then bOo = cKb [91] ["HuntController"] ["active"] () == nil; bOw = 1 else bOw = 16336; continue end else if bOw < 5342 then if bOw < 5341 then if bOw == 5340 then bOr = bOp ["QuestInstance"] ["Name"]; bOw = 0 else bOw = 5342; continue end else if bOw == 5341 then bpz ["HuntStatus"] = "Quest slot busy"; return else bOw = 16336; continue end else if bOw < 5343 then if bOw == 5342 then bOp = bny ["controllerValid"] (cKb [91] ["HuntController"]); bOw = 23 else bOw = 16336; continue end else local cSs = cKb [136]; bOz = if bOo then 1 else 0; bOx = 3256*bOz + 26*(1 - bOz); bOy = 3950*bOz + 308*(1 - bOz); bOw = if (bOx*2213 + bOy*518 + bOx*bOy) % 16777213 == 5335615 then 22 else 2 end else if bOw < 5348 then if bOw < 5346 then if bOw < 5345 then if bOw == 5344 then bpz ["HuntStatus"] = bOp; bOw = 19 else bOw = 13722; continue end else bOp = bOo; bOw = if bOp then 29 else 43 end else if bOw < 5347 then return else if bOw == 5347 then local cSs = cKb [136]; bpz ["Hunts"] = bpz ["Hunts"] + 1; bpz ["Quests"] = bpz ["Quests"] + 1; bpz ["HuntStatus"] = "Finished " .. bOq; bOw = 7 else bOw = 5338; continue end else if bOw < 5350 then if bOw < 5349 then if bOw == 5348 then local cSt = cKb; local cSs = cSt [136]; bpz ["HuntStatus"] = "Claiming " .. bOq ["boss"]; bOw = if not cSt [91] ["HuntController"] ["claim"] (bOq) then 20 else 19 else bOw = 13424; continue end else if bOw == 5349 then bOp, bOo = cKb [91] ["HuntController"] ["active"] (); bOw = if bOp then 14 else 42 else bOw = 1028; continue end else if bOw < 5351 then bOw = if bOp then 38 else 44 else if bOw < 5352 then cKb [54] ["uncommit"] ("AutoBossHunt"); bOw = 2 else if bOw == 5352 then bOr = bOq; bOw = if bOr then 33 else 0 else bOw = 13480; continue end else if bOw < 5363 then if bOw < 5359 then if bOw < 5356 then if bOw < 5354 then if bOw == 5353 then bOo = cKb [91] ["HuntController"] ["stopped"]; bOw = if bOo then 45 else 28 else bOw = 5359; continue end else if bOw < 5355 then bOw = 15 else if bOw == 5355 then local cSs = cKb [136]; bOz = if cKb [91] ["HuntController"] ["stopped"] then 1 else 0; bOx = 973*bOz + 2784*(1 - bOz); bOy = "Interrupt Lower Priority"*bOz + "DemonStatus"*(1 - bOz); bOw = if (bOx*2803 + bOy*1873 + bOx*bOy) % 16777213 == 3535583 then 46 else 24 else bOw = 5339; continue end else if bOw < 5357 then bOw = if not cKb [86] (20) then 13 else 18 else if bOw < 5358 then local cSt = cKb; local cSs = cSt [136]; bOo = bmO (cSt [91] ["HuntController"]); bOp = (cSt [6] (bOq, "HuntStatus", 180, cSt [91] ["HuntController"])); bOw = if bOp then 11 else 36 else break end else if bOw < 5361 then if bOw < 5360 then bOq = cKb [91] ["HuntController"] ["target"] (bOo); bOw = if not bOq then 37 else 16 else bpz ["HuntStatus"] = "Waiting for character"; return end else if bOw < 5362 then if bOw == 5361 then bpz ["HuntStatus"] = bOo; return else bOw = 5346; continue end else bOp = not bOo (); bOw = 36 end else if bOw < 5371 then if bOw < 5367 then if bOw < 5365 then if bOw < 5364 then if bOw == 5363 then bOq, bOo, bOp = nil, nil, nil; bOB = false; for Hi, Hj in ipairs (cKb [91] ["HuntController"] ["offers"] ()) do bOC = Hi; bOE = Hj; local bOD = bOC; local bOF = bOE; local bOA = nil; local cSt = cKb; local cSs = cSt [136]; bOA = 9; while true do if bOA < 9 then if bOA < 4 then if bOA < 2 then if bOA < 1 then bOv = bOr == bOo; bOA = if bOv then 17 else 8 else bOB = true; bOA = 6 end else if bOA < 3 then bOp = bOr; bOA = 12 else bOA = if bOu then 16 else 5 end else if bOA < 6 then if bOA < 5 then bOr, bOt, bOs = cSt [91] ["HuntController"] ["canClaim"] (bOF ["quest"]); bOA = if bOr then 11 else 13 else bOA = 12 end else if bOA < 7 then break else if bOA < 8 then bOA = 6 else bOu = bOv; bOA = 3 end else if bOA < 13 then if bOA < 11 then if bOA < 10 then bOA = if cSt [91] ["HuntController"] ["wanted"] (bOF) then 4 else 7 else bOu = bOr > bOo; bOA = 14 end else if bOA < 12 then bOr = cSt [91] ["HuntController"] ["reward"] (bOF ["quest"]); bOu = not bOq; bOA = if bOu then 14 else 10 else bOA = 7 end else if bOA < 15 then if bOA < 14 then bOr = bOp; bOA = if bOr then 2 else 15 else bOA = if bOu then 3 else 0 end else if bOA < 16 then bOr = cSt [91] ["HuntController"] ["denial"] (bOt, bOs); bOA = 2 else if bOA < 17 then bOq, bOo = bOF, bOr; bOA = 5 else bOv = bOF ["expires"] < bOq ["expires"]; bOA = 8 end end; if bOB then break end end; bOw = if not bOq then 3 else 25 else bOw = 5362; continue end else if bOw == 5364 then bOo = not cKb [91] ["HuntController"] ["stopped"]; bOw = 30 else bOw = 5334; continue end else if bOw < 5366 then cKb [94] (bOp); return else if bOw == 5366 then return else bOw = 5332; continue end else if bOw < 5369 then if bOw < 5368 then bOw = 39 else if bOw == 5368 then bOo = "No hunt to take"; bOw = 12 else bOw = 5346; continue end else if bOw < 5370 then if bOw == 5369 then bOq = typeof (bOp ["QuestInstance"]) == "Instance"; bOw = 21 else bOw = 4121; continue end else bOo = bOp; bOw = if bOo then 12 else 5 end else if bOw < 10669 then if bOw < 5373 then if bOw < 5372 then bOw = 39 else if bOw == 5372 then bOw = if bOo then 26 else 7 else bOw = 6687; continue end else if bOw < 6687 then if bOw == 5373 then bOp = bOr; bOw = if bOp then 8 else 48 else break end else break end else break end end end end)
+  bOG,bOH= F2175(
+          function()
+              -- nested state machine (pc=bOw, entry=5356)
+                  -- state S<4121
+                    --> EXIT
+                  -- state S4121..5324
+                    --> EXIT
+                  -- state S5325
+                    bOp = bOo
+                    --> goto 5365
+                  -- state S5326
+                    -- (constant pool alias cSs)
+                    -- [dropped obfuscation helper: bOz = if bOp then 1 else 0]
+                    -- [dropped obfuscation helper: bOx = 2822*bOz + 1738*(1 - bOz)]
+                    -- [dropped obfuscation helper: bOy = 1689*bOz + 687*(1 - bOz)]
+                    --> if bOp then goto 5346
+                    --> if not (bOp) then goto 5367
+                    -- opaque predicate reduced to its real condition
+                  -- state S5327
+                    return
+                    --> RETURN
+                  -- state S5328
+                    bOo = "Idle"
+                    --> goto 5345
+                  -- state S5329
+                    bOo = not cKb [91] ["HuntController"] ["yield"]
+                    --> if bOo then goto 5364
+                    --> if not (bOo) then goto 5343
+                  -- state S5330
+                    bOp = "Cannot claim " .. bOq ["boss"]
+                    --> goto 5344
+                  -- state S5331
+                    bOo = cKb [52] ()
+                    --> if bOo then goto 5332
+                    --> if not (bOo) then goto 5363
+                  -- state S5332
+                    -- (constant pool alias cSs)
+                    -- [dropped obfuscation helper: bOz = if not cKb [91] ["HuntController"] ["dropForeign"] then 1 else 0]
+                    -- [dropped obfuscation helper: bOx = 697*bOz + 1508*(1 - bOz)]
+                    -- [dropped obfuscation helper: bOy = 3811*bOz + 126*(1 - bOz)]
+                    --> if not cKb [91] ["HuntController"] ["dropForeign"] then goto 5341
+                    --> if not (not cKb [91] ["HuntController"] ["dropForeign"]) then goto 5338
+                    -- opaque predicate reduced to its real condition
+                  -- state S5333
+                    bOp = not bny ["controllerValid"] (cKb [91] ["HuntController"])
+                    --> goto 5326
+                  -- state S5334
+                    bOo = not cKb [91] ["HuntController"] ["stopped"]
+                    --> if bOo then goto 5339
+                    --> if not (bOo) then goto 5372
+                  -- state S5335
+                    local cSt = cKb
+                    local cSs = cSt [136]
+                    cSt [91] ["HuntController"] ["lootUntil"] = cSt [91] ["LootController"] ["afterKill"] ()
+                    cSt[13](
+                        function()
+                            return cKb [91] ["HuntController"] ["active"] () == nil
+                        end,
+                        4,
+                        bOo
+                    )
+                    bOp = (bOo ())
+                    --> if bOp then goto 5326
+                    --> if not (bOp) then goto 5333
+                  -- state S5336
+                    local cSt = cKb
+                    local cSs = cSt [136]
+                    cSt [54] ["uncommit"] ("AutoBossHunt")
+                    bpz ["HuntStatus"] = "Cannot read " .. cSt [142] (bOp)
+                    return
+                    --> RETURN
+                  -- state S5337
+                    --> if bOp then goto 5342
+                    --> if not (bOp) then goto 5350
+                  -- state S5338
+                    local cSt = cKb
+                    bOp = cSt [110] (bOo)
+                    local cSs = cSt [136]
+                    bpz ["HuntStatus"] = "Clearing quest slot"
+                    bOq = type (bOp) == "table"
+                    --> if bOq then goto 5369
+                    --> if not (bOq) then goto 5352
+                  -- state S5339
+                    bOo = cKb [91] ["HuntController"] ["active"] () == nil
+                    --> goto 5372
+                  -- state S5340
+                    bOr = bOp ["QuestInstance"] ["Name"]
+                    --> goto 5373
+                  -- state S5341
+                    bpz ["HuntStatus"] = "Quest slot busy"
+                    return
+                    --> RETURN
+                  -- state S5342
+                    bOp = bny ["controllerValid"] (cKb [91] ["HuntController"])
+                    --> goto 5350
+                  -- state S5343
+                    -- (constant pool alias cSs)
+                    -- [dropped obfuscation helper: bOz = if bOo then 1 else 0]
+                    -- [dropped obfuscation helper: bOx = 3256*bOz + 26*(1 - bOz)]
+                    -- [dropped obfuscation helper: bOy = 3950*bOz + 308*(1 - bOz)]
+                    --> if bOo then goto 5351
+                    --> if not (bOo) then goto 5371
+                    -- opaque predicate reduced to its real condition
+                  -- state S5344
+                    bpz ["HuntStatus"] = bOp
+                    --> goto 5354
+                  -- state S5345
+                    bOp = bOo
+                    --> if bOp then goto 5344
+                    --> if not (bOp) then goto 5330
+                  -- state S5346
+                    return
+                    --> RETURN
+                  -- state S5347
+                    -- (constant pool alias cSs)
+                    bpz ["Hunts"] = bpz ["Hunts"] + 1
+                    bpz ["Quests"] = bpz ["Quests"] + 1
+                    bpz ["HuntStatus"] = "Finished " .. bOq
+                    --> goto 5366
+                  -- state S5348
+                    local cSt = cKb
+                    local cSs = cSt [136]
+                    bpz ["HuntStatus"] = "Claiming " .. bOq ["boss"]
+                    --> if not cSt [91] ["HuntController"] ["claim"] (bOq) then goto 5353
+                    --> if not (not cSt [91] ["HuntController"] ["claim"] (bOq)) then goto 5354
+                  -- state S5349
+                    bOp, bOo = cKb [91] ["HuntController"] ["active"] ()
+                    --> if bOp then goto 5359
+                    --> if not (bOp) then goto 5331
+                  -- state S5350
+                    --> if bOp then goto 5335
+                    --> if not (bOp) then goto 5329
+                  -- state S5351
+                    cKb [54] ["uncommit"] ("AutoBossHunt")
+                    --> goto 5371
+                  -- state S5352
+                    bOr = bOq
+                    --> if bOr then goto 5340
+                    --> if not (bOr) then goto 5373
+                  -- state S5353
+                    bOo = cKb [91] ["HuntController"] ["stopped"]
+                    --> if bOo then goto 5328
+                    --> if not (bOo) then goto 5345
+                  -- state S5354
+                    --> goto 5358
+                  -- state S5355
+                    -- (constant pool alias cSs)
+                    -- [dropped obfuscation helper: bOz = if cKb [91] ["HuntController"] ["stopped"] then 1 else 0]
+                    -- [dropped obfuscation helper: bOx = 973*bOz + 2784*(1 - bOz)]
+                    -- [dropped obfuscation helper: bOy = "Interrupt Lower Priority"*bOz + "DemonStatus"*(1 - bOz)]
+                    --> if (bOx*2803 + bOy*1873 + bOx*bOy) % 16777213 == 3535583 then goto 5327
+                    --> if not ((bOx*2803 + bOy*1873 + bOx*bOy) % 16777213 == 3535583) then goto 5349
+                  -- state S5356
+                    --> if not cKb [86] (20) then goto 5360
+                    --> if not (not cKb [86] (20)) then goto 5355
+                  -- state S5357
+                    local cSt = cKb
+                    local cSs = cSt [136]
+                    bOo = bmO (cSt [91] ["HuntController"])
+                    bOp = (cSt [6] (bOq, "HuntStatus", 180, cSt [91] ["HuntController"]))
+                    --> if bOp then goto 5362
+                    --> if not (bOp) then goto 5337
+                  -- state S5358
+                    --> EXIT
+                  -- state S5359
+                    bOq = cKb [91] ["HuntController"] ["target"] (bOo)
+                    --> if not bOq then goto 5336
+                    --> if not (not bOq) then goto 5357
+                  -- state S5360
+                    bpz ["HuntStatus"] = "Waiting for character"
+                    return
+                    --> RETURN
+                  -- state S5361
+                    bpz ["HuntStatus"] = bOo
+                    return
+                    --> RETURN
+                  -- state S5362
+                    bOp = not bOo ()
+                    --> goto 5337
+                  -- state S5363
+                    bOq, bOo, bOp = nil, nil, nil
+                    bOB = false
+                    for Hi, Hj in F4813 (cKb [91] ["HuntController"] ["offers"] ()) do
+                        -- nested state machine (pc=bOA, entry=9)
+                            -- state S<1
+                              bOv = bOr == bOo
+                              --> if bOv then goto 17
+                              --> if not (bOv) then goto 8
+                            -- state S1
+                              bOB = true
+                              --> goto 6
+                            -- state S2
+                              bOp = bOr
+                              --> goto 12
+                            -- state S3
+                              --> if bOu then goto 16
+                              --> if not (bOu) then goto 5
+                            -- state S4
+                              bOr, bOt, bOs = cSt [91] ["HuntController"] ["canClaim"] (bOF ["quest"])
+                              --> if bOr then goto 11
+                              --> if not (bOr) then goto 13
+                            -- state S5
+                              --> goto 12
+                            -- state S6
+                              --> EXIT
+                            -- state S7
+                              --> goto 6
+                            -- state S8
+                              bOu = bOv
+                              --> goto 3
+                            -- state S9
+                              --> if cSt [91] ["HuntController"] ["wanted"] (bOF) then goto 4
+                              --> if not (cSt [91] ["HuntController"] ["wanted"] (bOF)) then goto 7
+                            -- state S10
+                              bOu = bOr > bOo
+                              --> goto 14
+                            -- state S11
+                              bOr = cSt [91] ["HuntController"] ["reward"] (bOF ["quest"])
+                              bOu = not bOq
+                              --> if bOu then goto 14
+                              --> if not (bOu) then goto 10
+                            -- state S12
+                              --> goto 7
+                            -- state S13
+                              bOr = bOp
+                              --> if bOr then goto 2
+                              --> if not (bOr) then goto 15
+                            -- state S14
+                              --> if bOu then goto 3
+                              --> if not (bOu) then goto 0  (outside dispatcher -> EXIT)
+                            -- state S15
+                              bOr = cSt [91] ["HuntController"] ["denial"] (bOt, bOs)
+                              --> goto 2
+                            -- state S16
+                              bOq, bOo = bOF, bOr
+                              --> goto 5
+                            -- state S>=17
+                              bOv = bOF ["expires"] < bOq ["expires"]
+                              --> goto 8
+                        if bOB then
+                            break
+                        end
+                    end
+                    --> if not bOq then goto 5370
+                    --> if not (not bOq) then goto 5348
+                  -- state S5364
+                    bOo = not cKb [91] ["HuntController"] ["stopped"]
+                    --> goto 5343
+                  -- state S5365
+                    cKb [94] (bOp)
+                    return
+                    --> RETURN
+                  -- state S5366
+                    return
+                    --> RETURN
+                  -- state S5367
+                    --> goto 5334
+                  -- state S5368
+                    bOo = "No hunt to take"
+                    --> goto 5361
+                  -- state S5369
+                    bOq = typeof (bOp ["QuestInstance"]) == "Instance"
+                    --> goto 5352
+                  -- state S5370
+                    bOo = bOp
+                    --> if bOo then goto 5361
+                    --> if not (bOo) then goto 5368
+                  -- state S5371
+                    --> goto 5334
+                  -- state S5372
+                    --> if bOo then goto 5347
+                    --> if not (bOo) then goto 5366
+                  -- state S5373
+                    bOp = bOr
+                    --> if bOp then goto 5365
+                    --> if not (bOp) then goto 5325
+                  -- state S5374..6686
+                    --> EXIT
+                  -- state S6687..10668
+                    --> EXIT
+                  -- state S>=10669
+                    --> EXIT
+          end
+      )
   bpY ("AutoBossHunt")
   --> if not bOG then goto 6253
   --> if not (not bOG) then goto 6256
@@ -22213,9 +23179,9 @@
   --> if XP  ~= "Play It Out" then goto 10825
   --> if not (XP  ~= "Play It Out") then goto 10826
 -- state S10825
-  local cSv = task ["wait"]
+  local cSv = F6128 ["wait"]
   -- (constant pool alias cSu)
-  task.wait (1)
+  F3916 (1)
   bn8 ("training_signaler", "Stop", true)
   return cKb [91] ["TrainController"] ["watch"] (XM, XO, XP, {}, XR, 20)
   --> RETURN
@@ -22241,9 +23207,9 @@
 -- state S10830
   --> EXIT
 -- state S10831
-  local cSw = Vector3 ["new"]
+  local cSw = F3022 ["new"]
   -- (constant pool alias cSu)
-  bqd (b_X ["goal"] + Vector3.new (0, 3, 0), 0.4, XR)
+  bqd (b_X ["goal"] + F4803 (0, 3, 0), 0.4, XR)
   cKb [91] ["TrainController"] ["touchGoal"] (b_X)
   --> goto 10829
 -- state S10832..11321
@@ -22423,7 +23389,7 @@
 -- state S3515
   cAC = {}
   cAF = false
-  for aTm, aTn in ipairs (bpz ["WorldCache"]) do
+  for aTm, aTn in F4813 (bpz ["WorldCache"]) do
       -- nested state machine (pc=cAE, entry=2)
           -- state S<1
             cAF = true
@@ -22573,7 +23539,7 @@
 -- locals: local bQW, bQY, bQZ, bQ_, bQ1 = nil, nil, nil, nil, nil; local bQX = nil; bQX = 1
 -- state S1800
   bQZ = false
-  for JG, JH in ipairs (bQW:GetChildren ()) do
+  for JG, JH in F4813 (bQW:GetChildren ()) do
       -- nested state machine (pc=bQY, entry=2)
           -- state S<1
             return bQ2
@@ -22740,9 +23706,9 @@
   --> if not bnB () then goto 2109
   --> if not (not bnB ()) then goto 2113
 -- state S2118
-  local cSO = coroutine ["running"]
+  local cSO = F3109 ["running"]
   -- (constant pool alias cSN)
-  bt_ = bny ["runs"] [coroutine.running ()]
+  bt_ = bny ["runs"] [F5473 ()]
   bt0 = not dK ["stopped"]
   --> if bt0 then goto 2121
   --> if not (bt0) then goto 2116
@@ -22773,12 +23739,12 @@
 -- state S3536
   --> EXIT
 -- state S3537
-  local cSP = coroutine ["status"]
-  --> if coroutine.status (bo0)  ~= "TextColor3" then goto 3538
-  --> if not (coroutine.status (bo0)  ~= "TextColor3") then goto 3535
+  local cSP = F3109 ["status"]
+  --> if F6075 (bo0)  ~= "TextColor3" then goto 3538
+  --> if not (F6075 (bo0)  ~= "TextColor3") then goto 3535
 -- state S3538
-  local cSQ = task ["cancel"]
-  pcall (task.cancel, bo0)
+  local cSQ = F6128 ["cancel"]
+  F2175 (F5108, bo0)
   --> goto 3535
 -- state S3539..4102
   --> goto -1289  (outside dispatcher -> EXIT)
@@ -22791,7 +23757,7 @@
 -- locals: local cCx, cCy, cCz, cCB = nil, nil, nil, nil; local cCw = nil; cCw = 2
 -- state S226
   cCy = false
-  for aVv, aVw in ipairs (cKb [91] ["controllers"]) do
+  for aVv, aVw in F4813 (cKb [91] ["controllers"]) do
       -- nested state machine (pc=cCx, entry=1)
           -- state S<1
             --> EXIT
@@ -22808,14 +23774,14 @@
   cKb [97] (false)
   --> goto 228
 -- state S227
-  local cSS = coroutine ["status"]
-  --> if coroutine.status (cKb [75])  ~= "TextColor3" then goto 229
-  --> if not (coroutine.status (cKb [75])  ~= "TextColor3") then goto 226
+  local cSS = F3109 ["status"]
+  --> if F6075 (cKb [75])  ~= "TextColor3" then goto 229
+  --> if not (F6075 (cKb [75])  ~= "TextColor3") then goto 226
 -- state S228
   --> EXIT
 -- state S229
-  local cST = task ["cancel"]
-  pcall (task.cancel, cKb [75])
+  local cST = F6128 ["cancel"]
+  F2175 (F5108, cKb [75])
   --> goto 226
 -- state S230..572
   --> goto -3844  (outside dispatcher -> EXIT)
@@ -23122,7 +24088,7 @@
 -- state S1522
   cyw = {}
   cyz = false
-  for aQa in pairs (cKb [35] ["DefaultItemCategories"]) do
+  for aQa in F2602 (cKb [35] ["DefaultItemCategories"]) do
       -- nested state machine (pc=cyy, entry=0)
           -- state S<1
             cyw [# cyw + 1] = cyB
@@ -23192,7 +24158,7 @@
   --> goto 11174
 -- state S11177
   bN8 = false
-  for Gl, Gm in pairs (Gj ["Markers"]) do
+  for Gl, Gm in F2602 (Gj ["Markers"]) do
       -- nested state machine (pc=bN7, entry=5)
           -- state S<1
             bN5 = bOc ["Npc"]  ~= ""
@@ -23396,7 +24362,7 @@
   --> EXIT
 -- state S14243
   -- (constant pool alias cS4)
-  b9k = {{["name"] = "Session", ["value"] = b9k ({b9l, b9m, "\u{203A} Alive %s":format (b9n)}, "\n"), ["in line"] = true}}
+  b9k = {{["name"] = "Session", ["value"] = b9k ({b9l, b9m, "\\u{203A} Alive %s":format (b9n)}, " "), ["in line"] = true}}
   --> if ajy ["Label"] == "Dungeon" then goto 14253
   --> if not (ajy ["Label"] == "Dungeon") then goto 14264
 -- state S14244
@@ -23406,11 +24372,11 @@
   b9l = bno ["EXP_PER_LEVEL"]
   --> goto 14255
 -- state S14246
-  b9m (b9k, {["name"] = "Run", ["value"] = b9n ({b9o, "\u{203A} Hearts**%s**":format (tostring (b9p)), "\u{203A} Points**%s**":format (cKb [35] ["Commas"] (cKb [91] ["CrystalController"] ["points"] ()))}, "\n"), ["in line"] = true})
+  b9m (b9k, {["name"] = "Run", ["value"] = b9n ({b9o, "\\u{203A} Hearts**%s**":format (tostring (b9p)), "\\u{203A} Points**%s**":format (cKb [35] ["Commas"] (cKb [91] ["CrystalController"] ["points"] ()))}, " "), ["in line"] = true})
   --> goto 14258
 -- state S14247
   -- (constant pool alias cS4)
-  b9o = "\u{203A} Floor**%s**":format (b9l)
+  b9o = "\\u{203A} Floor**%s**":format (b9l)
   b9p = (tonumber (cKb [126]:GetAttribute ("Hearts")))
   --> if b9p then goto 14246
   --> if not (b9p) then goto 14261
@@ -23452,8 +24418,8 @@
 -- state S14257
   b9k = cJV
   -- (constant pool alias cS4)
-  b9l = "\u{203A} Running**%s**":format (cKb [35] ["Clock"] (os ["clock"] () - cKb [35] ["Started"]))
-  b9m = "\u{203A} Doing %s":format (cKb [51] ["PriorityHolder"] ())
+  b9l = "\\u{203A} Running**%s**":format (cKb [35] ["Clock"] (os ["clock"] () - cKb [35] ["Started"]))
+  b9m = "\\u{203A} Doing %s":format (cKb [51] ["PriorityHolder"] ())
   b9n = (bnB ())
   -- [dropped obfuscation helper: b9t = if b9n then 1 else 0]
   -- [dropped obfuscation helper: b9r = 1220*b9t + 391*(1 - b9t)]
@@ -23472,7 +24438,7 @@
   --> goto 14250
 -- state S14260
   b9n = b9l
-  cJU (b9k, {["name"] = "Character", ["value"] = cJV ({"\u{203A} Level**%d**/ %d":format (cKb [48] (), bno ["MAX_LEVEL"]), "\u{203A} Exp**%s**/ %s":format (cKb [35] ["Commas"] (b9n), cKb [35] ["Commas"] (b9m)), "\u{203A} Wen**%s**":format (cKb [35] ["Commas"] (cKb [20] ()))}, "\n"), ["in line"] = true})
+  cJU (b9k, {["name"] = "Character", ["value"] = cJV ({"\\u{203A} Level**%d**/ %d":format (cKb [48] (), bno ["MAX_LEVEL"]), "\\u{203A} Exp**%s**/ %s":format (cKb [35] ["Commas"] (b9n), cKb [35] ["Commas"] (b9m)), "\\u{203A} Wen**%s**":format (cKb [35] ["Commas"] (cKb [20] ()))}, " "), ["in line"] = true})
   --> goto 14258
 -- state S14261
   b9p = 0
@@ -23543,7 +24509,7 @@
   cJ5 (cKb [54] ["lastClaim"])
   cJ5 (cKb [54] ["commitments"])
   cti = false
-  for aI7, aI8 in ipairs (cKb [54] ["features"]) do
+  for aI7, aI8 in F4813 (cKb [54] ["features"]) do
       -- nested state machine (pc=cth, entry=2)
           -- state S<1
             cti = true
@@ -23560,7 +24526,7 @@
   bpz ["PriorityStatus"] = "Off"
   bpz ["PriorityHolder"] = "None"
   cto = false
-  for aI9, aJa in ipairs (cKb [54] ["or der"]) do
+  for aI9, aJa in F4813 (cKb [54] ["or der"]) do
       -- nested state machine (pc=ctn, entry=5)
           -- state S<1
             --> goto 3
@@ -23601,7 +24567,7 @@
 -- state S7417
   byE = {}
   byI = false
-  for kr, ks in ipairs (bmK ["CollectionService"]:GetTagged ("Chest")) do
+  for kr, ks in F4813 (bmK ["CollectionService"]:GetTagged ("Chest")) do
       -- nested state machine (pc=byH, entry=3)
           -- state S<1
             --> goto 4
@@ -23711,7 +24677,7 @@
   bF3 = {}
   bF7 = false
   -- (constant pool alias cS8)
-  for vw, vx in ipairs (bF2:GetChildren ()) do
+  for vw, vx in F4813 (bF2:GetChildren ()) do
       -- nested state machine (pc=bF6, entry=3)
           -- state S<1
             bF2 = bF4
@@ -23747,8 +24713,8 @@
           break
       end
   end
-  --> if next (bF3) == nil then goto 10448
-  --> if not (next (bF3) == nil) then goto 10449
+  --> if F3173 (bF3) == nil then goto 10448
+  --> if not (F3173 (bF3) == nil) then goto 10449
 -- state S10444
   bF2 = typeof (vs ["QuestInstance"])  ~= "Instance"
   --> goto 10446
@@ -23791,9 +24757,126 @@
   --> goto 3860
 -- state S3856
   -- (constant pool alias cS9)
-  pcall (function () local ccj, cck, ccl, ccm, cco, ccp, ccq = nil, nil, nil, nil, nil, nil, nil; local ccn = nil; ccn = 2; while true do ccn = 9402 - ccn; do if ccn < 9389 then if ccn < 9379 then if ccn < 8283 then break else if ccn < 9287 then break else if ccn < 9377 then break else if ccn < 9378 then ccj = cKb [118] (cKb [99] ["parry"] ["step"]); ccn = 21 else if ccn == 9378 then ccl = cck; local cTa = cKb [136]; ccq = if ccl then 1 else 0; cco = 3899*ccq + 2362*(1 - ccq); ccp = 805*ccq + 3239*(1 - ccq); ccn = if (cco*3515 + ccp*2547 + cco*ccp) % 16777213 == 2116802 then 11 else 10 else ccn = 7201; continue end else if ccn < 9384 then if ccn < 9381 then if ccn < 9380 then if ccn == 9379 then ccn = if ccj then 4 else 7 else ccn = 9391; continue end else if ccn == 9380 then ccj ["WalkSpeed"] = 16; ccn = 17 else ccn = 9400; continue end else if ccn < 9382 then ccn = if ccj then 9 else 13 else if ccn < 9383 then if ccn == 9382 then cKb [99] ["resourceTick"] (); ccn = 8 else ccn = 9385; continue end else bon (); bpX (); boZ (); ccn = 15 end else if ccn < 9386 then if ccn < 9385 then if ccn == 9384 then cKb [140] (); ccn = 1 else ccn = 9402; continue end else if ccn == 9385 then ccn = 19 else ccn = 9395; continue end else if ccn < 9387 then cck = ccj ["WalkSpeed"] > 0; ccn = 5 else if ccn < 9388 then break else local cTa = cKb [136]; ccq = if cck then 1 else 0; cco = 2694*ccq + 2712*(1 - ccq); ccp = 328*ccq + 989*(1 - ccq); ccn = if (cco*3409 + ccp*3964 + cco*ccp) % 16777213 == 11367670 then 22 else 17 end else if ccn < 9399 then if ccn < 9394 then if ccn < 9391 then if ccn < 9390 then ccj = cKb [72] ["noStun"]; ccn = if ccj then 23 else 6 else cck = bno ["CombatPresets"] ["slow_walk_speed"]; ccn = 24 end else if ccn < 9392 then cck = ccj; ccm = ccl; local cTa = cKb [136]; ccq = if cck then 1 else 0; cco = 2360*ccq + 1783*(1 - ccq); ccp = 1291*ccq + 2000*(1 - ccq); ccn = if (cco*685 + ccp*800 + cco*ccp) % 16777213 == 5696160 then 16 else 5 else if ccn < 9393 then ccl = 7; ccn = 11 else if ccn == 9393 then cKb [99] ["parry"] ["step"] (); ccn = 13 else ccn = 9559; continue end else if ccn < 9396 then if ccn < 9395 then if ccn == 9394 then ccj = cKb [99] ["parry"]; ccn = if ccj then 25 else 21 else ccn = 9395; continue end else ccn = if cKb [72] ["noRagdoll"] then 18 else 1 end else if ccn < 9397 then ccj = cKb [72] ["noRagdoll"]; ccn = 23 else if ccn < 9398 then ccn = if cck then 0 else 14 else if ccn == 9398 then cKb [88] (); ccn = 7 else ccn = 9383; continue end else if ccn < 11713 then if ccn < 9401 then if ccn < 9400 then if ccn == 9399 then ccj = cKb [124] (); cck = type (bno ["CombatPresets"]) == "table"; ccn = if cck then 12 else 24 else ccn = 9383; continue end else cKb [66] (); ccn = if cKb [118] (cKb [99] ["resourceTick"]) then 20 else 8 end else if ccn < 9402 then if ccn == 9401 then ccn = if cKb [72] [8562344] then 3 else 19 else ccn = 9559; continue end else if ccn < 9559 then if ccn == 9402 then cck = ccj ["WalkSpeed"] < =  ccm; ccn = 14 else break end else break end else break end end end end)
-  local cTb = task ["wait"]
-  task.wait (0.15)
+  F2175(
+      function()
+          -- nested state machine (pc=ccn, entry=9400)
+              -- state S<8283
+                --> EXIT
+              -- state S8283..9286
+                --> EXIT
+              -- state S9287..9376
+                --> EXIT
+              -- state S9377
+                ccj = cKb [118] (cKb [99] ["parry"] ["step"])
+                --> goto 9381
+              -- state S9378
+                ccl = cck
+                -- (constant pool alias cTa)
+                -- [dropped obfuscation helper: ccq = if ccl then 1 else 0]
+                -- [dropped obfuscation helper: cco = 3899*ccq + 2362*(1 - ccq)]
+                -- [dropped obfuscation helper: ccp = 805*ccq + 3239*(1 - ccq)]
+                --> if ccl then goto 9391
+                --> if not (ccl) then goto 9392
+                -- opaque predicate reduced to its real condition
+              -- state S9379
+                --> if ccj then goto 9398
+                --> if not (ccj) then goto 9395
+              -- state S9380
+                ccj ["WalkSpeed"] = 16
+                --> goto 9385
+              -- state S9381
+                --> if ccj then goto 9393
+                --> if not (ccj) then goto 9389
+              -- state S9382
+                cKb [99] ["resourceTick"] ()
+                --> goto 9394
+              -- state S9383
+                bon ()
+                bpX ()
+                boZ ()
+                --> goto 9387
+              -- state S9384
+                cKb [140] ()
+                --> goto 9401
+              -- state S9385
+                --> goto 9383
+              -- state S9386
+                cck = ccj ["WalkSpeed"] > 0
+                --> goto 9397
+              -- state S9387
+                --> EXIT
+              -- state S9388
+                -- (constant pool alias cTa)
+                -- [dropped obfuscation helper: ccq = if cck then 1 else 0]
+                -- [dropped obfuscation helper: cco = 2694*ccq + 2712*(1 - ccq)]
+                -- [dropped obfuscation helper: ccp = 328*ccq + 989*(1 - ccq)]
+                --> if cck then goto 9380
+                --> if not (cck) then goto 9385
+                -- opaque predicate reduced to its real condition
+              -- state S9389
+                ccj = cKb [72] ["noStun"]
+                --> if ccj then goto 9379
+                --> if not (ccj) then goto 9396
+              -- state S9390
+                cck = bno ["CombatPresets"] ["slow_walk_speed"]
+                --> goto 9378
+              -- state S9391
+                cck = ccj
+                ccm = ccl
+                -- (constant pool alias cTa)
+                -- [dropped obfuscation helper: ccq = if cck then 1 else 0]
+                -- [dropped obfuscation helper: cco = 2360*ccq + 1783*(1 - ccq)]
+                -- [dropped obfuscation helper: ccp = 1291*ccq + 2000*(1 - ccq)]
+                --> if cck then goto 9386
+                --> if not (cck) then goto 9397
+                -- opaque predicate reduced to its real condition
+              -- state S9392
+                ccl = 7
+                --> goto 9391
+              -- state S9393
+                cKb [99] ["parry"] ["step"] ()
+                --> goto 9389
+              -- state S9394
+                ccj = cKb [99] ["parry"]
+                --> if ccj then goto 9377
+                --> if not (ccj) then goto 9381
+              -- state S9395
+                --> if cKb [72] ["noRagdoll"] then goto 9384
+                --> if not (cKb [72] ["noRagdoll"]) then goto 9401
+              -- state S9396
+                ccj = cKb [72] ["noRagdoll"]
+                --> goto 9379
+              -- state S9397
+                --> if cck then goto 9402
+                --> if not (cck) then goto 9388
+              -- state S9398
+                cKb [88] ()
+                --> goto 9395
+              -- state S9399
+                ccj = cKb [124] ()
+                cck = type (bno ["CombatPresets"]) == "table"
+                --> if cck then goto 9390
+                --> if not (cck) then goto 9378
+              -- state S9400
+                cKb [66] ()
+                --> if cKb [118] (cKb [99] ["resourceTick"]) then goto 9382
+                --> if not (cKb [118] (cKb [99] ["resourceTick"])) then goto 9394
+              -- state S9401
+                --> if cKb [72] [8562344] then goto 9399
+                --> if not (cKb [72] [8562344]) then goto 9383
+              -- state S9402
+                cck = ccj ["WalkSpeed"] < =  ccm
+                --> goto 9388
+              -- state S9403..9558
+                --> EXIT
+              -- state S9559..11712
+                --> EXIT
+              -- state S>=11713
+                --> EXIT
+      end
+  )
+  local cTb = F6128 ["wait"]
+  F3916 (0.15)
   --> goto 3854
 -- state S3857
   --> if bnB () then goto 3856
@@ -23838,7 +24921,55 @@
   --> RETURN
 -- state S13602
   -- (constant pool alias cTc)
-  bSJ, bSK = pcall (function () local bSD, bSE, bSG, bSH, bSI = nil, nil, nil, nil, nil; local bSF = nil; bSF = 0; while true do bSF = 5003 - bSF; do if bSF < 4999 then if bSF < 4994 then break else if bSF < 4996 then if bSF < 4995 then break else bSE = not cKb [91] ["MobController"] ["stopped"]; bSF = 7 end else if bSF < 4997 then bSF = if bSE then 1 else 5 else if bSF < 4998 then if bSF == 4997 then bpz ["MobStatus"] = "Waiting for character"; return else bSF = 4998; continue end else if bSF == 4998 then bSF = 9 else bSF = 10036; continue end else if bSF < 5003 then if bSF < 5001 then if bSF < 5000 then if bSF == 4999 then bSD = cKb [82] (cKb [91] ["MobController"] ["target"], "MobStatus", 120, cKb [91] ["MobController"]); bSE = not bSD; bSF = if bSE then 3 else 2 else bSF = 2136; continue end else bSE = not cKb [91] ["MobController"] ["yield"]; bSF = 2 end else if bSF < 5002 then local cTd = cKb [136]; bSI = if bSE then 1 else 0; bSG = 2581*bSI + 3940*(1 - bSI); bSH = 1492*bSI + 3323*(1 - bSI); bSF = if (bSG*3224 + bSH*3208 + bSG*bSH) % 16777213 == 181119 then 8 else 7 else if bSF == 5002 then cKb [54] ["uncommit"] ("AutoMob"); bSF = 5 else bSF = 2136; continue end else if bSF < 10036 then if bSF < 5712 then if bSF == 5003 then bSF = if not cKb [86] (20) then 6 else 4 else break end else break end else break end end end end)
+  bSJ,bSK= F2175(
+          function()
+              -- nested state machine (pc=bSF, entry=5003)
+                  -- state S<4994
+                    --> EXIT
+                  -- state S4994
+                    --> EXIT
+                  -- state S4995
+                    bSE = not cKb [91] ["MobController"] ["stopped"]
+                    --> goto 4996
+                  -- state S4996
+                    --> if bSE then goto 5002
+                    --> if not (bSE) then goto 4998
+                  -- state S4997
+                    bpz ["MobStatus"] = "Waiting for character"
+                    return
+                    --> RETURN
+                  -- state S4998
+                    --> goto 4994
+                  -- state S4999
+                    bSD = cKb [82] (cKb [91] ["MobController"] ["target"], "MobStatus", 120, cKb [91] ["MobController"])
+                    bSE = not bSD
+                    --> if bSE then goto 5000
+                    --> if not (bSE) then goto 5001
+                  -- state S5000
+                    bSE = not cKb [91] ["MobController"] ["yield"]
+                    --> goto 5001
+                  -- state S5001
+                    -- (constant pool alias cTd)
+                    -- [dropped obfuscation helper: bSI = if bSE then 1 else 0]
+                    -- [dropped obfuscation helper: bSG = 2581*bSI + 3940*(1 - bSI)]
+                    -- [dropped obfuscation helper: bSH = 1492*bSI + 3323*(1 - bSI)]
+                    --> if bSE then goto 4995
+                    --> if not (bSE) then goto 4996
+                    -- opaque predicate reduced to its real condition
+                  -- state S5002
+                    cKb [54] ["uncommit"] ("AutoMob")
+                    --> goto 4998
+                  -- state S5003
+                    --> if not cKb [86] (20) then goto 4997
+                    --> if not (not cKb [86] (20)) then goto 4999
+                  -- state S5004..5711
+                    --> EXIT
+                  -- state S5712..10035
+                    --> EXIT
+                  -- state S>=10036
+                    --> EXIT
+          end
+      )
   bpY ("AutoMob")
   --> if not bSJ then goto 13603
   --> if not (not bSJ) then goto 13596
@@ -23938,7 +25069,7 @@
 -- state S1600
   cpd = {}
   cpl = false
-  for aEL, aEM in pairs (cpc ["Grid"]) do
+  for aEL, aEM in F2602 (cpc ["Grid"]) do
       -- nested state machine (pc=cpk, entry=9)
           -- state S<1
             --> goto 12
@@ -23991,7 +25122,12 @@
           break
       end
   end
-  table.sort (cpd, function (aEV, aEW) return aEV ["name"] < aEW ["name"] end)
+  table.sort(
+      cpd,
+      function(aEV, aEW)
+          return aEV ["name"] < aEW ["name"]
+      end
+  )
   return cpd
   --> RETURN
 -- state S1601..2471
@@ -24026,7 +25162,7 @@
   bK4 = cKb [48] ()
   bK6, bK5 = nil, nil
   bLf = false
-  for BA, BB in pairs (bno ["Quests"] ["Holder"]) do
+  for BA, BB in F2602 (bno ["Quests"] ["Holder"]) do
       -- nested state machine (pc=bLe, entry=4)
           -- state S<1
             bK8 = not bK5
@@ -24296,7 +25432,7 @@
 -- state S6319
   b2P = {}
   b2S = false
-  for abN in pairs (cKb [141] ["SHOP_VENDORS"]) do
+  for abN in F2602 (cKb [141] ["SHOP_VENDORS"]) do
       -- nested state machine (pc=b2R, entry=1)
           -- state S<1
             --> EXIT
@@ -24333,7 +25469,7 @@
   --> EXIT
 -- state S7330
   byz = false
-  for km, kn in ipairs (byw:GetDescendants ()) do
+  for km, kn in F4813 (byw:GetDescendants ()) do
       -- nested state machine (pc=byy, entry=0)
           -- state S<1
             --> if byD:IsA ("ProximityPrompt") then goto 1
@@ -24425,7 +25561,7 @@
 -- state S7647
   bCQ = false
   -- (constant pool alias cTr)
-  for pU, pV in ipairs (cKb [141] ["LOCKOUT_TAGS"]) do
+  for pU, pV in F4813 (cKb [141] ["LOCKOUT_TAGS"]) do
       -- nested state machine (pc=bCP, entry=1)
           -- state S<1
             bCQ = true
@@ -24721,7 +25857,94 @@
   return
   --> RETURN
 -- state S1617
-  cKb [35] ["Loop"] = task ["spawn"] (function () local b9B, b9C, b9E, b9F, b9G, b9I = nil, nil, nil, nil, nil, nil; local b9D = nil; b9D = 3; while true do b9D = 8094 - b9D; do if b9D < 8091 then if b9D < 8088 then if b9D < 8087 then if b9D < 8086 then if b9D < 5114 then break else if b9D < 7131 then break else if b9D < 8085 then break else if b9D == 8085 then cKb [35] ["Loop"] = nil; b9D = 1 else b9D = 8564; continue end else if b9D == 8086 then b9D = if true then 5 else 9 else b9D = 5994; continue end else if b9D == 8087 then b9B = cKb [35] ["Running"] (); b9D = 0 else b9D = 14506; continue end else if b9D < 8090 then if b9D < 8089 then if b9D == 8088 then b9D = 8 else b9D = 1794; continue end else b9B = (bnB ()); b9D = if b9B then 7 else 0 end else if b9D == 8090 then local cTu = cKb [136]; pcall (cKb [35] ["Sample"]); b9F = false; for aj6, aj7 in ipairs (cKb [35] ["Order"]) do b9G = aj6; b9I = aj7; local b9H = b9G; local b9J = b9I; local b9E = nil; b9E = 0; while true do if b9E < 6 then if b9E < 3 then if b9E < 1 then b9B = cKb [35] ["Channels"] [b9J]; b9E = if b9B ["Enabled"] then 11 else 1 else if b9E < 2 then b9E = 5 else pcall (cKb [35] ["S end"], b9B); b9E = 7 end else if b9E < 4 then b9F = true; b9E = 5 else if b9E < 5 then b9B ["Waited"] = 0; b9C = cKb [35] ["Counted"] (b9B) > 0; b9E = if b9C then 9 else 8 else break end else if b9E < 9 then if b9E < 7 then b9E = 1 else if b9E < 8 then b9E = 6 else b9C = not cKb [35] ["SkipQuiet"]; b9E = 9 end else if b9E < 10 then b9E = if b9C then 2 else 10 else if b9E < 11 then cKb [35] ["Reset"] (b9B); b9E = 7 else b9B ["Waited"] = b9B ["Waited"] + 5; b9E = if b9B ["Waited"] > =  b9B ["Interval"]*60 then 4 else 6 end end; if b9F then break end end; local cTv = task ["wait"]; task.wait (5); b9D = 6 else b9D = 8088; continue end else if b9D < 8094 then if b9D < 8093 then if b9D < 8092 then if b9D == 8091 then b9D = 8 else b9D = 8086; continue end else b9D = 9 end else break end else if b9D < 8564 then if b9D == 8094 then b9D = if b9B then 4 else 2 else break end else break end end end end)
+  cKb[35]["Loop"]= F6128["spawn"](
+          function()
+              -- nested state machine (pc=b9D, entry=8091)
+                  -- state S<5114
+                    --> EXIT
+                  -- state S5114..7130
+                    --> EXIT
+                  -- state S7131..8084
+                    --> EXIT
+                  -- state S8085
+                    cKb [35] ["Loop"] = nil
+                    --> goto 8093
+                  -- state S8086
+                    --> if true then goto 8089
+                    --> if not (true) then goto 8085
+                  -- state S8087
+                    b9B = cKb [35] ["Running"] ()
+                    --> goto 8094
+                  -- state S8088
+                    --> goto 8086
+                  -- state S8089
+                    b9B = (bnB ())
+                    --> if b9B then goto 8087
+                    --> if not (b9B) then goto 8094
+                  -- state S8090
+                    -- (constant pool alias cTu)
+                    F2175 (cKb [35] ["Sample"])
+                    b9F = false
+                    for aj6, aj7 in F4813 (cKb [35] ["Order"]) do
+                        -- nested state machine (pc=b9E, entry=0)
+                            -- state S<1
+                              b9B = cKb [35] ["Channels"] [b9J]
+                              --> if b9B ["Enabled"] then goto 11
+                              --> if not (b9B ["Enabled"]) then goto 1
+                            -- state S1
+                              --> goto 5
+                            -- state S2
+                              F2175 (cKb [35] ["S end"], b9B)
+                              --> goto 7
+                            -- state S3
+                              b9F = true
+                              --> goto 5
+                            -- state S4
+                              b9B ["Waited"] = 0
+                              b9C = cKb [35] ["Counted"] (b9B) > 0
+                              --> if b9C then goto 9
+                              --> if not (b9C) then goto 8
+                            -- state S5
+                              --> EXIT
+                            -- state S6
+                              --> goto 1
+                            -- state S7
+                              --> goto 6
+                            -- state S8
+                              b9C = not cKb [35] ["SkipQuiet"]
+                              --> goto 9
+                            -- state S9
+                              --> if b9C then goto 2
+                              --> if not (b9C) then goto 10
+                            -- state S10
+                              cKb [35] ["Reset"] (b9B)
+                              --> goto 7
+                            -- state S>=11
+                              b9B ["Waited"] = b9B ["Waited"] + 5
+                              --> if b9B ["Waited"] > =  b9B ["Interval"]*60 then goto 4
+                              --> if not (b9B ["Waited"] > =  b9B ["Interval"]*60) then goto 6
+                        if b9F then
+                            break
+                        end
+                    end
+                    local cTv = F6128 ["wait"]
+                    F3916 (5)
+                    --> goto 8088
+                  -- state S8091
+                    --> goto 8086
+                  -- state S8092
+                    --> goto 8085
+                  -- state S8093
+                    --> EXIT
+                  -- state S8094
+                    --> if b9B then goto 8090
+                    --> if not (b9B) then goto 8092
+                  -- state S8095..8563
+                    --> EXIT
+                  -- state S>=8564
+                    --> EXIT
+          end
+      )
   --> goto 1618
 -- state S1618..2820
   --> EXIT
@@ -24810,7 +26033,7 @@
   --> EXIT
 -- state S12847
   -- (constant pool alias cTx)
-  ci6 = Instance ["new"] ("ScreenGui")
+  ci6 = F5725 ["new"] ("ScreenGui")
   ci6 ["Name"] = "OuroborosOuwlandEsp"
   ci6 ["ResetOnSpawn"] = false
   ci6 ["IgnoreGuiInset"] = true
@@ -24872,7 +26095,7 @@
   -- (constant pool alias cTy)
   bXd = "Ill learn " .. TA .. " Breathing"
   bXg = false
-  for TE in pairs (bno ["Quests"] ["Holder"]) do
+  for TE in F2602 (bno ["Quests"] ["Holder"]) do
       -- nested state machine (pc=bXf, entry=1)
           -- state S<1
             bXg = true
