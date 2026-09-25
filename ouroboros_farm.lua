@@ -156,6 +156,101 @@ local function TriggerPrompt(prompt)                 -- cKb[69]
 end
 
 -- ---------------------------------------------------------------------------
+-- ПОДГОТОВКА ПОПЫТКИ — bmO/bp3 (слот F5074; эти два имени в артефакте
+-- указывают на один слот, поэтому совмещены)
+-- ---------------------------------------------------------------------------
+local function BeginAttempt(controller)          -- bmO(controller) / bp3(controller)
+    controller["claim"] = nil
+    controller["attempt"] = (controller["attempt"] or 0) + 1
+    local attempt = controller["attempt"]
+    return function()
+        return not controller["cancelled"]
+           and controller["attempt"] == attempt
+           and controller["running"] == true
+    end
+end
+
+-- ---------------------------------------------------------------------------
+-- ОЖИДАНИЕ ГОТОВНОСТИ — cKb[86](seconds)  (строка 3928)
+--   Ждёт, пока скрипт загружен (bnB) и запуск контроллера валиден, но не
+--   дольше seconds. Возвращает true, если дождались.
+-- ---------------------------------------------------------------------------
+local function WaitReady(seconds)                 -- cKb[86]
+    local record = bny["runs"][coroutine.running()]
+    local function ready()
+        if not bnB() then return false end
+        if not record then return true end
+        return bny["controllerValid"](record["controller"])
+    end
+    local deadline = os.clock() + (seconds or 0)
+    while os.clock() < deadline do
+        if ready() then return true end
+        task.wait()
+    end
+    return false
+end
+
+-- ---------------------------------------------------------------------------
+-- ГОТОВНОСТЬ ДРОПА К ЗАХВАТУ — cKb[138] = F2668 (строка 14011)
+--   Атрибуты: "DropReservedFor" (строка) и "DropOwnerUserId" (число).
+-- ---------------------------------------------------------------------------
+local function ClaimReadiness(drop)               -- cKb[138]
+    local reserved = drop:GetAttribute("DropReservedFor")
+    if type(reserved) ~= "string" then return true end
+    local owner = drop:GetAttribute("DropOwnerUserId")
+    if type(owner) == "number" and owner ~= cKb[126]["UserId"] then
+        return false
+    end
+    return true
+end
+
+-- ---------------------------------------------------------------------------
+-- ПРЕДИКАТ «МОЖНО ЗАБИРАТЬ» — состояния S4168…S4184
+--   cKb[132] = cloneref(LocalPlayer) => IsDescendantOf(cKb[132]) = «уже у нас».
+-- ---------------------------------------------------------------------------
+local function Claimable(drop)
+    if drop:IsDescendantOf(cKb[132]) then return false end
+    local claimedBy = drop:GetAttribute("DropClaimedBy")
+    if claimedBy ~= nil and claimedBy ~= cKb[126]["UserId"] then return false end
+    return ClaimReadiness(drop)
+end
+
+-- ---------------------------------------------------------------------------
+-- ПОДОЙТИ К ТОЧКЕ — bqd(position, eps, cancel)  (строка 4018)
+--   Композиция отмены вычитана дословно: прерываемся, если not bnB(), или
+--   невалиден запуск контроллера, или сработал внешний cancel.
+--   Перемещение выполняет арбитр движения bob (token/поколение).
+-- ---------------------------------------------------------------------------
+local function MoveToTarget(character, position)
+    local humanoid = character:FindFirstChildOfClass("Humanoid")
+    if humanoid then humanoid:MoveTo(position) end
+end
+
+local function Reach(position, eps, cancel)       -- bqd
+    local record = bny["runs"][coroutine.running()]
+    local function aborted()
+        if not bnB() then return true end
+        if record and not bny["controllerValid"](record["controller"]) then return true end
+        return cancel and cancel() or false
+    end
+    local character = cKb[9]()
+    if not character then return false end
+    local root = character:FindFirstChild("HumanoidRootPart")
+    if not root then return false end
+
+    local deadline = os.clock() + 10
+    while os.clock() < deadline do
+        if aborted() then return false end
+        if (root["Position"] - position)["Magnitude"] <= (eps or 0.2) + 0.5 then
+            return true
+        end
+        MoveToTarget(character, position)
+        task.wait(0.05)
+    end
+    return false
+end
+
+-- ---------------------------------------------------------------------------
 -- ЛУТ — шаг LootController: bnb(aBP, aBQ)  (строка 14014, состояния S4162…S4214)
 --   aBP = объект дропа, aBQ = функция отмены/признак "ждать"
 -- ---------------------------------------------------------------------------
@@ -171,11 +266,15 @@ local function LootStep(drop, cancel)
         return false
     end
 
-    -- S4169: проверка «можно ли забирать»
-    if not claimable(drop) then
+    -- S4169/S4184: проверка «можно ли забирать»
+    if not Claimable(drop) then
         -- S4213: подойти к дропу (смещение вверх на 3)
-        local ok = bqd(bpb(drop) + Vector3.new(0, 3, 0), 0.2, cancel)
-        if not ok then return false end                                -- S4198
+        local base = drop:IsA("BasePart") and drop
+                  or drop:FindFirstChildWhichIsA("BasePart", true)
+        if not base then return false end
+        if not Reach(base["Position"] + Vector3.new(0, 3, 0), 0.2, cancel) then
+            return false                                               -- S4198
+        end
     end
 
     -- S4193/S4214: уважать retryAt записи попытки
@@ -525,30 +624,23 @@ return {
 }
 
 --[[ ============================================================================
-  СТАТУС (обновлено: сундуки и схематики закрыты)
-  Готово и вычитано из артефакта:
-    * лут-шаг bnb (14014), душа boc (15938), сундук bpL (13460), open() (23125),
-      квест-каркас bpn (23850), перенос детали bqn (20991), раннер bpu (3127),
-      триггер промпта cKb[69] (19540), обёртки схем атик F3068/F2545;
-    * константы: CHEST_TIERS {"T1","T2","T3"} / CHEST_GUARD_RANGE 220 /
-      PASSIVE_MOBS (cKb[141]); бэкофф лута; интервалы всех 24 контроллеров.
-  Осталось вычитать:
-  1. claimable(drop) — предикат «можно забрать» (состояния S4168…S4184).
-  2. Вспомогательные: bpb (позиция дропа), bqd (подойти), bmO (снять claim),
-     bp3 (wait-until с таймаутом), cKb[86] (таймаут-обёртка), bnN/bps (поиск и
-     список сундуков), bpY (снять приоритет), bnz.
-  3. Внутренности квест-шага: F2175-обёртка у bpn (сбор/сортировка квестов),
-     bnn(quest, …, "QuestStatus", QuestController), cKb[142] (имя квеста),
-     cKb[94] (добить зависший квест), cKb[98] (длина списка), F6310 (выбор квеста
-     по Category == "Combat" и Requirements.Level).
-  4. Порог убийства: SetKillThreshold F51, SetChestKillThreshold F6033,
-     SetChestInstantKill F2680, SetInstantKill F4760 и его связь со свингами
-     Combat_Service (A3/A5 из трейсов).
-  5. Схематика: как именно берётся part и owner внутри SchematicRunner.start()
-     (цепочка bnN/btc вокруг 26500+).
+  СТАТУС: лут-шаг больше не содержит заглушек.
 
-  ОСТОРОЖНО С F-НОМЕРАМИ: в этой зоне артефакта нумерация слотов ненадёжна
-  (проверено: pool[6310] — это выбор квеста, хотя в тексте стоит bmX = F6310).
-  Поэтому шаги выше опознаны ПО СОДЕРЖИМОМУ (по строкам/статусам), а не по слоту.
-  Учитывать вместе с разделом 13 D_MAP (две параллельные копии кода).
+  ЗАКРЫТО (вычитано из артефакта):
+    ClaimReadiness — F2668: атрибуты "DropReservedFor" (строка) и
+      "DropOwnerUserId" (число); чужой владелец → нельзя.
+    Claimable — S4168…S4184: не «уже у нас» + DropClaimedBy пустой или наш.
+    WaitReady — cKb[86](секунды), строка 3928.
+    BeginAttempt — bmO/bp3 = слот F5074 (снять прошлый claim + предикат).
+    Reach — bqd(position, eps, cancel), строка 4018 (композиция отмены дословно).
+    cKb[145](arg) — переключатель CanCollide (проход сквозь препятствия) с
+      восстановлением прежних значений.
+
+  ОСТАЛОСЬ (движок перемещения, не фарм):
+    * bob — арбитр движения (token/поколение), целиком не вычитан;
+    * трасса ходьбы/твина (MovementMode, TweenSpeed) — отдельная подсистема;
+    * cKb[59]() — источник списка регионов (для MobList в ouroboros_combat.lua).
+
+  ПРО КОПИИ: bmO/bp3 в двух копиях артефакта указывают на РАЗНЫЕ функции;
+  везде используется первая копия, как и в остальных модулях.
 ============================================================================ ]]
