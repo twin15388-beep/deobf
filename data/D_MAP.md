@@ -194,3 +194,75 @@ bn8("AddQuest", wq)      -- строки 12024 и 37837
    `attempts`/`retryAt`/`IsDescendantOf(cKb[132])`), шаг сундука (S7542),
    шаг души, шаг квеста (`[Ouroboros] quest step: `).
 3. Схематики — отдельная пара `CollectSchematics`/`StopSchematics` (F3068/F2545).
+
+## 11. Тела шагов — имена и адреса (первая копия артефакта)
+
+| Шаг | Функция | Строка | Состояния |
+|---|---|---|---|
+| Лут (дроп) | `bnb(aBP, aBQ)` | 14014 | S4162…S4214 |
+| Душа | `boc(aDC)` | 15938 | S13715…S13740 |
+| Сундук | `cKb[91]["open"](chest, statusKey, cancel)` | ~23208 | S7535…S7566 |
+| Схематики | `bqn(fz, fA)` | 20991 | — |
+| Квесты | `bpn()` | 23850 | S14057…S14065 |
+| Триггер промпта | `cKb[69](prompt)` | 19540 | S2052…S2059 |
+
+Вспомогательные (для шагов): `bpb(drop)` — позиция, `bqd(pos, eps, cancel)` — подойти,
+`bmO(controller)` = F5074 — снять claim/отметить неудачу, `cKb[13](fn, timeout, cancel)` —
+wait-until, `F4803(a,b,c)` = Vector3, `F3022` = Vector3, `bnZ` = F892 — найти промпт.
+
+### Сундук: тело открытия
+```
+if chest:GetAttribute("ChestState") == "Locked" → false
+if not chest:IsDescendantOf(cKb[132])          → false
+if not isOpened(chest):
+     status = "Waiting for chest to unlock"
+     wait-until(not descendant and ChestState ~= "Locked", 4) → если отмена: false
+status = "Opening chest"
+bqd(chest:GetPivot().Position + Vector3(0,3,0), 0.3, cancel)  -- подойти
+wait-until(IsOpen == true или деревом удалён, 3)
+opened[chest] = true; bpz["Chests"] += 1; status = "Chest opened"; true
+```
+`isOpened` = F138, `opened`/`retryAt` — weak-таблицы (`__mode = "k"`).
+
+### Душа: тело (boc)
+```
+part = target:IsA("BasePart") and target or target:FindFirstChildWhichIsA("BasePart", true)
+if part:IsDescendantOf(cKb[132]) → false
+prompt = bnZ(target)  →  если есть: cKb[69](prompt)
+иначе если есть firetouchinterest:
+      firetouchinterest(part, target, 0); wait(0.1); firetouchinterest(part, target, 1)
+wait-until(not target:IsDescendantOf(cKb[132]), 2)
+status = "Collecting " .. aDC["label"]
+если не подошли (bqd(aDC["point"] + Vector3(0,3,0), 0.2, …)) → false
+bpz["Souls"] += 1; status = "Collected " .. label; true
+иначе                                 status = "Cannot take " .. label; false
+```
+
+### Квесты: каркас шага (bpn)
+```
+if cKb[98](QuestController.quests) == 0 → выход
+cKb[54]["commit"]("AutoQuest")
+if not cKb[38]("AutoQuest") → выход
+warn("[Ouroboros] quest step:" .. tostring(...))
+… сбор/сортировка квестов, bnn(quest, …, "QuestStatus", QuestController),
+  "Dropping stuck " .. cKb[142](quest)   -- добить зависший квест
+```
+
+## 12. Арбитр приоритетов (cKb[54]) — наблюдаемые операции
+
+`commit(key)`, `do ne(key)`, `turn(key)`, `blocked(key)`, `label(key)`, `uncommit(key)`,
+а также поля `active`, `settling`, `byKey`, `ownerRun`, `holder`, `lastClaim`,
+`movementEpoch`. Статусы в UI: `PriorityStatus = "Running " .. label(key)`,
+`"… waiting on " .. label(other)`, `PriorityHolder = label(key)`.
+При старте бегуна: `cKb[54][2330] = {thread = F5473(), key = z8, run = bKi}`;
+`cKb[56] = true` при захвате (флаг «идёт арбитраж»).
+
+## 13. ВАЖНО про сам артефакт: в нём ДВЕ параллельные копии кода
+
+Сдвиг ~5.5 тыс. строк: `bnb` 14014 ↔ 17679-ветка, `boc` 15938 ↔ ~21500,
+«Chest opened» 23514 ↔ 34473, `cKb[38]` 23125 ↔ `cKb[142]` 34021,
+`bqn` 20991 ↔ 26500-ветка. Логика одинаковая, отличаются имена временных
+переменных. При сверке «дублей слотов» (cKb[104], bnY, cKb[107], bo_/boA) —
+учитывать это: большинство «дублей» это как раз вторая копия.
+
+Готовый читаемый порт: `ouroboros_farm.lua`.
