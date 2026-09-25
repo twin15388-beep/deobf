@@ -259,8 +259,28 @@ return {
     cKb[132] = cloneref(LocalPlayer) — значит IsDescendantOf(cKb[132]) читается
     как «уже у нас».
 
+  cKb[59]() = пул-функция 1319 (привязка в заголовке второй сборки @1 963 167;
+  там же слот 87 @2 262 903) — прочитана целиком:
+    local out = {}
+    local base = cKb[63]()               -- контейнер со «сценами»/регионами
+    if not base then return out end
+    for _, scene in ipairs(base:GetChildren()) do
+        local npcs = scene:FindFirstChild("ActiveNpcs")
+        if npcs then
+            for _, folder in ipairs(npcs:GetChildren()) do
+                out[#out + 1] = { region = scene["Name"], folder = folder }
+            end
+        end
+    end
+    return out
+  (записи — {region = имя ребёнка контейнера, folder = папка из его ActiveNpcs}).
+
   ЧТО ЗДЕСЬ ЕЩЁ НЕ ДОЧИТАНО:
-  1. cKb[59]() — откуда берётся список регионов ({folder=…, region=…}).
+  1. cKb[63]() — сам контейнер регионов: в сборках слот 63 привязан к РАЗНЫМ
+     телам (пул 5333 @1 462 355 и пул 2112 @1 527 155 в первой сборке; inline
+     @1 714 392 во второй — но там это уже не контейнер, а хелпер промпта с
+     параметром). Какое тело действует в момент вызова cKb[59](), зависит от
+     выбранной карты слотов (см. ROADMAP, «Известные ловушки»).
   3. Точный тик: цикл запускается через F2175(function() … end) и гейтится
      cKb[72]["AntiAfk"]; внутри — пошаговая машина состояний (per-frame).
   4. Патч "instant kill is patched": в UI есть подпись, что мгновенное убийство
