@@ -56,3 +56,4 @@ python3 tools/deflatten.py "ouroboros_ps2 (1).luau" --pool 1125      # функ�
 
 Начните с `NZL_AUDIT.md`.
 - `ouroboros_farm.lua` — читаемый порт подсистемы фарма (D): реестр 24 контроллеров, лут/сундуки/души/схематики/квесты, арбитр приоритетов; карта — `data/D_MAP.md`.
+- `ouroboros_skills.lua` — читаемый порт подсистемы скиллов (A): запись каста, автокаст через `asGameScript(Attempt_Hold, имя, "")`, release в 3 попытки, сторож таймаута (CAST_GRACE=6), гейт «Holding off for auto parry»; константы CAST_MIN_GAP=0.2.
