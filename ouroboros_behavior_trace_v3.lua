@@ -21,7 +21,7 @@
 local RS      = game:GetService("ReplicatedStorage")
 local Players = game:GetService("Players")
 local LP      = Players.LocalPlayer
-local logs, started, marks = {}, os.clock(), {}
+local logs, started = {}, os.clock()
 local HOOKED, RESTORE, TAGS = 0, {}, {}
 local BUF_OK = type(setclipboard) == "function" or type(toclipboard) == "function"
 local copy = setclipboard or toclipboard
@@ -339,6 +339,6 @@ local stopButton = button2("STOP", 158, 120, Color3.fromRGB(55, 58, 68), functio
     frame.Size = UDim2.fromOffset(430, 120)
 end)
 
-log("RECORDER_V3_STARTED hooks=%d clipboard=%s remotes=%s"
-    .. "", HOOKED, tostring(BUF_OK), tostring(okScan))
+log("RECORDER_V3_STARTED hooks=%d clipboard=%s remotes=%s",
+    HOOKED, tostring(BUF_OK), tostring(okScan))
 title.Text = ("Рекордер v3 активен (хуков: %d). Жми метку сцены."):format(HOOKED)
