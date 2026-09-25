@@ -1,0 +1,748 @@
+OUROBOROS_BEHAVIOR_TRACE_V2
+[   0.000] HOOKED SignalEvent.ToServer
+
+[   0.000] HOOKED SignalFunction.ToServer
+
+[   0.000] HOOKED InputHandler.VirtualPress
+
+[   0.000] HOOKED InputHandler.VirtualRelease
+
+[   0.000] HOOKED SkillController.Attempt_Hold
+
+[   0.000] HOOKED SkillController.StopHold
+
+[   0.017] API_FOUND
+
+[   2.939] API.SetAutoLevel
+  A1=true
+
+[   2.939] API.SetAutoLevel RETURN
+
+[   3.085] LOCAL_MOVE [SetAutoLevel]
+  A1=CFrame(-425.49,1245.50,-949.49)
+  A2="NEAR=FloorMesh | Floor | FloorWedge | Grass | Meshes/CellArenaRocks_Cylinder.227 | Gate1 | Pillar | Model"
+
+[   4.315] SignalEvent.ToServer
+  A1="AddQuest"
+  A2="Ill take 3 bandits"
+
+[   4.315] SignalEvent.ToServer RETURN
+
+[   4.416] SignalEvent.ToServer
+  A1="NpcTalking"
+  A2="Ended"
+
+[   4.416] SignalEvent.ToServer RETURN
+
+[   4.545] SignalEvent.ToServer
+  A1="NpcTalking"
+  A2="Ended"
+
+[   4.545] SignalEvent.ToServer RETURN
+
+[   4.590] SignalEvent.ToServer
+  A1="Item_Equip"
+  A2=2
+
+[   4.590] SignalEvent.ToServer RETURN
+
+[   4.639] SignalEvent.ToServer
+  A1="VisitRegion"
+  A2="Wilderness"
+
+[   4.639] SignalEvent.ToServer RETURN
+
+[   4.829] SignalEvent.ToServer
+  A1="Combat_Service"
+  A2="Combat"
+  A3=1
+  A4=false
+  A5=0.13
+  A6=false
+  A7=nil
+
+[   4.829] SignalEvent.ToServer RETURN
+
+[   5.225] SignalEvent.ToServer
+  A1="Combat_Service"
+  A2="Combat"
+  A3=2
+  A4=false
+  A5=0
+  A6=false
+  A7=nil
+
+[   5.225] SignalEvent.ToServer RETURN
+
+[   5.491] SignalEvent.ToServer
+  A1="Combat_Service"
+  A2="Combat"
+  A3=3
+  A4=false
+  A5=0
+  A6=false
+  A7=nil
+
+[   5.491] SignalEvent.ToServer RETURN
+
+[   5.752] SignalEvent.ToServer
+  A1="Combat_Service"
+  A2="Combat"
+  A3=4
+  A4=false
+  A5=0
+  A6=false
+  A7=nil
+
+[   5.752] SignalEvent.ToServer RETURN
+
+[   6.068] SignalEvent.ToServer
+  A1="Combat_Service"
+  A2="Combat"
+  A3=5
+  A4=false
+  A5=0.03999999999999998
+  A6=false
+  A7=nil
+
+[   6.068] SignalEvent.ToServer RETURN
+
+[   7.539] SignalEvent.ToServer
+  A1="Combat_Service"
+  A2="Combat"
+  A3=1
+  A4=false
+  A5=0.13
+  A6=false
+  A7=nil
+
+[   7.539] SignalEvent.ToServer RETURN
+
+[   7.930] SignalEvent.ToServer
+  A1="Combat_Service"
+  A2="Combat"
+  A3=2
+  A4=false
+  A5=0
+  A6=false
+  A7=nil
+
+[   7.930] SignalEvent.ToServer RETURN
+
+[   8.192] SignalEvent.ToServer
+  A1="Combat_Service"
+  A2="Combat"
+  A3=3
+  A4=false
+  A5=0
+  A6=false
+  A7=nil
+
+[   8.192] SignalEvent.ToServer RETURN
+
+[   8.487] SignalEvent.ToServer
+  A1="Combat_Service"
+  A2="Combat"
+  A3=4
+  A4=false
+  A5=0
+  A6=false
+  A7=nil
+
+[   8.487] SignalEvent.ToServer RETURN
+
+[   8.818] SignalEvent.ToServer
+  A1="Combat_Service"
+  A2="Combat"
+  A3=5
+  A4=false
+  A5=0.03999999999999998
+  A6=false
+  A7=nil
+
+[   8.818] SignalEvent.ToServer RETURN
+
+[  10.287] SignalEvent.ToServer
+  A1="Combat_Service"
+  A2="Combat"
+  A3=1
+  A4=false
+  A5=0.13
+  A6=false
+  A7=nil
+
+[  10.287] SignalEvent.ToServer RETURN
+
+[  10.681] SignalEvent.ToServer
+  A1="Combat_Service"
+  A2="Combat"
+  A3=2
+  A4=false
+  A5=0
+  A6=false
+  A7=nil
+
+[  10.681] SignalEvent.ToServer RETURN
+
+[  10.950] SignalEvent.ToServer
+  A1="Combat_Service"
+  A2="Combat"
+  A3=3
+  A4=false
+  A5=0
+  A6=false
+  A7=nil
+
+[  10.950] SignalEvent.ToServer RETURN
+
+[  11.207] SignalEvent.ToServer
+  A1="Combat_Service"
+  A2="Combat"
+  A3=4
+  A4=false
+  A5=0
+  A6=false
+  A7=nil
+
+[  11.208] SignalEvent.ToServer RETURN
+
+[  11.529] SignalEvent.ToServer
+  A1="Combat_Service"
+  A2="Combat"
+  A3=5
+  A4=false
+  A5=0.03999999999999998
+  A6=false
+  A7=nil
+
+[  11.529] SignalEvent.ToServer RETURN
+
+[  12.999] SignalEvent.ToServer
+  A1="Combat_Service"
+  A2="Combat"
+  A3=1
+  A4=false
+  A5=0.13
+  A6=false
+  A7=nil
+
+[  12.999] SignalEvent.ToServer RETURN
+
+[  13.388] SignalEvent.ToServer
+  A1="Combat_Service"
+  A2="Combat"
+  A3=2
+  A4=false
+  A5=0
+  A6=false
+  A7=nil
+
+[  13.388] SignalEvent.ToServer RETURN
+
+[  13.651] SignalEvent.ToServer
+  A1="Combat_Service"
+  A2="Combat"
+  A3=3
+  A4=false
+  A5=0
+  A6=false
+  A7=nil
+
+[  13.651] SignalEvent.ToServer RETURN
+
+[  13.923] SignalEvent.ToServer
+  A1="Combat_Service"
+  A2="Combat"
+  A3=4
+  A4=false
+  A5=0
+  A6=false
+  A7=nil
+
+[  13.923] SignalEvent.ToServer RETURN
+
+[  14.235] SignalEvent.ToServer
+  A1="Combat_Service"
+  A2="Combat"
+  A3=5
+  A4=false
+  A5=0.03999999999999998
+  A6=false
+  A7=nil
+
+[  14.235] SignalEvent.ToServer RETURN
+
+[  15.710] SignalEvent.ToServer
+  A1="Combat_Service"
+  A2="Combat"
+  A3=1
+  A4=false
+  A5=0.13
+  A6=false
+  A7=nil
+
+[  15.711] SignalEvent.ToServer RETURN
+
+[  16.110] SignalEvent.ToServer
+  A1="Combat_Service"
+  A2="Combat"
+  A3=2
+  A4=false
+  A5=0
+  A6=false
+  A7=nil
+
+[  16.110] SignalEvent.ToServer RETURN
+
+[  16.378] SignalEvent.ToServer
+  A1="Combat_Service"
+  A2="Combat"
+  A3=3
+  A4=false
+  A5=0
+  A6=false
+  A7=nil
+
+[  16.378] SignalEvent.ToServer RETURN
+
+[  16.645] SignalEvent.ToServer
+  A1="Combat_Service"
+  A2="Combat"
+  A3=4
+  A4=false
+  A5=0
+  A6=false
+  A7=nil
+
+[  16.645] SignalEvent.ToServer RETURN
+
+[  16.968] SignalEvent.ToServer
+  A1="Combat_Service"
+  A2="Combat"
+  A3=5
+  A4=false
+  A5=0.03999999999999998
+  A6=false
+  A7=nil
+
+[  16.968] SignalEvent.ToServer RETURN
+
+[  18.444] SignalEvent.ToServer
+  A1="Combat_Service"
+  A2="Combat"
+  A3=1
+  A4=false
+  A5=0.13
+  A6=false
+  A7=nil
+
+[  18.444] SignalEvent.ToServer RETURN
+
+[  18.840] SignalEvent.ToServer
+  A1="Combat_Service"
+  A2="Combat"
+  A3=2
+  A4=false
+  A5=0
+  A6=false
+  A7=nil
+
+[  18.840] SignalEvent.ToServer RETURN
+
+[  19.106] SignalEvent.ToServer
+  A1="Combat_Service"
+  A2="Combat"
+  A3=3
+  A4=false
+  A5=0
+  A6=false
+  A7=nil
+
+[  19.106] SignalEvent.ToServer RETURN
+
+[  19.375] SignalEvent.ToServer
+  A1="Combat_Service"
+  A2="Combat"
+  A3=4
+  A4=false
+  A5=0
+  A6=false
+  A7=nil
+
+[  19.375] SignalEvent.ToServer RETURN
+
+[  19.695] SignalEvent.ToServer
+  A1="Combat_Service"
+  A2="Combat"
+  A3=5
+  A4=false
+  A5=0.03999999999999998
+  A6=false
+  A7=nil
+
+[  19.695] SignalEvent.ToServer RETURN
+
+[  22.556] API.SetAutoLevel
+  A1=false
+
+[  22.556] API.SetAutoLevel RETURN
+
+[  28.275] API.SetAutoBossHunt
+  A1=true
+
+[  28.275] API.SetAutoBossHunt RETURN
+
+[  38.805] API.SetAutoBossHunt
+  A1=false
+
+[  38.805] API.SetAutoBossHunt RETURN
+
+[  39.390] API.SetAutoBossHunt
+  A1=true
+
+[  39.390] API.SetAutoBossHunt RETURN
+
+[  40.922] API.SetAutoBossHunt
+  A1=false
+
+[  40.922] API.SetAutoBossHunt RETURN
+
+[  42.587] API.SetAutoChest
+  A1=true
+
+[  42.587] API.SetAutoChest RETURN
+
+[  43.636] API.SetAutoChest
+  A1=false
+
+[  43.636] API.SetAutoChest RETURN
+
+[  49.040] API.SetAutoLoot
+  A1=true
+
+[  49.040] API.SetAutoLoot RETURN
+
+[  58.615] API.SetAutoLoot
+  A1=false
+
+[  58.615] API.SetAutoLoot RETURN
+
+[  75.142] API.SetAutoSkillTree
+  A1=true
+
+[  75.142] API.SetAutoSkillTree RETURN
+
+[  87.050] API.SetAutoSkillTree
+  A1=false
+
+[  87.050] API.SetAutoSkillTree RETURN
+
+[  93.965] SignalEvent.ToServer
+  A1="Item_Equip"
+  A2=0
+
+[  93.965] SignalEvent.ToServer RETURN
+
+[  93.981] SignalEvent.ToServer
+  A1="training_signaler"
+  A2="StateChanged"
+  A3=false
+
+[  93.981] SignalEvent.ToServer RETURN
+
+[  99.619] SignalEvent.ToServer
+  A1="training_signaler"
+  A2="Stop"
+  A3=true
+
+[  99.619] SignalEvent.ToServer RETURN
+
+[ 103.140] SignalEvent.ToServer
+  A1="VisitRegion"
+  A2="Butterfly Estate"
+
+[ 103.140] SignalEvent.ToServer RETURN
+
+[ 103.501] SignalEvent.ToServer
+  A1="VisitRegion"
+  A2="Wilderness"
+
+[ 103.501] SignalEvent.ToServer RETURN
+
+[ 112.505] SignalEvent.ToServer
+  A1="VisitRegion"
+  A2="Butterfly Estate"
+
+[ 112.505] SignalEvent.ToServer RETURN
+
+[ 114.359] SignalEvent.ToServer
+  A1="training_signaler"
+  A2="Stop"
+  A3=true
+
+[ 114.359] SignalEvent.ToServer RETURN
+
+[ 117.257] SignalEvent.ToServer
+  A1="training_signaler"
+  A2="Stop"
+  A3=true
+
+[ 117.257] SignalEvent.ToServer RETURN
+
+[ 120.250] SignalEvent.ToServer
+  A1="training_signaler"
+  A2="Stop"
+  A3=true
+
+[ 120.250] SignalEvent.ToServer RETURN
+
+[ 123.668] SignalEvent.ToServer
+  A1="training_signaler"
+  A2="Stop"
+  A3=true
+
+[ 123.668] SignalEvent.ToServer RETURN
+
+[ 153.648] SignalEvent.ToServer
+  A1="VisitRegion"
+  A2="Mistfall Harbor"
+
+[ 153.648] SignalEvent.ToServer
+  A1="VisitRegion"
+  A2="Seasons Crossing"
+
+[ 154.357] SignalEvent.ToServer
+  A1="VisitRegion"
+  A2="Iceveil Valley"
+
+[ 155.424] SignalEvent.ToServer
+  A1="VisitRegion"
+  A2="Stone Sanctuary"
+
+[ 156.136] SignalEvent.ToServer
+  A1="VisitRegion"
+  A2="Iceveil Valley"
+
+[ 157.209] SignalEvent.ToServer
+  A1="VisitRegion"
+  A2="Wilderness"
+
+[ 157.919] SignalEvent.ToServer
+  A1="VisitRegion"
+  A2="Final Selection Plains"
+
+[ 157.919] SignalEvent.ToServer
+  A1="VisitRegion"
+  A2="The White Terror Lair"
+
+[ 158.296] SignalEvent.ToServer
+  A1="Swim"
+  A2="State"
+  A3=3
+
+[ 158.296] SignalEvent.ToServer RETURN
+
+[ 158.676] SignalEvent.ToServer
+  A1="Swim"
+  A2="State"
+  A3=0
+
+[ 158.676] SignalEvent.ToServer RETURN
+
+[ 159.003] SignalEvent.ToServer
+  A1="VisitRegion"
+  A2="Mistfall Harbor"
+
+[ 159.003] SignalEvent.ToServer
+  A1="VisitRegion"
+  A2="Seasons Crossing"
+
+[ 159.712] SignalEvent.ToServer
+  A1="VisitRegion"
+  A2="Wilderness"
+
+[ 160.775] SignalEvent.ToServer
+  A1="VisitRegion"
+  A2="Iceveil Valley"
+
+[ 161.485] SignalEvent.ToServer
+  A1="VisitRegion"
+  A2="Butterfly Estate"
+
+[ 196.390] SignalEvent.ToServer
+  A1="Item_Equip"
+  A2=2
+
+[ 196.390] SignalEvent.ToServer RETURN
+
+[ 197.383] SignalEvent.ToServer
+  A1="Combat_Service"
+  A2="Combat"
+  A3=1
+  A4=false
+  A5=0.13
+  A6=false
+  A7=nil
+
+[ 197.383] SignalEvent.ToServer RETURN
+
+[ 197.975] SignalEvent.ToServer
+  A1="Combat_Service"
+  A2="Combat"
+  A3=2
+  A4=false
+  A5=0
+  A6=false
+  A7=nil
+
+[ 197.975] SignalEvent.ToServer RETURN
+
+[ 201.459] SignalEvent.ToServer
+  A1="Combat_Service"
+  A2="Combat"
+  A3=1
+  A4=false
+  A5=0.13
+  A6=false
+  A7=nil
+
+[ 201.459] SignalEvent.ToServer RETURN
+
+[ 201.858] SignalEvent.ToServer
+  A1="Combat_Service"
+  A2="Combat"
+  A3=2
+  A4=false
+  A5=0
+  A6=false
+  A7=nil
+
+[ 201.858] SignalEvent.ToServer RETURN
+
+[ 215.043] SignalEvent.ToServer
+  A1="Item_Equip"
+  A2=2
+
+[ 215.043] SignalEvent.ToServer RETURN
+
+[ 216.665] SignalEvent.ToServer
+  A1="Item_Equip"
+  A2=2
+
+[ 216.665] SignalEvent.ToServer RETURN
+
+[ 229.988] API.SetAutoPotion
+  A1=true
+
+[ 229.988] API.SetAutoPotion RETURN
+
+[ 230.620] API.SetAutoPotion
+  A1=false
+
+[ 230.620] API.SetAutoPotion RETURN
+
+[ 282.259] API.SetAutoEquip
+  A1=true
+
+[ 282.260] API.SetAutoEquip RETURN
+
+[ 285.946] API.SetAutoEquip
+  A1=false
+
+[ 285.946] API.SetAutoEquip RETURN
+
+[ 288.196] API.SetAutoMob
+  A1=true
+
+[ 288.196] API.SetAutoMob RETURN
+
+[ 292.774] SignalEvent.ToServer
+  A1="Combat_Service"
+  A2="Combat"
+  A3=1
+  A4=false
+  A5=0.13
+  A6=false
+  A7=nil
+
+[ 292.774] SignalEvent.ToServer RETURN
+
+[ 293.079] API.SetAutoMob
+  A1=false
+
+[ 293.079] API.SetAutoMob RETURN
+
+[ 293.167] SignalEvent.ToServer
+  A1="Combat_Service"
+  A2="Combat"
+  A3=2
+  A4=false
+  A5=0
+  A6=false
+  A7=nil
+
+[ 293.167] SignalEvent.ToServer RETURN
+
+[ 294.044] SignalEvent.ToServer
+  A1="server_skill_controller_signaler"
+  A2="Blocking"
+  A3="Hold"
+  A4=Vector3(0.00,0.00,0.00)
+
+[ 294.044] SignalEvent.ToServer RETURN
+
+[ 294.238] SignalEvent.ToServer
+  A1="server_skill_controller_signaler"
+  A2="Blocking"
+  A3="UnHold"
+  A4=Vector3(0.00,0.00,0.00)
+
+[ 294.238] SignalEvent.ToServer RETURN
+
+[ 296.821] SignalEvent.ToServer
+  A1="server_skill_controller_signaler"
+  A2="Blocking"
+  A3="Hold"
+  A4=Vector3(0.00,0.00,0.00)
+
+[ 296.821] SignalEvent.ToServer RETURN
+
+[ 297.014] SignalEvent.ToServer
+  A1="server_skill_controller_signaler"
+  A2="Blocking"
+  A3="UnHold"
+  A4=Vector3(0.00,0.00,0.00)
+
+[ 297.014] SignalEvent.ToServer RETURN
+
+[ 299.563] SignalEvent.ToServer
+  A1="server_skill_controller_signaler"
+  A2="Blocking"
+  A3="Hold"
+  A4=Vector3(0.00,0.00,0.00)
+
+[ 299.563] SignalEvent.ToServer RETURN
+
+[ 301.073] SignalEvent.ToServer
+  A1="server_skill_controller_signaler"
+  A2="Blocking"
+  A3="UnHold"
+  A4=Vector3(0.00,0.00,0.00)
+
+[ 301.073] SignalEvent.ToServer RETURN
+
+[ 302.377] SignalEvent.ToServer
+  A1="server_skill_controller_signaler"
+  A2="Blocking"
+  A3="Hold"
+  A4=Vector3(0.00,0.00,0.00)
+
+[ 302.377] SignalEvent.ToServer RETURN
+
+[ 303.539] SignalEvent.ToServer
+  A1="server_skill_controller_signaler"
+  A2="Blocking"
+  A3="UnHold"
+  A4=Vector3(0.00,0.00,0.00)
+
+[ 303.539] SignalEvent.ToServer RETURN

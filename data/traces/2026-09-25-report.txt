@@ -1,0 +1,153 @@
+=== 184 events ===
+  SignalEvent.ToServer                       141
+  API.SetAutoBossHunt                        8
+  HOOKED                                     5
+  API.SetAutoLevel                           4
+  API.SetAutoChest                           4
+  API.SetAutoLoot                            4
+  API.SetAutoSkillTree                       4
+  API.SetAutoPotion                          4
+  API.SetAutoEquip                           4
+  API.SetAutoMob                             4
+  API_FOUND                                  1
+  LOCAL_MOVE                                 1
+
+=== call signatures ===
+  HOOKED                                 ()  x5
+  API_FOUND                              ()  x1
+  API.SetAutoLevel                       (bool)  x2
+      A1 = true
+  API.SetAutoLevel                       ()  x2
+  LOCAL_MOVE                             (CFrame, string)  x1
+      A1 = CFrame(-425.49,1245.50,-949.49)
+      A2 = "NEAR=FloorMesh | Floor | FloorWedge | Grass | Meshes/CellArenaRocks_Cylinder.227 | Gate1 
+  SignalEvent.ToServer                   (string, string)  x20
+      A1 = "AddQuest"
+      A2 = "Ill take 3 bandits"
+  SignalEvent.ToServer                   ()  x64
+  SignalEvent.ToServer                   (string, number)  x5
+      A1 = "Item_Equip"
+      A2 = 2
+  SignalEvent.ToServer                   (string, string, number, bool, number, bool, nil)  x36
+      A1 = "Combat_Service"
+      A2 = "Combat"
+      A3 = 1
+      A4 = false
+      A5 = 0.13
+      A6 = false
+      A7 = nil
+  API.SetAutoBossHunt                    (bool)  x4
+      A1 = true
+  API.SetAutoBossHunt                    ()  x4
+  API.SetAutoChest                       (bool)  x2
+      A1 = true
+  API.SetAutoChest                       ()  x2
+  API.SetAutoLoot                        (bool)  x2
+      A1 = true
+  API.SetAutoLoot                        ()  x2
+  API.SetAutoSkillTree                   (bool)  x2
+      A1 = true
+  API.SetAutoSkillTree                   ()  x2
+  SignalEvent.ToServer                   (string, string, bool)  x6
+      A1 = "training_signaler"
+      A2 = "StateChanged"
+      A3 = false
+  SignalEvent.ToServer                   (string, string, number)  x2
+      A1 = "Swim"
+      A2 = "State"
+      A3 = 3
+  API.SetAutoPotion                      (bool)  x2
+      A1 = true
+  API.SetAutoPotion                      ()  x2
+  API.SetAutoEquip                       (bool)  x2
+      A1 = true
+  API.SetAutoEquip                       ()  x2
+  API.SetAutoMob                         (bool)  x2
+      A1 = true
+  API.SetAutoMob                         ()  x2
+  SignalEvent.ToServer                   (string, string, string, Vector3)  x8
+      A1 = "server_skill_controller_signaler"
+      A2 = "Blocking"
+      A3 = "Hold"
+      A4 = Vector3(0.00,0.00,0.00)
+
+=== API toggles in order ===
+  [   2.94] API.SetAutoLevel                   true
+  [   2.94] API.SetAutoLevel                   
+  [  22.56] API.SetAutoLevel                   false
+  [  22.56] API.SetAutoLevel                   
+  [  28.27] API.SetAutoBossHunt                true
+  [  28.27] API.SetAutoBossHunt                
+  [  38.80] API.SetAutoBossHunt                false
+  [  38.80] API.SetAutoBossHunt                
+  [  39.39] API.SetAutoBossHunt                true
+  [  39.39] API.SetAutoBossHunt                
+  [  40.92] API.SetAutoBossHunt                false
+  [  40.92] API.SetAutoBossHunt                
+  [  42.59] API.SetAutoChest                   true
+  [  42.59] API.SetAutoChest                   
+  [  43.64] API.SetAutoChest                   false
+  [  43.64] API.SetAutoChest                   
+  [  49.04] API.SetAutoLoot                    true
+  [  49.04] API.SetAutoLoot                    
+  [  58.62] API.SetAutoLoot                    false
+  [  58.62] API.SetAutoLoot                    
+  [  75.14] API.SetAutoSkillTree               true
+  [  75.14] API.SetAutoSkillTree               
+  [  87.05] API.SetAutoSkillTree               false
+  [  87.05] API.SetAutoSkillTree               
+  [ 229.99] API.SetAutoPotion                  true
+  [ 229.99] API.SetAutoPotion                  
+  [ 230.62] API.SetAutoPotion                  false
+  [ 230.62] API.SetAutoPotion                  
+  [ 282.26] API.SetAutoEquip                   true
+  [ 282.26] API.SetAutoEquip                   
+  [ 285.95] API.SetAutoEquip                   false
+  [ 285.95] API.SetAutoEquip                   
+  [ 288.20] API.SetAutoMob                     true
+  [ 288.20] API.SetAutoMob                     
+  [ 293.08] API.SetAutoMob                     false
+  [ 293.08] API.SetAutoMob                     
+
+=== remote calls in order (first 40) ===
+  [   4.32] SignalEvent.ToServer               "AddQuest"  "Ill take 3 bandits"
+  [   4.32] SignalEvent.ToServer               
+  [   4.42] SignalEvent.ToServer               "NpcTalking"  "Ended"
+  [   4.42] SignalEvent.ToServer               
+  [   4.54] SignalEvent.ToServer               "NpcTalking"  "Ended"
+  [   4.54] SignalEvent.ToServer               
+  [   4.59] SignalEvent.ToServer               "Item_Equip"  2
+  [   4.59] SignalEvent.ToServer               
+  [   4.64] SignalEvent.ToServer               "VisitRegion"  "Wilderness"
+  [   4.64] SignalEvent.ToServer               
+  [   4.83] SignalEvent.ToServer               "Combat_Service"  "Combat"  1  false  0.13  false  nil
+  [   4.83] SignalEvent.ToServer               
+  [   5.22] SignalEvent.ToServer               "Combat_Service"  "Combat"  2  false  0  false  nil
+  [   5.22] SignalEvent.ToServer               
+  [   5.49] SignalEvent.ToServer               "Combat_Service"  "Combat"  3  false  0  false  nil
+  [   5.49] SignalEvent.ToServer               
+  [   5.75] SignalEvent.ToServer               "Combat_Service"  "Combat"  4  false  0  false  nil
+  [   5.75] SignalEvent.ToServer               
+  [   6.07] SignalEvent.ToServer               "Combat_Service"  "Combat"  5  false  0.03999999999999998  false  nil
+  [   6.07] SignalEvent.ToServer               
+  [   7.54] SignalEvent.ToServer               "Combat_Service"  "Combat"  1  false  0.13  false  nil
+  [   7.54] SignalEvent.ToServer               
+  [   7.93] SignalEvent.ToServer               "Combat_Service"  "Combat"  2  false  0  false  nil
+  [   7.93] SignalEvent.ToServer               
+  [   8.19] SignalEvent.ToServer               "Combat_Service"  "Combat"  3  false  0  false  nil
+  [   8.19] SignalEvent.ToServer               
+  [   8.49] SignalEvent.ToServer               "Combat_Service"  "Combat"  4  false  0  false  nil
+  [   8.49] SignalEvent.ToServer               
+  [   8.82] SignalEvent.ToServer               "Combat_Service"  "Combat"  5  false  0.03999999999999998  false  nil
+  [   8.82] SignalEvent.ToServer               
+  [  10.29] SignalEvent.ToServer               "Combat_Service"  "Combat"  1  false  0.13  false  nil
+  [  10.29] SignalEvent.ToServer               
+  [  10.68] SignalEvent.ToServer               "Combat_Service"  "Combat"  2  false  0  false  nil
+  [  10.68] SignalEvent.ToServer               
+  [  10.95] SignalEvent.ToServer               "Combat_Service"  "Combat"  3  false  0  false  nil
+  [  10.95] SignalEvent.ToServer               
+  [  11.21] SignalEvent.ToServer               "Combat_Service"  "Combat"  4  false  0  false  nil
+  [  11.21] SignalEvent.ToServer               
+  [  11.53] SignalEvent.ToServer               "Combat_Service"  "Combat"  5  false  0.03999999999999998  false  nil
+  [  11.53] SignalEvent.ToServer               
+  ...
