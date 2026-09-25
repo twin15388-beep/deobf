@@ -1,0 +1,38 @@
+#e0788c\">Instant kill is patched but it can still kill enemies, they just won't drop any items</font>
+ActiveQuests
+AddQuest
+AlreadyDoingQuest
+Auto Farm Nearby Enemies
+AutoChest
+AutoFarm
+AutoLoot
+AutoQuest
+AutoQuestDelay
+BossFarm
+Brave Soul
+CanAddQuest
+Cannot claim 
+Chest
+Chests
+Collectibles
+Collecting drops
+Drop disappeared; receipt unconfirmed: 
+EspChest
+Farm
+How far to travel for a soul, 0 collects at any distance
+IsOpen
+LastQuestAttempt
+LootDrop
+Looted
+No permit quest in this place
+NoQuest
+NoQuestMaximumReached
+Quest
+QuestAlreadyCompleted
+Schematics To Collect
+SelectedQuest
+SetLootRange
+Stopped after %d collected
+Waiting for the quest to load
+[Ouroboros] quest step: 
+farm
