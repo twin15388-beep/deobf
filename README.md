@@ -20,6 +20,7 @@
 | `ouroboros_main_deflattened.txt` | главный движок (top-level state machine) целиком |
 | `ouroboros_main_pruned.txt` | он же без junk-состояний: 1488 из 1761 состояний достижимы из входа |
 | `data/pool_index.json` | **точная карта пула**: 6641 слот = индекс -> значение (0 расхождений) |
+| `data/api_map.json`, `API_MAP.md` | **публичный API оригинала**: 575 настроек в 21 таблице -> F-слоты |
 | `NZL_AUDIT.md` | **аудит: что подтверждено, чего не хватает, что делать дальше** |
 | `tools/`, `data/` | парсер артефакта, разворот констант, индексы фич |
 
@@ -42,6 +43,8 @@ python3 tools/deflatten.py "ouroboros_ps2 (1).luau" --main \
         ouroboros_main_deflattened.txt                               # главный движок
 python3 tools/prune_junk.py "ouroboros_ps2 (1).luau" \
         --out ouroboros_main_pruned.txt                              # движок без junk-состояний
+python3 tools/api_map.py ouroboros_main_pruned.txt data/api_map.json \
+        --md API_MAP.md --compare ouwland_clean_main.lua             # публичный API -> F-слоты
 ```
 
 Формат де-flattened вывода: каждый state — это значение, которое проверяет диспетчер;
