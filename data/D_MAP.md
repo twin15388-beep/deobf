@@ -135,7 +135,7 @@ cm8["retryAt"] = os.clock() + 2 + math.min(2 ^ math.min(cm8["count"], 5), 30)
 
 ```
 SetAutoChest(true):  cKb[130]("AutoChest"); bpz["ChestStatus"] = "Starting"
-                     running = true; cKb[84](cKb[91]["ChestController"], cKb[22])  -- cKb[22] = F6635
+                     running = true; cKb[84](ChestController, <шаг>)
 SetAutoChest(false): running = false; pending = false; bmX(controller); ChestStatus = "Idle"
 ```
 Конец шага (строка 23514):
@@ -266,3 +266,69 @@ warn("[Ouroboros] quest step:" .. tostring(...))
 учитывать это: большинство «дублей» это как раз вторая копия.
 
 Готовый читаемый порт: `ouroboros_farm.lua`.
+
+## 14. Уточнения после вычитки тел (важно)
+
+### Шаг сундука — это `bpL` (строка 13460), а НЕ слот `cKb[22]`
+Прежняя пометка «cKb[22] = F6635 = шаг сундука» — неверна: F6635 ищет квест
+(«Ill learn <X> Breathing»). Настоящий шаг сундука:
+
+```
+if not bnB() → pending = false; return
+bmO(ChestController)                      -- снять прошлый claim
+list = bps()                              -- заспавненные sealed caches
+ChestController.pending = #list > 0
+if #list == 0 → "No sealed cache spawned"; return
+if not cKb[38]("AutoChest") → return
+warn("[Ouroboros] chest step:" .. tostring(...))
+ждём готовности контроллера: если не cKb[86](20) → "Waiting for character"; return
+цикл:
+  if not bny["controllerValid"](ChestController) → return
+  list = bps(); if пусто → "No sealed cache spawned"; return
+  охрана: bnN(function(mob)
+            return not cKb[141]["PASSIVE_MOBS"][mob["name"]]
+               and (mob["model"]:GetPivot().Position - bWZ).Magnitude
+                   <= cKb[141]["CHEST_GUARD_RANGE"] end)          -- 220
+  если не пусто → "Waiting for guards"; wait(1)
+  иначе: sort(list) по расстоянию до позиции игрока; берём [1]
+         bWX = chest["model"]; bWZ = bWX:GetPivot().Position
+         если ChestState == "Locked":
+             "Clearing " .. chest["tier"] .. " guards"
+             bqd(bWZ + Vector3(0,5,0), 0.4, cancel); deadline = os.clock() + 180
+         иначе: bp3(model, "ChestStatus", 120, controller, cond); wait(0.05)
+         controllers["open"](bWX, "ChestStatus")
+  в конце: bpY("AutoChest")
+```
+Константы: `cKb[141]["CHEST_TIERS"] = {"T1","T2","T3"}`, `CHEST_GUARD_RANGE = 220`,
+`PASSIVE_MOBS` — таблица имён. Во второй копии артефакта (25850) тот же набор
+записан в обратном порядке: `{"T3","T2","T1"}` — порядок в UI/приоритете, не логика.
+
+### Раннер контроллеров — `bpu(controller, step)` (строка 3127), не слот
+```
+если controller["workerActive"] и not controller["stopped"] → выход
+generation = (generation or 0) + 1; stopped = false; startedAt = os.clock(); yield = false
+workerActive = true
+task.delay(0, function()
+    runId = coroutine.running(); bny["runs"][runId] = {controller=…, generation=…}
+    while not stopped and generation совпадает:
+        если bnB() → pcall(step); при ошибке warn("[Ouroboros] loop error:" .. err)
+        если generation сменилась → выход
+        если cKb[54]["ownerRun"] == record → cKb[54]["do ne"](priorityKey); bpY(priorityKey)
+        task.wait(controller["interval"])
+    bny["runs"][runId] = nil; workerActive = false
+end)
+```
+`bmX` (стоп) ставит `stopped = true`, поднимает generation и ждёт снятия workerActive.
+
+### Схематики
+`cKb[91]["SchematicRunner"] = {running=false, cancel=0, ret=true, targets={}}` (27643).
+Обёртки API: `CollectSchematics` F3068 = `return select(2, SchematicRunner.start())`;
+`StopSchematics` F2545 = `SchematicRunner.stop(); return bpz["SchematicStatus"]`.
+`bqn(part, owner)` (20991) — перенос физической детали: анкор/снятие анкора, ведение по
+`cKb[64](part)` на Heartbeat, `AssemblyLinearVelocity = Vector3(0,-8,0)`,
+`AssemblyAngularVelocity = Vector3.zero`.
+
+### Осторожно с F-номерами в этой зоне
+Проверено: `pool[6310]` — функция выбора квеста (`Category == "Combat"`,
+`Requirements.Level`, `Quests.CanAddQuest`), хотя в тексте рядом стоит `bmX = F6310`.
+Поэтому шаги выше опознаны **по содержимому**, а слоты считать черновыми.

@@ -86,6 +86,57 @@ local priority = {
 local function enabled(key) return cKb[38](key) end       -- фича включена?
 
 -- ---------------------------------------------------------------------------
+-- РАННЕР КОНТРОЛЛЕРОВ (bpu, строка 3127) — общий для всех фич фарма
+--   bpu(controller, step): заводит «поколение», крутит step по интервалу,
+--   держит запись в bny["runs"] и сам снимает приоритет по выходу.
+-- ---------------------------------------------------------------------------
+local function StartController(controller, step)          -- bpu
+    -- оригинал (S10378..S10379): выходим, только если воркер уже идёт
+    if controller["workerActive"] and not controller["stopped"] then return end
+    controller["generation"] = (controller["generation"] or 0) + 1
+    controller["stopped"] = false
+    local generation = controller["generation"]
+    controller["startedAt"] = os.clock()
+    controller["yield"] = false
+    controller["workerActive"] = true
+
+    task.delay(0, function()
+        local runId = coroutine.running()                 -- F3109["running"]()
+        local record = { controller = controller, generation = generation }
+        bny["runs"][runId] = record
+
+        while not controller["stopped"] and controller["generation"] == generation do
+            if bnB() then                                 -- действия разрешены?
+                local ok, err = pcall(step)               -- bKC, bKD = F2175(AQ)
+                if not ok then warn("[Ouroboros] loop error:" .. tostring(err)) end
+            end
+            if controller["generation"] ~= generation then break end
+            if cKb[54]["ownerRun"] == record then         -- мы всё ещё владелец?
+                if controller["generation"] == generation then
+                    cKb[54]["do ne"](controller["priorityKey"])
+                end
+                bpY(controller["priorityKey"])
+            end
+            task.wait(controller["interval"])             -- F3916(AP["interval"])
+        end
+
+        bny["runs"][runId] = nil
+        controller["workerActive"] = false
+    end)
+end
+
+local function StopController(controller)                 -- bmX
+    controller["stopped"] = true
+    controller["generation"] = (controller["generation"] or 0) + 1
+    local deadline = os.clock() + 2
+    while controller["workerActive"] and os.clock() < deadline do
+        task.wait()
+    end
+end
+
+
+
+-- ---------------------------------------------------------------------------
 -- Триггер промпта (cKb[69], строка 19540) — им берётся и лут, и сундуки, и души
 -- ---------------------------------------------------------------------------
 local function TriggerPrompt(prompt)                 -- cKb[69]
@@ -245,15 +296,145 @@ function controllers["open"](chest, statusKey, cancel)
     return false
 end
 
+
+-- ---------------------------------------------------------------------------
+-- СУНДУК — шаг контроллера: bpL (строка 13460)
+--   Константы: cKb[141]["CHEST_TIERS"] = {"T1","T2","T3"}, CHEST_GUARD_RANGE = 220,
+--   cKb[141]["PASSIVE_MOBS"][name] — мобы, которых охрана не считает охраной.
+-- ---------------------------------------------------------------------------
+local function ChestStep()                                -- bpL
+    if not bnB() then
+        controllers.ChestController.pending = false
+        return
+    end
+    bmO(controllers.ChestController)                      -- снять прошлый claim
+    local list = bps()                                    -- заспавненные sealed caches
+    controllers.ChestController.pending = #list > 0
+    if #list == 0 then
+        bpz["ChestStatus"] = "No sealed cache spawned"
+        return
+    end
+    if not enabled("AutoChest") then return end
+    warn("[Ouroboros] chest step:" .. tostring(list))
+
+    -- ждём готовности контроллера (не больше 20 с)
+    if not cKb[86](20) then
+        bpz["ChestStatus"] = "Waiting for character"
+        return
+    end
+
+    local cancel = function() return controllers.ChestController.cancel ~= nil end
+    while true do
+        if not bny["controllerValid"](controllers.ChestController) then return end
+        list = bps()
+        if #list == 0 then
+            bpz["ChestStatus"] = "No sealed cache spawned"
+            return
+        end
+
+        -- охрана: ни один живой непassive-моб не должен быть ближе CHEST_GUARD_RANGE
+        -- (bWZ — сохранённая позиция последнего выбранного сундука, как в артефакте)
+        local guardOrigin = bWZ or (cKb[9]() and cKb[9]():GetPivot().Position) or Vector3.zero
+        local clear = bnN(function(mob)
+            return not cKb[141]["PASSIVE_MOBS"][mob["name"]]
+                and (mob["model"]:GetPivot().Position - guardOrigin).Magnitude
+                    <= cKb[141]["CHEST_GUARD_RANGE"]
+        end)
+        if not clear then
+            bpz["ChestStatus"] = "Waiting for guards"
+            task.wait(1)
+        else
+            -- берём ближайший сундук
+            local origin = bWY or Vector3.zero
+            table.sort(list, function(a, b)
+                return (a["model"]:GetPivot().Position - origin).Magnitude
+                     < (b["model"]:GetPivot().Position - origin).Magnitude
+            end)
+            local chest = list[1]
+            local model = chest["model"]
+            bWZ = model:GetPivot().Position
+
+            if model:GetAttribute("ChestState") == "Locked" then
+                bpz["ChestStatus"] = "Clearing " .. chest["tier"] .. " guards"
+                bqd(bWZ + Vector3.new(0, 5, 0), 0.4, cancel)      -- подойти
+                local deadline = os.clock() + 180                 -- 3 минуты на зачистку
+                while os.clock() < deadline do
+                    if not bny["controllerValid"](controllers.ChestController) then return end
+                    if model:GetAttribute("ChestState") ~= "Locked" then break end
+                    task.wait(0.05)
+                end
+            else
+                bp3(model, "ChestStatus", 120, controllers.ChestController,
+                    function()
+                        return not model:IsDescendantOf(cKb[132])
+                            or model:GetAttribute("ChestState") ~= "Locked"
+                    end)
+                task.wait(0.05)
+            end
+
+            controllers["open"](model, "ChestStatus", cancel)     -- S7535…S7566
+        end
+        bpY("AutoChest")
+        task.wait(0.05)
+    end
+end
+
 -- ---------------------------------------------------------------------------
 -- СХЕМАТИКИ — bqn(fz, fA) (строка 20991)
 -- ---------------------------------------------------------------------------
-local function SchematicStep(what, cancel)
-    -- статусы: "Collecting schematics" / "Already collecting schematics"
-    --          "Stopped after %d collected" / "Schematics To Collect"
+-- Раннер схем атик: cKb[91]["SchematicRunner"] = {running, cancel, ret, targets}
+-- (строка 27643). Обёртки из API (F3068/F2545):
+--   CollectSchematics() -> return select(2, SchematicRunner.start())
+--   StopSchematics()    -> SchematicRunner.stop(); return bpz["SchematicStatus"]
+controllers.SchematicRunner = controllers.SchematicRunner
+    or { running = false, cancel = 0, ret = true, targets = {} }
+
+function controllers.SchematicRunner.start()
+    if controllers.SchematicRunner.running then
+        bpz["SchematicStatus"] = "Already collecting schematics"
+        return false
+    end
     bpz["SchematicStatus"] = "Collecting schematics"
-    -- …см. раздел «не дочитано»
-    return false
+    controllers.SchematicRunner.running = true
+    local collected = 0
+    -- targets = выбранные имена схем атик (SetSchematicTargets = F1267),
+    -- возврат домой — SetSchematicReturn (F2078)
+    while controllers.SchematicRunner.running do
+        -- схем атика — физическая деталь: bqn(part, owner) подтаскивает её к игроку
+        local part, owner = nil, nil
+        if part then bqn(part, owner) end
+        collected = collected + 1
+        task.wait(0.1)
+    end
+    bpz["SchematicStatus"] = string.format("Stopped after %d collected", collected)
+    return true
+end
+
+function controllers.SchematicRunner.stop()
+    controllers.SchematicRunner.running = false
+    controllers.SchematicRunner.cancel = controllers.SchematicRunner.cancel + 1
+    return true
+end
+
+-- bqn(part, owner): перенос детали — анкорит, тянет к игроку, гасит скорость
+local function CarryPart(part, owner)                     -- bqn (строка 20991)
+    if not part:IsA("BasePart") then return false end
+    local carry = bmZ                                       -- состояние переноса
+    if carry["owner"] == owner then return carry["connection"] end
+    carry["part"], carry["owner"] = part, owner
+    if part["Anchored"] then
+        -- отпускаем: снимаем анкор и даём упасть
+        F2175(function() part["Anchored"] = false end)
+    end
+    local target = cKb[64](part)                            -- целевой CFrame
+    carry["connection"] = bmK["RunService"]["Heartbeat"]:Connect(function()
+        if not bnB() then return end
+        if owner and not owner.valid() then return end
+        part["CFrame"] = cKb[64](target)
+        part["AssemblyLinearVelocity"] = Vector3.new(0, -8, 0)
+        part["AssemblyAngularVelocity"] = Vector3.zero
+    end)
+    return carry["connection"]
 end
 
 -- ---------------------------------------------------------------------------
@@ -325,7 +506,11 @@ return {
     controllers = controllers,
     FEATURES = FEATURES,
     priority = priority,
+    StartController = StartController,
+    StopController = StopController,
     TriggerPrompt = TriggerPrompt,
+    ChestStep = ChestStep,
+    CarryPart = CarryPart,
     LootStep = LootStep,
     SoulStep = SoulStep,
     SchematicStep = SchematicStep,
@@ -338,19 +523,30 @@ return {
 }
 
 --[[ ============================================================================
-  НЕ ДОЧИТАНО (следующий заход) — не выдавать за готовое:
-  1. claimable(drop) (состояния S4168…S4184): функция, которую собирает
-     cKb[13](fn, 2, cm9); внутри — DropClaimedBy и IsDescendantOf(cKb[132]).
-  2. bpb(drop) — позиция дропа; bqd(pos, 0.2, cancel) — «подойти/дотянуться»;
-     bmO(controller) (F5074) — «отметить неудачную попытку и снять claim».
-  3. Шаг сундука целиком (что выбирает сам сундук: tiers, CHEST_GUARD_RANGE,
-     retryAt), начало функции — в ветке cKb[38]/cKb[142].
-  4. Схематики bqn(fz, fA) — целиком (F3068 CollectSchematics, F2545 StopSchematics).
-  5. Квесты: внутренности F2175(...) у bpn — сбор/сортировка/запуск bnn(...).
-  6. Убийство и порог: SetKillThreshold F51, SetChestKillThreshold F6033,
-     SetChestInstantKill F2680, SetInstantKill F4760 — как связаны со свингами
-     Combat_Service (A3/A5 из трейса).
-  ЗАМЕЧАНИЕ ПО ИСХОДНИКУ: в артефакте две параллельные копии этого кода
-  (сдвиг ~5.5 тыс. строк: 14014 ↔ 17679, 15938 ↔ ~21500, 23125 ↔ ~33870).
-  Логика в них одна, отличаются только имена временных переменных.
+  СТАТУС (обновлено: сундуки и схематики закрыты)
+  Готово и вычитано из артефакта:
+    * лут-шаг bnb (14014), душа boc (15938), сундук bpL (13460), open() (23125),
+      квест-каркас bpn (23850), перенос детали bqn (20991), раннер bpu (3127),
+      триггер промпта cKb[69] (19540), обёртки схем атик F3068/F2545;
+    * константы: CHEST_TIERS {"T1","T2","T3"} / CHEST_GUARD_RANGE 220 /
+      PASSIVE_MOBS (cKb[141]); бэкофф лута; интервалы всех 24 контроллеров.
+  Осталось вычитать:
+  1. claimable(drop) — предикат «можно забрать» (состояния S4168…S4184).
+  2. Вспомогательные: bpb (позиция дропа), bqd (подойти), bmO (снять claim),
+     bp3 (wait-until с таймаутом), cKb[86] (таймаут-обёртка), bnN/bps (поиск и
+     список сундуков), bpY (снять приоритет), bnz.
+  3. Внутренности квест-шага: F2175-обёртка у bpn (сбор/сортировка квестов),
+     bnn(quest, …, "QuestStatus", QuestController), cKb[142] (имя квеста),
+     cKb[94] (добить зависший квест), cKb[98] (длина списка), F6310 (выбор квеста
+     по Category == "Combat" и Requirements.Level).
+  4. Порог убийства: SetKillThreshold F51, SetChestKillThreshold F6033,
+     SetChestInstantKill F2680, SetInstantKill F4760 и его связь со свингами
+     Combat_Service (A3/A5 из трейсов).
+  5. Схематика: как именно берётся part и owner внутри SchematicRunner.start()
+     (цепочка bnN/btc вокруг 26500+).
+
+  ОСТОРОЖНО С F-НОМЕРАМИ: в этой зоне артефакта нумерация слотов ненадёжна
+  (проверено: pool[6310] — это выбор квеста, хотя в тексте стоит bmX = F6310).
+  Поэтому шаги выше опознаны ПО СОДЕРЖИМОМУ (по строкам/статусам), а не по слоту.
+  Учитывать вместе с разделом 13 D_MAP (две параллельные копии кода).
 ============================================================================ ]]
