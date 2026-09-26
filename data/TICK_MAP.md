@@ -218,6 +218,14 @@ end
 * `F3841` (ownership-цикл) — ✅ вычитан целиком (см. `ouroboros_esp.lua`);
 * `F5182` зависит от `PlayerSummary` (F4476), `QuestSummary` (F3729),
   `BreathingCost` (F4597) — в сборке вызываются, если зарегистрированы в `cKb[51]`;
+* ✅ планировщик `cKb[65] = F3871` сверен целиком: негодный вход / несчитанное
+  окно (`bmN`) / просроченный (`now > latest`, `missed++`) → `bmL(track, true)`;
+  кандидат — `now >= due` и `cKb[128](model, in fo.reach, reachPad, true)`,
+  берётся с наименьшим `latest`; дальше `cKb[123].playerValues()` →
+  `cKb[41]` («none» → выход; «block» при выключенном `mitigate` → выход),
+  повторные проверки (`cKb[58]`, `latest`), группа входов в окне
+  (`earliest..latest` + valid) и максимум `protectUntil` → `cKb[143]`;
+  зачёт `fired` (или `locked` для «block») и снятие группы.
 * воркеры, которых пока нет в сборке (см. `data/D_MAP.md`, ROADMAP п.6):
   рыбалка, данжи, очереди, ESP-экран, вебхуки, тренировки, скиллы-контроллер.
 

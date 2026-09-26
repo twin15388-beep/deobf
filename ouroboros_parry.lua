@@ -800,12 +800,12 @@ local function ParryScheduler()                      -- cKb[65] (F3871)
     local now = os.clock()                           -- S376
     local target = nil                               -- cgJ: самый срочный вход
     for track, entry in pairs(parry.entries) do
-        if not EntryValid(entry) then                -- S21
-            parry.armed[track] = true                -- bmL(track, true) — S13
-        elseif (not entry["due"]) or (not EntryWindow(entry, now)) then   -- S6/S19
-            parry.armed[track] = true                -- bmL(track, true) — S18
-        elseif not EntryValid(entry) then            -- S9
-            parry.armed[track] = true                -- bmL(track, true) — S3
+        if not EntryValid(entry) then                -- S21/S13
+            WithdrawEntry(track, true)               -- bmL(track, true)
+        elseif (not entry["due"]) and (not EntryWindow(entry, now)) then   -- S6/S19/S18
+            WithdrawEntry(track, true)               -- bmL(track, true)
+        elseif not EntryValid(entry) then            -- S9/S3
+            WithdrawEntry(track, true)               -- bmL(track, true)
         elseif now > entry["latest"] then            -- S5
             local stats = parry["stats"]
             stats["missed"] = stats["missed"] + 1    -- S8
