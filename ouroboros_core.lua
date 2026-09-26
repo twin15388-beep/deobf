@@ -307,6 +307,8 @@ end
 
 Core.CanAct = CanAct        -- bnB: «скрипт загружен и может действовать»
 Core.Unloaded = Unloaded
+Core.Report = Report        -- cKb[100]: доклад о недостающих зависимостях
+Core.IsCallable = IsCallable
 
 Core.Services = Services
 Core.constants = CONST

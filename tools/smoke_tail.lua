@@ -87,3 +87,67 @@ print("[smoke] Farm.StartController:", ok10, tostring(err10),
       "шагов:", steps, "workerActive:", tostring(controller["workerActive"]),
       "записей в bny.runs:", (function()
           local n = 0 for _ in pairs(M.Core.bny["runs"]) do n = n + 1 end return n end)())
+
+-- Полный путь парирования: модель → Animator → играющий трек → вход → окно
+local ok11, err11 = pcall(function()
+    local workspaceTable = {
+        Position = Vector3.new(0, 0, 0),
+        CFrame = { LookVector = Vector3.new(0, 0, -1) },
+        FindFirstChild = function() return nil end,
+    }
+    services.Workspace = workspaceTable
+    local animation = { Name = "attack", }
+    local track = {
+        Animation = animation,
+        IsPlaying = true,
+        Speed = 1,
+        TimePosition = 0.3,
+        Stopped = services.RunService.Heartbeat,        -- заглушка «события»
+    }
+    local animator = {
+        AnimationPlayed = services.RunService.Heartbeat,
+        GetPlayingAnimationTracks = function() return { track } end,
+    }
+    local humanoid = { Health = 100, FindFirstChildOfClass = function() return animator end }
+    local model = {
+        Parent = workspaceTable,
+        Position = Vector3.new(0, 0, 0),
+        CFrame = { LookVector = Vector3.new(0, 0, -1) },
+        FindFirstChildOfClass = function() return humanoid end,
+        FindFirstChild = function() return nil end,
+    }
+    animation.AnimationId = "rbxassetid://123456789"
+    cKb[34]["123456789"] = { { folder = "folder", preset = {}, combo = 1, running = false,
+                              swing = 0.2, hit = 0.5, reach = 10, runTrim = 0.05 } }
+    -- персонаж игрока с корнем (нужен InReach → cKb[145])
+    local root = { Position = Vector3.new(3, 0, 0), IsA = function() return true end }
+    local character = {
+        Position = Vector3.new(3, 0, 0),
+        IsA = function() return true end,
+        FindFirstChild = function(_, name) return name == "HumanoidRootPart" and root or nil end,
+        FindFirstChildOfClass = function() return { Health = 100 } end,
+    }
+    services.Players.LocalPlayer.Character = character
+    M.Core.Services.LocalPlayer = services.Players.LocalPlayer   -- ядро берёт игрока отсюда
+
+    M.Parry.state.on = true
+    M.Parry.state.npc = true
+    M.Parry.TrackModel(model, true)
+    local n = 0
+    for _ in pairs(M.Parry.state.entries) do n = n + 1 end
+    print("[smoke] Parry.TrackModel: входов =", n,
+          "по этому треку =", tostring(M.Parry.state.entries[track] ~= nil),
+          "записей cKb[50] =", (function()
+              local c = 0 for _ in pairs(M.Core and cKb[50] or {}) do c = c + 1 end return c end)())
+
+    -- окно блока по этому входу (bmN = F2590)
+    local entry = M.Parry.state.entries[track]
+    if entry then
+        entry["in fo"] = { reach = 10, hit = 0.5, swing = 0.2, runTrim = 0.05 }
+        local okw = M.Parry.EntryWindow(entry, os.clock())
+        print("[smoke] Parry.EntryValid:", M.Parry.EntryValid(entry))
+        print("[smoke] Parry.EntryWindow:", okw, "due/earliest/latest =",
+              entry["due"], entry["earliest"], entry["latest"], "window =", entry["window"])
+    end
+end)
+print("[smoke] Parry.TrackModel:", ok11, tostring(err11))

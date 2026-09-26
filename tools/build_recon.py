@@ -117,6 +117,7 @@ end
 -- ---------------------------------------------------------------------------
 -- 5. СЛОТЫ cKb: слот → реализация (каноническая карта, см. ROADMAP)
 -- ---------------------------------------------------------------------------
+local REGISTRY = {}                              -- cKb[50]
 local slotWarned = {}
 -- Непрочитанный слот: вместо nil отдаём «цепную» заглушку, чтобы код не падал
 -- сразу, а один раз предупредил и пошёл дальше (её можно вызвать и индексировать).
@@ -162,9 +163,12 @@ cKb = setmetatable({
         end
         return false
     end,
+    [14]  = Parry.TrackModel,                    -- подписка на модель (cKb[14])
     [17]  = function()                       -- F3460: боевые пресеты доступны?
         return type(bno["CombatPresets"]) == "table"
     end,
+    [34]  = Parry.state.presets,                 -- таблица пресетов боя (заполняет F3460)
+    [108] = Parry.PresetFor,                     -- F3490: пресет по анимации
     [22]  = Farm.ChestStep,
     [23]  = 1110,                                -- интервал воркера экипировки
     [24]  = missing_slot(24),                    -- игровой объект скилла по имени
@@ -178,7 +182,15 @@ cKb = setmetatable({
         return true
     end,
     [42]  = missing_slot(42),                    -- ввод боя (cKb[51]["CombatInputs"])
+    [41]  = function(values)                     -- F5356: «block» / «none» по playerValues
+        if values == nil then return "none" end
+        if type(values) ~= "table" then return "none" end
+        local block = values["Blocking"] or values["block"]
+        if block == nil then return "none" end
+        return "block"
+    end,
     [48]  = missing_slot(48),                    -- уровень игрока
+    [50]  = REGISTRY,                            -- cKb[50]: записи подписок по моделям
     [51]  = API,
     [52]  = Farm.QuestSlotBusy,
     [54]  = Core.priority,
@@ -212,7 +224,7 @@ cKb = setmetatable({
     [97]  = Move.SetCollide,
     [98]  = Farm.Count,
     [99]  = Combat.tweaks,
-    [100] = Core.Report,
+    [100] = function(...) return Core.Report(...) end,  -- доклад (Core.Report ставится при Boot)
     [102] = { EquipWeapon = Equip.EquipWeapon },
     [104] = Equip.ItemScore,
     [106] = missing_slot(106),                   -- обновление списка скиллов
@@ -222,7 +234,9 @@ cKb = setmetatable({
     [118] = function(v) return type(v) == "function" end,
     [119] = function(fn, ...) return pcall(fn, ...) end,
     [120] = Move.MoveTo,
-    [122] = missing_slot(122),                   -- проверка подтверждения парирования
+    [122] = Parry.ValidNumber,                   -- проверка «валидное число»
+    [128] = Parry.InReach,                       -- F853: дотягивается ли цель
+    [143] = Parry.BeginBlock,                    -- боевой вход (S1839..S1857)
     [123] = missing_slot(123),                   -- module-таблица (playerValues и пр.)
     [124] = Move.GetHumanoid,
     [126] = Core.Services.LocalPlayer,
@@ -242,6 +256,7 @@ cKb = setmetatable({
 }, { __index = function(_, key) return missing_slot(key) end })
 
 cKb[51]["BlockWork"] = Parry.state   -- bnl == cKb[51]["BlockWork"] (S2928)
+cKb[50] = Parry.state.watched        -- cKb[50]: записи подписок по моделям
 
 -- ---------------------------------------------------------------------------
 -- 6. ПСЕВДОНИМЫ артефакта (имена, которыми модули зовут друг друга)

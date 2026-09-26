@@ -45,8 +45,30 @@ function toclipboard() end
 getgenv = function() return _G end
 
 Enum = setmetatable({}, { __index = function(_, k) return stub_table(k) end })
-Vector3 = { new = function(x, y, z) return { X = x or 0, Y = y or 0, Z = z or 0 } end, zero = { X = 0, Y = 0, Z = 0 } }
-Vector2 = Vector3
+-- Мини-Vector3: нужны вычитание, Magnitude, Unit, Dot (InReach и др.)
+local V3
+local V3MT = {
+    __index = {
+        Dot = function(a, b) return a.X * b.X + a.Y * b.Y + a.Z * b.Z end,
+    },
+    __sub = function(a, b) return V3(a.X - b.X, a.Y - b.Y, a.Z - b.Z) end,
+    __add = function(a, b) return V3(a.X + b.X, a.Y + b.Y, a.Z + b.Z) end,
+}
+-- Magnitude/Unit считаются сразу: в Roblox это свойства, а не методы
+local function magnitude(x, y, z) return math.sqrt(x * x + y * y + z * z) end
+local function build(x, y, z, m)
+    local v = setmetatable({ X = x, Y = y, Z = z, Magnitude = m }, V3MT)
+    if m and m > 0 then
+        v.Unit = setmetatable({ X = x / m, Y = y / m, Z = z / m, Magnitude = 1 }, V3MT)
+    end
+    return v
+end
+V3 = function(x, y, z)
+    x, y, z = x or 0, y or 0, z or 0
+    return build(x, y, z, magnitude(x, y, z))
+end
+Vector3 = { new = V3, zero = V3(0, 0, 0) }
+Vector2 = { new = function(x, y) return { X = x or 0, Y = y or 0 } end }
 CFrame = { new = function() return {} end }
 Color3 = { new = function() return { ToHex = function() return "ffffff" end } end,
            fromHex = function() return {} end, fromRGB = function() return {} end }
@@ -80,7 +102,10 @@ game = {
 }
 workspace = make_service("Workspace")
 script = make_service("Script")
-services.Players = { LocalPlayer = make_service("LocalPlayer") }
+services.Players = { LocalPlayer = { Character = nil, Name = "stub" } }
+services.Workspace = services.Workspace or make_service("Workspace")
+services.Workspace.Position = Vector3.new(0, 0, 0)
+services.Workspace.CFrame = { LookVector = Vector3.new(0, 0, -1) }
 services.HttpService = make_service("HttpService")
 HttpGet = function() return "" end
 
@@ -100,3 +125,10 @@ end
 LIBRARY_STUB = chain("Library")
 
 function warn(...) print("[warn]", ...) end
+
+-- Stats.Network.ServerStatsItem.Data Ping:GetValue() и Utility.Tick() для парирования
+local statsService = {
+    Network = { ServerStatsItem = { ["Data Ping"] = { GetValue = function() return 42 end } } },
+}
+services.Stats = statsService
+bno_extra = { Utility = { Tick = function() return os.clock() end } }
