@@ -76,6 +76,17 @@ gh api repos/joustingmatch/Ouroboros/contents/games/ps2.luau?ref=<commit> --jq '
 * **Тексты, которых больше нет:** `%d attempts, %d blocks, %d missed, %d cancelled`,
   `auto parry scheduler`, `Block When Parry Is Locked Out`, `BOSS_DWELL` и др.
 
+### Публичный API
+
+Настроек `Set*`/`Get*` было 128, стало 276: **163 новых** имени и **15 исчезли**
+(часть переименована — так, вместо `SetParryHold`/`SetParryLead`/`SetParryMitigate`/
+`SetParryNpcs` появились `SetParryRadius`, `SetParryPlayers`, `GetParryDiagnostics`).
+Полные списки — `data/API_DELTA_2026-09-26.md`. Новое в основном про фарм:
+кэш-хопы (`SetCacheHop*`), карты в Ouwigahara (`SetCardReroll*`, `SetCardPriorityList`,
+`SetCardBlocks`), боссы (`SetBossHop*`, `SetBossOrder*`), продажа и рынок
+(`SetAutoSell`, `SetAutoBuyMarket`, `SetAutoTradeCoins`), профессии
+(`SetAnglerQuest`, `SetAutoYeti`), ассист прицела (`SetAimAssist*`).
+
 ## Как читать обе сборки одним инструментом
 
 ```bash
