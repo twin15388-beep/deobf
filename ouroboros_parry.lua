@@ -328,17 +328,33 @@ local function BuildPresets()                        -- cKb[17] (F3460)
 end
 parry.BuildPresets = BuildPresets                     -- cKb[17]
 
--- cKb[108] = F3490: по анимации найти запись пресета
+-- cKb[108] = F3490: по анимации найти запись пресета (S522..S523).
+--   id = AnimationId:match("%d+") → cKb[34][id] (список записей);
+--   первый проход: запись, у которой folder == animation.Parent.Name;
+--   если совпадения нет — второй проход-проверка: все записи списка должны
+--   совпадать по preset/combo/running (иначе nil), и возвращается первая.
 local function PresetFor(animation)                  -- cKb[108] (F3490)
     if not animation then return nil end             -- S522/S527
     local id = tostring(animation["AnimationId"] or ""):match("%d+")   -- S524
     local list = id and presets[id] or nil           -- S525/S529
     if type(list) ~= "table" then return nil end     -- S530/S521
-    local folder = animation["Parent"] and animation["Parent"]["Name"]  -- S523
-    for _, item in ipairs(list) do                   -- S523 (поиск по папке)
-        if item["folder"] == folder then return item end
+    local parent = animation["Parent"]               -- S523 (первый проход)
+    if parent then
+        local folder = parent["Name"]                -- S3
+        for _, item in ipairs(list) do               -- S5/S0
+            if folder == item["folder"] then return item end
+        end
     end
-    return list[1]                                    -- S523 (иначе первая запись)
+    local first = list[1]                            -- ce1 = ce2[1]
+    if first == nil then return nil end
+    for _, item in ipairs(list) do                   -- второй проход (S5/S0/S3)
+        if item["preset"] ~= first["preset"]         -- S5/S7/S4
+                or item["combo"] ~= first["combo"]   -- S0
+                or item["running"] ~= first["running"] then  -- S3
+            return nil                               -- S6
+        end
+    end
+    return first                                     -- S523/S530
 end
 
 -- ---------------------------------------------------------------------------

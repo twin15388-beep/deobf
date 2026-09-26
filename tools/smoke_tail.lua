@@ -331,3 +331,26 @@ local ok14, err14 = pcall(function()
     print("[smoke] Parry.BlockWorkStep (off): статус =", tostring(M.Core.bpz["ParryStatus"]))
 end)
 print("[smoke] Parry.AcquireTargets/step:", ok14, tostring(err14))
+
+-- Тик артефакта (M.Tick = pcall(тело) + task.wait(0.15))
+local ok15, err15 = pcall(function()
+    local okTick, errTick = pcall(M.Tick)
+    print("[smoke] M.Tick:", okTick, tostring(errTick))
+    -- ветка «медленной ходьбы»: tweaks[8562344] + WalkSpeed <= slow_walk_speed
+    M.Combat.tweaks[8562344] = true
+    M.Core.bno["CombatPresets"] = { Presets = {}, slow_walk_speed = "9" }
+    local fakeCharacter = { WalkSpeed = 6 }
+    cKb[124] = function() return fakeCharacter end
+    M.Tick()
+    print("[smoke] M.Tick walkspeed:", fakeCharacter["WalkSpeed"], "(ожидается 16)")
+    M.Combat.tweaks[8562344] = nil
+    M.Combat.tweaks["noStun"] = true
+    M.Combat.tweaks["noRagdoll"] = true
+    local okTick2 = pcall(M.Tick)
+    print("[smoke] M.Tick (noStun/noRagdoll):", okTick2)
+    M.Combat.tweaks["noStun"] = false
+    M.Combat.tweaks["noRagdoll"] = false
+    print("[smoke] cKb[51].BlockWork == cKb[99].parry =",
+          tostring(M.Parry.state == cKb[51]["BlockWork"]), "bnl =", tostring(bnl == M.Parry.state))
+end)
+print("[smoke] M.Tick:", ok15, tostring(err15))

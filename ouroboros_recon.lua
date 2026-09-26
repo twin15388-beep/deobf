@@ -3163,17 +3163,33 @@ local function BuildPresets()                        -- cKb[17] (F3460)
 end
 parry.BuildPresets = BuildPresets                     -- cKb[17]
 
--- cKb[108] = F3490: по анимации найти запись пресета
+-- cKb[108] = F3490: по анимации найти запись пресета (S522..S523).
+--   id = AnimationId:match("%d+") → cKb[34][id] (список записей);
+--   первый проход: запись, у которой folder == animation.Parent.Name;
+--   если совпадения нет — второй проход-проверка: все записи списка должны
+--   совпадать по preset/combo/running (иначе nil), и возвращается первая.
 local function PresetFor(animation)                  -- cKb[108] (F3490)
     if not animation then return nil end             -- S522/S527
     local id = tostring(animation["AnimationId"] or ""):match("%d+")   -- S524
     local list = id and presets[id] or nil           -- S525/S529
     if type(list) ~= "table" then return nil end     -- S530/S521
-    local folder = animation["Parent"] and animation["Parent"]["Name"]  -- S523
-    for _, item in ipairs(list) do                   -- S523 (поиск по папке)
-        if item["folder"] == folder then return item end
+    local parent = animation["Parent"]               -- S523 (первый проход)
+    if parent then
+        local folder = parent["Name"]                -- S3
+        for _, item in ipairs(list) do               -- S5/S0
+            if folder == item["folder"] then return item end
+        end
     end
-    return list[1]                                    -- S523 (иначе первая запись)
+    local first = list[1]                            -- ce1 = ce2[1]
+    if first == nil then return nil end
+    for _, item in ipairs(list) do                   -- второй проход (S5/S0/S3)
+        if item["preset"] ~= first["preset"]         -- S5/S7/S4
+                or item["combo"] ~= first["combo"]   -- S0
+                or item["running"] ~= first["running"] then  -- S3
+            return nil                               -- S6
+        end
+    end
+    return first                                     -- S523/S530
 end
 
 -- ---------------------------------------------------------------------------
@@ -5985,6 +6001,11 @@ end
 local API = {}
 API["Track"] = function(fn) return fn end
 
+-- Тик артефакта: период и «нормальная» скорость (пул: 4706 = 0.15, 4396 = 16)
+TICK_PERIOD = 0.15
+NORMAL_WALK_SPEED = 16
+SLOW_WALK_DEFAULT = 7
+
 cKb = setmetatable({
     [3]   = chain_stub("cKb[3]"),                -- источник слотов квестов (не вычитан)
     [8]   = Farm.QuestStep,
@@ -6173,7 +6194,6 @@ function M.StartSteps()
         pcall(Combat.CombatTick)
         pcall(Skills.SkillStep)
         pcall(Parry.BlockTick)
-        pcall(Parry.BlockWorkStep)                   -- bnl["step"] = F288
         pcall(Equip.EquipStep)
     end)
     return M._tick
@@ -6230,10 +6250,56 @@ function M.StartSummaryLoop()                        -- cKb[75] = task.delay(0, 
     return M._summaryLoop
 end
 
+-- Тик артефакта (второй билд, S9400..9387): тело под pcall в цикле с
+-- task.wait(0.15). Порядок — как в машине состояний:
+--   cKb[66]() → cKb[99]["resourceTick"]() → cKb[99]["parry"]["step"]() (F288)
+--   → (noStun или noRagdoll) → cKb[88]() → noRagdoll → cKb[140]()
+--   → «медленная ходьба»: если tweaks[числовой ключ] и WalkSpeed в (0; slow]
+--     — вернуть 16 → bon(); bpX(); boZ() (у нас Combat.CombatTick).
+function M.Tick()
+    if Core.IsCallable(cKb[66]) then cKb[66]() end                    -- S9400
+    if Core.IsCallable(cKb[99]["resourceTick"]) then cKb[99]["resourceTick"]() end
+    local work = cKb[99]["parry"]                                     -- S9394
+    if work and Core.IsCallable(work["step"]) then work["step"]() end -- S9381/S9393
+    local tweaks = Combat.tweaks
+    if tweaks["noStun"] or tweaks["noRagdoll"] then                   -- S9389/S9379
+        if Core.IsCallable(cKb[88]) then cKb[88]() end                -- S9398 (F4619)
+    end
+    if tweaks["noRagdoll"] and Core.IsCallable(cKb[140]) then         -- S9395
+        cKb[140]()                                                    -- S9384 (DMG)
+    end
+    if tweaks[8562344] then                                           -- S9401 (ключ из пула)
+        local character = cKb[124]()                                  -- S9399
+        local slow = SLOW_WALK_DEFAULT
+        if type(bno["CombatPresets"]) == "table" then                 -- S9390
+            slow = tonumber(bno["CombatPresets"]["slow_walk_speed"]) or slow
+        end
+        if character and slow then
+            local walk = character["WalkSpeed"]                       -- S9386
+            if walk and walk > 0 and walk <= slow then                -- S9402
+                character["WalkSpeed"] = NORMAL_WALK_SPEED            -- S9380
+            end
+        end
+    end
+    pcall(Combat.CombatTick)                                          -- bon(); bpX(); boZ()
+end
+
+function M.StartTick()
+    if M._tickLoop then return M._tickLoop end
+    M._tickLoop = task.delay(0, function()
+        while true do
+            pcall(M.Tick)                       -- F2175(тело) — pcall в артефакте
+            task.wait(TICK_PERIOD)              -- task.wait(0.15)
+        end
+    end)
+    return M._tickLoop
+end
+
 function M.StartLoops()
     M.StartSummaryLoop()
     Parry.StartScheduler()                           -- bnx = Heartbeat:Connect(F4910)
     ESP.StartOwnershipLoop(ESP.container)            -- bm8 = task.delay(0, F3841)
+    M.StartTick()                                    -- тик артефакта: pcall + wait(0.15)
     return true
 end
 
