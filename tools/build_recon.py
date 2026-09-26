@@ -165,9 +165,7 @@ cKb = setmetatable({
         return false
     end,
     [14]  = Parry.TrackModel,                    -- подписка на модель (cKb[14])
-    [17]  = function()                       -- F3460: боевые пресеты доступны?
-        return type(bno["CombatPresets"]) == "table"
-    end,
+    [17]  = Parry.BuildPresets,                  -- F3460: построить пресеты боя (cKb[34])
     [34]  = Parry.state.presets,                 -- таблица пресетов боя (заполняет F3460)
     [108] = Parry.PresetFor,                     -- F3490: пресет по анимации
     [22]  = Farm.ChestStep,

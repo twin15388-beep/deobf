@@ -189,15 +189,133 @@ end
 
 -- ---------------------------------------------------------------------------
 -- Таблица пресетов боя (cKb[34]) и выбор пресета по анимации
---   Пресеты строит cKb[17]() = F3460: по детям папки анимаций собираются записи
---     { folder, preset, combo, running, swing, hit, reach, runTrim }
---   и складываются в cKb[34][<AnimationId без нецифр>] как список.
---   Тело F3460 прочитано частично (форма записи и источники полей:
---   delay_before_swing / delay_before_hit / Reaches / Default_Swing_Wait /
---   run_swing_remove_on_first); сама папка анимаций ещё не определена.
+--   Пресеты строит cKb[17]() = F3460 (см. BuildPresets ниже): по детям папки
+--   анимаций собираются записи { folder, preset, combo, running, swing, hit,
+--   reach, runTrim } и складываются в cKb[34][<AnimationId без нецифр>] списком.
 -- ---------------------------------------------------------------------------
 local presets = {}                                   -- cKb[34]
 parry.presets = presets
+
+-- ---------------------------------------------------------------------------
+-- Папка анимаций и конфиг пресетов (F3460)
+--   S5151: bnm = cloneref(ReplicatedStorage) → :FindFirstChild("Assets")
+--          → :FindFirstChild("Animations")
+--   S26691: bno["CombatPresets"] = LoadModule(Global, {"Combat_presets"})
+--   S22086: bno["Items"]         = LoadModule(Global, {"Collectibles","Items"})
+-- ---------------------------------------------------------------------------
+local function AnimationsFolder()                    -- S5151/S5149
+    local replicated = game:GetService("ReplicatedStorage")
+    local assets = replicated and replicated:FindFirstChild("Assets")
+    if not assets then return nil end
+    return assets:FindFirstChild("Animations")
+end
+
+local function PresetConfigs()                       -- S5152/S5144
+    local module = bno["CombatPresets"]
+    if type(module) ~= "table" then return nil end
+    local list = module["Presets"]
+    if type(list) ~= "table" then return nil end
+    return list
+end
+
+-- Первое число из списка кандидатов (замена цепочек tonumber/«а если nil»)
+local function FirstNumber(...)
+    for i = 1, select("#", ...) do
+        local value = tonumber((select(i, ...)))      -- скобки: только первый результат
+        if value then return value end
+    end
+    return nil
+end
+
+-- cKb[17] = F3460: построить cKb[34] (таблицу пресетов) и вернуть её.
+--   Возврат nil — когда нет папки Animations или нет bno["CombatPresets"].
+local presetsBuilt = false
+local function BuildPresets()                        -- cKb[17] (F3460)
+    if presetsBuilt then return presets end          -- S5155/S5147
+    local animations = AnimationsFolder()
+    if not animations then return nil end            -- S5142/S5146
+    local config = PresetConfigs()
+    if type(config) ~= "table" then return nil end   -- S5153/S5146
+
+    local items = bno["Items"]
+    local built = {}
+    for _, folder in ipairs(animations:GetChildren()) do          -- S5145
+        -- S7: ключ конфига — короткое имя папки без суффикса _Combat_Anims
+        -- (в записи folder — полное имя, чтобы PresetFor сравнивал его с
+        --  animation.Parent.Name)
+        local key = tostring(folder["Name"] or ""):match("^(.+)_Combat_Anims$")
+        if key then
+            -- S8/S9/S5: имя элемента Items; S4: пресет по ключу,
+            -- S10: иначе пресет по Items[key].CombatPreset
+            local item = (type(items) == "table") and items[key] or key
+            local cfg = config[key]
+            if not cfg and type(item) == "table" then
+                cfg = config[item["CombatPreset"]]
+            end
+            if cfg then                              -- S13/S2
+                for _, animation in ipairs(folder:GetChildren()) do
+                    if animation:IsA("Animation") then            -- S33
+                        local name = tostring(animation["Name"] or "")
+                        local combo = tonumber(name:match("^Swing_(%d+)$"))   -- S21
+                        local running = (name == "Run_Hit")
+                        if combo or running then                 -- S1/S27
+                            local index = combo or 1             -- S26
+                            -- S20/S19/S37: боевой бег берёт задержки из
+                            -- Presets.Combat, если у пресета включён CombatRunHit
+                            local source = cfg
+                            if running and cfg["CombatRunHit"] == true
+                                    and type(config["Combat"]) == "table" then
+                                source = config["Combat"]
+                            end
+                            local swings = source["delay_before_swing"]     -- S8
+                            local hits = source["delay_before_hit"]         -- S41
+                            local swing = FirstNumber(
+                                type(swings) == "table" and swings[index],   -- S22
+                                source["default_before_swing"],              -- S14
+                                bno["CombatPresets"]["Default_Swing_Wait"])  -- S3
+                                or 0                                          -- S30/S42
+                            local hit = FirstNumber(
+                                type(hits) == "table" and hits[index],       -- S16
+                                source["default_before_hit"])                -- S15
+                                or swing                                     -- S46/S2
+                            local reaches = source["Reaches"]                -- S13
+                            local reach = 4                                  -- S9
+                            if type(reaches) == "table" then
+                                reach = FirstNumber(reaches[index],          -- S10
+                                                    reaches["Default"],      -- S25
+                                                    reaches) or reach
+                            else
+                                reach = FirstNumber(reaches) or reach        -- S38
+                            end
+                            local runTrim = 0                                -- S7/S32
+                            if running then
+                                runTrim = tonumber(source["run_swing_remove_on_first"]) or 0
+                            end
+                            local record = {                                 -- S12
+                                folder = folder["Name"], preset = source,
+                                combo = index, running = running,
+                                swing = swing, hit = hit,
+                                reach = reach, runTrim = runTrim,
+                            }
+                            local id = tostring(animation["AnimationId"] or ""):match("%d+")
+                            if id then                                   -- S12/S23
+                                built[id] = built[id] or {}
+                                table.insert(built[id], record)
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end
+
+    for id, list in pairs(built) do                   -- S5143 (cKb[34] = ceE)
+        presets[id] = list
+    end
+    presetsBuilt = true
+    return presets                                    -- S5148
+end
+parry.BuildPresets = BuildPresets                     -- cKb[17]
 
 -- cKb[108] = F3490: по анимации найти запись пресета
 local function PresetFor(animation)                  -- cKb[108] (F3490)
@@ -702,6 +820,7 @@ return {
     InReach = InReach,
     WithdrawEntry = WithdrawEntry,
     TrackModel = TrackModel,
+    BuildPresets = BuildPresets,                     -- cKb[17] = F3460
     EntryWindow = EntryWindow,
     RequestRelease = RequestRelease,
     BeginBlock = BeginBlock,

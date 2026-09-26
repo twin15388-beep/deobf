@@ -199,3 +199,64 @@ local ok12, err12 = pcall(function()
           type(cKb[78]), type(cKb[112]))
 end)
 print("[smoke] ESP:", ok12, tostring(err12))
+
+-- Построение пресетов боя (cKb[17] = F3460) из папки анимаций и Global.Combat_presets
+local ok13, err13 = pcall(function()
+    local function animation(name, id)
+        return { Name = name, AnimationId = id, Parent = nil,
+                 IsA = function(_, class) return class == "Animation" end }
+    end
+    local folder = { Name = "Sword_Combat_Anims", Children = {
+        animation("Swing_1", "rbxassetid://111111"),
+        animation("Swing_2", "rbxassetid://222222"),
+        animation("Run_Hit", "rbxassetid://333333"),
+        animation("Idle", "rbxassetid://444444"),
+    } }
+    for _, child in ipairs(folder.Children) do child.Parent = folder end
+    folder.GetChildren = function() return folder.Children end
+    local assets = { Name = "Assets", GetChildren = function()
+        return { folder, { Name = "NotACombatFolder", GetChildren = function() return {} end } }
+    end }
+    assets.FindFirstChild = function(_, name) return name == "Animations" and assets or nil end
+    local replicated = {
+        Name = "ReplicatedStorage",
+        FindFirstChild = function(_, name) return name == "Assets" and assets or nil end,
+    }
+    services.ReplicatedStorage = replicated
+
+    M.Core.bno["CombatPresets"] = {
+        Default_Swing_Wait = "0.7",
+        Presets = {
+            Sword = {                                -- ключ = имя папки без _Combat_Anims
+                delay_before_swing = { [1] = "0.15", [2] = 0.25 },
+                default_before_swing = "0.3",
+                delay_before_hit = { [1] = "0.4" },
+                Default_before_hit = 0.5,
+                Reaches = { [1] = 9, Default = 7 },
+                CombatRunHit = true,
+                run_swing_remove_on_first = "0.05",
+            },
+            Combat = { delay_before_swing = { [1] = 0.11 }, delay_before_hit = { [1] = 0.22 },
+                       Reaches = { Default = 6 } },
+        },
+    }
+    local built = M.Parry.BuildPresets()
+    local one = built and built["111111"] and built["111111"][1]
+    print("[smoke] Parry.BuildPresets:", type(built), "записей id 111111 =",
+          one and #built["111111"] or 0)
+    print("[smoke]   запись 1:", one and one.folder, "combo=", one and one.combo,
+          "swing=", one and one.swing, "hit=", one and one.hit,
+          "reach=", one and one.reach, "running=", tostring(one and one.running),
+          "runTrim=", one and one.runTrim)
+    local two = built and built["222222"] and built["222222"][1]
+    print("[smoke]   запись 2: combo=", two and two.combo, "swing=", two and two.swing,
+          "hit=", two and two.hit, "reach=", two and two.reach)
+    local run = built and built["333333"] and built["333333"][1]
+    print("[smoke]   Run_Hit: combo=", run and run.combo, "swing=", run and run.swing,
+          "hit=", run and run.hit, "reach=", run and run.reach,
+          "running=", tostring(run and run.running), "runTrim=", run and run.runTrim,
+          "источник = Presets.Combat:", tostring(run and run.preset ==
+              M.Core.bno["CombatPresets"]["Presets"]["Combat"]))
+    print("[smoke]   Idle пропущен:", tostring(built and built["444444"] == nil))
+end)
+print("[smoke] Parry.BuildPresets:", ok13, tostring(err13))

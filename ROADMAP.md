@@ -43,7 +43,9 @@
      `boA = F5058` («block/none/parry»), `bo_ = F2854` (фазы отпускания),
      `bpa = F1572` (просьба отпустить), `bmL = F1290` (снять вход);
      копии алиасов разобраны (см. `data/TICK_MAP.md` §5.1);
-     осталось: хвост `F853` (направление), `F3460` (папка анимаций);
+     ✅ в том числе `cKb[17] = F3460` (папка анимаций `Assets.Animations`,
+     папки `*_Combat_Anims`, конфиг `Global.Combat_presets` → `Presets`);
+     осталось: хвост `F853` (направление);
    - ✅ ownership-цикл `bm8` (F3841) — ESP-подсветка мобов: `bpp = {marks={}}`
      (`cKb[99]["viewer"]`), метка `cKb[78] = F4034` (Highlight
      "OuroborosOuwlandOwnership", AlwaysOnTop, 0.7/0), снятие `cKb[112]`,
