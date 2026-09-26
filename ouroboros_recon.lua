@@ -2314,9 +2314,10 @@ local Combat = (function()
 -- ---------------------------------------------------------------------------
 -- Таблица твиков (cKb[99]["tweaks"], строка 37249) с точными дефолтами
 -- ---------------------------------------------------------------------------
-local tweaks = {
+local tweaks = {                    -- точные дефолты артефакта (S37249)
     noStun = true,
     noRagdoll = false,
+    [8562344] = false,              -- "noSlowdown" (пул 3912): возврат WalkSpeed
     instantKill = false,
     killThreshold = 10,
     chestKill = false,
@@ -2330,7 +2331,6 @@ local tweaks = {
     alwaysRun = false,
     ownership = false,
     ownershipRange = 250,
-    [8562344] = false,          -- "noSlowdown" (F5934): возврат WalkSpeed из тика
 }
 -- В коде ниже таблица встречается как cKb[72] (строка 32666: cKb[72] = cKb[99]["tweaks"])
 -- и как bop (строка 23692).
@@ -2503,12 +2503,119 @@ local function AntiAfk()                                  -- bon (F2440)
 end
 
 -- ---------------------------------------------------------------------------
--- ТИКЕР (в оригинале — цикл под флагом cKb[72]["AntiAfk"], строка ~9300)
---   bon(); bpX(); boZ()   -- каждый проход
+-- ФИЛЬТР ИГРОВЫХ МЕТОК — cKb[135] (inline @1 937 241)
+--   Имена из артефакта: boK = {Stun, Strict_Stun, CombatStun, KnockedOut, Cancel},
+--   bqD = {RagDoll}. Если включён noStun и метка из boK — снять (pcall Destroy,
+--   и на этом всё); иначе если включён noRagdoll и метка RagDoll — снять.
 -- ---------------------------------------------------------------------------
-local function CombatTick()                               -- обёртка анти-АФК прохода
-    if not tweaks["AntiAfk"] then return end
-    AntiAfk()                                             -- анти-АФК действие
+local STUN_MARKS = { Stun = true, Strict_Stun = true, CombatStun = true,
+                     KnockedOut = true, Cancel = true }   -- boK
+local RAGDOLL_MARKS = { RagDoll = true }                  -- bqD
+
+local function FilterValue(object)                        -- cKb[135]
+    if type(object) ~= "table" then return end
+    local name = object["Name"]
+    if tweaks["noStun"] and STUN_MARKS[name] then          -- S1870/S1875/S1876
+        pcall(function() object:Destroy() end)
+        return
+    end
+    if tweaks["noRagdoll"] and RAGDOLL_MARKS[name] then    -- S1871/S1877/S1874
+        pcall(function() object:Destroy() end)
+    end
+end
+
+-- ---------------------------------------------------------------------------
+-- «noragdoll» — cKb[88] = F4619 (S7167..S7173)
+--   values = cKb[123].playerValues(); нет — выходим.
+--   Прогоняем всех детей через cKb[135] (фильтр меток); затем, если включён
+--   noRagdoll и в values нет BoolValue "noragdoll" — создаём его (Value = true).
+-- ---------------------------------------------------------------------------
+local function NoRagdollStep()                            -- cKb[88] (F4619)
+    local api = cKb[123]
+    local values = type(api) == "table" and api["playerValues"] and api["playerValues"]()
+    if not values then return end                         -- S7167/S7170
+    if type(values) == "table" and values.GetChildren then
+        for _, child in ipairs(values:GetChildren()) do    -- S7173
+            FilterValue(child)
+        end
+    end
+    if tweaks["noRagdoll"] and values["FindFirstChild"]
+            and values:FindFirstChild("noragdoll") == nil then   -- S7164/S7169
+        local flag = Instance.new("BoolValue")
+        flag["Name"] = "noragdoll"
+        flag["Value"] = true
+        flag["Parent"] = values
+    end
+end
+
+-- ---------------------------------------------------------------------------
+-- Обновление подписки ChildAdded — cKb[66] = F4120 (S16375..S16370)
+--   Держит фильтр cKb[135] подключённым к АКТУАЛЬНЫМ playerValues: если таблица
+--   сменилась — отключаем старую подписку (cKb[18]) и подключаемся к новой.
+-- ---------------------------------------------------------------------------
+local valueFilterConnection = nil                         -- cKb[18]
+local valueFilterValues = nil                             -- bpM
+local function RefreshValueFilter()                       -- cKb[66] (F4120)
+    local api = cKb[123]
+    local values = type(api) == "table" and api["playerValues"] and api["playerValues"]()
+    if not values then return end                         -- S16375/S16376/S16371
+    if values == valueFilterValues then return end        -- S16373
+    if valueFilterConnection then
+        valueFilterConnection:Disconnect()                -- S16369
+    end
+    valueFilterValues = values                            -- S16370
+    if values["ChildAdded"] then
+        valueFilterConnection = values["ChildAdded"]:Connect(FilterValue)
+    end
+end
+
+-- ---------------------------------------------------------------------------
+-- ОТПУСКАНИЕ РАГДОЛЛА — cKb[140] (inline @1 425 932, S4418..S4430)
+--   1) RagDoll (BoolValue) у персонажа → Value = false (через task.defer);
+--   2) RagdollConstraints: все Constraint-наследники запоминаются в bqe и
+--      выключаются (Enabled = false) — их вернёт restoreRagdoll;
+--   3) Humanoid.PlatformStand → false.
+-- ---------------------------------------------------------------------------
+local disabledConstraints = {}                            -- bqe
+local function ReleaseRagdoll()                           -- cKb[140]
+    local character = cKb[9]()                            -- S4424
+    if not character then return end                      -- S4432
+    local ragDoll = character:FindFirstChild("RagDoll")    -- S4423
+    if ragDoll and ragDoll:IsA("BoolValue") and ragDoll["Value"] then  -- S4418/S4425/S4431
+        task.defer(function() ragDoll["Value"] = false end)            -- S4427
+    end
+    local constraints = character:FindFirstChild("RagdollConstraints")  -- S4419
+    if constraints then                                   -- S4426
+        for _, descendant in ipairs(constraints:GetDescendants()) do
+            if descendant:IsA("Constraint") then
+                disabledConstraints[descendant] = true
+                task.defer(function() descendant["Enabled"] = false end)
+            end
+        end
+    end
+    local humanoid = cKb[124]()                           -- S4421
+    if humanoid and humanoid["PlatformStand"] then         -- S4422/S4420
+        task.defer(function() humanoid["PlatformStand"] = false end)    -- S4428
+    end
+end
+
+-- bqe-восстановление: cKb[51]["restoreRagdoll"] (S3769/S3770)
+local function RestoreRagdoll()
+    for object in pairs(disabledConstraints) do
+        if object["Parent"] then
+            pcall(function() object["Enabled"] = true end)
+        end
+    end
+    table.clear(disabledConstraints)
+end
+
+-- ---------------------------------------------------------------------------
+-- ТИКЕР: bon(); bpX(); boZ() — хвост тика артефакта (см. M.Tick)
+--   Своего гейта у прохода нет: bpX/boZ проверяют свои твики изнутри,
+--   bon() просто переключает RunHandler.Toggled (анти-АФК).
+-- ---------------------------------------------------------------------------
+local function CombatTick()                               -- bon(); bpX(); boZ()
+    AntiAfk()                                             -- bon (F2440)
     InstantKillStep(MobList)                              -- bpX
     ChestKillStep(MobList, bps)                           -- boZ
 end
@@ -2534,6 +2641,11 @@ return {
     CombatTick = CombatTick,
     MobList = MobList,
     AntiAfk = AntiAfk,
+    FilterValue = FilterValue,                 -- cKb[135]
+    NoRagdollStep = NoRagdollStep,             -- cKb[88] (F4619)
+    RefreshValueFilter = RefreshValueFilter,   -- cKb[66] (F4120)
+    ReleaseRagdoll = ReleaseRagdoll,           -- cKb[140]
+    RestoreRagdoll = RestoreRagdoll,           -- cKb[51]["restoreRagdoll"]
     LocalPlayerRef = LocalPlayerRef,
     SetKillThreshold = SetKillThreshold,
     SetChestKillThreshold = SetChestKillThreshold,
@@ -6063,7 +6175,11 @@ cKb = setmetatable({
     [60]  = Equip.EquippedByName,
     [61]  = Parry.CONFIG,
     [63]  = missing_slot(63),                    -- контейнер регионов
+    [140] = Combat.ReleaseRagdoll,               -- S4418..S4430: отпустить рагдолл
     [65]  = Parry.Scheduler,                     -- F3871: планировщик блоков (bm0)
+    [66]  = Combat.RefreshValueFilter,           -- F4120: подписка ChildAdded на playerValues
+    [88]  = Combat.NoRagdollStep,                -- F4619: метки + BoolValue "noragdoll"
+    [135] = Combat.FilterValue,                  -- фильтр игровых меток (boK/bqD)
     [64]  = function(value)                      -- CFrame-конструктор
         if typeof(value) == "CFrame" then return value end
         return CFrame.new(value)
@@ -6175,6 +6291,7 @@ function M.Setters()
         SetChestInstantKill   = Combat.SetChestInstantKill,
         SetInstantKill        = Combat.SetInstantKill,
         SetOwnershipRange     = Combat.SetOwnershipRange,
+        restoreRagdoll        = Combat.RestoreRagdoll,
         SetOwnershipViewer    = Combat.SetOwnershipViewer,
         SetNoStun             = Combat.SetNoStun,
         SetNoRagdoll          = Combat.SetNoRagdoll,
@@ -6260,6 +6377,7 @@ end
 -- task.wait(0.15). Порядок — как в машине состояний:
 --   cKb[66]() → cKb[99]["resourceTick"]() → cKb[99]["parry"]["step"]() (F288)
 --   → (noStun или noRagdoll) → cKb[88]() → noRagdoll → cKb[140]()
+--   (первая сборка: cKb[66] и cKb[140] — свои тела; вторая: cKb[66] = F4120)
 --   → «медленная ходьба»: если tweaks[числовой ключ] и WalkSpeed в (0; slow]
 --     — вернуть 16 → bon(); bpX(); boZ() (у нас Combat.CombatTick).
 function M.Tick()
@@ -6272,7 +6390,7 @@ function M.Tick()
         if Core.IsCallable(cKb[88]) then cKb[88]() end                -- S9398 (F4619)
     end
     if tweaks["noRagdoll"] and Core.IsCallable(cKb[140]) then         -- S9395
-        cKb[140]()                                                    -- S9384 (DMG)
+        cKb[140]()                                                    -- S9384: отпустить рагдолл
     end
     if tweaks[8562344] then                                           -- S9401 (ключ из пула)
         local character = cKb[124]()                                  -- S9399

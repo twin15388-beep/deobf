@@ -205,7 +205,11 @@ cKb = setmetatable({
     [60]  = Equip.EquippedByName,
     [61]  = Parry.CONFIG,
     [63]  = missing_slot(63),                    -- контейнер регионов
+    [140] = Combat.ReleaseRagdoll,               -- S4418..S4430: отпустить рагдолл
     [65]  = Parry.Scheduler,                     -- F3871: планировщик блоков (bm0)
+    [66]  = Combat.RefreshValueFilter,           -- F4120: подписка ChildAdded на playerValues
+    [88]  = Combat.NoRagdollStep,                -- F4619: метки + BoolValue "noragdoll"
+    [135] = Combat.FilterValue,                  -- фильтр игровых меток (boK/bqD)
     [64]  = function(value)                      -- CFrame-конструктор
         if typeof(value) == "CFrame" then return value end
         return CFrame.new(value)
@@ -317,6 +321,7 @@ function M.Setters()
         SetChestInstantKill   = Combat.SetChestInstantKill,
         SetInstantKill        = Combat.SetInstantKill,
         SetOwnershipRange     = Combat.SetOwnershipRange,
+        restoreRagdoll        = Combat.RestoreRagdoll,
         SetOwnershipViewer    = Combat.SetOwnershipViewer,
         SetNoStun             = Combat.SetNoStun,
         SetNoRagdoll          = Combat.SetNoRagdoll,
@@ -402,6 +407,7 @@ end
 -- task.wait(0.15). Порядок — как в машине состояний:
 --   cKb[66]() → cKb[99]["resourceTick"]() → cKb[99]["parry"]["step"]() (F288)
 --   → (noStun или noRagdoll) → cKb[88]() → noRagdoll → cKb[140]()
+--   (первая сборка: cKb[66] и cKb[140] — свои тела; вторая: cKb[66] = F4120)
 --   → «медленная ходьба»: если tweaks[числовой ключ] и WalkSpeed в (0; slow]
 --     — вернуть 16 → bon(); bpX(); boZ() (у нас Combat.CombatTick).
 function M.Tick()
@@ -414,7 +420,7 @@ function M.Tick()
         if Core.IsCallable(cKb[88]) then cKb[88]() end                -- S9398 (F4619)
     end
     if tweaks["noRagdoll"] and Core.IsCallable(cKb[140]) then         -- S9395
-        cKb[140]()                                                    -- S9384 (DMG)
+        cKb[140]()                                                    -- S9384: отпустить рагдолл
     end
     if tweaks[8562344] then                                           -- S9401 (ключ из пула)
         local character = cKb[124]()                                  -- S9399

@@ -354,3 +354,72 @@ local ok15, err15 = pcall(function()
           tostring(M.Parry.state == cKb[51]["BlockWork"]), "bnl =", tostring(bnl == M.Parry.state))
 end)
 print("[smoke] M.Tick:", ok15, tostring(err15))
+
+-- Фильтр меток (cKb[135]), «noragdoll» (cKb[88]), подписка (cKb[66]), рагдолл (cKb[140])
+local ok16, err16 = pcall(function()
+    local destroyed = {}
+    local function marker(name)
+        return { Name = name, Destroy = function() destroyed[#destroyed + 1] = name end }
+    end
+    local children = { marker("Stun"), marker("RagDoll"), marker("KeepMe") }
+    local values = {
+        GetChildren = function() return children end,
+        FindFirstChild = function(_, name)
+            for _, child in ipairs(children) do
+                if child.Name == name then return child end
+            end
+            return nil
+        end,
+        ChildAdded = services.RunService.Heartbeat,
+    }
+    M.Combat.tweaks["noStun"] = true
+    M.Combat.tweaks["noRagdoll"] = true
+    cKb[123] = { playerValues = function() return values end }
+
+    cKb[135](children[1])                          -- Stun → снять (noStun)
+    cKb[135](children[2])                          -- RagDoll → снять (noRagdoll)
+    task.wait(0)                                   -- дать сработать task.defer? (в стабе нет)
+    print("[smoke] маски: destroyed =", table.concat(destroyed, ","),
+          "| KeepMe целый =", tostring(cKb[135](children[3]) == nil))
+
+    local realNew = Instance.new
+    local made = {}
+    Instance.new = function(class)
+        local object = realNew(class)
+        made[#made + 1] = object
+        return object
+    end
+    cKb[88]()                                      -- NoRagdollStep: фильтр + "noragdoll"
+    local flag = made[#made]
+    print("[smoke] cKb[88] noragdoll:", flag and flag["ClassName"], flag and flag["Name"],
+          "Value =", flag and flag["Value"], "Parent =", tostring(flag and flag["Parent"] == values))
+    Instance.new = realNew
+
+    cKb[66]()                                      -- RefreshValueFilter (первый раз: подписка)
+    cKb[66]()                                      -- второй раз: та же таблица → выход
+    print("[smoke] cKb[66] подписка =", tostring(M.Combat.RefreshValueFilter ~= nil))
+
+    -- рагдолл: BoolValue RagDoll + ограничения + PlatformStand
+    local ragValue = { Value = true, IsA = function(_, class) return class == "BoolValue" end }
+    local constraint = { Enabled = true, Parent = "x", IsA = function(_, class) return class == "Constraint" end }
+    local humanoid = { PlatformStand = true }
+    local character = {
+        FindFirstChild = function(_, name)
+            if name == "RagDoll" then return ragValue end
+            if name == "RagdollConstraints" then
+                return { GetDescendants = function() return { constraint, { IsA = function() return false end } } end }
+            end
+            return nil
+        end,
+    }
+    cKb[9] = function() return character end
+    cKb[124] = function() return humanoid end
+    M.Combat.ReleaseRagdoll()
+    print("[smoke] cKb[140] вызван без ошибок; RagDoll.Value =", tostring(ragValue.Value),
+          "(отложено), Constraint =", tostring(constraint.Enabled), "(отложено)")
+    M.Combat.RestoreRagdoll()
+    print("[smoke] restoreRagdoll: Constraint.Enabled =", tostring(constraint.Enabled))
+    M.Combat.tweaks["noStun"] = false
+    M.Combat.tweaks["noRagdoll"] = false
+end)
+print("[smoke] Combat.FilterValue/ReleaseRagdoll:", ok16, tostring(err16))
