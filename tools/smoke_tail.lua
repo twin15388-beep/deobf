@@ -151,3 +151,51 @@ local ok11, err11 = pcall(function()
     end
 end)
 print("[smoke] Parry.TrackModel:", ok11, tostring(err11))
+
+-- Ownership/ESP (cKb[78] = F4034, cKb[112], bpp["clear"] = F1060), проход F3841
+local ok12, err12 = pcall(function()
+    local mobPart = setmetatable({ Position = Vector3.new(5, 0, 0), ReceiveAge = 0,
+                                   IsA = function() return true end }, {})
+    local humanoid = { Health = 100 }
+    local mob = {
+        Name = "Mob", Parent = services.Workspace,
+        IsA = function(_, class) return class == "Model" end,
+        GetAttribute = function(_, name) return name == "IsMob" and true or nil end,
+        FindFirstChildOfClass = function() return humanoid end,
+        FindFirstChild = function(_, name) return name == "HumanoidRootPart" and mobPart or nil end,
+    }
+    local folder = { Name = "Region1", GetChildren = function() return { mob } end }
+    cKb[59] = function() return { { folder = folder, region = "Region1" } } end
+
+    local tweaks = M.ESP.container["tweaks"]          -- cKb[99]["tweaks"]
+    tweaks["ownership"] = true
+    tweaks["ownershipRange"] = 250
+    local keep = M.ESP.OwnershipPass()
+    local marks = 0
+    for _ in pairs(M.ESP.viewer["marks"]) do marks = marks + 1 end
+    local mark = M.ESP.viewer["marks"][mob]
+    print("[smoke] ESP.OwnershipPass:", keep, "меток =", marks,
+          "цвет задан =", tostring(mark ~= nil and mark["FillColor"] ~= nil),
+          "имя =", tostring(mark and mark["Name"]), "Parent =", tostring(mark and mark["Parent"] == mob))
+
+    -- второй проход: та же модель, метка переиспользуется (не пересоздаётся)
+    local again = M.ESP.OwnershipPass()
+    print("[smoke] ESP повторный проход:", again, "та же метка =",
+          tostring(M.ESP.viewer["marks"][mob] == mark))
+
+    -- «чужой» моб: ReceiveAge > 0 → красный
+    mobPart.ReceiveAge = 0.4
+    M.ESP.OwnershipPass()
+    print("[smoke] ESP ReceiveAge ~= 0 → цвет bo9 =",
+          tostring(M.ESP.viewer["marks"][mob]["FillColor"] == M.ESP.COLORS["other"]))
+
+    -- выключили ownership → все метки сняты
+    tweaks["ownership"] = false
+    M.ESP.OwnershipPass()
+    local left = 0
+    for _ in pairs(M.ESP.viewer["marks"]) do left = left + 1 end
+    print("[smoke] ESP выключен, осталось меток =", left,
+          "clear =", type(M.ESP.viewer["clear"]), "cKb[78]/cKb[112] =",
+          type(cKb[78]), type(cKb[112]))
+end)
+print("[smoke] ESP:", ok12, tostring(err12))

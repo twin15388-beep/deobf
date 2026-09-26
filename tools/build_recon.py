@@ -21,6 +21,7 @@ MODULES = [
     ("Parry", "ouroboros_parry.lua"),
     ("Config", "ouroboros_config.lua"),
     ("UI", "ouroboros_ui.lua"),
+    ("ESP", "ouroboros_esp.lua"),
 ]
 
 HEADER = '''--[[ ============================================================================
@@ -211,6 +212,8 @@ cKb = setmetatable({
     [71]  = false,                               -- флаг анти-АФК
     [72]  = Combat.tweaks,
     [76]  = missing_slot(76),                    -- код задачи квеста
+    [78]  = ESP.MarkModel,                       -- F4034: метка-подсветка модели
+    [112] = ESP.DropMark,                        -- cKb[112]: снять метку модели
     [77]  = {                                    -- хелперы скиллов (cKb[77])
         owns = Skills.owns, claim = Skills.claim, held = Skills.held,
     },
@@ -223,7 +226,7 @@ cKb = setmetatable({
     [94]  = Farm.QuestRemove,
     [97]  = Move.SetCollide,
     [98]  = Farm.Count,
-    [99]  = Combat.tweaks,
+    [99]  = ESP.container,                       -- cKb[99]: settings (tweaks + viewer)
     [100] = function(...) return Core.Report(...) end,  -- доклад (Core.Report ставится при Boot)
     [102] = { EquipWeapon = Equip.EquipWeapon },
     [104] = Equip.ItemScore,
@@ -257,6 +260,8 @@ cKb = setmetatable({
 
 cKb[51]["BlockWork"] = Parry.state   -- bnl == cKb[51]["BlockWork"] (S2928)
 cKb[50] = Parry.state.watched        -- cKb[50]: записи подписок по моделям
+ESP.viewer["clear"] = ESP.ClearMarks -- bpp["clear"] = F1060
+ESP.container["tweaks"] = Combat.tweaks         -- S752: cKb[99]["tweaks"] = cKb[72]
 
 -- ---------------------------------------------------------------------------
 -- 6. ПСЕВДОНИМЫ артефакта (имена, которыми модули зовут друг друга)
@@ -289,7 +294,8 @@ firetouchinterest = (type(getgenv) == "function" and getgenv() or _G).firetouchi
 -- 7. СБОРКА И ЗАПУСК
 -- ---------------------------------------------------------------------------
 local M = { Core = Core, Move = Move, Farm = Farm, Skills = Skills, Combat = Combat,
-            Equip = Equip, Parry = Parry, Config = Config, UI = UI, slots = cKb }
+            Equip = Equip, Parry = Parry, Config = Config, UI = UI, ESP = ESP,
+            slots = cKb }
 
 -- Сеттеры, которые уже реализованы в модулях (ключ конфига → функция).
 -- Они же попадают в публичный API cKb[51] — так же, как в артефакте.
@@ -389,6 +395,7 @@ end
 function M.StartLoops()
     M.StartSummaryLoop()
     Parry.StartScheduler()                           -- bnx = Heartbeat:Connect(F4910)
+    ESP.StartOwnershipLoop(ESP.container)            -- bm8 = task.delay(0, F3841)
     return true
 end
 

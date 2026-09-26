@@ -8,7 +8,7 @@ FILES = [("Core", "ouroboros_core.lua"), ("Move", "ouroboros_move.lua"),
          ("Farm", "ouroboros_farm.lua"), ("Skills", "ouroboros_skills.lua"),
          ("Combat", "ouroboros_combat.lua"), ("Equip", "ouroboros_equip.lua"),
          ("Parry", "ouroboros_parry.lua"), ("Config", "ouroboros_config.lua"),
-         ("UI", "ouroboros_ui.lua")]
+         ("UI", "ouroboros_ui.lua"), ("ESP", "ouroboros_esp.lua")]
 
 
 def exports(name, path):
