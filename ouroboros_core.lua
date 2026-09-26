@@ -287,6 +287,18 @@ function Core.bind(moduleTable)
     return moduleTable
 end
 
+-- Публичный API (cKb[51]): флаг выгрузки + таблица тумблеров UI (aVS).
+-- Раньше Core.api упоминался в Unloaded()/CanAct(), но нигде не создавался —
+-- теперь он есть, и сборка может зарегистрировать в нём тумблеры из UI.
+Core.api = { Unloaded = false, toggles = {} }
+
+function Core.Bind(api)
+    if type(api) ~= "table" then return Core.api end
+    if api.toggles then Core.api.toggles = api.toggles end
+    if api.Unloaded ~= nil then Core.api.Unloaded = api.Unloaded end
+    return Core.api
+end
+
 Core.Services = Services
 Core.constants = CONST
 Core.priority = priority

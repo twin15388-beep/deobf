@@ -17,6 +17,8 @@
 | Ядро: сервисы, `bno`/`bpz`/`cKb`, арбитр, `Signal` | `ouroboros_core.lua` |
 | Движок перемещения: `bob`, `Reach` (bqd), `MoveTo`, `SetCollide`, `Alive` | `ouroboros_move.lua` |
 | Конфиг: 77 ключей → сеттеры, экспорт/импорт JSON (лимиты 262 144 / 2048) | `ouroboros_config.lua`, `data/UI_MAP.md` |
+| UI: окно/вкладки/группы/виджеты из артефакта | `ouroboros_ui.lua` (+ `tools/gen_ui_widgets.py`, `tools/gen_ui_lua.py`, `data/ui_tree.json`) |
+| Единая сборка (ядро + 8 модулей + слоты cKb + псевдонимы) | `ouroboros_recon.lua` (+ `tools/build_recon.py`, `tools/check_bundle.py`) |
 | Проверка синтаксиса настоящим Luau | `tools/check_lua.sh` |
 
 ## 🔜 Следующее
@@ -53,8 +55,13 @@
 
 ## ⏳ Потом
 
-4. **Сборка запускаемого файла** — один `ouroboros_recon.lua`: ядро + 5 модулей +
-   UI + конфиг, с тем же порядком инициализации, что в артефакте.
+4. ✅ **Сборка запускаемого файла** — `ouroboros_recon.lua` собирается
+   `tools/build_recon.py` (ядро + move/farm/skills/combat/equip/parry/config/ui,
+   таблица слотов `cKb`, псевдонимы артефакта, строки пула `cKb[136]`,
+   `Boot()`/`Setters()`); статическая проверка ссылок — `tools/check_bundle.py`.
+   Осталось: непрочитанные тела оформлены заглушками (`bnq`, `bpQ`, `bp9`, `bnn`,
+   `cKb[3]`, `cKb[48]`, `cKb[76]`, `bnN/bnZ/bn_/bnc/bpd/bps`) и шаги, которых
+   ещё нет (рыбалка, данжи, очереди, ESP, вебхуки, тренировки).
 5. **Сверка с оригиналом по сценариям** — эталонные трейсы (№1–№4) как приёмочные
    тесты: пары Blocking 1.5 с, `Item_Equip 0/2`, `AddQuest`, `VisitRegion`.
 6. **Разбор оставшихся подсистем**: рыбалка, данжи, очереди, ESP, вебхуки,
