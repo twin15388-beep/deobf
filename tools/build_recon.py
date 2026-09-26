@@ -162,6 +162,9 @@ cKb = setmetatable({
         end
         return false
     end,
+    [17]  = function()                       -- F3460: боевые пресеты доступны?
+        return type(bno["CombatPresets"]) == "table"
+    end,
     [22]  = Farm.ChestStep,
     [23]  = 1110,                                -- интервал воркера экипировки
     [24]  = missing_slot(24),                    -- игровой объект скилла по имени
@@ -181,15 +184,18 @@ cKb = setmetatable({
     [54]  = Core.priority,
     [55]  = Equip.EquippedValue,
     [56]  = Core.priority,
+    [58]  = Parry.EntryValid,                    -- F4381: вход блока годен
     [59]  = Regions,
     [60]  = Equip.EquippedByName,
     [61]  = Parry.CONFIG,
     [63]  = missing_slot(63),                    -- контейнер регионов
+    [65]  = Parry.Scheduler,                     -- F3871: планировщик блоков (bm0)
     [64]  = function(value)                      -- CFrame-конструктор
         if typeof(value) == "CFrame" then return value end
         return CFrame.new(value)
     end,
     [69]  = Farm.TriggerPrompt,
+    [75]  = nil,                                 -- хендл цикла сводок (F5182, ставится в Boot)
     [71]  = false,                               -- флаг анти-АФК
     [72]  = Combat.tweaks,
     [76]  = missing_slot(76),                    -- код задачи квеста
@@ -235,7 +241,7 @@ cKb = setmetatable({
     [4004] = function(seconds, fn) return task.delay(seconds, fn) end,
 }, { __index = function(_, key) return missing_slot(key) end })
 
-for name, fn in pairs(API) do end                  -- API уже содержит Track
+cKb[51]["BlockWork"] = Parry.state   -- bnl == cKb[51]["BlockWork"] (S2928)
 
 -- ---------------------------------------------------------------------------
 -- 6. ПСЕВДОНИМЫ артефакта (имена, которыми модули зовут друг друга)
@@ -335,7 +341,40 @@ function M.Boot(options)
         ui = UI.Build(library, handlers)
         M.ui = ui
     end
+
+    M.StartLoops()                     -- S2928 + S2052/S2056: фоновые циклы артефакта
     return { ui = ui, library = library }
+end
+
+-- ---------------------------------------------------------------------------
+-- Фоновые циклы верхнего уровня (они и есть «тик» артефакта: у каждой фичи
+-- свой воркер, запускаемый cKb[84](controller, step))
+-- ---------------------------------------------------------------------------
+function M.StartSummaryLoop()                        -- cKb[75] = task.delay(0, F5182)
+    if M._summaryLoop then return M._summaryLoop end
+    M._summaryLoop = task.delay(0, function()
+        while bnB() do
+            pcall(function()                         -- тело F5182
+                if cKb[51]["PlayerSummary"] then
+                    bpz["Summary"] = cKb[51]["PlayerSummary"]()
+                end
+                if cKb[51]["QuestSummary"] then
+                    bpz["Quest"] = cKb[51]["QuestSummary"]()
+                end
+                if cKb[51]["BreathingCost"] then
+                    bpz["CostText"] = cKb[51]["BreathingCost"]()
+                end
+            end)
+            task.wait(1)                             -- F3916(1)
+        end
+    end)
+    return M._summaryLoop
+end
+
+function M.StartLoops()
+    M.StartSummaryLoop()
+    Parry.StartScheduler()                           -- bnx = Heartbeat:Connect(F4910)
+    return true
 end
 
 -- Автозапуск при загрузке исполнителем (как в артефакте).
@@ -347,11 +386,11 @@ if type(game) == "table" and type(task) == "table" then
             or function(url) return game:HttpGet(url) end
         local ok, err = pcall(function()
             M.Boot({ loadLibrary = true, HttpGet = http })
-            M.StartSteps()
+            M.StartSteps()   -- временный драйвер: пока не все воркеры восстановлены
         end)
         if ok then
-            print("[Ouroboros] recon: UI собран, шаги запущены "
-                .. "(тик упрощённый: общий цикл артефакта cKb[73] не восстановлен)")
+            print("[Ouroboros] recon: UI собран; циклы сводок и парирования запущены, "
+                .. "шаги — временным драйвером (воркеры cKb[84]/cKb[91] в работе)")
         else
             warn("[Ouroboros] recon: запуск не удался: " .. tostring(err))
         end

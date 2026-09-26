@@ -44,8 +44,24 @@ end
 local parry = {
     on = false, npc = true, pvp = true, mitigate = true, hold = false,
     lead = 0, radius = 40, generation = 0,
+    entries = {},                   -- bm0: входы блоков (пары «инфо → состояние»)
+    blockEntry = nil,               -- bnl["blockEntry"]: вход, по которому идёт блок
     stats = { fired = 0, locked = 0, late = 0, missed = 0, cancelled = 0 },
 }
+-- bnl == cKb[51]["BlockWork"]: в артефакте это одна и та же таблица.
+-- Ссылку ставит сборка (tools/build_recon.py) после создания cKb[51].
+
+-- bnl["in validate"] = F4744 (S2928): пересоздать набор целей блока.
+parry["in validate"] = function()
+    parry.generation = parry.generation + 1        -- bnl["generation"] += 1
+    table.clear(parry.entries)                     -- table.clear(bm0)
+    -- TODO(F4744): хвост «for x in pairs(cKb[50]) do cKb[14](x) end» не вычитан
+end
+
+-- bnl["reset"] = F6287 (S2928): обнулить счётчики блока
+parry["reset"] = function()
+    parry["stats"] = { fired = 0, locked = 0, late = 0, missed = 0, cancelled = 0 }
+end
 
 local CONFIG = {
     windowNpc = 0.25, windowPvp = 0.1, bias = 0.25, relock = 1,
@@ -189,6 +205,115 @@ function BlockRelease(entry, force)
 end
 
 -- ---------------------------------------------------------------------------
+-- bnl["step"] = F288, строка 38250: надзор за активным входом блока
+--   Порядок ветвей восстановлен по состояниям S9478..S9513 (entry=9479).
+--   Тексты bpz["ParryStatus"] — дословно из артефакта.
+--   TODO(F288): вызов bom() в S9508 и точные переходы двух «непрозрачных»
+--   развилок (рендер свернул их в константы) — уточнить сырым телом пула.
+-- ---------------------------------------------------------------------------
+local function BlockWorkStep()                       -- F288
+    local work = cKb[51]["BlockWork"]
+    local entry = work["entry"]
+
+    if entry and cKb[118](entry["poll"]) then        -- S9479 -> S9494
+        entry["poll"]()                              -- S9511: опрос входа
+        entry = work["entry"]                        -- S9508: перечитать
+    end
+
+    if entry and entry["character"] ~= cKb[9]() then -- S9501: вход от другого персонажа
+        if entry["connection"] then                  -- S9493
+            entry["connection"]:Disconnect()         -- S9485
+        end
+        if work["entry"] == entry then               -- S9509
+            work["entry"] = nil                      -- S9484
+        end
+        entry = work["entry"]
+    end
+
+    if not entry then                                -- S9504
+        if not parry["on"] then
+            bpz["ParryStatus"] = "Off"               -- S9497
+            return
+        end
+        if not cKb[17]() then                        -- S9487: боевые пресеты доступны?
+            bpz["ParryStatus"] = "Combat presets unavailable"   -- S9491
+            return
+        end
+        return                                       -- входа нет — докладывать нечего
+    end
+
+    if entry["phase"] == "boxFill" then              -- S9490
+        bpz["ParryStatus"] = "Block acknowledgement unresolved"          -- S9481
+    elseif entry ~= parry["blockEntry"] then         -- S9486
+        bpz["ParryStatus"] = "Waiting for previous block release"        -- S9505
+    elseif entry["phase"] == "releasing" then        -- S9478
+        bpz["ParryStatus"] = "Waiting for block release"                 -- S9483
+    else
+        local s = parry["stats"]                     -- S9496
+        bpz["ParryStatus"] = string.format(
+            "%d attempts, %d blocks, %d missed, %d cancelled",
+            s["fired"], s["locked"], s["missed"], s["cancelled"])
+    end
+end
+parry["step"] = BlockWorkStep
+
+-- ---------------------------------------------------------------------------
+-- cKb[65] = F3871, строка ~17280: планировщик блоков (перебор bm0)
+--   Известное: перебор pairs(bm0); пропуск невалидных; счётчики
+--     bnl["stats"]["missed"] (просрочен latest), ["fired"] (ставим блок),
+--     ["locked"] (mitigate), через bmL(entry, bool); проверки
+--     cKb[58](entry), cKb[128](model, reach, cKb[61]["reachPad"], true),
+--     cKb[41](model) -> "block"/"none", cKb[143](protectUntil).
+--   Здесь — каркас: опрос всех входов; сами окна доделываются в следующем заходе.
+-- ---------------------------------------------------------------------------
+local function ParryScheduler()                      -- cKb[65] (F3871)
+    if not bnB() then return end                     -- S373/S361/S385 (bnl["on"])
+    if not parry["on"] then return end
+
+    local now = os.clock()
+    for _, entry in pairs(parry.entries) do
+        if cKb[118](entry["poll"]) then
+            entry["poll"]()
+        end
+        local latest = entry["latest"]
+        if latest and now > latest then              -- S371/S378: просрочен
+            local stats = parry["stats"]
+            stats["missed"] = stats["missed"] + 1    -- S372/S382
+            entry["poll"] = entry["poll"] or function() end
+        end
+    end
+end
+
+-- bnl, cKb[58] = F4381: годен ли вход блока (есть модель с Humanoid и т.п.)
+-- TODO(F4381): точное тело (cgx:FindFirstChildOfClass(...) + проверки модели)
+function EntryValid(entry)
+    if type(entry) ~= "table" then return false end
+    local model = entry["model"]
+    if typeof(model) ~= "Instance" then return false end
+    return model:FindFirstChildOfClass("Humanoid") ~= nil
+end
+
+-- bnl-обёртка Heartbeat: F4910 (S2928). Флаг bn9 — защита от повторного входа.
+local schedulerReentrant = false                     -- bn9
+local function ParrySchedulerTick()                  -- F4910
+    if schedulerReentrant then return end            -- S792
+    schedulerReentrant = true
+    local ok, err = pcall(ParryScheduler)            -- F2175(cKb[65])
+    schedulerReentrant = false                       -- S787
+    if not ok and bnB() then                         -- S787/S789/S793
+        cKb[100]("auto parry scheduler:" .. tostring(err))   -- S788
+    end
+end
+
+local schedulerConnection = nil
+local function StartParryScheduler()                 -- S2928
+    if schedulerConnection then return schedulerConnection end
+    parry["in validate"] = parry["in validate"] or function() end
+    schedulerConnection = game:GetService("RunService").Heartbeat:Connect(ParrySchedulerTick)
+    return schedulerConnection
+end
+
+-- ---------------------------------------------------------------------------
 -- Кнопка «Reset Counters»                                        [F5094]
 -- ---------------------------------------------------------------------------
 local function ResetParryStats()                    -- F5094
@@ -204,6 +329,11 @@ return {
     BlockTick = BlockTick,
     BlockRelease = BlockRelease,
     ResetParryStats = ResetParryStats,
+    BlockWorkStep = BlockWorkStep,
+    EntryValid = EntryValid,
+    Scheduler = ParryScheduler,
+    SchedulerTick = ParrySchedulerTick,
+    StartScheduler = StartParryScheduler,
     state = parry,
     CONFIG = CONFIG,
 }

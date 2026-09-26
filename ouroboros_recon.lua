@@ -246,6 +246,10 @@ end
 -- ---------------------------------------------------------------------------
 local bny = {
     runs = {},                                     -- bny["runs"][coroutine] = record
+    inputs = {},                                   -- bny["inputs"][id] = owner (захваты ввода)
+    releaseInput = nil,                            -- bny["releaseInput"](id, owner) — из арбитра
+    session = nil,                                 -- bny["session"] = {controller=…} (активная сессия)
+    stop = nil,                                    -- bny["stop"](session) — завершение сессии
     cancelSkill = nil,                             -- bny["cancelSkill"] = F1204
     timing = nil,                                  -- bny["timing"](player) — из игры
     controllerValid = function(controller)
@@ -872,50 +876,72 @@ local function enabled(key) return cKb[38](key) end       -- фича включ
 --   bpu(controller, step): заводит «поколение», крутит step по интервалу,
 --   держит запись в bny["runs"] и сам снимает приоритет по выходу.
 -- ---------------------------------------------------------------------------
-local function StartController(controller, step)          -- bpu
-    -- оригинал (S10378..S10379): выходим, только если воркер уже идёт
+local function StartController(controller, step)          -- cKb[84] (F3818, copy 2)
+    -- S10384/S10383/S10379: уже идёт и не остановлен — второй воркер не заводим
     if controller["workerActive"] and not controller["stopped"] then return end
-    controller["generation"] = (controller["generation"] or 0) + 1
+
+    controller["workerActive"] = true                     -- S10385
+    controller["generation"] = (controller["generation"] or 0) + 1   -- S10381/S10382
     controller["stopped"] = false
     local generation = controller["generation"]
     controller["startedAt"] = os.clock()
     controller["yield"] = false
-    controller["workerActive"] = true
 
-    task.delay(0, function()
-        local runId = coroutine.running()                 -- F3109["running"]()
+    task.delay(0, function()                              -- F4004(0, тело)
+        local runId = coroutine.running()                 -- F3109["running"]() = coroutine.running
         local record = { controller = controller, generation = generation }
-        bny["runs"][runId] = record
+        bny["runs"][runId] = record                       -- S1966
 
-        while not controller["stopped"] and controller["generation"] == generation do
-            if bnB() then                                 -- действия разрешены?
-                local ok, err = pcall(step)               -- bKC, bKD = F2175(AQ)
-                if not ok then warn("[Ouroboros] loop error:" .. tostring(err)) end
+        while true do
+            -- S1956/S1959/S1958: три условия продолжения
+            if not (bnB() and not controller["stopped"]
+                    and controller["generation"] == generation) then
+                break
             end
-            if controller["generation"] ~= generation then break end
-            if cKb[54]["ownerRun"] == record then         -- мы всё ещё владелец?
-                if controller["generation"] == generation then
-                    cKb[54]["do ne"](controller["priorityKey"])
+
+            local ok, err = pcall(step)                   -- S1955
+
+            if cKb[54]["ownerRun"] == record then          -- S1955 (хвост)
+                bpY(controller["priorityKey"])             -- S1969: снять заявку
+                if controller["generation"] == generation then      -- S1970
+                    cKb[54]["do ne"](controller["priorityKey"])     -- S1967
                 end
-                bpY(controller["priorityKey"])
             end
-            task.wait(controller["interval"])             -- F3916(AP["interval"])
+            if not ok then                                 -- S1968 -> S1963
+                warn("[Ouroboros] loop error:" .. tostring(err))
+            end
+            if not bnB() then break end                    -- S1977
+            if controller["stopped"] then break end         -- S1954
+            if controller["generation"] ~= generation then break end    -- S1953/S1972
+            task.wait(controller["interval"])              -- S1975: F3916(AP["interval"])
         end
 
-        bny["runs"][runId] = nil
-        controller["workerActive"] = false
+        bny["runs"][runId] = nil                           -- S1957
+        if controller["generation"] == generation then      -- S1957
+            controller["workerActive"] = false             -- S1960
+        end
     end)
 end
 
-local function StopController(controller)                 -- bmX
-    controller["stopped"] = true
-    controller["generation"] = (controller["generation"] or 0) + 1
-    local deadline = os.clock() + 2
-    while controller["workerActive"] and os.clock() < deadline do
-        task.wait()
+local function StopController(controller)                  -- bmX (F363, copy 2)
+    controller["stopped"] = true                           -- S1083
+    controller["yield"] = false
+    controller["startedAt"] = nil
+    controller["cancel"] = (controller["cancel"] or 0) + 1 -- S1074/S1075/S1076
+    controller["generation"] = (controller["generation"] or 0) + 1      -- S1078/S1077
+    controller["workerActive"] = false
+    cKb[54]["do ne"](controller["priorityKey"], true)      -- арбитр: закрыть заявку силой
+    cKb[54]["uncommit"](controller["priorityKey"])
+    local session = bny["session"]                         -- S1080/S1082
+    if session and session["controller"] == controller then
+        bny["stop"](session)
+    end
+    if controller["priorityKey"] and cKb[54]["holder"] == controller["priorityKey"] then
+        cKb[37]()                                          -- снять удержание блока/скилла
+        cKb[87]()                                          -- CancelMove
+        bpY(controller["priorityKey"], true)               -- S1085
     end
 end
-
 
 
 -- ---------------------------------------------------------------------------
@@ -2851,8 +2877,24 @@ end
 local parry = {
     on = false, npc = true, pvp = true, mitigate = true, hold = false,
     lead = 0, radius = 40, generation = 0,
+    entries = {},                   -- bm0: входы блоков (пары «инфо → состояние»)
+    blockEntry = nil,               -- bnl["blockEntry"]: вход, по которому идёт блок
     stats = { fired = 0, locked = 0, late = 0, missed = 0, cancelled = 0 },
 }
+-- bnl == cKb[51]["BlockWork"]: в артефакте это одна и та же таблица.
+-- Ссылку ставит сборка (tools/build_recon.py) после создания cKb[51].
+
+-- bnl["in validate"] = F4744 (S2928): пересоздать набор целей блока.
+parry["in validate"] = function()
+    parry.generation = parry.generation + 1        -- bnl["generation"] += 1
+    table.clear(parry.entries)                     -- table.clear(bm0)
+    -- TODO(F4744): хвост «for x in pairs(cKb[50]) do cKb[14](x) end» не вычитан
+end
+
+-- bnl["reset"] = F6287 (S2928): обнулить счётчики блока
+parry["reset"] = function()
+    parry["stats"] = { fired = 0, locked = 0, late = 0, missed = 0, cancelled = 0 }
+end
 
 local CONFIG = {
     windowNpc = 0.25, windowPvp = 0.1, bias = 0.25, relock = 1,
@@ -2996,6 +3038,115 @@ function BlockRelease(entry, force)
 end
 
 -- ---------------------------------------------------------------------------
+-- bnl["step"] = F288, строка 38250: надзор за активным входом блока
+--   Порядок ветвей восстановлен по состояниям S9478..S9513 (entry=9479).
+--   Тексты bpz["ParryStatus"] — дословно из артефакта.
+--   TODO(F288): вызов bom() в S9508 и точные переходы двух «непрозрачных»
+--   развилок (рендер свернул их в константы) — уточнить сырым телом пула.
+-- ---------------------------------------------------------------------------
+local function BlockWorkStep()                       -- F288
+    local work = cKb[51]["BlockWork"]
+    local entry = work["entry"]
+
+    if entry and cKb[118](entry["poll"]) then        -- S9479 -> S9494
+        entry["poll"]()                              -- S9511: опрос входа
+        entry = work["entry"]                        -- S9508: перечитать
+    end
+
+    if entry and entry["character"] ~= cKb[9]() then -- S9501: вход от другого персонажа
+        if entry["connection"] then                  -- S9493
+            entry["connection"]:Disconnect()         -- S9485
+        end
+        if work["entry"] == entry then               -- S9509
+            work["entry"] = nil                      -- S9484
+        end
+        entry = work["entry"]
+    end
+
+    if not entry then                                -- S9504
+        if not parry["on"] then
+            bpz["ParryStatus"] = "Off"               -- S9497
+            return
+        end
+        if not cKb[17]() then                        -- S9487: боевые пресеты доступны?
+            bpz["ParryStatus"] = "Combat presets unavailable"   -- S9491
+            return
+        end
+        return                                       -- входа нет — докладывать нечего
+    end
+
+    if entry["phase"] == "boxFill" then              -- S9490
+        bpz["ParryStatus"] = "Block acknowledgement unresolved"          -- S9481
+    elseif entry ~= parry["blockEntry"] then         -- S9486
+        bpz["ParryStatus"] = "Waiting for previous block release"        -- S9505
+    elseif entry["phase"] == "releasing" then        -- S9478
+        bpz["ParryStatus"] = "Waiting for block release"                 -- S9483
+    else
+        local s = parry["stats"]                     -- S9496
+        bpz["ParryStatus"] = string.format(
+            "%d attempts, %d blocks, %d missed, %d cancelled",
+            s["fired"], s["locked"], s["missed"], s["cancelled"])
+    end
+end
+parry["step"] = BlockWorkStep
+
+-- ---------------------------------------------------------------------------
+-- cKb[65] = F3871, строка ~17280: планировщик блоков (перебор bm0)
+--   Известное: перебор pairs(bm0); пропуск невалидных; счётчики
+--     bnl["stats"]["missed"] (просрочен latest), ["fired"] (ставим блок),
+--     ["locked"] (mitigate), через bmL(entry, bool); проверки
+--     cKb[58](entry), cKb[128](model, reach, cKb[61]["reachPad"], true),
+--     cKb[41](model) -> "block"/"none", cKb[143](protectUntil).
+--   Здесь — каркас: опрос всех входов; сами окна доделываются в следующем заходе.
+-- ---------------------------------------------------------------------------
+local function ParryScheduler()                      -- cKb[65] (F3871)
+    if not bnB() then return end                     -- S373/S361/S385 (bnl["on"])
+    if not parry["on"] then return end
+
+    local now = os.clock()
+    for _, entry in pairs(parry.entries) do
+        if cKb[118](entry["poll"]) then
+            entry["poll"]()
+        end
+        local latest = entry["latest"]
+        if latest and now > latest then              -- S371/S378: просрочен
+            local stats = parry["stats"]
+            stats["missed"] = stats["missed"] + 1    -- S372/S382
+            entry["poll"] = entry["poll"] or function() end
+        end
+    end
+end
+
+-- bnl, cKb[58] = F4381: годен ли вход блока (есть модель с Humanoid и т.п.)
+-- TODO(F4381): точное тело (cgx:FindFirstChildOfClass(...) + проверки модели)
+function EntryValid(entry)
+    if type(entry) ~= "table" then return false end
+    local model = entry["model"]
+    if typeof(model) ~= "Instance" then return false end
+    return model:FindFirstChildOfClass("Humanoid") ~= nil
+end
+
+-- bnl-обёртка Heartbeat: F4910 (S2928). Флаг bn9 — защита от повторного входа.
+local schedulerReentrant = false                     -- bn9
+local function ParrySchedulerTick()                  -- F4910
+    if schedulerReentrant then return end            -- S792
+    schedulerReentrant = true
+    local ok, err = pcall(ParryScheduler)            -- F2175(cKb[65])
+    schedulerReentrant = false                       -- S787
+    if not ok and bnB() then                         -- S787/S789/S793
+        cKb[100]("auto parry scheduler:" .. tostring(err))   -- S788
+    end
+end
+
+local schedulerConnection = nil
+local function StartParryScheduler()                 -- S2928
+    if schedulerConnection then return schedulerConnection end
+    parry["in validate"] = parry["in validate"] or function() end
+    schedulerConnection = game:GetService("RunService").Heartbeat:Connect(ParrySchedulerTick)
+    return schedulerConnection
+end
+
+-- ---------------------------------------------------------------------------
 -- Кнопка «Reset Counters»                                        [F5094]
 -- ---------------------------------------------------------------------------
 local function ResetParryStats()                    -- F5094
@@ -3011,6 +3162,11 @@ return {
     BlockTick = BlockTick,
     BlockRelease = BlockRelease,
     ResetParryStats = ResetParryStats,
+    BlockWorkStep = BlockWorkStep,
+    EntryValid = EntryValid,
+    Scheduler = ParryScheduler,
+    SchedulerTick = ParrySchedulerTick,
+    StartScheduler = StartParryScheduler,
     state = parry,
     CONFIG = CONFIG,
 }
@@ -5056,6 +5212,9 @@ cKb = setmetatable({
         end
         return false
     end,
+    [17]  = function()                       -- F3460: боевые пресеты доступны?
+        return type(bno["CombatPresets"]) == "table"
+    end,
     [22]  = Farm.ChestStep,
     [23]  = 1110,                                -- интервал воркера экипировки
     [24]  = missing_slot(24),                    -- игровой объект скилла по имени
@@ -5075,15 +5234,18 @@ cKb = setmetatable({
     [54]  = Core.priority,
     [55]  = Equip.EquippedValue,
     [56]  = Core.priority,
+    [58]  = Parry.EntryValid,                    -- F4381: вход блока годен
     [59]  = Regions,
     [60]  = Equip.EquippedByName,
     [61]  = Parry.CONFIG,
     [63]  = missing_slot(63),                    -- контейнер регионов
+    [65]  = Parry.Scheduler,                     -- F3871: планировщик блоков (bm0)
     [64]  = function(value)                      -- CFrame-конструктор
         if typeof(value) == "CFrame" then return value end
         return CFrame.new(value)
     end,
     [69]  = Farm.TriggerPrompt,
+    [75]  = nil,                                 -- хендл цикла сводок (F5182, ставится в Boot)
     [71]  = false,                               -- флаг анти-АФК
     [72]  = Combat.tweaks,
     [76]  = missing_slot(76),                    -- код задачи квеста
@@ -5129,7 +5291,7 @@ cKb = setmetatable({
     [4004] = function(seconds, fn) return task.delay(seconds, fn) end,
 }, { __index = function(_, key) return missing_slot(key) end })
 
-for name, fn in pairs(API) do end                  -- API уже содержит Track
+cKb[51]["BlockWork"] = Parry.state   -- bnl == cKb[51]["BlockWork"] (S2928)
 
 -- ---------------------------------------------------------------------------
 -- 6. ПСЕВДОНИМЫ артефакта (имена, которыми модули зовут друг друга)
@@ -5229,7 +5391,40 @@ function M.Boot(options)
         ui = UI.Build(library, handlers)
         M.ui = ui
     end
+
+    M.StartLoops()                     -- S2928 + S2052/S2056: фоновые циклы артефакта
     return { ui = ui, library = library }
+end
+
+-- ---------------------------------------------------------------------------
+-- Фоновые циклы верхнего уровня (они и есть «тик» артефакта: у каждой фичи
+-- свой воркер, запускаемый cKb[84](controller, step))
+-- ---------------------------------------------------------------------------
+function M.StartSummaryLoop()                        -- cKb[75] = task.delay(0, F5182)
+    if M._summaryLoop then return M._summaryLoop end
+    M._summaryLoop = task.delay(0, function()
+        while bnB() do
+            pcall(function()                         -- тело F5182
+                if cKb[51]["PlayerSummary"] then
+                    bpz["Summary"] = cKb[51]["PlayerSummary"]()
+                end
+                if cKb[51]["QuestSummary"] then
+                    bpz["Quest"] = cKb[51]["QuestSummary"]()
+                end
+                if cKb[51]["BreathingCost"] then
+                    bpz["CostText"] = cKb[51]["BreathingCost"]()
+                end
+            end)
+            task.wait(1)                             -- F3916(1)
+        end
+    end)
+    return M._summaryLoop
+end
+
+function M.StartLoops()
+    M.StartSummaryLoop()
+    Parry.StartScheduler()                           -- bnx = Heartbeat:Connect(F4910)
+    return true
 end
 
 -- Автозапуск при загрузке исполнителем (как в артефакте).
@@ -5241,11 +5436,11 @@ if type(game) == "table" and type(task) == "table" then
             or function(url) return game:HttpGet(url) end
         local ok, err = pcall(function()
             M.Boot({ loadLibrary = true, HttpGet = http })
-            M.StartSteps()
+            M.StartSteps()   -- временный драйвер: пока не все воркеры восстановлены
         end)
         if ok then
-            print("[Ouroboros] recon: UI собран, шаги запущены "
-                .. "(тик упрощённый: общий цикл артефакта cKb[73] не восстановлен)")
+            print("[Ouroboros] recon: UI собран; циклы сводок и парирования запущены, "
+                .. "шаги — временным драйвером (воркеры cKb[84]/cKb[91] в работе)")
         else
             warn("[Ouroboros] recon: запуск не удался: " .. tostring(err))
         end

@@ -193,6 +193,10 @@ end
 -- ---------------------------------------------------------------------------
 local bny = {
     runs = {},                                     -- bny["runs"][coroutine] = record
+    inputs = {},                                   -- bny["inputs"][id] = owner (захваты ввода)
+    releaseInput = nil,                            -- bny["releaseInput"](id, owner) — из арбитра
+    session = nil,                                 -- bny["session"] = {controller=…} (активная сессия)
+    stop = nil,                                    -- bny["stop"](session) — завершение сессии
     cancelSkill = nil,                             -- bny["cancelSkill"] = F1204
     timing = nil,                                  -- bny["timing"](player) — из игры
     controllerValid = function(controller)

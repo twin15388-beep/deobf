@@ -90,50 +90,72 @@ local function enabled(key) return cKb[38](key) end       -- фича включ
 --   bpu(controller, step): заводит «поколение», крутит step по интервалу,
 --   держит запись в bny["runs"] и сам снимает приоритет по выходу.
 -- ---------------------------------------------------------------------------
-local function StartController(controller, step)          -- bpu
-    -- оригинал (S10378..S10379): выходим, только если воркер уже идёт
+local function StartController(controller, step)          -- cKb[84] (F3818, copy 2)
+    -- S10384/S10383/S10379: уже идёт и не остановлен — второй воркер не заводим
     if controller["workerActive"] and not controller["stopped"] then return end
-    controller["generation"] = (controller["generation"] or 0) + 1
+
+    controller["workerActive"] = true                     -- S10385
+    controller["generation"] = (controller["generation"] or 0) + 1   -- S10381/S10382
     controller["stopped"] = false
     local generation = controller["generation"]
     controller["startedAt"] = os.clock()
     controller["yield"] = false
-    controller["workerActive"] = true
 
-    task.delay(0, function()
-        local runId = coroutine.running()                 -- F3109["running"]()
+    task.delay(0, function()                              -- F4004(0, тело)
+        local runId = coroutine.running()                 -- F3109["running"]() = coroutine.running
         local record = { controller = controller, generation = generation }
-        bny["runs"][runId] = record
+        bny["runs"][runId] = record                       -- S1966
 
-        while not controller["stopped"] and controller["generation"] == generation do
-            if bnB() then                                 -- действия разрешены?
-                local ok, err = pcall(step)               -- bKC, bKD = F2175(AQ)
-                if not ok then warn("[Ouroboros] loop error:" .. tostring(err)) end
+        while true do
+            -- S1956/S1959/S1958: три условия продолжения
+            if not (bnB() and not controller["stopped"]
+                    and controller["generation"] == generation) then
+                break
             end
-            if controller["generation"] ~= generation then break end
-            if cKb[54]["ownerRun"] == record then         -- мы всё ещё владелец?
-                if controller["generation"] == generation then
-                    cKb[54]["do ne"](controller["priorityKey"])
+
+            local ok, err = pcall(step)                   -- S1955
+
+            if cKb[54]["ownerRun"] == record then          -- S1955 (хвост)
+                bpY(controller["priorityKey"])             -- S1969: снять заявку
+                if controller["generation"] == generation then      -- S1970
+                    cKb[54]["do ne"](controller["priorityKey"])     -- S1967
                 end
-                bpY(controller["priorityKey"])
             end
-            task.wait(controller["interval"])             -- F3916(AP["interval"])
+            if not ok then                                 -- S1968 -> S1963
+                warn("[Ouroboros] loop error:" .. tostring(err))
+            end
+            if not bnB() then break end                    -- S1977
+            if controller["stopped"] then break end         -- S1954
+            if controller["generation"] ~= generation then break end    -- S1953/S1972
+            task.wait(controller["interval"])              -- S1975: F3916(AP["interval"])
         end
 
-        bny["runs"][runId] = nil
-        controller["workerActive"] = false
+        bny["runs"][runId] = nil                           -- S1957
+        if controller["generation"] == generation then      -- S1957
+            controller["workerActive"] = false             -- S1960
+        end
     end)
 end
 
-local function StopController(controller)                 -- bmX
-    controller["stopped"] = true
-    controller["generation"] = (controller["generation"] or 0) + 1
-    local deadline = os.clock() + 2
-    while controller["workerActive"] and os.clock() < deadline do
-        task.wait()
+local function StopController(controller)                  -- bmX (F363, copy 2)
+    controller["stopped"] = true                           -- S1083
+    controller["yield"] = false
+    controller["startedAt"] = nil
+    controller["cancel"] = (controller["cancel"] or 0) + 1 -- S1074/S1075/S1076
+    controller["generation"] = (controller["generation"] or 0) + 1      -- S1078/S1077
+    controller["workerActive"] = false
+    cKb[54]["do ne"](controller["priorityKey"], true)      -- арбитр: закрыть заявку силой
+    cKb[54]["uncommit"](controller["priorityKey"])
+    local session = bny["session"]                         -- S1080/S1082
+    if session and session["controller"] == controller then
+        bny["stop"](session)
+    end
+    if controller["priorityKey"] and cKb[54]["holder"] == controller["priorityKey"] then
+        cKb[37]()                                          -- снять удержание блока/скилла
+        cKb[87]()                                          -- CancelMove
+        bpY(controller["priorityKey"], true)               -- S1085
     end
 end
-
 
 
 -- ---------------------------------------------------------------------------
