@@ -142,10 +142,17 @@ def main(argv):
         # ссылка на пул: `cKb [136] [N]` / `fwe [164] [N]`
         head = poolref.replace("[", r"\s*\[\s*").replace("]", r"\s*\]\s*")
         text = re.sub(head + r"\[\s*(\d+\.?)\s*\]", rep, text)
-        # локальные псевдонимы пула (`local cTz = cKb[136]`)
+        # локальные псевдонимы пула: `local cTz = cKb[136]` (+ всё, что указано в --alias)
+        names = set()
         if alias:
-            for name in alias.split(","):
-                text = re.sub(re.escape(name.strip()) + r"\s*\[\s*(\d+\.?)\s*\]", rep, text)
+            names |= {x.strip() for x in alias.split(",") if x.strip()}
+        # в тексте пула пробелы вырезаны (`localcRd=cKb[136]`) — разлепляем `local`
+        probe = re.sub(r"\blocal(?=[A-Za-z_])", "local ", raw)
+        for m in re.finditer(r"(?:^|[^A-Za-z0-9_])([A-Za-z_]\w*)\s*=\s*"
+                             + re.escape(poolref) + r"(?![0-9])", probe):
+            names.add(m.group(1))
+        for name in sorted(names, key=len, reverse=True):
+            text = re.sub(re.escape(name) + r"\s*\[\s*(\d+\.?)\s*\]", rep, text)
 
     if "--raw" not in argv:
         keep = []

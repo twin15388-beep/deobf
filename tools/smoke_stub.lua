@@ -30,11 +30,13 @@ local Instance_mt = {}
 Instance = {
     new = function(class) return setmetatable({ ClassName = class, Name = class }, Instance_mt) end,
 }
+-- Роблоксовые типы: typeof() должен узнавать их (иначе Bounds/Health не срабатывают)
+local ROBLOX_TYPES = setmetatable({}, { __mode = "k" })
 function typeof(v)
     local t = type(v)
     if t == "table" then
         if getmetatable(v) == Instance_mt then return "Instance" end
-        return "table"
+        return ROBLOX_TYPES[v] or "table"
     end
     return t
 end
@@ -43,6 +45,7 @@ function fireproximityprompt() end
 function setclipboard() end
 function toclipboard() end
 getgenv = function() return _G end
+gethui = function() return nil end
 
 Enum = setmetatable({}, { __index = function(_, k) return stub_table(k) end })
 -- Мини-Vector3: нужны вычитание, Magnitude, Unit, Dot (InReach и др.)
@@ -53,13 +56,20 @@ local V3MT = {
     },
     __sub = function(a, b) return V3(a.X - b.X, a.Y - b.Y, a.Z - b.Z) end,
     __add = function(a, b) return V3(a.X + b.X, a.Y + b.Y, a.Z + b.Z) end,
+    __mul = function(a, b)                  -- Vector3 * число / число * Vector3
+        if type(b) == "number" then return V3(a.X * b, a.Y * b, a.Z * b) end
+        return V3(a.X * b.X, a.Y * b.Y, a.Z * b.Z)
+    end,
+    __div = function(a, b) return V3(a.X / b, a.Y / b, a.Z / b) end,
 }
 -- Magnitude/Unit считаются сразу: в Roblox это свойства, а не методы
 local function magnitude(x, y, z) return math.sqrt(x * x + y * y + z * z) end
 local function build(x, y, z, m)
     local v = setmetatable({ X = x, Y = y, Z = z, Magnitude = m }, V3MT)
+    ROBLOX_TYPES[v] = "Vector3"
     if m and m > 0 then
         v.Unit = setmetatable({ X = x / m, Y = y / m, Z = z / m, Magnitude = 1 }, V3MT)
+        ROBLOX_TYPES[v.Unit] = "Vector3"
     end
     return v
 end
@@ -68,10 +78,56 @@ V3 = function(x, y, z)
     return build(x, y, z, magnitude(x, y, z))
 end
 Vector3 = { new = V3, zero = V3(0, 0, 0) }
-Vector2 = { new = function(x, y) return { X = x or 0, Y = y or 0 } end }
-CFrame = { new = function() return {} end }
-Color3 = { new = function() return { ToHex = function() return "ffffff" end } end,
-           fromHex = function() return {} end, fromRGB = function() return {} end }
+ROBLOX_TYPES[Vector3.zero] = "Vector3"
+local V2                                     -- объявим заранее: метатаблица на него ссылается
+local V2MT = {
+    __index = { Dot = function(a, b) return a.X * b.X + a.Y * b.Y end },
+    __sub = function(a, b) return V2(a.X - b.X, a.Y - b.Y) end,
+    __add = function(a, b) return V2(a.X + b.X, a.Y + b.Y) end,
+    __mul = function(a, b)
+        if type(b) == "number" then return V2(a.X * b, a.Y * b) end
+        return V2(a.X * b.X, a.Y * b.Y)
+    end,
+}
+local C3                                     -- так же: Color3 нужен внутри своей метатаблицы
+local CFMT = {
+    __mul = function(a, b)          -- CFrame * Vector3 → сдвиг (как в игре)
+        if typeof(b) == "Vector3" then return V3(a.Position.X + b.X, a.Position.Y + b.Y, a.Position.Z + b.Z) end
+        return a
+    end,
+    __index = {
+        PointToWorldSpace = function(_, vector) return vector end,   -- без поворотов: локальные оси = мировые
+        ToWorldSpace = function(_, other) return other end,
+        LookVector = V3(0, 0, -1),
+    },
+}
+local C3MT = { __index = { Lerp = function(a, _, alpha)    -- Color3:Lerp → переход к другому цвету
+        return C3(a.R + ((255 - a.R) * (alpha or 1)), a.G + ((255 - a.G) * (alpha or 1)),
+                  a.B + ((255 - a.B) * (alpha or 1)))
+    end } }
+V2 = function(x, y)
+    local v = setmetatable({ X = x or 0, Y = y or 0 }, V2MT)
+    v.Magnitude = magnitude(x or 0, y or 0, 0)
+    ROBLOX_TYPES[v] = "Vector2"
+    return v
+end
+Vector2 = { new = V2 }
+-- CFrame: минимально нужны Position и PointToWorldSpace (проекция углов ESP)
+local CF = function(...)
+    local args = table.pack(...)
+    local position = V3(args[1], args[2], args[3])
+    if typeof(args[1]) == "Vector3" then position = args[1] end
+    local cf = setmetatable({ Position = position, X = position.X, Y = position.Y, Z = position.Z }, CFMT)
+    ROBLOX_TYPES[cf] = "CFrame"
+    return cf
+end
+CFrame = { new = CF, fromEulerAnglesXYZ = function() return CF() end }
+C3 = function(r, g, b)
+    local colour = setmetatable({ R = r or 0, G = g or 0, B = b or 0 }, C3MT)
+    ROBLOX_TYPES[colour] = "Color3"
+    return colour
+end
+Color3 = { new = C3, fromRGB = function(r, g, b) return C3(r, g, b) end, fromHex = function() return C3() end }
 UDim2 = { fromOffset = function() return {} end, new = function() return {} end }
 TweenInfo = { new = function() return {} end }
 Ray = { new = function() return {} end }

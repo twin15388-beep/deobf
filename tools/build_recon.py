@@ -219,6 +219,7 @@ cKb = setmetatable({
     [71]  = false,                               -- флаг анти-АФК
     [72]  = Combat.tweaks,
     [76]  = missing_slot(76),                    -- код задачи квеста
+    [39]  = ESP.EDGES,                          -- 12 рёбер куба (box3d)
     [57]  = ESP.corners,                        -- 8 углов куба для box3d
     [78]  = ESP.MarkModel,                       -- F4034: метка-подсветка модели
     [92]  = ESP.toggles,                         -- тумблеры вкладки ESP (range 5000)

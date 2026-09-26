@@ -4925,6 +4925,354 @@ local module = {                       -- cKb[92] в варианте A
 screen["colour"] = palette
 module["colour"] = palette
 
+-- ===========================================================================
+-- МОДУЛЬ ESP (в артефакте — таблица `bpc`, поля camera…collect + bounds/health/
+-- hide/tint/render). Ниже — тела, вычитанные из пула (номера в скобках):
+--   camera F5089, container F6613, newFrame F4132, newLabel F2752, line F5265,
+--   anchorPart F5538, bounds F790, health F675, tint F4525, hide F163,
+--   add (сборка записи), drop, bossNames F4162, render F5471, clear F3998.
+-- ===========================================================================
+
+-- 12 рёбер куба (cKb[39]) — пары индексов в cKb[57] (углы куба)
+local EDGES = { { 1, 3 }, { 7, 8 }, { 2, 6 }, { 3, 4 }, { 5, 7 }, { 5, 6 },
+                { 1, 2 }, { 6, 8 }, { 4, 8 }, { 3, 7 }, { 1, 5 }, { 2, 4 } }
+
+-- Куда вешать ScreenGui: gethui() → CoreGui → PlayerGui (в артефакте — bpZ(CoreGui))
+local function UIContainer()
+    local ok, gethui = pcall(function() return gethui end)
+    if ok and type(gethui) == "function" then
+        local ok2, handle = pcall(gethui)
+        if ok2 and handle then return handle end
+    end
+    local ok3, coreGui = pcall(function() return game:GetService("CoreGui") end)
+    if ok3 and coreGui then return coreGui end
+    local player = game:GetService("Players").LocalPlayer
+    return player and player:FindFirstChild("PlayerGui") or nil
+end
+
+local function Camera()                                  -- F5089
+    return workspace["CurrentCamera"]
+end
+
+local function Container()                               -- F6613
+    if screen["screen"] and screen["screen"]["Parent"] then return screen["screen"] end
+    local gui = Instance.new("ScreenGui")
+    gui["Name"] = "OuroborosOuwlandEsp"
+    gui["ResetOnSpawn"] = false
+    gui["IgnoreGuiInset"] = true
+    gui["DisplayOrder"] = 999999
+    gui["Parent"] = UIContainer()
+    screen["screen"] = gui
+    return gui
+end
+
+local function NewFrame(parent, zIndex)                  -- F4132
+    local frame = Instance.new("Frame")
+    frame["AnchorPoint"] = Vector2.new(0.5, 0.5)
+    frame["BackgroundColor3"] = Color3.fromRGB(255, 255, 255)
+    frame["BorderSizePixel"] = 0
+    frame["Visible"] = false
+    frame["ZIndex"] = zIndex
+    frame["Parent"] = parent
+    return frame
+end
+
+local function NewLabel(parent, zIndex)                  -- F2752
+    local label = Instance.new("TextLabel")
+    label["AnchorPoint"] = Vector2.new(0.5, 0.5)
+    label["BackgroundTransparency"] = 1
+    label["Size"] = UDim2.fromOffset(240, 14)
+    label["Font"] = Enum.Font.BuilderSansBold
+    label["TextSize"] = 13
+    label["TextStrokeTransparency"] = 0.4
+    label["Visible"] = false
+    label["ZIndex"] = zIndex
+    label["Parent"] = parent
+    return label
+end
+
+local function Line(frame, pointA, pointB)               -- F5265
+    local delta = pointB - pointA
+    frame["Size"] = UDim2.fromOffset(math.max(delta.Magnitude, 1), 1)
+    frame["Position"] = UDim2.fromOffset((pointA.X + pointB.X) * 0.5, (pointA.Y + pointB.Y) * 0.5)
+    frame["Rotation"] = math.deg(math.atan2(delta.Y, delta.X))
+end
+
+local function AnchorPart(model)                         -- F5538
+    local part = model:FindFirstChild("HumanoidRootPart")
+    if part then return part end
+    part = model["PrimaryPart"]
+    if part then return part end
+    return model:FindFirstChildWhichIsA("BasePart", true)
+end
+
+local function Bounds(model)                             -- F790
+    local ok, cf, size = pcall(model.GetBoundingBox, model)
+    if not ok or typeof(cf) ~= "CFrame" or typeof(size) ~= "Vector3" then return nil, nil end
+    if size.Magnitude < 0.1 then return cf, Vector3.new(4, 8, 4) end
+    return cf, size
+end
+
+local function Health(entry)                             -- F675
+    local humanoid = entry["humanoid"]
+    if humanoid and humanoid["Parent"] and humanoid["Health"] and humanoid["Health"] > 0 then
+        return humanoid["Health"], humanoid["MaxHealth"]
+    end
+    local instance = entry["instance"]
+    if not (instance and instance["GetAttribute"]) then return nil, nil end
+    return tonumber(instance:GetAttribute("Health")), tonumber(instance:GetAttribute("Serpent"))
+end
+
+local function Tint(entry)                               -- F4525
+    local color = palette[entry["category"]]
+    if color then return color end
+    if entry["category"] == "Players" then
+        return entry["party"] and palette["Party"] or palette["Players"]
+    end
+    return Color3.fromRGB(255, 255, 255)
+end
+
+local function Hide(entry)                               -- F163
+    entry["box"]["Visible"] = false
+    entry["tracer"]["Visible"] = false
+    entry["name"]["Visible"] = false
+    entry["distance"]["Visible"] = false
+    entry["info"]["Visible"] = false
+    entry["healthText"]["Visible"] = false
+    entry["healthBack"]["Visible"] = false
+    entry["healthFill"]["Visible"] = false
+    for _, line in ipairs(entry["lines"]) do line["Visible"] = false end
+end
+
+local function DropEntry(model)                          -- cKb[147]["drop"]
+    local entry = screen["entries"][model]
+    if not entry then return end
+    screen["entries"][model] = nil
+    if entry["holder"] then
+        pcall(function() entry["holder"]:Destroy() end)
+    end
+end
+
+-- Сборка записи — как в артефакте (bpc["add"]): папка Entry → рамка (box) со
+-- штрихом, таблица линий (12), трейсер, четыре подписи и полоса здоровья.
+local function AddEntry(model, label, category, player)  -- cKb[147]["add"]
+    if screen["entries"][model] then return end
+    local holder = Instance.new("Folder")
+    holder["Name"] = "Entry"
+    holder["Parent"] = Container()
+
+    local box = NewFrame(holder, 2)
+    local stroke = Instance.new("UIStroke")
+    stroke["Thickness"] = 1
+    stroke["Color"] = Color3.fromRGB(255, 255, 255)
+    stroke["Parent"] = box
+
+    local lines = table.create(#EDGES)
+    for index = 1, #EDGES do
+        lines[index] = NewFrame(holder, 3)
+    end
+
+    local healthBack = NewFrame(holder, 2)
+    healthBack["BackgroundColor3"] = Color3.fromRGB(15, 15, 15)
+    local healthFill = NewFrame(holder, 3)
+    healthFill["AnchorPoint"] = Vector2.new(0.5, 1)
+
+    screen["entries"][model] = {
+        ["instance"] = model,
+        ["part"] = AnchorPart(model),
+        ["label"] = label,
+        ["category"] = category,
+        ["player"] = player,
+        ["humanoid"] = model:FindFirstChildOfClass("Humanoid"),
+        ["holder"] = holder,
+        ["box"] = box,
+        ["stroke"] = stroke,
+        ["lines"] = lines,
+        ["tracer"] = NewFrame(holder, 2),
+        ["name"] = NewLabel(holder, 4),
+        ["distance"] = NewLabel(holder, 4),
+        ["info"] = NewLabel(holder, 4),
+        ["healthText"] = NewLabel(holder, 4),
+        ["healthBack"] = healthBack,
+        ["healthFill"] = healthFill,
+    }
+end
+
+local CombatPresets                                  -- bno["CombatPresets"] (см. Core)
+local function SetPresetSource(source)                -- вызывается сборкой после загрузки ядра
+    CombatPresets = source
+end
+
+local function BossNames()                               -- F4162
+    local names = {}
+    local presets = CombatPresets and CombatPresets["Presets"] or {}
+    for _, record in ipairs(presets) do
+        local folder = record["folder"]
+        if folder and folder:FindFirstChild("BossInfo") then
+            names[folder["Name"]] = true
+        end
+    end
+    return names
+end
+
+local function ClearScreen()                             -- cKb[92]["clear"] (F3998)
+    if screen["screen"] then
+        pcall(function() screen["screen"]:Destroy() end)
+    end
+    screen["screen"] = nil
+    for model in pairs(screen["entries"]) do
+        DropEntry(model)
+    end
+end
+
+-- Отрисовка кадра — F5471: по каждой записи считаем экранные координаты восьми
+-- углов габарита, рисуем рамку/имя/дистанцию/здоровье/трейсер/3D-бокс.
+local function Render()
+    local camera = Camera()
+    if not camera then return end
+    local cameraPosition = camera["CFrame"]["Position"]
+    local viewport = camera["ViewportSize"]
+    local range = toggles["range"] or 5000
+    local anyOn = false
+
+    for model, entry in pairs(screen["entries"]) do
+        local part = entry["part"] or AnchorPart(model)
+        entry["part"] = part
+        if not (part and part:IsDescendantOf(game)) then
+            DropEntry(model)
+        else
+            local distance = (part["Position"] - cameraPosition).Magnitude
+            if range > 0 and distance > range then
+                Hide(entry)
+            else
+                local color = Tint(entry)
+                local cf, size = Bounds(model)
+                local points = table.create(#corners)
+                local minX, minY, maxX, maxY
+                if cf and size then
+                    for index, cornerOffset in ipairs(corners) do
+                        local projected, onScreen = camera:WorldToViewportPoint(
+                            cf:PointToWorldSpace(cornerOffset * size * 0.5))
+                        if onScreen then
+                            points[index] = Vector2.new(projected.X, projected.Y)
+                            minX = math.min(minX or projected.X, projected.X)
+                            maxX = math.max(maxX or projected.X, projected.X)
+                            minY = math.min(minY or projected.Y, projected.Y)
+                            maxY = math.max(maxY or projected.Y, projected.Y)
+                        end
+                    end
+                end
+
+                if not (minX and minY) then
+                    Hide(entry)
+                else
+                    anyOn = true
+                    local centerX = (minX + maxX) * 0.5
+                    local centerY = (minY + maxY) * 0.5
+                    local width = maxX - minX
+                    local height = maxY - minY
+
+                    local box = entry["box"]
+                    box["Position"] = UDim2.fromOffset(centerX, centerY)
+                    box["Size"] = UDim2.fromOffset(width, height)
+                    box["BackgroundColor3"] = color
+                    box["BackgroundTransparency"] = 0.75
+                    box["Visible"] = toggles["box"] and true or false
+                    entry["stroke"]["Enabled"] = toggles["box"] and true or false
+                    entry["stroke"]["Color"] = color
+
+                    for index, edge in ipairs(EDGES) do
+                        local line = entry["lines"][index]
+                        local first, second = points[edge[1]], points[edge[2]]
+                        line["Visible"] = toggles["box3d"] and (first ~= nil and second ~= nil) or false
+                        if first and second then
+                            line["BackgroundColor3"] = color
+                            Line(line, first, second)
+                        end
+                    end
+
+                    entry["name"]["Text"] = entry["label"]
+                    entry["name"]["TextColor3"] = palette["name"]
+                    entry["name"]["Position"] = UDim2.fromOffset(centerX, minY - 9)
+                    entry["name"]["Visible"] = toggles["name"] and true or false
+
+                    entry["distance"]["Text"] = string.format("%d studs", math.floor(distance))
+                    entry["distance"]["TextColor3"] = palette["distance"]
+                    entry["distance"]["Position"] = UDim2.fromOffset(centerX, maxY + 9)
+                    entry["distance"]["Visible"] = toggles["distance"] and true or false
+
+                    local health, maxHealth = Health(entry)
+                    if toggles["healthBar"] and health and maxHealth and maxHealth > 0 then
+                        local ratio = math.clamp(health / maxHealth, 0, 1)
+                        entry["healthBack"]["Position"] = UDim2.fromOffset(minX - 5, centerY)
+                        entry["healthBack"]["Size"] = UDim2.fromOffset(3, height)
+                        entry["healthBack"]["Visible"] = true
+                        entry["healthFill"]["Position"] = UDim2.fromOffset(minX - 5, centerY + height * 0.5)
+                        entry["healthFill"]["Size"] = UDim2.fromOffset(3, height * ratio)
+                        entry["healthFill"]["BackgroundColor3"] = palette["health"]:Lerp(palette["dying"], 1 - ratio)
+                        entry["healthFill"]["Visible"] = true
+                    else
+                        entry["healthBack"]["Visible"] = false
+                        entry["healthFill"]["Visible"] = false
+                    end
+
+                    if toggles["healthText"] and health and maxHealth and maxHealth > 0 then
+                        entry["healthText"]["Text"] = string.format("%d / %d", math.floor(health), math.floor(maxHealth))
+                        entry["healthText"]["TextColor3"] = palette["healthText"]
+                        entry["healthText"]["Position"] = UDim2.fromOffset(centerX - 40, centerY)
+                        entry["healthText"]["Visible"] = true
+                    else
+                        entry["healthText"]["Visible"] = false
+                    end
+
+                    local detail = entry["info"]
+                    if toggles["playerInfo"] and entry["category"] == "Players" then
+                        detail["Text"] = entry["detail"] or entry["label"]
+                        detail["TextColor3"] = palette["info"]
+                        detail["Position"] = UDim2.fromOffset(centerX, maxY - 0.75)
+                        detail["Visible"] = true
+                    else
+                        detail["Visible"] = false
+                    end
+
+                    local tracer = entry["tracer"]
+                    tracer["Visible"] = toggles["tracer"] and true or false
+                    if toggles["tracer"] then
+                        tracer["BackgroundColor3"] = color
+                        Line(tracer, Vector2.new(viewport.X * 0.5, viewport.Y), Vector2.new(centerX, maxY))
+                    end
+                end
+            end
+        end
+    end
+
+    if screen["screen"] then
+        screen["screen"]["Enabled"] = anyOn
+    end
+end
+
+local function StartEspLoop()                            -- bpz: RunService.RenderStepped
+    local runService = game:GetService("RunService")
+    return runService["RenderStepped"]:Connect(function() pcall(Render) end)
+end
+
+-- Поля модуля — как в артефакте (bpc[...]): цвета остаются в palette (cKb[147])
+module["camera"] = Camera
+module["container"] = Container
+module["newFrame"] = NewFrame
+module["newLabel"] = NewLabel
+module["line"] = Line
+module["anchorPart"] = AnchorPart
+module["bounds"] = Bounds
+module["health"] = Health
+module["hide"] = Hide
+module["tint"] = Tint
+module["add"] = AddEntry
+module["drop"] = DropEntry
+module["bossNames"] = BossNames
+module["clear"] = ClearScreen
+module["render"] = Render
+
 -- ---------------------------------------------------------------------------
 -- Метка модели (cKb[78] = F4034)
 -- ---------------------------------------------------------------------------
@@ -5049,6 +5397,24 @@ return {
     palette = palette,                 -- cKb[147]: цвета подписей
     PALETTE_RGB = PALETTE_RGB,         -- «сырые» значения палитры
     corners = corners,                 -- cKb[57]: углы для box3d
+    EDGES = EDGES,                     -- cKb[39]: 12 рёбер куба (box3d)
+    Camera = Camera,
+    Container = Container,
+    NewFrame = NewFrame,
+    NewLabel = NewLabel,
+    Line = Line,
+    AnchorPart = AnchorPart,
+    Bounds = Bounds,
+    Health = Health,
+    Tint = Tint,
+    HideEntry = Hide,
+    AddEntry = AddEntry,               -- cKb[147]["add"]
+    DropEntry = DropEntry,             -- cKb[147]["drop"]
+    BossNames = BossNames,             -- cKb[147]["bossNames"]
+    SetPresetSource = SetPresetSource, -- источник списка пресетов (bno.CombatPresets)
+    ClearScreen = ClearScreen,         -- cKb[92]["clear"]
+    Render = Render,                   -- cKb[147]["render"]
+    StartEspLoop = StartEspLoop,
     OwnershipPass = OwnershipPass,
     StartOwnershipLoop = StartOwnershipLoop,
 }
@@ -6280,6 +6646,7 @@ cKb = setmetatable({
     [71]  = false,                               -- флаг анти-АФК
     [72]  = Combat.tweaks,
     [76]  = missing_slot(76),                    -- код задачи квеста
+    [39]  = ESP.EDGES,                          -- 12 рёбер куба (box3d)
     [57]  = ESP.corners,                        -- 8 углов куба для box3d
     [78]  = ESP.MarkModel,                       -- F4034: метка-подсветка модели
     [92]  = ESP.toggles,                         -- тумблеры вкладки ESP (range 5000)

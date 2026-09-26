@@ -57,11 +57,26 @@ end
 `cKb[92]["clear"] = F3998`, и он же регистрируется в общем трекере:
 `cKb[99]["Track"](cKb[92]["clear"])`.
 
+## Состояние реконструкции
+
+Тела `F5089` (camera), `F6613` (container, `OuroborosOuwlandEsp`, CoreGui, DisplayOrder
+999999), `F4132` (newFrame), `F2752` (newLabel), `F5265` (line), `F5538` (anchorPart),
+`F4872` (add: рамка + `UIStroke` + 12 линий + трейсер + подписи + полоса здоровья),
+`F790` (bounds), `F675` (health), `F163` (hide), `F4525` (tint), `F4162` (bossNames),
+`F3998` (clear) и `F5471` (render, вне пула — читается регионом) **вычитаны и вписаны
+в `ouroboros_esp.lua`**; рёбра куба — экспорт `ESP.EDGES` → слот `cKb[39]` в
+`tools/build_recon.py`.
+
+Проверено дымовым прогоном (`tools/smoke.sh`, секция «ESP: рендер»): `Bounds`/`AnchorPart`/
+`Tint`, `AddEntry` → `Render` (рамка, штрих, имя, «N studs», 12 рёбер box3d, трейсер),
+полоса и подпись здоровья для модели с Humanoid (40/100), `HideEntry`, отсечение по
+`range`, `ClearScreen`, `DropEntry`. Заглушки `tools/smoke_stub.lua` дополнены типами
+`CFrame`/`Vector2`/`Color3` (`typeof`, `PointToWorldSpace`, `Lerp`, вычитание векторов).
+
 ## Что осталось
 
-1. Вычитать тела `F5089`, `F6613`, `F4132`, `F2752`, `F5265`, `F5538`, `F4872`,
-   `F4162`, `F3998` (все — поля `cKb[147]`/`cKb[92]`) и реализовать отрисовку
-   (2D-рамка, `healthBar`/`healthText`, `tracer`, `box3d` по `cKb[57]`).
+1. Сборщик записей (`collect`) подключить к реальному потоку: сейчас записи кладёт
+   вызывающая сторона (`AddEntry`), категории — из `cKb[92]`.
 2. Уточнить внутренние контейнеры для `Levers`/`Spider Lily`/`NPCs` (сырые тела
    состояний S6584/S6590/S6591) — в документе указаны по именам детей, найденным
    рядом: `"Map"`, `"Sickles Levers"`, `"Puzzles"`, `"StationaryNpcs"`, `"Debree"`.

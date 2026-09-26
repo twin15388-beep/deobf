@@ -32,6 +32,7 @@ def main(argv):
     start, end = int(argv[0]), int(argv[1])
     rest = argv[2:]
     alias = rest[0] if rest and not rest[0].startswith("--") else "cTz"
+    pool_expr = argv[argv.index("--poolref") + 1] if "--poolref" in argv else "cKb[136]"
     art = "ouroboros_ps2 (1).luau"
     pool_path = "data/pool_index.json"
     if "--artifact" in argv:
@@ -52,7 +53,16 @@ def main(argv):
         return "%s/*%s*/" % (val, key)
 
     text = src[start:end]
-    text = re.sub(r"(?<![\w.])%s\[(\d+\.?)\]" % re.escape(alias), sub, text)
+    # псевдонимы пула внутри окна: `local cTz = cKb[136]` (в склеенном тексте — `localcTz=…`)
+    names = {alias}
+    probe = re.sub(r"\blocal(?=[A-Za-z_])", "local ", text)
+    for m in re.finditer(r"(?:^|[^A-Za-z0-9_])([A-Za-z_]\w*)\s*=\s*" + re.escape(pool_expr) + r"(?![0-9])", probe):
+        names.add(m.group(1))
+    # сам пул (в исходнике пишется как cKb[136])
+    text = re.sub(re.escape(pool_expr).replace(r"\[", r"\s*\[\s*").replace(r"\]", r"\s*\]\s*")
+                  + r"\s*\[\s*(\d+\.?)\s*\]", sub, text)
+    for name in sorted(names, key=len, reverse=True):
+        text = re.sub(r"(?<![\w.])" + re.escape(name) + r"\s*\[\s*(\d+\.?)\s*\]", sub, text)
     sys.stdout.write(text)
     if not text.endswith("\n"):
         sys.stdout.write("\n")

@@ -430,3 +430,92 @@ print("[smoke] ESP toggles:", type(cKb[92]), cKb[92]["range"], cKb[92]["name"],
       "| raw NPCs =", table.concat(M.ESP.PALETTE_RGB["NPCs"], ","))
 print("[smoke] ESP CATEGORIES:", #M.ESP.CATEGORIES, M.ESP.CATEGORIES[1], "| bna.opt == cKb[92]:",
       M.ESP.screen["opt"] == cKb[92], "| colours:", tostring(M.ESP.screen["colour"]["Mobs"] ~= nil))
+
+-- ESP: рендер (cKb[147]["render"] / F5471). Заглушка модели собирается «в два шага»:
+-- иначе замыкания внутри таблицы видят глобальную (пустую) переменную, а не саму модель.
+local function stub_model(name, position)
+    local model = { Name = name, Position = position }
+    model.IsDescendantOf = function() return true end
+    model.FindFirstChild = function(_, childName)
+        if childName == "HumanoidRootPart" then return model end
+        return nil
+    end
+    model.FindFirstChildOfClass = function() return nil end
+    model.FindFirstChildWhichIsA = function() return model end
+    model.GetBoundingBox = function() return CFrame.new(), Vector3.new(4, 6, 2) end
+    model.GetAttribute = function() return nil end
+    return model
+end
+
+local function esp_screen_lines(entry)
+    local shown = 0
+    for _, line in ipairs(entry["lines"]) do if line["Visible"] then shown = shown + 1 end end
+    return shown
+end
+
+local function esp_entry_count()
+    local total = 0
+    for _ in pairs(__RECON.ESP.screen["entries"]) do total = total + 1 end
+    return total
+end
+
+local ok17, err17 = pcall(function()
+    local model = stub_model("StubMob", Vector3.new(10, 0, 0))
+    workspace.CurrentCamera = {
+        CFrame = CFrame.new(0, 0, 0),
+        ViewportSize = Vector2.new(1920, 1080),
+        WorldToViewportPoint = function(_, position)
+            return { X = position.X * 10, Y = position.Y * 10, Z = 5 }, true
+        end,
+    }
+    local esp = __RECON.ESP
+    for _, key in ipairs({ "box", "box3d", "tracer", "name", "distance", "healthBar", "healthText" }) do
+        esp.toggles[key] = true
+    end
+    print("[smoke] ESP.Bounds:", typeof((esp.Bounds(model))), "| AnchorPart == модель:",
+          esp.AnchorPart(model) == model, "| Tint Mobs:", esp.Tint({ instance = model, category = "Mobs" }) ~= nil)
+
+    esp.AddEntry(model, "StubMob", "Mobs", false)
+    print("[smoke] ESP.AddEntry: записей =", esp_entry_count())
+    esp.Render()
+    local entry = esp.screen["entries"][model]
+    print("[smoke] ESP.Render: запись жива =", entry ~= nil,
+          "| рамка видима =", entry and entry["box"]["Visible"],
+          "| штрих включён =", entry and entry["stroke"]["Enabled"],
+          "| имя =", entry and entry["name"]["Text"],
+          "| дистанция =", entry and entry["distance"]["Text"],
+          "| рёбер видимо =", entry and esp_screen_lines(entry),
+          "| трейсер =", entry and entry["tracer"]["Visible"],
+          "| полоса здоровья =", entry and entry["healthBack"]["Visible"])
+    esp.HideEntry(entry)
+    print("[smoke] ESP.HideEntry: рамка =", entry["box"]["Visible"], "| рёбер видимо =", esp_screen_lines(entry))
+    esp.toggles["range"] = 5
+    esp.Render()
+    print("[smoke] ESP.Render вне радиуса: рамка =", entry["box"]["Visible"],
+          "| запись жива =", esp.screen["entries"][model] ~= nil)
+    esp.toggles["range"] = 5000
+    esp.ClearScreen()
+    print("[smoke] ESP.ClearScreen: записей =", esp_entry_count(),
+          "| экран =", tostring(esp.screen["screen"]))
+    esp.AddEntry(model, "StubMob", "Mobs", false)
+    esp.DropEntry(model)
+    print("[smoke] ESP.DropEntry: записей =", esp_entry_count())
+
+    -- Модель с Humanoid: полоса здоровья и подпись здоровья (F675 → health/healthBar)
+    local mob = stub_model("StubNpc", Vector3.new(8, 0, 0))
+    local humanoid = { Health = 40, MaxHealth = 100, Parent = mob }
+    mob.FindFirstChildOfClass = function() return humanoid end
+    esp.AddEntry(mob, "StubNpc", "Mobs", false)
+    esp.Render()
+    local npcEntry = esp.screen["entries"][mob]
+    print("[smoke] ESP.Render (Humanoid 40/100): полоса =", npcEntry["healthBack"]["Visible"],
+          "| текст =", npcEntry["healthText"]["Text"],
+          "| цвет полосы =", tostring(npcEntry["healthFill"]["BackgroundColor3"] ~= nil),
+          "| заливка включена =", npcEntry["healthFill"]["Visible"])
+    esp.toggles["healthBar"] = false
+    esp.Render()
+    print("[smoke] ESP.Render (healthBar выключен): полоса =", npcEntry["healthBack"]["Visible"])
+    esp.toggles["healthBar"] = true
+    esp.ClearScreen()
+end)
+print("[smoke] ESP.Render/AddEntry/HideEntry/DropEntry:", ok17, tostring(err17))
