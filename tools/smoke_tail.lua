@@ -427,4 +427,6 @@ print("[smoke] Combat.FilterValue/ReleaseRagdoll:", ok16, tostring(err16))
 -- ESP: тумблеры (cKb[92]), палитра (cKb[147]), углы (cKb[57])
 print("[smoke] ESP toggles:", type(cKb[92]), cKb[92]["range"], cKb[92]["name"],
       "| углов:", #cKb[57], "| палитра Mobs =", tostring(cKb[147]["Mobs"] ~= nil),
-      "| raw NPCs =", table.concat(cKb[147].PALETTE_RGB and {} or M.ESP.PALETTE_RGB["NPCs"], ","))
+      "| raw NPCs =", table.concat(M.ESP.PALETTE_RGB["NPCs"], ","))
+print("[smoke] ESP CATEGORIES:", #M.ESP.CATEGORIES, M.ESP.CATEGORIES[1], "| bna.opt == cKb[92]:",
+      M.ESP.screen["opt"] == cKb[92], "| colours:", tostring(M.ESP.screen["colour"]["Mobs"] ~= nil))

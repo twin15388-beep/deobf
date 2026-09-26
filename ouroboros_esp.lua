@@ -41,11 +41,18 @@ local CLEAR_INTERVAL = 0.2                           -- F3916(0.2)
 local loopHandle = nil
 
 -- ---------------------------------------------------------------------------
--- Данные ESP-вкладки — состояния 3477 (артефакт @776 392 … @776 500)
+-- Данные ESP-вкладки — состояние 3477 рабочей сборки (вариант B)
+--   @1 947 331: bna["opt"] = cKb[92] (тумблеры), @1 948 160: cKb[147] (палитра),
+--   @1 961 295: cKb[57] (углы). В варианте A (@1 756 346) то же самое собрано
+--   иначе: cKb[92] — модуль с полями CATEGORIES/opt/colour/clear, палитра —
+--   cKb[51]. Подробности и доказательства — data/BUILD_MAP.md.
 -- ---------------------------------------------------------------------------
+-- Список категорий (bna["CATEGORIES"], рабочая сборка)
+local CATEGORIES = { "Players", "Mobs", "Bosses", "NPCs", "Muzan", "Spider Lily",
+                     "Chests", "Wild Horse", "Levers" }
 -- Тумблеры экрана ESP (cKb[92]): снимок «по умолчанию» — всё выключено,
 -- дальность 5000; ключ "Warn Me Before" — предупреждение до входа в радиус.
-local toggles = {                                  -- cKb[92]
+local toggles = {                                  -- cKb[92] (bna["opt"])
     ["box"]          = false,
     ["Warn Me Before"] = false,
     ["box3d"]        = false,
@@ -96,6 +103,26 @@ local corners = {                                  -- cKb[57]
     Vector3.new(1, -1, -1),  Vector3.new(1, -1, 1),
     Vector3.new(1, 1, -1),   Vector3.new(1, 1, 1),
 }
+
+-- Два представления одного и того же (в артефакте встречаются оба варианта):
+local screen = {                       -- bna (рабочая сборка)
+    ["on"] = {},                       -- включённые категории
+    ["entries"] = {},                  -- модель → { holder = рамка }
+    ["screen"] = nil,                  -- GuiObject экрана
+    ["in fo"] = {},                    -- строки «info» по категории
+    ["anyOn"] = false,
+    ["CATEGORIES"] = CATEGORIES,
+    ["opt"] = toggles,
+    ["colour"] = nil,                  -- заполняется после палитры
+}
+local module = {                       -- cKb[92] в варианте A
+    ["CATEGORIES"] = CATEGORIES,
+    ["opt"] = toggles,
+    ["colour"] = nil,
+    ["clear"] = nil,                   -- F3998
+}
+screen["colour"] = palette
+module["colour"] = palette
 
 -- ---------------------------------------------------------------------------
 -- Метка модели (cKb[78] = F4034)
@@ -214,7 +241,10 @@ return {
     MarkModel = MarkModel,
     DropMark = DropMark,
     ClearMarks = ClearMarks,
-    toggles = toggles,                 -- cKb[92]: тумблеры ESP
+    CATEGORIES = CATEGORIES,           -- bna["CATEGORIES"]
+    screen = screen,                   -- bna: состояние экрана ESP
+    module = module,                   -- вариант A: cKb[92] как модуль
+    toggles = toggles,                 -- cKb[92]/["opt"]: тумблеры ESP
     palette = palette,                 -- cKb[147]: цвета подписей
     PALETTE_RGB = PALETTE_RGB,         -- «сырые» значения палитры
     corners = corners,                 -- cKb[57]: углы для box3d
