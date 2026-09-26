@@ -4842,6 +4842,63 @@ local CLEAR_INTERVAL = 0.2                           -- F3916(0.2)
 local loopHandle = nil
 
 -- ---------------------------------------------------------------------------
+-- Данные ESP-вкладки — состояния 3477 (артефакт @776 392 … @776 500)
+-- ---------------------------------------------------------------------------
+-- Тумблеры экрана ESP (cKb[92]): снимок «по умолчанию» — всё выключено,
+-- дальность 5000; ключ "Warn Me Before" — предупреждение до входа в радиус.
+local toggles = {                                  -- cKb[92]
+    ["box"]          = false,
+    ["Warn Me Before"] = false,
+    ["box3d"]        = false,
+    ["name"]         = false,
+    ["distance"]     = false,
+    ["healthBar"]    = false,
+    ["healthText"]   = false,
+    ["tracer"]       = false,
+    ["playerInfo"]   = false,
+    ["range"]        = 5000,
+}
+
+-- Палитра подписей (cKb[147]): категория → Color3.fromRGB(r, g, b).
+-- Значения 1:1 из артефакта; Color3 создаётся лениво (модуль грузится и там,
+-- где его нет — смоук).
+local PALETTE_RGB = {                              -- cKb[147]
+    ["name"]        = { 255, 255, 255 },
+    ["distance"]    = { 255, 255, 255 },
+    ["health"]      = { 0,   255, 0   },
+    ["dying"]       = { 255, 0,   0   },
+    ["healthText"]  = { 255, 255, 255 },
+    ["info"]        = { 255, 255, 255 },
+    ["Players"]     = { 255, 0,   0   },
+    ["Party"]       = { 0,   255, 0   },
+    ["Mobs"]        = { 0,   170, 255 },
+    ["Bosses"]      = { 255, 170, 0   },
+    ["NPCs"]        = { 120, 255, 150 },
+    ["Muzan"]       = { 200, 0,   60  },
+    ["Spider Lily"] = { 255, 80,  160 },
+    ["Chests"]      = { 255, 200, 40  },
+    ["Wild Horse"]  = { 215, 175, 120 },
+    ["Levers"]      = { 170, 120, 255 },
+}
+local palette = setmetatable({}, {               -- cKb[147]
+    __index = function(t, key)
+        local rgb = PALETTE_RGB[key]
+        if not rgb then return nil end
+        local ok, color = pcall(function() return Color3.fromRGB(rgb[1], rgb[2], rgb[3]) end)
+        t[key] = ok and color or false
+        return t[key]
+    end,
+})
+
+-- Восемь углов куба (cKb[57]) — обход углов при 3D-боксе (box3d).
+local corners = {                                  -- cKb[57]
+    Vector3.new(-1, -1, -1), Vector3.new(-1, -1, 1),
+    Vector3.new(-1, 1, -1),  Vector3.new(-1, 1, 1),
+    Vector3.new(1, -1, -1),  Vector3.new(1, -1, 1),
+    Vector3.new(1, 1, -1),   Vector3.new(1, 1, 1),
+}
+
+-- ---------------------------------------------------------------------------
 -- Метка модели (cKb[78] = F4034)
 -- ---------------------------------------------------------------------------
 local function MarkModel(model)                      -- cKb[78] (F4034)
@@ -4958,6 +5015,10 @@ return {
     MarkModel = MarkModel,
     DropMark = DropMark,
     ClearMarks = ClearMarks,
+    toggles = toggles,                 -- cKb[92]: тумблеры ESP
+    palette = palette,                 -- cKb[147]: цвета подписей
+    PALETTE_RGB = PALETTE_RGB,         -- «сырые» значения палитры
+    corners = corners,                 -- cKb[57]: углы для box3d
     OwnershipPass = OwnershipPass,
     StartOwnershipLoop = StartOwnershipLoop,
 }
@@ -6189,7 +6250,10 @@ cKb = setmetatable({
     [71]  = false,                               -- флаг анти-АФК
     [72]  = Combat.tweaks,
     [76]  = missing_slot(76),                    -- код задачи квеста
+    [57]  = ESP.corners,                        -- 8 углов куба для box3d
     [78]  = ESP.MarkModel,                       -- F4034: метка-подсветка модели
+    [92]  = ESP.toggles,                         -- тумблеры вкладки ESP (range 5000)
+    [147] = ESP.palette,                         -- цвета подписей (ленивые Color3)
     [112] = ESP.DropMark,                        -- cKb[112]: снять метку модели
     [77]  = {                                    -- хелперы скиллов (cKb[77])
         owns = Skills.owns, claim = Skills.claim, held = Skills.held,

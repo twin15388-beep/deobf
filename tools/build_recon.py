@@ -219,7 +219,10 @@ cKb = setmetatable({
     [71]  = false,                               -- флаг анти-АФК
     [72]  = Combat.tweaks,
     [76]  = missing_slot(76),                    -- код задачи квеста
+    [57]  = ESP.corners,                        -- 8 углов куба для box3d
     [78]  = ESP.MarkModel,                       -- F4034: метка-подсветка модели
+    [92]  = ESP.toggles,                         -- тумблеры вкладки ESP (range 5000)
+    [147] = ESP.palette,                         -- цвета подписей (ленивые Color3)
     [112] = ESP.DropMark,                        -- cKb[112]: снять метку модели
     [77]  = {                                    -- хелперы скиллов (cKb[77])
         owns = Skills.owns, claim = Skills.claim, held = Skills.held,
