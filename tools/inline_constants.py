@@ -25,8 +25,8 @@ def unwrap(text):
     return text[1:-1] if is_quoted(text) else text
 
 
-def build_maps(src):
-    entries, toks = luaflat.extract_pool(src)
+def build_maps(src, pool_expr=None):
+    entries, toks = luaflat.extract_pool(src, pool_expr=pool_expr)
     values = [unwrap(e) for e in entries]
     kinds = []
     for e in entries:

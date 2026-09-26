@@ -1032,7 +1032,8 @@ def build_main(src, toks, entries, aliases):
 
 def main(path, argv):
     src = open(path, encoding="utf-8", errors="replace").read()
-    entries, values, kinds, toks = build_maps(src)
+    pool_expr = argv[argv.index("--poolref") + 1] if "--poolref" in argv else None
+    entries, values, kinds, toks = build_maps(src, pool_expr=pool_expr)
 
     aliases = find_aliases(toks)
     folded_count = [0]
@@ -1072,8 +1073,8 @@ def main(path, argv):
     if "--pool" in argv:
         slot = int(argv[argv.index("--pool") + 1])
         toks = list(luaflat.tokenize(src))
-        alias = "cKb[136]"
-        if len(argv) > argv.index("--pool") + 2 and argv[argv.index("--pool") + 2].startswith("cKb"):
+        alias = pool_expr or "cKb[136]"
+        if len(argv) > argv.index("--pool") + 2 and not argv[argv.index("--pool") + 2].startswith("--"):
             alias = argv[argv.index("--pool") + 2]
         starts = [i + 1 for i in range(len(toks))
                   if toks[i][1] == "="

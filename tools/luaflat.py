@@ -549,16 +549,39 @@ class PoolParser(Parser):
         self.depth -= 1
 
 
-def extract_pool(src, pool_key="136"):
-    """Return (list of entry texts, token list) for `cKb[pool_key] = { ... }`."""
+def extract_pool(src, pool_key="136", pool_expr=None):
+    """Return (list of entry texts, token list) for the constant pool table.
+
+    `pool_expr` — точное выражение таблицы в исходнике, например ``cKb[136]``
+    (сборка 2026-09-21) или ``fwe[164]`` (сборка 2026-09-26). Если не задано,
+    ищем ``cKb[pool_key]`` — старое поведение.
+    """
     toks = list(tokenize(src))
     target = None
-    for i in range(len(toks) - 5):
-        if (toks[i][0] == "name" and toks[i][1] == "cKb" and toks[i + 1][1] == "["
-                and toks[i + 2][1] == str(pool_key) and toks[i + 3][1] == "]"
-                and toks[i + 4][1] == "=" and toks[i + 5][1] == "{"):
-            target = i + 5
-            break
+    if pool_expr:
+        want = "".join(c for c in pool_expr if not c.isspace())
+        text = "".join(t[1] for t in toks)
+        # индекс токена по смещению в склеенном тексте
+        acc = 0
+        starts = []
+        for t in toks:
+            starts.append(acc)
+            acc += len(t[1])
+        pos = text.find(want + "=")
+        while pos >= 0:
+            j = pos + len(want) + 1
+            if text[j:j + 1] == "{":
+                idx = max(i for i, s in enumerate(starts) if s <= j)
+                target = idx
+                break
+            pos = text.find(want + "=", pos + 1)
+    if target is None:
+        for i in range(len(toks) - 5):
+            if (toks[i][0] == "name" and toks[i][1] == "cKb" and toks[i + 1][1] == "["
+                    and toks[i + 2][1] == str(pool_key) and toks[i + 3][1] == "]"
+                    and toks[i + 4][1] == "=" and toks[i + 5][1] == "{"):
+                target = i + 5
+                break
     if target is None:
         raise ValueError("pool table not found")
     p = PoolParser(toks)

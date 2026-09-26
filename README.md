@@ -26,6 +26,36 @@
 | `NZL_AUDIT.md` | **аудит: что подтверждено, чего не хватает, что делать дальше** |
 | `tools/`, `data/` | парсер артефакта, разворот констант, индексы фич |
 
+## Текущая сборка и лоадер (обновлено 26.09.2026)
+
+Скрипт раздаётся не файлом-лоадером, а набором игровых файлов:
+
+```
+loadstring(game:HttpGet("https://raw.githubusercontent.com/joustingmatch/Ouroboros/main/loader.lua"))()
+  -> games/ps2.luau        -- скрипт для Ouwland (Place ID 136406881576517)
+```
+
+Перекачать свежую сборку и собрать её пул:
+
+```bash
+python3 tools/fetch_build.py            # -> artifacts/ps2_<дата>.luau + data/pool_index_<дата>.json
+python3 tools/fetch_build.py --list     # история коммитов файла
+```
+
+Прочитать функцию из любой сборки (старая — пул `cKb[136]`, новая — `fwe[164]`):
+
+```bash
+python3 tools/read_fn.py --pool 2440 --names
+python3 tools/read_fn.py --offset 1950332 --names --artifact artifacts/ps2_2026-09-26.luau \
+    --poolref "fwe[164]" --pooldata data/pool_index_2026-09-26.json
+python3 tools/read_region.py 3292571 3293500 fwe --artifact artifacts/ps2_2026-09-26.luau \
+    --pool data/pool_index_2026-09-26.json
+```
+
+Что именно изменилось между сборками 21.09 (наш исходник истины) и 26.09 — в
+`data/BUILD_HISTORY.md`; порядок работы и восстановление после сброса песочницы — в
+`WORKFLOW.md`.
+
 ## Инструменты
 
 ```bash
