@@ -99,7 +99,9 @@ local bpz = {
     CardStatus = "Idle", WaveStatus = "Idle", BringStatus = "Idle",
     SchematicStatus = "Idle", PriorityStatus = "Idle", PriorityHolder = "",
     -- счётчики
-    Chests = 0, Looted = 0, Souls = 0,
+    Chests = 0, Looted = 0, Souls = 0, Quests = 0, Kills = 0,
+    -- кэши/выборы
+    SkillChoices = {},
 }
 
 -- ---------------------------------------------------------------------------
@@ -298,6 +300,9 @@ function Core.Bind(api)
     if api.Unloaded ~= nil then Core.api.Unloaded = api.Unloaded end
     return Core.api
 end
+
+Core.CanAct = CanAct        -- bnB: «скрипт загружен и может действовать»
+Core.Unloaded = Unloaded
 
 Core.Services = Services
 Core.constants = CONST

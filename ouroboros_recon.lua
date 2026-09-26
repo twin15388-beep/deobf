@@ -152,7 +152,9 @@ local bpz = {
     CardStatus = "Idle", WaveStatus = "Idle", BringStatus = "Idle",
     SchematicStatus = "Idle", PriorityStatus = "Idle", PriorityHolder = "",
     -- счётчики
-    Chests = 0, Looted = 0, Souls = 0,
+    Chests = 0, Looted = 0, Souls = 0, Quests = 0, Kills = 0,
+    -- кэши/выборы
+    SkillChoices = {},
 }
 
 -- ---------------------------------------------------------------------------
@@ -351,6 +353,9 @@ function Core.Bind(api)
     if api.Unloaded ~= nil then Core.api.Unloaded = api.Unloaded end
     return Core.api
 end
+
+Core.CanAct = CanAct        -- bnB: «скрипт загружен и может действовать»
+Core.Unloaded = Unloaded
 
 Core.Services = Services
 Core.constants = CONST
@@ -4380,8 +4385,7 @@ local POOL = {
     [3165] = "Cannot find Dr. Higoshima", [3166] = 3227, [3167] = "ehupc", [3168] = 3002, [3169] = "visit", [3171] = 2669,
     [3172] = "gsdxqqsayq", [3173] = "next", [3174] = "Sparkles", [3175] = "refvsmrvi", [3176] = 15886827, [3177] = "CollectSchematics",
     [3178] = "No selected boss is available", [3179] = "Opening chest", [3181] = 3433, [3183] = 3945, [3184] = "Clearing quest slot", [3185] = "BoolValue",
-    [3186] = "MUZAN_LAIR", [3187] = 514, [3189] = "
-", [3190] = "BasePart", [3191] = "Stops after the spot it's on. It won't take you back", [3192] = 2614,
+    [3186] = "MUZAN_LAIR", [3187] = 514, [3189] = "\010", [3190] = "BasePart", [3191] = "Stops after the spot it's on. It won't take you back", [3192] = 2614,
     [3193] = 2142723282, [3194] = 181, [3195] = "terminal", [3196] = "DefaultItemCategories", [3197] = 479, [3198] = "AutoBossHunt",
     [3199] = "Alerts", [3200] = "order", [3201] = "Exit", [3202] = "Kaiden", [3203] = 2378, [3204] = 4087,
     [3205] = 2448005365, [3207] = "before", [3208] = "targets", [3209] = 6166272, [3210] = "mitigate", [3211] = 3160,
@@ -4914,12 +4918,76 @@ local POOL = {
     [6639] = 986, [6640] = "buyBait", [6641] = "NotifyBossSpawns",
 }
 local CONST = {
-    ARRIVE_RADIUS = Move.bob["ARRIVE_RADIUS"],
-    BLINK_HOLD    = Move.bob["BLINK_HOLD"],
-    REFUSAL_GAP   = Skills.state and Skills.state["REFUSAL_GAP"],
-    CAST_GRACE    = Skills["CAST_GRACE"],
-    CAST_MIN_GAP  = Skills["CAST_MIN_GAP"],
+    ["ARRIVE_RADIUS"] = 8,
+    ["BAIT_RESTOCK"] = 25,
+    ["BLINK_HOLD"] = 0.35,
+    ["BOOT_TIMEOUT"] = 300,
+    ["BOSS_COLLECT_CAP"] = 90,
+    ["BOSS_COLLECT_YIELD"] = 15,
+    ["BOSS_DWELL"] = 20,
+    ["BOSS_GUARDS"] = {["Yeti Demon"] = {["Small Yeti"] = true}},
+    ["BOSS_GUARD_RANGE"] = 300,
+    ["BOSS_NAMES"] = {"Akazo", "Datai", "Domae", "Enru", "Flame Trainee", "Fujiko", "Giyen", "Gyorei", "Gyutai", "Hoyuzo", "Insect Trainee", "Kaiden", "Mother Bear", "Nezura", "Obari", "Reaper", "Reaper Trainee Kuzan", "Rengu", "Saneri", "Serpent Trainee", "Shinora", "Sound Trainee", "Soryu Trainee Goki", "Stone Trainee", "Sumari", "Tai Chi Trainee Suzume", "Tengai", "Thunder Trainee", "Water Trainee Sabito", "Wind Trainee", "Yahari", "Yeti Demon", "Zentaro", "Zuko"},
+    ["BOSS_SKIP"] = 45,
+    ["BOSS_STREAM_GRACE"] = 3,
+    ["CARD_NAMES"] = {"AscendClan", "Clan", "Event", "ExtraLife", "Forge", "Fortune", "Heal", "Points", "Potion", "Reroll", "Revive", "Skill", "SkillSwap", "Skip", "SkipFloor", "Stat", "SwapMap", "Trade", "Weapon"},
+    ["CAST_GRACE"] = 6,
+    ["CAST_MIN_GAP"] = 0.2,
+    ["CHEST_GUARD_RANGE"] = 220,
+    ["CHEST_TIERS"] = {"T1", "T2", "T3"},
+    ["CODE_BACKOFF"] = {3, 6},
+    ["CODE_COOLDOWN"] = 20,
+    ["CODE_GAP"] = 1.5,
+    ["CODE_MOBS"] = {["KaruVillageBandit"] = "Bandit", ["VillageSpy"] = "*Civilian*", ["HoyuzoSub"] = "Hoyuzo Subordinate", ["KaidenSub"] = "Kaiden Subordinate", ["ReaperTrainee"] = "Reaper Trainee Kuzan", ["SoryuTrainee"] = "Soryu Trainee Goki", ["TaiChiTrainee"] = "Tai Chi Trainee Suzume", ["WaterTrainee"] = "Water Trainee Sabito"},
+    ["CRYSTAL_NAME"] = "Tower Crystal",
+    ["DELIVERY_QUEST"] = "Ill deliver the supply box(Lv 70)",
+    ["EXP_BUNDLE_POINTS"] = 3500,
+    ["EXP_LISTING"] = "1, 000 Exp",
+    ["EXP_MAX_BUNDLES"] = 99,
+    ["EXP_PER_BUNDLE"] = 1000,
+    ["FISHING_BAITS"] = {"Worm", "Fish Head", "Golden Tentacle", "Drowned Lure"},
+    ["FISHING_CAST_RANGE"] = {6, 8, 10, 12},
+    ["FISHING_RODS"] = {"Legendary Fishing Rod", "Rare Fishing Rod", "Basic Fishing Rod"},
+    ["HEAL_CARDS"] = {["Heal"] = true},
+    ["HUNT_TIERS"] = {"Common", "UnCommon", "Rare", "Epic", "Legendary", "Mythic"},
+    ["LOCKOUT_TAGS"] = {"Stun", "CombatStun", "Strict_Stun", "KnockedOut", "Swapping", "combatdisabled"},
+    ["MAX_LOOK_PITCH"] = 0.82,
+    ["MIN_AIM_REACH"] = 1,
+    ["MOB_NAMES"] = {"Akazo", "Bandit", "Bear Cub", "Beast Born Demon", "Blood Hounded Demon", "Cache Lancer", "Cache Prowler", "Datai", "Domae", "Enru", "Fire Profound Demon", "Flame Trainee", "Fujiko", "Giyen", "Greater Demon", "Grove Raider", "Gyorei", "Gyutai", "High Demon", "Hoyuzo", "Hoyuzo Subordinate", "Ice Profound Demon", "Insect Trainee", "Kaiden", "Kaiden Subordinate", "Kanoe Demon Slayer", "Lancer Captain", "Lesser Demon", "Mizunoe Demon Slayer", "Mizunoto", "Mother Bear", "Nezura", "Prowler Captain", "Raid Captain", "Reaper", "Reaper Trainee Kuzan", "Rengu", "Saneri", "Serpent Trainee", "Shinora", "Soryu Trainee Goki", "Sound Trainee", "Stone Trainee", "Sumari", "Tai Chi Trainee Suzume", "Tengai", "Thunder Trainee", "Water Trainee Sabito", "Wind Trainee", "Yahari", "Zentaro", "Zuko"},
+    ["MOVEMENT_MODES"] = {"Tween", "Teleport"},
+    ["NEVER_CAST"] = {["Blocking"] = true, ["Dash"] = true, ["Double_Jump"] = true},
+    ["ORBIT_SPEED"] = 1.8,
+    ["PARRY_GAP"] = 0.1,
+    ["PASSIVE_MOBS"] = {["Civilian"] = true, ["*Civilian*"] = true},
+    ["PERMIT_QUEST"] = "Ill find the permit stamp(Lv 45)",
+    ["POSITION_TYPES"] = {"Above", "Below", "Behind", "Front", "Side", "Orbit", "Inside"},
+    ["POTION_NAMES"] = {"Health Elixir", "Health Potion", "Health Regen Elixir", "Health Regen Potion", "Stamina Regen Elixir", "Stamina Regen Potion", "Underwater Breathing Potion"},
+    ["REFUSAL_GAP"] = 0.35,
+    ["Reset"] = 4045,
+    ["SHC_PATIENCE"] = 6,
+    ["SHOP_VENDORS"] = {["Regular Katana"] = "Raze", ["Fancy Katana"] = "Raze", ["Health Regen Potion"] = "Rika", ["Stamina Regen Potion"] = "Rika", ["Basic Fishing Rod"] = "Fisherman Jeso", ["Rare Fishing Rod"] = "Fisherman Jeso", ["Worm"] = "Fisherman Jeso", ["Fish Head"] = "Baitmonger Nori", ["Shovel"] = "Winter Store Rep Lynx"},
+    ["SLOT_NAMES"] = {"One", "Two", "Three", "Four", "Five"},
+    ["SOUL_NAMES"] = {["Weak Soul"] = true, ["Strong Soul"] = true, ["Brave Soul"] = true},
+    ["STARTER_ROD"] = "Basic Fishing Rod",
+    ["STAT_NODES"] = {["Max Health"] = true, ["Max Stamina"] = true, ["Additional Damage"] = true, ["Stamina Regen Speed"] = true, ["Health Regen Speed"] = true, ["Block Regen"] = true, ["Block Points"] = true},
+    ["STAT_WEIGHTS"] = {["Max Health"] = 1, ["Max Stamina"] = 0.6, ["Additional Damage"] = 25, ["Additional Damage Factor"] = 900, ["Movement Speed Factor"] = 300, ["Stamina Regen Speed"] = 120, ["Health Regen Speed"] = 120, ["Block Points"] = 30, ["Block Regen"] = 80},
+    ["TRAINING_CODES"] = {["Meditation"] = true, ["Pushups"] = true, ["Squat"] = true, ["Boulder Push"] = true, ["Boulder Split"] = true, ["Target Shooting"] = true, ["Cup Game"] = true, ["Parkour Dungeon"] = true},
+    ["TRAINING_NAMES"] = {"Boulder Push", "Boulder Split", "Cup Game", "Meditation", "Pushups", "Squat", "Target Shooting"},
+    ["TRAINING_TIMEOUT"] = 180,
+    ["VERTICAL_CLEARANCE"] = 2,
 }
+-- Значения, которые модули считают своими (источник — артефакт, строки 21156/21157/28566)
+CONST["ARRIVE_RADIUS"] = CONST["ARRIVE_RADIUS"] or Move.bob["ARRIVE_RADIUS"]
+CONST["BLINK_HOLD"]    = CONST["BLINK_HOLD"]    or Move.bob["BLINK_HOLD"]
+CONST["REFUSAL_GAP"]   = CONST["REFUSAL_GAP"]   or (Skills.state and Skills.state["REFUSAL_GAP"])
+CONST["CAST_GRACE"]    = CONST["CAST_GRACE"]    or Skills["CAST_GRACE"]
+CONST["CAST_MIN_GAP"]  = CONST["CAST_MIN_GAP"]  or Skills["CAST_MIN_GAP"]
+for _, key in ipairs({ "SLOT_NAMES", "CHEST_TIERS", "CHEST_GUARD_RANGE", "LOCKOUT_TAGS",
+                       "PASSIVE_MOBS", "STAT_WEIGHTS", "POTION_NAMES", "HUNT_TIERS",
+                       "BREATHINGS", "TRAINING_NAMES", "TRAINING_TIMEOUT" }) do
+    if CONST[key] == nil and Core.constants[key] ~= nil then CONST[key] = Core.constants[key] end
+end
+CONST["PASSIVE_MOBS"] = CONST["PASSIVE_MOBS"] or {}
 
 -- Источник списка регионов: cKb[59] (канонически — пул 1319; во второй сборке тот
 -- же слот указывает на пул 2112, который читает LocalPlayer.Humanoids.Regions).
@@ -4944,11 +5012,43 @@ end
 -- 5. СЛОТЫ cKb: слот → реализация (каноническая карта, см. ROADMAP)
 -- ---------------------------------------------------------------------------
 local slotWarned = {}
+-- Непрочитанный слот: вместо nil отдаём «цепную» заглушку, чтобы код не падал
+-- сразу, а один раз предупредил и пошёл дальше (её можно вызвать и индексировать).
+local slotWarned = {}
+local function chain_stub(name)
+    local obj = {}
+    return setmetatable(obj, {
+        __index = function(self, key)
+            local child = chain_stub(name .. "." .. tostring(key))
+            rawset(self, key, child)
+            return child
+        end,
+        __call = function() return chain_stub(name .. "()") end,
+        __tostring = function() return name end,
+        __add = function() return 0 end, __sub = function() return 0 end,
+        __lt = function() return false end, __le = function() return false end,
+    })
+end
+local function missing_slot(key)
+    if not slotWarned[key] then
+        slotWarned[key] = true
+        warn(("[Ouroboros] cKb[%s]: слот не вычитан из артефакта"):format(tostring(key)))
+    end
+    return chain_stub("cKb[" .. tostring(key) .. "]")
+end
+
+-- Публичный API (cKb[51]): сеттеры + трекер отмены перемещения.
+local API = {}
+API["Track"] = function(fn) return fn end
+
 cKb = setmetatable({
-    [3]   = stub("cKb[3] (источник слотов квестов)"),
+    [3]   = chain_stub("cKb[3]"),                -- источник слотов квестов (не вычитан)
     [8]   = Farm.QuestStep,
-    [9]   = Move.GetCharacter,
-    [13]  = function(condition, seconds)                  -- пул 4633/4512
+    [9]   = function()                           -- персонаж: cKb[126]["Character"]
+        local player = Core.Services.LocalPlayer
+        return player and player["Character"]
+    end,
+    [13]  = function(condition, seconds)         -- ожидание условия (пул 4633/4512)
         local deadline = os.clock() + (seconds or 0)
         while os.clock() < deadline do
             if condition() then return true end
@@ -4956,52 +5056,80 @@ cKb = setmetatable({
         end
         return false
     end,
+    [22]  = Farm.ChestStep,
+    [23]  = 1110,                                -- интервал воркера экипировки
+    [24]  = missing_slot(24),                    -- игровой объект скилла по имени
+    [27]  = Equip.EquipSlot,
+    [31]  = Equip.EquipWeapon,
+    [36]  = Equip.Inventory,
     [37]  = Move.Detach,
-    [38]  = function(key)          -- фича включена? (UI-тумблеры aVS)
-        local toggle = Core.api and Core.api["toggles"] and Core.api["toggles"][key]
+    [38]  = function(key)                        -- фича включена? (UI-тумблеры)
+        local toggle = Core.api and Core.api.toggles and Core.api.toggles[key]
         if toggle ~= nil then return toggle["Value"] == true end
-        return true                -- без UI считаем фичу включённой
+        return true
     end,
-    [48]  = stub("cKb[48] (уровень игрока)"),
-    [51]  = nil,                                          -- ставится ниже из шагов
+    [42]  = missing_slot(42),                    -- ввод боя (cKb[51]["CombatInputs"])
+    [48]  = missing_slot(48),                    -- уровень игрока
+    [51]  = API,
     [52]  = Farm.QuestSlotBusy,
     [54]  = Core.priority,
+    [55]  = Equip.EquippedValue,
     [56]  = Core.priority,
     [59]  = Regions,
-    [63]  = stub("cKb[63] (контейнер регионов)"),
+    [60]  = Equip.EquippedByName,
+    [61]  = Parry.CONFIG,
+    [63]  = missing_slot(63),                    -- контейнер регионов
+    [64]  = function(value)                      -- CFrame-конструктор
+        if typeof(value) == "CFrame" then return value end
+        return CFrame.new(value)
+    end,
     [69]  = Farm.TriggerPrompt,
-    [76]  = stub("cKb[76] (код задачи квеста)"),
+    [71]  = false,                               -- флаг анти-АФК
+    [72]  = Combat.tweaks,
+    [76]  = missing_slot(76),                    -- код задачи квеста
+    [77]  = {                                    -- хелперы скиллов (cKb[77])
+        owns = Skills.owns, claim = Skills.claim, held = Skills.held,
+    },
     [81]  = Move.CONFIG,
-    [84]  = stub("cKb[84] (проверка промпта)"),
+    [83]  = Equip.EquipBest,
+    [84]  = Farm.StartController,
     [86]  = Move.WaitReady,
     [87]  = Move.CancelMove,
     [91]  = Farm.controllers,
     [94]  = Farm.QuestRemove,
     [97]  = Move.SetCollide,
     [98]  = Farm.Count,
+    [99]  = Combat.tweaks,
     [100] = Core.Report,
+    [102] = { EquipWeapon = Equip.EquipWeapon },
+    [104] = Equip.ItemScore,
+    [106] = missing_slot(106),                   -- обновление списка скиллов
+    [107] = function() return Equip.EquippedValue() end,
     [110] = Farm.QuestData,
+    [111] = Farm.SoulStep,
     [118] = function(v) return type(v) == "function" end,
     [119] = function(fn, ...) return pcall(fn, ...) end,
     [120] = Move.MoveTo,
+    [122] = missing_slot(122),                   -- проверка подтверждения парирования
+    [123] = missing_slot(123),                   -- module-таблица (playerValues и пр.)
     [124] = Move.GetHumanoid,
     [126] = Core.Services.LocalPlayer,
+    [130] = function(key)                        -- перезапуск контроллера по ключу
+        local controller = Farm.controllers[key .. "Controller"]
+        if controller then Farm.StopController(controller); Farm.StartController(controller) end
+    end,
+    [131] = function() return Core.Services.LocalPlayer end,   -- Utility.GetData
     [132] = F853(Core.Services.LocalPlayer),
-    [136] = nil,    -- таблица строк пула, ставится ниже (POOL)
+    [136] = POOL,                                -- строки пула
     [137] = Farm.QuestHolder,
     [138] = Farm.ClaimReadiness,
     [141] = CONST,
     [142] = Farm.QuestName,
     [145] = Move.GetRootPart,
-}, {
-    __index = function(_, key)
-        if not slotWarned[key] then
-            slotWarned[key] = true
-            warn(("[Ouroboros] cKb[%s]: слот не вычитан"):format(tostring(key)))
-        end
-        return nil
-    end,
-})
+    [4004] = function(seconds, fn) return task.delay(seconds, fn) end,
+}, { __index = function(_, key) return missing_slot(key) end })
+
+for name, fn in pairs(API) do end                  -- API уже содержит Track
 
 -- ---------------------------------------------------------------------------
 -- 6. ПСЕВДОНИМЫ артефакта (имена, которыми модули зовут друг друга)
@@ -5037,6 +5165,7 @@ local M = { Core = Core, Move = Move, Farm = Farm, Skills = Skills, Combat = Com
             Equip = Equip, Parry = Parry, Config = Config, UI = UI, slots = cKb }
 
 -- Сеттеры, которые уже реализованы в модулях (ключ конфига → функция).
+-- Они же попадают в публичный API cKb[51] — так же, как в артефакте.
 function M.Setters()
     local setters = {
         SetLootRange      = Farm.SetLootRange,
@@ -5057,7 +5186,30 @@ function M.Setters()
         SetAutoEquip          = Equip.SetAutoEquip,
         SetAutoParry          = Parry.SetAutoParry,
     }
+    for name, fn in pairs(setters) do
+        if cKb[51][name] == nil then cKb[51][name] = fn end
+    end
     return setters
+end
+
+-- Тик: упрощённый драйвер над уже вычитанными шагами.
+-- В артефакте это один общий цикл-машина (pc cKb[73], entry 3720), который ещё
+-- не восстановлен; здесь шаги вызываются по Heartbeat и сами решают, положено ли
+-- им работать (bnB + приоритет + флаги фич).
+function M.StartSteps()
+    if M._tick then return M._tick end
+    M._tick = Core.Services.RunService.Heartbeat:Connect(function()
+        if not Core.CanAct() then return end
+        pcall(Combat.CombatTick)
+        pcall(Skills.SkillStep)
+        pcall(Parry.BlockTick)
+        pcall(Equip.EquipStep)
+    end)
+    return M._tick
+end
+
+function M.StopSteps()
+    if M._tick then M._tick:Disconnect() M._tick = nil end
 end
 
 -- Запуск: UI (если доступна библиотека) + авто-шаги, которые уже вычитаны.
@@ -5078,6 +5230,26 @@ function M.Boot(options)
         M.ui = ui
     end
     return { ui = ui, library = library }
+end
+
+-- Автозапуск при загрузке исполнителем (как в артефакте).
+-- Отключается флагом getgenv().OUROBOROS_NO_AUTORUN = true.
+if type(game) == "table" and type(task) == "table" then
+    local env = (type(getgenv) == "function" and getgenv()) or _G
+    if not env["OUROBOROS_NO_AUTORUN"] then
+        local http = (type(HttpGet) == "function") and HttpGet
+            or function(url) return game:HttpGet(url) end
+        local ok, err = pcall(function()
+            M.Boot({ loadLibrary = true, HttpGet = http })
+            M.StartSteps()
+        end)
+        if ok then
+            print("[Ouroboros] recon: UI собран, шаги запущены "
+                .. "(тик упрощённый: общий цикл артефакта cKb[73] не восстановлен)")
+        else
+            warn("[Ouroboros] recon: запуск не удался: " .. tostring(err))
+        end
+    end
 end
 
 return M

@@ -80,12 +80,20 @@ local POOL = {
 __POOL__
 }
 local CONST = {
-    ARRIVE_RADIUS = Move.bob["ARRIVE_RADIUS"],
-    BLINK_HOLD    = Move.bob["BLINK_HOLD"],
-    REFUSAL_GAP   = Skills.state and Skills.state["REFUSAL_GAP"],
-    CAST_GRACE    = Skills["CAST_GRACE"],
-    CAST_MIN_GAP  = Skills["CAST_MIN_GAP"],
+__CONST__
 }
+-- Значения, которые модули считают своими (источник — артефакт, строки 21156/21157/28566)
+CONST["ARRIVE_RADIUS"] = CONST["ARRIVE_RADIUS"] or Move.bob["ARRIVE_RADIUS"]
+CONST["BLINK_HOLD"]    = CONST["BLINK_HOLD"]    or Move.bob["BLINK_HOLD"]
+CONST["REFUSAL_GAP"]   = CONST["REFUSAL_GAP"]   or (Skills.state and Skills.state["REFUSAL_GAP"])
+CONST["CAST_GRACE"]    = CONST["CAST_GRACE"]    or Skills["CAST_GRACE"]
+CONST["CAST_MIN_GAP"]  = CONST["CAST_MIN_GAP"]  or Skills["CAST_MIN_GAP"]
+for _, key in ipairs({ "SLOT_NAMES", "CHEST_TIERS", "CHEST_GUARD_RANGE", "LOCKOUT_TAGS",
+                       "PASSIVE_MOBS", "STAT_WEIGHTS", "POTION_NAMES", "HUNT_TIERS",
+                       "BREATHINGS", "TRAINING_NAMES", "TRAINING_TIMEOUT" }) do
+    if CONST[key] == nil and Core.constants[key] ~= nil then CONST[key] = Core.constants[key] end
+end
+CONST["PASSIVE_MOBS"] = CONST["PASSIVE_MOBS"] or {}
 
 -- Источник списка регионов: cKb[59] (канонически — пул 1319; во второй сборке тот
 -- же слот указывает на пул 2112, который читает LocalPlayer.Humanoids.Regions).
@@ -110,11 +118,43 @@ end
 -- 5. СЛОТЫ cKb: слот → реализация (каноническая карта, см. ROADMAP)
 -- ---------------------------------------------------------------------------
 local slotWarned = {}
+-- Непрочитанный слот: вместо nil отдаём «цепную» заглушку, чтобы код не падал
+-- сразу, а один раз предупредил и пошёл дальше (её можно вызвать и индексировать).
+local slotWarned = {}
+local function chain_stub(name)
+    local obj = {}
+    return setmetatable(obj, {
+        __index = function(self, key)
+            local child = chain_stub(name .. "." .. tostring(key))
+            rawset(self, key, child)
+            return child
+        end,
+        __call = function() return chain_stub(name .. "()") end,
+        __tostring = function() return name end,
+        __add = function() return 0 end, __sub = function() return 0 end,
+        __lt = function() return false end, __le = function() return false end,
+    })
+end
+local function missing_slot(key)
+    if not slotWarned[key] then
+        slotWarned[key] = true
+        warn(("[Ouroboros] cKb[%s]: слот не вычитан из артефакта"):format(tostring(key)))
+    end
+    return chain_stub("cKb[" .. tostring(key) .. "]")
+end
+
+-- Публичный API (cKb[51]): сеттеры + трекер отмены перемещения.
+local API = {}
+API["Track"] = function(fn) return fn end
+
 cKb = setmetatable({
-    [3]   = stub("cKb[3] (источник слотов квестов)"),
+    [3]   = chain_stub("cKb[3]"),                -- источник слотов квестов (не вычитан)
     [8]   = Farm.QuestStep,
-    [9]   = Move.GetCharacter,
-    [13]  = function(condition, seconds)                  -- пул 4633/4512
+    [9]   = function()                           -- персонаж: cKb[126]["Character"]
+        local player = Core.Services.LocalPlayer
+        return player and player["Character"]
+    end,
+    [13]  = function(condition, seconds)         -- ожидание условия (пул 4633/4512)
         local deadline = os.clock() + (seconds or 0)
         while os.clock() < deadline do
             if condition() then return true end
@@ -122,52 +162,80 @@ cKb = setmetatable({
         end
         return false
     end,
+    [22]  = Farm.ChestStep,
+    [23]  = 1110,                                -- интервал воркера экипировки
+    [24]  = missing_slot(24),                    -- игровой объект скилла по имени
+    [27]  = Equip.EquipSlot,
+    [31]  = Equip.EquipWeapon,
+    [36]  = Equip.Inventory,
     [37]  = Move.Detach,
-    [38]  = function(key)          -- фича включена? (UI-тумблеры aVS)
-        local toggle = Core.api and Core.api["toggles"] and Core.api["toggles"][key]
+    [38]  = function(key)                        -- фича включена? (UI-тумблеры)
+        local toggle = Core.api and Core.api.toggles and Core.api.toggles[key]
         if toggle ~= nil then return toggle["Value"] == true end
-        return true                -- без UI считаем фичу включённой
+        return true
     end,
-    [48]  = stub("cKb[48] (уровень игрока)"),
-    [51]  = nil,                                          -- ставится ниже из шагов
+    [42]  = missing_slot(42),                    -- ввод боя (cKb[51]["CombatInputs"])
+    [48]  = missing_slot(48),                    -- уровень игрока
+    [51]  = API,
     [52]  = Farm.QuestSlotBusy,
     [54]  = Core.priority,
+    [55]  = Equip.EquippedValue,
     [56]  = Core.priority,
     [59]  = Regions,
-    [63]  = stub("cKb[63] (контейнер регионов)"),
+    [60]  = Equip.EquippedByName,
+    [61]  = Parry.CONFIG,
+    [63]  = missing_slot(63),                    -- контейнер регионов
+    [64]  = function(value)                      -- CFrame-конструктор
+        if typeof(value) == "CFrame" then return value end
+        return CFrame.new(value)
+    end,
     [69]  = Farm.TriggerPrompt,
-    [76]  = stub("cKb[76] (код задачи квеста)"),
+    [71]  = false,                               -- флаг анти-АФК
+    [72]  = Combat.tweaks,
+    [76]  = missing_slot(76),                    -- код задачи квеста
+    [77]  = {                                    -- хелперы скиллов (cKb[77])
+        owns = Skills.owns, claim = Skills.claim, held = Skills.held,
+    },
     [81]  = Move.CONFIG,
-    [84]  = stub("cKb[84] (проверка промпта)"),
+    [83]  = Equip.EquipBest,
+    [84]  = Farm.StartController,
     [86]  = Move.WaitReady,
     [87]  = Move.CancelMove,
     [91]  = Farm.controllers,
     [94]  = Farm.QuestRemove,
     [97]  = Move.SetCollide,
     [98]  = Farm.Count,
+    [99]  = Combat.tweaks,
     [100] = Core.Report,
+    [102] = { EquipWeapon = Equip.EquipWeapon },
+    [104] = Equip.ItemScore,
+    [106] = missing_slot(106),                   -- обновление списка скиллов
+    [107] = function() return Equip.EquippedValue() end,
     [110] = Farm.QuestData,
+    [111] = Farm.SoulStep,
     [118] = function(v) return type(v) == "function" end,
     [119] = function(fn, ...) return pcall(fn, ...) end,
     [120] = Move.MoveTo,
+    [122] = missing_slot(122),                   -- проверка подтверждения парирования
+    [123] = missing_slot(123),                   -- module-таблица (playerValues и пр.)
     [124] = Move.GetHumanoid,
     [126] = Core.Services.LocalPlayer,
+    [130] = function(key)                        -- перезапуск контроллера по ключу
+        local controller = Farm.controllers[key .. "Controller"]
+        if controller then Farm.StopController(controller); Farm.StartController(controller) end
+    end,
+    [131] = function() return Core.Services.LocalPlayer end,   -- Utility.GetData
     [132] = F853(Core.Services.LocalPlayer),
-    [136] = nil,    -- таблица строк пула, ставится ниже (POOL)
+    [136] = POOL,                                -- строки пула
     [137] = Farm.QuestHolder,
     [138] = Farm.ClaimReadiness,
     [141] = CONST,
     [142] = Farm.QuestName,
     [145] = Move.GetRootPart,
-}, {
-    __index = function(_, key)
-        if not slotWarned[key] then
-            slotWarned[key] = true
-            warn(("[Ouroboros] cKb[%s]: слот не вычитан"):format(tostring(key)))
-        end
-        return nil
-    end,
-})
+    [4004] = function(seconds, fn) return task.delay(seconds, fn) end,
+}, { __index = function(_, key) return missing_slot(key) end })
+
+for name, fn in pairs(API) do end                  -- API уже содержит Track
 
 -- ---------------------------------------------------------------------------
 -- 6. ПСЕВДОНИМЫ артефакта (имена, которыми модули зовут друг друга)
@@ -203,6 +271,7 @@ local M = { Core = Core, Move = Move, Farm = Farm, Skills = Skills, Combat = Com
             Equip = Equip, Parry = Parry, Config = Config, UI = UI, slots = cKb }
 
 -- Сеттеры, которые уже реализованы в модулях (ключ конфига → функция).
+-- Они же попадают в публичный API cKb[51] — так же, как в артефакте.
 function M.Setters()
     local setters = {
         SetLootRange      = Farm.SetLootRange,
@@ -223,7 +292,30 @@ function M.Setters()
         SetAutoEquip          = Equip.SetAutoEquip,
         SetAutoParry          = Parry.SetAutoParry,
     }
+    for name, fn in pairs(setters) do
+        if cKb[51][name] == nil then cKb[51][name] = fn end
+    end
     return setters
+end
+
+-- Тик: упрощённый драйвер над уже вычитанными шагами.
+-- В артефакте это один общий цикл-машина (pc cKb[73], entry 3720), который ещё
+-- не восстановлен; здесь шаги вызываются по Heartbeat и сами решают, положено ли
+-- им работать (bnB + приоритет + флаги фич).
+function M.StartSteps()
+    if M._tick then return M._tick end
+    M._tick = Core.Services.RunService.Heartbeat:Connect(function()
+        if not Core.CanAct() then return end
+        pcall(Combat.CombatTick)
+        pcall(Skills.SkillStep)
+        pcall(Parry.BlockTick)
+        pcall(Equip.EquipStep)
+    end)
+    return M._tick
+end
+
+function M.StopSteps()
+    if M._tick then M._tick:Disconnect() M._tick = nil end
 end
 
 -- Запуск: UI (если доступна библиотека) + авто-шаги, которые уже вычитаны.
@@ -246,10 +338,51 @@ function M.Boot(options)
     return { ui = ui, library = library }
 end
 
+-- Автозапуск при загрузке исполнителем (как в артефакте).
+-- Отключается флагом getgenv().OUROBOROS_NO_AUTORUN = true.
+if type(game) == "table" and type(task) == "table" then
+    local env = (type(getgenv) == "function" and getgenv()) or _G
+    if not env["OUROBOROS_NO_AUTORUN"] then
+        local http = (type(HttpGet) == "function") and HttpGet
+            or function(url) return game:HttpGet(url) end
+        local ok, err = pcall(function()
+            M.Boot({ loadLibrary = true, HttpGet = http })
+            M.StartSteps()
+        end)
+        if ok then
+            print("[Ouroboros] recon: UI собран, шаги запущены "
+                .. "(тик упрощённый: общий цикл артефакта cKb[73] не восстановлен)")
+        else
+            warn("[Ouroboros] recon: запуск не удался: " .. tostring(err))
+        end
+    end
+end
+
 return M
 '''
 
 BOOT_TAIL = ''
+
+
+def lua_escape(text):
+    """Строка -> тело Lua-литерала: экранируем кавычки, слэши и управляющие.
+
+    В пуле артефакта есть значения с реальными управляющими символами
+    (например [3189] = "\\n" — настоящий перевод строки), поэтому мало
+    удвоить слэши: любой символ < 0x20 или 0x7F пишем как \\ddd.
+    """
+    out = []
+    for ch in text:
+        code = ord(ch)
+        if ch == "\\":
+            out.append("\\\\")
+        elif ch == '"':
+            out.append('\\"')
+        elif code < 32 or code == 127:
+            out.append("\\%03d" % code)       # \010, \013, \009 …
+        else:
+            out.append(ch)
+    return "".join(out)
 
 
 def pool_lua():
@@ -264,7 +397,7 @@ def pool_lua():
                 continue
             value = value if len(value) <= 40 else None
         if isinstance(value, str):
-            value = '"%s"' % value.replace("\\", "\\\\").replace('"', '\\"')
+            value = '"%s"' % lua_escape(value)
         elif isinstance(value, (int, float)):
             value = repr(value)
         else:
@@ -278,6 +411,16 @@ def pool_lua():
             row = []
     if row:
         lines.append("    " + ", ".join(row) + ",")
+    return "\n".join(lines)
+
+
+def const_lua():
+    """Литеральные константы cKb[141] из data/const_141.json -> поля Lua-таблицы."""
+    import json
+    data = json.load(open("data/const_141.json", encoding="utf-8"))
+    lines = []
+    for key in sorted(data):
+        lines.append("    [%s] = %s," % ('"%s"' % key, data[key]))
     return "\n".join(lines)
 
 
@@ -297,6 +440,7 @@ def main():
     parts.append(GLUE_TAIL)
     text = "\n".join(parts)
     text = text.replace("__POOL__", pool_lua())
+    text = text.replace("__CONST__", const_lua())
     open("ouroboros_recon.lua", "w", encoding="utf-8").write(text)
     print("wrote ouroboros_recon.lua (%d bytes)" % len("\n".join(parts)))
 
