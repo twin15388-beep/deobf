@@ -209,7 +209,10 @@ end
 
 ## 6. Что ещё не восстановлено
 
-* хвост `F853` (проверка направления «< 0.1» — сейчас через `facingMin`);
+* ✅ `F853` вычитан целиком (плоская дистанция, `distance < 0.1`, `Dot` с
+  `facingMin`), `F4381` (`cKb[58]`: bnB → `bnl.on` → generation → owner ==
+  `cKb[9]()` → аниматор записи `cKb[50][model]` → `track.IsPlaying` → Humanoid
+  жив → `bnl.npc`/`bnl.pvp`), `F3460`, `F4744`, `F5469`, `F2783`, `F288`;
 * `F3490`: второй проход по `combo/preset/running` (берётся первая подходящая запись);
 * `F4744` (хвост `in validate`: обход `cKb[50]` с `cKb[14]`) и `bom()` из `F288`;
 * `F3841` (ownership-цикл) — ✅ вычитан целиком (см. `ouroboros_esp.lua`);

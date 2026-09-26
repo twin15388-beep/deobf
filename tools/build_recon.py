@@ -164,7 +164,7 @@ cKb = setmetatable({
         end
         return false
     end,
-    [14]  = Parry.TrackModel,                    -- подписка на модель (cKb[14])
+    [14]  = Parry.UnwatchModel,                  -- F5469: отписка от модели (cKb[14])
     [17]  = Parry.BuildPresets,                  -- F3460: построить пресеты боя (cKb[34])
     [34]  = Parry.state.presets,                 -- таблица пресетов боя (заполняет F3460)
     [108] = Parry.PresetFor,                     -- F3490: пресет по анимации
@@ -257,6 +257,9 @@ cKb = setmetatable({
 }, { __index = function(_, key) return missing_slot(key) end })
 
 cKb[51]["BlockWork"] = Parry.state   -- bnl == cKb[51]["BlockWork"] (S2928)
+bnl = Parry.state                    -- псевдоним артефакта: bnl["step"] = F288 и др.
+bom = Parry.AcquireTargets           -- F2783: собрать цели рядом (зовётся из bnl["step"])
+bpO = Parry.TrackModel               -- подписка (bpO(model, isMob))
 cKb[50] = Parry.state.watched        -- cKb[50]: записи подписок по моделям
 ESP.viewer["clear"] = ESP.ClearMarks -- bpp["clear"] = F1060
 ESP.container["tweaks"] = Combat.tweaks         -- S752: cKb[99]["tweaks"] = cKb[72]
@@ -334,6 +337,7 @@ function M.StartSteps()
         pcall(Combat.CombatTick)
         pcall(Skills.SkillStep)
         pcall(Parry.BlockTick)
+        pcall(Parry.BlockWorkStep)                   -- bnl["step"] = F288
         pcall(Equip.EquipStep)
     end)
     return M._tick

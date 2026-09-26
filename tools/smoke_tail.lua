@@ -109,12 +109,19 @@ local ok11, err11 = pcall(function()
         GetPlayingAnimationTracks = function() return { track } end,
     }
     local humanoid = { Health = 100, FindFirstChildOfClass = function() return animator end }
+    -- цель InReach (F853) — модель с HumanoidRootPart: cKb[128] ищет именно его
+    local mobRoot = {
+        Position = Vector3.new(0, 0, 0),
+        CFrame = { LookVector = Vector3.new(0, 0, -1) },
+    }
     local model = {
         Parent = workspaceTable,
         Position = Vector3.new(0, 0, 0),
         CFrame = { LookVector = Vector3.new(0, 0, -1) },
         FindFirstChildOfClass = function() return humanoid end,
-        FindFirstChild = function() return nil end,
+        FindFirstChild = function(_, name)
+            return name == "HumanoidRootPart" and mobRoot or nil
+        end,
     }
     animation.AnimationId = "rbxassetid://123456789"
     cKb[34]["123456789"] = { { folder = "folder", preset = {}, combo = 1, running = false,
@@ -260,3 +267,67 @@ local ok13, err13 = pcall(function()
     print("[smoke]   Idle пропущен:", tostring(built and built["444444"] == nil))
 end)
 print("[smoke] Parry.BuildPresets:", ok13, tostring(err13))
+
+-- Сбор целей (bom = F2783) и отписка (cKb[14] = F5469)
+local ok14, err14 = pcall(function()
+    local function animation(name, id)
+        return { Name = name, AnimationId = id, IsPlaying = true, Speed = 1, TimePosition = 0.1,
+                 Stopped = services.RunService.Heartbeat,
+                 IsA = function(_, class) return class == "Animation" end }
+    end
+    local track = animation("Swing_1", "rbxassetid://777")
+    local animator = { AnimationPlayed = services.RunService.Heartbeat,
+                       GetPlayingAnimationTracks = function() return { track } end }
+    local humanoid = { Health = 100, FindFirstChildOfClass = function() return animator end }
+    local function mob(name, position)
+        local part = { Position = position, CFrame = { LookVector = Vector3.new(0, 0, -1) } }
+        local model = {
+            Name = name, Parent = services.Workspace,
+            IsA = function(_, class) return class == "Model" end,
+            FindFirstChildOfClass = function() return humanoid end,
+            FindFirstChild = function(_, child)
+                return child == "HumanoidRootPart" and part or nil
+            end,
+        }
+        return model
+    end
+    local near, far = mob("Near", Vector3.new(5, 0, 0)), mob("Far", Vector3.new(900, 0, 0))
+    local npcs = { GetChildren = function() return { near, far } end }
+    local region = { Name = "R1", FindFirstChild = function() return npcs end }
+    local regions = { GetChildren = function() return { region } end }
+    local humanoids = { FindFirstChild = function() return regions end }
+    services.Workspace.FindFirstChild = function(_, name)
+        return name == "Humanoids" and humanoids or nil
+    end
+    services.Players.GetPlayers = function() return { services.Players.LocalPlayer } end
+
+    M.Parry.state.generation = 0
+    M.Parry.state["radius"] = 40
+    M.Parry.state["npc"] = true
+    M.Parry.state["pvp"] = true
+    M.Parry.state["on"] = true
+    M.Parry.AcquireTargets()
+    local watched = 0
+    for _ in pairs(M.Parry.state.watched) do watched = watched + 1 end
+    print("[smoke] Parry.AcquireTargets: подписок =", watched,
+          "ближний подписан =", tostring(M.Parry.state.watched[near] ~= nil),
+          "дальний пропущен =", tostring(M.Parry.state.watched[far] == nil))
+
+    -- отписка (cKb[14]): запись уходит, входы по этой модели снимаются
+    M.Parry.state.entries[track] = { model = near, track = track }
+    M.Parry.UnwatchModel(near)
+    print("[smoke] Parry.UnwatchModel: запись убрана =",
+          tostring(M.Parry.state.watched[near] == nil),
+          "вход снят =", tostring(M.Parry.state.entries[track] == nil),
+          "cKb[14] это отписка =", tostring(cKb[14] == M.Parry.UnwatchModel),
+          "bpO это подписка =", tostring(bpO == M.Parry.TrackModel))
+
+    -- шаг блока (bnl["step"] = F288): без входа и без проблем — только статус
+    M.Parry.state["blockEntry"] = nil
+    M.Parry.BlockWorkStep()
+    print("[smoke] Parry.BlockWorkStep: статус =", tostring(M.Core.bpz["ParryStatus"]))
+    M.Parry.state["on"] = false
+    M.Parry.BlockWorkStep()
+    print("[smoke] Parry.BlockWorkStep (off): статус =", tostring(M.Core.bpz["ParryStatus"]))
+end)
+print("[smoke] Parry.AcquireTargets/step:", ok14, tostring(err14))

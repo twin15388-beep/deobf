@@ -45,7 +45,9 @@
      копии алиасов разобраны (см. `data/TICK_MAP.md` §5.1);
      ✅ в том числе `cKb[17] = F3460` (папка анимаций `Assets.Animations`,
      папки `*_Combat_Anims`, конфиг `Global.Combat_presets` → `Presets`);
-     осталось: хвост `F853` (направление);
+     ✅ вычитаны и `F853` (дистанция/«< 0.1»/`Dot`), `F4381` (годность входа,
+     с проверкой `owner == cKb[9]()`), `F5469` (отписка `cKb[14]`), `F2783`
+     (`bom` — сбор целей рядом), `F288` (`bnl["step"]` — надзор и статус);
    - ✅ ownership-цикл `bm8` (F3841) — ESP-подсветка мобов: `bpp = {marks={}}`
      (`cKb[99]["viewer"]`), метка `cKb[78] = F4034` (Highlight
      "OuroborosOuwlandOwnership", AlwaysOnTop, 0.7/0), снятие `cKb[112]`,

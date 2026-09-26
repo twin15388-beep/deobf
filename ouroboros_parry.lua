@@ -53,7 +53,8 @@ local parry = {
 }
 -- Опережающие объявления: на них ссылаются замыкания выше по файлу.
 local TrackModel, RequestRelease, BeginBlock, BlockTick, BlockRelease, EntryWindow,
-      OnAnimationPlayed, CombatCommand, LastHit, PresetFor
+      OnAnimationPlayed, CombatCommand, LastHit, PresetFor,
+      UnwatchModel, AcquireTargets
 
 -- bnl == cKb[51]["BlockWork"]: в артефакте это одна и та же таблица.
 -- Ссылку ставит сборка (tools/build_recon.py) после создания cKb[51].
@@ -63,7 +64,7 @@ parry["in validate"] = function()                  -- F4744 (S15950)
     parry.generation = parry.generation + 1        -- bnl["generation"] += 1
     table.clear(parry.entries)                     -- table.clear(bm0)
     for model in pairs(parry.watched) do           -- for x in pairs(cKb[50])
-        TrackModel(model)                          -- cKb[14](x) — подписаться заново
+        UnwatchModel(model)                        -- cKb[14](x) — отписка (F4744)
     end
     RequestRelease()                               -- bpa()
 end
@@ -130,26 +131,36 @@ end
 
 -- cKb[128] = F853: дотягивается ли цель (плоская дистанция + запас, при strict —
 -- ещё и «лицом ли» цель). Тело читается по S5779..S5795.
+-- cKb[128] = F853(target, reach, pad, strict): дотягиваемся ли до цели.
+--   Цель — модель: берётся её HumanoidRootPart (target:FindFirstChild); если у
+--   цели нет Parent — сразу false. Дальше:
+--     delta = мой корень (cKb[145]()) − их часть, обнуляем Y,
+--     distance > reach + pad → false;
+--     без strict → true (запас дистанции уже проверен);
+--     distance < 0.1 → true (вплотную);
+--     их LookVector по плоскости: Magnitude < 0.01 → true,
+--     иначе look.Unit:Dot(delta.Unit) >= cKb[61]["facingMin"] — «цель смотрит
+--     на нас» (facingMin = −0.35, то есть допускается и вбок/чуть в сторону).
 local function InReach(target, reach, pad, strict)   -- cKb[128] (F853)
     if not target then return false end              -- S5781/S5787
-    local parent = target["Parent"]                  -- S5785
-    if not parent then return false end              -- S5790/S5793
-    local root = cKb[145]()                          -- корень персонажа
-    if not root then return false end
-    if not parent["Position"] then return false end
+    local part = nil
+    if target["Parent"] then                         -- S5785/S5794
+        part = target:FindFirstChild("HumanoidRootPart")
+    end
+    local root = cKb[145]()                          -- S5790
+    if not part or not root then return false end    -- S5780/S5793/S5779
 
-    local delta = root["Position"] - parent["Position"]              -- S5791
+    local delta = root["Position"] - part["Position"]              -- S5791
     local flat = Vector3.new(delta.X, 0, delta.Z)
-    if flat.Magnitude > reach + (pad or 0) then return false end     -- S5791/S5789
-    if not strict then return true end                               -- S5792/S5784/S5788
+    local distance = flat["Magnitude"]
+    if distance > reach + (pad or 0) then return false end         -- S5789
+    if not strict then return true end                             -- S5792/S5784/S5788
+    if distance < 0.1 then return true end                         -- S5783/S5788
 
-    local look = parent["CFrame"] and parent["CFrame"]["LookVector"] -- S5782
-    if not look then return false end
+    local look = part["CFrame"]["LookVector"]                      -- S5782
     local lookFlat = Vector3.new(look.X, 0, look.Z)
-    if lookFlat.Magnitude < 0.01 then return false end               -- S5786
-    -- TODO(F853): хвост «< 0.1» — проверка направления; ставлю dot по facingMin
-    if flat.Magnitude < 0.01 then return true end
-    return lookFlat.Unit:Dot(flat.Unit) >= CONFIG.facingMin
+    if lookFlat["Magnitude"] < 0.01 then return true end           -- S5786
+    return lookFlat["Unit"]:Dot(flat["Unit"]) >= CONFIG["facingMin"]  -- S5795/S5786
 end
 
 -- ---------------------------------------------------------------------------
@@ -346,14 +357,18 @@ TrackModel = function(model, isMob)                  -- cKb[14]
     if rig then rig = rig:FindFirstChild("CustomRig") end         -- S13324
     if rig then rig = rig:FindFirstChild("AnimController") end    -- S13321
     if rig then                                                   -- S13307/S13325
-        animator = rig:FindFirstChildOfClass("Animator") or animator
+        animator = rig:FindFirstChildOfClass("Animator")          -- S13325 (заменяет!)
     end
 
     local record = parry.watched[model]                           -- S13327
-    if record and record["animator"] == animator then return end   -- S13313/S13320
-    if not ValidNumber(humanoid["Health"]) then return end         -- S13317/S13318
+    if record then
+        if record["animator"] == animator then return end          -- S13313/S13320: уже подписаны
+        UnwatchModel(model)                                        -- S13319: cKb[14](model)
+        record = nil
+    end
+    if not ValidNumber(humanoid and humanoid["Health"]) then return end  -- S13317/S13318
     if humanoid["Health"] <= 0 then return end                     -- S13326/S13311
-    if not animator then return end                                -- S13325
+    if not animator then return end                                -- S13325/S13315
 
     record = { animator = animator, stopped = {} }                 -- S13323
     parry.watched[model] = record                                  -- cKb[50][model]
@@ -380,6 +395,78 @@ TrackModel = function(model, isMob)                  -- cKb[14]
         onTrack(track)
     end
 end
+
+-- cKb[14] = F5469: отписаться от модели (S8727..S8729).
+--   Закрывает AnimationPlayed, все подписки на Stopped (и снимает boX[track]),
+--   убирает запись cKb[50][model] и снимает входы bm0, чья модель — эта.
+UnwatchModel = function(model)                        -- cKb[14] (F5469)
+    local record = parry.watched[model]               -- S8727
+    if not record then return end                     -- S8724
+    record["played"]:Disconnect()                     -- S8729
+    for track, connection in pairs(record["stopped"]) do
+        connection:Disconnect()
+        parry.armed[track] = nil                      -- boX[track] = nil
+    end
+    parry.watched[model] = nil                        -- cKb[50][model] = nil
+    for track, entry in pairs(parry.entries) do        -- for … in pairs(bm0)
+        if entry["model"] == model then               -- S>=4
+            WithdrawEntry(track, true)                -- bmL(track, true)
+        end
+    end
+end
+parry.UnwatchModel = UnwatchModel
+
+-- bom = F2783: собрать цели рядом и подписаться (S16209..S16210).
+--   chI = «увиденные»: мобы (Workspace.Humanoids.Regions[*].ActiveNpcs) ближе
+--   bnl["radius"] к нашему корню (cKb[145]()) → bpO(model, true);
+--   игроки (Players:GetPlayers(), кроме cKb[126]) с Character.HumanoidRootPart
+--   ближе радиуса → bpO(character, false). Затем по cKb[50]: кого не видели
+--   или кто потерял Parent — cKb[14](model) (отписка).
+AcquireTargets = function()                           -- bom (F2783)
+    local root = cKb[145]()                           -- S16209
+    local position = root and root["Position"] or nil -- S16204
+    local seen = {}                                   -- chI
+
+    if position and parry["npc"] then                 -- S16204/S16202
+        local workspaceService = game:GetService("Workspace")
+        local humanoids = workspaceService:FindFirstChild("Humanoids")   -- S16202
+        local regions = humanoids and humanoids:FindFirstChild("Regions")-- S16207/S16199
+        for _, region in ipairs(regions and regions:GetChildren() or {}) do
+            local npcs = region:FindFirstChild("ActiveNpcs")             -- S3
+            for _, model in ipairs(npcs and npcs:GetChildren() or {}) do
+                local part = nil
+                if model:IsA("Model") then                               -- S3/S6
+                    part = model:FindFirstChild("HumanoidRootPart")
+                end
+                if part and (part["Position"] - position)["Magnitude"] <= parry["radius"] then
+                    seen[model] = true                                   -- S4/S9
+                    TrackModel(model, true)                              -- bpO(model, true)
+                end
+            end
+        end
+    end
+
+    if position and parry["pvp"] then                 -- S16208/S16198
+        local players = game:GetService("Players")
+        for _, player in ipairs(players:GetPlayers()) do
+            if player ~= players["LocalPlayer"] then                 -- cOs[126] = cKb[126]
+                local character = player["Character"]                -- S2/S1
+                local part = character and character:FindFirstChild("HumanoidRootPart")
+                if part and (part["Position"] - position)["Magnitude"] <= parry["radius"] then
+                    seen[character] = true                           -- S4/S9
+                    TrackModel(character, false)                     -- bpO(character, false)
+                end
+            end
+        end
+    end
+
+    for model in pairs(parry.watched) do              -- S16210 (чистка)
+        if not seen[model] or not model["Parent"] then
+            UnwatchModel(model)                       -- cKb[14](model)
+        end
+    end
+end
+parry.AcquireTargets = AcquireTargets
 
 -- ---------------------------------------------------------------------------
 -- Решение по играющей анимации (boh = F324, S3756..S3779)
@@ -656,7 +743,19 @@ local function BlockWorkStep()                       -- F288
             bpz["ParryStatus"] = "Combat presets unavailable"   -- S9491
             return
         end
-        return                                       -- входа нет — докладывать нечего
+        AcquireTargets()                             -- S9508: bom() — собрать цели рядом
+        entry = work["entry"]                        -- перечитать: вход мог появиться
+        if not entry then
+            if parry["blockEntry"] then              -- S9482/S9506
+                bpz["ParryStatus"] = "Waiting for previous block release"  -- S9505
+            else
+                local s = parry["stats"]             -- S9480/S9488/S9496
+                bpz["ParryStatus"] = string.format(
+                    "%d attempts, %d blocks, %d missed, %d cancelled",
+                    s["fired"], s["locked"], s["missed"], s["cancelled"])
+            end
+            return
+        end
     end
 
     if entry["phase"] == "boxFill" then              -- S9490
@@ -754,30 +853,34 @@ local function ParryScheduler()                      -- cKb[65] (F3871)
     end
 end
 
--- bnl, cKb[58] = F4381: годен ли вход блока (S8933..S8961)
---   Проверки: модель жива (Humanoid, Health > 0), фильтр npc/pvp по isMob,
---   поколение входа совпадает с bnl["generation"], аниматор тот же,
---   трек ещё играет, скрипт может действовать.
+-- bnl, cKb[58] = F4381 (S8959..S8947): годен ли вход блока.
+--   Порядок проверок — как в артефакте:
+--     bnB() → bnl["on"] → entry.generation == bnl.generation →
+--     entry.owner == cKb[9]() (наш персонаж) →
+--     аниматор записи cKb[50][model] тот же (cgz.animator == entry.animator) →
+--     трек ещё играет (track.IsPlaying) → модель жива
+--     (Parent есть, Humanoid есть, Humanoid.Health > 0) →
+--     фильтр по isMob: моб → bnl["npc"], игрок → bnl["pvp"]; возвращается
+--     именно значение этого флага.
 function EntryValid(entry)
     if type(entry) ~= "table" then return false end
     local model, track = entry["model"], entry["track"]
-    if not model or not model["Parent"] then return false end        -- S8959/S8952
-    local humanoid = model:FindFirstChildOfClass("Humanoid")         -- S8933
-    if not humanoid then return false end                            -- S8934
-    if not ValidNumber(humanoid["Health"]) then return false end     -- S8958
-    if humanoid["Health"] <= 0 then return false end                 -- S8956/S8947
-
-    if entry["isMob"] then                                           -- S8939/S8935
-        if not parry["npc"] then return false end
-    else
-        if not parry["pvp"] then return false end                    -- S8936/S8944
+    local record = model and parry.watched[model] or nil      -- cgz = cKb[50][model]
+    local humanoid = nil
+    if model and model["Parent"] then                          -- S8959 → S8933/S8952
+        humanoid = model:FindFirstChildOfClass("Humanoid")
     end
-    if entry["generation"] ~= parry.generation then return false end -- S8946
-    if track and not track["IsPlaying"] then return false end        -- S8943
-    local record = parry.watched[model]                              -- S8959 (cgz)
-    if record and record["animator"] ~= entry["animator"] then return false end
-    if not bnB() then return false end                               -- S8952
-    return true
+    local ok = bnB()                                           -- S8952
+        and parry["on"]                                        -- S8962
+        and entry["generation"] == parry.generation            -- S8946
+        and entry["owner"] == cKb[9]()                         -- S8941
+        and (record == nil or record["animator"] == entry["animator"])   -- S8954
+        and (track == nil or track["IsPlaying"])               -- S8943
+        and humanoid ~= nil                                    -- S8948/S8934
+        and humanoid["Health"] > 0                             -- S8958
+    if not ok then return false end                            -- S8956/S8947
+    if entry["isMob"] then return parry["npc"] end             -- S8939/S8935
+    return parry["pvp"]                                        -- S8936/S8944
 end
 
 -- bnl-обёртка Heartbeat: F4910 (S2928). Флаг bn9 — защита от повторного входа.
@@ -821,6 +924,9 @@ return {
     WithdrawEntry = WithdrawEntry,
     TrackModel = TrackModel,
     BuildPresets = BuildPresets,                     -- cKb[17] = F3460
+    TrackModel = TrackModel,                         -- bpO (подписка)
+    UnwatchModel = UnwatchModel,                     -- cKb[14] = F5469 (отписка)
+    AcquireTargets = AcquireTargets,                 -- bom = F2783
     EntryWindow = EntryWindow,
     RequestRelease = RequestRelease,
     BeginBlock = BeginBlock,
