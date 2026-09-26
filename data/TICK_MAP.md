@@ -144,18 +144,64 @@ release» (фаза `releasing`), иначе — `"%d attempts, %d blocks, %d mi
 (проверка входа, 2 арг.), `bmL(entry, bool)` (взвести/снять), счётчики
 `stats.missed` (просрочен `latest`) и `stats.fired`/`locked`.
 
+### 5.1 Восстановленная логика `F3871` (планировщик)
+
+```
+if not bnB() then return end                  -- S373
+if not bnl.on then return end                 -- S385
+now = os.clock(); target = nil
+for _, entry in pairs(bm0) do                 -- первый проход
+    if not cKb[58](entry) then bmL(entry, true)                -- S21/S13
+    elseif (not entry.due) or (not bmN(entry, now)) then bmL(entry, true)   -- S6/S19/S18
+    elseif not cKb[58](entry) then bmL(entry, true)            -- S9/S3
+    elseif now > entry.latest then stats.missed += 1; bmL(entry, false)     -- S5/S8
+    elseif now >= entry.due
+       and cKb[128](entry.model, entry["in fo"].reach, cKb[61].reachPad, true)
+       and (not target or entry.latest < target.latest) then target = entry  -- S20..S7/S4
+    end
+end
+if not target and not cKb[51].BlockWork.entry then return end   -- S381/S362/S364
+values = cKb[123].playerValues(); if not values then return end -- S380/S369
+kind = cKb[41](values)                                          -- "block" / "none"
+if kind == "none" then return end                               -- S386
+if kind == "block" and not bnl.mitigate then return end          -- S383/S374
+if not cKb[58](target) then return end                          -- S366
+if os.clock() > target.latest then return end                    -- S371
+group, protectUntil = {}, target.protectUntil                   -- S378
+for _, entry in pairs(bm0) do
+    if entry.earliest and now >= entry.earliest and now <= entry.latest then
+        group[#group+1] = entry
+        protectUntil = max(protectUntil, entry.protectUntil)
+    end
+end
+if cKb[143](protectUntil) then            -- «можно бить» (окно защиты истекло)
+    if kind == "block" then stats.locked += 1 else stats.fired += 1 end   -- S382/S372
+    for _, entry in ipairs(group) do bmL(entry, false) end               -- S367
+end
+```
+
+`bmL(entry, true/false)` — взвод/снятие входа; его тело в разных копиях лежит
+на `F853` / `F1290` / `F3460` (путаница алиасов), поэтому в сборке оно пока
+помечает вход полем `armed` и один раз предупреждает.
+
 ## 6. Что ещё не восстановлено
 
-* точное тело `F3871` (окна срабатывания, `protectUntil`, `mitigate`-ветка) —
-  сейчас в сборке каркас: опрос входов + счётчик `missed`;
-* `F4744` (хвост `in validate`) и `bom()` из `F288`;
+* тело `bmL` (взвод/снятие входа блока) — см. выше;
+* `F4744` (хвост `in validate`: обход `cKb[50]` с `cKb[14]`) и `bom()` из `F288`;
 * `F3841` (ownership-цикл) — нужны `bpp`, `cKb[78]`, `cKb[112]`;
 * `F5182` зависит от `PlayerSummary` (F4476), `QuestSummary` (F3729),
   `BreathingCost` (F4597) — в сборке вызываются, если зарегистрированы в `cKb[51]`;
 * воркеры, которых пока нет в сборке (см. `data/D_MAP.md`, ROADMAP п.6):
   рыбалка, данжи, очереди, ESP, вебхуки, тренировки, скиллы-контроллер.
 
-## 7. Слоты, найденные попутно (канон = вторая копия)
+## 7. Проверка вне игры
+
+`tools/smoke.sh` прогоняет сборку в настоящем Luau на заглушках Roblox и умеет
+проверять тик: `task.delay` складывает тела в `STUB_DELAYED`, `task.wait` дёргает
+`STUB_ON_WAIT` — так прогоняется ровно один виток воркера (шаг → `task.wait` →
+остановка → уборка `bny.runs`/`workerActive`).
+
+## 8. Слоты, найденные попутно (канон = вторая копия)
 
 `cKb[17] = F3460` (боевые пресеты доступны), `cKb[58] = F4381`,
 `cKb[65] = F3871`, `cKb[73]` — pc верхней машины, `cKb[75] = task.delay(0, F5182)`,

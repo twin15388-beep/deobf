@@ -58,3 +58,32 @@ local ok8, err8 = pcall(function()
                            function() end, function() end)
 end)
 print("[smoke] Config.Import(bad):", ok8, tostring(err8))
+
+-- Планировщик парирования (cKb[65] = F3871) на одном поддельном входе
+local ok9, err9 = pcall(function()
+    local now = os.clock()
+    M.Parry.state.entries["test"] = {
+        due = now - 0.05, latest = now + 0.2, earliest = now - 0.2,
+        protectUntil = now + 0.5, model = services.Workspace, phase = "boxFill",
+        ["in fo"] = { reach = 5 },
+    }
+    M.Parry.state.on = true
+    M.Parry.SchedulerTick()
+end)
+print("[smoke] Parry.SchedulerTick:", ok9, tostring(err9), "stats.fired=",
+      M.Parry.state.stats.fired, "missed=", M.Parry.state.stats.missed)
+
+-- Воркер-раннер (cKb[84] = F3818): прогоняем один виток цикла вручную.
+-- task.delay в стабе складывает тело в STUB_DELAYED; task.wait дёргает STUB_ON_WAIT.
+local steps = 0
+local controller = { interval = 0.05, priorityKey = "AutoLoot" }
+local ok10, err10 = pcall(function()
+    M.Farm.StartController(controller, function() steps = steps + 1 end)
+    local body = STUB_DELAYED[#STUB_DELAYED]
+    STUB_ON_WAIT = function() controller["stopped"] = true end
+    body()                                        -- виток: шаг -> task.wait -> стоп
+end)
+print("[smoke] Farm.StartController:", ok10, tostring(err10),
+      "шагов:", steps, "workerActive:", tostring(controller["workerActive"]),
+      "записей в bny.runs:", (function()
+          local n = 0 for _ in pairs(M.Core.bny["runs"]) do n = n + 1 end return n end)())

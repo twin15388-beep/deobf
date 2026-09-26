@@ -258,28 +258,91 @@ end
 parry["step"] = BlockWorkStep
 
 -- ---------------------------------------------------------------------------
--- cKb[65] = F3871, строка ~17280: планировщик блоков (перебор bm0)
---   Известное: перебор pairs(bm0); пропуск невалидных; счётчики
---     bnl["stats"]["missed"] (просрочен latest), ["fired"] (ставим блок),
---     ["locked"] (mitigate), через bmL(entry, bool); проверки
---     cKb[58](entry), cKb[128](model, reach, cKb[61]["reachPad"], true),
---     cKb[41](model) -> "block"/"none", cKb[143](protectUntil).
---   Здесь — каркас: опрос всех входов; сами окна доделываются в следующем заходе.
+-- cKb[65] = F3871: планировщик блоков (перебор bm0 = parry.entries)
+--   Восстановлено по рендеру состояний S360..S386 и вложенных машин (entry=21,
+--   entry=7, entry=0). Точные развилки двух «непрозрачных» ветвей сверены по
+--   смыслу; местами помечено TODO — там, где рендер свернул прыжки в константы.
+--     * первый проход: выбрать САМЫЙ СРОЧНЫЙ вход (cgJ):
+--         - негодный (cKb[58])  → bmL(вход, true)  (перевзвести);
+--         - не готов по времени (not due или not bmN(вход, now)) → перевзвести;
+--         - просрочен (now > entry.latest) → stats.missed += 1, bmL(вход, false);
+--         - в окне (now >= due) и дотягивается (cKb[128](model, info.reach,
+--           cKb[61].reachPad, true)) → кандидат; берём с наименьшим latest;
+--     * если кандидата нет и нет активного входа (cKb[51].BlockWork.entry) — выход;
+--     * cKb[123].playerValues() → cKb[41](values) даёт «block» / «none»;
+--       «none» → выход; «block» при выключенном mitigate → выход;
+--     * повторные проверки кандидата (cKb[58], latest) — выход, если протух;
+--     * собрать группу входов в окне + максимум protectUntil,
+--       и если cKb[143](protectUntil) разрешает — зачесть stats (fired, а для
+--       «block» — locked) и снять группу: bmL(вход, false).
+--   bmL (F853/F1290/F3460 в разных копиях) здесь не восстановлен: помечаем
+--   вход полем armed, чтобы не выдавать чужую семантику за оригинал.
 -- ---------------------------------------------------------------------------
-local function ParryScheduler()                      -- cKb[65] (F3871)
-    if not bnB() then return end                     -- S373/S361/S385 (bnl["on"])
-    if not parry["on"] then return end
+local bmLWarned = false
+local function MarkEntry(entry, armed)               -- bmL (TODO: точное тело)
+    if not bmLWarned then
+        bmLWarned = true
+        warn("[Ouroboros] parry: bmL (взвод/снятие входа) не вычитан — помечаю вход полем armed")
+    end
+    entry["armed"] = armed
+end
 
-    local now = os.clock()
+local function ParryScheduler()                      -- cKb[65] (F3871)
+    if not bnB() then return end                     -- S373
+    if not parry["on"] then return end               -- S385
+
+    local now = os.clock()                           -- S376
+    local target = nil                               -- cgJ: самый срочный вход
     for _, entry in pairs(parry.entries) do
-        if cKb[118](entry["poll"]) then
-            entry["poll"]()
-        end
-        local latest = entry["latest"]
-        if latest and now > latest then              -- S371/S378: просрочен
+        if not cKb[58](entry) then                   -- S21
+            MarkEntry(entry, true)                   -- S13
+        elseif (not entry["due"]) or (not bmN(entry, now)) then    -- S6/S19
+            MarkEntry(entry, true)                   -- S18
+        elseif not cKb[58](entry) then               -- S9
+            MarkEntry(entry, true)                   -- S3
+        elseif now > entry["latest"] then            -- S5
             local stats = parry["stats"]
-            stats["missed"] = stats["missed"] + 1    -- S372/S382
-            entry["poll"] = entry["poll"] or function() end
+            stats["missed"] = stats["missed"] + 1    -- S8
+            MarkEntry(entry, false)
+        elseif now >= entry["due"] then              -- S20/S23
+            local reach = entry["in fo"] and entry["in fo"]["reach"]
+            if cKb[128](entry["model"], reach, cKb[61]["reachPad"], true) then
+                if not target or entry["latest"] < target["latest"] then
+                    target = entry                   -- S4/S22/S7
+                end
+            end
+        end
+    end
+
+    if not target and not cKb[51]["BlockWork"]["entry"] then return end  -- S381/S362/S364
+
+    local values = cKb[123]["playerValues"]()        -- S380
+    if not values then return end                    -- S369
+    local kind = cKb[41](values)                     -- S377
+    if kind == "none" then return end                -- S386
+    if kind == "block" and not parry["mitigate"] then return end         -- S383/S374
+    if not cKb[58](target) then return end           -- S366
+    if os.clock() > target["latest"] then return end -- S371
+
+    -- S378: группа входов в окне + максимум protectUntil
+    local group, protectUntil = {}, target["protectUntil"]
+    for _, entry in pairs(parry.entries) do
+        local earliest = entry["earliest"]
+        if earliest and now >= earliest and now <= entry["latest"] then
+            group[#group + 1] = entry
+            protectUntil = math.max(protectUntil or 0, entry["protectUntil"] or 0)
+        end
+    end
+
+    if cKb[143](protectUntil) then                   -- S378
+        local stats = parry["stats"]
+        if kind == "block" then
+            stats["locked"] = stats["locked"] + 1    -- S382
+        else
+            stats["fired"] = stats["fired"] + 1      -- S372
+        end
+        for _, entry in ipairs(group) do             -- S367
+            MarkEntry(entry, false)
         end
     end
 end

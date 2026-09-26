@@ -7,10 +7,20 @@ local function stub_table(name)
                               __tostring = function() return name end })
 end
 
+STUB_DELAYED = {}
+STUB_ON_WAIT = nil
+
 task = {
-    wait = function() return 0 end,
-    delay = function() end,
-    spawn = function(fn) end,
+    wait = function(...)
+        local hook = STUB_ON_WAIT
+        if hook then STUB_ON_WAIT = nil hook() end
+        return 0
+    end,
+    delay = function(_, fn)                     -- отложенные задачи складываем
+        STUB_DELAYED[#STUB_DELAYED + 1] = fn
+        return #STUB_DELAYED
+    end,
+    spawn = function(fn) STUB_DELAYED[#STUB_DELAYED + 1] = fn end,
     defer = function(fn) end,
 }
 local Signal = { Connect = function() return { Disconnect = noop } end,
