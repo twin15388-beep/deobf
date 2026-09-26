@@ -46,6 +46,7 @@ python3 tools/check_bundle.py                # целостность модул
 | `data/pool_index.json` | индекс пула 21.09 (6641 запись) |
 | `data/pool_index_<дата>.json` | индекс пула текущей сборки (11 071 запись) |
 | `data/UI_MAP.md`, `data/D_MAP.md`, `data/TICK_MAP.md`, `data/ESP_MAP.md`, `data/BUILD_MAP.md`, `data/BUILD_HISTORY.md` | карты подсистем и история сборок |
+| `data/BUILD_DELTA_2026-09-26.md`, `data/API_DELTA_2026-09-26.md`, `data/canon_summary_2026-09-26.txt` | дифф 21.09 → 26.09: код, API, сырой вывод |
 
 Инструменты чтения (см. `--help`-описания в шапках файлов):
 
@@ -54,7 +55,10 @@ python3 tools/check_bundle.py                # целостность модул
   (подстановка значений пула) и `--poolref`/`--alias` для любой сборки;
 * `tools/read_region.py` — окно исходника с подстановкой значений пула;
 * `tools/deflatten.py` — основной деобфускатор: `--pool N`, `--slot N`, `--main FILE`;
-* `tools/pool_map.py "<артефакт>" out.json --alias "fwe[164]"` — собрать пул вручную.
+* `tools/pool_map.py "<артефакт>" out.json --alias "fwe[164]"` — собрать пул вручную;
+* `tools/canon_diff.py --summary` — канонический дифф кода двух сборок (имена и индексы
+  абстрагируются): вердикты «ИДЕНТИЧНО/ИЗМЕНЕНО» по строке-якорю, ~2.5 мин на полный
+  прогон; отчёт по текущему сравнению — `data/BUILD_DELTA_2026-09-26.md`.
 
 Важно: тексты функций в `data/pool_index*.json` хранятся без пробелов (склейка токенов),
 поэтому для разбора их надо резать из исходника по смещениям — это уже делают

@@ -1,0 +1,148 @@
+старая сборка: ouroboros_ps2 (1).luau — 757930 токенов; псевдонимы пула: 1378 (напр. b0E, b0P, b0T, b0d)
+новая сборка : artifacts/ps2_2026-09-26.luau — 1355262 токенов; псевдонимы пула: 2559 (напр. beD, c01, c08, c0U)
+
+### 'noRagdoll' — в старой 7, в новой 5
+    функция @527394..529760 ↔ функция @831709..832216: ИЗМЕНЕНО (строки 10%, структура 24%)
+      только в старой: "noragdoll" "playerValues" "new" "BoolValue" "Name" "noragdoll" "Value" "Parent"
+      только в новой : "restoreRagdoll" "tweaks" "tweaks"
+    функция @712411..712898 ↔ функция @831709..832216: ИЗМЕНЕНО (строки 100%, структура 73%)
+
+### 'noStun' — в старой 6, в новой 6
+    функция @698883..698956 ↔ функция @804741..804814: ИДЕНТИЧНО
+    функция @728935..732292 ↔ функция @1324970..1328599: ИЗМЕНЕНО (строки 73%, структура 8%)
+      только в старой: "noRagdoll" "noRagdoll"
+      только в новой : "noSlowdown" "noKnockback"
+
+### 'noSlowdown' — в старой 3, в новой 6
+    функция @344984..348308 ↔ функция @349257..349357: ИЗМЕНЕНО (строки 5%, структура 5%)
+      только в старой: "affordable" "locked" "CrystalStatus" "Level %d is the cap" "MAX_LEVEL" "CrystalStatus" "Waiting for the run to bank its points" "MAX_LEVEL" "controllerValid" "CrystalController"
+      только в новой : "applySlowdown"
+    фрагмент @2216078..2221078 ↔ функция @349257..349357: ИЗМЕНЕНО (строки 3%, структура 4%)
+      только в старой: "Auto Buy Exp" "Nothing to reel in" "Waiting for %d points" "MinigameSkipNeeded" "Auto Buy Exp" "Nothing to reel in" "Waiting for %d points" "MinigameSkipNeeded" "ldpnivkcbn" "tatycqyegtg"
+      только в новой : "applySlowdown"
+
+### 'noragdoll' — в старой 1, в новой 1
+    функция @527394..529760 ↔ функция @1363215..1364605: ИЗМЕНЕНО (строки 88%, структура 8%)
+      только в старой: "noRagdoll"
+
+### 'RagdollConstraints' — в старой 2, в новой 2
+    функция @1254794..1257387 ↔ функция @1733767..1736584: ИЗМЕНЕНО (строки 100%, структура 46%)
+    функция @1425943..1428536 ↔ функция @1733767..1736584: ИЗМЕНЕНО (строки 100%, структура 46%)
+
+### 'resourceTick' — в старой 3, в новой 3
+    функция @728935..732292 ↔ функция @1324970..1328599: ИЗМЕНЕНО (строки 73%, структура 8%)
+      только в старой: "noRagdoll" "noRagdoll"
+      только в новой : "noSlowdown" "noKnockback"
+    фрагмент @1513775..1518775 ↔ фрагмент @2215330..2220330: ИЗМЕНЕНО (строки 6%, структура 6%)
+      только в старой: "Picked" "Nothing chosen in this hand" "CardStatus" "OuwigaharaRequest" "action" "Pick" "id" "Name" "Picked" "waves"
+      только в новой : "PASSIVE_MOBS" "name" "players" "partyId" "assistPoint" "override" "PlatformHandler" "cutscene_tag123" "create" "n"
+
+### 'PARRY_GAP' — в старой 3, в новой 4
+    функция @749796..752560 ↔ функция @900035..903390: ИЗМЕНЕНО (строки 55%, структура 36%)
+      только в старой: "Value" "Game refused "
+      только в новой : "Waiting for " " to be ready" "clock" "ParryReservedUntil" "ParryReservedUntil" "ggwywiopdhi" "BlockWork" "entry" "stamina"
+    фрагмент @876103..881103 ↔ фрагмент @2526258..2531258: ИЗМЕНЕНО (строки 18%, структура 1%)
+      только в старой: "zyugkxbvygv" "knqvlr" "cop" "cgacpvwlyw" "skm" "bwiaxr" "rxtf" "puxxmnreykpz" "ehupc" "iisfft"
+      только в новой : "clock" "cancel" "name" "name" "COMBO_STEPS" "SKILL_KEYS" "J" "X" "Z" "B"
+
+### 'CAST_GRACE' — в старой 4, в новой 5
+    функция @807242..817680 ↔ функция @1678248..1691504: ИЗМЕНЕНО (строки 89%, структура 10%)
+      только в новой : "Holding off for auto parry" "ParryReservedUntil" "clan" "ParryReservedUntil" "BlockWork" "ClanSkillStatus" "ParryReservedUntil" "clan" "Holding off for auto parry" "clan"
+    фрагмент @876000..881000 ↔ фрагмент @2526152..2531152: ИЗМЕНЕНО (строки 18%, структура 1%)
+      только в старой: "zyugkxbvygv" "knqvlr" "cop" "cgacpvwlyw" "skm" "bwiaxr" "rxtf" "puxxmnreykpz" "ehupc" "iisfft"
+      только в новой : "cancel" "clock" "cancel" "name" "name" "COMBO_STEPS" "SKILL_KEYS" "J" "X" "Z"
+
+### 'windowNpc' — в старой 3, в новой 3
+    функция @302727..306168 ↔ функция @614489..619577: ИЗМЕНЕНО (строки 45%, структура 11%)
+      только в старой: "stats" "late" "late" "earliest" "margin" "latest" "margin" "due" "bias" "lead"
+      только в новой : "initialized" "impact" "preset" "AnimSpeed" "running" "name" "combo" "Default"
+    фрагмент @823691..828691 ↔ фрагмент @2360510..2365510: ИЗМЕНЕНО (строки 24%, структура 5%)
+      только в старой: "UserGameSettings" "closingPad" "bias" "status" "field" "BOSS_DWELL" "BOSS_SKIP" "BOSS_STREAM_GRACE" "BOSS_COLLECT_YIELD" "BOSS_COLLECT_CAP"
+      только в новой : "UI library required" "Unload" "function" "UI unload required" "Track" "Unloaded" "Unload" "OuroborosOuwland" "Signals" "SignalFunction"
+
+### 'defaultRtt' — в старой 3, в новой 3
+    функция @519119..521730 ↔ функция @697738..700436: ИЗМЕНЕНО (строки 50%, структура 18%)
+      только в новой : "clock" "pingAt" "rtt" "rtt" "pingAt" "pingInterval" "rtt" "jitter" "jitter" "rtt"
+    фрагмент @823640..828640 ↔ фрагмент @2360743..2365743: ИЗМЕНЕНО (строки 27%, структура 9%)
+      только в старой: "UserGameSettings" "closingPad" "bias" "status" "field" "BOSS_DWELL" "BOSS_SKIP" "BOSS_STREAM_GRACE" "BOSS_COLLECT_YIELD" "BOSS_COLLECT_CAP"
+      только в новой : "Unloaded" "Unload" "OuroborosOuwland" "Signals" "SignalFunction" "SignalFunction module" "Rarities" "retryGap" "reserveAhead" "recovery"
+
+### 'reachPad' — в старой 3, в новой 3
+    функция @444359..450557 ↔ функция @850808..863702: ИЗМЕНЕНО (строки 42%, структура 10%)
+      только в новой : "reason" "Waiting for player values" "phase" "awaiting" "ParryReservedUntil" "Blocking" "impact" "attempt" "models" "sentAt"
+    фрагмент @823821..828821 ↔ фрагмент @2360767..2365767: ИЗМЕНЕНО (строки 27%, структура 9%)
+      только в старой: "UserGameSettings" "closingPad" "bias" "status" "field" "BOSS_DWELL" "BOSS_SKIP" "BOSS_STREAM_GRACE" "BOSS_COLLECT_YIELD" "BOSS_COLLECT_CAP"
+      только в новой : "Unloaded" "Unload" "OuroborosOuwland" "Signals" "SignalFunction" "SignalFunction module" "Rarities" "retryGap" "reserveAhead" "recovery"
+
+### 'OuroborosOuwlandOwnership' — в старой 1, в новой 1
+    функция @461590..462787 ↔ функция @400318..401275: ИЗМЕНЕНО (строки 100%, структура 38%)
+
+### 'ReceiveAge' — в старой 5, в новой 1
+    функция @440752..443553 ↔ функция @581888..583571: ИЗМЕНЕНО (строки 25%, структура 10%)
+      только в старой: "tweaks" "ownership" "clear" "clear" "marks" "tweaks" "ownershipRange" "model" "Position" "Position"
+      только в новой : "Anchored"
+    функция @796283..798075 ↔ функция @581888..583571: ИЗМЕНЕНО (строки 36%, структура 10%)
+      только в старой: "killThreshold" "Health" "Serpent" "Serpent" "model" "humanoid" "Health" "instantKill"
+      только в новой : "Anchored"
+
+### 'SetEspOption' — в старой 8, в новой 8
+    фрагмент @784151..789151 ↔ фрагмент @3234698..3239698: ИЗМЕНЕНО (строки 21%, структура 5%)
+      только в старой: "SetWebhookEnabled" "SetWebhookPingId" "SetWebhookPing" "SetWebhookSkipQuiet" "WebhookStatus" "WebhookChannelStatus" "SendWebhookReport" "spawn" "Sample" "Payload"
+      только в новой : "FinderJoinStatus" "clanStep" "joining" "bad" "finds" "jobId" "order" "finds" "order" ""
+    функция @1066435..1066488 ↔ функция @3454317..3454370: ИДЕНТИЧНО
+
+### 'CATEGORIES' — в старой 3, в новой 3
+    функция @519034..519097 ↔ функция @1023706..1023770: ИДЕНТИЧНО
+    фрагмент @1753843..1758843 ↔ фрагмент @2494664..2499664: ИЗМЕНЕНО (строки 69%, структура 32%)
+      только в старой: "Collected %d, skipped %d" "cancel" "running" "Position" "SchematicStatus" "Teleporting back" "Collecting schematics" "running" "stop" "Track"
+      только в новой : "mousepos" "#e0788c" "Loot" "boxFill" "Loot"
+
+### 'CombatPresets' — в старой 9, в новой 9
+    функция @11637..13192 ↔ функция @903681..905241: ИЗМЕНЕНО (строки 75%, структура 42%)
+      только в новой : "noSlowdown"
+    функция @55352..60609 ↔ функция @388201..394080: ИЗМЕНЕНО (строки 7%, структура 7%)
+      только в старой: "stall" "stall" "AutoSkillStatus" "%d cast, all on cooldown" "count" "skillsAt" "stallUntil" "skills" "autoSkills" "skills"
+      только в новой : "attackSpeedMult" "No combat preset for " "attackSpeedMult" "delay_before_hit" "final" "longest" "duration" "error" "delay_before_swing" "expires"
+
+### 'SetInstantKill' — в старой 6, в новой 6
+    фрагмент @783388..788388 ↔ фрагмент @2178041..2183041: ИЗМЕНЕНО (строки 16%, структура 4%)
+      только в старой: "TrainController" "pointer" "hold" "SetTrainings" "SetTrainingMode" "SetFishBait" "SetAutoBuyBait" "SetAutoBuyExp" "SetExpBundles" "SetPointReserve"
+      только в новой : "apply" "on" "BasePart" "skipped" "sweep" "added" "SetMapXrayAmount" "amount" "on" "xray"
+    функция @1058229..1058275 ↔ функция @3439633..3439681: ИДЕНТИЧНО
+
+### 'killThreshold' — в старой 5, в новой 4
+    функция @6563..7143 ↔ функция @177186..177773: ИЗМЕНЕНО (строки 100%, структура 96%)
+    функция @796283..798075 ↔ функция @791817..793456: ИЗМЕНЕНО (строки 31%, структура 40%)
+      только в старой: "Serpent" "BasePart" "Serpent" "ReceiveAge" "HumanoidRootPart" "PrimaryPart"
+      только в новой : "owned" "PASSIVE_MOBS" "name" "name" "Horse" "kill" "MaxHealth" "MaxHealth"
+
+### 'AntiAfk' — в старой 6, в новой 6
+    функция @1076979..1077830 ↔ функция @3483208..3483914: ИЗМЕНЕНО (строки 100%, структура 51%)
+    функция @1084078..1085557 ↔ функция @3489590..3490839: ИЗМЕНЕНО (строки 100%, структура 44%)
+
+### 'MuzanLairModel' — в старой 4, в новой 4
+    функция @416121..420835 ↔ функция @913712..918028: ИЗМЕНЕНО (строки 90%, структура 20%)
+      только в старой: "MaxHealth" "MaxHealth" "lease" "MaxHealth" "MaxHealth"
+      только в новой : "DemonStatus" "DemonStatus" "DemonStatus" "DemonStatus"
+    функция @557506..559296 ↔ функция @92749..94895: ИЗМЕНЕНО (строки 100%, структура 21%)
+
+### 'Sickles Levers' — в старой 2, в новой 2
+    функция @1759459..1770013 ↔ функция @2500645..2513142: ИЗМЕНЕНО (строки 79%, структура 15%)
+      только в старой: "StationaryNpcs"
+      только в новой : "Level too low" "Loot" "CollectionService" "LootDrop" "DropItemId" "DropClaimedBy" "BasePart" "Loot" "Loot" "isOpened"
+    функция @1950368..1960922 ↔ функция @2500645..2513142: ИЗМЕНЕНО (строки 79%, структура 15%)
+      только в старой: "StationaryNpcs"
+      только в новой : "Level too low" "Loot" "CollectionService" "LootDrop" "DropItemId" "DropClaimedBy" "BasePart" "Loot" "Loot" "isOpened"
+
+### 'Double_Jump' — в старой 2, в новой 2
+    фрагмент @773819..778819 ↔ фрагмент @2204958..2209958: ИЗМЕНЕНО (строки 16%, структура 5%)
+      только в старой: "Track" "active" "preempt" "settling" "settle" "order" "rank" "wants" "commitments" "holder"
+      только в новой : "CodeStatus" "Redeeming codes" "CodeStatus" "Redeemed %d, failed %d, skipped %d" "CodeStatus" "No codes available" "CodeReadyAt" "clock" "CODE_COOLDOWN" "CodeBusy"
+    фрагмент @974402..979402 ↔ фрагмент @2204958..2209958: ИЗМЕНЕНО (строки 16%, структура 8%)
+      только в старой: "string" "" "SkillTree" "table" "npc" "hold" "mitigate" "stats" "cancelled" "fired"
+      только в новой : "CodeStatus" "Redeeming codes" "CodeStatus" "Redeemed %d, failed %d, skipped %d" "CodeStatus" "No codes available" "CodeReadyAt" "clock" "CODE_COOLDOWN" "CodeBusy"
+
+### 'alwaysRun' — в старой 5, в новой 5
+    функция @266100..266172 ↔ функция @1213167..1213239: ИДЕНТИЧНО
+    функция @293904..295455 ↔ функция @1148331..1149773: ИЗМЕНЕНО (строки 100%, структура 24%)
+
