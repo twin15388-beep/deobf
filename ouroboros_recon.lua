@@ -2330,7 +2330,7 @@ local tweaks = {
     alwaysRun = false,
     ownership = false,
     ownershipRange = 250,
-    [8562344] = false,          -- ещё один безымянный флаг (в артефакте — число)
+    [8562344] = false,          -- "noSlowdown" (F5934): возврат WalkSpeed из тика
 }
 -- В коде ниже таблица встречается как cKb[72] (строка 32666: cKb[72] = cKb[99]["tweaks"])
 -- и как bop (строка 23692).
@@ -2356,7 +2356,13 @@ end
 
 local function SetNoStun(value)       tweaks["noStun"] = value == true end        -- F5991
 local function SetNoRagdoll(value)    tweaks["noRagdoll"] = value == true end     -- F6168
-local function SetNoAttackSlowdown(value) tweaks["noAttackSlowdown"] = value == true end -- F5934
+-- F5934: в артефакте это ключ-число 8562344 (в списке ключей он же "noSlowdown");
+-- тик артефакта читает именно tweaks[8562344] (см. M.Tick) и возвращает
+-- WalkSpeed = 16, если тот просел до slow_walk_speed.
+local function SetNoAttackSlowdown(value)
+    tweaks[8562344] = value == true                  -- F5934
+    tweaks["noAttackSlowdown"] = value == true       -- удобный псевдоним
+end
 local function SetNoDashCooldown(value)   tweaks["noDashCd"] = value == true end  -- F734
 local function SetNoDrown(value)      tweaks["noDrown"] = value == true end       -- F5927
 local function SetInfiniteStamina(value)  tweaks["infStamina"] = value == true end-- F4483
