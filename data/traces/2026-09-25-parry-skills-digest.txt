@@ -1,0 +1,115 @@
+NZL TRACE DIGEST v1 — 2026-09-25, второй прогон (парирование + скиллы + прочее)
+Источник: рекодер v2 (ouroboros_behavior_trace.lua), сырой трейс прислан в чат.
+Ниже — только протокольные события (LOCAL_MOVE-шум убран). Время в секундах.
+
+=================== ГЛАВНОЕ: ПАРИРОВАНИЕ ПОДТВЕРЖДЕНО 1:1 ===================
+
+Пары Hold -> UnHold для "Blocking" в этом прогоне:
+   20.842 -> 22.344   = 1.502 с
+   22.505 -> 24.009   = 1.504
+   25.379 -> 26.882   = 1.503
+   29.261 -> 30.766   = 1.505
+   32.530 -> 34.031   = 1.501
+   34.150 -> 35.659   = 1.509
+   36.823 -> 38.329   = 1.506
+   39.612 -> 41.113   = 1.501
+   42.449 -> 43.950   = 1.501
+   45.263 -> 46.764   = 1.501
+   48.027 -> 49.529   = 1.502
+   50.832 -> 52.342   = 1.510
+   53.681 -> 55.184   = 1.503
+   56.429 -> 57.937   = 1.508
+   среднее 1.504 с, разброс 1.501..1.510
+
+В артефакте ровно эта ветка:
+   bnl = {on, npc, pvp, mitigate, hold, lead, radius=40, generation, stats}
+   if bnl["hold"] then  cf2 = cfZ + 1.5  end        <-- "Keep Blocking After A Parry"
+   cfX = {character, phase="awaiting", keep, lastHit, releaseAt,
+          deadline = now + cKb[61]["acknowledgement"],
+          ...}
+   bn8("server_skill_controller_signaler", "Blocking", "Hold", F3022["zero"])
+   F3022 = Vector3,  F3022["zero"] = Vector3(0,0,0)  <-- совпадает с трейсом
+
+Первый прогон (трейс №1) дал Hold -> UnHold ~0.19 с при выключенном "hold":
+   294.044 -> 294.238 = 0.194
+   296.821 -> 297.014 = 0.193
+=> переключатель "Keep Blocking After A Parry" наблюдаемо меняет длительность
+   удержания с ~0.19 с на ровно 1.5 с. Это подтверждает и флаг, и константу.
+
+=================== СЦЕНА SKILLS (не сработала) ==============================
+
+SetAutoSkills(true) в 40.646, SetAutoSkills(false) в 44.523 — всего 4 секунды,
+кастов не было. Attempt_Hold в трейсе есть, но это ДЕЙСТВИЯ ИГРОКА (рывок):
+   66.204  SkillController.Attempt_Hold  "Dash" "S"
+   66.204  SIGNAL server_skill_controller_signaler  Dash  Hold    Vector3(-477.18,1244.10,-1024.13)
+   66.204  SIGNAL server_skill_controller_signaler  Dash  UnHold  Vector3(...)  nil
+   66.204  SIGNAL server_skill_controller_signaler  Dash  Cancel  Vector3(...)
+   66.204  SkillController.StopHold  "Dash"   -> RETURN true
+   69.763  Attempt_Hold "Dash" "W"     (то же)
+   69.806  Attempt_Hold "Dash" "D"     -> RETURN (молча, без сигналов)
+   69.946..70.624  Attempt_Hold "Dash" "D"/"W" x6
+Видно, что для рывка аргумент №2 — клавиша направления ("S"/"W"/"D"), а не "".
+Артефакт же зовёт так: asGameScript(bno["SkillRunner"]["Attempt_Hold"], ИМЯ, "")
+=> путь автокаста артефакта в трейсе НЕ наблюдался. Нужен прогон с выбранными
+   скиллами и 30+ секундами в бою.
+
+=================== ЭКИПИРОВКА ==============================================
+
+  103.848  Item_Equip  0
+  167.997  Item_Equip  2      (сразу после VisitRegion Butterfly Estate)
+  5.620    Item_Equip  2
+Все — целые индексы слотов 0..5, как в cKb[27] (S4899..S4912).
+AccessoryEquip не вызывался (SetAutoEquip был включён 45.665..50.580).
+
+=================== БОЕВОЙ ПРОТОКОЛ =========================================
+
+Combat_Service / "Combat" с шагом A3 = 1..5:
+   A3=1: A5 = 0.13,   A4=false      (замах)
+   A3=2: A5 = 0,      A4=false      (контакт)
+   A3=3: A5 = 0,      A4=false
+   A3=4: A5 = 0,      A4=false
+   A3=5: A5 = 0.04,   A4=false      (восстановление)
+Один раз (18.622) встретился A3=1, A4=true, A5=0.038 — другой тип свинга.
+A7 всегда nil.
+
+=================== ПРОЧИЕ СИГНАЛЫ ==========================================
+
+training_signaler / "Stop" / true        104.9, 107.8, 110.7, 114.1  (тренировки)
+VisitRegion / "Windy Peak"               84.182, 87.014
+VisitRegion / "Raze's Sword Shop"        84.182
+VisitRegion / "Wilderness"               94.787
+VisitRegion / "Butterfly Estate"         102.571
+NpcTalking / "Ended"                     4.712, 5.581
+
+API-переключатели по порядку (это же путь меню -> cKb[51]["SetX"]):
+ 3.581 SetAutoLevel true      4.705 SetAutoLevel false
+15.391 SetAutoQuest true     15.882 SetAutoQuest false
+16.373 SetAutoMob true       17.210 SetAutoMob false
+40.646 SetAutoSkills true    44.523 SetAutoSkills false
+45.665 SetAutoEquip true     50.580 SetAutoEquip false
+57.671 SetInstantKill true   60.156 SetInstantKill false
+145.025 SetAutoSkillTree true  157.516 SetAutoSkillTree false
+166.195 SetAutoChest true    171.507 SetInstantKill true (повторно)
+229.988 SetAutoPotion true   230.620 SetAutoPotion false
+282.259 SetAutoEquip true    285.946 SetAutoEquip false
+288.196 SetAutoMob true      293.079 SetAutoMob false
+
+=================== ХВОСТ ЭТОГО ЖЕ ПРОГОНА (145..241 с) =====================
+
+ 145.025  API.SetAutoSkillTree true      157.516  API.SetAutoSkillTree false
+ 166.195  API.SetAutoChest true         (далее телепорт-петля по LOCAL_MOVE,
+                                        в 167.997 Item_Equip 2; AutoChest не выключен!)
+ 171.507  API.SetInstantKill true        (повторное включение)
+ 225.490  API.SetAutoLoot true          239.570  API.SetAutoLoot false
+ 240.234  API.SetAutoLoot true          241.774  API.SetAutoLoot false
+
+ВАЖНО: при включённом AutoLoot (225..241 с) в трейсе НЕТ НИ ОДНОГО сигнала —
+только LOCAL_MOVE с тегами [SetAutoChest,SetAutoLoot,SetInstantKill].
+Два варианта: (а) рядом нечего было подбирать; (б) подбор идёт не через
+SignalEvent.ToServer (например, ProximityPrompt), и рекордер v2 его не видит.
+Это надо развести отдельным прогоном (см. задание на трейс №4).
+
+Сводка API-тогглов прогона (путь меню -> cKb[51][...]):
+ SetAutoLevel(true/false), SetAutoQuest, SetAutoMob, SetAutoSkills,
+ SetAutoEquip(x2), SetInstantKill(x2), SetAutoSkillTree, SetAutoChest,
+ SetAutoLoot(x3).
