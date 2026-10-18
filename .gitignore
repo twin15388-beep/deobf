@@ -1,5 +1,5 @@
 __pycache__/
 *.py[cod]
 
-# Locally derived third-party script output; do not republish in Git.
-local-results/
+# Keep local-results/ untracked for workspace access; do not commit or push
+# derived third-party scripts without permission.
