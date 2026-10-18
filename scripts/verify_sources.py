@@ -42,10 +42,13 @@ def verify():
                 if (len(parts) < 2 or parts[0] != prefix or
                         ".." in parts or info.filename.startswith("/")):
                     raise ValueError(f"Unsafe or unexpected ZIP entry: {info.filename}")
-                if len(parts) == 2 and parts[1].lower().startswith("license"):
+                if len(parts) == 2 and (
+                    parts[1].lower().startswith("license")
+                    or parts[1].lower() in {"copying", "copying.txt"}
+                ):
                     licenses.append(info.filename)
         if not licenses:
-            raise ValueError(f"Missing upstream license: {archive_name}")
+            raise ValueError(f"Missing upstream LICENSE/COPYING: {archive_name}")
         print(f"OK  {repo}  ({len(files)} files)")
 
     print(f"Verified {len(sources)} source archives.")

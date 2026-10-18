@@ -2,7 +2,7 @@
 
 Коллекция **исходников** инструментов для анализа обфусцированных Roblox Lua/Luau-скриптов. Снимок поиска: **18 октября 2026 года**. Это не единый деобфускатор и не гарантия, что каждый проект работает с любой версией указанного обфускатора.
 
-**Практическая партия:** [отчёт о 10 GPO и других Roblox-скриптах](reports/roblox-batch-2026-10-18.md), [манифест с хешами](reports/roblox-batch-2026-10-18.json) и [папка с результатами `dobf scripts 1.0`](dobf%20scripts%201.0/README.md). Ни одного полностью восстановленного исходника: 5 частичных результатов, 5 неудач; один кандидат RScripts дополнительно исключён как не соответствующий рекламе. Исходные обфусцированные файлы в репозиторий не скопированы; в папке находятся только производные результаты.
+**Практические результаты:** [первая партия — 10 Roblox-скриптов](reports/roblox-batch-2026-10-18.md) ([JSON](reports/roblox-batch-2026-10-18.json)) и [дополнение — ещё 7 заявленных GPO-файлов](reports/gpo-followup-2026-10-18.md) ([JSON с SHA-256](reports/gpo-followup-2026-10-18.json)). [Открыть результаты `dobf scripts 1.0`](dobf%20scripts%201.0/README.md). **Полностью восстановленных и проверенных исходников нет:** в дополнении получены один читаемый, но не проверенный на эквивалентность Lua-фрагмент, один непрозрачный контейнер, один экспериментальный бинарный кандидат и четыре неудачи. Исходные обфусцированные файлы в репозиторий не скопированы.
 
 ## Уже были в репозитории
 
@@ -50,6 +50,10 @@
 | [oxygen-Deobf/clyde-deobf](https://github.com/oxygen-Deobf/clyde-deobf) | Clyde Luau | статический анализ, JS | Apache-2.0 | [ZIP](sources/oxygen-Deobf--clyde-deobf.zip) |
 | [nexus1877/LuaObfuscator-Deobfuscator](https://github.com/nexus1877/LuaObfuscator-Deobfuscator) | LuaObfuscator Chaotic Good/Evil/v1; вариант eoxd | JS | MIT | [ZIP](sources/nexus1877--LuaObfuscator-Deobfuscator.zip) |
 | [JamiesNolandGiggleShi1er/ClydeDeobfuscator](https://github.com/JamiesNolandGiggleShi1er/ClydeDeobfuscator) | Clyde Luau VM | статический анализ, JS | MIT¹ | [ZIP](sources/JamiesNolandGiggleShi1er--ClydeDeobfuscator.zip) |
+| [sztupy/luadec51](https://github.com/sztupy/luadec51) | Lua 5.1 bytecode | декомпилятор, C; нужен отдельный Lua 5.1 | MIT (`COPYING`) | [ZIP](sources/sztupy--luadec51.zip) |
+| [x3zvawq/unluac-rs](https://github.com/x3zvawq/unluac-rs) | Lua 5.1 / Luau bytecode | исходники Rust и JS-обвязки; WASM/binaries не вложены | MIT | [ZIP](sources/x3zvawq--unluac-rs.zip) |
+| [Kiet1308/Tovek](https://github.com/Kiet1308/Tovek) | Luau bytecode | исходники Rust; в этой среде нет Rust toolchain | MIT | [ZIP](sources/Kiet1308--Tovek.zip) |
+| [arm64d/luraph-v14_9-vm_decode](https://github.com/arm64d/luraph-v14_9-vm_decode) | Luraph v14.9 | **VM-reference, не готовый декомпилятор**, Lua | MIT | [ZIP](sources/arm64d--luraph-v14_9-vm_decode.zip) |
 
 ¹ Файл `LICENSE` содержит текст MIT и разрешение на распространение, но GitHub классифицирует его как `NOASSERTION` из-за дополнительной строки перед лицензией. В README `oxygen-Deobf/clyde-deobf` написано MIT, а фактический файл `LICENSE` — **Apache-2.0**; в таблице указана лицензия из файла.
 
@@ -62,18 +66,19 @@
 | **Luraph v15.0** | [исходный архив caomod2077](Deobfuscator-Luraph-V15-master.zip) | В нём есть два образца с заголовком `Luraph Obfuscator v15.0`; успешная деобфускация здесь не проверялась. |
 | **Luraph v15.1** | [ludicious-claw](sources/ludicious-claw--Deobfuscator-Luraph-V15-1.zip) | Upstream называет v15.1 и содержит пары примеров с таким заголовком; примеры из нашего source-only ZIP исключены. Поддержка не проверялась независимо. |
 | **Luraph v14.7** | [luau-vmp-deobf](luau-vmp-deobf-main.zip), [caomod2077](Deobfuscator-Luraph-V15-master.zip) | Первый документирует регрессионный корпус v14.7. Он **не** поддерживает v15; второй описывает v14.x как экспериментальный режим. |
-| **Luraph v14.8–14.9** | [caomod2077](Deobfuscator-Luraph-V15-master.zip) | Upstream прямо отмечает неполное восстановление и переход к трассировке. Для остальных версий v14.x поддержка не установлена. |
+| **Luraph v14.8–14.9** | [caomod2077](Deobfuscator-Luraph-V15-master.zip), [v14.9 VM-reference](sources/arm64d--luraph-v14_9-vm_decode.zip) | Upstream отмечает неполное восстановление. Наш офлайн-декодер извлёк **только внешний контейнер** одного v14.9-образца, не игровой Lua; см. [дополнение по GPO](reports/gpo-followup-2026-10-18.md). |
 | **MoonVeil v1.4.5** | [UnstableGrape](sources/UnstableGrape--Moonveil-1.4.5-Deobfuscator.zip), [edwindev-spec](sources/edwindev-spec--MoonVeil.zip) | Поддержка других выпусков MoonVeil не заявлена; нужны официальные инструменты Luau. |
 | **MoonSec V3** | [tupsutumppu](sources/tupsutumppu--MoonsecDeobfuscator.zip), [MoonDumper](sources/sametEXE1--MoonDumper.zip) | Первый выдаёт Lua 5.1 bytecode, а дампер извлекает только константы; это не обещание полного исходника. |
 | **IronBrew** | [Lethal-Luka](sources/Lethal-Luka--IronbrewDeobfuscator.zip), [memcpython](sources/memcpython--lua-deobfuscators.zip) | Эти архивы ориентированы прежде всего на **IronBrew2**. См. ниже внешнюю ссылку на IronBrew0/1/2; IronBrew1 в коллекции не заявлен как проверенный. |
 | **Prometheus / WeAreDevs** | [unprom](sources/yennylol--unprom.zip), [prostone4](sources/prostone4--Prometheus-Deobfuscator.zip), [Melodieshusband](sources/Melodieshusband--WeAreDevs-Prometheus-Deobfuscator.zip) | Результат зависит от варианта VM и обёртки; универсальной поддержки всех версий не заявляем. |
 
-**Ограничения:** исключённый `unluac.jar` требуется для части функций Luraph-инструмента Tony Bolivar; исключённые Lua 5.1 бинарники могут понадобиться Epimetheus (можно установить Lua отдельно). Также удалены скомпилированные Luau/bf для Wynfuscate и Mcdofries: при необходимости их надо получать/собирать отдельно. Инструментам MoonVeil тоже нужны официальные Luau runtime/compiler, которые в ZIP не включены. У некоторых других проектов есть внешние зависимости — смотрите их README. MoonDumper/moonsecdumper предполагают выполнение *сгенерированного* Lua; Wynfuscate/Mcdofries предлагают динамический анализ. Никогда не запускайте неизвестный скрипт без изоляции и разрешения владельца; Discord-боты могут передавать загруженный код стороннему сервису. При первоначальном составлении каталога работа инструментов не проверялась; результаты последующей **статической** проверки отдельных файлов описаны в отчёте выше. Защищённые Roblox-скрипты не исполнялись.
+**Ограничения:** исключённый `unluac.jar` требуется для части функций Luraph-инструмента Tony Bolivar; исключённые Lua 5.1 бинарники могут понадобиться Epimetheus (можно установить Lua отдельно). Также удалены скомпилированные Luau/bf для Wynfuscate и Mcdofries: при необходимости их надо получать/собирать отдельно. Инструментам MoonVeil тоже нужны официальные Luau runtime/compiler, которые в ZIP не включены. У некоторых других проектов есть внешние зависимости — смотрите их README. MoonDumper/moonsecdumper предполагают выполнение *сгенерированного* Lua; Wynfuscate/Mcdofries предлагают динамический анализ. Никогда не запускайте неизвестный скрипт без изоляции и разрешения владельца; Discord-боты могут передавать загруженный код стороннему сервису. При первоначальном составлении каталога работа инструментов не проверялась; результаты последующей **статической** проверки отдельных файлов описаны в [первом](reports/roblox-batch-2026-10-18.md) и [дополнительном](reports/gpo-followup-2026-10-18.md) отчётах. Для одного PSU-образца использован отдельно опубликованный npm-пакет `unluac-js@1.4.4`; он не включён в архив исходников Rust. Исходники `memcpython/PSU-Deobfuscator` и `viruscamp/luadec` без явной корневой лицензии здесь не скопированы, хотя локально исследовались/собирались. Защищённые Roblox-скрипты не исполнялись.
 
 Проверить целостность новых архивов без запуска стороннего кода:
 
 ```bash
 python3 scripts/verify_sources.py
+python3 scripts/verify_results.py  # SHA-256 опубликованных результатов, не проверка их поведения
 ```
 
 ## Дополнительные находки: только ссылки
@@ -85,7 +90,8 @@ python3 scripts/verify_sources.py
 | [PhoenixZeng/LuraphDeobfuscator](https://github.com/PhoenixZeng/LuraphDeobfuscator) | Luraph, Java |
 | [0x251/Prometheus-Deobfuscator](https://github.com/0x251/Prometheus-Deobfuscator) и [V2](https://github.com/0x251/Prometheus-DeobfuscatorV2) | Prometheus, Python / Lua |
 | [umdill/LuauDeobfuscators](https://github.com/umdill/LuauDeobfuscators) | Luau, C# |
-| [memcpython/PSU-Deobfuscator](https://github.com/memcpython/PSU-Deobfuscator) | PSU, JS |
+| [memcpython/PSU-Deobfuscator](https://github.com/memcpython/PSU-Deobfuscator) | PSU, JS; статически применён к одному заявленному GPO-файлу, без копирования исходников |
+| [viruscamp/luadec](https://github.com/viruscamp/luadec) | Lua 5.1 bytecode; локально собран, на SeaHub не восстановил полный исходник |
 | [luaprojects/moonsec-js-deobf](https://github.com/luaprojects/moonsec-js-deobf) | MoonSec V3, JS-порт |
 | [SixZensED/Lua-Deobfuscator](https://github.com/SixZensED/Lua-Deobfuscator) | Lua, JS |
 | [Centrixs/lua-deobfuscators](https://github.com/Centrixs/lua-deobfuscators) | несколько Lua-обфускаторов |

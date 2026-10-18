@@ -406,6 +406,58 @@
       "files": 46,
       "omitted_files": 58,
       "notes": "Upstream README names v15.1 and includes v15.1 sample pairs; version-specific functionality not independently tested. Sample scripts and binaries omitted."
+    },
+    {
+      "repository": "sztupy/luadec51",
+      "url": "https://github.com/sztupy/luadec51",
+      "commit": "35cddc816df28f149daa3178636d061e34edb50f",
+      "license": "MIT (COPYING)",
+      "family": "Lua 5.1 bytecode",
+      "language": "C",
+      "kind": "decompiler (external Lua 5.1 required)",
+      "archive": "sources/sztupy--luadec51.zip",
+      "sha256": "c93cd9c3077b1ccf81f4e5e3d56ade327880d182f190e6f2cc0e7624f17f13a9",
+      "files": 24,
+      "omitted_files": 0
+    },
+    {
+      "repository": "x3zvawq/unluac-rs",
+      "url": "https://github.com/x3zvawq/unluac-rs",
+      "commit": "3186d2e392e44a2ddaadd1826a779c98c718be53",
+      "license": "MIT",
+      "family": "Lua 5.1 / Luau bytecode",
+      "language": "Rust / JS",
+      "kind": "decompiler (Rust sources; JS wrapper)",
+      "archive": "sources/x3zvawq--unluac-rs.zip",
+      "sha256": "d26aed1b6216067a790283f3faf8712a1fdabe5c02d3bba9af0ac4b57f754c57",
+      "files": 563,
+      "omitted_files": 955
+    },
+    {
+      "repository": "Kiet1308/Tovek",
+      "url": "https://github.com/Kiet1308/Tovek",
+      "commit": "77edf387bf280a2f4d46d57ac85d5c4f071b763f",
+      "license": "MIT",
+      "family": "Luau bytecode",
+      "language": "Rust",
+      "kind": "decompiler (Rust sources)",
+      "archive": "sources/Kiet1308--Tovek.zip",
+      "sha256": "ccf943cb0f615827c5bf50d410d246f42d3a9341d394607b7e73aeddc37fafaa",
+      "files": 211,
+      "omitted_files": 778
+    },
+    {
+      "repository": "arm64d/luraph-v14_9-vm_decode",
+      "url": "https://github.com/arm64d/luraph-v14_9-vm_decode",
+      "commit": "1ee43fe7a1fc511979f91d4067507cef656bfbe1",
+      "license": "MIT",
+      "family": "Luraph v14.9",
+      "language": "Lua",
+      "kind": "reference interpreter, NOT a deobfuscator",
+      "archive": "sources/arm64d--luraph-v14_9-vm_decode.zip",
+      "sha256": "dcc1143c818d994c2a846d12198cf253b2d9922877e66792ca617cc0bd6ad0b8",
+      "files": 3,
+      "omitted_files": 0
     }
   ]
 }

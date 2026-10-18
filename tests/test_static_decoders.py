@@ -7,7 +7,12 @@ import lzma
 import unittest
 
 from scripts.decode_lua_xor_literals import literal_bytes, lua_quote, replace_literal_calls
-from scripts.unpack_luraph13_hex import BANNER, unpack_hex_stream
+from scripts.unpack_luraph13_hex import BANNER, BANNER_136, unpack_hex_stream
+from scripts.unpack_luraph14_base85 import (
+    BANNER as BANNER_149,
+    DECODER_FINGERPRINT,
+    unpack_container,
+)
 from scripts.unpack_luraph14_lzma import FILTER, unpack_outer_layer
 
 
@@ -61,6 +66,44 @@ class Luraph13HexTests(unittest.TestCase):
             unpack_hex_stream(source.replace('3H00', '3H'))
         with self.assertRaises(ValueError):
             unpack_hex_stream(source.replace('2H43', 'AH43'))
+
+    def test_v136_heuristic_literal_is_not_v135_decoder(self):
+        source = BANNER_136 + '\nreturn f("LPH#41422H433H00",0X1,string.char)'
+        candidate, markers = unpack_hex_stream(source)
+        self.assertEqual(candidate, b'ABCC\x00\x00\x00')
+        self.assertEqual(markers, 2)
+        for bad in [source.replace('LPH#', 'LPH~'),
+                    source.replace(',0X1,string.char', ',something_else')]:
+            with self.assertRaises(ValueError):
+                unpack_hex_stream(bad)
+
+
+class Luraph149Base85Tests(unittest.TestCase):
+    @staticmethod
+    def wrapper(encoded):
+        return BANNER_149 + '\n' + ';'.join(DECODER_FINGERPRINT) + '\nlocal data=[==[LPH?' + encoded + ']==]'
+
+    def test_little_endian_words_and_zero_shorthand(self):
+        expected = b'ABCD' + b'\x00' * 4 + b'\x01\x02\x03\x04'
+        # base64.a85encode uses network byte order; Luau buffer.writeu32
+        # stores each decoded integer as little-endian instead.
+        big_endian = b''.join(expected[i:i + 4][::-1] for i in range(0, len(expected), 4))
+        encoded = base64.a85encode(big_endian).decode('ascii')
+        self.assertIn('z', encoded)
+        data, zero_groups = unpack_container(self.wrapper(encoded))
+        self.assertEqual(data, expected)
+        self.assertEqual(zero_groups, 1)
+
+    def test_rejects_other_families_broken_groups_and_limits(self):
+        source = self.wrapper(base64.a85encode(b'ABCD').decode('ascii'))
+        for bad in [source.replace('LPH?', 'LPH~'),
+                    source.replace('for l=5,f,0B101', 'for l=1,f,0B101'),
+                    source.replace(']==]', '~]==]'),
+                    source.replace(']==]', '!]==]')]:
+            with self.assertRaises(ValueError):
+                unpack_container(bad)
+        with self.assertRaises(ValueError):
+            unpack_container(source, max_output=3)
 
 
 class LuraphWrapperTests(unittest.TestCase):
