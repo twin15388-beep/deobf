@@ -1,0 +1,5055 @@
+{
+  "profile": "wearedevs-prometheus-v1",
+  "source_sha256": "170b348b9e31ad29aa9bc2f3e1d7c85195bccbdb87bd217531a37a3c964cfa11",
+  "constants": [
+    {
+      "bytes_hex": "5f5f696e646578",
+      "text": "__index"
+    },
+    {
+      "bytes_hex": "5f5f6763",
+      "text": "__gc"
+    },
+    {
+      "bytes_hex": "5f5f6c656e",
+      "text": "__len"
+    },
+    {
+      "bytes_hex": "5f5f6763",
+      "text": "__gc"
+    },
+    {
+      "bytes_hex": "5f5f696e646578",
+      "text": "__index"
+    },
+    {
+      "bytes_hex": "5f5f6c656e",
+      "text": "__len"
+    },
+    {
+      "bytes_hex": "566563746f7233",
+      "text": "Vector3"
+    },
+    {
+      "bytes_hex": "436861726163746572",
+      "text": "Character"
+    },
+    {
+      "bytes_hex": "5f47",
+      "text": "_G"
+    },
+    {
+      "bytes_hex": "48756d616e6f6964526f6f7450617274",
+      "text": "HumanoidRootPart"
+    },
+    {
+      "bytes_hex": "53697a65",
+      "text": "Size"
+    },
+    {
+      "bytes_hex": "5f47",
+      "text": "_G"
+    },
+    {
+      "bytes_hex": "6e6577",
+      "text": "new"
+    },
+    {
+      "bytes_hex": "4865616453697a65",
+      "text": "HeadSize"
+    },
+    {
+      "bytes_hex": "5f47",
+      "text": "_G"
+    },
+    {
+      "bytes_hex": "4865616453697a65",
+      "text": "HeadSize"
+    },
+    {
+      "bytes_hex": "4865616453697a65",
+      "text": "HeadSize"
+    },
+    {
+      "bytes_hex": "436861726163746572",
+      "text": "Character"
+    },
+    {
+      "bytes_hex": "48756d616e6f6964526f6f7450617274",
+      "text": "HumanoidRootPart"
+    },
+    {
+      "bytes_hex": "43616e436f6c6c696465",
+      "text": "CanCollide"
+    },
+    {
+      "bytes_hex": "7342505430384c4176325855726b",
+      "text": "sBPT08LAv2XUrk"
+    },
+    {
+      "bytes_hex": "496e7374616e6365",
+      "text": "Instance"
+    },
+    {
+      "bytes_hex": "6e6577",
+      "text": "new"
+    },
+    {
+      "bytes_hex": "42696c6c626f617264477569",
+      "text": "BillboardGui"
+    },
+    {
+      "bytes_hex": "456c656374726963505050475549",
+      "text": "ElectricPPPGUI"
+    },
+    {
+      "bytes_hex": "4e616d65",
+      "text": "Name"
+    },
+    {
+      "bytes_hex": "5544696d32",
+      "text": "UDim2"
+    },
+    {
+      "bytes_hex": "53697a65",
+      "text": "Size"
+    },
+    {
+      "bytes_hex": "6e6577",
+      "text": "new"
+    },
+    {
+      "bytes_hex": "416c776179734f6e546f70",
+      "text": "AlwaysOnTop"
+    },
+    {
+      "bytes_hex": "496e7374616e6365",
+      "text": "Instance"
+    },
+    {
+      "bytes_hex": "5544696d32",
+      "text": "UDim2"
+    },
+    {
+      "bytes_hex": "6e6577",
+      "text": "new"
+    },
+    {
+      "bytes_hex": "4672616d65",
+      "text": "Frame"
+    },
+    {
+      "bytes_hex": "53697a65",
+      "text": "Size"
+    },
+    {
+      "bytes_hex": "6e6577",
+      "text": "new"
+    },
+    {
+      "bytes_hex": "436f6c6f7233",
+      "text": "Color3"
+    },
+    {
+      "bytes_hex": "4261636b67726f756e645472616e73706172656e6379",
+      "text": "BackgroundTransparency"
+    },
+    {
+      "bytes_hex": "426f7264657253697a65506978656c",
+      "text": "BorderSizePixel"
+    },
+    {
+      "bytes_hex": "4261636b67726f756e64436f6c6f7233",
+      "text": "BackgroundColor3"
+    },
+    {
+      "bytes_hex": "6e6577",
+      "text": "new"
+    },
+    {
+      "bytes_hex": "496e7374616e6365",
+      "text": "Instance"
+    },
+    {
+      "bytes_hex": "5544696d32",
+      "text": "UDim2"
+    },
+    {
+      "bytes_hex": "6e6577",
+      "text": "new"
+    },
+    {
+      "bytes_hex": "546578744c6162656c",
+      "text": "TextLabel"
+    },
+    {
+      "bytes_hex": "53697a65",
+      "text": "Size"
+    },
+    {
+      "bytes_hex": "6e6577",
+      "text": "new"
+    },
+    {
+      "bytes_hex": "426f7264657253697a65506978656c",
+      "text": "BorderSizePixel"
+    },
+    {
+      "bytes_hex": "5465787453697a65",
+      "text": "TextSize"
+    },
+    {
+      "bytes_hex": "54657874",
+      "text": "Text"
+    },
+    {
+      "bytes_hex": "4c6567656e64617279204368657374",
+      "text": "Legendary Chest"
+    },
+    {
+      "bytes_hex": "4261636b67726f756e645472616e73706172656e6379",
+      "text": "BackgroundTransparency"
+    },
+    {
+      "bytes_hex": "67616d65",
+      "text": "game"
+    },
+    {
+      "bytes_hex": "47657453657276696365",
+      "text": "GetService"
+    },
+    {
+      "bytes_hex": "52756e53657276696365",
+      "text": "RunService"
+    },
+    {
+      "bytes_hex": "52656e64657253746570706564",
+      "text": "RenderStepped"
+    },
+    {
+      "bytes_hex": "77616974",
+      "text": "wait"
+    },
+    {
+      "bytes_hex": "496e7374616e6365",
+      "text": "Instance"
+    },
+    {
+      "bytes_hex": "6e6577",
+      "text": "new"
+    },
+    {
+      "bytes_hex": "42696c6c626f617264477569",
+      "text": "BillboardGui"
+    },
+    {
+      "bytes_hex": "496e7374616e6365",
+      "text": "Instance"
+    },
+    {
+      "bytes_hex": "566563746f7233",
+      "text": "Vector3"
+    },
+    {
+      "bytes_hex": "48656164",
+      "text": "Head"
+    },
+    {
+      "bytes_hex": "6e6577",
+      "text": "new"
+    },
+    {
+      "bytes_hex": "4672616d65",
+      "text": "Frame"
+    },
+    {
+      "bytes_hex": "496e7374616e6365",
+      "text": "Instance"
+    },
+    {
+      "bytes_hex": "6e6577",
+      "text": "new"
+    },
+    {
+      "bytes_hex": "546578744c6162656c",
+      "text": "TextLabel"
+    },
+    {
+      "bytes_hex": "41646f726e6565",
+      "text": "Adornee"
+    },
+    {
+      "bytes_hex": "57616974466f724368696c64",
+      "text": "WaitForChild"
+    },
+    {
+      "bytes_hex": "53747564734f6666736574",
+      "text": "StudsOffset"
+    },
+    {
+      "bytes_hex": "6e6577",
+      "text": "new"
+    },
+    {
+      "bytes_hex": "416c776179734f6e546f70",
+      "text": "AlwaysOnTop"
+    },
+    {
+      "bytes_hex": "5544696d32",
+      "text": "UDim2"
+    },
+    {
+      "bytes_hex": "6e6577",
+      "text": "new"
+    },
+    {
+      "bytes_hex": "53697a65",
+      "text": "Size"
+    },
+    {
+      "bytes_hex": "5544696d32",
+      "text": "UDim2"
+    },
+    {
+      "bytes_hex": "53697a65",
+      "text": "Size"
+    },
+    {
+      "bytes_hex": "6e6577",
+      "text": "new"
+    },
+    {
+      "bytes_hex": "53697a65",
+      "text": "Size"
+    },
+    {
+      "bytes_hex": "5544696d32",
+      "text": "UDim2"
+    },
+    {
+      "bytes_hex": "6e6577",
+      "text": "new"
+    },
+    {
+      "bytes_hex": "4261636b67726f756e645472616e73706172656e6379",
+      "text": "BackgroundTransparency"
+    },
+    {
+      "bytes_hex": "4e616d65",
+      "text": "Name"
+    },
+    {
+      "bytes_hex": "4261636b67726f756e645472616e73706172656e6379",
+      "text": "BackgroundTransparency"
+    },
+    {
+      "bytes_hex": "54657874",
+      "text": "Text"
+    },
+    {
+      "bytes_hex": "466f6e74",
+      "text": "Font"
+    },
+    {
+      "bytes_hex": "54657874436f6c6f7233",
+      "text": "TextColor3"
+    },
+    {
+      "bytes_hex": "546578745363616c6564",
+      "text": "TextScaled"
+    },
+    {
+      "bytes_hex": "4c77356c30436a37535348454547",
+      "text": "Lw5l0Cj7SSHEEG"
+    },
+    {
+      "bytes_hex": "436861726163746572",
+      "text": "Character"
+    },
+    {
+      "bytes_hex": "4164644e616d65546167",
+      "text": "AddNameTag"
+    },
+    {
+      "bytes_hex": "4e616d65",
+      "text": "Name"
+    },
+    {
+      "bytes_hex": "556e636f6d6d6f6e",
+      "text": "Uncommon"
+    },
+    {
+      "bytes_hex": "4a51786e6d3835346b684d3642",
+      "text": "JQxnm854khM6B"
+    },
+    {
+      "bytes_hex": "4e616d65",
+      "text": "Name"
+    },
+    {
+      "bytes_hex": "436f6d6d6f6e",
+      "text": "Common"
+    },
+    {
+      "bytes_hex": "4b50644157315152765a39785274",
+      "text": "KPdAW1QRvZ9xRt"
+    },
+    {
+      "bytes_hex": "346f76485659554c41484862",
+      "text": "4ovHVYULAHHb"
+    },
+    {
+      "bytes_hex": "67616d65",
+      "text": "game"
+    },
+    {
+      "bytes_hex": "736861726564",
+      "text": "shared"
+    },
+    {
+      "bytes_hex": "77616c6b66617374",
+      "text": "walkfast"
+    },
+    {
+      "bytes_hex": "506c6179657273",
+      "text": "Players"
+    },
+    {
+      "bytes_hex": "47657453657276696365",
+      "text": "GetService"
+    },
+    {
+      "bytes_hex": "4c6f63616c506c61796572",
+      "text": "LocalPlayer"
+    },
+    {
+      "bytes_hex": "436861726163746572",
+      "text": "Character"
+    },
+    {
+      "bytes_hex": "436f6c6f7233",
+      "text": "Color3"
+    },
+    {
+      "bytes_hex": "456e756d",
+      "text": "Enum"
+    },
+    {
+      "bytes_hex": "436f7265477569",
+      "text": "CoreGui"
+    },
+    {
+      "bytes_hex": "66726f6d524742",
+      "text": "fromRGB"
+    },
+    {
+      "bytes_hex": "436f6c6f7233",
+      "text": "Color3"
+    },
+    {
+      "bytes_hex": "66726f6d524742",
+      "text": "fromRGB"
+    },
+    {
+      "bytes_hex": "466f6e74",
+      "text": "Font"
+    },
+    {
+      "bytes_hex": "526f626f746f4d6f6e6f",
+      "text": "RobotoMono"
+    },
+    {
+      "bytes_hex": "436f6c6f7233",
+      "text": "Color3"
+    },
+    {
+      "bytes_hex": "506c6179657273",
+      "text": "Players"
+    },
+    {
+      "bytes_hex": "66726f6d524742",
+      "text": "fromRGB"
+    },
+    {
+      "bytes_hex": "496e7374616e6365",
+      "text": "Instance"
+    },
+    {
+      "bytes_hex": "6e6577",
+      "text": "new"
+    },
+    {
+      "bytes_hex": "47657453657276696365",
+      "text": "GetService"
+    },
+    {
+      "bytes_hex": "67616d65",
+      "text": "game"
+    },
+    {
+      "bytes_hex": "67616d65",
+      "text": "game"
+    },
+    {
+      "bytes_hex": "466f6c646572",
+      "text": "Folder"
+    },
+    {
+      "bytes_hex": "",
+      "text": ""
+    },
+    {
+      "bytes_hex": "4e616d65",
+      "text": "Name"
+    },
+    {
+      "bytes_hex": "4164644f75746c696e65",
+      "text": "AddOutline"
+    },
+    {
+      "bytes_hex": "697061697273",
+      "text": "ipairs"
+    },
+    {
+      "bytes_hex": "4164644e616d65546167",
+      "text": "AddNameTag"
+    },
+    {
+      "bytes_hex": "47657453657276696365",
+      "text": "GetService"
+    },
+    {
+      "bytes_hex": "476574506c6179657273",
+      "text": "GetPlayers"
+    },
+    {
+      "bytes_hex": "496e7374616e6365",
+      "text": "Instance"
+    },
+    {
+      "bytes_hex": "6e6577",
+      "text": "new"
+    },
+    {
+      "bytes_hex": "5544696d32",
+      "text": "UDim2"
+    },
+    {
+      "bytes_hex": "42696c6c626f617264477569",
+      "text": "BillboardGui"
+    },
+    {
+      "bytes_hex": "4e616d65",
+      "text": "Name"
+    },
+    {
+      "bytes_hex": "456c656374726963505050475549",
+      "text": "ElectricPPPGUI"
+    },
+    {
+      "bytes_hex": "53697a65",
+      "text": "Size"
+    },
+    {
+      "bytes_hex": "6e6577",
+      "text": "new"
+    },
+    {
+      "bytes_hex": "416c776179734f6e546f70",
+      "text": "AlwaysOnTop"
+    },
+    {
+      "bytes_hex": "496e7374616e6365",
+      "text": "Instance"
+    },
+    {
+      "bytes_hex": "6e6577",
+      "text": "new"
+    },
+    {
+      "bytes_hex": "4672616d65",
+      "text": "Frame"
+    },
+    {
+      "bytes_hex": "53697a65",
+      "text": "Size"
+    },
+    {
+      "bytes_hex": "5544696d32",
+      "text": "UDim2"
+    },
+    {
+      "bytes_hex": "6e6577",
+      "text": "new"
+    },
+    {
+      "bytes_hex": "4261636b67726f756e645472616e73706172656e6379",
+      "text": "BackgroundTransparency"
+    },
+    {
+      "bytes_hex": "426f7264657253697a65506978656c",
+      "text": "BorderSizePixel"
+    },
+    {
+      "bytes_hex": "436f6c6f7233",
+      "text": "Color3"
+    },
+    {
+      "bytes_hex": "4261636b67726f756e64436f6c6f7233",
+      "text": "BackgroundColor3"
+    },
+    {
+      "bytes_hex": "6e6577",
+      "text": "new"
+    },
+    {
+      "bytes_hex": "5544696d32",
+      "text": "UDim2"
+    },
+    {
+      "bytes_hex": "496e7374616e6365",
+      "text": "Instance"
+    },
+    {
+      "bytes_hex": "6e6577",
+      "text": "new"
+    },
+    {
+      "bytes_hex": "546578744c6162656c",
+      "text": "TextLabel"
+    },
+    {
+      "bytes_hex": "53697a65",
+      "text": "Size"
+    },
+    {
+      "bytes_hex": "6e6577",
+      "text": "new"
+    },
+    {
+      "bytes_hex": "426f7264657253697a65506978656c",
+      "text": "BorderSizePixel"
+    },
+    {
+      "bytes_hex": "5465787453697a65",
+      "text": "TextSize"
+    },
+    {
+      "bytes_hex": "54657874",
+      "text": "Text"
+    },
+    {
+      "bytes_hex": "556e636f6d6d6f6e204368657374",
+      "text": "Uncommon Chest"
+    },
+    {
+      "bytes_hex": "4261636b67726f756e645472616e73706172656e6379",
+      "text": "BackgroundTransparency"
+    },
+    {
+      "bytes_hex": "7061697273",
+      "text": "pairs"
+    },
+    {
+      "bytes_hex": "506c6179657273",
+      "text": "Players"
+    },
+    {
+      "bytes_hex": "67616d65",
+      "text": "game"
+    },
+    {
+      "bytes_hex": "47657453657276696365",
+      "text": "GetService"
+    },
+    {
+      "bytes_hex": "4c6f63616c506c61796572",
+      "text": "LocalPlayer"
+    },
+    {
+      "bytes_hex": "506c6179657253637269707473",
+      "text": "PlayerScripts"
+    },
+    {
+      "bytes_hex": "53686f70",
+      "text": "Shop"
+    },
+    {
+      "bytes_hex": "436865737473",
+      "text": "Chests"
+    },
+    {
+      "bytes_hex": "47657444657363656e64616e7473",
+      "text": "GetDescendants"
+    },
+    {
+      "bytes_hex": "4e616d65",
+      "text": "Name"
+    },
+    {
+      "bytes_hex": "52617265",
+      "text": "Rare"
+    },
+    {
+      "bytes_hex": "7063616c6c",
+      "text": "pcall"
+    },
+    {
+      "bytes_hex": "306370447832413356427a7555",
+      "text": "0cpDx2A3VBzuU"
+    },
+    {
+      "bytes_hex": "4e616d65",
+      "text": "Name"
+    },
+    {
+      "bytes_hex": "4c6567656e64617279",
+      "text": "Legendary"
+    },
+    {
+      "bytes_hex": "736861726564",
+      "text": "shared"
+    },
+    {
+      "bytes_hex": "77616c6b66617374",
+      "text": "walkfast"
+    },
+    {
+      "bytes_hex": "43376b56503573394a744f4b",
+      "text": "C7kVP5s9JtOK"
+    },
+    {
+      "bytes_hex": "496e7374616e6365",
+      "text": "Instance"
+    },
+    {
+      "bytes_hex": "5544696d32",
+      "text": "UDim2"
+    },
+    {
+      "bytes_hex": "6e6577",
+      "text": "new"
+    },
+    {
+      "bytes_hex": "42696c6c626f617264477569",
+      "text": "BillboardGui"
+    },
+    {
+      "bytes_hex": "456c656374726963505050475549",
+      "text": "ElectricPPPGUI"
+    },
+    {
+      "bytes_hex": "4e616d65",
+      "text": "Name"
+    },
+    {
+      "bytes_hex": "6e6577",
+      "text": "new"
+    },
+    {
+      "bytes_hex": "53697a65",
+      "text": "Size"
+    },
+    {
+      "bytes_hex": "416c776179734f6e546f70",
+      "text": "AlwaysOnTop"
+    },
+    {
+      "bytes_hex": "496e7374616e6365",
+      "text": "Instance"
+    },
+    {
+      "bytes_hex": "5544696d32",
+      "text": "UDim2"
+    },
+    {
+      "bytes_hex": "6e6577",
+      "text": "new"
+    },
+    {
+      "bytes_hex": "4672616d65",
+      "text": "Frame"
+    },
+    {
+      "bytes_hex": "53697a65",
+      "text": "Size"
+    },
+    {
+      "bytes_hex": "6e6577",
+      "text": "new"
+    },
+    {
+      "bytes_hex": "436f6c6f7233",
+      "text": "Color3"
+    },
+    {
+      "bytes_hex": "4261636b67726f756e645472616e73706172656e6379",
+      "text": "BackgroundTransparency"
+    },
+    {
+      "bytes_hex": "426f7264657253697a65506978656c",
+      "text": "BorderSizePixel"
+    },
+    {
+      "bytes_hex": "4261636b67726f756e64436f6c6f7233",
+      "text": "BackgroundColor3"
+    },
+    {
+      "bytes_hex": "6e6577",
+      "text": "new"
+    },
+    {
+      "bytes_hex": "496e7374616e6365",
+      "text": "Instance"
+    },
+    {
+      "bytes_hex": "5544696d32",
+      "text": "UDim2"
+    },
+    {
+      "bytes_hex": "6e6577",
+      "text": "new"
+    },
+    {
+      "bytes_hex": "546578744c6162656c",
+      "text": "TextLabel"
+    },
+    {
+      "bytes_hex": "53697a65",
+      "text": "Size"
+    },
+    {
+      "bytes_hex": "6e6577",
+      "text": "new"
+    },
+    {
+      "bytes_hex": "426f7264657253697a65506978656c",
+      "text": "BorderSizePixel"
+    },
+    {
+      "bytes_hex": "5465787453697a65",
+      "text": "TextSize"
+    },
+    {
+      "bytes_hex": "4d7974686963616c204368657374",
+      "text": "Mythical Chest"
+    },
+    {
+      "bytes_hex": "54657874",
+      "text": "Text"
+    },
+    {
+      "bytes_hex": "4261636b67726f756e645472616e73706172656e6379",
+      "text": "BackgroundTransparency"
+    },
+    {
+      "bytes_hex": "496e7374616e6365",
+      "text": "Instance"
+    },
+    {
+      "bytes_hex": "6e6577",
+      "text": "new"
+    },
+    {
+      "bytes_hex": "42696c6c626f617264477569",
+      "text": "BillboardGui"
+    },
+    {
+      "bytes_hex": "456c656374726963505050475549",
+      "text": "ElectricPPPGUI"
+    },
+    {
+      "bytes_hex": "5544696d32",
+      "text": "UDim2"
+    },
+    {
+      "bytes_hex": "4e616d65",
+      "text": "Name"
+    },
+    {
+      "bytes_hex": "53697a65",
+      "text": "Size"
+    },
+    {
+      "bytes_hex": "6e6577",
+      "text": "new"
+    },
+    {
+      "bytes_hex": "416c776179734f6e546f70",
+      "text": "AlwaysOnTop"
+    },
+    {
+      "bytes_hex": "496e7374616e6365",
+      "text": "Instance"
+    },
+    {
+      "bytes_hex": "6e6577",
+      "text": "new"
+    },
+    {
+      "bytes_hex": "4672616d65",
+      "text": "Frame"
+    },
+    {
+      "bytes_hex": "53697a65",
+      "text": "Size"
+    },
+    {
+      "bytes_hex": "5544696d32",
+      "text": "UDim2"
+    },
+    {
+      "bytes_hex": "6e6577",
+      "text": "new"
+    },
+    {
+      "bytes_hex": "4261636b67726f756e645472616e73706172656e6379",
+      "text": "BackgroundTransparency"
+    },
+    {
+      "bytes_hex": "436f6c6f7233",
+      "text": "Color3"
+    },
+    {
+      "bytes_hex": "426f7264657253697a65506978656c",
+      "text": "BorderSizePixel"
+    },
+    {
+      "bytes_hex": "6e6577",
+      "text": "new"
+    },
+    {
+      "bytes_hex": "4261636b67726f756e64436f6c6f7233",
+      "text": "BackgroundColor3"
+    },
+    {
+      "bytes_hex": "5544696d32",
+      "text": "UDim2"
+    },
+    {
+      "bytes_hex": "496e7374616e6365",
+      "text": "Instance"
+    },
+    {
+      "bytes_hex": "6e6577",
+      "text": "new"
+    },
+    {
+      "bytes_hex": "546578744c6162656c",
+      "text": "TextLabel"
+    },
+    {
+      "bytes_hex": "53697a65",
+      "text": "Size"
+    },
+    {
+      "bytes_hex": "6e6577",
+      "text": "new"
+    },
+    {
+      "bytes_hex": "426f7264657253697a65506978656c",
+      "text": "BorderSizePixel"
+    },
+    {
+      "bytes_hex": "5465787453697a65",
+      "text": "TextSize"
+    },
+    {
+      "bytes_hex": "436f6d6d6f6e204368657374",
+      "text": "Common Chest"
+    },
+    {
+      "bytes_hex": "54657874",
+      "text": "Text"
+    },
+    {
+      "bytes_hex": "4261636b67726f756e645472616e73706172656e6379",
+      "text": "BackgroundTransparency"
+    },
+    {
+      "bytes_hex": "6a72396d684e596f4349504b3265",
+      "text": "jr9mhNYoCIPK2e"
+    },
+    {
+      "bytes_hex": "316c7577696c35527464566d",
+      "text": "1luwil5RtdVm"
+    },
+    {
+      "bytes_hex": "5f47",
+      "text": "_G"
+    },
+    {
+      "bytes_hex": "44697361626c6564",
+      "text": "Disabled"
+    },
+    {
+      "bytes_hex": "6b6579616263313233",
+      "text": "keyabc123"
+    },
+    {
+      "bytes_hex": "546f67676c654b6579",
+      "text": "ToggleKey"
+    },
+    {
+      "bytes_hex": "446973636f72644c696e6b",
+      "text": "DiscordLink"
+    },
+    {
+      "bytes_hex": "6c6f6164737472696e67",
+      "text": "loadstring"
+    },
+    {
+      "bytes_hex": "68747470733a2f2f7261772e67697468756275736572636f6e74656e742e636f6d2f4c6f636f2d43544f2f55492d4c6962726172792f6d61696e2f566973696f6e4c696256322f736f757263652e6c7561",
+      "text": "https://raw.githubusercontent.com/Loco-CTO/UI-Library/main/VisionLibV2/source.lua"
+    },
+    {
+      "bytes_hex": "4b6579",
+      "text": "Key"
+    },
+    {
+      "bytes_hex": "48747470476574",
+      "text": "HttpGet"
+    },
+    {
+      "bytes_hex": "67616d65",
+      "text": "game"
+    },
+    {
+      "bytes_hex": "456e756d",
+      "text": "Enum"
+    },
+    {
+      "bytes_hex": "5874726579313078204875622046726565202d205bf09f9296f09fa49655504441544520385d204772616e64205069656365204f6e6c696e65",
+      "text": "Xtrey10x Hub Free - [\ud83d\udc96\ud83e\udd16UPDATE 8] Grand Piece Online"
+    },
+    {
+      "bytes_hex": "4279205874726579313078",
+      "text": "By Xtrey10x"
+    },
+    {
+      "bytes_hex": "4e616d65",
+      "text": "Name"
+    },
+    {
+      "bytes_hex": "466f6f746572",
+      "text": "Footer"
+    },
+    {
+      "bytes_hex": "4b6579436f6465",
+      "text": "KeyCode"
+    },
+    {
+      "bytes_hex": "437265617465",
+      "text": "Create"
+    },
+    {
+      "bytes_hex": "52696768745368696674",
+      "text": "RightShift"
+    },
+    {
+      "bytes_hex": "546f67676c656452656c6174697665594f6666736574",
+      "text": "ToggledRelativeYOffset"
+    },
+    {
+      "bytes_hex": "4b657953797374656d",
+      "text": "KeySystem"
+    },
+    {
+      "bytes_hex": "4c6f6164656443616c6c6261636b",
+      "text": "LoadedCallback"
+    },
+    {
+      "bytes_hex": "68747470733a2f2f646973636f72642e67672f4270377746635a65556e",
+      "text": "https://discord.gg/Bp7wFcZeUn"
+    },
+    {
+      "bytes_hex": "4d6178417474656d707473",
+      "text": "MaxAttempts"
+    },
+    {
+      "bytes_hex": "436f6c6f72",
+      "text": "Color"
+    },
+    {
+      "bytes_hex": "4e616d65",
+      "text": "Name"
+    },
+    {
+      "bytes_hex": "436f6c6f7233",
+      "text": "Color3"
+    },
+    {
+      "bytes_hex": "43616c6c6261636b",
+      "text": "Callback"
+    },
+    {
+      "bytes_hex": "49636f6e",
+      "text": "Icon"
+    },
+    {
+      "bytes_hex": "6e6577",
+      "text": "new"
+    },
+    {
+      "bytes_hex": "726278617373657469643a2f2f3131333936313331393832",
+      "text": "rbxassetid://11396131982"
+    },
+    {
+      "bytes_hex": "546162",
+      "text": "Tab"
+    },
+    {
+      "bytes_hex": "47656e6572616c",
+      "text": "General"
+    },
+    {
+      "bytes_hex": "4d61696e",
+      "text": "Main"
+    },
+    {
+      "bytes_hex": "43616c6c6261636b",
+      "text": "Callback"
+    },
+    {
+      "bytes_hex": "4e616d65",
+      "text": "Name"
+    },
+    {
+      "bytes_hex": "53656374696f6e",
+      "text": "Section"
+    },
+    {
+      "bytes_hex": "4d696e",
+      "text": "Min"
+    },
+    {
+      "bytes_hex": "20496e76697369626c6520486974626f78",
+      "text": " Invisible Hitbox"
+    },
+    {
+      "bytes_hex": "546f67676c65",
+      "text": "Toggle"
+    },
+    {
+      "bytes_hex": "4e616d65",
+      "text": "Name"
+    },
+    {
+      "bytes_hex": "44656661756c74",
+      "text": "Default"
+    },
+    {
+      "bytes_hex": "44656661756c74",
+      "text": "Default"
+    },
+    {
+      "bytes_hex": "43616c6c6261636b",
+      "text": "Callback"
+    },
+    {
+      "bytes_hex": "57616c6b7370656564",
+      "text": "Walkspeed"
+    },
+    {
+      "bytes_hex": "4e616d65",
+      "text": "Name"
+    },
+    {
+      "bytes_hex": "546f67676c65",
+      "text": "Toggle"
+    },
+    {
+      "bytes_hex": "44656661756c74",
+      "text": "Default"
+    },
+    {
+      "bytes_hex": "4e616d65",
+      "text": "Name"
+    },
+    {
+      "bytes_hex": "496e6620476570706f",
+      "text": "Inf Geppo"
+    },
+    {
+      "bytes_hex": "43616c6c6261636b",
+      "text": "Callback"
+    },
+    {
+      "bytes_hex": "52756e6e696e6720416e696d6174696f6e",
+      "text": "Running Animation"
+    },
+    {
+      "bytes_hex": "546f67676c65",
+      "text": "Toggle"
+    },
+    {
+      "bytes_hex": "4e616d65",
+      "text": "Name"
+    },
+    {
+      "bytes_hex": "43616c6c6261636b",
+      "text": "Callback"
+    },
+    {
+      "bytes_hex": "4e616d65",
+      "text": "Name"
+    },
+    {
+      "bytes_hex": "427574746f6e",
+      "text": "Button"
+    },
+    {
+      "bytes_hex": "4e6f2046616c6c2044616d616765",
+      "text": "No Fall Damage"
+    },
+    {
+      "bytes_hex": "427574746f6e",
+      "text": "Button"
+    },
+    {
+      "bytes_hex": "43616c6c6261636b",
+      "text": "Callback"
+    },
+    {
+      "bytes_hex": "44656661756c74",
+      "text": "Default"
+    },
+    {
+      "bytes_hex": "486970486569676874",
+      "text": "HipHeight"
+    },
+    {
+      "bytes_hex": "4e616d65",
+      "text": "Name"
+    },
+    {
+      "bytes_hex": "4d6178",
+      "text": "Max"
+    },
+    {
+      "bytes_hex": "536c69646572",
+      "text": "Slider"
+    },
+    {
+      "bytes_hex": "436f6c6f7233",
+      "text": "Color3"
+    },
+    {
+      "bytes_hex": "726278617373657469643a2f2f3131333936313331393832",
+      "text": "rbxassetid://11396131982"
+    },
+    {
+      "bytes_hex": "4e616d65",
+      "text": "Name"
+    },
+    {
+      "bytes_hex": "457370",
+      "text": "Esp"
+    },
+    {
+      "bytes_hex": "49636f6e",
+      "text": "Icon"
+    },
+    {
+      "bytes_hex": "6e6577",
+      "text": "new"
+    },
+    {
+      "bytes_hex": "546162",
+      "text": "Tab"
+    },
+    {
+      "bytes_hex": "436f6c6f72",
+      "text": "Color"
+    },
+    {
+      "bytes_hex": "506c6179657220457370",
+      "text": "Player Esp"
+    },
+    {
+      "bytes_hex": "4e616d65",
+      "text": "Name"
+    },
+    {
+      "bytes_hex": "53656374696f6e",
+      "text": "Section"
+    },
+    {
+      "bytes_hex": "457370",
+      "text": "Esp"
+    },
+    {
+      "bytes_hex": "43616c6c6261636b",
+      "text": "Callback"
+    },
+    {
+      "bytes_hex": "4e616d65",
+      "text": "Name"
+    },
+    {
+      "bytes_hex": "427574746f6e",
+      "text": "Button"
+    },
+    {
+      "bytes_hex": "436f6d6d6f6e204368657374",
+      "text": "Common Chest"
+    },
+    {
+      "bytes_hex": "43616c6c6261636b",
+      "text": "Callback"
+    },
+    {
+      "bytes_hex": "436865737420457370",
+      "text": "Chest Esp"
+    },
+    {
+      "bytes_hex": "4e616d65",
+      "text": "Name"
+    },
+    {
+      "bytes_hex": "53656374696f6e",
+      "text": "Section"
+    },
+    {
+      "bytes_hex": "4e616d65",
+      "text": "Name"
+    },
+    {
+      "bytes_hex": "427574746f6e",
+      "text": "Button"
+    },
+    {
+      "bytes_hex": "43616c6c6261636b",
+      "text": "Callback"
+    },
+    {
+      "bytes_hex": "556e636f6d6d6f6e204368657374",
+      "text": "Uncommon Chest"
+    },
+    {
+      "bytes_hex": "4e616d65",
+      "text": "Name"
+    },
+    {
+      "bytes_hex": "427574746f6e",
+      "text": "Button"
+    },
+    {
+      "bytes_hex": "52617265204368657374",
+      "text": "Rare Chest"
+    },
+    {
+      "bytes_hex": "43616c6c6261636b",
+      "text": "Callback"
+    },
+    {
+      "bytes_hex": "4e616d65",
+      "text": "Name"
+    },
+    {
+      "bytes_hex": "4e616d65",
+      "text": "Name"
+    },
+    {
+      "bytes_hex": "43616c6c6261636b",
+      "text": "Callback"
+    },
+    {
+      "bytes_hex": "427574746f6e",
+      "text": "Button"
+    },
+    {
+      "bytes_hex": "4c6567656e64617279204368657374",
+      "text": "Legendary Chest"
+    },
+    {
+      "bytes_hex": "43616c6c6261636b",
+      "text": "Callback"
+    },
+    {
+      "bytes_hex": "427574746f6e",
+      "text": "Button"
+    },
+    {
+      "bytes_hex": "4e616d65",
+      "text": "Name"
+    },
+    {
+      "bytes_hex": "4d7974686963616c204368657374",
+      "text": "Mythical Chest"
+    },
+    {
+      "bytes_hex": "427574746f6e",
+      "text": "Button"
+    },
+    {
+      "bytes_hex": "704850334c486c523778526568",
+      "text": "pHP3LHlR7xReh"
+    },
+    {
+      "bytes_hex": "52756e53657276696365",
+      "text": "RunService"
+    },
+    {
+      "bytes_hex": "5f47",
+      "text": "_G"
+    },
+    {
+      "bytes_hex": "4865616453697a65",
+      "text": "HeadSize"
+    },
+    {
+      "bytes_hex": "5f47",
+      "text": "_G"
+    },
+    {
+      "bytes_hex": "44697361626c6564",
+      "text": "Disabled"
+    },
+    {
+      "bytes_hex": "67616d65",
+      "text": "game"
+    },
+    {
+      "bytes_hex": "47657453657276696365",
+      "text": "GetService"
+    },
+    {
+      "bytes_hex": "52656e64657253746570706564",
+      "text": "RenderStepped"
+    },
+    {
+      "bytes_hex": "636f6e6e656374",
+      "text": "connect"
+    },
+    {
+      "bytes_hex": "4d55546c7955754a66714c43",
+      "text": "MUTlyUuJfqLC"
+    },
+    {
+      "bytes_hex": "4164644f75746c696e65",
+      "text": "AddOutline"
+    },
+    {
+      "bytes_hex": "496e7374616e6365",
+      "text": "Instance"
+    },
+    {
+      "bytes_hex": "6e6577",
+      "text": "new"
+    },
+    {
+      "bytes_hex": "42696c6c626f617264477569",
+      "text": "BillboardGui"
+    },
+    {
+      "bytes_hex": "4e616d65",
+      "text": "Name"
+    },
+    {
+      "bytes_hex": "5544696d32",
+      "text": "UDim2"
+    },
+    {
+      "bytes_hex": "456c656374726963505050475549",
+      "text": "ElectricPPPGUI"
+    },
+    {
+      "bytes_hex": "53697a65",
+      "text": "Size"
+    },
+    {
+      "bytes_hex": "6e6577",
+      "text": "new"
+    },
+    {
+      "bytes_hex": "496e7374616e6365",
+      "text": "Instance"
+    },
+    {
+      "bytes_hex": "416c776179734f6e546f70",
+      "text": "AlwaysOnTop"
+    },
+    {
+      "bytes_hex": "5544696d32",
+      "text": "UDim2"
+    },
+    {
+      "bytes_hex": "6e6577",
+      "text": "new"
+    },
+    {
+      "bytes_hex": "4672616d65",
+      "text": "Frame"
+    },
+    {
+      "bytes_hex": "53697a65",
+      "text": "Size"
+    },
+    {
+      "bytes_hex": "6e6577",
+      "text": "new"
+    },
+    {
+      "bytes_hex": "436f6c6f7233",
+      "text": "Color3"
+    },
+    {
+      "bytes_hex": "4261636b67726f756e645472616e73706172656e6379",
+      "text": "BackgroundTransparency"
+    },
+    {
+      "bytes_hex": "426f7264657253697a65506978656c",
+      "text": "BorderSizePixel"
+    },
+    {
+      "bytes_hex": "6e6577",
+      "text": "new"
+    },
+    {
+      "bytes_hex": "4261636b67726f756e64436f6c6f7233",
+      "text": "BackgroundColor3"
+    },
+    {
+      "bytes_hex": "496e7374616e6365",
+      "text": "Instance"
+    },
+    {
+      "bytes_hex": "6e6577",
+      "text": "new"
+    },
+    {
+      "bytes_hex": "5544696d32",
+      "text": "UDim2"
+    },
+    {
+      "bytes_hex": "546578744c6162656c",
+      "text": "TextLabel"
+    },
+    {
+      "bytes_hex": "53697a65",
+      "text": "Size"
+    },
+    {
+      "bytes_hex": "6e6577",
+      "text": "new"
+    },
+    {
+      "bytes_hex": "426f7264657253697a65506978656c",
+      "text": "BorderSizePixel"
+    },
+    {
+      "bytes_hex": "5465787453697a65",
+      "text": "TextSize"
+    },
+    {
+      "bytes_hex": "52617265204368657374",
+      "text": "Rare Chest"
+    },
+    {
+      "bytes_hex": "54657874",
+      "text": "Text"
+    },
+    {
+      "bytes_hex": "4261636b67726f756e645472616e73706172656e6379",
+      "text": "BackgroundTransparency"
+    },
+    {
+      "bytes_hex": "67616d65",
+      "text": "game"
+    },
+    {
+      "bytes_hex": "506c6179657273",
+      "text": "Players"
+    },
+    {
+      "bytes_hex": "4c6f63616c506c61796572",
+      "text": "LocalPlayer"
+    },
+    {
+      "bytes_hex": "436861726163746572",
+      "text": "Character"
+    },
+    {
+      "bytes_hex": "48756d616e6f6964",
+      "text": "Humanoid"
+    },
+    {
+      "bytes_hex": "486970486569676874",
+      "text": "HipHeight"
+    },
+    {
+      "bytes_hex": "726a37637547734750333779",
+      "text": "rj7cuGsGP37y"
+    },
+    {
+      "bytes_hex": "744f47674844464f736c4b36",
+      "text": "tOGgHDFOslK6"
+    },
+    {
+      "bytes_hex": "496e7374616e6365",
+      "text": "Instance"
+    },
+    {
+      "bytes_hex": "6e6577",
+      "text": "new"
+    },
+    {
+      "bytes_hex": "486967686c69676874",
+      "text": "Highlight"
+    },
+    {
+      "bytes_hex": "4f75746c696e65436f6c6f72",
+      "text": "OutlineColor"
+    },
+    {
+      "bytes_hex": "41646f726e6565",
+      "text": "Adornee"
+    },
+    {
+      "bytes_hex": "313231554d30443372693670",
+      "text": "121UM0D3ri6p"
+    },
+    {
+      "bytes_hex": "4e616d65",
+      "text": "Name"
+    },
+    {
+      "bytes_hex": "4d7974686963616c",
+      "text": "Mythical"
+    },
+    {
+      "bytes_hex": "506c6179657273",
+      "text": "Players"
+    },
+    {
+      "bytes_hex": "7745445763356d74435650556d",
+      "text": "wEDWc5mtCVPUm"
+    },
+    {
+      "bytes_hex": "67616d65",
+      "text": "game"
+    },
+    {
+      "bytes_hex": "47657453657276696365",
+      "text": "GetService"
+    },
+    {
+      "bytes_hex": "506c617965724164646564",
+      "text": "PlayerAdded"
+    },
+    {
+      "bytes_hex": "436f6e6e656374",
+      "text": "Connect"
+    },
+    {
+      "bytes_hex": "42667445544541597a426c694945",
+      "text": "BftETEAYzBliIE"
+    },
+    {
+      "bytes_hex": "67616d65",
+      "text": "game"
+    },
+    {
+      "bytes_hex": "47657453657276696365",
+      "text": "GetService"
+    },
+    {
+      "bytes_hex": "576f726b7370616365",
+      "text": "Workspace"
+    },
+    {
+      "bytes_hex": "506c6179657243686172616374657273",
+      "text": "PlayerCharacters"
+    },
+    {
+      "bytes_hex": "67616d65",
+      "text": "game"
+    },
+    {
+      "bytes_hex": "506c6179657273",
+      "text": "Players"
+    },
+    {
+      "bytes_hex": "4c6f63616c506c61796572",
+      "text": "LocalPlayer"
+    },
+    {
+      "bytes_hex": "4e616d65",
+      "text": "Name"
+    },
+    {
+      "bytes_hex": "46616c6c44616d616765",
+      "text": "FallDamage"
+    },
+    {
+      "bytes_hex": "44657374726f79",
+      "text": "Destroy"
+    },
+    {
+      "bytes_hex": "56316f5a656670374e467574",
+      "text": "V1oZefp7NFut"
+    },
+    {
+      "bytes_hex": "46696c6c436f6c6f72",
+      "text": "FillColor"
+    },
+    {
+      "bytes_hex": "46696c6c5472616e73706172656e6379",
+      "text": "FillTransparency"
+    },
+    {
+      "bytes_hex": "4368617261637465724164646564",
+      "text": "CharacterAdded"
+    },
+    {
+      "bytes_hex": "436f6e6e656374",
+      "text": "Connect"
+    },
+    {
+      "bytes_hex": "6c49504c6b70436e74785a36",
+      "text": "lIPLkpCntxZ6"
+    },
+    {
+      "bytes_hex": "46696c6c5472616e73706172656e6379",
+      "text": "FillTransparency"
+    },
+    {
+      "bytes_hex": "4164644e616d65546167",
+      "text": "AddNameTag"
+    },
+    {
+      "bytes_hex": "67616d65",
+      "text": "game"
+    },
+    {
+      "bytes_hex": "7061697273",
+      "text": "pairs"
+    },
+    {
+      "bytes_hex": "506c6179657273",
+      "text": "Players"
+    },
+    {
+      "bytes_hex": "47657453657276696365",
+      "text": "GetService"
+    },
+    {
+      "bytes_hex": "4c6f63616c506c61796572",
+      "text": "LocalPlayer"
+    },
+    {
+      "bytes_hex": "506c6179657253637269707473",
+      "text": "PlayerScripts"
+    },
+    {
+      "bytes_hex": "53686f70",
+      "text": "Shop"
+    },
+    {
+      "bytes_hex": "436865737473",
+      "text": "Chests"
+    },
+    {
+      "bytes_hex": "47657444657363656e64616e7473",
+      "text": "GetDescendants"
+    },
+    {
+      "bytes_hex": "67616d65",
+      "text": "game"
+    },
+    {
+      "bytes_hex": "506c6179657273",
+      "text": "Players"
+    },
+    {
+      "bytes_hex": "4c6f63616c506c61796572",
+      "text": "LocalPlayer"
+    },
+    {
+      "bytes_hex": "436861726163746572",
+      "text": "Character"
+    },
+    {
+      "bytes_hex": "48756d616e6f6964",
+      "text": "Humanoid"
+    },
+    {
+      "bytes_hex": "46696e6446697273744368696c644f66436c617373",
+      "text": "FindFirstChildOfClass"
+    },
+    {
+      "bytes_hex": "4368616e67655374617465",
+      "text": "ChangeState"
+    },
+    {
+      "bytes_hex": "4a756d70696e67",
+      "text": "Jumping"
+    },
+    {
+      "bytes_hex": "67616d65",
+      "text": "game"
+    },
+    {
+      "bytes_hex": "4e616d65",
+      "text": "Name"
+    },
+    {
+      "bytes_hex": "506c6179657273",
+      "text": "Players"
+    },
+    {
+      "bytes_hex": "47657453657276696365",
+      "text": "GetService"
+    },
+    {
+      "bytes_hex": "4c6f63616c506c61796572",
+      "text": "LocalPlayer"
+    },
+    {
+      "bytes_hex": "4e616d65",
+      "text": "Name"
+    },
+    {
+      "bytes_hex": "4164644e616d65546167",
+      "text": "AddNameTag"
+    },
+    {
+      "bytes_hex": "6e657874",
+      "text": "next"
+    },
+    {
+      "bytes_hex": "67616d65",
+      "text": "game"
+    },
+    {
+      "bytes_hex": "506c6179657273",
+      "text": "Players"
+    },
+    {
+      "bytes_hex": "476574506c6179657273",
+      "text": "GetPlayers"
+    },
+    {
+      "bytes_hex": "47657453657276696365",
+      "text": "GetService"
+    },
+    {
+      "bytes_hex": "4164644f75746c696e65",
+      "text": "AddOutline"
+    },
+    {
+      "bytes_hex": "436861726163746572",
+      "text": "Character"
+    },
+    {
+      "bytes_hex": "7061697273",
+      "text": "pairs"
+    },
+    {
+      "bytes_hex": "67616d65",
+      "text": "game"
+    },
+    {
+      "bytes_hex": "506c6179657273",
+      "text": "Players"
+    },
+    {
+      "bytes_hex": "47657453657276696365",
+      "text": "GetService"
+    },
+    {
+      "bytes_hex": "4c6f63616c506c61796572",
+      "text": "LocalPlayer"
+    },
+    {
+      "bytes_hex": "506c6179657253637269707473",
+      "text": "PlayerScripts"
+    },
+    {
+      "bytes_hex": "53686f70",
+      "text": "Shop"
+    },
+    {
+      "bytes_hex": "436865737473",
+      "text": "Chests"
+    },
+    {
+      "bytes_hex": "47657444657363656e64616e7473",
+      "text": "GetDescendants"
+    },
+    {
+      "bytes_hex": "4164644f75746c696e65",
+      "text": "AddOutline"
+    },
+    {
+      "bytes_hex": "67616d65",
+      "text": "game"
+    },
+    {
+      "bytes_hex": "55736572496e70757453657276696365",
+      "text": "UserInputService"
+    },
+    {
+      "bytes_hex": "47657453657276696365",
+      "text": "GetService"
+    },
+    {
+      "bytes_hex": "4a756d7052657175657374",
+      "text": "JumpRequest"
+    },
+    {
+      "bytes_hex": "636f6e6e656374",
+      "text": "connect"
+    },
+    {
+      "bytes_hex": "4843304e476b346371475369516e",
+      "text": "HC0NGk4cqGSiQn"
+    },
+    {
+      "bytes_hex": "35353137323938383334",
+      "text": "5517298834"
+    },
+    {
+      "bytes_hex": "726278617373657469643a2f2f",
+      "text": "rbxassetid://"
+    },
+    {
+      "bytes_hex": "416e696d6174696f6e4964",
+      "text": "AnimationId"
+    },
+    {
+      "bytes_hex": "67616d65",
+      "text": "game"
+    },
+    {
+      "bytes_hex": "416e696d6174696f6e4964",
+      "text": "AnimationId"
+    },
+    {
+      "bytes_hex": "496e7374616e6365",
+      "text": "Instance"
+    },
+    {
+      "bytes_hex": "6e6577",
+      "text": "new"
+    },
+    {
+      "bytes_hex": "416e696d6174696f6e",
+      "text": "Animation"
+    },
+    {
+      "bytes_hex": "416e696d6174696f6e4964",
+      "text": "AnimationId"
+    },
+    {
+      "bytes_hex": "506c6179657273",
+      "text": "Players"
+    },
+    {
+      "bytes_hex": "4c6f63616c506c61796572",
+      "text": "LocalPlayer"
+    },
+    {
+      "bytes_hex": "436861726163746572",
+      "text": "Character"
+    },
+    {
+      "bytes_hex": "48756d616e6f6964",
+      "text": "Humanoid"
+    },
+    {
+      "bytes_hex": "4c6f6164416e696d6174696f6e",
+      "text": "LoadAnimation"
+    },
+    {
+      "bytes_hex": "386931356b4239474d3842715933",
+      "text": "8i15kB9GM8BqY3"
+    },
+    {
+      "bytes_hex": "506c6179",
+      "text": "Play"
+    },
+    {
+      "bytes_hex": "41646a7573745370656564",
+      "text": "AdjustSpeed"
+    },
+    {
+      "bytes_hex": "506c6179657273",
+      "text": "Players"
+    },
+    {
+      "bytes_hex": "67616d65",
+      "text": "game"
+    },
+    {
+      "bytes_hex": "47657453657276696365",
+      "text": "GetService"
+    },
+    {
+      "bytes_hex": "4c6f63616c506c61796572",
+      "text": "LocalPlayer"
+    },
+    {
+      "bytes_hex": "4368617261637465724164646564",
+      "text": "CharacterAdded"
+    },
+    {
+      "bytes_hex": "436f6e6e656374",
+      "text": "Connect"
+    },
+    {
+      "bytes_hex": "436861726163746572",
+      "text": "Character"
+    },
+    {
+      "bytes_hex": "67614f73464837695649485654",
+      "text": "gaOsFH7iVIHVT"
+    },
+    {
+      "bytes_hex": "506c6179657273",
+      "text": "Players"
+    },
+    {
+      "bytes_hex": "5a",
+      "text": "Z"
+    },
+    {
+      "bytes_hex": "67616d65",
+      "text": "game"
+    },
+    {
+      "bytes_hex": "47657453657276696365",
+      "text": "GetService"
+    },
+    {
+      "bytes_hex": "4c6f63616c506c61796572",
+      "text": "LocalPlayer"
+    },
+    {
+      "bytes_hex": "59",
+      "text": "Y"
+    },
+    {
+      "bytes_hex": "436861726163746572",
+      "text": "Character"
+    },
+    {
+      "bytes_hex": "48756d616e6f6964526f6f7450617274",
+      "text": "HumanoidRootPart"
+    },
+    {
+      "bytes_hex": "566563746f7233",
+      "text": "Vector3"
+    },
+    {
+      "bytes_hex": "56656c6f63697479",
+      "text": "Velocity"
+    },
+    {
+      "bytes_hex": "506f736974696f6e",
+      "text": "Position"
+    },
+    {
+      "bytes_hex": "58",
+      "text": "X"
+    },
+    {
+      "bytes_hex": "6e6577",
+      "text": "new"
+    },
+    {
+      "bytes_hex": "4d6f7665546f",
+      "text": "MoveTo"
+    },
+    {
+      "bytes_hex": "67616d65",
+      "text": "game"
+    },
+    {
+      "bytes_hex": "7061697273",
+      "text": "pairs"
+    },
+    {
+      "bytes_hex": "506c6179657273",
+      "text": "Players"
+    },
+    {
+      "bytes_hex": "47657453657276696365",
+      "text": "GetService"
+    },
+    {
+      "bytes_hex": "4c6f63616c506c61796572",
+      "text": "LocalPlayer"
+    },
+    {
+      "bytes_hex": "506c6179657253637269707473",
+      "text": "PlayerScripts"
+    },
+    {
+      "bytes_hex": "53686f70",
+      "text": "Shop"
+    },
+    {
+      "bytes_hex": "436865737473",
+      "text": "Chests"
+    },
+    {
+      "bytes_hex": "47657444657363656e64616e7473",
+      "text": "GetDescendants"
+    },
+    {
+      "bytes_hex": "55327954746858574a6f654c5a5a",
+      "text": "U2yTthXWJoeLZZ"
+    },
+    {
+      "bytes_hex": "7061697273",
+      "text": "pairs"
+    },
+    {
+      "bytes_hex": "67616d65",
+      "text": "game"
+    },
+    {
+      "bytes_hex": "47657453657276696365",
+      "text": "GetService"
+    },
+    {
+      "bytes_hex": "506c6179657273",
+      "text": "Players"
+    },
+    {
+      "bytes_hex": "4c6f63616c506c61796572",
+      "text": "LocalPlayer"
+    },
+    {
+      "bytes_hex": "506c6179657253637269707473",
+      "text": "PlayerScripts"
+    },
+    {
+      "bytes_hex": "53686f70",
+      "text": "Shop"
+    },
+    {
+      "bytes_hex": "436865737473",
+      "text": "Chests"
+    },
+    {
+      "bytes_hex": "47657444657363656e64616e7473",
+      "text": "GetDescendants"
+    },
+    {
+      "bytes_hex": "756e7061636b",
+      "text": "unpack"
+    }
+  ],
+  "decoded_strings": [],
+  "string_status": "No supported cipher initializer found",
+  "functions": [
+    {
+      "name": "recovered_1",
+      "entry": 12320991,
+      "parameters": [
+        "local_93"
+      ],
+      "blocks": [
+        13,
+        51,
+        57,
+        59
+      ],
+      "structured": true
+    },
+    {
+      "name": "recovered_2",
+      "entry": 908929,
+      "parameters": [
+        "local_57",
+        "local_58",
+        "local_59",
+        "local_60"
+      ],
+      "blocks": [
+        4
+      ],
+      "structured": true
+    },
+    {
+      "name": "recovered_3",
+      "entry": 176902,
+      "parameters": [
+        "local_57",
+        "local_58",
+        "local_59",
+        "local_60"
+      ],
+      "blocks": [
+        0
+      ],
+      "structured": true
+    },
+    {
+      "name": "recovered_4",
+      "entry": 10013251,
+      "parameters": [
+        "local_93"
+      ],
+      "blocks": [
+        36
+      ],
+      "structured": true
+    },
+    {
+      "name": "recovered_5",
+      "entry": 3550145,
+      "parameters": [
+        "local_65",
+        "local_66",
+        "local_67",
+        "local_68",
+        "local_69",
+        "local_70"
+      ],
+      "blocks": [
+        2,
+        7,
+        15,
+        30,
+        75,
+        79
+      ],
+      "structured": true
+    },
+    {
+      "name": "recovered_6",
+      "entry": 14630919,
+      "parameters": [
+        "local_57",
+        "local_58",
+        "local_59",
+        "local_60"
+      ],
+      "blocks": [
+        72
+      ],
+      "structured": true
+    },
+    {
+      "name": "recovered_7",
+      "entry": 11581663,
+      "parameters": [
+        "local_84",
+        "local_85"
+      ],
+      "blocks": [
+        44
+      ],
+      "structured": true
+    },
+    {
+      "name": "recovered_8",
+      "entry": 14949374,
+      "parameters": [],
+      "blocks": [
+        73
+      ],
+      "structured": true
+    },
+    {
+      "name": "recovered_9",
+      "entry": 16645849,
+      "parameters": [
+        "local_75",
+        "local_76",
+        "local_77",
+        "local_78",
+        "local_79"
+      ],
+      "blocks": [
+        31,
+        32,
+        33,
+        53,
+        70,
+        82
+      ],
+      "structured": true
+    },
+    {
+      "name": "recovered_10",
+      "entry": 12760391,
+      "parameters": [],
+      "blocks": [
+        56
+      ],
+      "structured": true
+    },
+    {
+      "name": "recovered_11",
+      "entry": 4915196,
+      "parameters": [
+        "local_93"
+      ],
+      "blocks": [
+        1,
+        17,
+        20,
+        23,
+        25,
+        52
+      ],
+      "structured": true
+    },
+    {
+      "name": "recovered_12",
+      "entry": 12085171,
+      "parameters": [
+        "local_93"
+      ],
+      "blocks": [
+        47
+      ],
+      "structured": true
+    },
+    {
+      "name": "recovered_13",
+      "entry": 16119328,
+      "parameters": [
+        "local_75",
+        "local_76",
+        "local_77",
+        "local_78",
+        "local_79"
+      ],
+      "blocks": [
+        8,
+        9,
+        34,
+        48,
+        66,
+        80
+      ],
+      "structured": true
+    },
+    {
+      "name": "recovered_14",
+      "entry": 4317733,
+      "parameters": [
+        "local_75",
+        "local_76",
+        "local_77",
+        "local_78",
+        "local_79"
+      ],
+      "blocks": [
+        3,
+        5,
+        11,
+        18,
+        26,
+        28,
+        35,
+        41,
+        54,
+        68,
+        74,
+        77
+      ],
+      "structured": true
+    },
+    {
+      "name": "recovered_15",
+      "entry": 12913970,
+      "parameters": [
+        "local_93"
+      ],
+      "blocks": [
+        21,
+        29,
+        46,
+        50,
+        61,
+        81
+      ],
+      "structured": true
+    },
+    {
+      "name": "recovered_16",
+      "entry": 14351983,
+      "parameters": [],
+      "blocks": [
+        6,
+        19,
+        39,
+        40,
+        49,
+        69
+      ],
+      "structured": true
+    },
+    {
+      "name": "recovered_17",
+      "entry": 10816622,
+      "parameters": [
+        "local_102",
+        "local_103",
+        "local_104"
+      ],
+      "blocks": [
+        14,
+        22,
+        27,
+        38,
+        42,
+        64,
+        67,
+        76
+      ],
+      "structured": true
+    },
+    {
+      "name": "recovered_18",
+      "entry": 12798352,
+      "parameters": [
+        "local_57",
+        "local_58",
+        "local_59",
+        "local_60"
+      ],
+      "blocks": [
+        58
+      ],
+      "structured": true
+    },
+    {
+      "name": "recovered_19",
+      "entry": 13029106,
+      "parameters": [
+        "local_93"
+      ],
+      "blocks": [
+        16,
+        45,
+        62,
+        65,
+        78
+      ],
+      "structured": true
+    },
+    {
+      "name": "recovered_20",
+      "entry": 2693588,
+      "parameters": [
+        "local_84",
+        "local_85"
+      ],
+      "blocks": [
+        10,
+        24,
+        63
+      ],
+      "structured": true
+    },
+    {
+      "name": "recovered_21",
+      "entry": 2865384,
+      "parameters": [
+        "local_84",
+        "local_85"
+      ],
+      "blocks": [
+        12,
+        37,
+        55,
+        60,
+        71
+      ],
+      "structured": true
+    },
+    {
+      "name": "recovered_22",
+      "entry": 11092583,
+      "parameters": [
+        "..."
+      ],
+      "blocks": [
+        43
+      ],
+      "structured": true
+    }
+  ],
+  "blocks": [
+    {
+      "index": 0,
+      "successors": [],
+      "labels": [],
+      "exit_global": {
+        "bytes_hex": "7342505430384c4176325855726b",
+        "text": "sBPT08LAv2XUrk"
+      },
+      "instructions": [
+        "local_127 = \"Vector3\"",
+        "local_126 = \"Character\"",
+        "local_116 = local_40[local_112[1]]",
+        "local_119 = local_116[\"Character\"]",
+        "local_130 = \"_G\"",
+        "local_116 = \"HumanoidRootPart\"",
+        "local_110 = local_119[\"HumanoidRootPart\"]",
+        "local_126 = local_27[\"Vector3\"]",
+        "local_119 = \"Size\"",
+        "local_125 = \"_G\"",
+        "local_127 = \"new\"",
+        "local_116 = local_126[\"new\"]",
+        "local_123 = local_27[\"_G\"]",
+        "local_125 = \"HeadSize\"",
+        "local_133 = \"_G\"",
+        "local_127 = local_123[\"HeadSize\"]",
+        "local_125 = local_27[\"_G\"]",
+        "local_133 = \"HeadSize\"",
+        "local_123 = local_125[\"HeadSize\"]",
+        "local_133 = local_27[\"_G\"]",
+        "local_130 = \"HeadSize\"",
+        "local_125 = local_133[\"HeadSize\"]",
+        "local_126 = local_116(local_127, local_123, local_125)",
+        "local_110[\"Size\"] = local_126",
+        "local_116 = local_40[local_112[1]]",
+        "local_126 = \"Character\"",
+        "local_119 = local_116[\"Character\"]",
+        "local_116 = \"HumanoidRootPart\"",
+        "local_110 = local_119[\"HumanoidRootPart\"]",
+        "local_119 = \"CanCollide\"",
+        "local_116 = false",
+        "local_110[\"CanCollide\"] = false",
+        "local_110 = local_27[\"sBPT08LAv2XUrk\"]",
+        "local_119 = {}"
+      ]
+    },
+    {
+      "index": 1,
+      "successors": [
+        17
+      ],
+      "labels": [
+        3893982
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_130 = \"Instance\"",
+        "local_133 = local_27[\"Instance\"]",
+        "local_130 = \"new\"",
+        "local_110 = local_133[\"new\"]",
+        "local_130 = \"BillboardGui\"",
+        "local_131 = 0",
+        "local_135 = 0",
+        "local_133 = local_110(\"BillboardGui\", local_125)",
+        "local_130 = \"ElectricPPPGUI\"",
+        "local_110 = \"Name\"",
+        "local_136 = \"UDim2\"",
+        "local_117 = 10",
+        "local_133[\"Name\"] = \"ElectricPPPGUI\"",
+        "local_132 = local_27[\"UDim2\"]",
+        "local_110 = \"Size\"",
+        "local_136 = \"new\"",
+        "local_124 = 0",
+        "local_130 = local_132[\"new\"]",
+        "local_129 = 0",
+        "local_136 = 10",
+        "local_132 = local_130(10, 0, 10, 0)",
+        "local_133[\"Size\"] = local_132",
+        "local_110 = \"AlwaysOnTop\"",
+        "local_132 = \"Instance\"",
+        "local_117 = 0",
+        "local_129 = 1",
+        "local_130 = true",
+        "local_133[\"AlwaysOnTop\"] = true",
+        "local_130 = local_27[\"Instance\"]",
+        "local_135 = \"UDim2\"",
+        "local_132 = \"new\"",
+        "local_110 = local_130[\"new\"]",
+        "local_132 = \"Frame\"",
+        "local_130 = local_110(\"Frame\", local_133)",
+        "local_136 = local_27[\"UDim2\"]",
+        "local_110 = \"Size\"",
+        "local_135 = \"new\"",
+        "local_132 = local_136[\"new\"]",
+        "local_135 = 1",
+        "local_136 = local_132(1, 0, 1, 0)",
+        "local_130[\"Size\"] = local_136",
+        "local_135 = \"Color3\"",
+        "local_110 = \"BackgroundTransparency\"",
+        "local_132 = 0.8",
+        "local_130[\"BackgroundTransparency\"] = 0.8",
+        "local_129 = 255",
+        "local_132 = 0",
+        "local_110 = \"BorderSizePixel\"",
+        "local_130[\"BorderSizePixel\"] = 0",
+        "local_110 = \"BackgroundColor3\"",
+        "local_117 = 255",
+        "local_136 = local_27[\"Color3\"]",
+        "local_135 = \"new\"",
+        "local_132 = local_136[\"new\"]",
+        "local_135 = 240",
+        "local_136 = local_132(240, 255, 255)",
+        "local_130[\"BackgroundColor3\"] = local_136",
+        "local_136 = \"Instance\"",
+        "local_132 = local_27[\"Instance\"]",
+        "local_117 = \"UDim2\"",
+        "local_129 = 0",
+        "local_136 = \"new\"",
+        "local_110 = local_132[\"new\"]",
+        "local_136 = \"TextLabel\"",
+        "local_132 = local_110(\"TextLabel\", local_130)",
+        "local_135 = local_27[\"UDim2\"]",
+        "local_110 = \"Size\"",
+        "local_117 = \"new\"",
+        "local_131 = 2",
+        "local_136 = local_135[\"new\"]",
+        "local_117 = 2",
+        "local_135 = local_136(2, 0, 2, 0)",
+        "local_130 = nil",
+        "local_132[\"Size\"] = local_135",
+        "local_136 = 0",
+        "local_110 = \"BorderSizePixel\"",
+        "local_132[\"BorderSizePixel\"] = 0",
+        "local_133 = nil",
+        "local_110 = \"TextSize\"",
+        "local_136 = 10",
+        "local_132[\"TextSize\"] = 10",
+        "local_110 = \"Text\"",
+        "local_136 = \"Legendary Chest\"",
+        "local_132[\"Text\"] = \"Legendary Chest\"",
+        "local_136 = 1",
+        "local_110 = \"BackgroundTransparency\"",
+        "local_132[\"BackgroundTransparency\"] = 1",
+        "local_132 = nil",
+        "local_110 = 3893982"
+      ]
+    },
+    {
+      "index": 2,
+      "successors": [
+        75
+      ],
+      "labels": [
+        15504524
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_125 = \"game\"",
+        "local_123 = local_27[\"game\"]",
+        "local_125 = \"GetService\"",
+        "local_133 = \"RunService\"",
+        "local_125 = local_123[\"GetService\"]",
+        "local_125 = local_125(local_123, \"RunService\")",
+        "local_123 = \"RenderStepped\"",
+        "local_127 = local_125[\"RenderStepped\"]",
+        "local_110 = 15504524",
+        "local_123 = \"wait\"",
+        "local_123 = local_127[\"wait\"]",
+        "local_123 = local_123(local_127)",
+        "local_119 = local_123"
+      ]
+    },
+    {
+      "index": 3,
+      "successors": [
+        35
+      ],
+      "labels": [
+        9751184
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_110 = 9751184"
+      ]
+    },
+    {
+      "index": 4,
+      "successors": [],
+      "labels": [],
+      "exit_global": {
+        "bytes_hex": "4c77356c30436a37535348454547",
+        "text": "Lw5l0Cj7SSHEEG"
+      },
+      "instructions": [
+        "local_116 = local_111[1]",
+        "local_126 = \"Instance\"",
+        "local_119 = local_27[\"Instance\"]",
+        "local_126 = \"new\"",
+        "local_110 = local_119[\"new\"]",
+        "local_126 = \"BillboardGui\"",
+        "local_127 = local_40[local_112[1]]",
+        "local_119 = local_110(\"BillboardGui\", local_127)",
+        "local_126 = local_119",
+        "local_127 = \"Instance\"",
+        "local_136 = 0",
+        "local_133 = \"Vector3\"",
+        "local_119 = local_27[\"Instance\"]",
+        "local_125 = \"Head\"",
+        "local_127 = \"new\"",
+        "local_110 = local_119[\"new\"]",
+        "local_127 = \"Frame\"",
+        "local_119 = local_110(\"Frame\", local_126)",
+        "local_127 = local_119",
+        "local_123 = \"Instance\"",
+        "local_119 = local_27[\"Instance\"]",
+        "local_123 = \"new\"",
+        "local_130 = 3",
+        "local_110 = local_119[\"new\"]",
+        "local_123 = \"TextLabel\"",
+        "local_119 = local_110(\"TextLabel\", local_127)",
+        "local_110 = \"Adornee\"",
+        "local_123 = local_119",
+        "local_132 = 0",
+        "local_119 = \"WaitForChild\"",
+        "local_119 = local_116[\"WaitForChild\"]",
+        "local_119 = local_119(local_116, \"Head\")",
+        "local_126[\"Adornee\"] = local_119",
+        "local_110 = \"StudsOffset\"",
+        "local_125 = local_27[\"Vector3\"]",
+        "local_133 = \"new\"",
+        "local_119 = local_125[\"new\"]",
+        "local_133 = 0",
+        "local_125 = local_119(0, 3, 0)",
+        "local_126[\"StudsOffset\"] = local_125",
+        "local_110 = \"AlwaysOnTop\"",
+        "local_130 = 0",
+        "local_133 = \"UDim2\"",
+        "local_119 = true",
+        "local_126[\"AlwaysOnTop\"] = true",
+        "local_125 = local_27[\"UDim2\"]",
+        "local_133 = \"new\"",
+        "local_119 = local_125[\"new\"]",
+        "local_133 = 4",
+        "local_132 = 0.5",
+        "local_125 = local_119(4, 0, 0.5, 0)",
+        "local_136 = 0",
+        "local_110 = \"Size\"",
+        "local_126[\"Size\"] = local_125",
+        "local_133 = \"UDim2\"",
+        "local_130 = 0",
+        "local_125 = local_27[\"UDim2\"]",
+        "local_110 = \"Size\"",
+        "local_132 = 1",
+        "local_133 = \"new\"",
+        "local_119 = local_125[\"new\"]",
+        "local_133 = 1",
+        "local_125 = local_119(1, 0, 1, 0)",
+        "local_127[\"Size\"] = local_125",
+        "local_110 = \"Size\"",
+        "local_133 = \"UDim2\"",
+        "local_125 = local_27[\"UDim2\"]",
+        "local_133 = \"new\"",
+        "local_132 = 1",
+        "local_136 = 0",
+        "local_119 = local_125[\"new\"]",
+        "local_130 = 0",
+        "local_133 = 1",
+        "local_125 = local_119(1, 0, 1, 0)",
+        "local_123[\"Size\"] = local_125",
+        "local_110 = \"BackgroundTransparency\"",
+        "local_119 = 1",
+        "local_127[\"BackgroundTransparency\"] = 1",
+        "local_119 = 1",
+        "local_127 = nil",
+        "local_125 = \"Name\"",
+        "local_110 = \"BackgroundTransparency\"",
+        "local_123[\"BackgroundTransparency\"] = 1",
+        "local_119 = local_116[\"Name\"]",
+        "local_116 = nil",
+        "local_110 = \"Text\"",
+        "local_123[\"Text\"] = local_119",
+        "local_119 = local_40[local_112[2]]",
+        "local_110 = \"Font\"",
+        "local_126 = nil",
+        "local_123[\"Font\"] = local_119",
+        "local_110 = \"TextColor3\"",
+        "local_119 = local_40[local_112[3]]",
+        "local_123[\"TextColor3\"] = local_119",
+        "local_110 = \"TextScaled\"",
+        "local_119 = local_40[local_112[4]]",
+        "local_123[\"TextScaled\"] = local_119",
+        "local_110 = local_27[\"Lw5l0Cj7SSHEEG\"]",
+        "local_123 = nil",
+        "local_119 = {}"
+      ]
+    },
+    {
+      "index": 5,
+      "successors": [
+        3
+      ],
+      "labels": [
+        579942
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_137 = \"Character\"",
+        "local_134 = \"AddNameTag\"",
+        "local_128 = local_27[\"AddNameTag\"]",
+        "local_122 = local_118[\"Character\"]",
+        "local_110 = 579942",
+        "local_134 = local_128(local_122)"
+      ]
+    },
+    {
+      "index": 6,
+      "successors": [
+        19,
+        39
+      ],
+      "labels": [
+        4495594,
+        10448948
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_130 = \"Name\"",
+        "local_123 = local_126",
+        "local_133 = local_125[\"Name\"]",
+        "local_130 = \"Uncommon\"",
+        "local_110 = (local_133 == \"Uncommon\")",
+        "local_110 = ((local_110 and 4495594) or 10448948)"
+      ]
+    },
+    {
+      "index": 7,
+      "successors": [],
+      "labels": [],
+      "exit_global": {
+        "bytes_hex": "4a51786e6d3835346b684d3642",
+        "text": "JQxnm854khM6B"
+      },
+      "instructions": [
+        "local_126 = nil",
+        "local_119 = {}",
+        "local_110 = local_27[\"JQxnm854khM6B\"]",
+        "local_116 = nil"
+      ]
+    },
+    {
+      "index": 8,
+      "successors": [
+        66
+      ],
+      "labels": [
+        14133709
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_125 = nil",
+        "local_110 = 14133709",
+        "local_123 = nil"
+      ]
+    },
+    {
+      "index": 9,
+      "successors": [
+        8,
+        34
+      ],
+      "labels": [
+        2253478,
+        9337013
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_123 = local_126",
+        "local_130 = \"Name\"",
+        "local_133 = local_125[\"Name\"]",
+        "local_130 = \"Common\"",
+        "local_110 = (local_133 == \"Common\")",
+        "local_110 = ((local_110 and 9337013) or 2253478)"
+      ]
+    },
+    {
+      "index": 10,
+      "successors": [
+        24,
+        63
+      ],
+      "labels": [
+        5664381,
+        13153728
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_110 = local_40[local_112[1]]",
+        "local_110 = ((local_110 and 13153728) or 5664381)"
+      ]
+    },
+    {
+      "index": 11,
+      "successors": [
+        41
+      ],
+      "labels": [
+        10716787
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_117 = nil",
+        "local_110 = 10716787",
+        "local_118 = nil"
+      ]
+    },
+    {
+      "index": 12,
+      "successors": [
+        37,
+        71
+      ],
+      "labels": [
+        10135159,
+        14517169
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_116 = local_111[1]",
+        "local_126 = true",
+        "local_119 = local_40[local_112[1]]",
+        "local_110 = (local_119 == true)",
+        "local_110 = ((local_110 and 14517169) or 10135159)"
+      ]
+    },
+    {
+      "index": 13,
+      "successors": [],
+      "labels": [],
+      "exit_global": {
+        "bytes_hex": "4b50644157315152765a39785274",
+        "text": "KPdAW1QRvZ9xRt"
+      },
+      "instructions": [
+        "local_119 = {}",
+        "local_126 = nil",
+        "local_110 = local_27[\"KPdAW1QRvZ9xRt\"]",
+        "local_116 = nil"
+      ]
+    },
+    {
+      "index": 14,
+      "successors": [],
+      "labels": [],
+      "exit_global": {
+        "bytes_hex": "346f76485659554c41484862",
+        "text": "4ovHVYULAHHb"
+      },
+      "instructions": [
+        "local_110 = local_27[\"4ovHVYULAHHb\"]",
+        "local_119 = {}"
+      ]
+    },
+    {
+      "index": 15,
+      "successors": [
+        30
+      ],
+      "labels": [
+        8006720
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_127 = \"game\"",
+        "local_119 = \"shared\"",
+        "local_116 = local_111[1]",
+        "local_110 = local_27[\"shared\"]",
+        "local_126 = local_116",
+        "local_119 = \"walkfast\"",
+        "local_123 = \"Players\"",
+        "local_110[\"walkfast\"] = local_126",
+        "local_126 = local_27[\"game\"]",
+        "local_127 = \"GetService\"",
+        "local_127 = local_126[\"GetService\"]",
+        "local_127 = local_127(local_126, \"Players\")",
+        "local_126 = \"LocalPlayer\"",
+        "local_119 = local_127[\"LocalPlayer\"]",
+        "local_126 = \"Character\"",
+        "local_110 = local_119[\"Character\"]",
+        "local_126 = local_110",
+        "local_110 = 8006720"
+      ]
+    },
+    {
+      "index": 16,
+      "successors": [
+        65,
+        78
+      ],
+      "labels": [
+        13830494,
+        15894490
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_119 = local_40[local_112[2]]",
+        "local_126 = true",
+        "local_110 = (local_119 == true)",
+        "local_110 = ((local_110 and 13830494) or 15894490)"
+      ]
+    },
+    {
+      "index": 17,
+      "successors": [
+        23
+      ],
+      "labels": [
+        5644735
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_125 = nil",
+        "local_123 = nil",
+        "local_110 = 5644735"
+      ]
+    },
+    {
+      "index": 18,
+      "successors": [
+        41
+      ],
+      "labels": [
+        10716787
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_126 = \"Color3\"",
+        "local_116 = local_38()",
+        "local_132 = \"Enum\"",
+        "local_131 = \"CoreGui\"",
+        "local_110 = true",
+        "local_40[local_116] = true",
+        "local_119 = local_27[\"Color3\"]",
+        "local_126 = \"fromRGB\"",
+        "local_136 = 255",
+        "local_127 = 255",
+        "local_110 = local_119[\"fromRGB\"]",
+        "local_123 = 255",
+        "local_126 = 255",
+        "local_119 = local_110(255, 255, 255)",
+        "local_125 = \"Color3\"",
+        "local_110 = false",
+        "local_126 = local_38()",
+        "local_40[local_126] = local_119",
+        "local_133 = 255",
+        "local_127 = local_38()",
+        "local_40[local_127] = false",
+        "local_110 = 1",
+        "local_123 = local_38()",
+        "local_40[local_123] = 1",
+        "local_119 = local_27[\"Color3\"]",
+        "local_130 = 255",
+        "local_125 = \"fromRGB\"",
+        "local_110 = local_119[\"fromRGB\"]",
+        "local_125 = 255",
+        "local_119 = local_110(255, 255, 255)",
+        "local_125 = local_38()",
+        "local_40[local_125] = local_119",
+        "local_110 = true",
+        "local_133 = local_38()",
+        "local_40[local_133] = true",
+        "local_130 = local_27[\"Enum\"]",
+        "local_132 = \"Font\"",
+        "local_119 = local_130[\"Font\"]",
+        "local_130 = \"RobotoMono\"",
+        "local_110 = local_119[\"RobotoMono\"]",
+        "local_130 = local_38()",
+        "local_40[local_130] = local_110",
+        "local_132 = \"Color3\"",
+        "local_135 = 255",
+        "local_134 = \"Players\"",
+        "local_119 = local_27[\"Color3\"]",
+        "local_132 = \"fromRGB\"",
+        "local_110 = local_119[\"fromRGB\"]",
+        "local_132 = 255",
+        "local_119 = local_110(255, 255, 255)",
+        "local_132 = local_38()",
+        "local_136 = local_38()",
+        "local_40[local_132] = local_119",
+        "local_110 = false",
+        "local_135 = \"Instance\"",
+        "local_40[local_136] = false",
+        "local_119 = local_27[\"Instance\"]",
+        "local_135 = \"new\"",
+        "local_110 = local_119[\"new\"]",
+        "local_124 = \"GetService\"",
+        "local_129 = \"game\"",
+        "local_117 = local_27[\"game\"]",
+        "local_124 = local_117[\"GetService\"]",
+        "local_128 = \"game\"",
+        "local_129 = {local_124(local_117, \"CoreGui\")}",
+        "local_135 = \"Folder\"",
+        "local_119 = local_110(\"Folder\", local_28(local_129))",
+        "local_135 = local_38()",
+        "local_117 = \"\"",
+        "local_40[local_135] = local_119",
+        "local_119 = \"Name\"",
+        "local_110 = local_40[local_135]",
+        "local_110[\"Name\"] = \"\"",
+        "local_119 = \"AddOutline\"",
+        "local_110 = local_48(12320991, {local_135, local_126, local_127, local_125, local_123})",
+        "local_129 = \"ipairs\"",
+        "local_27[\"AddOutline\"] = local_110",
+        "local_117 = \"AddNameTag\"",
+        "local_119 = local_37(908929, {local_135, local_130, local_132, local_136})",
+        "local_27[\"AddNameTag\"] = local_119",
+        "local_117 = local_27[\"ipairs\"]",
+        "local_118 = local_27[\"game\"]",
+        "local_128 = \"GetService\"",
+        "local_128 = local_118[\"GetService\"]",
+        "local_110 = 10716787",
+        "local_128 = local_128(local_118, \"Players\")",
+        "local_134 = \"GetPlayers\"",
+        "local_134 = local_128[\"GetPlayers\"]",
+        "local_118 = {local_134(local_128)}",
+        "local_128 = {local_117(local_28(local_118))}",
+        "local_131 = local_128[2]",
+        "local_124 = local_128[3]",
+        "local_129 = local_128[1]"
+      ]
+    },
+    {
+      "index": 19,
+      "successors": [
+        39
+      ],
+      "labels": [
+        10448948
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_130 = \"Instance\"",
+        "local_133 = local_27[\"Instance\"]",
+        "local_117 = 10",
+        "local_130 = \"new\"",
+        "local_136 = \"UDim2\"",
+        "local_110 = local_133[\"new\"]",
+        "local_130 = \"BillboardGui\"",
+        "local_133 = local_110(\"BillboardGui\", local_125)",
+        "local_110 = \"Name\"",
+        "local_130 = \"ElectricPPPGUI\"",
+        "local_133[\"Name\"] = \"ElectricPPPGUI\"",
+        "local_132 = local_27[\"UDim2\"]",
+        "local_110 = \"Size\"",
+        "local_129 = 0",
+        "local_136 = \"new\"",
+        "local_131 = 0",
+        "local_135 = 0",
+        "local_130 = local_132[\"new\"]",
+        "local_136 = 10",
+        "local_132 = local_130(10, 0, 10, 0)",
+        "local_133[\"Size\"] = local_132",
+        "local_110 = \"AlwaysOnTop\"",
+        "local_132 = \"Instance\"",
+        "local_130 = true",
+        "local_133[\"AlwaysOnTop\"] = true",
+        "local_130 = local_27[\"Instance\"]",
+        "local_124 = 0",
+        "local_132 = \"new\"",
+        "local_110 = local_130[\"new\"]",
+        "local_132 = \"Frame\"",
+        "local_117 = 0",
+        "local_130 = local_110(\"Frame\", local_133)",
+        "local_110 = \"Size\"",
+        "local_135 = \"UDim2\"",
+        "local_129 = 1",
+        "local_136 = local_27[\"UDim2\"]",
+        "local_135 = \"new\"",
+        "local_132 = local_136[\"new\"]",
+        "local_135 = 1",
+        "local_136 = local_132(1, 0, 1, 0)",
+        "local_130[\"Size\"] = local_136",
+        "local_132 = 0.8",
+        "local_110 = \"BackgroundTransparency\"",
+        "local_130[\"BackgroundTransparency\"] = 0.8",
+        "local_110 = \"BorderSizePixel\"",
+        "local_117 = 255",
+        "local_135 = \"Color3\"",
+        "local_132 = 0",
+        "local_130[\"BorderSizePixel\"] = 0",
+        "local_110 = \"BackgroundColor3\"",
+        "local_136 = local_27[\"Color3\"]",
+        "local_129 = 255",
+        "local_133 = nil",
+        "local_135 = \"new\"",
+        "local_132 = local_136[\"new\"]",
+        "local_135 = 240",
+        "local_136 = local_132(240, 255, 255)",
+        "local_130[\"BackgroundColor3\"] = local_136",
+        "local_117 = \"UDim2\"",
+        "local_129 = 0",
+        "local_136 = \"Instance\"",
+        "local_132 = local_27[\"Instance\"]",
+        "local_136 = \"new\"",
+        "local_110 = local_132[\"new\"]",
+        "local_136 = \"TextLabel\"",
+        "local_132 = local_110(\"TextLabel\", local_130)",
+        "local_135 = local_27[\"UDim2\"]",
+        "local_110 = \"Size\"",
+        "local_117 = \"new\"",
+        "local_131 = 2",
+        "local_136 = local_135[\"new\"]",
+        "local_117 = 2",
+        "local_135 = local_136(2, 0, 2, 0)",
+        "local_132[\"Size\"] = local_135",
+        "local_136 = 0",
+        "local_110 = \"BorderSizePixel\"",
+        "local_132[\"BorderSizePixel\"] = 0",
+        "local_136 = 10",
+        "local_110 = \"TextSize\"",
+        "local_132[\"TextSize\"] = 10",
+        "local_130 = nil",
+        "local_110 = \"Text\"",
+        "local_136 = \"Uncommon Chest\"",
+        "local_132[\"Text\"] = \"Uncommon Chest\"",
+        "local_110 = \"BackgroundTransparency\"",
+        "local_136 = 1",
+        "local_132[\"BackgroundTransparency\"] = 1",
+        "local_110 = 10448948",
+        "local_132 = nil"
+      ]
+    },
+    {
+      "index": 20,
+      "successors": [
+        23
+      ],
+      "labels": [
+        5644735
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_119 = \"pairs\"",
+        "local_110 = local_27[\"pairs\"]",
+        "local_136 = \"Players\"",
+        "local_132 = \"game\"",
+        "local_130 = local_27[\"game\"]",
+        "local_132 = \"GetService\"",
+        "local_132 = local_130[\"GetService\"]",
+        "local_132 = local_132(local_130, \"Players\")",
+        "local_130 = \"LocalPlayer\"",
+        "local_133 = local_132[\"LocalPlayer\"]",
+        "local_130 = \"PlayerScripts\"",
+        "local_125 = local_133[\"PlayerScripts\"]",
+        "local_133 = \"Shop\"",
+        "local_123 = local_125[\"Shop\"]",
+        "local_125 = \"Chests\"",
+        "local_127 = local_123[\"Chests\"]",
+        "local_125 = \"GetDescendants\"",
+        "local_125 = local_127[\"GetDescendants\"]",
+        "local_123 = {local_125(local_127)}",
+        "local_127 = {local_110(local_28(local_123))}",
+        "local_116 = local_127[2]",
+        "local_126 = local_127[3]",
+        "local_110 = 5644735",
+        "local_119 = local_127[1]",
+        "local_127 = local_119"
+      ]
+    },
+    {
+      "index": 21,
+      "successors": [
+        46,
+        50
+      ],
+      "labels": [
+        11859924,
+        12192223
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_123 = local_126",
+        "local_130 = \"Name\"",
+        "local_133 = local_125[\"Name\"]",
+        "local_130 = \"Rare\"",
+        "local_110 = (local_133 == \"Rare\")",
+        "local_110 = ((local_110 and 11859924) or 12192223)"
+      ]
+    },
+    {
+      "index": 22,
+      "successors": [
+        27
+      ],
+      "labels": [
+        7262544
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_130 = \"pcall\"",
+        "local_132 = local_37(176902, {local_125})",
+        "local_133 = local_27[\"pcall\"]",
+        "local_130 = local_133(local_132)",
+        "local_110 = 7262544"
+      ]
+    },
+    {
+      "index": 23,
+      "successors": [
+        25,
+        52
+      ],
+      "labels": [
+        6298840,
+        12358934
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_126, local_125 = local_127(local_116, local_126)",
+        "local_110 = ((local_126 and 6298840) or 12358934)"
+      ]
+    },
+    {
+      "index": 24,
+      "successors": [],
+      "labels": [],
+      "exit_global": {
+        "bytes_hex": "306370447832413356427a7555",
+        "text": "0cpDx2A3VBzuU"
+      },
+      "instructions": [
+        "local_119 = {}",
+        "local_110 = local_27[\"0cpDx2A3VBzuU\"]"
+      ]
+    },
+    {
+      "index": 25,
+      "successors": [
+        1,
+        17
+      ],
+      "labels": [
+        221501,
+        3893982
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_123 = local_126",
+        "local_130 = \"Name\"",
+        "local_133 = local_125[\"Name\"]",
+        "local_130 = \"Legendary\"",
+        "local_110 = (local_133 == \"Legendary\")",
+        "local_110 = ((local_110 and 221501) or 3893982)"
+      ]
+    },
+    {
+      "index": 26,
+      "successors": [
+        3,
+        5
+      ],
+      "labels": [
+        579942,
+        944181
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_122 = true",
+        "local_134 = local_40[local_133]",
+        "local_128 = (local_134 == true)",
+        "local_110 = ((local_128 and 944181) or 579942)"
+      ]
+    },
+    {
+      "index": 27,
+      "successors": [
+        38
+      ],
+      "labels": [
+        10243237
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_123 = nil",
+        "local_125 = local_46(local_125)",
+        "local_110 = 10243237"
+      ]
+    },
+    {
+      "index": 28,
+      "successors": [
+        26,
+        68
+      ],
+      "labels": [
+        7004611,
+        14269228
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_134 = local_40[local_116]",
+        "local_122 = true",
+        "local_128 = (local_134 == true)",
+        "local_110 = ((local_128 and 14269228) or 7004611)"
+      ]
+    },
+    {
+      "index": 29,
+      "successors": [
+        21,
+        81
+      ],
+      "labels": [
+        5240040,
+        16547150
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_126, local_125 = local_127(local_116, local_126)",
+        "local_110 = ((local_126 and 5240040) or 16547150)"
+      ]
+    },
+    {
+      "index": 30,
+      "successors": [
+        2,
+        75
+      ],
+      "labels": [
+        332506,
+        15504524
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_125 = \"shared\"",
+        "local_123 = local_27[\"shared\"]",
+        "local_125 = \"walkfast\"",
+        "local_127 = local_123[\"walkfast\"]",
+        "local_119 = local_127",
+        "local_110 = ((local_127 and 332506) or 15504524)"
+      ]
+    },
+    {
+      "index": 31,
+      "successors": [],
+      "labels": [],
+      "exit_global": {
+        "bytes_hex": "43376b56503573394a744f4b",
+        "text": "C7kVP5s9JtOK"
+      },
+      "instructions": [
+        "local_119 = {}",
+        "local_110 = local_27[\"C7kVP5s9JtOK\"]"
+      ]
+    },
+    {
+      "index": 32,
+      "successors": [
+        31,
+        53
+      ],
+      "labels": [
+        8661748,
+        12385041
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_126, local_125 = local_127(local_116, local_126)",
+        "local_110 = ((local_126 and 12385041) or 8661748)"
+      ]
+    },
+    {
+      "index": 33,
+      "successors": [
+        70
+      ],
+      "labels": [
+        14389864
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_130 = \"Instance\"",
+        "local_133 = local_27[\"Instance\"]",
+        "local_124 = 0",
+        "local_136 = \"UDim2\"",
+        "local_135 = 0",
+        "local_130 = \"new\"",
+        "local_110 = local_133[\"new\"]",
+        "local_130 = \"BillboardGui\"",
+        "local_133 = local_110(\"BillboardGui\", local_125)",
+        "local_131 = 0",
+        "local_130 = \"ElectricPPPGUI\"",
+        "local_110 = \"Name\"",
+        "local_133[\"Name\"] = \"ElectricPPPGUI\"",
+        "local_132 = local_27[\"UDim2\"]",
+        "local_129 = 0",
+        "local_136 = \"new\"",
+        "local_110 = \"Size\"",
+        "local_117 = 10",
+        "local_130 = local_132[\"new\"]",
+        "local_136 = 10",
+        "local_132 = local_130(10, 0, 10, 0)",
+        "local_133[\"Size\"] = local_132",
+        "local_130 = true",
+        "local_110 = \"AlwaysOnTop\"",
+        "local_132 = \"Instance\"",
+        "local_135 = \"UDim2\"",
+        "local_133[\"AlwaysOnTop\"] = true",
+        "local_130 = local_27[\"Instance\"]",
+        "local_132 = \"new\"",
+        "local_129 = 1",
+        "local_110 = local_130[\"new\"]",
+        "local_132 = \"Frame\"",
+        "local_130 = local_110(\"Frame\", local_133)",
+        "local_117 = 0",
+        "local_136 = local_27[\"UDim2\"]",
+        "local_110 = \"Size\"",
+        "local_135 = \"new\"",
+        "local_132 = local_136[\"new\"]",
+        "local_135 = 1",
+        "local_136 = local_132(1, 0, 1, 0)",
+        "local_132 = 0.8",
+        "local_130[\"Size\"] = local_136",
+        "local_135 = \"Color3\"",
+        "local_110 = \"BackgroundTransparency\"",
+        "local_133 = nil",
+        "local_130[\"BackgroundTransparency\"] = 0.8",
+        "local_110 = \"BorderSizePixel\"",
+        "local_132 = 0",
+        "local_130[\"BorderSizePixel\"] = 0",
+        "local_117 = 255",
+        "local_129 = 255",
+        "local_136 = local_27[\"Color3\"]",
+        "local_110 = \"BackgroundColor3\"",
+        "local_135 = \"new\"",
+        "local_132 = local_136[\"new\"]",
+        "local_135 = 240",
+        "local_131 = 2",
+        "local_136 = local_132(240, 255, 255)",
+        "local_130[\"BackgroundColor3\"] = local_136",
+        "local_136 = \"Instance\"",
+        "local_117 = \"UDim2\"",
+        "local_132 = local_27[\"Instance\"]",
+        "local_136 = \"new\"",
+        "local_110 = local_132[\"new\"]",
+        "local_136 = \"TextLabel\"",
+        "local_129 = 0",
+        "local_132 = local_110(\"TextLabel\", local_130)",
+        "local_110 = \"Size\"",
+        "local_135 = local_27[\"UDim2\"]",
+        "local_130 = nil",
+        "local_117 = \"new\"",
+        "local_136 = local_135[\"new\"]",
+        "local_117 = 2",
+        "local_135 = local_136(2, 0, 2, 0)",
+        "local_136 = 0",
+        "local_132[\"Size\"] = local_135",
+        "local_110 = \"BorderSizePixel\"",
+        "local_132[\"BorderSizePixel\"] = 0",
+        "local_136 = 10",
+        "local_110 = \"TextSize\"",
+        "local_132[\"TextSize\"] = 10",
+        "local_136 = \"Mythical Chest\"",
+        "local_110 = \"Text\"",
+        "local_132[\"Text\"] = \"Mythical Chest\"",
+        "local_136 = 1",
+        "local_110 = \"BackgroundTransparency\"",
+        "local_132[\"BackgroundTransparency\"] = 1",
+        "local_110 = 14389864",
+        "local_132 = nil"
+      ]
+    },
+    {
+      "index": 34,
+      "successors": [
+        8
+      ],
+      "labels": [
+        2253478
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_117 = 10",
+        "local_130 = \"Instance\"",
+        "local_133 = local_27[\"Instance\"]",
+        "local_131 = 0",
+        "local_130 = \"new\"",
+        "local_110 = local_133[\"new\"]",
+        "local_129 = 0",
+        "local_130 = \"BillboardGui\"",
+        "local_133 = local_110(\"BillboardGui\", local_125)",
+        "local_130 = \"ElectricPPPGUI\"",
+        "local_136 = \"UDim2\"",
+        "local_110 = \"Name\"",
+        "local_133[\"Name\"] = \"ElectricPPPGUI\"",
+        "local_110 = \"Size\"",
+        "local_132 = local_27[\"UDim2\"]",
+        "local_136 = \"new\"",
+        "local_130 = local_132[\"new\"]",
+        "local_135 = 0",
+        "local_136 = 10",
+        "local_132 = local_130(10, 0, 10, 0)",
+        "local_133[\"Size\"] = local_132",
+        "local_110 = \"AlwaysOnTop\"",
+        "local_132 = \"Instance\"",
+        "local_130 = true",
+        "local_133[\"AlwaysOnTop\"] = true",
+        "local_117 = 0",
+        "local_130 = local_27[\"Instance\"]",
+        "local_132 = \"new\"",
+        "local_110 = local_130[\"new\"]",
+        "local_129 = 1",
+        "local_132 = \"Frame\"",
+        "local_130 = local_110(\"Frame\", local_133)",
+        "local_110 = \"Size\"",
+        "local_135 = \"UDim2\"",
+        "local_136 = local_27[\"UDim2\"]",
+        "local_135 = \"new\"",
+        "local_132 = local_136[\"new\"]",
+        "local_135 = 1",
+        "local_136 = local_132(1, 0, 1, 0)",
+        "local_130[\"Size\"] = local_136",
+        "local_110 = \"BackgroundTransparency\"",
+        "local_132 = 0.8",
+        "local_130[\"BackgroundTransparency\"] = 0.8",
+        "local_135 = \"Color3\"",
+        "local_124 = 0",
+        "local_132 = 0",
+        "local_131 = 2",
+        "local_110 = \"BorderSizePixel\"",
+        "local_130[\"BorderSizePixel\"] = 0",
+        "local_133 = nil",
+        "local_129 = 255",
+        "local_136 = local_27[\"Color3\"]",
+        "local_135 = \"new\"",
+        "local_132 = local_136[\"new\"]",
+        "local_110 = \"BackgroundColor3\"",
+        "local_135 = 240",
+        "local_117 = 255",
+        "local_136 = local_132(240, 255, 255)",
+        "local_117 = \"UDim2\"",
+        "local_130[\"BackgroundColor3\"] = local_136",
+        "local_136 = \"Instance\"",
+        "local_132 = local_27[\"Instance\"]",
+        "local_136 = \"new\"",
+        "local_110 = local_132[\"new\"]",
+        "local_129 = 0",
+        "local_136 = \"TextLabel\"",
+        "local_132 = local_110(\"TextLabel\", local_130)",
+        "local_110 = \"Size\"",
+        "local_135 = local_27[\"UDim2\"]",
+        "local_130 = nil",
+        "local_117 = \"new\"",
+        "local_136 = local_135[\"new\"]",
+        "local_117 = 2",
+        "local_135 = local_136(2, 0, 2, 0)",
+        "local_132[\"Size\"] = local_135",
+        "local_136 = 0",
+        "local_110 = \"BorderSizePixel\"",
+        "local_132[\"BorderSizePixel\"] = 0",
+        "local_110 = \"TextSize\"",
+        "local_136 = 10",
+        "local_132[\"TextSize\"] = 10",
+        "local_136 = \"Common Chest\"",
+        "local_110 = \"Text\"",
+        "local_132[\"Text\"] = \"Common Chest\"",
+        "local_110 = \"BackgroundTransparency\"",
+        "local_136 = 1",
+        "local_132[\"BackgroundTransparency\"] = 1",
+        "local_132 = nil",
+        "local_110 = 2253478"
+      ]
+    },
+    {
+      "index": 35,
+      "successors": [
+        11
+      ],
+      "labels": [
+        2751153
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_110 = 2751153"
+      ]
+    },
+    {
+      "index": 36,
+      "successors": [],
+      "labels": [],
+      "exit_global": {
+        "bytes_hex": "6a72396d684e596f4349504b3265",
+        "text": "jr9mhNYoCIPK2e"
+      },
+      "instructions": [
+        "local_119 = {}",
+        "local_110 = local_27[\"jr9mhNYoCIPK2e\"]"
+      ]
+    },
+    {
+      "index": 37,
+      "successors": [
+        55,
+        60
+      ],
+      "labels": [
+        12512780,
+        12827118
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_126 = true",
+        "local_119 = local_40[local_112[2]]",
+        "local_110 = (local_119 == true)",
+        "local_110 = ((local_110 and 12827118) or 12512780)"
+      ]
+    },
+    {
+      "index": 38,
+      "successors": [
+        64,
+        76
+      ],
+      "labels": [
+        13414708,
+        15568629
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_126, local_125 = local_116(local_127, local_126)",
+        "local_110 = ((local_126 and 13414708) or 15568629)"
+      ]
+    },
+    {
+      "index": 39,
+      "successors": [
+        49
+      ],
+      "labels": [
+        12189044
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_125 = nil",
+        "local_110 = 12189044",
+        "local_123 = nil"
+      ]
+    },
+    {
+      "index": 40,
+      "successors": [],
+      "labels": [],
+      "exit_global": {
+        "bytes_hex": "316c7577696c35527464566d",
+        "text": "1luwil5RtdVm"
+      },
+      "instructions": [
+        "local_110 = local_27[\"1luwil5RtdVm\"]",
+        "local_119 = {}"
+      ]
+    },
+    {
+      "index": 41,
+      "successors": [
+        54,
+        74
+      ],
+      "labels": [
+        12449164,
+        15306341
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_124, local_118 = local_129(local_131, local_124)",
+        "local_110 = ((local_124 and 15306341) or 12449164)"
+      ]
+    },
+    {
+      "index": 42,
+      "successors": [
+        14,
+        67
+      ],
+      "labels": [
+        3361975,
+        14238182
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_116 = \"_G\"",
+        "local_119 = local_27[\"_G\"]",
+        "local_116 = \"Disabled\"",
+        "local_110 = local_119[\"Disabled\"]",
+        "local_110 = ((local_110 and 14238182) or 3361975)"
+      ]
+    },
+    {
+      "index": 43,
+      "successors": [],
+      "labels": [],
+      "exit_global": {
+        "bytes_hex": "704850334c486c523778526568",
+        "text": "pHP3LHlR7xReh"
+      },
+      "instructions": [
+        "local_124 = \"keyabc123\"",
+        "local_130 = \"ToggleKey\"",
+        "local_116 = local_111",
+        "local_134 = \"DiscordLink\"",
+        "local_119 = \"loadstring\"",
+        "local_123 = \"https://raw.githubusercontent.com/Loco-CTO/UI-Library/main/VisionLibV2/source.lua\"",
+        "local_110 = local_27[\"loadstring\"]",
+        "local_131 = \"Key\"",
+        "local_128 = 5",
+        "local_125 = \"HttpGet\"",
+        "local_127 = \"game\"",
+        "local_117 = \"Enum\"",
+        "local_126 = local_27[\"game\"]",
+        "local_125 = local_126[\"HttpGet\"]",
+        "local_127 = {local_125(local_126, \"https://raw.githubusercontent.com/Loco-CTO/UI-Library/main/VisionLibV2/source.lua\")}",
+        "local_123 = \"Xtrey10x Hub Free - [\\240\\159\\146\\150\\240\\159\\164\\150UPDATE 8] Grand Piece Online\"",
+        "local_119 = local_110(local_28(local_127))",
+        "local_110 = local_119()",
+        "local_133 = \"By Xtrey10x\"",
+        "local_127 = \"Name\"",
+        "local_126 = local_110",
+        "local_135 = local_27[\"Enum\"]",
+        "local_125 = \"Footer\"",
+        "local_117 = \"KeyCode\"",
+        "local_136 = local_135[\"KeyCode\"]",
+        "local_110 = \"Create\"",
+        "local_129 = false",
+        "local_135 = \"RightShift\"",
+        "local_132 = local_136[\"RightShift\"]",
+        "local_135 = local_48(10013251, {})",
+        "local_137 = \"ToggledRelativeYOffset\"",
+        "local_121 = 5",
+        "local_110 = local_126[\"Create\"]",
+        "local_117 = \"KeySystem\"",
+        "local_136 = \"LoadedCallback\"",
+        "local_122 = \"https://discord.gg/Bp7wFcZeUn\"",
+        "local_118 = \"MaxAttempts\"",
+        "local_119 = {\n    [\"Name\"] = \"Xtrey10x Hub Free - [\\240\\159\\146\\150\\240\\159\\164\\150UPDATE 8] Grand Piece Online\",\n    [\"Footer\"] = \"By Xtrey10x\",\n    [\"ToggleKey\"] = local_132,\n    [\"LoadedCallback\"] = local_135,\n    [\"KeySystem\"] = false,\n    [\"Key\"] = \"keyabc123\",\n    [\"MaxAttempts\"] = 5,\n    [\"DiscordLink\"] = \"https://discord.gg/Bp7wFcZeUn\",\n    [\"ToggledRelativeYOffset\"] = 5,\n}",
+        "local_132 = \"Color\"",
+        "local_123 = \"Name\"",
+        "local_117 = \"Color3\"",
+        "local_137 = \"Callback\"",
+        "local_110 = local_110(local_126, local_119)",
+        "local_133 = \"Icon\"",
+        "local_127 = local_110",
+        "local_135 = local_27[\"Color3\"]",
+        "local_117 = \"new\"",
+        "local_130 = \"rbxassetid://11396131982\"",
+        "local_120 = 0",
+        "local_131 = 0",
+        "local_124 = 15",
+        "local_110 = \"Tab\"",
+        "local_125 = \"General\"",
+        "local_136 = local_135[\"new\"]",
+        "local_110 = local_127[\"Tab\"]",
+        "local_117 = 1",
+        "local_129 = 0",
+        "local_135 = local_136(1, 0, 0)",
+        "local_119 = {[\"Name\"] = \"General\", [\"Icon\"] = \"rbxassetid://11396131982\", [\"Color\"] = local_135}",
+        "local_133 = \"Main\"",
+        "local_129 = local_35(3550145, {})",
+        "local_135 = \"Callback\"",
+        "local_131 = local_37(14630919, {})",
+        "local_110 = local_110(local_127, local_119)",
+        "local_125 = \"Name\"",
+        "local_119 = {[\"Name\"] = \"Main\"}",
+        "local_123 = local_110",
+        "local_110 = \"Section\"",
+        "local_136 = false",
+        "local_110 = local_123[\"Section\"]",
+        "local_118 = \"Min\"",
+        "local_117 = local_49(11581663, {})",
+        "local_110 = local_110(local_123, local_119)",
+        "local_130 = \" Invisible Hitbox\"",
+        "local_125 = local_110",
+        "local_110 = \"Toggle\"",
+        "local_110 = local_125[\"Toggle\"]",
+        "local_128 = 2.07",
+        "local_133 = \"Name\"",
+        "local_132 = \"Default\"",
+        "local_119 = {[\"Name\"] = \" Invisible Hitbox\", [\"Default\"] = false, [\"Callback\"] = local_117}",
+        "local_122 = 2.07",
+        "local_136 = \"Default\"",
+        "local_117 = \"Callback\"",
+        "local_135 = false",
+        "local_132 = \"Walkspeed\"",
+        "local_110 = local_110(local_125, local_119)",
+        "local_130 = \"Name\"",
+        "local_133 = local_110",
+        "local_110 = \"Toggle\"",
+        "local_110 = local_125[\"Toggle\"]",
+        "local_119 = {[\"Name\"] = \"Walkspeed\", [\"Default\"] = false, [\"Callback\"] = local_129}",
+        "local_110 = local_110(local_125, local_119)",
+        "local_135 = \"Default\"",
+        "local_117 = false",
+        "local_132 = \"Name\"",
+        "local_136 = \"Inf Geppo\"",
+        "local_129 = \"Callback\"",
+        "local_130 = local_110",
+        "local_119 = {[\"Name\"] = \"Inf Geppo\", [\"Default\"] = false, [\"Callback\"] = local_131}",
+        "local_135 = \"Running Animation\"",
+        "local_110 = \"Toggle\"",
+        "local_110 = local_125[\"Toggle\"]",
+        "local_129 = local_44(14949374, {})",
+        "local_114 = local_42(16645849, {})",
+        "local_110 = local_110(local_125, local_119)",
+        "local_131 = local_44(12760391, {})",
+        "local_136 = \"Name\"",
+        "local_117 = \"Callback\"",
+        "local_115 = local_48(4915196, {})",
+        "local_132 = local_110",
+        "local_119 = {[\"Name\"] = \"Running Animation\", [\"Callback\"] = local_129}",
+        "local_135 = \"Name\"",
+        "local_110 = \"Button\"",
+        "local_110 = local_125[\"Button\"]",
+        "local_117 = \"No Fall Damage\"",
+        "local_123 = nil",
+        "local_110 = local_110(local_125, local_119)",
+        "local_136 = local_110",
+        "local_110 = \"Button\"",
+        "local_121 = local_48(12085171, {})",
+        "local_110 = local_125[\"Button\"]",
+        "local_129 = \"Callback\"",
+        "local_134 = \"Default\"",
+        "local_119 = {[\"Name\"] = \"No Fall Damage\", [\"Callback\"] = local_131}",
+        "local_129 = \"HipHeight\"",
+        "local_110 = local_110(local_125, local_119)",
+        "local_117 = \"Name\"",
+        "local_135 = local_110",
+        "local_131 = \"Max\"",
+        "local_110 = \"Slider\"",
+        "local_119 = {[\"Name\"] = \"HipHeight\", [\"Max\"] = 15, [\"Min\"] = 2.07, [\"Default\"] = 2.07, [\"Callback\"] = local_121}",
+        "local_137 = \"Color3\"",
+        "local_110 = local_125[\"Slider\"]",
+        "local_118 = \"rbxassetid://11396131982\"",
+        "local_129 = \"Name\"",
+        "local_136 = nil",
+        "local_131 = \"Esp\"",
+        "local_121 = 0",
+        "local_124 = \"Icon\"",
+        "local_110 = local_110(local_125, local_119)",
+        "local_122 = local_27[\"Color3\"]",
+        "local_130 = nil",
+        "local_137 = \"new\"",
+        "local_117 = local_110",
+        "local_134 = local_122[\"new\"]",
+        "local_137 = 1",
+        "local_122 = local_134(1, 0, 0)",
+        "local_110 = \"Tab\"",
+        "local_128 = \"Color\"",
+        "local_119 = {[\"Name\"] = \"Esp\", [\"Icon\"] = \"rbxassetid://11396131982\", [\"Color\"] = local_122}",
+        "local_110 = local_127[\"Tab\"]",
+        "local_132 = nil",
+        "local_137 = local_42(16119328, {})",
+        "local_124 = \"Player Esp\"",
+        "local_110 = local_110(local_127, local_119)",
+        "local_131 = \"Name\"",
+        "local_129 = local_110",
+        "local_110 = \"Section\"",
+        "local_110 = local_129[\"Section\"]",
+        "local_134 = local_42(4317733, {})",
+        "local_119 = {[\"Name\"] = \"Player Esp\"}",
+        "local_118 = \"Esp\"",
+        "local_128 = \"Callback\"",
+        "local_124 = \"Name\"",
+        "local_110 = local_110(local_129, local_119)",
+        "local_131 = local_110",
+        "local_110 = \"Button\"",
+        "local_110 = local_131[\"Button\"]",
+        "local_120 = local_48(12913970, {})",
+        "local_119 = {[\"Name\"] = \"Esp\", [\"Callback\"] = local_134}",
+        "local_134 = \"Common Chest\"",
+        "local_122 = \"Callback\"",
+        "local_128 = \"Chest Esp\"",
+        "local_118 = \"Name\"",
+        "local_110 = local_110(local_131, local_119)",
+        "local_119 = {[\"Name\"] = \"Chest Esp\"}",
+        "local_121 = local_44(14351983, {})",
+        "local_124 = local_110",
+        "local_110 = \"Section\"",
+        "local_110 = local_129[\"Section\"]",
+        "local_128 = \"Name\"",
+        "local_135 = nil",
+        "local_110 = local_110(local_129, local_119)",
+        "local_118 = local_110",
+        "local_127 = nil",
+        "local_110 = \"Button\"",
+        "local_110 = local_118[\"Button\"]",
+        "local_119 = {[\"Name\"] = \"Common Chest\", [\"Callback\"] = local_137}",
+        "local_137 = \"Callback\"",
+        "local_122 = \"Uncommon Chest\"",
+        "local_110 = local_110(local_118, local_119)",
+        "local_134 = \"Name\"",
+        "local_128 = local_110",
+        "local_110 = \"Button\"",
+        "local_133 = nil",
+        "local_119 = {[\"Name\"] = \"Uncommon Chest\", [\"Callback\"] = local_121}",
+        "local_137 = \"Rare Chest\"",
+        "local_110 = local_118[\"Button\"]",
+        "local_121 = \"Callback\"",
+        "local_122 = \"Name\"",
+        "local_126 = nil",
+        "local_110 = local_110(local_118, local_119)",
+        "local_119 = {[\"Name\"] = \"Rare Chest\", [\"Callback\"] = local_120}",
+        "local_137 = \"Name\"",
+        "local_124 = nil",
+        "local_134 = local_110",
+        "local_120 = \"Callback\"",
+        "local_110 = \"Button\"",
+        "local_121 = \"Legendary Chest\"",
+        "local_110 = local_118[\"Button\"]",
+        "local_110 = local_110(local_118, local_119)",
+        "local_128 = nil",
+        "local_119 = {[\"Name\"] = \"Legendary Chest\", [\"Callback\"] = local_115}",
+        "local_122 = local_110",
+        "local_115 = \"Callback\"",
+        "local_110 = \"Button\"",
+        "local_121 = \"Name\"",
+        "local_125 = nil",
+        "local_117 = nil",
+        "local_120 = \"Mythical Chest\"",
+        "local_110 = local_118[\"Button\"]",
+        "local_129 = nil",
+        "local_122 = nil",
+        "local_110 = local_110(local_118, local_119)",
+        "local_119 = {[\"Name\"] = \"Mythical Chest\", [\"Callback\"] = local_114}",
+        "local_137 = local_110",
+        "local_131 = nil",
+        "local_110 = \"Button\"",
+        "local_110 = local_118[\"Button\"]",
+        "local_134 = nil",
+        "local_137 = nil",
+        "local_110 = local_110(local_118, local_119)",
+        "local_121 = local_110",
+        "local_121 = nil",
+        "local_110 = local_27[\"pHP3LHlR7xReh\"]",
+        "local_118 = nil",
+        "local_119 = {}"
+      ]
+    },
+    {
+      "index": 44,
+      "successors": [],
+      "labels": [],
+      "exit_global": {
+        "bytes_hex": "4d55546c7955754a66714c43",
+        "text": "MUTlyUuJfqLC"
+      },
+      "instructions": [
+        "local_127 = \"RunService\"",
+        "local_126 = 15",
+        "local_119 = \"_G\"",
+        "local_110 = local_27[\"_G\"]",
+        "local_119 = \"HeadSize\"",
+        "local_116 = local_111[1]",
+        "local_110[\"HeadSize\"] = 15",
+        "local_119 = \"_G\"",
+        "local_110 = local_27[\"_G\"]",
+        "local_119 = \"Disabled\"",
+        "local_126 = local_116",
+        "local_110[\"Disabled\"] = local_126",
+        "local_126 = \"game\"",
+        "local_119 = local_27[\"game\"]",
+        "local_126 = \"GetService\"",
+        "local_116 = nil",
+        "local_126 = local_119[\"GetService\"]",
+        "local_126 = local_126(local_119, \"RunService\")",
+        "local_119 = \"RenderStepped\"",
+        "local_110 = local_126[\"RenderStepped\"]",
+        "local_126 = local_41(10816622, {})",
+        "local_119 = \"connect\"",
+        "local_119 = local_110[\"connect\"]",
+        "local_119 = local_119(local_110, local_126)",
+        "local_119 = {}",
+        "local_110 = local_27[\"MUTlyUuJfqLC\"]"
+      ]
+    },
+    {
+      "index": 45,
+      "successors": [
+        16
+      ],
+      "labels": [
+        3695335
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_119 = \"AddOutline\"",
+        "local_110 = local_27[\"AddOutline\"]",
+        "local_119 = local_110(local_116)",
+        "local_110 = 3695335"
+      ]
+    },
+    {
+      "index": 46,
+      "successors": [
+        50
+      ],
+      "labels": [
+        12192223
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_130 = \"Instance\"",
+        "local_133 = local_27[\"Instance\"]",
+        "local_129 = 0",
+        "local_130 = \"new\"",
+        "local_110 = local_133[\"new\"]",
+        "local_117 = 10",
+        "local_130 = \"BillboardGui\"",
+        "local_133 = local_110(\"BillboardGui\", local_125)",
+        "local_135 = 0",
+        "local_110 = \"Name\"",
+        "local_136 = \"UDim2\"",
+        "local_130 = \"ElectricPPPGUI\"",
+        "local_133[\"Name\"] = \"ElectricPPPGUI\"",
+        "local_110 = \"Size\"",
+        "local_132 = local_27[\"UDim2\"]",
+        "local_136 = \"new\"",
+        "local_130 = local_132[\"new\"]",
+        "local_136 = 10",
+        "local_132 = local_130(10, 0, 10, 0)",
+        "local_133[\"Size\"] = local_132",
+        "local_132 = \"Instance\"",
+        "local_131 = 0",
+        "local_110 = \"AlwaysOnTop\"",
+        "local_117 = 0",
+        "local_130 = true",
+        "local_133[\"AlwaysOnTop\"] = true",
+        "local_130 = local_27[\"Instance\"]",
+        "local_135 = \"UDim2\"",
+        "local_132 = \"new\"",
+        "local_110 = local_130[\"new\"]",
+        "local_132 = \"Frame\"",
+        "local_130 = local_110(\"Frame\", local_133)",
+        "local_136 = local_27[\"UDim2\"]",
+        "local_110 = \"Size\"",
+        "local_135 = \"new\"",
+        "local_132 = local_136[\"new\"]",
+        "local_129 = 1",
+        "local_135 = 1",
+        "local_136 = local_132(1, 0, 1, 0)",
+        "local_130[\"Size\"] = local_136",
+        "local_135 = \"Color3\"",
+        "local_110 = \"BackgroundTransparency\"",
+        "local_132 = 0.8",
+        "local_130[\"BackgroundTransparency\"] = 0.8",
+        "local_110 = \"BorderSizePixel\"",
+        "local_132 = 0",
+        "local_130[\"BorderSizePixel\"] = 0",
+        "local_136 = local_27[\"Color3\"]",
+        "local_135 = \"new\"",
+        "local_110 = \"BackgroundColor3\"",
+        "local_129 = 255",
+        "local_132 = local_136[\"new\"]",
+        "local_117 = 255",
+        "local_135 = 240",
+        "local_136 = local_132(240, 255, 255)",
+        "local_130[\"BackgroundColor3\"] = local_136",
+        "local_136 = \"Instance\"",
+        "local_124 = 0",
+        "local_132 = local_27[\"Instance\"]",
+        "local_136 = \"new\"",
+        "local_117 = \"UDim2\"",
+        "local_110 = local_132[\"new\"]",
+        "local_136 = \"TextLabel\"",
+        "local_129 = 0",
+        "local_132 = local_110(\"TextLabel\", local_130)",
+        "local_135 = local_27[\"UDim2\"]",
+        "local_110 = \"Size\"",
+        "local_131 = 2",
+        "local_117 = \"new\"",
+        "local_136 = local_135[\"new\"]",
+        "local_117 = 2",
+        "local_135 = local_136(2, 0, 2, 0)",
+        "local_136 = 0",
+        "local_132[\"Size\"] = local_135",
+        "local_110 = \"BorderSizePixel\"",
+        "local_132[\"BorderSizePixel\"] = 0",
+        "local_136 = 10",
+        "local_133 = nil",
+        "local_110 = \"TextSize\"",
+        "local_132[\"TextSize\"] = 10",
+        "local_130 = nil",
+        "local_136 = \"Rare Chest\"",
+        "local_110 = \"Text\"",
+        "local_132[\"Text\"] = \"Rare Chest\"",
+        "local_110 = \"BackgroundTransparency\"",
+        "local_136 = 1",
+        "local_132[\"BackgroundTransparency\"] = 1",
+        "local_110 = 12192223",
+        "local_132 = nil"
+      ]
+    },
+    {
+      "index": 47,
+      "successors": [],
+      "labels": [],
+      "exit_global": {
+        "bytes_hex": "726a37637547734750333779",
+        "text": "rj7cuGsGP37y"
+      },
+      "instructions": [
+        "local_125 = \"game\"",
+        "local_123 = local_27[\"game\"]",
+        "local_116 = local_111[1]",
+        "local_125 = \"Players\"",
+        "local_127 = local_123[\"Players\"]",
+        "local_123 = \"LocalPlayer\"",
+        "local_126 = local_127[\"LocalPlayer\"]",
+        "local_127 = \"Character\"",
+        "local_119 = local_126[\"Character\"]",
+        "local_126 = \"Humanoid\"",
+        "local_110 = local_119[\"Humanoid\"]",
+        "local_126 = local_116",
+        "local_119 = \"HipHeight\"",
+        "local_110[\"HipHeight\"] = local_126",
+        "local_116 = nil",
+        "local_110 = local_27[\"rj7cuGsGP37y\"]",
+        "local_119 = {}"
+      ]
+    },
+    {
+      "index": 48,
+      "successors": [],
+      "labels": [],
+      "exit_global": {
+        "bytes_hex": "744f47674844464f736c4b36",
+        "text": "tOGgHDFOslK6"
+      },
+      "instructions": [
+        "local_119 = {}",
+        "local_110 = local_27[\"tOGgHDFOslK6\"]"
+      ]
+    },
+    {
+      "index": 49,
+      "successors": [
+        6,
+        40
+      ],
+      "labels": [
+        1119951,
+        10589906
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_126, local_125 = local_127(local_116, local_126)",
+        "local_110 = ((local_126 and 1119951) or 10589906)"
+      ]
+    },
+    {
+      "index": 50,
+      "successors": [
+        29
+      ],
+      "labels": [
+        7931558
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_123 = nil",
+        "local_110 = 7931558",
+        "local_125 = nil"
+      ]
+    },
+    {
+      "index": 51,
+      "successors": [
+        57,
+        59
+      ],
+      "labels": [
+        12768643,
+        12808223
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_116 = local_111[1]",
+        "local_126 = \"Instance\"",
+        "local_119 = local_27[\"Instance\"]",
+        "local_126 = \"new\"",
+        "local_110 = local_119[\"new\"]",
+        "local_126 = \"Highlight\"",
+        "local_127 = local_40[local_112[1]]",
+        "local_119 = local_110(\"Highlight\", local_127)",
+        "local_126 = local_119",
+        "local_110 = \"OutlineColor\"",
+        "local_119 = local_40[local_112[2]]",
+        "local_126[\"OutlineColor\"] = local_119",
+        "local_110 = \"Adornee\"",
+        "local_119 = local_116",
+        "local_126[\"Adornee\"] = local_119",
+        "local_127 = true",
+        "local_119 = local_40[local_112[3]]",
+        "local_110 = (local_119 == true)",
+        "local_110 = ((local_110 and 12768643) or 12808223)"
+      ]
+    },
+    {
+      "index": 52,
+      "successors": [],
+      "labels": [],
+      "exit_global": {
+        "bytes_hex": "313231554d30443372693670",
+        "text": "121UM0D3ri6p"
+      },
+      "instructions": [
+        "local_110 = local_27[\"121UM0D3ri6p\"]",
+        "local_119 = {}"
+      ]
+    },
+    {
+      "index": 53,
+      "successors": [
+        33,
+        70
+      ],
+      "labels": [
+        9232491,
+        14389864
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_123 = local_126",
+        "local_130 = \"Name\"",
+        "local_133 = local_125[\"Name\"]",
+        "local_130 = \"Mythical\"",
+        "local_110 = (local_133 == \"Mythical\")",
+        "local_110 = ((local_110 and 9232491) or 14389864)"
+      ]
+    },
+    {
+      "index": 54,
+      "successors": [],
+      "labels": [],
+      "exit_global": {
+        "bytes_hex": "7745445763356d74435650556d",
+        "text": "wEDWc5mtCVPUm"
+      },
+      "instructions": [
+        "local_124 = \"Players\"",
+        "local_110 = local_27[\"wEDWc5mtCVPUm\"]",
+        "local_131 = \"game\"",
+        "local_129 = local_27[\"game\"]",
+        "local_131 = \"GetService\"",
+        "local_131 = local_129[\"GetService\"]",
+        "local_131 = local_131(local_129, \"Players\")",
+        "local_126 = local_46(local_126)",
+        "local_119 = {}",
+        "local_123 = local_46(local_123)",
+        "local_129 = \"PlayerAdded\"",
+        "local_136 = local_46(local_136)",
+        "local_117 = local_131[\"PlayerAdded\"]",
+        "local_129 = \"Connect\"",
+        "local_127 = local_46(local_127)",
+        "local_132 = local_46(local_132)",
+        "local_135 = local_46(local_135)",
+        "local_125 = local_46(local_125)",
+        "local_131 = local_37(12798352, {local_116, local_133})",
+        "local_133 = local_46(local_133)",
+        "local_116 = local_46(local_116)",
+        "local_129 = local_117[\"Connect\"]",
+        "local_130 = local_46(local_130)",
+        "local_129 = local_129(local_117, local_131)"
+      ]
+    },
+    {
+      "index": 55,
+      "successors": [],
+      "labels": [],
+      "exit_global": {
+        "bytes_hex": "42667445544541597a426c694945",
+        "text": "BftETEAYzBliIE"
+      },
+      "instructions": [
+        "local_116 = nil",
+        "local_110 = local_27[\"BftETEAYzBliIE\"]",
+        "local_119 = {}"
+      ]
+    },
+    {
+      "index": 56,
+      "successors": [],
+      "labels": [],
+      "exit_global": {
+        "bytes_hex": "56316f5a656670374e467574",
+        "text": "V1oZefp7NFut"
+      },
+      "instructions": [
+        "local_127 = \"game\"",
+        "local_126 = local_27[\"game\"]",
+        "local_127 = \"GetService\"",
+        "local_123 = \"Workspace\"",
+        "local_127 = local_126[\"GetService\"]",
+        "local_127 = local_127(local_126, \"Workspace\")",
+        "local_126 = \"PlayerCharacters\"",
+        "local_116 = local_127[\"PlayerCharacters\"]",
+        "local_133 = \"game\"",
+        "local_125 = local_27[\"game\"]",
+        "local_133 = \"Players\"",
+        "local_123 = local_125[\"Players\"]",
+        "local_125 = \"LocalPlayer\"",
+        "local_127 = local_123[\"LocalPlayer\"]",
+        "local_123 = \"Name\"",
+        "local_126 = local_127[\"Name\"]",
+        "local_119 = local_116[local_126]",
+        "local_116 = \"FallDamage\"",
+        "local_110 = local_119[\"FallDamage\"]",
+        "local_119 = \"Destroy\"",
+        "local_119 = local_110[\"Destroy\"]",
+        "local_119 = local_119(local_110)",
+        "local_119 = {}",
+        "local_110 = local_27[\"V1oZefp7NFut\"]"
+      ]
+    },
+    {
+      "index": 57,
+      "successors": [
+        13
+      ],
+      "labels": [
+        2890875
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_119 = local_40[local_112[4]]",
+        "local_110 = \"FillColor\"",
+        "local_126[\"FillColor\"] = local_119",
+        "local_110 = \"FillTransparency\"",
+        "local_119 = local_40[local_112[5]]",
+        "local_126[\"FillTransparency\"] = local_119",
+        "local_110 = 2890875"
+      ]
+    },
+    {
+      "index": 58,
+      "successors": [],
+      "labels": [],
+      "exit_global": {
+        "bytes_hex": "6c49504c6b70436e74785a36",
+        "text": "lIPLkpCntxZ6"
+      },
+      "instructions": [
+        "local_119 = \"CharacterAdded\"",
+        "local_116 = local_111[1]",
+        "local_126 = local_48(13029106, {local_112[1], local_112[2]})",
+        "local_110 = local_116[\"CharacterAdded\"]",
+        "local_119 = \"Connect\"",
+        "local_119 = local_110[\"Connect\"]",
+        "local_116 = nil",
+        "local_119 = local_119(local_110, local_126)",
+        "local_119 = {}",
+        "local_110 = local_27[\"lIPLkpCntxZ6\"]"
+      ]
+    },
+    {
+      "index": 59,
+      "successors": [
+        13
+      ],
+      "labels": [
+        2890875
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_110 = \"FillTransparency\"",
+        "local_119 = 1",
+        "local_126[\"FillTransparency\"] = 1",
+        "local_110 = 2890875"
+      ]
+    },
+    {
+      "index": 60,
+      "successors": [
+        55
+      ],
+      "labels": [
+        12512780
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_119 = \"AddNameTag\"",
+        "local_110 = local_27[\"AddNameTag\"]",
+        "local_119 = local_110(local_116)",
+        "local_110 = 12512780"
+      ]
+    },
+    {
+      "index": 61,
+      "successors": [
+        29
+      ],
+      "labels": [
+        7931558
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_132 = \"game\"",
+        "local_119 = \"pairs\"",
+        "local_110 = local_27[\"pairs\"]",
+        "local_136 = \"Players\"",
+        "local_130 = local_27[\"game\"]",
+        "local_132 = \"GetService\"",
+        "local_132 = local_130[\"GetService\"]",
+        "local_132 = local_132(local_130, \"Players\")",
+        "local_130 = \"LocalPlayer\"",
+        "local_133 = local_132[\"LocalPlayer\"]",
+        "local_130 = \"PlayerScripts\"",
+        "local_125 = local_133[\"PlayerScripts\"]",
+        "local_133 = \"Shop\"",
+        "local_123 = local_125[\"Shop\"]",
+        "local_125 = \"Chests\"",
+        "local_127 = local_123[\"Chests\"]",
+        "local_125 = \"GetDescendants\"",
+        "local_125 = local_127[\"GetDescendants\"]",
+        "local_123 = {local_125(local_127)}",
+        "local_127 = {local_110(local_28(local_123))}",
+        "local_119 = local_127[1]",
+        "local_116 = local_127[2]",
+        "local_126 = local_127[3]",
+        "local_110 = 7931558",
+        "local_127 = local_119"
+      ]
+    },
+    {
+      "index": 62,
+      "successors": [
+        16,
+        45
+      ],
+      "labels": [
+        3695335,
+        11816503
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_116 = local_111[1]",
+        "local_119 = local_40[local_112[1]]",
+        "local_126 = true",
+        "local_110 = (local_119 == true)",
+        "local_110 = ((local_110 and 11816503) or 3695335)"
+      ]
+    },
+    {
+      "index": 63,
+      "successors": [
+        24
+      ],
+      "labels": [
+        5664381
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_127 = \"game\"",
+        "local_126 = local_27[\"game\"]",
+        "local_127 = \"Players\"",
+        "local_116 = local_126[\"Players\"]",
+        "local_126 = \"LocalPlayer\"",
+        "local_119 = local_116[\"LocalPlayer\"]",
+        "local_116 = \"Character\"",
+        "local_110 = local_119[\"Character\"]",
+        "local_116 = \"Humanoid\"",
+        "local_119 = \"FindFirstChildOfClass\"",
+        "local_119 = local_110[\"FindFirstChildOfClass\"]",
+        "local_119 = local_119(local_110, \"Humanoid\")",
+        "local_110 = \"ChangeState\"",
+        "local_116 = \"Jumping\"",
+        "local_110 = local_119[\"ChangeState\"]",
+        "local_110 = local_110(local_119, \"Jumping\")",
+        "local_110 = 5664381"
+      ]
+    },
+    {
+      "index": 64,
+      "successors": [
+        22,
+        27
+      ],
+      "labels": [
+        5441190,
+        7262544
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_133 = local_38()",
+        "local_117 = \"game\"",
+        "local_40[local_133] = local_125",
+        "local_123 = local_126",
+        "local_136 = \"Name\"",
+        "local_125 = local_133",
+        "local_132 = local_40[local_125]",
+        "local_130 = local_132[\"Name\"]",
+        "local_135 = local_27[\"game\"]",
+        "local_129 = \"Players\"",
+        "local_117 = \"GetService\"",
+        "local_117 = local_135[\"GetService\"]",
+        "local_117 = local_117(local_135, \"Players\")",
+        "local_135 = \"LocalPlayer\"",
+        "local_136 = local_117[\"LocalPlayer\"]",
+        "local_135 = \"Name\"",
+        "local_132 = local_136[\"Name\"]",
+        "local_133 = (local_130 ~= local_132)",
+        "local_110 = ((local_133 and 5441190) or 7262544)"
+      ]
+    },
+    {
+      "index": 65,
+      "successors": [
+        78
+      ],
+      "labels": [
+        15894490
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_119 = \"AddNameTag\"",
+        "local_110 = local_27[\"AddNameTag\"]",
+        "local_119 = local_110(local_116)",
+        "local_110 = 15894490"
+      ]
+    },
+    {
+      "index": 66,
+      "successors": [
+        9,
+        48
+      ],
+      "labels": [
+        2331350,
+        12127417
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_126, local_125 = local_127(local_116, local_126)",
+        "local_110 = ((local_126 and 2331350) or 12127417)"
+      ]
+    },
+    {
+      "index": 67,
+      "successors": [
+        38
+      ],
+      "labels": [
+        10243237
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_119 = \"next\"",
+        "local_110 = local_27[\"next\"]",
+        "local_116 = \"game\"",
+        "local_126 = \"Players\"",
+        "local_119 = local_27[\"game\"]",
+        "local_127 = \"GetPlayers\"",
+        "local_116 = \"GetService\"",
+        "local_116 = local_119[\"GetService\"]",
+        "local_116 = local_116(local_119, \"Players\")",
+        "local_127 = local_116[\"GetPlayers\"]",
+        "local_127 = {local_127(local_116)}",
+        "local_126 = local_127[2]",
+        "local_116 = local_110",
+        "local_119 = local_127[1]",
+        "local_127 = local_119",
+        "local_110 = 10243237"
+      ]
+    },
+    {
+      "index": 68,
+      "successors": [
+        26
+      ],
+      "labels": [
+        7004611
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_134 = \"AddOutline\"",
+        "local_137 = \"Character\"",
+        "local_128 = local_27[\"AddOutline\"]",
+        "local_110 = 7004611",
+        "local_122 = local_118[\"Character\"]",
+        "local_134 = local_128(local_122)"
+      ]
+    },
+    {
+      "index": 69,
+      "successors": [
+        49
+      ],
+      "labels": [
+        12189044
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_119 = \"pairs\"",
+        "local_132 = \"game\"",
+        "local_110 = local_27[\"pairs\"]",
+        "local_136 = \"Players\"",
+        "local_130 = local_27[\"game\"]",
+        "local_132 = \"GetService\"",
+        "local_132 = local_130[\"GetService\"]",
+        "local_132 = local_132(local_130, \"Players\")",
+        "local_130 = \"LocalPlayer\"",
+        "local_133 = local_132[\"LocalPlayer\"]",
+        "local_130 = \"PlayerScripts\"",
+        "local_125 = local_133[\"PlayerScripts\"]",
+        "local_133 = \"Shop\"",
+        "local_123 = local_125[\"Shop\"]",
+        "local_125 = \"Chests\"",
+        "local_127 = local_123[\"Chests\"]",
+        "local_125 = \"GetDescendants\"",
+        "local_125 = local_127[\"GetDescendants\"]",
+        "local_123 = {local_125(local_127)}",
+        "local_127 = {local_110(local_28(local_123))}",
+        "local_116 = local_127[2]",
+        "local_110 = 12189044",
+        "local_126 = local_127[3]",
+        "local_119 = local_127[1]",
+        "local_127 = local_119"
+      ]
+    },
+    {
+      "index": 70,
+      "successors": [
+        32
+      ],
+      "labels": [
+        9001218
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_123 = nil",
+        "local_125 = nil",
+        "local_110 = 9001218"
+      ]
+    },
+    {
+      "index": 71,
+      "successors": [
+        37
+      ],
+      "labels": [
+        10135159
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_119 = \"AddOutline\"",
+        "local_110 = local_27[\"AddOutline\"]",
+        "local_119 = local_110(local_116)",
+        "local_110 = 10135159"
+      ]
+    },
+    {
+      "index": 72,
+      "successors": [],
+      "labels": [],
+      "exit_global": {
+        "bytes_hex": "4843304e476b346371475369516e",
+        "text": "HC0NGk4cqGSiQn"
+      },
+      "instructions": [
+        "local_127 = \"game\"",
+        "local_126 = local_38()",
+        "local_116 = local_111[1]",
+        "local_40[local_126] = local_116",
+        "local_119 = local_27[\"game\"]",
+        "local_123 = \"UserInputService\"",
+        "local_116 = nil",
+        "local_127 = \"GetService\"",
+        "local_127 = local_119[\"GetService\"]",
+        "local_127 = local_127(local_119, \"UserInputService\")",
+        "local_119 = \"JumpRequest\"",
+        "local_110 = local_127[\"JumpRequest\"]",
+        "local_127 = local_49(2693588, {local_126})",
+        "local_119 = \"connect\"",
+        "local_119 = local_110[\"connect\"]",
+        "local_126 = local_46(local_126)",
+        "local_119 = local_119(local_110, local_127)",
+        "local_110 = local_27[\"HC0NGk4cqGSiQn\"]",
+        "local_119 = {}"
+      ]
+    },
+    {
+      "index": 73,
+      "successors": [],
+      "labels": [],
+      "exit_global": {
+        "bytes_hex": "386931356b4239474d3842715933",
+        "text": "8i15kB9GM8BqY3"
+      },
+      "instructions": [
+        "local_110 = \"5517298834\"",
+        "local_127 = \"rbxassetid://\"",
+        "local_125 = \"AnimationId\"",
+        "local_133 = \"game\"",
+        "local_119 = \"AnimationId\"",
+        "local_126 = \"Instance\"",
+        "local_27[\"AnimationId\"] = \"5517298834\"",
+        "local_116 = local_27[\"Instance\"]",
+        "local_126 = \"new\"",
+        "local_119 = local_116[\"new\"]",
+        "local_126 = \"Animation\"",
+        "local_116 = local_119(\"Animation\")",
+        "local_119 = \"AnimationId\"",
+        "local_123 = local_27[\"AnimationId\"]",
+        "local_126 = (\"rbxassetid://\" .. local_123)",
+        "local_116[\"AnimationId\"] = local_126",
+        "local_125 = local_27[\"game\"]",
+        "local_133 = \"Players\"",
+        "local_123 = local_125[\"Players\"]",
+        "local_125 = \"LocalPlayer\"",
+        "local_127 = local_123[\"LocalPlayer\"]",
+        "local_123 = \"Character\"",
+        "local_126 = local_127[\"Character\"]",
+        "local_127 = \"Humanoid\"",
+        "local_119 = local_126[\"Humanoid\"]",
+        "local_126 = \"LoadAnimation\"",
+        "local_110 = local_27[\"8i15kB9GM8BqY3\"]",
+        "local_126 = local_119[\"LoadAnimation\"]",
+        "local_126 = local_126(local_119, local_116)",
+        "local_119 = \"Play\"",
+        "local_119 = local_126[\"Play\"]",
+        "local_119 = local_119(local_126)",
+        "local_127 = 1",
+        "local_116 = nil",
+        "local_119 = \"AdjustSpeed\"",
+        "local_119 = local_126[\"AdjustSpeed\"]",
+        "local_119 = local_119(local_126, 1)",
+        "local_126 = nil",
+        "local_119 = {}"
+      ]
+    },
+    {
+      "index": 74,
+      "successors": [
+        11,
+        77
+      ],
+      "labels": [
+        2751153,
+        15795367
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_121 = \"Players\"",
+        "local_137 = \"game\"",
+        "local_122 = local_27[\"game\"]",
+        "local_137 = \"GetService\"",
+        "local_137 = local_122[\"GetService\"]",
+        "local_117 = local_124",
+        "local_137 = local_137(local_122, \"Players\")",
+        "local_122 = \"LocalPlayer\"",
+        "local_134 = local_137[\"LocalPlayer\"]",
+        "local_128 = (local_118 ~= local_134)",
+        "local_110 = ((local_128 and 15795367) or 2751153)"
+      ]
+    },
+    {
+      "index": 75,
+      "successors": [
+        7,
+        79
+      ],
+      "labels": [
+        1832493,
+        15941518
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_110 = ((local_119 and 15941518) or 1832493)"
+      ]
+    },
+    {
+      "index": 76,
+      "successors": [
+        14
+      ],
+      "labels": [
+        3361975
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_110 = 3361975"
+      ]
+    },
+    {
+      "index": 77,
+      "successors": [
+        28,
+        35
+      ],
+      "labels": [
+        7819629,
+        9751184
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_122 = local_49(2865384, {local_116, local_133})",
+        "local_134 = \"CharacterAdded\"",
+        "local_128 = local_118[\"CharacterAdded\"]",
+        "local_134 = \"Connect\"",
+        "local_134 = local_128[\"Connect\"]",
+        "local_134 = local_134(local_128, local_122)",
+        "local_134 = \"Character\"",
+        "local_128 = local_118[\"Character\"]",
+        "local_110 = ((local_128 and 7819629) or 9751184)"
+      ]
+    },
+    {
+      "index": 78,
+      "successors": [],
+      "labels": [],
+      "exit_global": {
+        "bytes_hex": "67614f73464837695649485654",
+        "text": "gaOsFH7iVIHVT"
+      },
+      "instructions": [
+        "local_116 = nil",
+        "local_119 = {}",
+        "local_110 = local_27[\"gaOsFH7iVIHVT\"]"
+      ]
+    },
+    {
+      "index": 79,
+      "successors": [
+        30
+      ],
+      "labels": [
+        8006720
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_133 = \"Players\"",
+        "local_129 = \"Z\"",
+        "local_125 = \"game\"",
+        "local_123 = local_27[\"game\"]",
+        "local_125 = \"GetService\"",
+        "local_125 = local_123[\"GetService\"]",
+        "local_125 = local_125(local_123, \"Players\")",
+        "local_123 = \"LocalPlayer\"",
+        "local_127 = local_125[\"LocalPlayer\"]",
+        "local_117 = \"Y\"",
+        "local_123 = \"Character\"",
+        "local_119 = local_127[\"Character\"]",
+        "local_127 = \"HumanoidRootPart\"",
+        "local_132 = \"Vector3\"",
+        "local_110 = local_119[\"HumanoidRootPart\"]",
+        "local_127 = local_110",
+        "local_119 = \"Velocity\"",
+        "local_133 = \"Position\"",
+        "local_110 = local_127[\"Velocity\"]",
+        "local_135 = \"X\"",
+        "local_123 = local_110",
+        "local_125 = local_127[\"Position\"]",
+        "local_130 = local_27[\"Vector3\"]",
+        "local_132 = \"new\"",
+        "local_133 = local_130[\"new\"]",
+        "local_136 = local_123[\"X\"]",
+        "local_135 = 20",
+        "local_132 = (local_136 / 20)",
+        "local_135 = local_123[\"Y\"]",
+        "local_127 = nil",
+        "local_117 = 30",
+        "local_136 = (local_135 / 30)",
+        "local_117 = local_123[\"Z\"]",
+        "local_129 = 20",
+        "local_135 = (local_117 / 20)",
+        "local_130 = local_133(local_132, local_136, local_135)",
+        "local_119 = (local_125 + local_130)",
+        "local_110 = \"MoveTo\"",
+        "local_110 = local_126[\"MoveTo\"]",
+        "local_123 = nil",
+        "local_110 = local_110(local_126, local_119)",
+        "local_110 = 8006720"
+      ]
+    },
+    {
+      "index": 80,
+      "successors": [
+        66
+      ],
+      "labels": [
+        14133709
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_132 = \"game\"",
+        "local_119 = \"pairs\"",
+        "local_136 = \"Players\"",
+        "local_110 = local_27[\"pairs\"]",
+        "local_130 = local_27[\"game\"]",
+        "local_132 = \"GetService\"",
+        "local_132 = local_130[\"GetService\"]",
+        "local_132 = local_132(local_130, \"Players\")",
+        "local_130 = \"LocalPlayer\"",
+        "local_133 = local_132[\"LocalPlayer\"]",
+        "local_130 = \"PlayerScripts\"",
+        "local_125 = local_133[\"PlayerScripts\"]",
+        "local_133 = \"Shop\"",
+        "local_123 = local_125[\"Shop\"]",
+        "local_125 = \"Chests\"",
+        "local_127 = local_123[\"Chests\"]",
+        "local_125 = \"GetDescendants\"",
+        "local_125 = local_127[\"GetDescendants\"]",
+        "local_123 = {local_125(local_127)}",
+        "local_127 = {local_110(local_28(local_123))}",
+        "local_126 = local_127[3]",
+        "local_110 = 14133709",
+        "local_116 = local_127[2]",
+        "local_119 = local_127[1]",
+        "local_127 = local_119"
+      ]
+    },
+    {
+      "index": 81,
+      "successors": [],
+      "labels": [],
+      "exit_global": {
+        "bytes_hex": "55327954746858574a6f654c5a5a",
+        "text": "U2yTthXWJoeLZZ"
+      },
+      "instructions": [
+        "local_119 = {}",
+        "local_110 = local_27[\"U2yTthXWJoeLZZ\"]"
+      ]
+    },
+    {
+      "index": 82,
+      "successors": [
+        32
+      ],
+      "labels": [
+        9001218
+      ],
+      "exit_global": null,
+      "instructions": [
+        "local_119 = \"pairs\"",
+        "local_110 = local_27[\"pairs\"]",
+        "local_132 = \"game\"",
+        "local_130 = local_27[\"game\"]",
+        "local_132 = \"GetService\"",
+        "local_132 = local_130[\"GetService\"]",
+        "local_136 = \"Players\"",
+        "local_132 = local_132(local_130, \"Players\")",
+        "local_130 = \"LocalPlayer\"",
+        "local_133 = local_132[\"LocalPlayer\"]",
+        "local_130 = \"PlayerScripts\"",
+        "local_125 = local_133[\"PlayerScripts\"]",
+        "local_133 = \"Shop\"",
+        "local_123 = local_125[\"Shop\"]",
+        "local_125 = \"Chests\"",
+        "local_127 = local_123[\"Chests\"]",
+        "local_125 = \"GetDescendants\"",
+        "local_125 = local_127[\"GetDescendants\"]",
+        "local_123 = {local_125(local_127)}",
+        "local_127 = {local_110(local_28(local_123))}",
+        "local_119 = local_127[1]",
+        "local_126 = local_127[3]",
+        "local_116 = local_127[2]",
+        "local_110 = 9001218",
+        "local_127 = local_119"
+      ]
+    }
+  ],
+  "limitations": [
+    "Generated names; original names and comments are unavailable",
+    "Tamper checks remain and may react to changed source lines or stack frames",
+    "Truthy opaque exit globals are unsupported and guarded in source",
+    "Decoded cache reads use the recognized cipher initializer; calls and RNG effects remain"
+  ]
+}
