@@ -25,16 +25,16 @@
       "details": "22/22 function bodies structured; 535 constants, 83 VM blocks; no behavioral equivalence check.",
       "artifacts": [
         {
-          "local_path": "local-results/01-gpo-xtrey-prometheus.partial.luau",
+          "local_path": "local-results/Grand Piece Online.partial.luau",
           "bytes": 98801,
           "sha256": "758c6e2ff550ad37d44fc46578fc455367671dbdca660c864bca7b35da9324ff",
-          "published_path": "dobf scripts 1.0/01-gpo-xtrey-prometheus.partial.luau"
+          "published_path": "dobf scripts 1.0/Grand Piece Online.partial.luau"
         },
         {
-          "local_path": "local-results/01-gpo-xtrey-prometheus.ir.json",
+          "local_path": "local-results/Grand Piece Online.analysis.json",
           "bytes": 125655,
           "sha256": "f58a587ed07aac6b5978889204f5dac476598abb1fd2624c00a24f333e04da21",
-          "published_path": "dobf scripts 1.0/01-gpo-xtrey-prometheus.ir.json"
+          "published_path": "dobf scripts 1.0/Grand Piece Online.analysis.json"
         }
       ]
     },
@@ -71,10 +71,10 @@
       "details": "Outer hex/RLE layer only: 15,681 markers and 251,604 opaque bytes. No Lua source recovered.",
       "artifacts": [
         {
-          "local_path": "local-results/03-gpo-luis-v13-container.bin",
+          "local_path": "local-results/Grand Piece Online (Luraph v13.5.8).container.bin",
           "bytes": 251604,
           "sha256": "ae06dfaa2054507dc83aaf31eaa208070a11daa05251eb5c52934259f32aad60",
-          "published_path": "dobf scripts 1.0/03-gpo-luis-v13-container.bin"
+          "published_path": "dobf scripts 1.0/Grand Piece Online (Luraph v13.5.8).container.bin"
         }
       ]
     },
@@ -95,10 +95,10 @@
       "details": "ASCII85+raw LZMA1 outer layer extracted: 119,197 bytes of still-virtualized Luau. No application source.",
       "artifacts": [
         {
-          "local_path": "local-results/04-grow-garden-v14-inner-vm.luau",
+          "local_path": "local-results/Grow a Garden.inner-vm.luau",
           "bytes": 119197,
           "sha256": "83f1bbb7d18ef864845b5253bfb9fe0b901279d9fa9ea6d2ccb9a1a954d5d261",
-          "published_path": "dobf scripts 1.0/04-grow-garden-v14-inner-vm.luau"
+          "published_path": "dobf scripts 1.0/Grow a Garden.inner-vm.luau"
         }
       ]
     },
@@ -119,10 +119,10 @@
       "details": "unprom inlined 2,273 constants, folded 19,373 expressions and de-flattened 1,232 VM blocks; VM not lifted (RecursionError).",
       "artifacts": [
         {
-          "local_path": "local-results/05-doors-prometheus-vm-deflattened.lua",
+          "local_path": "local-results/DOORS.vm-deflattened.lua",
           "bytes": 384022,
           "sha256": "d9dfd971c8f8cf703e522da272029010cfff7c4ab0bb3b57f7e53d14c572c02e",
-          "published_path": "dobf scripts 1.0/05-doors-prometheus-vm-deflattened.lua"
+          "published_path": "dobf scripts 1.0/DOORS.vm-deflattened.lua"
         }
       ]
     },
@@ -176,16 +176,16 @@
       "details": "15/15 function bodies structured; 294 constants, 48 VM blocks; output parses as Lua but runtime behavior unverified.",
       "artifacts": [
         {
-          "local_path": "local-results/08-untitled-boxing-prometheus.partial.luau",
+          "local_path": "local-results/Untitled Boxing Game.partial.luau",
           "bytes": 52081,
           "sha256": "e3941fc31ed4f7f9250a571a677fc9fe9501dfe7cfb61330a2d4ef8bcbc313a3",
-          "published_path": "dobf scripts 1.0/08-untitled-boxing-prometheus.partial.luau"
+          "published_path": "dobf scripts 1.0/Untitled Boxing Game.partial.luau"
         },
         {
-          "local_path": "local-results/08-untitled-boxing-prometheus.ir.json",
+          "local_path": "local-results/Untitled Boxing Game.analysis.json",
           "bytes": 67650,
           "sha256": "9e2f9db21cc716fd4f058dc75304667ecbc99030c80f190254e2e696cab72ec9",
-          "published_path": "dobf scripts 1.0/08-untitled-boxing-prometheus.ir.json"
+          "published_path": "dobf scripts 1.0/Untitled Boxing Game.analysis.json"
         }
       ]
     },
@@ -240,16 +240,16 @@
       "details": "922/922 literal calls statically decoded (153 distinct strings); resulting source is a generic key-screen UI, not advertised GPO farming logic. No linked domain contacted.",
       "artifacts": [
         {
-          "local_path": "local-results/excluded-dilleron-key-ui.xor.lua",
+          "local_path": "local-results/Key System (not GPO).strings-decoded.lua",
           "bytes": 40656,
           "sha256": "d19a99392aeccb055fda3b634496e34f6adbfec7718cda51843fbdfe66e2bbc8",
-          "published_path": "dobf scripts 1.0/excluded-dilleron-key-ui.xor.lua"
+          "published_path": "dobf scripts 1.0/Key System (not GPO).strings-decoded.lua"
         },
         {
-          "local_path": "local-results/excluded-dilleron-key-ui.formatted.lua",
+          "local_path": "local-results/Key System (not GPO).formatted.lua",
           "bytes": 40011,
           "sha256": "b6131c2f3c915aeed68c7a9c7fdaf872347012a867d7429b3c789a18aaf44004",
-          "published_path": "dobf scripts 1.0/excluded-dilleron-key-ui.formatted.lua"
+          "published_path": "dobf scripts 1.0/Key System (not GPO).formatted.lua"
         }
       ]
     }
