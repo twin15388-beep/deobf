@@ -1,0 +1,248 @@
+{
+  "date": "2026-10-18",
+  "method": "Static, offline, no Roblox/Lua payload execution; GitHub git checkouts for source bytes; RScripts page snippets for some pointers only.",
+  "summary": {
+    "selected": 10,
+    "full": 0,
+    "partial": 5,
+    "failed": 5,
+    "excluded_candidates": 1
+  },
+  "cases": [
+    {
+      "number": 1,
+      "game": "Grand Piece Online",
+      "source": {
+        "repository": "xtrey10x/xtrey10x-hub",
+        "commit": "39a1ef6b1b32e651d208dc296e758c0e0e862d36",
+        "path": "GPO FREE",
+        "sha256": "170b348b9e31ad29aa9bc2f3e1d7c85195bccbdb87bd217531a37a3c964cfa11",
+        "bytes": 20654,
+        "url": "https://github.com/xtrey10x/xtrey10x-hub/blob/39a1ef6b1b32e651d208dc296e758c0e0e862d36/GPO%20FREE"
+      },
+      "protection": "Prometheus/WeAreDevs VM (structural identification)",
+      "outcome": "partial",
+      "details": "22/22 function bodies structured; 535 constants, 83 VM blocks; no behavioral equivalence check.",
+      "artifacts": [
+        {
+          "local_path": "local-results/01-gpo-xtrey-prometheus.partial.luau",
+          "bytes": 98801,
+          "sha256": "758c6e2ff550ad37d44fc46578fc455367671dbdca660c864bca7b35da9324ff"
+        },
+        {
+          "local_path": "local-results/01-gpo-xtrey-prometheus.ir.json",
+          "bytes": 125655,
+          "sha256": "f58a587ed07aac6b5978889204f5dac476598abb1fd2624c00a24f333e04da21"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "game": "Grand Piece Online",
+      "source": {
+        "repository": "bestocheetos/GPOKAIZEN",
+        "commit": "797f374e3b2a3ef9af0cf1478d312516eb0a72b6",
+        "path": "kizaru0k",
+        "sha256": "c49659077ad969488d077babccdc21272e931c7c493c1ccf19d4acb8850fb7ec",
+        "bytes": 378567,
+        "url": "https://github.com/bestocheetos/GPOKAIZEN/blob/797f374e3b2a3ef9af0cf1478d312516eb0a72b6/kizaru0k",
+        "rscripts_listing": "https://rscripts.net/script/one-click-farm-farm-any-npc-auto-fish-and-more-qDS6"
+      },
+      "protection": "custom Luau VM, exact family unknown",
+      "outcome": "failed",
+      "details": "Static luauvmp inspection: 0/0 opcode slots; no bytecode reader recognized. No code recovered.",
+      "artifacts": []
+    },
+    {
+      "number": 3,
+      "game": "Grand Piece Online",
+      "source": {
+        "repository": "0xLuisKey/GPO",
+        "commit": "a3d833f5e503b5bd838d91310db1cbd1c0693c6b",
+        "path": "Lunar Hub GPO FREE.lua",
+        "sha256": "ebccc11f51ff280d8c7c6579e77e465837983c9df2928179f62ae89e3c15c0a9",
+        "bytes": 569083,
+        "url": "https://github.com/0xLuisKey/GPO/blob/a3d833f5e503b5bd838d91310db1cbd1c0693c6b/Lunar%20Hub%20GPO%20FREE.lua"
+      },
+      "protection": "Luraph v13.5.8 (banner)",
+      "outcome": "partial",
+      "details": "Outer hex/RLE layer only: 15,681 markers and 251,604 opaque bytes. No Lua source recovered.",
+      "artifacts": [
+        {
+          "local_path": "local-results/03-gpo-luis-v13-container.bin",
+          "bytes": 251604,
+          "sha256": "ae06dfaa2054507dc83aaf31eaa208070a11daa05251eb5c52934259f32aad60"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "game": "Grow a Garden",
+      "source": {
+        "repository": "de-ishi/scripts",
+        "commit": "88a12f621c318b307a53231253b73cb735e5b61d",
+        "path": "growAgardenOBF",
+        "sha256": "e1e5e2de5feb95beeea50bf92f2097d2014a6295720bddc43b64647c272e55ca",
+        "bytes": 68141,
+        "url": "https://github.com/de-ishi/scripts/blob/88a12f621c318b307a53231253b73cb735e5b61d/growAgardenOBF",
+        "rscripts_listing": "https://rscripts.net/script/best-or-aze-script-or-insane-script-or-godly-script-2YLO"
+      },
+      "protection": "Luraph v14.4.1 (banner)",
+      "outcome": "partial",
+      "details": "ASCII85+raw LZMA1 outer layer extracted: 119,197 bytes of still-virtualized Luau. No application source.",
+      "artifacts": [
+        {
+          "local_path": "local-results/04-grow-garden-v14-inner-vm.luau",
+          "bytes": 119197,
+          "sha256": "83f1bbb7d18ef864845b5253bfb9fe0b901279d9fa9ea6d2ccb9a1a954d5d261"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "game": "DOORS",
+      "source": {
+        "repository": "Soldix-Botty/Solex",
+        "commit": "d8cb82be3e1d8a85a77f0e3214b56edd16b0a0d5",
+        "path": "Doors",
+        "sha256": "fd3dde4bbe9a686aad335707eda9d6e2896a981a2b01933fa29b21d1740a44d6",
+        "bytes": 384785,
+        "url": "https://github.com/Soldix-Botty/Solex/blob/d8cb82be3e1d8a85a77f0e3214b56edd16b0a0d5/Doors",
+        "rscripts_listing": "https://rscripts.net/script/doors-script-best-one-u1Xn"
+      },
+      "protection": "WeAreDevs/Prometheus (source banner)",
+      "outcome": "partial",
+      "details": "unprom inlined 2,273 constants, folded 19,373 expressions and de-flattened 1,232 VM blocks; VM not lifted (RecursionError).",
+      "artifacts": [
+        {
+          "local_path": "local-results/05-doors-prometheus-vm-deflattened.lua",
+          "bytes": 384022,
+          "sha256": "d9dfd971c8f8cf703e522da272029010cfff7c4ab0bb3b57f7e53d14c572c02e"
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "game": "Blade Ball",
+      "source": {
+        "repository": "SpiderScriptRB/Blade-ball-OP-",
+        "commit": "5bb023f5d14cbccab86d361b0688e9d245d1f43e",
+        "path": "Protected_3291800768430903.txt",
+        "sha256": "437ed4dc0a7c7f7c086ab1fcd1fd464a8fc07b7b2cf038821c8dd2a153ab0afe",
+        "bytes": 36033,
+        "url": "https://github.com/SpiderScriptRB/Blade-ball-OP-/blob/5bb023f5d14cbccab86d361b0688e9d245d1f43e/Protected_3291800768430903.txt",
+        "rscripts_listing": "https://rscripts.net/script/new-script-op-VphY"
+      },
+      "protection": "MoonSec V3 (banner)",
+      "outcome": "failed",
+      "details": "Static luauvmp inspection recognized 0/0 opcode slots; C# MoonSec tool unavailable without dotnet; no VM execution.",
+      "artifacts": []
+    },
+    {
+      "number": 7,
+      "game": "Arcane Odyssey",
+      "source": {
+        "repository": "HummingBird8/HummingRn",
+        "commit": "3e6e1e40b5b45abc03cbc75bd72a7bb0822fe317",
+        "path": "AOFishbysenS",
+        "sha256": "5ab84ecc177621f2e4bcf674417e03424d1cf69e54183515b5fd9fc507aa5107",
+        "bytes": 109668,
+        "url": "https://github.com/HummingBird8/HummingRn/blob/3e6e1e40b5b45abc03cbc75bd72a7bb0822fe317/AOFishbysenS",
+        "rscripts_listing": "https://rscripts.net/script/arcane-odyssey-auto-fishing-6bDG"
+      },
+      "protection": "MoonSec V3 (banner)",
+      "outcome": "failed",
+      "details": "Static luauvmp inspection recognized 0/0 opcode slots; no offline VM extraction or protected-code execution.",
+      "artifacts": []
+    },
+    {
+      "number": 8,
+      "game": "Untitled Boxing Game",
+      "source": {
+        "repository": "xtrey10x/xtrey10x-hub",
+        "commit": "39a1ef6b1b32e651d208dc296e758c0e0e862d36",
+        "path": "untitled boxing game",
+        "sha256": "59d6ffdde95406aba148ca626453f4708cfe0ed41d97e573047440e62fced0cf",
+        "bytes": 12926,
+        "url": "https://github.com/xtrey10x/xtrey10x-hub/blob/39a1ef6b1b32e651d208dc296e758c0e0e862d36/untitled%20boxing%20game"
+      },
+      "protection": "Prometheus/WeAreDevs VM (structural identification)",
+      "outcome": "partial",
+      "details": "15/15 function bodies structured; 294 constants, 48 VM blocks; output parses as Lua but runtime behavior unverified.",
+      "artifacts": [
+        {
+          "local_path": "local-results/08-untitled-boxing-prometheus.partial.luau",
+          "bytes": 52081,
+          "sha256": "e3941fc31ed4f7f9250a571a677fc9fe9501dfe7cfb61330a2d4ef8bcbc313a3"
+        },
+        {
+          "local_path": "local-results/08-untitled-boxing-prometheus.ir.json",
+          "bytes": 67650,
+          "sha256": "9e2f9db21cc716fd4f058dc75304667ecbc99030c80f190254e2e696cab72ec9"
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "game": "Blox Fruits",
+      "source": {
+        "repository": "xtrey10x/xtrey10x-hub",
+        "commit": "39a1ef6b1b32e651d208dc296e758c0e0e862d36",
+        "path": "bloxfruitssilent",
+        "sha256": "a2c325b68e2b28f744f8ed327a084e34f157f610f5ef7cf61e1d75cb34080b27",
+        "bytes": 50636,
+        "url": "https://github.com/xtrey10x/xtrey10x-hub/blob/39a1ef6b1b32e651d208dc296e758c0e0e862d36/bloxfruitssilent"
+      },
+      "protection": "MoonSec V2 (banner)",
+      "outcome": "failed",
+      "details": "Static luauvmp inspection recognized 0/0 opcode slots; V3 tooling does not establish V2 support.",
+      "artifacts": []
+    },
+    {
+      "number": 10,
+      "game": "Fruit Battlegrounds",
+      "source": {
+        "repository": "xtrey10x/xtrey10x-hub",
+        "commit": "39a1ef6b1b32e651d208dc296e758c0e0e862d36",
+        "path": "FruitBattlegrounds",
+        "sha256": "e37e483b3362cb915da84b6b6f26c3dea4aff71c3c1c6e7ab54d8c9a35af7817",
+        "bytes": 506967,
+        "url": "https://github.com/xtrey10x/xtrey10x-hub/blob/39a1ef6b1b32e651d208dc296e758c0e0e862d36/FruitBattlegrounds"
+      },
+      "protection": "MoonSec V3 (banner)",
+      "outcome": "failed",
+      "details": "Static luauvmp inspection recognized 0/0 opcode slots; application payload remains hidden.",
+      "artifacts": []
+    }
+  ],
+  "excluded": [
+    {
+      "number": "excluded",
+      "game": "Unverified GPO: recovered key-screen UI",
+      "source": {
+        "repository": "dilleron964/Grand-Piece-Online",
+        "commit": "213cbab591560220ffbbc3a354de99ba3c829df7",
+        "path": "Grand-Piece-Online.lua",
+        "sha256": "7758f00443b7fee5985763dcd6127b5acb14959c55a70dc4594bc4b5b22f8dab",
+        "bytes": 88602,
+        "url": "https://github.com/dilleron964/Grand-Piece-Online/blob/213cbab591560220ffbbc3a354de99ba3c829df7/Grand-Piece-Online.lua",
+        "rscripts_listing": "https://rscripts.net/script/grand-piece-online-script-auto-farm-fruit-tp-vSSl"
+      },
+      "protection": "literal XOR v7",
+      "outcome": "not_counted",
+      "details": "922/922 literal calls statically decoded (153 distinct strings); resulting source is a generic key-screen UI, not advertised GPO farming logic. No linked domain contacted.",
+      "artifacts": [
+        {
+          "local_path": "local-results/excluded-dilleron-key-ui.xor.lua",
+          "bytes": 40656,
+          "sha256": "d19a99392aeccb055fda3b634496e34f6adbfec7718cda51843fbdfe66e2bbc8"
+        },
+        {
+          "local_path": "local-results/excluded-dilleron-key-ui.formatted.lua",
+          "bytes": 40011,
+          "sha256": "b6131c2f3c915aeed68c7a9c7fdaf872347012a867d7429b3c789a18aaf44004"
+        }
+      ]
+    }
+  ]
+}

@@ -1,2 +1,5 @@
 __pycache__/
 *.py[cod]
+
+# Locally derived third-party script output; do not republish in Git.
+local-results/
