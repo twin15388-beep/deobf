@@ -1,0 +1,91 @@
+# Roblox Lua / Luau deobfuscators
+
+Коллекция **исходников** инструментов для анализа обфусцированных Roblox Lua/Luau-скриптов. Снимок поиска: **18 октября 2026 года**. Это не единый деобфускатор и не гарантия, что каждый проект работает с любой версией указанного обфускатора.
+
+## Уже были в репозитории
+
+| Архив | Исходный проект | Назначение |
+| --- | --- | --- |
+| [Deobfuscator-Luraph-V15-master.zip](Deobfuscator-Luraph-V15-master.zip) | [caomod2077/Deobfuscator-Luraph-V15](https://github.com/caomod2077/Deobfuscator-Luraph-V15) | Luraph v15 |
+| [luau-vmp-deobf-main.zip](luau-vmp-deobf-main.zip) | [binxgtl/luau-vmp-deobf](https://github.com/binxgtl/luau-vmp-deobf) | Luau VM / Luraph v14.x |
+
+Эти два архива оставлены без изменений.
+
+## Добавлены исходники
+
+Каждый ZIP — отдельный снимок upstream-репозитория, **без сборочных артефактов, сторонних бинарников, `node_modules` и части входных/сгенерированных примеров**. Лицензия исходного проекта сохранена *внутри* соответствующего архива. Конкретные коммиты, SHA-256 архивов, число файлов и пропуски перечислены в [sources/manifest.json](sources/manifest.json).
+
+| Проект | На что рассчитан | Тип / язык | Лицензия | Архив |
+| --- | --- | --- | --- | --- |
+| [tupsutumppu/MoonsecDeobfuscator](https://github.com/tupsutumppu/MoonsecDeobfuscator) | MoonSec V3 | деобфускация VM → Lua 5.1 bytecode, C# | GPL-3.0 | [ZIP](sources/tupsutumppu--MoonsecDeobfuscator.zip) |
+| [Lethal-Luka/IronbrewDeobfuscator](https://github.com/Lethal-Luka/IronbrewDeobfuscator) | IronBrew2 | деобфускация VM, C# | GPL-3.0 | [ZIP](sources/Lethal-Luka--IronbrewDeobfuscator.zip) |
+| [tonybolivar/luraph-deobfuscator-updated](https://github.com/tonybolivar/luraph-deobfuscator-updated) | Luraph / WeAreDevs | CLI, Python | MIT | [ZIP](sources/tonybolivar--luraph-deobfuscator-updated.zip) |
+| [prostone4/Prometheus-Deobfuscator](https://github.com/prostone4/Prometheus-Deobfuscator) | Prometheus / WeAreDevs | CLI, JavaScript | MIT | [ZIP](sources/prostone4--Prometheus-Deobfuscator.zip) |
+| [Melodieshusband/WeAreDevs-Prometheus-Deobfuscator](https://github.com/Melodieshusband/WeAreDevs-Prometheus-Deobfuscator) | WeAreDevs / Prometheus | Python | Apache-2.0 | [ZIP](sources/Melodieshusband--WeAreDevs-Prometheus-Deobfuscator.zip) |
+| [caomod2077/Prometheus-Deobfuscator](https://github.com/caomod2077/Prometheus-Deobfuscator) | Prometheus / WeAreDevs | Python, beta | MIT | [ZIP](sources/caomod2077--Prometheus-Deobfuscator.zip) |
+| [NoName2323-wq/Epimetheus](https://github.com/NoName2323-wq/Epimetheus) | Prometheus / Luau | Python, Linux | GPL-3.0 | [ZIP](sources/NoName2323-wq--Epimetheus.zip) |
+| [prostone55/Ironveil-Deobfuscator-V1](https://github.com/prostone55/Ironveil-Deobfuscator-V1) | Ironveil V1 | JavaScript | MIT | [ZIP](sources/prostone55--Ironveil-Deobfuscator-V1.zip) |
+| [HamieXD/luast-deobfuscator](https://github.com/HamieXD/luast-deobfuscator) | Luast / Roblox Luau | Python | MIT | [ZIP](sources/HamieXD--luast-deobfuscator.zip) |
+| [memcpython/lua-deobfuscators](https://github.com/memcpython/lua-deobfuscators) | IronBrew2, Hercules, XHider и др. | набор инструментов, C#/JS | MIT | [ZIP](sources/memcpython--lua-deobfuscators.zip) |
+| [approu/hercules-deobfuscator](https://github.com/approu/hercules-deobfuscator) | Hercules (Lua) | Python | Apache-2.0 | [ZIP](sources/approu--hercules-deobfuscator.zip) |
+| [BlackCatOfficialytb/xhider-deobfuscator](https://github.com/BlackCatOfficialytb/xhider-deobfuscator) | XHider / PSU и смежные Lua VM | набор скриптов, Python | AGPL-3.0 | [ZIP](sources/BlackCatOfficialytb--xhider-deobfuscator.zip) |
+| [sametEXE1/MoonDumper](https://github.com/sametEXE1/MoonDumper) | MoonSec V3 | **только извлечение констант**, JS | MIT | [ZIP](sources/sametEXE1--MoonDumper.zip) |
+| [certified-retart/moonsecdumper](https://github.com/certified-retart/moonsecdumper) | MoonSec V3 | **только извлечение констант**, JS | MIT | [ZIP](sources/certified-retart--moonsecdumper.zip) |
+| [lua-deobfuscator/lua-deobfuscator.github.io](https://github.com/lua-deobfuscator/lua-deobfuscator.github.io) | обычный Lua; поддержка Luau не заявлена | статическая очистка/форматирование, JS | MIT | [ZIP](sources/lua-deobfuscator--lua-deobfuscator.github.io.zip) |
+| [Bytecoded1337/77fuscatorDeobfuscator](https://github.com/Bytecoded1337/77fuscatorDeobfuscator) | 77fuscator (Lua 5.1 VM) | восстановление bytecode, C# | MIT | [ZIP](sources/Bytecoded1337--77fuscatorDeobfuscator.zip) |
+| [Melodieshusband/Wynfuscate-deobf](https://github.com/Melodieshusband/Wynfuscate-deobf) | Wynfuscate | статический/динамический анализ, Python/Luau | Apache-2.0 | [ZIP](sources/Melodieshusband--Wynfuscate-deobf.zip) |
+| [Pliothz/wynf-deob-multiversion](https://github.com/Pliothz/wynf-deob-multiversion) | Wynfuscate v4/v5 (вариант предыдущего проекта) | Python/Luau | Apache-2.0 | [ZIP](sources/Pliothz--wynf-deob-multiversion.zip) |
+| [Melodieshusband/FireFly-Protector-Deobfuscator](https://github.com/Melodieshusband/FireFly-Protector-Deobfuscator) | Firefly, Lua/Luau | статический анализ, Python | Apache-2.0 | [ZIP](sources/Melodieshusband--FireFly-Protector-Deobfuscator.zip) |
+| [eoxd/Deobfuscator](https://github.com/eoxd/Deobfuscator) | LuaObfuscator Chaotic Good/Evil | статический анализ, JS | MIT | [ZIP](sources/eoxd--Deobfuscator.zip) |
+| [ghostlyydeveloper-ctrl/clyde-deobfuscator](https://github.com/ghostlyydeveloper-ctrl/clyde-deobfuscator) | Clyde Luau | статический анализ, JS/Python | MIT | [ZIP](sources/ghostlyydeveloper-ctrl--clyde-deobfuscator.zip) |
+| [Mcdofries/deobfuscator](https://github.com/Mcdofries/deobfuscator) | Luraph v15 / MoonSec / IronBrew2 и др. | движок + Discord-бот, Python/JS | MIT | [ZIP](sources/Mcdofries--deobfuscator.zip) |
+| [paglsj43dx/Luast-Dumper](https://github.com/paglsj43dx/Luast-Dumper) | Luast | Python; исходники извлечены из вложенного ZIP | MIT | [ZIP](sources/paglsj43dx--Luast-Dumper.zip) |
+| [AnnonyA/WAD-deobf](https://github.com/AnnonyA/WAD-deobf) | WeAreDevs WAD v1.0.0 | статический анализ, Python | MIT | [ZIP](sources/AnnonyA--WAD-deobf.zip) |
+| [UnstableGrape/Moonveil-1.4.5-Deobfuscator](https://github.com/UnstableGrape/Moonveil-1.4.5-Deobfuscator) | MoonVeil v1.4.5 | Python | MIT | [ZIP](sources/UnstableGrape--Moonveil-1.4.5-Deobfuscator.zip) |
+| [edwindev-spec/MoonVeil](https://github.com/edwindev-spec/MoonVeil) | MoonVeil v1.4.5, доработанная версия предыдущего проекта | Python | MIT | [ZIP](sources/edwindev-spec--MoonVeil.zip) |
+| [yennylol/unprom](https://github.com/yennylol/unprom) | Prometheus / WeAreDevs | деобфускация VM, Python | MIT | [ZIP](sources/yennylol--unprom.zip) |
+| [oxygen-Deobf/clyde-deobf](https://github.com/oxygen-Deobf/clyde-deobf) | Clyde Luau | статический анализ, JS | Apache-2.0 | [ZIP](sources/oxygen-Deobf--clyde-deobf.zip) |
+| [nexus1877/LuaObfuscator-Deobfuscator](https://github.com/nexus1877/LuaObfuscator-Deobfuscator) | LuaObfuscator Chaotic Good/Evil/v1; вариант eoxd | JS | MIT | [ZIP](sources/nexus1877--LuaObfuscator-Deobfuscator.zip) |
+| [JamiesNolandGiggleShi1er/ClydeDeobfuscator](https://github.com/JamiesNolandGiggleShi1er/ClydeDeobfuscator) | Clyde Luau VM | статический анализ, JS | MIT¹ | [ZIP](sources/JamiesNolandGiggleShi1er--ClydeDeobfuscator.zip) |
+
+¹ Файл `LICENSE` содержит текст MIT и разрешение на распространение, но GitHub классифицирует его как `NOASSERTION` из-за дополнительной строки перед лицензией. В README `oxygen-Deobf/clyde-deobf` написано MIT, а фактический файл `LICENSE` — **Apache-2.0**; в таблице указана лицензия из файла.
+
+**Ограничения:** исключённый `unluac.jar` требуется для части функций Luraph-инструмента Tony Bolivar; исключённые Lua 5.1 бинарники могут понадобиться Epimetheus (можно установить Lua отдельно). Также удалены скомпилированные Luau/bf для Wynfuscate и Mcdofries: при необходимости их надо получать/собирать отдельно. Инструментам MoonVeil тоже нужны официальные Luau runtime/compiler, которые в ZIP не включены. У некоторых других проектов есть внешние зависимости — смотрите их README. MoonDumper/moonsecdumper предполагают выполнение *сгенерированного* Lua; Wynfuscate/Mcdofries предлагают динамический анализ. Никогда не запускайте неизвестный скрипт без изоляции и разрешения владельца; Discord-боты могут передавать загруженный код стороннему сервису. Здесь архивы не исполнялись и результаты работы инструментов не проверялись.
+
+Проверить целостность новых архивов без запуска стороннего кода:
+
+```bash
+python3 scripts/verify_sources.py
+```
+
+## Дополнительные находки: только ссылки
+
+У этих проектов не обнаружена явная лицензия на повторное распространение кода. Поэтому исходники **не скопированы** в этот репозиторий; ссылка на upstream не подразумевает разрешения их перепубликовать.
+
+| Проект | Направление |
+| --- | --- |
+| [PhoenixZeng/LuraphDeobfuscator](https://github.com/PhoenixZeng/LuraphDeobfuscator) | Luraph, Java |
+| [0x251/Prometheus-Deobfuscator](https://github.com/0x251/Prometheus-Deobfuscator) и [V2](https://github.com/0x251/Prometheus-DeobfuscatorV2) | Prometheus, Python / Lua |
+| [umdill/LuauDeobfuscators](https://github.com/umdill/LuauDeobfuscators) | Luau, C# |
+| [memcpython/PSU-Deobfuscator](https://github.com/memcpython/PSU-Deobfuscator) | PSU, JS |
+| [luaprojects/moonsec-js-deobf](https://github.com/luaprojects/moonsec-js-deobf) | MoonSec V3, JS-порт |
+| [SixZensED/Lua-Deobfuscator](https://github.com/SixZensED/Lua-Deobfuscator) | Lua, JS |
+| [Centrixs/lua-deobfuscators](https://github.com/Centrixs/lua-deobfuscators) | несколько Lua-обфускаторов |
+| [nguyenthaitrung/Lua-Deobfuscator](https://github.com/nguyenthaitrung/Lua-Deobfuscator) | MoonSec V2 / IronBrew / AztupBrew |
+| [noahcoolboy/bad-aztupbrew-deobfuscator](https://github.com/noahcoolboy/bad-aztupbrew-deobfuscator) | AztupBrew |
+| [vyxonq-dev/Luafuscator-Deobfuscator](https://github.com/vyxonq-dev/Luafuscator-Deobfuscator) | Luafuscator, C# |
+| [SnowyShiro/Synapse-SecureLua-Deobfuscator](https://github.com/SnowyShiro/Synapse-SecureLua-Deobfuscator) | Synapse SecureLua |
+| [tankslover420/Luau-Deobfuscator-Dumper-for-https-luaobfuscate.netlify.app-](https://github.com/tankslover420/Luau-Deobfuscator-Dumper-for-https-luaobfuscate.netlify.app-) | Luau, Python/JS |
+| [Obscyrizz/luau-deobf-pro](https://github.com/Obscyrizz/luau-deobf-pro) | Luau |
+| [karity-0/lua-deobfuscator](https://github.com/karity-0/lua-deobfuscator) | статическая обработка Lua |
+| [axomtools/prometheus-deobfuscator-by-axom](https://github.com/axomtools/prometheus-deobfuscator-by-axom) и [ironbrew2-deobfuscator](https://github.com/axomtools/ironbrew2-deobfuscator) | Prometheus / IronBrew2 |
+| [Nestor53top/lua-deobf-actions](https://github.com/Nestor53top/lua-deobf-actions) | сборка нескольких движков в GitHub Actions |
+| [hutaoshusband/Prometheus-WeAre-Devs-Dumper](https://github.com/hutaoshusband/Prometheus-WeAre-Devs-Dumper) и [WeAreDevs-Deobfuscator](https://github.com/hutaoshusband/WeAreDevs-Deobfuscator) | Prometheus / WeAreDevs |
+| [larpcorrupt/luraph-v15-v14.x-deobfuscator](https://github.com/larpcorrupt/luraph-v15-v14.x-deobfuscator) | Luraph v14/v15 |
+| [lovesyko/LuaObfuscatorChaoticEvilDeobfuscator](https://github.com/lovesyko/LuaObfuscatorChaoticEvilDeobfuscator) и [SynapseXenDeobfuscator](https://github.com/lovesyko/SynapseXenDeobfuscator) | LuaObfuscator / Synapse Xen |
+| [2zvh/moonveilvro](https://github.com/2zvh/moonveilvro) | MoonVeil |
+| [QuantumXternal/FlowAuth-Deobfuscator](https://github.com/QuantumXternal/FlowAuth-Deobfuscator) | FlowAuth |
+| [gigihumana/Centurion-Deobfuscator](https://github.com/gigihumana/Centurion-Deobfuscator) | Centurion |
+| [Dizzzzeeee/Deobfuscators](https://github.com/Dizzzzeeee/Deobfuscators) | сборник Lua-деобфускаторов |
+
+Не включены также репозитории лишь с `README` или `LICENSE`, только с готовыми `.exe/.dll`, либо почти идентичные копии уже добавленных проектов. Для *каждого* архива действуют условия **его собственной лицензии**; у коллекции в целом нет одной общей лицензии. Пользуйтесь инструментами только для анализа кода, на который у вас есть права или разрешение.
