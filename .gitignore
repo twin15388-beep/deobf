@@ -1,5 +1,6 @@
 __pycache__/
 *.py[cod]
 
-# Keep local-results/ untracked for workspace access; do not commit or push
-# derived third-party scripts without permission.
+# Never stage future local analysis scratch or Lua compiler output.
+/local-results/
+/luac.out

@@ -60,17 +60,18 @@
       },
       "outcome": "outer_container_only",
       "details": "Wrapper-matched base85 / buffer.writeu32 little-endian decode; binary is not recovered Lua.",
-      "artifacts": [
+      "artifacts": [],
+      "intermediate": {
+        "zero_groups": 24,
+        "decoded_byte_order": "Luau buffer.writeu32 (little-endian); not plain ASCII85 big-endian"
+      },
+      "removed_artifacts": [
         {
           "path": "dobf scripts 1.0/Grand Piece Online (Luraph v14.9).container.bin",
           "bytes": 161240,
           "sha256": "4a6dd863c00a781e607229f8f550db33e399bf5afc1b05d888add95e7bb4ce81"
         }
-      ],
-      "intermediate": {
-        "zero_groups": 24,
-        "decoded_byte_order": "Luau buffer.writeu32 (little-endian); not plain ASCII85 big-endian"
-      }
+      ]
     },
     {
       "id": "adel-1367",
@@ -85,17 +86,18 @@
       },
       "outcome": "unverified_candidate",
       "details": "LPH# hex/RLE output is heuristic; v13.6.7 reader semantics not proven; not recovered Lua.",
-      "artifacts": [
+      "artifacts": [],
+      "intermediate": {
+        "rle_markers": 11086,
+        "status": "experimental; not validated against obfuscated reader"
+      },
+      "removed_artifacts": [
         {
           "path": "dobf scripts 1.0/Grand Piece Online (Luraph v13.6.7).candidate.bin",
           "bytes": 103708,
           "sha256": "07a9ff355f0d107a9d654de39f4174bb3722297ef94fb2988a063333ac3e0e62"
         }
-      ],
-      "intermediate": {
-        "rle_markers": 11086,
-        "status": "experimental; not validated against obfuscated reader"
-      }
+      ]
     },
     {
       "id": "toeerolo-151",
@@ -204,5 +206,10 @@
     "Outputs are untrusted and must not be run as Roblox scripts.",
     "Third-party input license/permission to redistribute is not established; input files are not included.",
     "The new source ZIPs are curated snapshots and omit tests, fixtures, generated binaries or assets. See sources/manifest.json."
-  ]
+  ],
+  "cleanup": {
+    "date": "2026-10-18",
+    "scope": "Only the published results folder: opaque VM/container dumps, unverified binaries, diagnostic JSON and unrelated key screens were removed. Historical SHA-256 and paths remain in removed_artifacts. Case outcomes describe analysis attempts, not current published files.",
+    "removed_files": 2
+  }
 }

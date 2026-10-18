@@ -1,0 +1,380 @@
+{
+  "date": "2026-10-18",
+  "scope": "Non-GPO follow-up: 10 distinct games with accessible source in two strictly separate categories. Two extracted from literal wrappers; eight were already readable in their original repositories and were not derived from obfuscated inputs.",
+  "summary": {
+    "distinct_game_sources": 10,
+    "literal_wrapper_inputs_fully_extracted": 2,
+    "published_decoded_lua_chunks": 3,
+    "preexisting_plain_sources_link_only": 8,
+    "additional_psu_inputs_attempted": 10,
+    "psu_full_game_sources_published": 0
+  },
+  "method": "GitHub blobs pinned by git commit, input size and SHA-256; offline decimal-escape extraction. No Lua/Roblox payload executed, no embedded URLs followed, no Pastefy or RScripts raw/API used.",
+  "cases": [
+    {
+      "game": "Ninja Masters",
+      "outcome": "embedded_lua_fully_extracted",
+      "source": {
+        "repository": "retpirato/Roblox-Scripts",
+        "commit": "2a0461de8fed66b5d63b7c0a09443ba8cf6f6a3a",
+        "path": "Autofarm_NinjaMasters.lua",
+        "url": "https://github.com/retpirato/Roblox-Scripts/blob/2a0461de8fed66b5d63b7c0a09443ba8cf6f6a3a/Autofarm_NinjaMasters.lua",
+        "bytes": 17683,
+        "sha256": "064a59763654f5ede4c193e549a679a66b1c96d359afce4039c33a381fa1cf9d"
+      },
+      "method": "Whole simple wrapper is one loadstring of decimal-escaped bytes; extracted with scripts/decode_decimal_loadstring.py; no protected Lua executed.",
+      "artifacts": [
+        {
+          "path": "dobf scripts 1.0/Ninja Masters.decoded.lua",
+          "bytes": 5134,
+          "sha256": "094b460b2763dac1a1e4570d856f9f0c4e2937b5032c30c73fdcedd80cb892c9",
+          "wait_before_seconds": null,
+          "syntax_checks": [
+            "luaparser 4.2.0: pass",
+            "Lua 5.1 luac -p: pass"
+          ]
+        }
+      ],
+      "caveat": "Full embedded Lua chunk, not proof of authorship, current game compatibility, equivalence outside this wrapper, or runtime safety."
+    },
+    {
+      "game": "Tower Battles",
+      "outcome": "embedded_lua_fully_extracted",
+      "source": {
+        "repository": "retpirato/Roblox-Scripts",
+        "commit": "2a0461de8fed66b5d63b7c0a09443ba8cf6f6a3a",
+        "path": "Tower Battles GUI.lua",
+        "url": "https://github.com/retpirato/Roblox-Scripts/blob/2a0461de8fed66b5d63b7c0a09443ba8cf6f6a3a/Tower%20Battles%20GUI.lua",
+        "bytes": 14070,
+        "sha256": "87297397d926196e329ab412900a1add4d00839a917371524dd1162327051e88"
+      },
+      "method": "Whole simple wrapper has two independent decimal-escaped loadstring calls separated by wait(2); each embedded Lua chunk retained separately.",
+      "artifacts": [
+        {
+          "path": "dobf scripts 1.0/Tower Battles.part1.decoded.lua",
+          "bytes": 906,
+          "sha256": "3cf30e9e7b24bc4f6e56198ea4207628b8ff60ac6d53168af843c122c8aae5da",
+          "wait_before_seconds": null,
+          "syntax_checks": [
+            "luaparser 4.2.0: pass",
+            "Lua 5.1 luac -p: pass"
+          ]
+        },
+        {
+          "path": "dobf scripts 1.0/Tower Battles.part2.decoded.lua",
+          "bytes": 3072,
+          "sha256": "ea44cc8fe39f3e1dc174749989116724f5d90031623ac7cf092f1c80ed57d85d",
+          "wait_before_seconds": 2,
+          "syntax_checks": [
+            "luaparser 4.2.0: pass",
+            "Lua 5.1 luac -p: pass"
+          ]
+        }
+      ],
+      "caveat": "First chunk is tower-list UI; second is tower GUI. Do not concatenate: each loadstring has its own Lua local scope. Roblox behavior untested."
+    }
+  ],
+  "plain_sources": [
+    {
+      "game": "Arsenal",
+      "status": "preexisting_plain_source_link_only_not_deobfuscated",
+      "source": {
+        "repository": "0x100C/Roblox-Scripts",
+        "commit": "97fa45e403a00a3d7d1a06c4271e0a787269dd33",
+        "path": "Games/Arsenal/Arsenal(s0ulz).lua",
+        "url": "https://github.com/0x100C/Roblox-Scripts/blob/97fa45e403a00a3d7d1a06c4271e0a787269dd33/Games/Arsenal/Arsenal%28s0ulz%29.lua",
+        "bytes": 39903,
+        "sha256": "ee7346822861ead2048c249928572b7dd46c60e22a34722733dfc8d85c0668d9"
+      },
+      "license": "MIT",
+      "lines": 1054,
+      "static_check": "Lua 5.1 parsers do not support Luau continue; no Luau compiler was run",
+      "description": "Local player/aim/ESP UI logic, not a one-line remote loader."
+    },
+    {
+      "game": "Blox Fruits",
+      "status": "preexisting_plain_source_link_only_not_deobfuscated",
+      "source": {
+        "repository": "xHeptc/BloxFruits",
+        "commit": "c67bd2cdd8f00026bf26649911cf6aaf9dc5abd1",
+        "path": "source.lua",
+        "url": "https://github.com/xHeptc/BloxFruits/blob/c67bd2cdd8f00026bf26649911cf6aaf9dc5abd1/source.lua",
+        "bytes": 9431,
+        "sha256": "67a6820b3de5071af60b5f400e55234e313e2e2821ce0cddad9a579fdf35af59"
+      },
+      "license": "not established",
+      "lines": 258,
+      "static_check": "Lua 5.1 syntax (luaparser 4.2.0 and luac -p): pass",
+      "description": "Quest and farming controls; loads an external UI library (not fetched)."
+    },
+    {
+      "game": "Grow a Garden",
+      "status": "preexisting_plain_source_link_only_not_deobfuscated",
+      "source": {
+        "repository": "depthso/Grow-a-Garden",
+        "commit": "7002a2e23e457c0cff80d5e994b0f04168aae8bb",
+        "path": "autofarm.lua",
+        "url": "https://github.com/depthso/Grow-a-Garden/blob/7002a2e23e457c0cff80d5e994b0f04168aae8bb/autofarm.lua",
+        "bytes": 12787,
+        "sha256": "ce47970abfde3cf83f573f00730b5cd42d46b45519859d52b02384609031a37b"
+      },
+      "license": "GPL-3.0",
+      "lines": 549,
+      "static_check": "Lua 5.1 parsers do not support Luau backtick interpolation; no Luau compiler was run",
+      "description": "Farming and inventory logic; loads an external UI library (not fetched)."
+    },
+    {
+      "game": "MURDER",
+      "status": "preexisting_plain_source_link_only_not_deobfuscated",
+      "source": {
+        "repository": "teppyboy/MurderHaxx",
+        "commit": "c2128095c5deef3a658ebd11d7f2a9962fbb420e",
+        "path": "MurderHaxx_beta.lua",
+        "url": "https://github.com/teppyboy/MurderHaxx/blob/c2128095c5deef3a658ebd11d7f2a9962fbb420e/MurderHaxx_beta.lua",
+        "bytes": 20441,
+        "sha256": "6cc2daf625f329f10c0771eea5924d868edf5445de6565acdd2e02d9c89f70b6"
+      },
+      "license": "not established",
+      "lines": 548,
+      "static_check": "Lua 5.1 syntax (luaparser 4.2.0 and luac -p): pass",
+      "description": "MurderHaxx by TreTrauIT; README explicitly targets MURDER place 4572253581 (not MM2)."
+    },
+    {
+      "game": "Bee Swarm Simulator",
+      "status": "preexisting_plain_source_link_only_not_deobfuscated",
+      "source": {
+        "repository": "retpirato/Roblox-Scripts",
+        "commit": "2a0461de8fed66b5d63b7c0a09443ba8cf6f6a3a",
+        "path": "Bee Swarm Simulator Script.lua",
+        "url": "https://github.com/retpirato/Roblox-Scripts/blob/2a0461de8fed66b5d63b7c0a09443ba8cf6f6a3a/Bee%20Swarm%20Simulator%20Script.lua",
+        "bytes": 29544,
+        "sha256": "276a2056fe004d933edd0c10fc72ef94a4201a3b3b65e9c60d2041cf75e6efd6"
+      },
+      "license": "not established",
+      "lines": 14,
+      "static_check": "Lua 5.1 syntax (luaparser 4.2.0 and luac -p): pass",
+      "description": "Bee Swarm Simulator GUI with game logic; densely minified but Lua parses."
+    },
+    {
+      "game": "Jailbreak",
+      "status": "preexisting_plain_source_link_only_not_deobfuscated",
+      "source": {
+        "repository": "retpirato/Roblox-Scripts",
+        "commit": "2a0461de8fed66b5d63b7c0a09443ba8cf6f6a3a",
+        "path": "Jailbreak - Jailbreaker V4.2.lua",
+        "url": "https://github.com/retpirato/Roblox-Scripts/blob/2a0461de8fed66b5d63b7c0a09443ba8cf6f6a3a/Jailbreak%20-%20Jailbreaker%20V4.2.lua",
+        "bytes": 31806,
+        "sha256": "b02fcc72af790b7352daab73eb41bd564c998ebaeadb45a5cfd967144cb81ea3"
+      },
+      "license": "not established",
+      "lines": 990,
+      "static_check": "Lua 5.1 syntax (luaparser 4.2.0 and luac -p): pass",
+      "description": "Jailbreaker V4.2 GUI and routines."
+    },
+    {
+      "game": "Pet Simulator",
+      "status": "preexisting_plain_source_link_only_not_deobfuscated",
+      "source": {
+        "repository": "retpirato/Roblox-Scripts",
+        "commit": "2a0461de8fed66b5d63b7c0a09443ba8cf6f6a3a",
+        "path": "Pet Simulator.lua",
+        "url": "https://github.com/retpirato/Roblox-Scripts/blob/2a0461de8fed66b5d63b7c0a09443ba8cf6f6a3a/Pet%20Simulator.lua",
+        "bytes": 15243,
+        "sha256": "f76de571a34315dbcc0178fae4fda0f1b6b718b322aac7c80b61391038794701"
+      },
+      "license": "not established",
+      "lines": 468,
+      "static_check": "Lua 5.1 syntax (luaparser 4.2.0 and luac -p): pass",
+      "description": "Pet Simulator GUI and controls."
+    },
+    {
+      "game": "Tapping Simulator",
+      "status": "preexisting_plain_source_link_only_not_deobfuscated",
+      "source": {
+        "repository": "HamieXD/luast-deobfuscator",
+        "commit": "4a674d6c78b191eebbe652057371761574982a38",
+        "path": "samples/Tapping Simulator.lua",
+        "url": "https://github.com/HamieXD/luast-deobfuscator/blob/4a674d6c78b191eebbe652057371761574982a38/samples/Tapping%20Simulator.lua",
+        "bytes": 5394,
+        "sha256": "bf21171e2847e3374a610a212776c869bda3b6678df00930f92863581071f9d3"
+      },
+      "license": "MIT (repository); sample authorship should still be checked",
+      "lines": 174,
+      "static_check": "Lua 5.1 syntax (luaparser 4.2.0 and luac -p): pass",
+      "description": "Original source is shipped alongside an obfuscated Level 1 sample. It was NOT recovered by the pinned deobfuscator; separate original sample is the only source linked here."
+    }
+  ],
+  "psu_attempts": [
+    {
+      "game_claim": "Farm Yard Simulator",
+      "source": {
+        "repository": "PapierLP/Scripts",
+        "commit": "0c4889d8fc3985ed541e4313188e31885108661c",
+        "path": "Farm Yard Simulator",
+        "url": "https://github.com/PapierLP/Scripts/blob/0c4889d8fc3985ed541e4313188e31885108661c/Farm%20Yard%20Simulator",
+        "bytes": 31200,
+        "sha256": "80472a998af90276ad22c2b352db3ad117145446be977e004da09b5037d641da"
+      },
+      "outcome": "diagnostic_pseudocode_only",
+      "psu_lua51_chunk_sha256": "2e0682006a67fc63901e7204ba4a80ed607b80225453d8fc717432b300345ab5",
+      "unluac_kind": "diagnostic-pseudocode",
+      "note": "PSU lifted Lua 5.1 bytecode with zero unknown instructions; unluac-js returned unresolved diagnostic pseudocode, not complete Lua source."
+    },
+    {
+      "game_claim": "Money Simulator X",
+      "source": {
+        "repository": "PapierLP/Scripts",
+        "commit": "0c4889d8fc3985ed541e4313188e31885108661c",
+        "path": "Money simulator X",
+        "url": "https://github.com/PapierLP/Scripts/blob/0c4889d8fc3985ed541e4313188e31885108661c/Money%20simulator%20X",
+        "bytes": 31404,
+        "sha256": "a752340382a731107f7da9e053d79da1709ca9fa7fd64953147a3a086c757696"
+      },
+      "outcome": "diagnostic_pseudocode_only",
+      "psu_lua51_chunk_sha256": "e9b5e52e65bd2ef9f3611871be61a0bdfc49db0fb43db31ef32280ede2cb602e",
+      "unluac_kind": "diagnostic-pseudocode",
+      "note": "PSU lifted Lua 5.1 bytecode with zero unknown instructions; unluac-js returned unresolved diagnostic pseudocode, not complete Lua source."
+    },
+    {
+      "game_claim": "Pet Simulator X",
+      "source": {
+        "repository": "PapierLP/Scripts",
+        "commit": "0c4889d8fc3985ed541e4313188e31885108661c",
+        "path": "Pet Simulator X Power Calculator",
+        "url": "https://github.com/PapierLP/Scripts/blob/0c4889d8fc3985ed541e4313188e31885108661c/Pet%20Simulator%20X%20Power%20Calculator",
+        "bytes": 37978,
+        "sha256": "c0ea34df19b30761e61322cd537cd8c80aec2c225139b839736a47c9ff69192a"
+      },
+      "outcome": "diagnostic_pseudocode_only",
+      "psu_lua51_chunk_sha256": "2cfafc0cab6a0d884b201f3f063ce3eab277ff599aeea8ac40827df5b4702b5c",
+      "unluac_kind": "diagnostic-pseudocode",
+      "note": "PSU lifted Lua 5.1 bytecode with zero unknown instructions; unluac-js returned unresolved diagnostic pseudocode, not complete Lua source."
+    },
+    {
+      "game_claim": "Printing Simulator",
+      "source": {
+        "repository": "PapierLP/Scripts",
+        "commit": "0c4889d8fc3985ed541e4313188e31885108661c",
+        "path": "Printing Simulator",
+        "url": "https://github.com/PapierLP/Scripts/blob/0c4889d8fc3985ed541e4313188e31885108661c/Printing%20Simulator",
+        "bytes": 54734,
+        "sha256": "c5af5445b4f51eef4df6eb68c3c46892e94628bd019329603090bce5bee7cd24"
+      },
+      "outcome": "diagnostic_pseudocode_only",
+      "psu_lua51_chunk_sha256": "6e2a5c76a9ba47178bb81e73333f7b9f00dd7c0951b3ce7bded67cd9b0222505",
+      "unluac_kind": "diagnostic-pseudocode",
+      "note": "PSU lifted Lua 5.1 bytecode with zero unknown instructions; unluac-js returned unresolved diagnostic pseudocode, not complete Lua source."
+    },
+    {
+      "game_claim": "PapierLP Notifier (game unknown)",
+      "source": {
+        "repository": "PapierLP/Scripts",
+        "commit": "0c4889d8fc3985ed541e4313188e31885108661c",
+        "path": "Notifier",
+        "bytes": 35346,
+        "sha256": "5a6c0aca1d7c4be92d8ebb6ccd98d33fa972b250899caf165c3de2626160e661"
+      },
+      "outcome": "withheld_sensitive_game_unknown",
+      "psu_lua51_chunk_sha256": "3cc318caad637d43f512fd877bda9e36adf25d5cf59e49bf6c160ae91e3a5a62",
+      "unluac_kind": "source",
+      "note": "Decompilation returned Lua source but it contains an embedded Discord webhook. No output or secret is published; this is not a verified game script."
+    },
+    {
+      "game_claim": "PapierLP Hub (game unknown)",
+      "source": {
+        "repository": "PapierLP/Scripts",
+        "commit": "0c4889d8fc3985ed541e4313188e31885108661c",
+        "path": "Hub",
+        "url": "https://github.com/PapierLP/Scripts/blob/0c4889d8fc3985ed541e4313188e31885108661c/Hub",
+        "bytes": 42756,
+        "sha256": "1b0a15feebfbc4026e0e6939f0ac2d5e92420071998c111007c6c3e67358f438"
+      },
+      "outcome": "diagnostic_pseudocode_only",
+      "psu_lua51_chunk_sha256": "2dcb0dfa4717466ecf84cceb689295c1eea7e1ce2c4c8859ced02a8007660312",
+      "unluac_kind": "diagnostic-pseudocode",
+      "note": "PSU lifted Lua 5.1 bytecode with zero unknown instructions; unluac-js returned unresolved diagnostic pseudocode, not complete Lua source."
+    },
+    {
+      "game_claim": "Blox Fruits",
+      "source": {
+        "repository": "SenpaiUser/RBXScripts",
+        "commit": "2291a73cb11cdf29031e418c025a81b8af04b8e6",
+        "path": "blox fruits.lua",
+        "url": "https://github.com/SenpaiUser/RBXScripts/blob/2291a73cb11cdf29031e418c025a81b8af04b8e6/blox%20fruits.lua",
+        "bytes": 30502,
+        "sha256": "6c0b51365b249a45e97be25880472e25c81f7cfe3aaab53beeef15bdd375e930"
+      },
+      "outcome": "diagnostic_pseudocode_only",
+      "psu_lua51_chunk_sha256": "c63812875cb1474cf39b754f25c9219326711f008b57b9156ea1c695eb4dd968",
+      "unluac_kind": "diagnostic-pseudocode",
+      "note": "PSU lifted Lua 5.1 bytecode with zero unknown instructions; unluac-js returned unresolved diagnostic pseudocode, not complete Lua source."
+    },
+    {
+      "game_claim": "Pet Simulator X (auto collection)",
+      "source": {
+        "repository": "johnnymartone/PetSimulatorX",
+        "commit": "981027efd2bfcd1316d906d8853d7b5517885a13",
+        "path": "autoCollection.lua",
+        "url": "https://github.com/johnnymartone/PetSimulatorX/blob/981027efd2bfcd1316d906d8853d7b5517885a13/autoCollection.lua",
+        "bytes": 56039,
+        "sha256": "a6cb3f20ac0b20ed28fae1c20a618d61f47ea9ecebfc22fc8af1b0e62a4b49e6"
+      },
+      "outcome": "diagnostic_pseudocode_only",
+      "psu_lua51_chunk_sha256": "d30f3168bcb288645000882dc2ae555a06e417f7d5a96588c786cfb1c0fdbab8",
+      "unluac_kind": "diagnostic-pseudocode",
+      "note": "PSU lifted Lua 5.1 bytecode with zero unknown instructions; unluac-js returned unresolved diagnostic pseudocode, not complete Lua source."
+    },
+    {
+      "game_claim": "Unclassified PSU 4.5.A",
+      "source": {
+        "repository": "RobloxHackerProLuaStuff/cashsellingtools",
+        "commit": "f59046414262c30e7413ce35ad3cf13898822c3d",
+        "path": "Obfuscated (8).lua",
+        "url": "https://github.com/RobloxHackerProLuaStuff/cashsellingtools/blob/f59046414262c30e7413ce35ad3cf13898822c3d/Obfuscated%20%288%29.lua",
+        "bytes": 114951,
+        "sha256": "ecda6e7b463b35266e6106ae328f3dae4ca92c0d908a51882b3fcfc2e2096808"
+      },
+      "outcome": "bytecode_lift_failed",
+      "psu_lua51_chunk_sha256": null,
+      "unluac_kind": null,
+      "note": "PSU Lua 5.1 lift failed at register limit; no source."
+    },
+    {
+      "game_claim": "Senter (game unknown)",
+      "source": {
+        "repository": "Sanprx/eee",
+        "commit": "8c9f1acf0c4b2fbc7abb6209bb695dfc646a7b44",
+        "path": "Senter",
+        "url": "https://github.com/Sanprx/eee/blob/8c9f1acf0c4b2fbc7abb6209bb695dfc646a7b44/Senter",
+        "bytes": 95644,
+        "sha256": "e7e0afc9070aa20466d110302cee25092f8223859582d2af18c46df7bffddd35"
+      },
+      "outcome": "diagnostic_pseudocode_only",
+      "psu_lua51_chunk_sha256": "0feef98a56753a4b70990db960721435d435981bac619abbbd01e31ab4e095e0",
+      "unluac_kind": "diagnostic-pseudocode",
+      "note": "PSU lifted Lua 5.1 bytecode with zero unknown instructions; unluac-js returned unresolved diagnostic pseudocode, not complete Lua source."
+    }
+  ],
+  "excluded_findings": [
+    {
+      "repository": "scriptsomega/scripts",
+      "commit": "dce86075ff781d0d4f565fe1ce9a3987edb98cb0",
+      "sampled_wrappers": 13,
+      "reason": "Static Base64 decode revealed nearly identical 317-line Delta X key-screen UIs (pairwise similarity against Doors sample 0.989-0.995), not thirteen different game programs. No sampled output counted or published."
+    },
+    {
+      "repository": "HamieXD/luast-deobfuscator",
+      "commit": "4a674d6c78b191eebbe652057371761574982a38",
+      "obfuscated_sample": {
+        "repository": "HamieXD/luast-deobfuscator",
+        "commit": "4a674d6c78b191eebbe652057371761574982a38",
+        "path": "samples/Tapping Simulator level 1.lua",
+        "url": "https://github.com/HamieXD/luast-deobfuscator/blob/4a674d6c78b191eebbe652057371761574982a38/samples/Tapping%20Simulator%20level%201.lua",
+        "bytes": 15027,
+        "sha256": "7fa366192e3e1e37f29683d2613923f7dc91a2024c69ae134593811faeea25aa"
+      },
+      "reason": "luast_deob.py v0.3.0 reports success with -o but writes no Lua output. It wrote only constant-analysis files (140 entries, 14 functions). Do not substitute the separately included original sample for a deobfuscation result."
+    }
+  ],
+  "publication": "Only three exact decoded chunks are copied into dobf scripts 1.0. Open originals remain pinned links (licenses vary or are not established). Outputs are not Roblox-tested."
+}

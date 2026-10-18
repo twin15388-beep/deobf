@@ -1,0 +1,19 @@
+local ScreenGui = Instance.new("ScreenGui")
+local TextBox = Instance.new("TextBox")
+ScreenGui.Parent = game.CoreGui
+TextBox.Archivable = false
+TextBox.Parent = ScreenGui
+TextBox.BackgroundColor3 = Color3.new(1, 1, 1)
+TextBox.BackgroundTransparency = 0.5
+TextBox.BorderSizePixel = 3
+TextBox.Draggable = true
+TextBox.Position = UDim2.new(0.834854007, 0, 0.222868219, 0)
+TextBox.Selectable = false
+TextBox.Size = UDim2.new(0, 175, 0, 237)
+TextBox.ClearTextOnFocus = false
+TextBox.Font = Enum.Font.Cartoon
+TextBox.FontSize = Enum.FontSize.Size14
+TextBox.ShowNativeInput = false
+TextBox.Text = "Scout 250\nSniper 450\nFragger 350\nShotgunner 400\nCryo-Gunner 200\nFarm 300\nSoldier 450\nTuber 850\nPatrol 400\nAviator 825\nFlamethrower 750\nCommando 1850\nCommander 600\nRailgunner 2450\nPhaser 3200\nScarecrow 300"
+TextBox.TextSize = 14
+TextBox:TweenPosition(UDim2.new(0.835,-100,0.5,-100), 'Out', 'Bounce', 1)

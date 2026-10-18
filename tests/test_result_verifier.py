@@ -39,6 +39,47 @@ class PublishedResultVerifierTests(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, "duplicate"):
                     verify_results.verify()
 
+    def test_unlisted_files_are_not_silently_accepted(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            output = root / "dobf scripts 1.0"
+            output.mkdir()
+            (root / "report.json").write_text(json.dumps({"cases": []}))
+            with patch.object(verify_results, "ROOT", root), patch.object(
+                verify_results, "REPORTS", ("report.json",)
+            ), contextlib.redirect_stdout(io.StringIO()):
+                self.assertEqual(verify_results.verify(), 0)
+                (output / "stray.bin").write_bytes(b"not Lua")
+                with self.assertRaisesRegex(ValueError, "Unlisted"):
+                    verify_results.verify()
+
+    def test_historical_removed_files_must_stay_absent(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            old = root / "dobf scripts 1.0" / "Old binary.container.bin"
+            old.parent.mkdir()
+            old_artifact = {
+                "path": "dobf scripts 1.0/Old binary.container.bin",
+                "bytes": 4,
+                "sha256": hashlib.sha256(b"test").hexdigest(),
+            }
+            report = root / "report.json"
+            report.write_text(json.dumps({"cases": [{
+                "artifacts": [], "removed_artifacts": [old_artifact]
+            }]}))
+            with patch.object(verify_results, "ROOT", root), patch.object(
+                verify_results, "REPORTS", ("report.json",)
+            ), contextlib.redirect_stdout(io.StringIO()):
+                self.assertEqual(verify_results.verify(), 0)
+                old.write_bytes(b"test")
+                with self.assertRaisesRegex(ValueError, "unexpectedly published"):
+                    verify_results.verify()
+                report.write_text(json.dumps({"cases": [{
+                    "artifacts": [old_artifact], "removed_artifacts": [old_artifact]
+                }]}))
+                with self.assertRaisesRegex(ValueError, "duplicate"):
+                    verify_results.verify()
+
     def test_rejects_paths_outside_results_directory(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

@@ -29,7 +29,9 @@
           "bytes": 98801,
           "sha256": "758c6e2ff550ad37d44fc46578fc455367671dbdca660c864bca7b35da9324ff",
           "published_path": "dobf scripts 1.0/Grand Piece Online.partial.luau"
-        },
+        }
+      ],
+      "removed_artifacts": [
         {
           "local_path": "local-results/Grand Piece Online.analysis.json",
           "bytes": 125655,
@@ -69,7 +71,8 @@
       "protection": "Luraph v13.5.8 (banner)",
       "outcome": "partial",
       "details": "Outer hex/RLE layer only: 15,681 markers and 251,604 opaque bytes. No Lua source recovered.",
-      "artifacts": [
+      "artifacts": [],
+      "removed_artifacts": [
         {
           "local_path": "local-results/Grand Piece Online (Luraph v13.5.8).container.bin",
           "bytes": 251604,
@@ -93,7 +96,8 @@
       "protection": "Luraph v14.4.1 (banner)",
       "outcome": "partial",
       "details": "ASCII85+raw LZMA1 outer layer extracted: 119,197 bytes of still-virtualized Luau. No application source.",
-      "artifacts": [
+      "artifacts": [],
+      "removed_artifacts": [
         {
           "local_path": "local-results/Grow a Garden.inner-vm.luau",
           "bytes": 119197,
@@ -117,7 +121,8 @@
       "protection": "WeAreDevs/Prometheus (source banner)",
       "outcome": "partial",
       "details": "unprom inlined 2,273 constants, folded 19,373 expressions and de-flattened 1,232 VM blocks; VM not lifted (RecursionError).",
-      "artifacts": [
+      "artifacts": [],
+      "removed_artifacts": [
         {
           "local_path": "local-results/DOORS.vm-deflattened.lua",
           "bytes": 384022,
@@ -180,7 +185,9 @@
           "bytes": 52081,
           "sha256": "e3941fc31ed4f7f9250a571a677fc9fe9501dfe7cfb61330a2d4ef8bcbc313a3",
           "published_path": "dobf scripts 1.0/Untitled Boxing Game.partial.luau"
-        },
+        }
+      ],
+      "removed_artifacts": [
         {
           "local_path": "local-results/Untitled Boxing Game.analysis.json",
           "bytes": 67650,
@@ -238,7 +245,8 @@
       "protection": "literal XOR v7",
       "outcome": "not_counted",
       "details": "922/922 literal calls statically decoded (153 distinct strings); resulting source is a generic key-screen UI, not advertised GPO farming logic. No linked domain contacted.",
-      "artifacts": [
+      "artifacts": [],
+      "removed_artifacts": [
         {
           "local_path": "local-results/Key System (not GPO).strings-decoded.lua",
           "bytes": 40656,
@@ -253,5 +261,10 @@
         }
       ]
     }
-  ]
+  ],
+  "cleanup": {
+    "date": "2026-10-18",
+    "scope": "Only the published results folder: opaque VM/container dumps, unverified binaries, diagnostic JSON and unrelated key screens were removed. Historical SHA-256 and paths remain in removed_artifacts. Case outcomes describe analysis attempts, not current published files.",
+    "removed_files": 7
+  }
 }
