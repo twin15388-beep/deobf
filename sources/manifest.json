@@ -392,6 +392,20 @@
       "sha256": "534f7396d6498712775357e0efc2a656db53254acaf226649f70276d99f54011",
       "files": 15,
       "omitted_files": 0
+    },
+    {
+      "repository": "ludicious-claw/Deobfuscator-Luraph-V15-1",
+      "url": "https://github.com/ludicious-claw/Deobfuscator-Luraph-V15-1",
+      "commit": "d78c335d96cce5ae3551c88e4a9857a40ab2c62b",
+      "license": "MIT",
+      "family": "Luraph v15 / v15.1 (upstream claim); v14 frontend",
+      "language": "Python / JavaScript / Luau",
+      "kind": "devirtualizer",
+      "archive": "sources/ludicious-claw--Deobfuscator-Luraph-V15-1.zip",
+      "sha256": "93821e5026628c15690840c6b8e8509702fd9311bb6d9659cd1e1ef261cc2fa2",
+      "files": 46,
+      "omitted_files": 58,
+      "notes": "Upstream README names v15.1 and includes v15.1 sample pairs; version-specific functionality not independently tested. Sample scripts and binaries omitted."
     }
   ]
 }

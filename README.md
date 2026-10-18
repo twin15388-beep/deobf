@@ -6,8 +6,8 @@
 
 | Архив | Исходный проект | Назначение |
 | --- | --- | --- |
-| [Deobfuscator-Luraph-V15-master.zip](Deobfuscator-Luraph-V15-master.zip) | [caomod2077/Deobfuscator-Luraph-V15](https://github.com/caomod2077/Deobfuscator-Luraph-V15) | Luraph v15 |
-| [luau-vmp-deobf-main.zip](luau-vmp-deobf-main.zip) | [binxgtl/luau-vmp-deobf](https://github.com/binxgtl/luau-vmp-deobf) | Luau VM / Luraph v14.x |
+| [Deobfuscator-Luraph-V15-master.zip](Deobfuscator-Luraph-V15-master.zip) | [caomod2077/Deobfuscator-Luraph-V15](https://github.com/caomod2077/Deobfuscator-Luraph-V15) | Luraph v15 (в архиве есть примеры v15.0); v14.7, экспериментально v14.8/14.9 |
+| [luau-vmp-deobf-main.zip](luau-vmp-deobf-main.zip) | [binxgtl/luau-vmp-deobf](https://github.com/binxgtl/luau-vmp-deobf) | Luau VM / Luraph v14.7; v15 явно не поддерживается |
 
 Эти два архива оставлены без изменений.
 
@@ -19,7 +19,8 @@
 | --- | --- | --- | --- | --- |
 | [tupsutumppu/MoonsecDeobfuscator](https://github.com/tupsutumppu/MoonsecDeobfuscator) | MoonSec V3 | деобфускация VM → Lua 5.1 bytecode, C# | GPL-3.0 | [ZIP](sources/tupsutumppu--MoonsecDeobfuscator.zip) |
 | [Lethal-Luka/IronbrewDeobfuscator](https://github.com/Lethal-Luka/IronbrewDeobfuscator) | IronBrew2 | деобфускация VM, C# | GPL-3.0 | [ZIP](sources/Lethal-Luka--IronbrewDeobfuscator.zip) |
-| [tonybolivar/luraph-deobfuscator-updated](https://github.com/tonybolivar/luraph-deobfuscator-updated) | Luraph / WeAreDevs | CLI, Python | MIT | [ZIP](sources/tonybolivar--luraph-deobfuscator-updated.zip) |
+| [tonybolivar/luraph-deobfuscator-updated](https://github.com/tonybolivar/luraph-deobfuscator-updated) | один распознанный вариант Luraph / WeAreDevs | CLI, Python | MIT | [ZIP](sources/tonybolivar--luraph-deobfuscator-updated.zip) |
+| [ludicious-claw/Deobfuscator-Luraph-V15-1](https://github.com/ludicious-claw/Deobfuscator-Luraph-V15-1) | Luraph v15/v15.1 **по заявлению upstream**; производная caomod2077 | Python/JS/Luau | MIT | [ZIP](sources/ludicious-claw--Deobfuscator-Luraph-V15-1.zip) |
 | [prostone4/Prometheus-Deobfuscator](https://github.com/prostone4/Prometheus-Deobfuscator) | Prometheus / WeAreDevs | CLI, JavaScript | MIT | [ZIP](sources/prostone4--Prometheus-Deobfuscator.zip) |
 | [Melodieshusband/WeAreDevs-Prometheus-Deobfuscator](https://github.com/Melodieshusband/WeAreDevs-Prometheus-Deobfuscator) | WeAreDevs / Prometheus | Python | Apache-2.0 | [ZIP](sources/Melodieshusband--WeAreDevs-Prometheus-Deobfuscator.zip) |
 | [caomod2077/Prometheus-Deobfuscator](https://github.com/caomod2077/Prometheus-Deobfuscator) | Prometheus / WeAreDevs | Python, beta | MIT | [ZIP](sources/caomod2077--Prometheus-Deobfuscator.zip) |
@@ -49,6 +50,21 @@
 | [JamiesNolandGiggleShi1er/ClydeDeobfuscator](https://github.com/JamiesNolandGiggleShi1er/ClydeDeobfuscator) | Clyde Luau VM | статический анализ, JS | MIT¹ | [ZIP](sources/JamiesNolandGiggleShi1er--ClydeDeobfuscator.zip) |
 
 ¹ Файл `LICENSE` содержит текст MIT и разрешение на распространение, но GitHub классифицирует его как `NOASSERTION` из-за дополнительной строки перед лицензией. В README `oxygen-Deobf/clyde-deobf` написано MIT, а фактический файл `LICENSE` — **Apache-2.0**; в таблице указана лицензия из файла.
+
+### Приоритетные семейства и версии
+
+Это **заявленное покрытие по документации и примерам upstream**, а не результаты запуска на наших тестовых файлах:
+
+| Цель | Где искать | Ограничение |
+| --- | --- | --- |
+| **Luraph v15.0** | [исходный архив caomod2077](Deobfuscator-Luraph-V15-master.zip) | В нём есть два образца с заголовком `Luraph Obfuscator v15.0`; успешная деобфускация здесь не проверялась. |
+| **Luraph v15.1** | [ludicious-claw](sources/ludicious-claw--Deobfuscator-Luraph-V15-1.zip) | Upstream называет v15.1 и содержит пары примеров с таким заголовком; примеры из нашего source-only ZIP исключены. Поддержка не проверялась независимо. |
+| **Luraph v14.7** | [luau-vmp-deobf](luau-vmp-deobf-main.zip), [caomod2077](Deobfuscator-Luraph-V15-master.zip) | Первый документирует регрессионный корпус v14.7. Он **не** поддерживает v15; второй описывает v14.x как экспериментальный режим. |
+| **Luraph v14.8–14.9** | [caomod2077](Deobfuscator-Luraph-V15-master.zip) | Upstream прямо отмечает неполное восстановление и переход к трассировке. Для остальных версий v14.x поддержка не установлена. |
+| **MoonVeil v1.4.5** | [UnstableGrape](sources/UnstableGrape--Moonveil-1.4.5-Deobfuscator.zip), [edwindev-spec](sources/edwindev-spec--MoonVeil.zip) | Поддержка других выпусков MoonVeil не заявлена; нужны официальные инструменты Luau. |
+| **MoonSec V3** | [tupsutumppu](sources/tupsutumppu--MoonsecDeobfuscator.zip), [MoonDumper](sources/sametEXE1--MoonDumper.zip) | Первый выдаёт Lua 5.1 bytecode, а дампер извлекает только константы; это не обещание полного исходника. |
+| **IronBrew** | [Lethal-Luka](sources/Lethal-Luka--IronbrewDeobfuscator.zip), [memcpython](sources/memcpython--lua-deobfuscators.zip) | Эти архивы ориентированы прежде всего на **IronBrew2**. См. ниже внешнюю ссылку на IronBrew0/1/2; IronBrew1 в коллекции не заявлен как проверенный. |
+| **Prometheus / WeAreDevs** | [unprom](sources/yennylol--unprom.zip), [prostone4](sources/prostone4--Prometheus-Deobfuscator.zip), [Melodieshusband](sources/Melodieshusband--WeAreDevs-Prometheus-Deobfuscator.zip) | Результат зависит от варианта VM и обёртки; универсальной поддержки всех версий не заявляем. |
 
 **Ограничения:** исключённый `unluac.jar` требуется для части функций Luraph-инструмента Tony Bolivar; исключённые Lua 5.1 бинарники могут понадобиться Epimetheus (можно установить Lua отдельно). Также удалены скомпилированные Luau/bf для Wynfuscate и Mcdofries: при необходимости их надо получать/собирать отдельно. Инструментам MoonVeil тоже нужны официальные Luau runtime/compiler, которые в ZIP не включены. У некоторых других проектов есть внешние зависимости — смотрите их README. MoonDumper/moonsecdumper предполагают выполнение *сгенерированного* Lua; Wynfuscate/Mcdofries предлагают динамический анализ. Никогда не запускайте неизвестный скрипт без изоляции и разрешения владельца; Discord-боты могут передавать загруженный код стороннему сервису. Здесь архивы не исполнялись и результаты работы инструментов не проверялись.
 
@@ -82,10 +98,13 @@ python3 scripts/verify_sources.py
 | [Nestor53top/lua-deobf-actions](https://github.com/Nestor53top/lua-deobf-actions) | сборка нескольких движков в GitHub Actions |
 | [hutaoshusband/Prometheus-WeAre-Devs-Dumper](https://github.com/hutaoshusband/Prometheus-WeAre-Devs-Dumper) и [WeAreDevs-Deobfuscator](https://github.com/hutaoshusband/WeAreDevs-Deobfuscator) | Prometheus / WeAreDevs |
 | [larpcorrupt/luraph-v15-v14.x-deobfuscator](https://github.com/larpcorrupt/luraph-v15-v14.x-deobfuscator) | Luraph v14/v15 |
+| [Kira762/luraph-v15-1-deobfuscator](https://github.com/Kira762/luraph-v15-1-deobfuscator) | Luraph v15.1; лицензия есть во вложенной папке, но не на весь репозиторий |
 | [lovesyko/LuaObfuscatorChaoticEvilDeobfuscator](https://github.com/lovesyko/LuaObfuscatorChaoticEvilDeobfuscator) и [SynapseXenDeobfuscator](https://github.com/lovesyko/SynapseXenDeobfuscator) | LuaObfuscator / Synapse Xen |
 | [2zvh/moonveilvro](https://github.com/2zvh/moonveilvro) | MoonVeil |
 | [QuantumXternal/FlowAuth-Deobfuscator](https://github.com/QuantumXternal/FlowAuth-Deobfuscator) | FlowAuth |
 | [gigihumana/Centurion-Deobfuscator](https://github.com/gigihumana/Centurion-Deobfuscator) | Centurion |
 | [Dizzzzeeee/Deobfuscators](https://github.com/Dizzzzeeee/Deobfuscators) | сборник Lua-деобфускаторов |
+
+Отдельно: [Bytecoded1337/Deobfuscators-and-Dumpers](https://github.com/Bytecoded1337/Deobfuscators-and-Dumpers) содержит исходники для **IronBrew0, IronBrew1 и IronBrew2**. Но README прямо сообщает, что автор репозитория не создавал эти инструменты; наличие MIT в корне не проясняет права на каждый компонент. Поэтому здесь оставлена только ссылка, без копии кода.
 
 Не включены также репозитории лишь с `README` или `LICENSE`, только с готовыми `.exe/.dll`, либо почти идентичные копии уже добавленных проектов. Для *каждого* архива действуют условия **его собственной лицензии**; у коллекции в целом нет одной общей лицензии. Пользуйтесь инструментами только для анализа кода, на который у вас есть права или разрешение.
