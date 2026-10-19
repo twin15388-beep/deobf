@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
-"""Verify current recovered Lua files against the pinned result manifest.
+"""Verify published game-specific Lua against the pinned result manifest.
 
-The obsolete 2026-10-18 partial results and reports were removed on request.
-This checks file inventory, size and SHA-256 only; it does NOT prove runtime
-behavior or execute any Lua/Roblox code.
+Checks inventory, size and SHA-256 only; never executes Lua or proves runtime
+behavior. The former generic/weak results have been removed on request.
 """
 
 from __future__ import annotations
@@ -14,7 +13,7 @@ import re
 from pathlib import Path, PurePosixPath
 
 ROOT = Path(__file__).resolve().parents[1]
-REPORTS = ("reports/vm-recovery-2026-10-19.json",)
+REPORTS = ("reports/game-recovery-2026-10-19.json",)
 
 
 def verify() -> int:

@@ -1,0 +1,305 @@
+{
+  "date": "2026-10-19",
+  "scope": "Static recovery of actual protected game-labelled Lua, not open-source re-uploads or universal hubs. Game-specificity and limitations stated per case.",
+  "tool": {
+    "repository": "prostone4/Prometheus-Deobfuscator",
+    "commit": "6ee3291ec83fdc58c04e17bb1f1703386619711a",
+    "archive": "sources/prostone4--Prometheus-Deobfuscator.zip",
+    "archive_sha256": "3f1d76e89c772ae235300c27d59dc49254421856b117e572544b6cb526ce719e",
+    "source_patches": "scripts/prepare_pdeobf.py"
+  },
+  "validation": {
+    "compiler": "Luau luau-compile --null",
+    "compiler_commit": "9d7748a4f324213a18cb8283fa2a77c330225fa0",
+    "all_luau_compiled": true,
+    "roblox_or_upstream_code_executed": false,
+    "semantic_equivalence_proved": false
+  },
+  "cases": [
+    {
+      "game": "Jujutsu Shenanigans",
+      "variant": "Pantheon Hub",
+      "input": {
+        "repository": "pantheon111/jjs",
+        "commit": "a5c3df2b86bc119e747a2e47374a6e7f17ad9371",
+        "path": "jujutsu_shenanigans_obfuscated.lua",
+        "url": "https://github.com/pantheon111/jjs/blob/a5c3df2b86bc119e747a2e47374a6e7f17ad9371/jujutsu_shenanigans_obfuscated.lua",
+        "bytes": 181647,
+        "sha256": "aeeac20490d0417e0ca8ca35fcb21e3b55b997716a912a25c59f37f45e41034d",
+        "protection": "WeAreDevs v1.0.0",
+        "third_party_rights": "license/redistribution rights not verified"
+      },
+      "method": "pdeobf",
+      "artifacts": [
+        {
+          "path": "dobf scripts 1.0/Jujutsu Shenanigans - Pantheon Hub.lua",
+          "bytes": 29257,
+          "lines": 1065,
+          "sha256": "27a08ea6f72b2e2a8611b3a7db507a9d6136edaf50e5573993c38ad9730cd2aa",
+          "luau_compiled": true,
+          "roblox_tested": false
+        }
+      ],
+      "limitations": [
+        "Game-specific abilities/UI and character event handlers; external WindUI is loaded at runtime.",
+        "Some globals are referenced without being defined in this recovered file (PlaceId, JobId, HttpService, TeleportService)."
+      ]
+    },
+    {
+      "game": "Jujutsu Shenanigans",
+      "variant": "Inquest Moveset",
+      "input": {
+        "repository": "Inquesthub/movesetJJS",
+        "commit": "726b6a43919a674d5a4c474952f0e7ebf0f2f7ec",
+        "path": "obfuscated_script-1764581181505.lua",
+        "url": "https://github.com/Inquesthub/movesetJJS/blob/726b6a43919a674d5a4c474952f0e7ebf0f2f7ec/obfuscated_script-1764581181505.lua",
+        "bytes": 432520,
+        "sha256": "e0fb6e837fdff13bb38f2e5def0106689dc1be19a0f0caabd3927c4b73fca4db",
+        "protection": "WeAreDevs v1.0.0",
+        "third_party_rights": "license/redistribution rights not verified"
+      },
+      "method": "pdeobf",
+      "artifacts": [
+        {
+          "path": "dobf scripts 1.0/Jujutsu Shenanigans - Inquest Moveset.lua",
+          "bytes": 58299,
+          "lines": 1963,
+          "sha256": "2d7e3c5995cdd676cd921242e5280675871ea0116643664052fa0a562c48aa87",
+          "luau_compiled": true,
+          "roblox_tested": false
+        }
+      ],
+      "limitations": [
+        "Original handler names/variables cannot be restored; complex control-flow lifting is not formally verified.",
+        "Requires game-side service/remotes and animation assets."
+      ]
+    },
+    {
+      "game": "Violence District",
+      "variant": "ANCH Hax",
+      "input": {
+        "repository": "ayamnubchh/Violence-District-Roblox-Script",
+        "commit": "56b5f560c3cbcfefac8dd40a74f931085888eb19",
+        "path": "ANCH-Hax.lua",
+        "url": "https://github.com/ayamnubchh/Violence-District-Roblox-Script/blob/56b5f560c3cbcfefac8dd40a74f931085888eb19/ANCH-Hax.lua",
+        "bytes": 212395,
+        "sha256": "d2b66541d512835b04a030b3b711267a92bd30f42d48b8507777470a53269916",
+        "protection": "WeAreDevs v1.0.0",
+        "third_party_rights": "license/redistribution rights not verified"
+      },
+      "method": "pdeobf + scripts/repair_violence_district_goto.py",
+      "artifacts": [
+        {
+          "path": "dobf scripts 1.0/Violence District - ANCH Hax.lua",
+          "bytes": 38095,
+          "lines": 1813,
+          "sha256": "03023ee9816c834d49febca6caa455fe4e29106f53ba8f0425e2d4ce2f975e0a",
+          "luau_compiled": true,
+          "roblox_tested": false
+        }
+      ],
+      "limitations": [
+        "Three adjacent jump targets in one callback were converted to structured fallthrough by an exact-match patch.",
+        "External WindUI is downloaded by the output at runtime; no game runtime was tested."
+      ]
+    },
+    {
+      "game": "King Legacy",
+      "variant": "Luxury Core",
+      "input": {
+        "repository": "SAO412/kl-scripts",
+        "commit": "f9a4de47b615ff108f80a9f9712d2cf5bc98e668",
+        "path": "core.lua",
+        "url": "https://github.com/SAO412/kl-scripts/blob/f9a4de47b615ff108f80a9f9712d2cf5bc98e668/core.lua",
+        "bytes": 40958,
+        "sha256": "dfaaee0cf0188b7ba7347e75f5e6fa12df2d58223b30885bcd1a7bb82f0de509",
+        "protection": "LuaObfuscator.com Alpha 0.10.9 (XOR literals and flattened control flow)",
+        "third_party_rights": "license/redistribution rights not verified"
+      },
+      "method": "pdeobf + scripts/unflatten_game_lua.cjs",
+      "artifacts": [
+        {
+          "path": "dobf scripts 1.0/King Legacy - Luxury Core.lua",
+          "bytes": 32783,
+          "lines": 1217,
+          "sha256": "ddc369a8b1d384ffb444758a6cf2d593d0562d65b77862e6ac93296beb3e5544",
+          "luau_compiled": true,
+          "roblox_tested": false
+        }
+      ],
+      "limitations": [
+        "This is a King Legacy-branded core UI with player-level/PVP overlay; it has NO King Legacy-specific farming remote/quest automation. General ESP/aim portions may work in other experiences.",
+        "Numeric dispatcher and provably one-shot loops removed: 28 and 19; source logic not compared with the live experience."
+      ]
+    },
+    {
+      "game": "Illegal Soccer",
+      "variant": "Smart GK",
+      "input": {
+        "repository": "Pitaya-real/Illegal-Soccer",
+        "commit": "d209e41e8a4ac1217151943ba0ecf277ff206642",
+        "path": "main.lua",
+        "url": "https://github.com/Pitaya-real/Illegal-Soccer/blob/d209e41e8a4ac1217151943ba0ecf277ff206642/main.lua",
+        "bytes": 22569,
+        "sha256": "b392489b369518972268846e6d06e9575f473c6b3000e5eb1569bf161c2912cc",
+        "protection": "XOR literals and flattened control flow (brand unverified)",
+        "third_party_rights": "license/redistribution rights not verified"
+      },
+      "method": "pdeobf + scripts/unflatten_game_lua.cjs",
+      "artifacts": [
+        {
+          "path": "dobf scripts 1.0/Illegal Soccer - Smart GK.lua",
+          "bytes": 25876,
+          "lines": 1053,
+          "sha256": "19f3b9211ed24de5075c7847df2ddd6a06abee5adffee8dfdf0814d3345cb128",
+          "luau_compiled": true,
+          "roblox_tested": false
+        }
+      ],
+      "limitations": [
+        "Ball lookup, Team1/Team2 goal lookup and goalkeeper input handler recovered; external PitayaUI is downloaded at runtime.",
+        "Numeric dispatcher and provably one-shot loops removed: 19 and 24. Assignment to v220 without a local declaration remains; gameplay not verified."
+      ]
+    },
+    {
+      "game": "Murder Mystery 2",
+      "variant": "Azure Hub",
+      "input": {
+        "repository": "LYERHUB/MM2-azure",
+        "commit": "161fe5fbbe65d6bd17d3bba41accf25a3444d11f",
+        "path": "README.md",
+        "url": "https://github.com/LYERHUB/MM2-azure/blob/161fe5fbbe65d6bd17d3bba41accf25a3444d11f/README.md",
+        "bytes": 245032,
+        "sha256": "ec2d9a149b4c2ccfc76fa28e5d3c941d03654e621d82c5c65881ac732ab78e3b",
+        "protection": "WeAreDevs v1.0.0",
+        "third_party_rights": "license/redistribution rights not verified"
+      },
+      "method": "pdeobf",
+      "artifacts": [
+        {
+          "path": "dobf scripts 1.0/Murder Mystery 2 - Azure Hub.lua",
+          "bytes": 38490,
+          "lines": 1590,
+          "sha256": "1f281499943f41e6f9920169c83929b6465001b42a282b6a0931cd488eb089bb",
+          "luau_compiled": true,
+          "roblox_tested": false
+        }
+      ],
+      "limitations": [
+        "Role detection, ESP and sheriff/knife actions are visible; server-side effectiveness not tested."
+      ]
+    },
+    {
+      "game": "Murder Mystery 2",
+      "variant": "KS Hub",
+      "input": {
+        "repository": "digobott-cmd/MurderMystery2Script",
+        "commit": "24cd049b8a1ec2cf74d2fb258bf55015caf7e8d4",
+        "path": "README.md",
+        "url": "https://github.com/digobott-cmd/MurderMystery2Script/blob/24cd049b8a1ec2cf74d2fb258bf55015caf7e8d4/README.md",
+        "bytes": 226691,
+        "sha256": "c874d247f6fc0cbff1090697afeeef9630a2305273fa4d72129573eecbd60055",
+        "protection": "WeAreDevs v1.0.0",
+        "third_party_rights": "license/redistribution rights not verified"
+      },
+      "method": "pdeobf",
+      "artifacts": [
+        {
+          "path": "dobf scripts 1.0/Murder Mystery 2 - KS Hub.lua",
+          "bytes": 33132,
+          "lines": 1231,
+          "sha256": "2a0fbc879f7f89f79b414c715b271f59c23dfb1bc46d9e40a35d80f980ffd10c",
+          "luau_compiled": true,
+          "roblox_tested": false
+        }
+      ],
+      "limitations": [
+        "Role inference from carried items and ESP are visible; server-side effectiveness not tested."
+      ]
+    },
+    {
+      "game": "Blue Lock Farm",
+      "variant": "RELWX",
+      "input": {
+        "repository": "TaiTonKung/BlueLockFarm",
+        "commit": "e651c6dedd82b03495506d035f31336f33e8558e",
+        "path": "README.md",
+        "url": "https://github.com/TaiTonKung/BlueLockFarm/blob/e651c6dedd82b03495506d035f31336f33e8558e/README.md",
+        "bytes": 301797,
+        "sha256": "439a031f4e141eeafbc22b72fd26384cbe43f66f7015a2a0168a70ee5cf65df3",
+        "protection": "WeAreDevs v1.0.0",
+        "third_party_rights": "license/redistribution rights not verified"
+      },
+      "method": "pdeobf",
+      "artifacts": [
+        {
+          "path": "dobf scripts 1.0/Blue Lock Farm - RELWX.lua",
+          "bytes": 54727,
+          "lines": 1909,
+          "sha256": "f15f532dc9cd248bb418f1d704e2a10964e035301a3486db9989ed9a288c2534",
+          "luau_compiled": true,
+          "roblox_tested": false
+        }
+      ],
+      "limitations": [
+        "Targets the Blue Lock Farm conveyor/boxes/mutations/polisher and unit upgrades; this is NOT Blue Lock Rivals.",
+        "External Fluent UI/add-ons are downloaded at runtime; gameplay not tested."
+      ]
+    },
+    {
+      "game": "Wild Horse Islands",
+      "variant": "WHI Farm",
+      "input": {
+        "repository": "oihi173/Whifa",
+        "commit": "f2a30ef072662227dcb24f67a6e02a6d8195da19",
+        "path": "README.md",
+        "url": "https://github.com/oihi173/Whifa/blob/f2a30ef072662227dcb24f67a6e02a6d8195da19/README.md",
+        "bytes": 328625,
+        "sha256": "543e773040ede3ab92bac2bd641bde8eab7b7616aa90d95d2dfdd440d670befc",
+        "protection": "WeAreDevs v1.0.0",
+        "third_party_rights": "license/redistribution rights not verified"
+      },
+      "method": "pdeobf + scripts/repair_wild_horse_goto.py",
+      "artifacts": [
+        {
+          "path": "dobf scripts 1.0/Wild Horse Islands - WHI Farm.lua",
+          "bytes": 39795,
+          "lines": 1985,
+          "sha256": "2904c29e00dc57330017113cad0ae1f446ea2ee84e17035ce09856d84e424f94",
+          "luau_compiled": true,
+          "roblox_tested": false
+        }
+      ],
+      "limitations": [
+        "One jump in the farm loop was replaced with an equivalent wait in the same branch by an exact-match patch.",
+        "Race/training/horse tracking depend on game UI text; external Rayfield is downloaded at runtime."
+      ]
+    }
+  ],
+  "excluded": [
+    {
+      "game": "Grand Piece Online",
+      "reason": "Luraph v13 samples remain protected; PSU lift produced compilable Lua but no verifiable GPO game logic. Neither is published as a GPO result."
+    },
+    {
+      "game": "Blox Fruits",
+      "reason": "PSU VM lifted to bytecode, but unluac-js returned diagnostic pseudocode with unresolved HIR expressions; not publishable Lua."
+    },
+    {
+      "game": "Case Paradise",
+      "reason": "MoonVeil --no-verify output compiled but had demonstrably wrong branches and false.Panel accesses; not published."
+    },
+    {
+      "game": "Night (99 Nights in the Forest claim)",
+      "reason": "Only a key system and remote payload loader were recovered, no verified game logic."
+    },
+    {
+      "game": "Ride a Pet",
+      "reason": "Source file ends mid-expression; pdeobf rejects it."
+    },
+    {
+      "game": "Grow a Garden",
+      "reason": "Protected GitHub Spawner only sets external configuration (including a webhook) and downloads a remote payload; no recovered game-specific behavior. Not published."
+    }
+  ]
+}
