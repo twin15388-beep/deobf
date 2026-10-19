@@ -16,12 +16,12 @@ class PublishedResultVerifierTests(unittest.TestCase):
     def test_size_hash_and_duplicate_detection(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            output = root / "dobf scripts 1.0" / "Grand Piece Online.partial.lua"
+            output = root / "dobf scripts 1.0" / "God of Glory - Destroy World.lua"
             output.parent.mkdir()
             data = b"-- static synthetic output\n"
             output.write_bytes(data)
             artifact = {
-                "path": "dobf scripts 1.0/Grand Piece Online.partial.lua",
+                "path": "dobf scripts 1.0/God of Glory - Destroy World.lua",
                 "bytes": len(data),
                 "sha256": hashlib.sha256(data).hexdigest(),
             }

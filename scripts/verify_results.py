@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Verify published derived files against all pinned result manifests.
+"""Verify current recovered Lua files against the pinned result manifest.
 
-Removed artifacts remain in historical manifests but MUST NOT be on disk in the
-published folder. This does NOT validate third-party inputs, semantic
-equivalence, or run any Lua/Roblox code.
+The obsolete 2026-10-18 partial results and reports were removed on request.
+This checks file inventory, size and SHA-256 only; it does NOT prove runtime
+behavior or execute any Lua/Roblox code.
 """
 
 from __future__ import annotations
@@ -14,11 +14,7 @@ import re
 from pathlib import Path, PurePosixPath
 
 ROOT = Path(__file__).resolve().parents[1]
-REPORTS = (
-    "reports/roblox-batch-2026-10-18.json",
-    "reports/gpo-followup-2026-10-18.json",
-    "reports/roblox-sources-2026-10-18.json",
-)
+REPORTS = ("reports/vm-recovery-2026-10-19.json",)
 
 
 def verify() -> int:

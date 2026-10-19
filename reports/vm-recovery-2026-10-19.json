@@ -1,0 +1,190 @@
+{
+  "date": "2026-10-19",
+  "source": {
+    "repository": "DohmBoyOG/Script-Dump",
+    "url": "https://github.com/DohmBoyOG/Script-Dump",
+    "commit": "da2dea31c28d620a85111a8f9cc1bd776141eb91",
+    "license": "no root LICENSE detected; third-party rights unverified"
+  },
+  "method": "Pinned SHA-256; static Base36/LZW/XOR parse; per-sample VM opcode/superinstruction lift to Lua 5.1 bytecode; unluac-js@1.4.4 strict; Lua 5.1 luac -p on bytecode and source; manually compared against separate open control pairs. Protected Lua, recovered Lua and Roblox were NOT executed. Equivalence is not formally proved.",
+  "cases": [
+    {
+      "game": "God of Glory",
+      "input": {
+        "path": "GodOfGlory_DestroyWorld_OBED.lua",
+        "sha256": "08c0dc490d952d4991c78531ede1c0adfc8faab6b5bd8198822beb2fb9fc23f5",
+        "url": "https://github.com/DohmBoyOG/Script-Dump/blob/da2dea31c28d620a85111a8f9cc1bd776141eb91/GodOfGlory_DestroyWorld_OBED.lua"
+      },
+      "vm": {
+        "decoded_bytes": 1157,
+        "prototypes": 2,
+        "instructions": 81
+      },
+      "lifted_lua51": {
+        "bytes": 1084,
+        "sha256": "4a598df991d4d470b0dd6f699b50497c3d309ed8d6815e15ea21cfc0545b1064"
+      },
+      "verification": {
+        "decompiler_kind": "source",
+        "decompiler_errors": 0,
+        "luac_bytecode_parse": true,
+        "luac_source_parse": true,
+        "open_pair": "reviewed as control, not a deobfuscation result",
+        "roblox_execution": false
+      },
+      "role_label": "destroyWorldDestructibles()",
+      "observed_effects": [
+        "spawn callback",
+        "BreakBuilding:FireServer({TagFullName = tostring(child:GetFullName())})"
+      ],
+      "artifacts": [
+        {
+          "path": "dobf scripts 1.0/God of Glory - Destroy World.lua",
+          "bytes": 1995,
+          "sha256": "93ca27c433bfec82589db0b31faff160278668657692893dc480380a1483e44d"
+        }
+      ]
+    },
+    {
+      "game": "Nerf FPS 5.46",
+      "input": {
+        "path": "NerfFPS_546_INFMONIES_OBED.lua",
+        "sha256": "c3088b181f635b0377b759edfcc104c86eb2d6beb74f5da87d30b29de7378564",
+        "url": "https://github.com/DohmBoyOG/Script-Dump/blob/da2dea31c28d620a85111a8f9cc1bd776141eb91/NerfFPS_546_INFMONIES_OBED.lua"
+      },
+      "vm": {
+        "decoded_bytes": 927,
+        "prototypes": 2,
+        "instructions": 62
+      },
+      "lifted_lua51": {
+        "bytes": 906,
+        "sha256": "fc8d5b3222e730dd3fd514b5a88df78293db26470a40a5546b39c994cb8ff856"
+      },
+      "verification": {
+        "decompiler_kind": "source",
+        "decompiler_errors": 0,
+        "luac_bytecode_parse": true,
+        "luac_source_parse": true,
+        "open_pair": "reviewed as control, not a deobfuscation result",
+        "roblox_execution": false
+      },
+      "role_label": "blockSubCash(self, ...)",
+      "observed_effects": [
+        "CashMoney Value = 9000000000",
+        "newcclosure __namecall"
+      ],
+      "artifacts": [
+        {
+          "path": "dobf scripts 1.0/Nerf FPS 5.46 - Infinite Money.lua",
+          "bytes": 1313,
+          "sha256": "8cdacdbeaa4edd5da72478d68ec3e9b8180abe2d01cbeddff06ff8b68b0c3036"
+        }
+      ]
+    },
+    {
+      "game": "Nerf FPS 5.46",
+      "input": {
+        "path": "NerfFPS_546_TDM_KillALL_OBED.lua",
+        "sha256": "58cefb372766fec7eded3ece0661654b6d245ef3aabcd5f3df9bb6f1252e4d22",
+        "url": "https://github.com/DohmBoyOG/Script-Dump/blob/da2dea31c28d620a85111a8f9cc1bd776141eb91/NerfFPS_546_TDM_KillALL_OBED.lua"
+      },
+      "vm": {
+        "decoded_bytes": 1115,
+        "prototypes": 1,
+        "instructions": 81
+      },
+      "lifted_lua51": {
+        "bytes": 902,
+        "sha256": "f918d991c858a4e5efb938706f736adbf8c439acf1c40e4be42909bd83e5fd15"
+      },
+      "verification": {
+        "decompiler_kind": "source",
+        "decompiler_errors": 0,
+        "luac_bytecode_parse": true,
+        "luac_source_parse": true,
+        "open_pair": "reviewed as control, not a deobfuscation result",
+        "roblox_execution": false
+      },
+      "role_label": "main chunk (no original user-defined function)",
+      "observed_effects": [
+        "TeamColor filter",
+        "sumiisbestgirl:FireServer(149306230, character, 100, \"VULCAN\", false)"
+      ],
+      "artifacts": [
+        {
+          "path": "dobf scripts 1.0/Nerf FPS 5.46 - TDM Kill All.lua",
+          "bytes": 1492,
+          "sha256": "8aec673290a6cdfcf7386ce74647451ed2c9467e59a9ce29fa434de3ef7eac4e"
+        }
+      ]
+    },
+    {
+      "game": "Prior Extinction",
+      "input": {
+        "path": "PriorExtinction_AntiBanKick_Probably_OBed.lua",
+        "sha256": "7af27dd60d387483855d9c38f2f7e3601ca81d03c5b6b5f3878018adc7e00914",
+        "url": "https://github.com/DohmBoyOG/Script-Dump/blob/da2dea31c28d620a85111a8f9cc1bd776141eb91/PriorExtinction_AntiBanKick_Probably_OBed.lua"
+      },
+      "vm": {
+        "decoded_bytes": 817,
+        "prototypes": 2,
+        "instructions": 55
+      },
+      "lifted_lua51": {
+        "bytes": 831,
+        "sha256": "150fd957d1de42774135a6d521c3ae09b3eeffa29f561621ab0ccce702be290a"
+      },
+      "verification": {
+        "decompiler_kind": "source",
+        "decompiler_errors": 0,
+        "luac_bytecode_parse": true,
+        "luac_source_parse": true,
+        "open_pair": "reviewed as control, not a deobfuscation result",
+        "roblox_execution": false
+      },
+      "role_label": "guardNamecall(self, ...)",
+      "observed_effects": [
+        "newcclosure __namecall",
+        "return 9000000000 on blocked methods"
+      ],
+      "artifacts": [
+        {
+          "path": "dobf scripts 1.0/Prior Extinction - Anti Kick Ban.lua",
+          "bytes": 1368,
+          "sha256": "970f282dce6b31c7d5faae26998f70686962390d67d6c1046b937e5a79f9e827"
+        }
+      ]
+    }
+  ],
+  "excluded": [
+    {
+      "input": "GOGV3OBED.lua",
+      "sha256": "f1798b8ba88c1445a70b9f27a46a23fa3441fe192933edbe189a574a43736d03",
+      "vm_prototypes": 32,
+      "vm_instructions": 733,
+      "reason": "container decodes completely; 32 shuffled-prototype handlers have no verified Lua lift",
+      "artifacts": []
+    },
+    {
+      "input": "Tropical Resort Tycoon.obfuscated.lua",
+      "reason": "PSU made bytecode; unluac-js open-pack and LuaDec SetList/register errors prevent reliable source",
+      "artifacts": []
+    },
+    {
+      "input": "WW2 Tycoon.lua",
+      "reason": "LuaObfuscator-Deobfuscator incomplete_evil:missing_xor_bootstrap; disrobe binary download EOF, rustc unavailable",
+      "artifacts": []
+    },
+    {
+      "input": "Tapping Simulator.luast.l1.lua",
+      "reason": "Luast-Dumper --raw --keep-dead lost almost all game logic",
+      "artifacts": []
+    },
+    {
+      "input": "Grand Piece Online candidates",
+      "reason": "old candidates only exposed VM structure or unverifiable partial code; old output removed",
+      "artifacts": []
+    }
+  ]
+}

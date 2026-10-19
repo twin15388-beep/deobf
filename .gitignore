@@ -4,3 +4,5 @@ __pycache__/
 # Never stage future local analysis scratch or Lua compiler output.
 /local-results/
 /luac.out
+*.luac
+node_modules/
