@@ -2,7 +2,7 @@
 
 Коллекция **исходников** инструментов для анализа обфусцированных Roblox Lua/Luau-скриптов. Архивы снимались 18 октября 2026 года; работа каждого инструмента со всеми версиями защиты не гарантируется.
 
-**Игровые результаты (19 октября 2026):** [9 восстановленных Lua-файлов из обфусцированных входов семи названных режимов](dobf%20scripts%201.0/README.md): Jujutsu Shenanigans, Violence District, Illegal Soccer, Murder Mystery 2, Blue Lock Farm, Wild Horse Islands и ограниченный King Legacy core (UI/ESP, **не** специфичный фарм). [Сам код функций с параметрами и назначением](dobf%20scripts%201.0/README.md) · [методика, ошибки и неудачи](reports/game-recovery-2026-10-19.md) · [коммиты и SHA-256 входов/выходов](reports/game-recovery-2026-10-19.json) · [проверка целостности](scripts/verify_results.py). **GPO пока не восстановлен:** полученный ранее компилируемый PSU-фрагмент не подтвердил принадлежность к игре и не публикуется. Старые отклонённые God of Glory, Nerf FPS и Prior Extinction удалены. Все результаты только статические: Luau компилируется, работоспособность в Roblox и эквивалентность исходникам не проверялись. Steal an Egg не обрабатывался.
+**Игровые результаты (19 октября 2026):** [10 Lua-файлов из обфусцированных входов восьми заявленных режимов](dobf%20scripts%201.0/README.md): семь прежних игр (Jujutsu Shenanigans, Violence District, Illegal Soccer, Murder Mystery 2, Blue Lock Farm, Wild Horse Islands и ограниченный King Legacy core — UI/ESP, **не** специфичный фарм) и **частично восстановленный Grand Piece Online — Lunar Hub** (квесты, NPC, боевой remote, лёд Hie-Hie; **не весь скрипт или готовый автофарм**). [Сам код функций с параметрами и назначением](dobf%20scripts%201.0/README.md) · [методика, ошибки и неудачи](reports/game-recovery-2026-10-19.md) · [коммиты и SHA-256 входов/выходов](reports/game-recovery-2026-10-19.json) · [проверка целостности](scripts/verify_results.py). Другой ограниченный PSU-вход GPO и ключевой UI не выдаются за результат. Старые отклонённые God of Glory, Nerf FPS и Prior Extinction удалены. Все результаты только статические: Luau компилируется; GPO проверен ещё и Lua 5.1 с подставными объектами, но работоспособность в Roblox и эквивалентность исходникам не проверялись. Steal an Egg не обрабатывался.
 
 ## Уже были в репозитории
 
@@ -90,8 +90,8 @@ python3 scripts/verify_results.py  # SHA-256 опубликованных рез
 | [PhoenixZeng/LuraphDeobfuscator](https://github.com/PhoenixZeng/LuraphDeobfuscator) | Luraph, Java |
 | [0x251/Prometheus-Deobfuscator](https://github.com/0x251/Prometheus-Deobfuscator) и [V2](https://github.com/0x251/Prometheus-DeobfuscatorV2) | Prometheus, Python / Lua |
 | [umdill/LuauDeobfuscators](https://github.com/umdill/LuauDeobfuscators) | Luau, C# |
-| [memcpython/PSU-Deobfuscator](https://github.com/memcpython/PSU-Deobfuscator) | PSU, JS; поднят байткод GPO-кандидата и Blox Fruits, но пригодный подтверждённый исходник не получен |
-| [viruscamp/luadec](https://github.com/viruscamp/luadec) | Lua 5.1 bytecode; локально собран, на SeaHub не восстановил полный исходник |
+| [memcpython/PSU-Deobfuscator](https://github.com/memcpython/PSU-Deobfuscator) | PSU, JS; статически поднят байткод Lunar Hub GPO и Blox Fruits; из GPO выборочно восстановлен **частичный** Lua-модуль, целый хаб не получен |
+| [viruscamp/luadec](https://github.com/viruscamp/luadec) | Lua 5.1 bytecode; локально собран, на целом Lunar Hub завершился с ошибкой, на GPO-квесте помог проверить часть кода |
 | [luaprojects/moonsec-js-deobf](https://github.com/luaprojects/moonsec-js-deobf) | MoonSec V3, JS-порт |
 | [SixZensED/Lua-Deobfuscator](https://github.com/SixZensED/Lua-Deobfuscator) | Lua, JS |
 | [Centrixs/lua-deobfuscators](https://github.com/Centrixs/lua-deobfuscators) | несколько Lua-обфускаторов |

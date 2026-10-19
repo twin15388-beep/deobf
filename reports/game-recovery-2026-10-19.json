@@ -13,9 +13,91 @@
     "compiler_commit": "9d7748a4f324213a18cb8283fa2a77c330225fa0",
     "all_luau_compiled": true,
     "roblox_or_upstream_code_executed": false,
-    "semantic_equivalence_proved": false
+    "semantic_equivalence_proved": false,
+    "gpo_partial_lua51_compiled": true,
+    "gpo_partial_isolated_mock_tested": true
   },
   "cases": [
+    {
+      "game": "Grand Piece Online",
+      "variant": "Lunar Hub FREE (partial selected fragments)",
+      "input": {
+        "repository": "c0deblox/Scripts",
+        "commit": "472dc5871faae68dfcfbba6485a619275063ee16",
+        "path": "GPO.lua",
+        "url": "https://github.com/c0deblox/Scripts/blob/472dc5871faae68dfcfbba6485a619275063ee16/GPO.lua",
+        "bytes": 90637,
+        "sha256": "0f6a4be8f4477de671068d6b19977088281e9fc098a00f72b5c53bf3f0320f30",
+        "protection": "PSU 4.0.A (virtualized Lua 5.1 bytecode)",
+        "third_party_rights": "license/redistribution rights not verified"
+      },
+      "method": "memcpython/PSU-Deobfuscator@7d955d4d8e3bc14b744dc4afd52118787fc2bda4 bytecode lift; unluac-js@1.4.4 diagnostic recovery and Lua 5.1 disassembly of selected prototypes; manual extraction/renaming into a partial module (not an intact decompilation)",
+      "recovery": "partial_selected_prototypes",
+      "intermediate": {
+        "bytecode_bytes": 48400,
+        "bytecode_sha256": "fe7dc0be0ad15266fd53765c2e53d60c4a4c61277696a93cc50cad3e06542241",
+        "prototype_count": 99,
+        "unknown_instructions": 0,
+        "unluac_status": "diagnostic-pseudocode; 49 recovery-error markers (not published)"
+      },
+      "artifacts": [
+        {
+          "path": "dobf scripts 1.0/Grand Piece Online - Lunar Hub (partial).lua",
+          "bytes": 8042,
+          "lines": 158,
+          "sha256": "b5ef23d211931d85b32e474bcd3efdaea27819dab7e015cd1668ab5f537d7144",
+          "luau_compiled": true,
+          "lua51_compiled": true,
+          "isolated_mock_tested": true,
+          "roblox_tested": false
+        }
+      ],
+      "functions": [
+        {
+          "name": "nearestNpc",
+          "parameters": [
+            "npcName"
+          ],
+          "purpose": "Closest workspace.NPCs model with a matching name pattern and a Humanoid."
+        },
+        {
+          "name": "nearestNpcExcept",
+          "parameters": [
+            "npcName",
+            "excludedName"
+          ],
+          "purpose": "Same, excluding one exact NPC name."
+        },
+        {
+          "name": "takeQuest",
+          "parameters": [
+            "npcName"
+          ],
+          "purpose": "Use Quest and QuestPos, call externally supplied teleport(x,y,z) and invoke Events.Quest with takequest."
+        },
+        {
+          "name": "damageNpc",
+          "parameters": [
+            "targetNpc",
+            "selectedWeapon"
+          ],
+          "purpose": "Map sword/Black Leg choices and invoke Events.CombatRegister for five Ground strikes."
+        },
+        {
+          "name": "hieWaterTouch",
+          "parameters": [
+            "foot"
+          ],
+          "purpose": "On a foot touching water and Hie-Hie selected, clone temporary ice floor from Backpack.WaterLogia."
+        }
+      ],
+      "limitations": [
+        "Not the full Lunar Hub: no UI, original teleport implementation, auto-farm loops or Water.Touched subscription; function names and return table are presentation additions.",
+        "QuestPos lacks Bandit Boss, Axe Hand Logan and Gorilla King; takeQuest will dereference nil for these quest keys.",
+        "unluac-js could not recover the complete program (49 diagnostic errors), and luadec crashes on the full bytecode; equivalence to the protected input is unproved.",
+        "Compiled with Lua 5.1 and Luau; isolated stub smoke test does not prove Roblox gameplay, current object names, safety or real remote behavior."
+      ]
+    },
     {
       "game": "Jujutsu Shenanigans",
       "variant": "Pantheon Hub",
@@ -278,8 +360,8 @@
   ],
   "excluded": [
     {
-      "game": "Grand Piece Online",
-      "reason": "Luraph v13 samples remain protected; PSU lift produced compilable Lua but no verifiable GPO game logic. Neither is published as a GPO result."
+      "game": "Grand Piece Online (other candidates only)",
+      "reason": "Other protected GPO candidates remain excluded: Luraph v13.x samples were not recovered; SeaHubCrackGPO recovered only Rifle CIcklcon spam and generic noclip, although the GPO remote is corroborated by a readable reference; dilleron964 XOR output is a PHANTOM key UI. The separately listed c0deblox/Scripts GPO is published only as selected fragments, not a complete hub."
     },
     {
       "game": "Blox Fruits",
