@@ -15,7 +15,9 @@
     "roblox_or_upstream_code_executed": false,
     "semantic_equivalence_proved": false,
     "gpo_partial_lua51_compiled": true,
-    "gpo_partial_isolated_mock_tested": true
+    "gpo_partial_isolated_mock_tested": true,
+    "astd_roghoul_partial_lua51_compiled": true,
+    "astd_roghoul_partial_isolated_mock_tested": true
   },
   "cases": [
     {
@@ -96,6 +98,139 @@
         "QuestPos lacks Bandit Boss, Axe Hand Logan and Gorilla King; takeQuest will dereference nil for these quest keys.",
         "unluac-js could not recover the complete program (49 diagnostic errors), and luadec crashes on the full bytecode; equivalence to the protected input is unproved.",
         "Compiled with Lua 5.1 and Luau; isolated stub smoke test does not prove Roblox gameplay, current object names, safety or real remote behavior."
+      ]
+    },
+    {
+      "game": "All Star Tower Defense",
+      "variant": "Assasine03 Autofarm (partial selected actions)",
+      "input": {
+        "repository": "c0deblox/Scripts",
+        "commit": "472dc5871faae68dfcfbba6485a619275063ee16",
+        "path": "ASTD.lua",
+        "url": "https://github.com/c0deblox/Scripts/blob/472dc5871faae68dfcfbba6485a619275063ee16/ASTD.lua",
+        "bytes": 89862,
+        "sha256": "0d7df2741df21fce25990d7b30fe7128d7b43d8d71b37a3d60d5442439e56564",
+        "protection": "PSU virtualized Lua 5.1 bytecode",
+        "third_party_rights": "license/redistribution rights not verified"
+      },
+      "method": "memcpython/PSU-Deobfuscator@7d955d4d8e3bc14b744dc4afd52118787fc2bda4 bytecode lift; unluac-js@1.4.4 diagnostic output; selected operations checked against Lua 5.1 disassembly and manually adapted into a partial module (not a complete decompilation)",
+      "recovery": "partial_selected_prototypes",
+      "intermediate": {
+        "bytecode_bytes": 25545,
+        "bytecode_sha256": "b4931b896fea3e372d6c6fd39f2f1ab480f94b0304e85ba2007803a5cfa530d0",
+        "prototype_count": 26,
+        "unknown_instructions": 0,
+        "unluac_status": "diagnostic-pseudocode; 46 recovery-error markers (not published)"
+      },
+      "artifacts": [
+        {
+          "path": "dobf scripts 1.0/All Star Tower Defense - Assasine03 Autofarm (partial).lua",
+          "bytes": 3889,
+          "lines": 74,
+          "sha256": "e179392641a44c402974464b2eb100820560e0d0599d7b787caf45315741da0f",
+          "luau_compiled": true,
+          "lua51_compiled": true,
+          "isolated_mock_tested": true,
+          "roblox_tested": false
+        }
+      ],
+      "functions": [
+        {
+          "name": "summonAt",
+          "parameters": [
+            "unitName",
+            "position"
+          ],
+          "purpose": "Send Remotes.Input/Summon with rotation zero and the caller-supplied placement position."
+        },
+        {
+          "name": "sellAtWave",
+          "parameters": [
+            "enabled",
+            "selectedWave"
+          ],
+          "purpose": "At or after a wave threshold, send Sell for every Workspace.Unit, without an ownership filter."
+        },
+        {
+          "name": "upgradeOwnedUnit",
+          "parameters": [
+            "enabled",
+            "unit",
+            "maxUpgrade"
+          ],
+          "purpose": "Send Upgrade once for a locally owned unit below the requested upgrade limit."
+        },
+        {
+          "name": "confirmNextWave",
+          "parameters": [
+            "enabled"
+          ],
+          "purpose": "When NextWaveVote is visible, send VoteWaveConfirm and hide it locally."
+        }
+      ],
+      "limitations": [
+        "Not the original autofarm: source UI, scheduler loops, placement selection, UnitPlaceAble guard, Summon pcall, and auto-farm pause flag are omitted; actions require explicit inputs.",
+        "Sell sends to every unit in Workspace.Unit with no Owner check, exactly as in the extracted action; use only for static study.",
+        "Whole-file decompiler returned 46 diagnostic error markers, so semantic equivalence of the protected VM is not established.",
+        "Lua 5.1/Luau compilation and a mock smoke test do not prove Roblox behavior, current remotes or safety."
+      ]
+    },
+    {
+      "game": "Ro-Ghoul",
+      "variant": "Yoshimura Quest (partial selected actions)",
+      "input": {
+        "repository": "c0deblox/Scripts",
+        "commit": "472dc5871faae68dfcfbba6485a619275063ee16",
+        "path": "Ro-Ghoul.lua",
+        "url": "https://github.com/c0deblox/Scripts/blob/472dc5871faae68dfcfbba6485a619275063ee16/Ro-Ghoul.lua",
+        "bytes": 69912,
+        "sha256": "18d39a34b235f8dea098d20361c5bf3b0bad987a02caffb73f88ff5753ca430b",
+        "protection": "PSU virtualized Lua 5.1 bytecode",
+        "third_party_rights": "license/redistribution rights not verified"
+      },
+      "method": "memcpython/PSU-Deobfuscator@7d955d4d8e3bc14b744dc4afd52118787fc2bda4 bytecode lift; unluac-js@1.4.4 diagnostic output; selected operations checked against Lua 5.1 disassembly and manually adapted into a partial module (not a complete decompilation)",
+      "recovery": "partial_selected_prototypes",
+      "intermediate": {
+        "bytecode_bytes": 21875,
+        "bytecode_sha256": "2948857707bdb1c1a382ab42f9b425397a1230b09d67cf9c7dd426ac178b35f3",
+        "prototype_count": 36,
+        "unknown_instructions": 0,
+        "unluac_status": "diagnostic-pseudocode; 28 recovery-error markers (not published)"
+      },
+      "artifacts": [
+        {
+          "path": "dobf scripts 1.0/Ro-Ghoul - Yoshimura Quest (partial).lua",
+          "bytes": 3507,
+          "lines": 63,
+          "sha256": "f4e6607869a1c321b987074e035b5536fe461cf52bb545e5c1b0024463c58912",
+          "luau_compiled": true,
+          "lua51_compiled": true,
+          "isolated_mock_tested": true,
+          "roblox_tested": false
+        }
+      ],
+      "functions": [
+        {
+          "name": "needsAogiriQuest",
+          "parameters": [
+            "player"
+          ],
+          "purpose": "Check whether Aogiri Member progress is missing or at Max."
+        },
+        {
+          "name": "yoshimuraAction",
+          "parameters": [
+            "shouldTakeQuest",
+            "deps"
+          ],
+          "purpose": "Move to Yoshimura, invoke Task twice and track quest UI, or cash out reputation; deps is a new explicit dependency bundle."
+        }
+      ],
+      "limitations": [
+        "Not a working autofarm: combat, target selection, trainer controls, UI creation and original movement function are not included.",
+        "The second deps parameter and return-table wrapper are presentation additions; original #24 captured external locals and accepted only one parameter.",
+        "Requires working game-specific remotes, progress objects, status/quest UI and caller-supplied moveTo; none has been verified in Roblox.",
+        "Whole-file decompiler returned 28 diagnostic error markers; equivalence of the protected VM is not proved."
       ]
     },
     {

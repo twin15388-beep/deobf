@@ -1,12 +1,14 @@
 # Восстановленные игровые Lua / Luau — 19 октября 2026
 
-Здесь **девять читаемых выходов из обфусцированных входов для семи заявленных игр** и **отдельный частичный результат по Grand Piece Online**: всего десять файлов / восемь игр. Для GPO это только выбранные игровые функции из поднятого PSU-байткода, **не полный скрипт Lunar Hub**; возвращаемая модулем таблица и говорящие имена добавлены при оформлении. Это не подборка открытых соседних исходников или универсальных загрузчиков. **Оговорка для King Legacy:** удалось восстановить только фирменный `core.lua` с UI и ESP уровня/PVP; его основные действия довольно общие, игровых remote-вызовов для фарма там нет. Это не «полный скрипт King Legacy».
+Здесь **девять читаемых выходов из обфусцированных входов для семи заявленных игр** и **три отдельных частичных результата по Grand Piece Online, All Star Tower Defense и Ro-Ghoul**: всего двенадцать файлов / десять игр. Для этих трёх игр доступны только выбранные игровые участки из поднятого PSU-байткода, **не полные скрипты**; возвращаемые модулями таблицы и говорящие имена добавлены при оформлении. Это не подборка открытых соседних исходников или универсальных загрузчиков. **Оговорка для King Legacy:** удалось восстановить только фирменный `core.lua` с UI и ESP уровня/PVP; его основные действия довольно общие, игровых remote-вызовов для фарма там нет. Это не «полный скрипт King Legacy».
 
-**Статус проверки:** все десять файлов скомпилированы `luau-compile --null`, частичный GPO также скомпилирован Lua 5.1 и проверен на подставных объектах **без Roblox и сети**. Ни защищённые входы, ни выходы не запускались в Roblox. Компиляция и подставные объекты **не доказывают** работоспособность, эквивалентность оригиналу или безопасность. Имена `f1`, `p1`, `v1` и новые имена в GPO — восстановленные/описательные обозначения, а не подлинные локальные имена автора. Сохранённые внешние `loadstring(game:HttpGet(...))` в полных выходах требуют отдельного аудита; **не запускайте эти файлы вслепую**. Хэши входов/выходов, точные коммиты и предупреждения — в [машинном отчёте](../reports/game-recovery-2026-10-19.json), способ воспроизведения — в [методике](../reports/game-recovery-2026-10-19.md). Права на сторонние исходники не проверены.
+**Статус проверки:** все двенадцать файлов скомпилированы `luau-compile --null`, три частичных модуля также скомпилированы Lua 5.1 и проверены на подставных объектах **без Roblox и сети**. Ни защищённые входы, ни выходы не запускались в Roblox. Компиляция и подставные объекты **не доказывают** работоспособность, эквивалентность оригиналу или безопасность. Имена `f1`, `p1`, `v1` и новые имена в трёх частичных модулях — восстановленные/описательные обозначения, а не подлинные локальные имена автора. Сохранённые внешние `loadstring(game:HttpGet(...))` в полных выходах требуют отдельного аудита; **не запускайте эти файлы вслепую**. Хэши входов/выходов, точные коммиты и предупреждения — в [машинном отчёте](../reports/game-recovery-2026-10-19.json), способ воспроизведения — в [методике](../reports/game-recovery-2026-10-19.md). Права на сторонние исходники не проверены.
 
 | Игра | Восстановленный файл | Что именно видно / предел |
 | --- | --- | --- |
 | Grand Piece Online | [Lunar Hub (partial).lua](Grand%20Piece%20Online%20-%20Lunar%20Hub%20%28partial%29.lua) | **Частично:** GPO-квесты/координаты, `Events.Quest`, `Events.CombatRegister`, поиск NPC, лёд Hie-Hie. Полный хаб, GUI, `teleport()` и автофарм не восстановлены |
+| All Star Tower Defense | [Assasine03 Autofarm (partial).lua](All%20Star%20Tower%20Defense%20-%20Assasine03%20Autofarm%20%28partial%29.lua) | **Частично:** `Remotes.Input` — `Summon`, `Sell`, `Upgrade`, `VoteWaveConfirm`; циклы, GUI и подбор точки размещения отсутствуют |
+| Ro-Ghoul | [Yoshimura Quest (partial).lua](Ro-Ghoul%20-%20Yoshimura%20Quest%20%28partial%29.lua) | **Частично:** квест `Aogiri Member` у Yoshimura, `ReputationCashOut`, параметры боссов; без движка перемещения и автофарма |
 | Jujutsu Shenanigans | [Inquest Moveset.lua](Jujutsu%20Shenanigans%20-%20Inquest%20Moveset.lua) | `MainEnv()`, анимационные обработчики способностей и игровые `Service.RE.Activated` |
 | Jujutsu Shenanigans | [Pantheon Hub.lua](Jujutsu%20Shenanigans%20-%20Pantheon%20Hub.lua) | Flash Step, обработчики анимаций, JJS UI; внешняя WindUI и неразрешённые глобалы |
 | King Legacy | [Luxury Core.lua](King%20Legacy%20-%20Luxury%20Core.lua) | UI, ESP уровня/PVP, выбор игрока; **не** фарм квестов, механики ESP в основном общие |
@@ -19,7 +21,7 @@
 
 ## Подлинные фрагменты восстановленных функций
 
-Это **выдержки**, не пересказ вместо кода: результаты — по ссылкам в таблице. У GPO доступен **только отмеченный частичный файл**, а не полный исходный результат; он составлен из выбранных участков поднятого байткода. `pN` означает параметр с неизвестным первоначальным именем.
+Это **выдержки**, не пересказ вместо кода: результаты — по ссылкам в таблице. У GPO, ASTD и Ro-Ghoul доступны **только отмеченные частичные файлы**, а не полные исходные результаты; они составлены из выбранных участков поднятого байткода. `pN` означает параметр с неизвестным первоначальным именем.
 
 ### Grand Piece Online — Lunar Hub FREE (частично)
 
@@ -41,6 +43,46 @@ end
 `damageNpc(targetNpc, selectedWeapon)` сопоставляет `Katana`/`Kiribachi` → `Sword`, `Black Leg` → `BlackLeg` и отправляет **пять** вызовов `CombatRegister` с `{ "damage", targetNpc.HumanoidRootPart, weapon, {strike, "Ground", weapon} }`. `nearestNpc(npcName)` выбирает ближайшего NPC из `workspace.NPCs`; `nearestNpcExcept(npcName, excludedName)` исключает точное имя. `hieWaterTouch(foot)` клонирует `WaterLogia["Hie-Hie"].floor`, помещает на поверхность воды на пять секунд и очищает `sm2`/`sm3`. Параметр `foot` — коснувшаяся воды деталь; подписка на `Water.Touched` была в остальном UI и **не входит** в опубликованный модуль.
 
 **Важный предел:** `unluac-js` выдал для **целого** хаба диагностический псевдокод с 49 метками ошибки восстановления, а `luadec` не восстановил программу целиком. Мы **не** публикуем этот ошибочный файл и **не** заявляем полный автоматический фарм. В таблице `QuestPos` отсутствуют `Bandit Boss`, `Axe Hand Logan`, `Gorilla King`, поэтому `takeQuest()` для них без добавочной логики не сработает. Не включены GUI, исходная реализация `teleport`, циклы автофарма и загрузка MaterialLua. Синтаксис проверен в Lua 5.1 и Luau, выбранные действия — в изолированном Lua-тесте с подставными объектами; ни один вызов не проверен на живом сервере. Имена функций/модульная оболочка при оформлении изменены, а степень сохранения поведения **всей** защиты неизвестна.
+
+### All Star Tower Defense — Assasine03 Autofarm (частично)
+
+Защищённый `c0deblox/Scripts:ASTD.lua` — PSU-вход со строкой `_G.UIName = "All Star Tower Defense Autofarm"`, полями `WaveValue`/`UnitPlaceAble` и `ReplicatedStorage.Remotes.Input`. Статическое поднятие дало Lua 5.1 bytecode, но **целый** диагностический вывод `unluac-js` содержит 46 меток ошибки: его нельзя запускать или выдавать за восстановленный скрипт. Выбранные действия #18, #19/#21, #22, #23 **дополнительно просмотрены в `luac -l -l`**. [Частичный Lua-модуль](All%20Star%20Tower%20Defense%20-%20Assasine03%20Autofarm%20%28partial%29.lua) даёт код четырёх функций, например:
+
+```lua
+local function summonAt(unitName, position)
+    if position then
+        inputRemote():FireServer("Summon", {
+            Rotation = 0,
+            cframe = CFrame.new(position.X, position.Y, position.Z),
+            Unit = unitName,
+        })
+    end
+end
+```
+
+`unitName` — выбранный юнит, `position` — готовая точка, которую в оригинале выбирает **не восстановленная здесь** функция #4. `sellAtWave(enabled, selectedWave)` при достижении волны отправляет `"Sell"` для **всех** моделей в `Workspace.Unit` (без фильтра владельца, как в выбранном участке). `upgradeOwnedUnit(enabled, unit, maxUpgrade)` проверяет `Owner == LocalPlayer`, текущую/максимальную ступень улучшения и отправляет `"Upgrade"` для **одного** юнита. `confirmNextWave(enabled)` проверяет `HUD.NextWaveVote.Visible`, отправляет `"VoteWaveConfirm"` и локально скрывает окно. `enabled` — прежний флаг UI, теперь аргумент однократного вызова, а не восстановленный цикл. **Не входят** UI, выбор уровня, очередь, бесконечные циклы, подбор позиции, контроль паузы автофарма и `pcall` оригинальной ветви Summon. Пройден изолированный тест с макетами и компиляция Lua 5.1/Luau; в Roblox не проверялся.
+
+### Ro-Ghoul — Yoshimura Quest (частично)
+
+Из защищённого `c0deblox/Scripts:Ro-Ghoul.lua` поднят Lua 5.1 bytecode; полный диагностический вывод содержит 28 меток ошибки, **не является рабочим автофармом**. Выбранная функция #24/#25 (и проверка из #35) сверена с дизассемблированным байткодом. [Частичный Lua-модуль](Ro-Ghoul%20-%20Yoshimura%20Quest%20%28partial%29.lua) содержит таблицы требований к `Eto Yoshimura`, `Koutarou Amon`, `Nishiki Nishio` и групп спавна, `needsAogiriQuest(player)` и `yoshimuraAction(shouldTakeQuest, deps)`. Внутри последней реально восстановлены два вызова квестового remote и подписка на прогресс:
+
+```lua
+if shouldTakeQuest then
+    deps.remotes.Yoshimura.Task:InvokeServer()
+    wait()
+    deps.remotes.Yoshimura.Task:InvokeServer()
+    local progress = deps.player.PlayerFolder.CurrentQuest.Complete:WaitForChild("Aogiri Member")
+    deps.questUI.label.Text = deps.questUI.prefix .. progress.Value .. "/" .. progress.Max.Value
+    progress.Changed:connect(function(value)
+        deps.questUI.label.Text = deps.questUI.prefix .. value .. "/" .. progress.Max.Value
+    end)
+else
+    deps.remotes.ReputationCashOut:InvokeServer()
+    deps.lastCashOut = tick()
+end
+```
+
+`player` — локальный игрок; `shouldTakeQuest=true` берёт квест, `false`/`nil` сдаёт репутацию. **Новый, не оригинальный** параметр `deps` явно предоставляет статус, `moveTo(cframe)`, remotes, игрока и UI; без `moveTo` и этих объектов функция не работает. Перед remote исходная функция также перемещается к `workspace.Anteiku.Yoshimura` и ждёт 1,5 секунды (см. файл). Не восстановлены бой, поиск целей, GUI, исполнение всего автофарма; работа на сервере не проверялась, только Lua 5.1/Luau-компиляция и изолированные макеты.
 
 ### Jujutsu Shenanigans — Inquest Moveset
 
