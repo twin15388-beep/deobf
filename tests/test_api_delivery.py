@@ -9,8 +9,8 @@ import unittest
 from pathlib import Path
 
 from scripts.inspect_api_delivery import (
-    CATALOG, MAX_BODY, SnapshotError, classify, decode_har, decode_response,
-    export_payload, inspect_loader, main, provider_for_url,
+    CATALOG, MAX_BODY, ROOT, SnapshotError, classify, decode_har, decode_response,
+    export_payload, inspect_loader, main, provider_for_url, route_for_url,
     unwrap_literal_loadstring,
 )
 
@@ -50,6 +50,21 @@ class DeliveryTests(unittest.TestCase):
         self.assertTrue(info["auth_or_sdk_call_seen"])
         self.assertNotIn("SECRET", json.dumps(info))
 
+    def test_jnkie_public_delivery_routes_are_redacted(self):
+        urls = {
+            "https://api.jnkie.com/api/v1/luascripts/public/FAKE/download?key=SECRET": "public-loader",
+            "https://api.jnkie.com/api/v1/loaders/public/FAKE/download": "public-loader",
+            "https://api.jnkie.com/api/v1/luascripts/delivery/FAKE": "delivery",
+            "https://cdn.jnkie.com/signed/FAKE.lua?sig=SECRET": "signed-payload",
+        }
+        for url, expected in urls.items():
+            self.assertEqual(provider_for_url(url), "jnkie")
+            self.assertEqual(route_for_url(url, "jnkie"), expected)
+        loader = inspect_loader(('loadstring(game:HttpGet("' + next(iter(urls)) + '"))()').encode())
+        self.assertEqual(loader["literal_http_routes"][0]["route"], "public-loader")
+        self.assertNotIn("SECRET", json.dumps(loader))
+        self.assertNotIn("FAKE", json.dumps(loader))
+
     def test_jnkie_sdk_url_passed_through_a_variable(self):
         loader = (b'local SDK_URL = "' + JNKIE_URL.encode() + b'"\n'
                   b'local function safeLoad(url) return loadstring(game:HttpGet(url))() end\n'
@@ -72,6 +87,74 @@ class DeliveryTests(unittest.TestCase):
         self.assertEqual(result.data, GAME)
         self.assertEqual([part["transform"] for part in result.layers],
                          ["json-base64", "literal-loadstring"])
+
+    def test_base64_data_field_and_multiple_json_fields(self):
+        response = json.dumps({"encoding": "base64", "data": base64.b64encode(VM).decode()}).encode()
+        result = decode_response(response)
+        self.assertEqual(result.status, "protected_payload")
+        self.assertEqual(result.data, VM)
+        self.assertEqual(result.layers[0]["transform"], "json-base64")
+
+        # A loader in the first field must not hide the actual local body.
+        loader = 'loadstring(game:HttpGet("' + LUARMOR_URL + '"))()'
+        result = decode_response(json.dumps({"script": loader, "payload": VM.decode()}).encode())
+        self.assertEqual(result.status, "protected_payload")
+        self.assertEqual(result.data, VM)
+        self.assertEqual(result.layers[0]["transform"], "json-payload")
+
+        # Two distinct source candidates require explicit human selection.
+        for other in ("local x = 1", VM.decode()):
+            result = decode_response(json.dumps({"script": GAME.decode(), "payload": other}).encode())
+            self.assertEqual(result.status, "ambiguous_json_fields")
+            self.assertIsNone(result.data)
+
+    def test_comments_and_strings_do_not_invent_gameplay_or_providers(self):
+        loader = b'loadstring(game:HttpGet("' + LUARMOR_URL.encode() + b'"))()'
+        commented = (b'-- game.Quest.Remote:FireServer("fake")\n'
+                     b'-- loadstring(game:HttpGet("' + JNKIE_URL.encode() + b'"))()\n'
+                     b'local note = ":InvokeServer(fake)"\n' + loader)
+        info = inspect_loader(commented)
+        self.assertEqual(info["providers"], ["luarmor"])
+        self.assertEqual(len(info["literal_http_routes"]), 1)
+        self.assertEqual(info["literal_http_routes"][0]["reference"], "direct-http")
+        self.assertFalse(info["inline_remote_call_hint_seen"])
+        self.assertEqual(classify(commented), "loader_only")
+        quoted_banner = b'local note = "This file was protected with MoonSec V3"\n' + loader
+        self.assertEqual(classify(quoted_banner), "loader_only")
+        self.assertEqual(classify(b"-- Luraph Obfuscator v15\n"), "unverified_data")
+        self.assertEqual(classify(b"-- Luraph Obfuscator v15\n" + loader), "loader_only")
+
+    def test_loader_with_inline_remote_calls_is_not_loader_only(self):
+        script = (b"repeat task.wait() until game:IsLoaded()\n"
+                  b'local lib=loadstring(game:HttpGet("' + LUARMOR_URL.encode() + b'"))()\n'
+                  b'local optional_hook = "LPH_ENCSTR" -- quoted API name, not a VM\n'
+                  b'game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("GetFruits")\n')
+        self.assertEqual(classify(script), "lua_source_candidate")
+        self.assertTrue(inspect_loader(script)["inline_remote_call_hint_seen"])
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / "mixed.lua"
+            path.write_bytes(script)
+            with contextlib.redirect_stdout(io.StringIO()) as buf:
+                self.assertEqual(main(["--loader", str(path)]), 0)
+            result = json.loads(buf.getvalue())
+            self.assertEqual(result["status"], "loader_with_inline_code")
+            self.assertFalse(result["gameplay_verified"])
+            self.assertFalse(result["deobfuscated"])
+
+    def test_loader_plus_embedded_vm_not_reported_loader_only(self):
+        mixed = (b'local sdk = loadstring(game:HttpGet("' + JNKIE_URL.encode() + b'"))()\n'
+                 b'-- This file was protected using Luraph Obfuscator v14.6\n'
+                 b'return(function() local virtualized = {} end)()\n')
+        self.assertEqual(classify(mixed), "protected_payload")
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / "jnkie.lua"
+            path.write_bytes(mixed)
+            with contextlib.redirect_stdout(io.StringIO()) as buf:
+                self.assertEqual(main(["--loader", str(path)]), 0)
+            result = json.loads(buf.getvalue())
+            self.assertEqual(result["status"], "loader_with_protected_code")
+            self.assertEqual(result["loader"]["providers"], ["jnkie"])
+            self.assertFalse(result["deobfuscated"])
 
     def test_long_brackets_and_escapes_preserve_exact_payload(self):
         self.assertEqual(unwrap_literal_loadstring(
@@ -158,12 +241,13 @@ class DeliveryTests(unittest.TestCase):
         with self.assertRaises(SnapshotError):
             decode_har(json.dumps({"log": {"entries": [entry]}}).encode(), None, None)
 
-    def test_size_limits_and_no_catalog_output(self):
+    def test_size_limits_and_no_tracked_repository_output(self):
         with self.assertRaises(SnapshotError):
             decode_response(b" " * (MAX_BODY + 1))
-        with self.assertRaises(SnapshotError):
-            export_payload(CATALOG / "Do Not Publish.lua", decode_response(GAME))
-        self.assertFalse((CATALOG / "Do Not Publish.lua").exists())
+        for target in (CATALOG / "Do Not Publish.lua", ROOT / "scripts" / "Do Not Publish.lua"):
+            with self.assertRaises(SnapshotError):
+                export_payload(target, decode_response(GAME))
+            self.assertFalse(target.exists())
 
     def test_cli_redacted_report_and_exclusive_scratch_output(self):
         with tempfile.TemporaryDirectory() as temp:

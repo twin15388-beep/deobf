@@ -28,7 +28,9 @@ from urllib.parse import urlsplit
 MAX_BODY = 4_000_000
 MAX_HAR = 20_000_000
 MAX_DEPTH = 6
-CATALOG = (Path(__file__).resolve().parents[1] / "dobf scripts 1.0").resolve()
+ROOT = Path(__file__).resolve().parents[1]
+CATALOG = (ROOT / "dobf scripts 1.0").resolve()
+PRIVATE_OUTPUT = (ROOT / "local-results").resolve()
 
 # Hostnames must match exactly or be subdomains, not merely contain the name.
 PROVIDERS = {"luarmor": "luarmor.net", "jnkie": "jnkie.com"}
@@ -41,14 +43,31 @@ HTTP_LITERAL = re.compile(
 # function call or execute arbitrary string concatenations.
 URL_LITERAL = re.compile(rb"(['\"])(https://[^\s'\"\\]+)\1", re.IGNORECASE)
 AUTH_MARKERS = (b"script_key", b"check_key(", b"checkkey(", b"load_script(")
-VM_MARKERS = (
+VM_BANNERS = (
     b"this file was protected with moonsec", b"luraph obfuscator",
     b"psu obfuscator", b"wearedevs.net/obfuscator", b"ironbrew",
-    b"lph_encstr", b"lph_encfunc",
+)
+VM_CODE_MARKERS = (b"lph_encstr", b"lph_encfunc")
+VM_COMMENT_LINE = re.compile(
+    rb"^[ \t]*--[^\r\n]*(?:this file was protected with moonsec|luraph obfuscator|"
+    rb"psu obfuscator|wearedevs\.net/obfuscator|ironbrew)", re.I | re.M,
+)
+# Some MoonSec versions use ([[banner]]):gsub(...) as *code* rather than a comment.
+VM_INLINE_MOONSEC = re.compile(
+    rb"^[ \t]*\(?[ \t]*\[=*\[\s*this file was protected with moonsec", re.I | re.M,
 )
 LUA_START = re.compile(
-    rb"(?:--|local\b|return\b|function\b|do\b|if\b|while\b|repeat\b|"
-    rb"loadstring\b|script_key\b|getgenv\s*\(|\(\s*\[\[)", re.IGNORECASE,
+    rb"(?:local\b|return\b|function\b|do\b|if\b|while\b|repeat\b|"
+    rb"loadstring\b|script_key\b|getgenv\s*\(|\(\s*function\b|\(\s*\[\[)", re.IGNORECASE,
+)
+REMOTE_CALL = re.compile(
+    rb":\s*(?:FireServer|InvokeServer)\s*\(|\bfireproximityprompt\s*\(", re.IGNORECASE,
+)
+NETWORK_CALL = re.compile(rb"\bHttpGet(?:Async)?\s*\(|\blrm_load_script\s*\(|\bjnkie\.load_script\s*\(", re.I)
+# Applied to code with comments/strings blanked, not to arbitrary downloaded text.
+SIMPLE_HTTP_LOADER = re.compile(
+    rb"(?:return\s+)?loadstring\s*\(\s*game\s*:\s*HttpGet(?:Async)?\s*\([^()]*\)\s*\)\s*\(\s*\)\s*;?\s*",
+    re.IGNORECASE,
 )
 FIELDS = ("script", "source", "lua", "payload", "body", "content", "response", "data", "code")
 
@@ -68,6 +87,60 @@ def read_limited(path: Path, limit: int) -> bytes:
     if len(data) > limit:
         raise SnapshotError("local input exceeds size limit")
     return data
+
+
+def _lua_without(raw: bytes, *, strings: bool) -> bytes:
+    """Blank Lua comments, and optionally literals, preserving byte offsets.
+
+    This is a lexical *hint* for metadata, not a Lua parser. In particular,
+    Luau interpolated backtick strings are treated as opaque, so an embedded
+    expression may be missed rather than misreported as recovered gameplay.
+    """
+    out = bytearray(raw)
+    length = len(raw)
+
+    def long_end(pos: int) -> int | None:
+        if pos >= length or raw[pos] != ord("["):
+            return None
+        equals = pos + 1
+        while equals < length and raw[equals] == ord("=") and equals - pos <= 64:
+            equals += 1
+        if equals >= length or raw[equals] != ord("["):
+            return None
+        closer = b"]" + raw[pos + 1:equals] + b"]"
+        end = raw.find(closer, equals + 1)
+        return length if end < 0 else end + len(closer)
+
+    pos = 0
+    while pos < length:
+        start = pos
+        if raw.startswith(b"--", pos):
+            end = long_end(pos + 2)
+            if end is None:
+                newline = raw.find(b"\n", pos + 2)
+                end = length if newline < 0 else newline
+            out[pos:end] = b" " * (end - pos)
+            pos = end
+        elif raw[pos] in (ord("'"), ord('"'), ord("`")):
+            quote = raw[pos]
+            pos += 1
+            while pos < length:
+                if raw[pos] == 92:  # escaped quote or backslash
+                    pos = min(length, pos + 2)
+                elif raw[pos] == quote:
+                    pos += 1
+                    break
+                else:
+                    pos += 1
+            if strings:
+                out[start:pos] = b" " * (pos - start)
+        elif raw[pos] == ord("[") and (end := long_end(pos)) is not None:
+            if strings:
+                out[pos:end] = b" " * (end - pos)
+            pos = end
+        else:
+            pos += 1
+    return bytes(out)
 
 
 def provider_for_url(url: str) -> str | None:
@@ -94,34 +167,48 @@ def route_for_url(url: str, provider: str) -> str:
             return "loader"
         if "/files/v3/l/" in path:
             return "script-endpoint"
-    if provider == "jnkie" and path.endswith("/sdk/library.lua"):
-        return "sdk-library"
+    if provider == "jnkie":
+        if path.endswith("/sdk/library.lua"):
+            return "sdk-library"
+        if re.fullmatch(r"/api/v1/(?:luascripts|loaders)/public/[^/]+/download", path):
+            return "public-loader"
+        if re.fullmatch(r"/api/v1/luascripts/delivery/[^/]+", path):
+            return "delivery"
+        if urlsplit(url).hostname == "cdn.jnkie.com" and path.endswith(".lua"):
+            return "signed-payload"
     return "other"
 
 
 def inspect_loader(raw: bytes) -> dict:
     """Extract delivery metadata from local Lua; never print script IDs/keys."""
-    direct_positions = {match.start(2) for match in HTTP_LITERAL.finditer(raw)}
+    uncommented = _lua_without(raw, strings=False)
+    code = _lua_without(raw, strings=True)
+    direct_positions = {
+        match.start(2) for match in HTTP_LITERAL.finditer(uncommented)
+        if code[match.start():match.start() + 7].lower() == b"httpget"
+    }
     found = []
-    for match in URL_LITERAL.finditer(raw):
+    for match in URL_LITERAL.finditer(uncommented):
         url = match.group(2).decode("ascii", "ignore")
         provider = provider_for_url(url)
         if provider:
             found.append({"provider": provider, "route": route_for_url(url, provider),
                           "reference": ("direct-http" if match.start(2) in direct_positions
                                         else "literal-url")})
-    lower = raw.lower()
+    lower = code.lower()
     providers = sorted({item["provider"] for item in found}
                        | ({"luarmor"} if b"lrm_load_script" in lower else set())
                        | ({"jnkie"} if b"jnkie.load_script" in lower else set()))
-    http_calls = len(re.findall(rb"\bHttpGet(?:Async)?\s*\(", raw, re.I))
+    http_calls = len(re.findall(rb"\bHttpGet(?:Async)?\s*\(", code, re.I))
     return {
         "bytes": len(raw), "sha256": digest(raw), "providers": providers,
         "literal_http_routes": found,
         "unresolved_http_calls": http_calls > len(direct_positions),
         "auth_or_sdk_call_seen": any(marker in lower for marker in AUTH_MARKERS),
+        # Heuristic only: an HttpGet may refer to an unrelated URL variable.
         "delivery_call_seen": bool((found and http_calls) or b"lrm_load_script" in lower
                                    or b"jnkie.load_script" in lower),
+        "inline_remote_call_hint_seen": bool(REMOTE_CALL.search(code)),
     }
 
 
@@ -245,23 +332,35 @@ def classify(data: bytes) -> str:
         return "no_payload"
     if data.startswith(b"\x1bLua") or data.startswith(b"\x1bLuau"):
         return "binary_bytecode"
-    low = data.lower()
-    if any(marker in low for marker in VM_MARKERS):
-        return "protected_payload"
     try:
-        start = _skip_trivia(data, 0)
+        _skip_trivia(data, 0)
     except SnapshotError:
         return "unverified_data"
-    tail = data[start:]
-    if not LUA_START.match(tail) and not re.search(rb"\b(?:game|workspace)[:.]", tail):
+    code = _lua_without(data, strings=True).lstrip()
+    if not code or (not LUA_START.match(code)
+                    and not re.search(rb"\b(?:game|workspace)[:.]", code)):
         return "unverified_data"
-    # The presence of a network/SDK loader, even a lengthy UI, is not proof of
-    # available game logic. The user may inspect but cannot export it as code.
-    if (b"httpget" in low or b"lrm_load_script" in low or b"jnkie.load_script" in low):
-        gameplay = any(marker in low for marker in
-                       (b":fireserver", b":invokeserver", b"fireproximityprompt"))
-        if not gameplay:
-            return "loader_only"
+    delivery = bool(NETWORK_CALL.search(code))
+    remote_call = bool(REMOTE_CALL.search(code))
+    # Quoted protection names are not proof of a VM. A banner must be a real
+    # comment header or MoonSec's executable ([[banner]]):gsub(...) idiom.
+    vm_marker = any(marker in code.lower() for marker in VM_CODE_MARKERS)
+    if not vm_marker and any(marker in data.lower() for marker in VM_BANNERS):
+        uncommented = _lua_without(data, strings=False)
+        vm_marker = any(not uncommented[m.start():m.end()].strip()
+                        for m in VM_COMMENT_LINE.finditer(data))
+        if not vm_marker:
+            vm_marker = any(code[m.start():m.start() + 32].lstrip().startswith((b"(", b"["))
+                            for m in VM_INLINE_MOONSEC.finditer(data))
+    # A VM banner pasted above a trivial network wrapper does not make the
+    # loader itself a VM. Complex VM bodies take precedence over loader hints.
+    if vm_marker and not (delivery and SIMPLE_HTTP_LOADER.fullmatch(code)):
+        return "protected_payload"
+    # No inline remote-call hint: *conservatively* withhold source export.
+    # This does not prove that the whole file lacks game code or that remote
+    # calls hidden in strings/interpolation have been decoded.
+    if delivery and not remote_call:
+        return "loader_only"
     return "lua_source_candidate"  # Not necessarily game-specific or recovered.
 
 
@@ -308,28 +407,44 @@ def decode_response(raw: bytes, initial_layers: tuple[dict, ...] = ()) -> Decode
                         value = obj.encode("utf-8")
                         return inner(value, layers + (_layer("json-string", value),), depth + 1)
                 elif isinstance(obj, dict):
-                    encoding = obj.get("encoding")
-                    if encoding == "base64":
-                        for field in ("script", "source", "lua", "payload", "body", "content"):
-                            if isinstance(obj.get(field), str):
-                                value = _decode_base64(obj[field])
-                                return inner(value, layers + (_layer("json-base64", value),), depth + 1)
+                    ranks = {"loader_only": 1, "lua_source_candidate": 2,
+                             "binary_bytecode": 3, "protected_payload": 4}
+                    best: Decoded | None = None
+                    ambiguous = False
                     for field in FIELDS:
                         value = obj.get(field)
                         if not isinstance(value, (str, dict)):
                             continue
                         if field == "code" and isinstance(value, str) and not LUA_START.match(value.lstrip().encode("utf-8")):
                             continue  # KEY_VALID/KEY_INVALID is a status, not code.
-                        if isinstance(value, str):
-                            encoded = value.encode("utf-8")
+                        if obj.get("encoding") == "base64" and field != "code" and isinstance(value, str):
+                            encoded = _decode_base64(value)
+                            label = "json-base64"
                         else:
-                            encoded = json.dumps(value, ensure_ascii=False).encode("utf-8")
+                            encoded = (value.encode("utf-8") if isinstance(value, str)
+                                       else json.dumps(value, ensure_ascii=False).encode("utf-8"))
+                            label = "json-" + field
                         if len(encoded) > MAX_BODY:
                             continue
-                        decoded = inner(encoded, layers + (_layer("json-" + field, encoded),), depth + 1)
-                        if decoded.status in ("protected_payload", "lua_source_candidate", "loader_only", "binary_bytecode"):
-                            return decoded
-                    return Decoded(None, layers, "auth_or_no_script")
+                        decoded = inner(encoded, layers + (_layer(label, encoded),), depth + 1)
+                        if decoded.status not in ranks:
+                            continue
+                        if best is None:
+                            best = decoded
+                        elif best.status == "loader_only" and decoded.status != "loader_only":
+                            best, ambiguous = decoded, False
+                        elif decoded.status != "loader_only" and best.status != "loader_only":
+                            # Neither protected VM nor readable code is a
+                            # safe default when both *different* bodies occur.
+                            if decoded.data != best.data:
+                                ambiguous = True
+                            if ranks[decoded.status] > ranks[best.status]:
+                                best = decoded
+                        elif best.status == "loader_only" and decoded.data != best.data:
+                            ambiguous = True
+                    if ambiguous:
+                        return Decoded(None, layers, "ambiguous_json_fields")
+                    return best if best is not None else Decoded(None, layers, "auth_or_no_script")
                 elif isinstance(obj, list):
                     return Decoded(None, layers, "ambiguous_json_array")
         try:
@@ -412,8 +527,8 @@ def export_payload(path: Path, decoded: Decoded) -> None:
     if decoded.status not in ("protected_payload", "lua_source_candidate") or decoded.data is None:
         raise SnapshotError("no code payload to export (loader/auth/transport is not a recovery)")
     target = path.resolve()
-    if target == CATALOG or CATALOG in target.parents:
-        raise SnapshotError("refusing to place an unverified snapshot in the game-results catalog")
+    if (target == ROOT or ROOT in target.parents) and PRIVATE_OUTPUT not in target.parents:
+        raise SnapshotError("repository output must be under ignored local-results/ (or outside the repo)")
     path.parent.mkdir(parents=True, exist_ok=True)
     # Exclusive create prevents silent overwrites; only explicit --out writes code.
     with path.open("xb") as dest:
@@ -437,7 +552,9 @@ def main(argv: list[str] | None = None) -> int:
     if args.out is not None and not (args.capture or args.har):
         parser.error("--out requires a response snapshot")
     try:
-        info = inspect_loader(read_limited(args.loader, MAX_BODY)) if args.loader else None
+        loader_raw = read_limited(args.loader, MAX_BODY) if args.loader else None
+        info = inspect_loader(loader_raw) if loader_raw is not None else None
+        local_class = classify(loader_raw) if loader_raw is not None else None
         result: dict = {"mode": "offline-static-only", "loader": info}
         decoded = None
         if args.capture:
@@ -448,7 +565,19 @@ def main(argv: list[str] | None = None) -> int:
             raw = read_limited(args.har, MAX_HAR)
             decoded, meta = decode_har(raw, args.response_index, info)
             result["snapshot"] = {"kind": "local-har", "bytes": len(raw), "sha256": digest(raw), **meta}
-        result["status"] = decoded.status if decoded else ("loader_only" if info and info["delivery_call_seen"] else "no_snapshot")
+        if decoded is not None:
+            result["status"] = decoded.status
+        elif info and info["delivery_call_seen"]:
+            if local_class == "protected_payload":
+                result["status"] = "loader_with_protected_code"
+            elif info["inline_remote_call_hint_seen"]:
+                result["status"] = "loader_with_inline_code"
+            else:
+                result["status"] = "loader_only"
+        elif local_class == "protected_payload":
+            result["status"] = "protected_local_file"
+        else:
+            result["status"] = "no_snapshot"
         result["layers"] = list(decoded.layers) if decoded else []
         if decoded and decoded.data is not None:
             result["payload"] = {"bytes": len(decoded.data), "sha256": digest(decoded.data)}
