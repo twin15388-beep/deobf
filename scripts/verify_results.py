@@ -19,16 +19,43 @@ SOURCE_REPORTS = (
     "reports/game-sources-2026-10-21-followup.json",
     "reports/game-sources-2026-10-21-extra.json",
     "reports/game-sources-2026-10-21-protected.json",
+    "reports/game-sources-2026-10-22-wad.json",
 )
 REPORTS = ("reports/game-recovery-2026-10-19.json", *SOURCE_REPORTS)
 ADDITIONS = SOURCE_REPORTS[1]
 FOLLOWUP = SOURCE_REPORTS[2]
 EXTRA = SOURCE_REPORTS[3]
 PROTECTED = SOURCE_REPORTS[4]
+WAD = SOURCE_REPORTS[5]
 PROTECTED_PARTIAL_CASES = {
     "dobf scripts 1.0/Zero Academia - ZeroScripts (partial).lua": 28,
     "dobf scripts 1.0/Item Factory - MoonSec V3 (partial).lua": 44,
     "dobf scripts 1.0/Anime Fighters Simulator - PSU (partial).lua": 20,
+}
+# Offline evidence required from each WAD recovery. A mock count of 0 is only
+# accepted together with a static-body assertion count, so an untested file can
+# never be published silently.
+WAD_EVIDENCE = {
+    "dobf scripts 1.0/Your Bizarre Adventure - Revenge Hub.lua": {
+        "mock_game_assertions": 36,
+        "static_body_assertions": None,
+        "body_contains": (
+            b"github.com/Footagesus/WindUI/releases/latest/download/main.lua",
+            b'"PurchaseShopItem", { ItemName = "1x Lucky Arrow" }',
+            b'NPC = "Merchant"',
+        ),
+        "body_excludes": (b"loadstring(game:HttpGet(\"https://pastebin",),
+    },
+    "dobf scripts 1.0/Jujutsu Shenanigans - Sonic Moveset.lua": {
+        "mock_game_assertions": 0,
+        "static_body_assertions": 35,
+        "body_contains": (
+            b"Knit.Knit.Services.CursoryImpactService.RE.Activated",
+            b"Knit.Knit.Services.NaoyaService.RE.RightActivated",
+            b'GetAttribute("Moveset") ~= "Naoya"',
+        ),
+        "body_excludes": (b"loadstring(",),
+    },
 }
 
 
@@ -200,6 +227,59 @@ def verify() -> int:
                             raise ValueError(f"Missing licensed decoder output: {name}")
                     else:
                         raise ValueError(f"Unsupported protected result license: {name}")
+                elif report_name == WAD:
+                    # Full static WeAreDevs/WAD recoveries: verbatim decoder body,
+                    # pinned MIT source, and honest offline evidence per file.
+                    source = artifact["source"]
+                    evidence = WAD_EVIDENCE.get(name)
+                    if evidence is None:
+                        raise ValueError(f"Unregistered WAD result: {name}")
+                    if (status != "deobfuscated"
+                            or source["license"] != "MIT"
+                            or len(source["commit"]) != 40
+                            or source["commit"] not in source["url"]
+                            or not source["url"].startswith("https://github.com/")
+                            or source["sha256"].encode() not in header
+                            or source["url"].encode() not in header
+                            or artifact["recovery_tool"].encode() not in header
+                            or b"DEOBFUSCATED (static recovery)" not in header
+                            or b"NOT TESTED IN ROBLOX" not in header
+                            or len(body) < 2000
+                            or source["sha256"] == artifact["result_body_sha256"]
+                            or hashlib.sha256(body).hexdigest() != artifact["result_body_sha256"]
+                            or hashlib.sha256(header + separator).hexdigest()
+                            != artifact["result_header_sha256"]
+                            or not all(marker.encode() in body
+                                       for marker in artifact["game_markers"])):
+                        raise ValueError(f"Unpinned or non-game-specific WAD recovery: {name}")
+                    begin, end = b"MIT LICENSE BEGIN\n", b"MIT LICENSE END\n"
+                    if begin not in header or end not in header:
+                        raise ValueError(f"Missing complete license in {name}")
+                    license_bytes = header.split(begin, 1)[1].split(end, 1)[0]
+                    if (b"MIT License" not in license_bytes
+                            or hashlib.sha256(license_bytes).hexdigest()
+                            != source["license_sha256"]):
+                        raise ValueError(f"Altered upstream MIT license in {name}")
+                    verification = artifact["verification"]
+                    if (verification["tested_in_roblox"] is not False
+                            or verification["protected_top_level_executed"] is not False
+                            or verification["repeat_decoder_output_identical"] is not True
+                            or verification["lua51_syntax"] is not True):
+                        raise ValueError(f"Unsupported verification claim: {name}")
+                    if (verification["mock_game_assertions"]
+                            != evidence["mock_game_assertions"]):
+                        raise ValueError(f"Mock evidence changed without update: {name}")
+                    if evidence["static_body_assertions"] is None:
+                        if "static_body_assertions" in verification:
+                            raise ValueError(f"Unexpected static-only claim: {name}")
+                    elif (verification.get("static_body_assertions")
+                            != evidence["static_body_assertions"]):
+                        raise ValueError(f"Static evidence changed without update: {name}")
+                    if (not all(token in body for token in evidence["body_contains"])
+                            or any(token in body for token in evidence["body_excludes"])):
+                        raise ValueError(f"Recovered body no longer matches its report: {name}")
+                    if not artifact["limitations"] or not artifact["external_dependencies"]:
+                        raise ValueError(f"Missing limits or dependencies for {name}")
                 elif report_name in (FOLLOWUP, EXTRA):
                     source = artifact["source"]
                     if (source["license"] != "MIT" or len(source["commit"]) != 40
