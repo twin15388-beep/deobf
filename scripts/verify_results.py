@@ -17,10 +17,12 @@ SOURCE_REPORTS = (
     "reports/game-sources-2026-10-21.json",
     "reports/game-sources-2026-10-21-additions.json",
     "reports/game-sources-2026-10-21-followup.json",
+    "reports/game-sources-2026-10-21-extra.json",
 )
 REPORTS = ("reports/game-recovery-2026-10-19.json", *SOURCE_REPORTS)
 ADDITIONS = SOURCE_REPORTS[1]
 FOLLOWUP = SOURCE_REPORTS[2]
+EXTRA = SOURCE_REPORTS[3]
 
 
 def verify() -> int:
@@ -105,7 +107,7 @@ def verify() -> int:
                                     b"BanWebhook", b"FireWebhook", b"usedFeatures",
                                     b"function lib.Webhook.send"))):
                             raise ValueError("GPO automatic telemetry must stay removed")
-                elif report_name == FOLLOWUP:
+                elif report_name in (FOLLOWUP, EXTRA):
                     source = artifact["source"]
                     if (source["license"] != "MIT" or len(source["commit"]) != 40
                             or source["commit"] not in source["url"]
@@ -124,14 +126,33 @@ def verify() -> int:
                             or not all(marker.encode() in body for marker in artifact["game_markers"])):
                         raise ValueError(f"Altered or non-game-specific body in {name}")
                     if status == "src":
-                        if (b"NOT DEOBFUSCATED" not in header
-                                or source["sha256"] != artifact["result_body_sha256"]
-                                or source["bytes"] != len(body)):
-                            raise ValueError(f"Unlabeled or altered source in {name}")
+                        if b"NOT DEOBFUSCATED" not in header:
+                            raise ValueError(f"Unlabeled open source in {name}")
+                        if report_name == EXTRA:
+                            if (artifact.get("sanitized") is not True
+                                    or b"OPEN SOURCE (src)" not in header
+                                    or source["sha256"] == artifact["result_body_sha256"]
+                                    or b"Method = 'POST'" in body
+                                    or b"submit-parry-timing" in body):
+                                raise ValueError(f"Unsanitized Aztup source in {name}")
+                        elif (source["sha256"] != artifact["result_body_sha256"]
+                              or source["bytes"] != len(body)):
+                            raise ValueError(f"Altered original source in {name}")
                     elif (b"DEOBFUSCATED (static recovery)" not in header
-                          or artifact["recovery_tool"].encode() not in header
+                          or (report_name == FOLLOWUP
+                              and artifact["recovery_tool"].encode() not in header)
                           or source["sha256"] == artifact["result_body_sha256"]):
                         raise ValueError(f"Unlabeled or unverified recovery in {name}")
+                    if report_name == EXTRA:
+                        if (hashlib.sha256(header + separator).hexdigest()
+                                != artifact["result_header_sha256"]):
+                            raise ValueError(f"Altered result header: {name}")
+                        if status == "deobfuscated" and (
+                                any(marker in body for marker in (
+                                    b"_MmmjvvlZHicC", b"_JBmfmFsdXbcx", b"_vnIGVltJgej"))
+                                or artifact["recovery"]["constants"] != 607
+                                or artifact["recovery"]["literal_uses"] != 1070):
+                            raise ValueError(f"Incomplete WaveHub string-layer recovery: {name}")
                 else:
                     if b"MIT License" not in header[:2500]:
                         raise ValueError(f"Missing license in {name}")
