@@ -18,11 +18,13 @@ SOURCE_REPORTS = (
     "reports/game-sources-2026-10-21-additions.json",
     "reports/game-sources-2026-10-21-followup.json",
     "reports/game-sources-2026-10-21-extra.json",
+    "reports/game-sources-2026-10-21-protected.json",
 )
 REPORTS = ("reports/game-recovery-2026-10-19.json", *SOURCE_REPORTS)
 ADDITIONS = SOURCE_REPORTS[1]
 FOLLOWUP = SOURCE_REPORTS[2]
 EXTRA = SOURCE_REPORTS[3]
+PROTECTED = SOURCE_REPORTS[4]
 
 
 def verify() -> int:
@@ -107,6 +109,52 @@ def verify() -> int:
                                     b"BanWebhook", b"FireWebhook", b"usedFeatures",
                                     b"function lib.Webhook.send"))):
                             raise ValueError("GPO automatic telemetry must stay removed")
+                elif report_name == PROTECTED:
+                    source = artifact["source"]
+                    if (status != "deobfuscated"
+                            or len(source["commit"]) != 40
+                            or source["commit"] not in source["url"]
+                            or not source["url"].startswith("https://github.com/")
+                            or source["sha256"].encode() not in header
+                            or source["url"].encode() not in header
+                            or len(body) < 2000
+                            or hashlib.sha256(body).hexdigest() != artifact["result_body_sha256"]
+                            or hashlib.sha256(header + separator).hexdigest()
+                            != artifact["result_header_sha256"]
+                            or not all(marker.encode() in body for marker in artifact["game_markers"])):
+                        raise ValueError(f"Unpinned or non-game-specific protected result: {name}")
+                    verification = artifact["verification"]
+                    if (verification["tested_in_roblox"] is not False
+                            or verification["protected_top_level_executed"] is not False):
+                        raise ValueError(f"Unsupported behavior claim: {name}")
+                    if name.endswith(" (partial).lua"):
+                        begin, end = b"MIT LICENSE BEGIN\n", b"MIT LICENSE END\n"
+                        if (source["license"] != "MIT"
+                                or b"PARTIAL STATIC DEOBFUSCATION" not in header
+                                or b"manually rewritten" not in header
+                                or begin not in header or end not in header
+                                or verification["isolated_prototype_mock_cases"] != 28):
+                            raise ValueError(f"Unlabeled manually reconstructed module: {name}")
+                        license_bytes = header.split(begin, 1)[1].split(end, 1)[0]
+                        if hashlib.sha256(license_bytes).hexdigest() != source["license_sha256"]:
+                            raise ValueError(f"Altered upstream MIT license: {name}")
+                    elif source["license"] == "MPL-2.0":
+                        license_name = source["license_path"]
+                        parts = PurePosixPath(license_name).parts
+                        if (len(parts) != 3 or parts[:2] != ("reports", "licenses")
+                                or ".." in parts):
+                            raise ValueError(f"Unsafe license path: {name}")
+                        license_path = ROOT / license_name
+                        if (not license_path.is_file() or license_path.is_symlink()
+                                or hashlib.sha256(license_path.read_bytes()).hexdigest()
+                                != source["license_sha256"]
+                                or b"Mozilla Public License, v. 2.0" not in header
+                                or b"static recovery" not in header
+                                or verification["repeat_decoder_output_identical"] is not True
+                                or verification["mock_game_assertions"] != 17):
+                            raise ValueError(f"Missing licensed decoder output: {name}")
+                    else:
+                        raise ValueError(f"Unsupported protected result license: {name}")
                 elif report_name in (FOLLOWUP, EXTRA):
                     source = artifact["source"]
                     if (source["license"] != "MIT" or len(source["commit"]) != 40

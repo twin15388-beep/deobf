@@ -1,0 +1,97 @@
+{
+  "date": "2026-10-21",
+  "scope": "Only protected, game-specific Lua; no new (src), no Pastefy, no script retrieval through APIs",
+  "artifacts": [
+    {
+      "published_path": "dobf scripts 1.0/Zero Academia - ZeroScripts (partial).lua",
+      "game": "Zero Academia",
+      "status": "deobfuscated",
+      "mode": "partial: 8 manually rewritten handlers from corrected isolated Lua 5.1 prototypes",
+      "bytes": 11691,
+      "sha256": "0a5261f892468cff62dae74fa42cd6c9d7f4bd90602ad10f8df35032a2541aba",
+      "result_header_sha256": "ed7c0c3a2e1d4853577ed99382fda8423a1e5bca7d6ef29b565c0f97ee38285e",
+      "result_body_sha256": "5743521addaba2b27258b90278eac7cf9ededbb86752bde9174059f54cd738b1",
+      "body_lines": 240,
+      "recovery_tool": "memcpython/PSU-Deobfuscator@7d955d4d8e3bc14b744dc4afd52118787fc2bda4 + scripts/lift_psu_multireturn.mjs",
+      "source": {
+        "repo": "teppyboy/RbxScripts",
+        "commit": "58a52a25dde88cd939d679ed74dc63542a2cacd2",
+        "url": "https://github.com/teppyboy/RbxScripts/blob/58a52a25dde88cd939d679ed74dc63542a2cacd2/ZeroScripts/ZeroAcademia/Script.lua",
+        "path": "ZeroScripts/ZeroAcademia/Script.lua",
+        "bytes": 64070,
+        "sha256": "0630d5d1c34ffe0ee1604c49cbc8c0dce83233cf638fb5b49a11f60fb309b4ad",
+        "license": "MIT",
+        "license_sha256": "a3fb4363c1345209d898a3a0bda853bf775d57a7b304b9b5efeada6836286900"
+      },
+      "game_markers": [
+        "workspace.Quests[player.Name]",
+        "deps.remotes.Quest.CancelQuest:FireServer()",
+        "workspace[deps.player.Name][deps.getQuirk()][key]",
+        "deps.remotes.Spin:FireServer(\"CommonSpin\")"
+      ],
+      "verification": {
+        "lua51_syntax": true,
+        "luau_syntax": true,
+        "isolated_prototype_mock_cases": 28,
+        "protected_top_level_executed": false,
+        "tested_in_roblox": false
+      },
+      "limitations": [
+        "Not an autonomous hub; eight selected handlers only; names/state/deps/wrapping/comments added by reconstructor",
+        "deps.getNPC, deps.useKey and further game helpers not included",
+        "Spin can spend in-game Cash; loops need external cancellation; real game not tested"
+      ]
+    },
+    {
+      "published_path": "dobf scripts 1.0/Fight Your Zombie - MoMoHub.lua",
+      "game": "Fight Your Zombie",
+      "status": "deobfuscated",
+      "mode": "static WeAreDevs/WAD v1.0.0 decode: entire tool output plus provenance header",
+      "bytes": 14181,
+      "sha256": "25f3f18e8f235ea0575832df3d6de61e0ce6d382413c97f351d38595fa32f7af",
+      "result_header_sha256": "203824043953d51a2b39a89fa2af694fde535c91df99e5540da0ea73ddb47a5e",
+      "result_body_sha256": "cc765936d850af40fc697159f46f1c0421aa1c6d623ae753726b420c99442d08",
+      "body_lines": 522,
+      "recovery_tool": "prostone4/Prometheus-Deobfuscator@6ee3291ec83fdc58c04e17bb1f1703386619711a",
+      "source": {
+        "repo": "MomoHub007/Fight-Your-Zombie",
+        "commit": "3af1c5938ef0b1c04505d1353d2cf4da1740f5f8",
+        "url": "https://github.com/MomoHub007/Fight-Your-Zombie/blob/3af1c5938ef0b1c04505d1353d2cf4da1740f5f8/README.md",
+        "path": "README.md",
+        "bytes": 110652,
+        "sha256": "5c7173796d6b8409f8b55aafb03c21e576484d3f24e602bd4447543fa78949f8",
+        "license": "MPL-2.0",
+        "license_path": "reports/licenses/MomoHub-MPL-2.0.txt",
+        "license_sha256": "3f3d9e0024b1921b067d6f7f88deb4a60cbe7a78e76c64e3f1d7fc3b779b9d04"
+      },
+      "game_markers": [
+        "workspace.Plots:GetChildren()",
+        "workspace:FindFirstChild(\"WalkingZombies\")",
+        "workspace.Orbs:GetChildren()",
+        "replicatedStorage.Remotes.EquipAxe:FireServer(d)",
+        "replicatedStorage.Remotes.AxeSwing:FireServer()"
+      ],
+      "verification": {
+        "lua51_syntax": true,
+        "luau_syntax": true,
+        "repeat_decoder_output_identical": true,
+        "protected_top_level_executed": false,
+        "tested_in_roblox": false,
+        "mock_game_assertions": 17
+      },
+      "limitations": [
+        "Title matches an official Roblox experience (PlaceId 92683694220101), but the code does not check PlaceId; correspondence to its current game version and live behavior are unverified",
+        "At startup the script loads mutable third-party X2ZU UI from GitHub (not included or audited); the game logic itself is inline",
+        "Uses executor APIs (fireproximityprompt, isfile/writefile, gethui); saving config, frequent teleports and remote calls can change game state",
+        "Static decode/syntax checks do not prove equivalence or game functionality"
+      ],
+      "candidate_place_id": 92683694220101,
+      "candidate_place_url": "https://www.roblox.com/games/92683694220101/Fight-Your-Zombie"
+    }
+  ],
+  "rejected_candidates": [
+    "Anime Fighters Simulator: repaired PSU lift yielded suspicious CALLs and malformed full decompilation, not published",
+    "Trident Survival / Gakuran Luraph and MoonSec V3 Item Factory: no reliable result or redistribution terms for inspected candidates",
+    "King Legacy MythicHub and JJza007: no upstream LICENSE; do not publish"
+  ]
+}
