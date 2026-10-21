@@ -28,6 +28,7 @@ PROTECTED = SOURCE_REPORTS[4]
 PROTECTED_PARTIAL_CASES = {
     "dobf scripts 1.0/Zero Academia - ZeroScripts (partial).lua": 28,
     "dobf scripts 1.0/Item Factory - MoonSec V3 (partial).lua": 44,
+    "dobf scripts 1.0/Anime Fighters Simulator - PSU (partial).lua": 20,
 }
 
 
@@ -143,6 +144,29 @@ def verify() -> int:
                         license_bytes = header.split(begin, 1)[1].split(end, 1)[0]
                         if hashlib.sha256(license_bytes).hexdigest() != source["license_sha256"]:
                             raise ValueError(f"Altered upstream MIT license: {name}")
+                        if name == "dobf scripts 1.0/Anime Fighters Simulator - PSU (partial).lua":
+                            recovery = artifact["recovery"]
+                            if (artifact["recovery_tool"].encode() not in header
+                                    or b"4042427666" not in header
+                                    or b"6299805723" not in header
+                                    or recovery["bytecode_bytes"] != 40696
+                                    or recovery["lua51_valid"] is not True
+                                    or recovery["child_prototypes"] != 55
+                                    or recovery["selected_children"] != [
+                                        "0_7", "0_15_0", "0_17", "0_22", "0_23",
+                                        "0_24", "0_25", "0_26", "0_27", "0_29"]
+                                    or recovery["corrected_call_handlers"] != {
+                                        "fixed_one_arg": 104,
+                                        "one_arg_multi_result": 39,
+                                        "other_multireturn": 3,
+                                    }
+                                    or recovery["protected_vm_executed"] is not False
+                                    or verification["bytecode_corrected_before_comparison"] is not True
+                                    or artifact["candidate_place_id"] != 6299805723
+                                    or artifact["excluded_place_id"] != 4042427666
+                                    or any(token in body.lower() for token in
+                                           (b"https://", b"httpget(", b"loadstring("))):
+                                raise ValueError(f"Incomplete or unsafe partial PSU recovery: {name}")
                         if name == "dobf scripts 1.0/Item Factory - MoonSec V3 (partial).lua":
                             recovery = artifact["recovery"]
                             if (artifact["recovery_tool"].encode() not in header

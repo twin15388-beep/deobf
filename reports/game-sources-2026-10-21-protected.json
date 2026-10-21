@@ -159,13 +159,86 @@
       ],
       "candidate_place_id": 7280506312,
       "candidate_place_url": "https://www.roblox.com/games/7280506312/Item-Factory"
+    },
+    {
+      "published_path": "dobf scripts 1.0/Anime Fighters Simulator - PSU (partial).lua",
+      "game": "Anime Fighters Simulator",
+      "status": "deobfuscated",
+      "mode": "partial: 10 manually rewritten gameplay handlers from selected Lua 5.1 PSU child prototypes after three narrow CALL-handler corrections",
+      "bytes": 8792,
+      "sha256": "9ff039c5869aa63eaf78047575408ebe729a8047cae927c8711da9b97e22b2bd",
+      "result_header_sha256": "c1ba65d9e27a595609ac7a37a9ff081866f4ea90c967bd094ca734a2df499de7",
+      "result_body_sha256": "038950316690c786f3dd2925ded3f03c1df78b49cff0970bbd3ba31b59f77668",
+      "body_lines": 137,
+      "recovery_tool": "memcpython/PSU-Deobfuscator@7d955d4d8e3bc14b744dc4afd52118787fc2bda4 + scripts/lift_psu_fixed_calls.mjs",
+      "recovery": {
+        "bytecode_bytes": 40696,
+        "bytecode_sha256": "dfd9f454a5381f4aca02550592867aebd2747170a1d891fbe6c7c6905a5967f2",
+        "lua51_valid": true,
+        "child_prototypes": 55,
+        "selected_children": [
+          "0_7",
+          "0_15_0",
+          "0_17",
+          "0_22",
+          "0_23",
+          "0_24",
+          "0_25",
+          "0_26",
+          "0_27",
+          "0_29"
+        ],
+        "corrected_call_handlers": {
+          "fixed_one_arg": 104,
+          "one_arg_multi_result": 39,
+          "other_multireturn": 3
+        },
+        "protected_vm_executed": false
+      },
+      "source": {
+        "repo": "Luciquad/robloxscripts",
+        "commit": "21735be73af9db5d6c3f9df4c532f08e9ddf7980",
+        "url": "https://github.com/Luciquad/robloxscripts/blob/21735be73af9db5d6c3f9df4c532f08e9ddf7980/animefighterssimulator",
+        "path": "animefighterssimulator",
+        "bytes": 121405,
+        "sha256": "f48e4db9cf568deba2c51e29940d57c65ce5eb678556870d08421e4270124f77",
+        "license": "MIT",
+        "license_sha256": "d4a1106b49a205dfbcd4aeceb62e8dc72f1eef3882911f75af6e491c4b00761d"
+      },
+      "game_markers": [
+        "ModuleScripts.PetStats",
+        "Remote.MassSell:FireServer({entry.UID.Value})",
+        "Remote.ClickerDamage:FireServer()",
+        "world.EnemySpawners:GetDescendants()",
+        "Remote.AttemptTravel"
+      ],
+      "verification": {
+        "lua51_syntax": true,
+        "luau_syntax": true,
+        "isolated_prototype_mock_cases": 20,
+        "protected_top_level_executed": false,
+        "tested_in_roblox": false,
+        "bytecode_corrected_before_comparison": true
+      },
+      "limitations": [
+        "Not a complete hub: selected handlers only; name/state/deps/single-tick API and comments added by the reconstructor, not author comments",
+        "Corrected static Lua 5.1 lift passes bytecode verification, but full decompiler output is malformed; protected VM and remote UI library not executed; equivalence to obfuscated top-level is unproven",
+        "The root rejects PlaceId 4042427666 (the different Anime Fighting Simulator) with Wrong Script, but does not explicitly validate the candidate Anime Fighters Simulator PlaceId 6299805723; current game compatibility not proven",
+        "PetStats modules, executor/game remotes and UI path may have changed; Require can execute Roblox modules; MassSell is destructive, AttemptTravel may travel, spawner scan moves the character and auto-click sends damage remotes",
+        "Offline comparisons use only ten isolated children from the CORRECTED static bytecode; cannot claim live game behavior or original unprotected source"
+      ],
+      "candidate_place_id": 6299805723,
+      "candidate_place_url": "https://www.roblox.com/games/6299805723/Anime-Fighters",
+      "excluded_place_id": 4042427666,
+      "excluded_place_url": "https://www.roblox.com/games/4042427666/Anime-Fighting-Simulator"
     }
   ],
   "rejected_candidates": [
-    "Anime Fighters Simulator: repaired PSU lift yielded suspicious CALLs and malformed full decompilation, not published",
     "Trident Survival / Gakuran Luraph: no reliable result or redistribution terms; Item Factory MoonSec V3 root invalid, ONLY selected valid children published",
     "King Legacy MythicHub and JJza007: no upstream LICENSE; do not publish",
     "Seven other MomoHub007 game repositories have no LICENSE; the separate Fight Your Zombie MPL-2.0 does not apply to them",
-    "worstskid/MoonsecV3-Deobfuscator README says it is not open source; not used"
+    "worstskid/MoonsecV3-Deobfuscator README says it is not open source; not used",
+    "Anime Fighters Simulator full PSU decompilation remains malformed; only ten individually checked game-specific handlers from corrected lift are published, not the full farm/auto-buy hub",
+    "Anime Training Simulator, Hospital Tycoon and Factory Simulator MoonSec V2: tried SixZensED/Lua-Deobfuscator@fd3d632 (package declares ISC); bytecode converted from size_t 4 to 8 still failed Lua 5.1 root checks, valid isolated children were UI/decoder rather than verified gameplay; not published"
   ]
 }
