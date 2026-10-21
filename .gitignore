@@ -6,3 +6,7 @@ __pycache__/
 /luac.out
 *.luac
 node_modules/
+
+# Offline API-delivery snapshots can contain auth tokens and personal data.
+*.har
+/captures/
