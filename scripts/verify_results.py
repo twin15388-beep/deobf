@@ -16,9 +16,11 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCE_REPORTS = (
     "reports/game-sources-2026-10-21.json",
     "reports/game-sources-2026-10-21-additions.json",
+    "reports/game-sources-2026-10-21-followup.json",
 )
 REPORTS = ("reports/game-recovery-2026-10-19.json", *SOURCE_REPORTS)
-ADDITIONS = SOURCE_REPORTS[-1]
+ADDITIONS = SOURCE_REPORTS[1]
+FOLLOWUP = SOURCE_REPORTS[2]
 
 
 def verify() -> int:
@@ -103,6 +105,33 @@ def verify() -> int:
                                     b"BanWebhook", b"FireWebhook", b"usedFeatures",
                                     b"function lib.Webhook.send"))):
                             raise ValueError("GPO automatic telemetry must stay removed")
+                elif report_name == FOLLOWUP:
+                    source = artifact["source"]
+                    if (source["license"] != "MIT" or len(source["commit"]) != 40
+                            or source["commit"] not in source["url"]
+                            or not source["url"].startswith("https://github.com/")
+                            or source["sha256"].encode() not in header):
+                        raise ValueError(f"Missing pinned MIT source for {name}")
+                    begin, end = b"MIT LICENSE BEGIN\n", b"MIT LICENSE END\n"
+                    if begin not in header or end not in header:
+                        raise ValueError(f"Missing complete license in {name}")
+                    license_bytes = header.split(begin, 1)[1].split(end, 1)[0]
+                    if (b"MIT License" not in license_bytes
+                            or hashlib.sha256(license_bytes).hexdigest() != source["license_sha256"]):
+                        raise ValueError(f"Altered upstream license in {name}")
+                    if (len(body) < 2000
+                            or hashlib.sha256(body).hexdigest() != artifact["result_body_sha256"]
+                            or not all(marker.encode() in body for marker in artifact["game_markers"])):
+                        raise ValueError(f"Altered or non-game-specific body in {name}")
+                    if status == "src":
+                        if (b"NOT DEOBFUSCATED" not in header
+                                or source["sha256"] != artifact["result_body_sha256"]
+                                or source["bytes"] != len(body)):
+                            raise ValueError(f"Unlabeled or altered source in {name}")
+                    elif (b"DEOBFUSCATED (static recovery)" not in header
+                          or artifact["recovery_tool"].encode() not in header
+                          or source["sha256"] == artifact["result_body_sha256"]):
+                        raise ValueError(f"Unlabeled or unverified recovery in {name}")
                 else:
                     if b"MIT License" not in header[:2500]:
                         raise ValueError(f"Missing license in {name}")
