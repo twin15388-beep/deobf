@@ -36,33 +36,42 @@
         "protection": "PSU 4.0.A (virtualized Lua 5.1 bytecode)",
         "third_party_rights": "license/redistribution rights not verified"
       },
-      "method": "memcpython/PSU-Deobfuscator@7d955d4d8e3bc14b744dc4afd52118787fc2bda4 static bytecode lift; unluac-js@1.4.4 diagnostic decompilation, Lua 5.1 disassembly; detached no-upvalue prototypes 0_7, 0_10 and 0_20 executed only under mocks to compare five numeric tween and three quest traces with a manually extracted partial module",
+      "method": "memcpython/PSU-Deobfuscator@7d955d4d8e3bc14b744dc4afd52118787fc2bda4 static bytecode lift; scripts/lift_psu_multireturn.mjs corrects 22 CALL classifications without modifying upstream; unluac-js@1.4.4 for diagnostics; isolated Lua 5.1 prototypes 0_7, 0_9, 0_10, 0_16, 0_20 and 0_56 executed only under mocks (0_16 and 0_56 through synthetic --wrap-upvalues parents) and compared with manually reconstructed game-specific functions",
       "recovery": "partial_selected_prototypes",
       "intermediate": {
         "bytecode_bytes": 48400,
         "bytecode_sha256": "fe7dc0be0ad15266fd53765c2e53d60c4a4c61277696a93cc50cad3e06542241",
         "prototype_count": 99,
         "unknown_instructions": 0,
-        "unluac_status": "diagnostic-pseudocode; 49 recovery-error markers (not published)",
+        "unluac_status": "diagnostic-pseudocode; 49 recovery-error markers from original lift, 24 after corrected CALL classification (neither published as a full source)",
+        "corrected_bytecode_sha256": "07e7b0509484109009e887c5a8da8c3976788840be5e5028ec72aedf9a804974",
+        "corrected_call_classifications": 22,
         "selected_prototype_paths": [
           "0_7:calculatetime",
+          "0_9:calculatefromto",
           "0_10:teleport (only number/number/number and noclip=false)",
-          "0_20:takeQuest"
+          "0_16:tweenAboveNpc (one captured LocalPlayer upvalue; raw child prototype unchanged)",
+          "0_20:takeQuest",
+          "0_56:Normal-barrel callback (one captured UI upvalue; child from corrected lift unchanged)"
         ]
       },
       "artifacts": [
         {
           "path": "dobf scripts 1.0/Grand Piece Online - Lunar Hub (partial).lua",
-          "bytes": 11541,
-          "lines": 223,
-          "sha256": "c5be6b26a5b4c086ece6974c8ce7a3df888c9ade1843aba6b0cf0ca9e3346ee2",
+          "bytes": 16606,
+          "lines": 327,
+          "sha256": "a5063f297e7e6d06ff3d449db1c1df799411a804e4cd8f156a0b29fa7947e0ac",
           "luau_compiled": true,
           "lua51_compiled": true,
           "isolated_mock_tested": true,
           "roblox_tested": false,
           "isolated_original_bytecode_differential_tested": true,
-          "numeric_routes_compared": 5,
-          "quest_outcomes_compared": 3
+          "numeric_routes_compared": 7,
+          "quest_outcomes_compared": 3,
+          "npc_tween_traces_compared": 2,
+          "barrel_callback_outcomes_compared": 3,
+          "barrel_linked_tween_outcomes_compared": 1,
+          "barrel_original_bytecode_required_call_repair": true
         }
       ],
       "functions": [
@@ -88,7 +97,19 @@
             "y",
             "z"
           ],
-          "purpose": "Numerical distance from HumanoidRootPart.Position divided by _G.speed (seconds); from proto #9."
+          "purpose": "Distance from HumanoidRootPart.Position to numeric x/y/z or to the X/Y/Z of a userdata CFrame, divided by _G.speed (seconds); from proto #9."
+        },
+        {
+          "name": "calculateFromTo",
+          "parameters": [
+            "fromX",
+            "fromY",
+            "fromZ",
+            "toX",
+            "toY",
+            "toZ"
+          ],
+          "purpose": "Proto #11: numeric or userdata-CFrame endpoints, Vector3 magnitude divided by _G.speed; the original ignores supplied extra orientation components."
         },
         {
           "name": "teleportNumeric",
@@ -100,11 +121,26 @@
           "purpose": "Numeric, noclip-disabled path of proto #12; optional long-distance Y=0 Position tween, then CFrame tween, returns tween and duration; rejects userdata and noclip."
         },
         {
+          "name": "tweenAboveNpc",
+          "parameters": [
+            "targetNpc"
+          ],
+          "purpose": "From original GPO proto #22: compute ETA from target NPC root CFrame, tween to three studs above its head and five behind its lookVector, wait for completion; original captured LocalPlayer is explicit in the module. No NPC selection, attacks or autofarm loop."
+        },
+        {
           "name": "takeQuest",
           "parameters": [
             "npcName"
           ],
           "purpose": "Use Quest and QuestPos, call the reconstructed numeric-only teleport and then invoke Events.Quest with takequest."
+        },
+        {
+          "name": "normalBarrelLoop",
+          "parameters": [
+            "enabled",
+            "deps"
+          ],
+          "purpose": "Corrected-lift proto #72: UI toggle, ETA, Normal-barrel Buy and Sell via Events.Barrel after movement/waits. Uses locally recovered teleportNumeric by default (numeric and noclip=false); deps supplies the external banner and optionally overrides teleport. Requires getgenv().good=false and _G.speed; no complete UI/Roblox runtime test."
         },
         {
           "name": "damageNpc",
@@ -123,11 +159,12 @@
         }
       ],
       "limitations": [
-        "Not the full Lunar Hub: no GUI, CFrame/userdata teleport, noclip branch, auto-farm loops or Water.Touched subscription; function names and module return table are presentation additions.",
+        "Not the full Lunar Hub: no GUI, CFrame/userdata teleport (the timing helpers alone accept userdata), noclip branch, NPC/chest auto-farm loops or Water.Touched subscription; barrel loop uses numeric-only teleportNumeric with noclip=false by default, still needs deps.banner, _G.speed and getgenv().good=false. Function names and module return table are presentation additions.",
         "teleportNumeric requires _G.speed set externally (175 in original hub initialization), getgenv().noclip=false, TweenService and an active HumanoidRootPart. Its spawn movement-state loop is not validated in Roblox.",
         "QuestPos lacks Bandit Boss, Axe Hand Logan and Gorilla King; takeQuest will dereference nil for these quest keys.",
-        "unluac-js could not recover the complete program (49 diagnostic errors), and luadec crashes on the full bytecode; equivalence to the protected input is unproved.",
-        "Five mock numeric paths and three quest outcomes matched detached Lua 5.1 bytecode functions, but this does not prove Roblox gameplay, current object names, safety or real remote behavior."
+        "unluac-js could not recover the complete program (49 diagnostic errors in the original lift, 24 after the targeted correction), and luadec crashes on the full bytecode; equivalence to the protected input is unproved.",
+        "Seven mock numeric paths (two with 12 barrel arguments), three quest outcomes, two NPC tween traces, three barrel callback outcomes and one linked barrel/tween trace matched detached Lua 5.1 bytecode functions under mocks, not Roblox gameplay or current object names. The source's protected top-level was never run.",
+        "GPO proto 0_56 (Barrels) from the uncorrected PSU lift is invalid under Lua 5.1 semantics: an intermediate CALL discards the numeric return before math.floor receives a function. Only the corrected-lift proto was checked; reproducing the full original PSU VM and genuine in-game behavior remains unproved."
       ]
     },
     {

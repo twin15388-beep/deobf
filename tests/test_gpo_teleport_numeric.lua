@@ -103,7 +103,9 @@ local function evaluate(initial, target, speed, useOriginal)
     else
         func = loadModule(env).teleportNumeric
     end
-    local tween, duration = func(target[1], target[2], target[3])
+    -- Some original callbacks pass 12 CFrame components. The extracted Lua
+    -- prototype declares only x/y/z; compare whether extras actually matter.
+    local tween, duration = func(unpack(target))
     assert(tween.goal.CFrame.X == target[1])
     assert(env._G.teleporting == false and #callbacks == 1)
     assert(#events >= 4)
@@ -123,12 +125,28 @@ local function equal(a, b, context)
     end
 end
 
+local buyBarrelCFrame = {-561.834045, 11.9474373, -4466.64453,
+    0.0234939456, -5.12754212e-8, -0.999723971,
+    -3.6866743e-9, 1, -5.13762188e-8,
+    0.999723971, 4.8926867e-9, 0.0234939456}
+local sellBarrelCFrame = {-4497.41309, 5.98184872, -2668.52979,
+    -0.181074247, -2.66281965e-8, 0.983469486,
+    2.14637765e-8, 1, 3.10276356e-8,
+    -0.983469486, 2.67272782e-8, -0.181074247}
 local cases = {
     { {0, 0, 0}, {3, 0, 4}, 2, 1, 2.5 },
     { {0, 20, 0}, {1100, 20, 0}, 100, 2, 11 },
     { {0, 10, 0}, {1100, 10, 0}, 100, 1, 11 },
     { {0, 11, 0}, {1000, 11, 0}, 100, 1, 10 },
     { {0, 11, 0}, {1001, 11, 0}, 100, 2, 10.01 },
+    -- The barrel callback supplies nine orientation components too; original
+    -- teleport declares only three params and ignores those extra values.
+    { {0, 0, 0}, buyBarrelCFrame, 175, 1,
+        math.sqrt((-561.834045)^2 + 11.9474373^2 + (-4466.64453)^2) / 175 },
+    { {-561.834045, 11.9474373, -4466.64453}, sellBarrelCFrame, 175, 2,
+        math.sqrt((-4497.41309+561.834045)^2
+            + (5.98184872-11.9474373)^2
+            + (-2668.52979+4466.64453)^2) / 175 },
 }
 for index, case in ipairs(cases) do
     local duration, events, root = evaluate(case[1], case[2], case[3], false)

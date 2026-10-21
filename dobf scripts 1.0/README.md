@@ -6,7 +6,7 @@
 
 | Игра | Восстановленный файл | Что именно видно / предел |
 | --- | --- | --- |
-| Grand Piece Online | [Lunar Hub (partial).lua](Grand%20Piece%20Online%20-%20Lunar%20Hub%20%28partial%29.lua) | **Частично:** квесты/координаты, числовой `teleportNumeric(x,y,z)`, `Events.Quest`/`CombatRegister`, поиск NPC, лёд Hie-Hie. **Нет** полного `teleport()` для userdata/CFrame и noclip, GUI и автофарма |
+| Grand Piece Online | [Lunar Hub (partial).lua](Grand%20Piece%20Online%20-%20Lunar%20Hub%20%28partial%29.lua) | **Частично:** квесты, числовой `teleportNumeric`, `tweenAboveNpc`, `normalBarrelLoop(enabled,deps)` (Buy/Sell; числовой Tween при noclip=false, внешний `deps.banner`), боевой remote, лёд Hie-Hie. **Нет** полного `teleport()` для userdata/CFrame и noclip, GUI и самостоятельного автофарма |
 | All Star Tower Defense | [Assasine03 Autofarm (partial).lua](All%20Star%20Tower%20Defense%20-%20Assasine03%20Autofarm%20%28partial%29.lua) | **Частично:** `Remotes.Input` — `Summon`, `Sell`, `Upgrade`, `VoteWaveConfirm`; циклы, GUI и подбор точки размещения отсутствуют |
 | Ro-Ghoul | [Yoshimura Quest (partial).lua](Ro-Ghoul%20-%20Yoshimura%20Quest%20%28partial%29.lua) | **Частично:** квест `Aogiri Member` у Yoshimura, `ReputationCashOut`, параметры боссов; без движка перемещения и автофарма |
 | Jujutsu Shenanigans | [Inquest Moveset.lua](Jujutsu%20Shenanigans%20-%20Inquest%20Moveset.lua) | `MainEnv()`, анимационные обработчики способностей и игровые `Service.RE.Activated` |
@@ -25,9 +25,9 @@
 
 ### Grand Piece Online — Lunar Hub FREE (частично)
 
-Защищённый `c0deblox/Scripts:GPO.lua` (PSU 4.0.A) **статически** поднят в Lua 5.1 bytecode. В нём присутствуют непосредственно игровые квесты (`Help Raphtalia`, `Take down Lucid`), NPC и `ReplicatedStorage.Events.Quest`/`Events.CombatRegister`, а также `WaterLogia["Hie-Hie"]`; связь с GPO подтверждается **содержимым**, а не названием репозитория. Выделены прототипы #9/#12 (числовое движение), #17/#18, #19/#20, #31 и #90; это не результат копирования готового открытого скрипта. Файл [Grand Piece Online - Lunar Hub (partial).lua](Grand%20Piece%20Online%20-%20Lunar%20Hub%20%28partial%29.lua) содержит **сам код**, таблицы квестов и координат.
+Защищённый `c0deblox/Scripts:GPO.lua` (PSU 4.0.A) **статически** поднят в Lua 5.1 bytecode. В нём присутствуют непосредственно игровые квесты (`Help Raphtalia`, `Take down Lucid`), NPC и `ReplicatedStorage.Events.Quest`/`Events.CombatRegister`, а также `WaterLogia["Hie-Hie"]`; связь с GPO подтверждается **содержимым**, а не названием репозитория. Выделены прототипы #9/#12 (движение), #17/#18, #19/#20, #22/#23 (подход над NPC), #31, #72 (бочки из исправленного лифта) и #90; это не результат копирования готового открытого скрипта. Файл [Grand Piece Online - Lunar Hub (partial).lua](Grand%20Piece%20Online%20-%20Lunar%20Hub%20%28partial%29.lua) содержит **сам код**, таблицы квестов и координат.
 
-`calculateTime(x, y, z)` вычисляет секунды как расстояние от `HumanoidRootPart.Position` до числовых координат, делённое на `_G.speed` (в исходной инициализации 175; отдельно нужно задать при использовании модуля). `teleportNumeric(x, y, z)` воспроизводит **только числовой маршрут** функции #12 при выключенном `getgenv().noclip`: при расстоянии >1000 студов и высоте игрока >10 сначала делает Tween `Position` до Y=0, затем Tween `CFrame` в `(x, y, z)`, ждёт `Completed:Wait()`, сбрасывает `_G.teleporting` и возвращает `(tween, duration)`. Например, действительный восстановленный фрагмент:
+`calculateTime(x, y, z)` вычисляет секунды как расстояние от `HumanoidRootPart.Position` до числовых координат **либо до `.X/.Y/.Z` у userdata-CFrame**, делённое на `_G.speed` (в исходной инициализации 175; отдельно нужно задать при использовании модуля). Это добавление **не** означает, что `teleportNumeric` поддерживает CFrame как вход. `teleportNumeric(x, y, z)` воспроизводит **только числовой маршрут** функции #12 при выключенном `getgenv().noclip`: при расстоянии >1000 студов и высоте игрока >10 сначала делает Tween `Position` до Y=0, затем Tween `CFrame` в `(x, y, z)`, ждёт `Completed:Wait()`, сбрасывает `_G.teleporting` и возвращает `(tween, duration)`. Например, действительный восстановленный фрагмент:
 
 ```lua
 local duration = calculateTime(x, y, z)
@@ -53,9 +53,46 @@ local function takeQuest(npcName)
 end
 ```
 
+`tweenAboveNpc(targetNpc)` принимает модель NPC с `Head.CFrame` и `HumanoidRootPart.CFrame`/`.lookVector`. Восстановленный прототип #22 вызывается внутри **не восстановленного** цикла AutoFarmNPC #84: он считает время до NPC и перемещает игрока на **3 студа выше головы и 5 позади взгляда цели**, дожидается окончания Tween и снимает `_G.teleporting`. Захваченный исходным прототипом `LocalPlayer` заменён обращением к `game.Players.LocalPlayer`. Сам обработчик опубликован в файле, существенная часть кода:
+
+```lua
+local duration = calculateTime(targetNpc.HumanoidRootPart.CFrame)
+local root = game.Players.LocalPlayer.Character.HumanoidRootPart
+local goal = targetNpc.Head.CFrame + Vector3.new(0, 3, 0)
+    + targetNpc.HumanoidRootPart.CFrame.lookVector * -5
+local tween = game:GetService("TweenService"):Create(root, TweenInfo.new(duration),
+    { CFrame = goal })
+tween:Play()
+tween.Completed:Wait()
+_G.teleporting = false
+return tween
+```
+
+Функция сама **не выбирает NPC, не атакует и не делает автофарм**; в коде перед Tween также запускается цикл удержания скорости через `spawn`. Две подставные траектории этой функции и userdata-ветвь `calculateTime` сравнены с **неизменённым выбранным дочерним прототипом** байткода при явно поданном upvalue; детали [в отчёте](../reports/game-recovery-2026-10-21-followup.md).
+
+`calculateFromTo(fromX, fromY, fromZ, toX, toY, toZ)` — восстановленный прототип #11: расстояние между точками / `_G.speed`; `fromX` либо `toX` могут быть userdata-CFrame, тогда используются их `.X/.Y/.Z`. Три случая сравнены с отдельным исходным прототипом; лишние компоненты ориентации, передаваемые вызывающим кодом, прототип игнорирует.
+
+`normalBarrelLoop(enabled, deps)` — **восстановленный игровой обработчик #72** (не готовая автономная ферма). `enabled` — флаг переключателя «Autofarm Barrels». `deps.banner({Text=...})` заменяет захваченный UI-метод; `deps.teleport(x,y,z, nineOrientationComponents)` — **необязательная** подмена перемещения; без неё используется восстановленный `teleportNumeric` **только при `getgenv().noclip=false`**, возвращающий вторым значением время. В выделенной функции #12 всего три параметра: две траектории бочек подтвердили, что добавочные девять компонентов поворота игнорируются её поднятым байткодом. Полный путь `teleport()` для userdata/noclip не восстановлен. До вызова задайте `_G.speed` и `getgenv().good = false`, как это делал исходный UI; для числового маршрута выключите noclip. После оценки времени и баннера `while getgenv().ON` ждёт, перемещается к покупке, ждёт её завершения и ещё секунду, шлёт `{action="Buy",barrelType="Normal"}` в `Events.Barrel:FireServer`, идёт к точке продажи, ждёт аналогично и шлёт `Sell`. Обработчик **не ограничивает число повторений** и не проверен в Roblox. Подлинная часть опубликованного кода:
+
+```lua
+local move = deps.teleport or teleportNumeric
+local _, travelTime = move(-561.834045, 11.9474373, -4466.64453,
+    0.0234939456, -5.12754212e-8, -0.999723971, -3.6866743e-9, 1,
+    -5.13762188e-8, 0.999723971, 4.8926867e-9, 0.0234939456)
+wait(travelTime)
+wait(1)
+game:GetService("ReplicatedStorage").Events.Barrel:FireServer({
+    action = "Buy", barrelType = "Normal",
+})
+-- Далее: teleport(-4497.41309, 5.98184872, -2668.52979, ...),
+-- wait(returnTime), wait(1), FireServer({action="Sell",barrelType="Normal"}).
+```
+
+Для #72 **не использован** прежний дефектный поднятый байткод: независимый [постпроход](../scripts/lift_psu_multireturn.mjs) исправил распознавание PSU-вызовов с многозначным результатом (**22 CALL-классификации** на GPO). Только после этого выбранный дочерний прототип с исходным upvalue сверили под макетами на **трёх исходах**: включение/одна покупка-продажа, уже занятый цикл и отключение без действий. Весь исходный защищённый скрипт не выполнялся; `deps`/модульная оболочка добавлены нами. [Воспроизведение и ошибки первоначального лифта](../reports/game-recovery-2026-10-21-followup.md).
+
 `damageNpc(targetNpc, selectedWeapon)` сопоставляет `Katana`/`Kiribachi` → `Sword`, `Black Leg` → `BlackLeg` и отправляет **пять** вызовов `CombatRegister` с `{ "damage", targetNpc.HumanoidRootPart, weapon, {strike, "Ground", weapon} }`. `nearestNpc(npcName)` выбирает ближайшего NPC из `workspace.NPCs`; `nearestNpcExcept(npcName, excludedName)` исключает точное имя. `hieWaterTouch(foot)` клонирует `WaterLogia["Hie-Hie"].floor`, помещает на поверхность воды на пять секунд и очищает `sm2`/`sm3`. Параметр `foot` — коснувшаяся воды деталь; подписка на `Water.Touched` была в остальном UI и **не входит** в опубликованный модуль.
 
-**Важный предел:** `unluac-js` выдал для **целого** хаба диагностический псевдокод с 49 метками ошибки восстановления, а `luadec` не восстановил программу целиком. Мы **не** публикуем этот ошибочный файл и **не** заявляем полный автоматический фарм. `teleportNumeric` намеренно отклоняет входы userdata/CFrame и включённый noclip: их ветви **не восстановлены**. `spawn`-цикл стабилизации персонажа сверён по инструкциям, но не проверен в Roblox. В таблице `QuestPos` отсутствуют `Bandit Boss`, `Axe Hand Logan`, `Gorilla King`, поэтому `takeQuest()` для них без добавочной логики не сработает. Не включены GUI, **полная** реализация `teleport`, циклы автофарма и загрузка MaterialLua. Синтаксис проверен в Lua 5.1 и Luau. Пять числовых маршрутов сравнили с **изолированно извлечённым настоящим байткодом** функций #9/#12; квест дополнительно сверили с прототипом #31 на трёх вариантах (`tests/test_gpo_teleport_numeric.lua`). Квест/урон/лёд также проверены в отдельном тесте с подставными объектами. Ни один вызов не проверен на живом сервере. Имена функций/модульная оболочка при оформлении изменены, а степень сохранения поведения **всей** защиты неизвестна. [Метод сравнения и ограничения](../reports/game-recovery-2026-10-21.md).
+**Важный предел:** `unluac-js` выдал для **целого** хаба диагностический псевдокод с 49 метками ошибки восстановления; после узкой поправки CALL осталось **24 ошибки**, а `luadec` не восстановил программу целиком. Мы **не** публикуем ошибочный псевдокод и **не** заявляем автономный полнофункциональный хаб/ферму: цикл бочек ограничен числовым маршрутом без noclip и требует UI-замены `deps.banner`. `teleportNumeric` намеренно отклоняет входы userdata/CFrame и включённый noclip: их ветви **не восстановлены**. `spawn`-цикл стабилизации персонажа сверён по инструкциям, но не проверен в Roblox. В таблице `QuestPos` отсутствуют `Bandit Boss`, `Axe Hand Logan`, `Gorilla King`, поэтому `takeQuest()` для них без добавочной логики не сработает. Не включены GUI, **полная** реализация `teleport`, другие циклы автофарма (NPC/сундуки) и загрузка MaterialLua. Синтаксис проверен в Lua 5.1 и Luau. Семь числовых маршрутов (в том числе две 12-аргументные траектории бочек) сравнили с **изолированно извлечённым поднятым байткодом** функций #9/#12; квест дополнительно сверили с прототипом #31 на трёх вариантах (`tests/test_gpo_teleport_numeric.lua`). Подход над NPC — два сценария и userdata-время — сверили с прототипами #22/#9 (`tests/test_gpo_npc_tween.lua`). Бочки — три сценария по **исправленному** поднятому прототипу #72, отдельно расстояние #11 и совместное исполнение #72 с выделенной функцией перемещения #12 (`tests/test_gpo_barrels.lua`). Квест/урон/лёд также проверены в отдельном тесте с подставными объектами. Ни один вызов не проверен на живом сервере. Имена функций/модульная оболочка при оформлении изменены, а степень сохранения поведения **всей** защиты неизвестна. [Метод сравнения и ограничения](../reports/game-recovery-2026-10-21-followup.md).
 
 ### All Star Tower Defense — Assasine03 Autofarm (частично)
 

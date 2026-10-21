@@ -2,9 +2,11 @@
 """Extract one Lua 5.1 function prototype without running the parent chunk.
 
 The root is path 0; children use the zero-based luadec notation 0_7, 0_10,
-0_10_0, etc. Output is a new binary Lua 5.1 chunk (header + selected proto).
-Only detached functions with zero upvalues can be safely extracted this way;
-loaded chunks still must be run only in an isolated, mocked environment.
+0_10_0, etc. By default, output is a new bytecode chunk of the unchanged
+selected proto; captured upvalues are rejected. --wrap-upvalues instead emits
+a small *synthetic* parent that accepts explicitly supplied captured values
+and returns the unchanged selected closure. Call loadfile(output)(mock_upvalue_1,
+...) to bind them. Never run either kind of chunk except with isolated mocks.
 """
 
 from __future__ import annotations
@@ -92,7 +94,38 @@ class Reader:
         return Proto(start, self.offset, upvalues, children)
 
 
-def extract(data: bytes, path: str) -> bytes:
+def _with_explicit_upvalues(reader: Reader, proto: Proto) -> bytes:
+    """Emit a minimal parent *only* to bind the original child's upvalues.
+
+    Lua 5.1 CLOSURE consumes one MOVE instruction per captured stack value.
+    No instruction in `proto` or its children is rewritten. The emitted parent
+    has no constants, globals, calls, or side effects except returning a closure.
+    """
+    n = proto.upvalues
+    if not 1 <= n <= 249:
+        raise ValueError("unsupported number of captured upvalues")
+
+    def integer(value: int, width: int = 0) -> bytes:
+        return value.to_bytes(width or reader.int_size, reader.order)
+
+    def abc(op: int, a: int, b: int) -> bytes:
+        return integer(op | (a << 6) | (b << 23), reader.instruction)
+
+    code = [integer(36 | (n << 6), reader.instruction)]  # CLOSURE R(n), child 0
+    code += [abc(0, 0, index) for index in range(n)]  # MOVE capture each argument
+    code += [abc(30, n, 2), abc(30, 0, 1)]  # RETURN closure; unreachable final return
+    name = b"@isolated-prototype\0"
+    return (reader.data[:12]
+            + integer(len(name), reader.size_t) + name
+            + integer(0) * 2  # definition lines
+            + bytes((0, n, 0, n + 1))  # root upvalues, parameters, vararg, stack
+            + integer(len(code)) + b"".join(code)
+            + integer(0)  # no constants
+            + integer(1) + reader.data[proto.start:proto.end]  # exact original child
+            + integer(0) * 3)  # no debug line/local/upvalue entries
+
+
+def extract(data: bytes, path: str, *, wrap_upvalues: bool = False) -> bytes:
     reader = Reader(data)
     root = reader.prototype()
     if reader.offset != len(data):
@@ -107,7 +140,11 @@ def extract(data: bytes, path: str) -> bytes:
             raise ValueError(f"prototype {path} is missing child {index}")
         chosen = chosen.children[index]
     if chosen.upvalues:
-        raise ValueError("cannot detach a function that captures upvalues")
+        if not wrap_upvalues:
+            raise ValueError("captured upvalues require --wrap-upvalues and explicit mocks")
+        return _with_explicit_upvalues(reader, chosen)
+    if wrap_upvalues:
+        raise ValueError("--wrap-upvalues is only for functions with captured upvalues")
     return data[:12] + data[chosen.start:chosen.end]
 
 
@@ -116,9 +153,14 @@ def main() -> None:
     parser.add_argument("input", type=Path, help="Lua 5.1 bytecode (not an obfuscated script)")
     parser.add_argument("path", help="zero-based proto path, e.g. 0_7")
     parser.add_argument("output", type=Path, help="new bytecode chunk")
+    parser.add_argument("--wrap-upvalues", action="store_true",
+                        help="return an unchanged selected closure bound to explicit mock arguments")
     args = parser.parse_args()
-    args.output.write_bytes(extract(args.input.read_bytes(), args.path))
-    print(f"Extracted {args.path} to {args.output}; only run with trusted mocks")
+    args.output.write_bytes(extract(args.input.read_bytes(), args.path,
+                                    wrap_upvalues=args.wrap_upvalues))
+    print(f"Extracted {args.path} to {args.output}; only run with trusted mocks" +
+          (" (call loadfile(output)(mock_upvalue_1, ...) for the function)"
+           if args.wrap_upvalues else ""))
 
 
 if __name__ == "__main__":

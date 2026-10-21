@@ -2,8 +2,9 @@
 -- Защищённый вход: c0deblox/Scripts:GPO.lua, commit 472dc5871faae68dfcfbba6485a619275063ee16.
 -- Это не исходник автора 1:1 и НЕ полноценный исполняемый Lunar Hub.
 -- Из поднятого Lua 5.1 bytecode вручную выделены только проверяемые фрагменты:
--- таблицы главного прототипа, #9/#12 (числовой маршрут движения), #17/#18
--- (урон), #19/#20 (NPC), #31 (квест), #90 (лёд).
+-- таблицы главного прототипа, #9/#11/#12 (движение), #17/#18 (урон),
+-- #19/#20 (NPC), #22/#23 (подход к NPC), #31 (квест),
+-- #72 (цикл покупки/продажи бочки из исправленного PSU-лифта), #90 (лёд).
 -- Переименования локальных переменных и оболочка return {} добавлены для чтения.
 -- В оригинале функции были частью большого UI и автофарма. Здесь они ничего не
 -- запускают сами по себе. В teleportNumeric НЕ восстановлены входы userdata/CFrame
@@ -97,14 +98,34 @@ local function nearestNpcExcept(npcName, excludedName)
     return nearest
 end
 
--- Прототип #9: время движения до числовых x, y, z в студах.
--- Используется _G.speed (175 в инициализации оригинального хаба); модуль его
--- не устанавливает. В оригинале x может быть userdata, но этот путь здесь НЕ
--- обещается: квестовый маршрут передаёт три числа.
+-- Прототип #9: время движения до x, y, z в студах. Если x — userdata
+-- (например, Roblox CFrame), берутся его X, Y, Z, как в исходном байткоде.
+-- Используется _G.speed (175 в инициализации хаба); модуль его не устанавливает.
 local function calculateTime(x, y, z)
+    if type(x) == "userdata" then
+        x, y, z = x.X, x.Y, x.Z
+    end
     local current = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
     local duration = (Vector3.new(x, y, z)
         - Vector3.new(current.X, current.Y, current.Z)).Magnitude / _G.speed
+    if tostring(duration):find("-") then
+        duration = math.abs(duration)
+    end
+    return duration
+end
+
+-- Прототип #11: расстояние между двумя точками / _G.speed. Первая или
+-- вторая точка может быть userdata-CFrame; её X/Y/Z подменяют числа.
+-- Переданные после шестого аргумента компоненты поворота не используются.
+local function calculateFromTo(fromX, fromY, fromZ, toX, toY, toZ)
+    if type(fromX) == "userdata" then
+        fromX, fromY, fromZ = fromX.X, fromX.Y, fromX.Z
+    end
+    if type(toX) == "userdata" then
+        toX, toY, toZ = toX.X, toX.Y, toX.Z
+    end
+    local duration = (Vector3.new(fromX, fromY, fromZ)
+        - Vector3.new(toX, toY, toZ)).Magnitude / _G.speed
     if tostring(duration):find("-") then
         duration = math.abs(duration)
     end
@@ -157,6 +178,32 @@ local function teleportNumeric(x, y, z)
     return tween, duration
 end
 
+-- Прототипы #22/#23, вызываются из НЕ восстановленного цикла AutoFarmNPC (#84).
+-- targetNpc: модель NPC с Head.CFrame и HumanoidRootPart.CFrame.lookVector.
+-- Цель Tween: 3 студа выше головы и 5 позади направления взгляда NPC.
+-- Оригинальный upvalue LocalPlayer заменён явным game.Players.LocalPlayer.
+-- Здесь нет цикла, выбора NPC, атаки или решения, когда нужен новый квест.
+local function tweenAboveNpc(targetNpc)
+    local duration = calculateTime(targetNpc.HumanoidRootPart.CFrame)
+    _G.teleporting = true
+    spawn(function()
+        while _G.teleporting == true do
+            wait(2)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0, 0, 0)
+        end
+    end)
+
+    local root = game.Players.LocalPlayer.Character.HumanoidRootPart
+    local goal = targetNpc.Head.CFrame + Vector3.new(0, 3, 0)
+        + targetNpc.HumanoidRootPart.CFrame.lookVector * -5
+    local tween = game:GetService("TweenService"):Create(root, TweenInfo.new(duration),
+        { CFrame = goal })
+    tween:Play()
+    tween.Completed:Wait()
+    _G.teleporting = false
+    return tween
+end
+
 -- Прототип #31. npcName: ключ Quest/QuestPos (например, "Bandit").
 -- В оригинале вызывается глобальная teleport(x,y,z); здесь ей соответствует
 -- ТОЛЬКО восстановленный числовой путь без noclip. Нет QuestPos для трёх боссов.
@@ -166,6 +213,60 @@ local function takeQuest(npcName)
         local position = QuestPos[npcName]
         teleportNumeric(position.X, position.Y, position.Z)
         game:GetService("ReplicatedStorage").Events.Quest:InvokeServer({"takequest", questName})
+    end
+end
+
+-- Прототип #72: игровой цикл покупки и продажи бочек Normal.
+-- enabled — значение исходного UI-переключателя. deps.banner({Text=...})
+-- заменяет UI-upvalue; deps.teleport опционально подменяет перемещение.
+-- Без него используется teleportNumeric: только 3 координаты, noclip=false.
+-- В поднятом прототипе #12 лишние 9 компонентов поворота игнорируются.
+-- getgenv().good должен быть заранее инициализирован в false (как в хабе).
+-- Пока ON=true цикл неограничен; в тестах wait() отключает ON за один проход.
+-- Эти действия восстановлены из *исправленного* PSU-лифта, не из живого Roblox.
+local function normalBarrelLoop(enabled, deps)
+    local move = deps.teleport or teleportNumeric
+    getgenv().ON = enabled
+    local rootFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+    local firstTime = math.floor(calculateFromTo(rootFrame, 0, 0,
+        -561.834045, 11.9474373, -4466.64453))
+    local secondTime = math.floor(calculateFromTo(
+        -561.834045, 11.9474373, -4466.64453,
+        -4497.41309, 5.98184872, -2668.52979))
+    local estimate = math.floor(firstTime + secondTime)
+    if getgenv().ON == true then
+        deps.banner({Text = ("It will take %s seconds to purchase and sell 1 barrel.")
+            :format(estimate)})
+    end
+
+    while getgenv().ON do
+        wait()
+        if getgenv().good == false then
+            getgenv().good = true
+            local _, travelTime = move(
+                -561.834045, 11.9474373, -4466.64453,
+                0.0234939456, -5.12754212e-8, -0.999723971,
+                -3.6866743e-9, 1, -5.13762188e-8,
+                0.999723971, 4.8926867e-9, 0.0234939456)
+            wait(travelTime)
+            wait(1)
+            game:GetService("ReplicatedStorage").Events.Barrel:FireServer({
+                action = "Buy", barrelType = "Normal",
+            })
+
+            local _, returnTime = move(
+                -4497.41309, 5.98184872, -2668.52979,
+                -0.181074247, -2.66281965e-8, 0.983469486,
+                2.14637765e-8, 1, 3.10276356e-8,
+                -0.983469486, 2.67272782e-8, -0.181074247)
+            wait(returnTime)
+            wait(1)
+            warn("soldd")
+            game:GetService("ReplicatedStorage").Events.Barrel:FireServer({
+                action = "Sell", barrelType = "Normal",
+            })
+            getgenv().good = false
+        end
     end
 end
 
@@ -216,8 +317,11 @@ return {
     nearestNpc = nearestNpc,
     nearestNpcExcept = nearestNpcExcept,
     calculateTime = calculateTime,
+    calculateFromTo = calculateFromTo,
     teleportNumeric = teleportNumeric,
+    tweenAboveNpc = tweenAboveNpc,
     takeQuest = takeQuest,
+    normalBarrelLoop = normalBarrelLoop,
     damageNpc = damageNpc,
     hieWaterTouch = hieWaterTouch,
 }
