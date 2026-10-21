@@ -2,7 +2,7 @@
 -- Never loads the protected input, never connects to Roblox or the network.
 -- Usage: lua5.1 tests/test_gpo_lunar_fragment.lua 'dobf scripts 1.0/Grand Piece Online - Lunar Hub (partial).lua'
 local source = assert(arg[1], "pass the partial GPO Lua module path")
-local calls = { quest = {}, damage = {}, teleports = {}, ice = 0, deleted = 0 }
+local calls = { quest = {}, damage = {}, teleports = {}, deferred = {}, ice = 0, deleted = 0 }
 
 local mockCFrame = {
     new = function(x, y, z)
@@ -35,10 +35,11 @@ local ice = {
     sm2 = { Destroy = function() calls.deleted = calls.deleted + 1 end },
     sm3 = { Destroy = function() calls.deleted = calls.deleted + 1 end },
 }
+local root = { Position = pos(0, 0, 0) }
 local game = {
     Players = {
         LocalPlayer = {
-            Character = { HumanoidRootPart = { Position = pos(0, 0, 0) } },
+            Character = { HumanoidRootPart = root },
             Backpack = {
                 FindFirstChild = function(_, name)
                     assert(name == "WaterLogia")
@@ -53,25 +54,55 @@ local game = {
     end },
 }
 local replicated = { Events = { Quest = questRemote, CombatRegister = damageRemote } }
+local tweenService = {}
+function tweenService:Create(target, info, goal)
+    assert(target == root and info.style == "Linear" and info.direction == "InOut")
+    local tween = { Completed = { Wait = function() end, wait = function() end } }
+    function tween:Play()
+        local destination = goal.Position or goal.CFrame
+        root.Position = pos(destination.X, destination.Y, destination.Z)
+        if goal.CFrame then
+            table.insert(calls.teleports, { destination.X, destination.Y, destination.Z })
+        end
+    end
+    return tween
+end
 function game:GetService(name)
+    if name == "TweenService" then return tweenService end
     assert(name == "ReplicatedStorage")
     return replicated
 end
 
-local env = {
+local env
+-- spawn() for the movement-state loop is deferred; combat/ice callbacks run immediately.
+env = {
     CFrame = mockCFrame,
     game = game,
     workspace = {
         NPCs = { GetChildren = function() return { npcFar, npcNear } end },
         Effects = { Water = { Position = { Y = 4 } } },
     },
-    Vector3 = { new = function(x, y, z) return { X = x, Y = y, Z = z } end },
-    teleport = function(x, y, z) table.insert(calls.teleports, {x, y, z}) end,
-    spawn = function(callback) callback() end,
+    Vector3 = { new = pos },
+    TweenInfo = { new = function(seconds, style, direction)
+        return { seconds = seconds, style = style, direction = direction }
+    end },
+    Enum = { EasingStyle = { Linear = "Linear" },
+        EasingDirection = { InOut = "InOut" } },
+    getgenv = function() return { noclip = false } end,
+    spawn = function(callback)
+        if env._G.teleporting then
+            table.insert(calls.deferred, callback)
+        else
+            callback()
+        end
+    end,
     wait = function(value) assert(value == 0.5) end,
     math = math,
     next = next,
-    _G = { WalkOnWater = nil },
+    type = type,
+    tostring = tostring,
+    error = error,
+    _G = { WalkOnWater = nil, speed = 175 },
 }
 local chunk = assert(loadfile(source))
 setfenv(chunk, env)
@@ -86,6 +117,7 @@ result.takeQuest("None")
 assert(#calls.quest == 0)
 result.takeQuest("Bandit")
 assert(#calls.teleports == 1 and calls.teleports[1][1] == 1014.99664)
+assert(#calls.deferred == 1 and env._G.teleporting == false)
 assert(#calls.quest == 1 and calls.quest[1][1] == "takequest"
     and calls.quest[1][2] == "Help Raphtalia")
 -- The missing QuestPos entries are a known limitation, not a working quest path.

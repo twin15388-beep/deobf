@@ -1,6 +1,6 @@
 {
-  "snapshot_date": "2026-10-18",
-  "policy": "Independent source-only ZIP snapshots at pinned upstream commits. Build outputs, bundled binary dependencies, node_modules, and generated/supplied sample payloads are omitted. No upstream code was executed or functionality certified. Licenses remain inside each ZIP. The Luast-Dumper source ZIP was unpacked into its source snapshot.",
+  "snapshot_date": "2026-10-21",
+  "policy": "Independent source-only ZIP snapshots at pinned upstream commits. Build outputs, bundled binary dependencies, node_modules, and generated/protected sample payloads are omitted (see per-entry notes). Licenses remain inside each ZIP. Tool applicability and evaluated failures are recorded in reports; protected game inputs were not executed.",
   "sources": [
     {
       "repository": "tupsutumppu/MoonsecDeobfuscator",
@@ -458,6 +458,76 @@
       "sha256": "dcc1143c818d994c2a846d12198cf253b2d9922877e66792ca617cc0bd6ad0b8",
       "files": 3,
       "omitted_files": 0
+    },
+    {
+      "repository": "Jeong-Min-Cho/unluac",
+      "url": "https://github.com/Jeong-Min-Cho/unluac",
+      "commit": "744c8149d93f7739f17b7f0f506822fb93ba7193",
+      "license": "MIT",
+      "family": "Lua 5.0–5.4 bytecode",
+      "language": "Java",
+      "kind": "decompiler (requires JDK, not just JRE)",
+      "archive": "sources/Jeong-Min-Cho--unluac.zip",
+      "sha256": "501e77bf8519a534e0d934a108cb29042765a5433221adf69697f1044550bfe2",
+      "files": 421,
+      "omitted_files": 1,
+      "notes": "Lua 5.1 GPO build not tested: local Java 17 runtime has no javac/compiler module; large generated test fixture omitted."
+    },
+    {
+      "repository": "CPunch/LuaDecompy",
+      "url": "https://github.com/CPunch/LuaDecompy",
+      "commit": "df8e9f7e831806a45f19227734e98de9c221bc39",
+      "license": "MIT",
+      "family": "Lua 5.1 bytecode",
+      "language": "Python",
+      "kind": "experimental decompiler",
+      "archive": "sources/CPunch--LuaDecompy.zip",
+      "sha256": "ac8a06ada055ae7f81fe38b6323219d1e8e737e76e763f123829325d8921ddf4",
+      "files": 6,
+      "omitted_files": 0,
+      "notes": "Runs on trivial luac, but output lacks return statement; GPO fails at SELF; not a reliable decompiler."
+    },
+    {
+      "repository": "Coldzer0/LuaDecompiler",
+      "url": "https://github.com/Coldzer0/LuaDecompiler",
+      "commit": "e75c48a73008187e88cc5a50a2dd06b884247923",
+      "license": "AGPL-3.0",
+      "family": "Lua bytecode",
+      "language": "Free Pascal",
+      "kind": "decompiler (needs Lazarus/FPC)",
+      "archive": "sources/Coldzer0--LuaDecompiler.zip",
+      "sha256": "363f7d9460813cb167a897d6a15fa02fb105f6a005c9157f0f49cbae2b34f30b",
+      "files": 93,
+      "omitted_files": 5,
+      "notes": "Build blocked here by missing Free Pascal/Lazarus; generated outputs, compiled resource/fixture and VSIX excluded."
+    },
+    {
+      "repository": "coazy/luraph-v14.7-unwrap",
+      "url": "https://github.com/coazy/luraph-v14.7-unwrap",
+      "commit": "1043c0444aae7648df150b0689e7ba8bb7dabe37",
+      "license": "MIT",
+      "family": "Luraph v14.7 envelope",
+      "language": "JavaScript / Lua",
+      "kind": "unwrapper (NOT source decompiler)",
+      "archive": "sources/coazy--luraph-v14.7-unwrap.zip",
+      "sha256": "b61c7a2e6e8c962750425849654623e06f04c396d1feeaa830f83fc04c2fcbaa",
+      "files": 9,
+      "omitted_files": 0,
+      "notes": "Only extracts interpreter and VM bytecode; v13 GPO rejected: expected two long-bracket literals, found zero. sandbox.lua executes unpacked code; never run it on unknown scripts."
+    },
+    {
+      "repository": "Melodieshusband/Luraph-v14.3-deobfuscator",
+      "url": "https://github.com/Melodieshusband/Luraph-v14.3-deobfuscator",
+      "commit": "1aea3bd4a6d5b0781881539267a0aa21acbf3f0c",
+      "license": "Apache-2.0",
+      "family": "Luraph v14.3",
+      "language": "Python",
+      "kind": "experimental VM research / extractor",
+      "archive": "sources/Melodieshusband--Luraph-v14.3-deobfuscator.zip",
+      "sha256": "56dadf1c146b42d1b9f5f07990a215408f2fcd1f465e1a3f07ee0dea0f05b2a9",
+      "files": 27,
+      "omitted_files": 1,
+      "notes": "Static luraph_decoder.py extracted 380240 opaque bytes from upstream v14.3 sample; original Lua not recovered. Protected sample excluded."
     }
   ]
 }

@@ -2,10 +2,12 @@
 -- Защищённый вход: c0deblox/Scripts:GPO.lua, commit 472dc5871faae68dfcfbba6485a619275063ee16.
 -- Это не исходник автора 1:1 и НЕ полноценный исполняемый Lunar Hub.
 -- Из поднятого Lua 5.1 bytecode вручную выделены только проверяемые фрагменты:
--- главный прототип (таблицы), #17/#18 (урон), #19/#20 (NPC), #31 (квест), #90 (лёд).
+-- таблицы главного прототипа, #9/#12 (числовой маршрут движения), #17/#18
+-- (урон), #19/#20 (NPC), #31 (квест), #90 (лёд).
 -- Переименования локальных переменных и оболочка return {} добавлены для чтения.
 -- В оригинале функции были частью большого UI и автофарма. Здесь они ничего не
--- запускают сами по себе. teleport() принадлежит НЕ восстановленной части хаба.
+-- запускают сами по себе. В teleportNumeric НЕ восстановлены входы userdata/CFrame
+-- и ветка noclip; в Quest используются только числовые координаты.
 -- Нельзя считать Lua 5.1/Luau-компиляцию доказательством работы в живой игре.
 
 local Quest = {
@@ -95,13 +97,74 @@ local function nearestNpcExcept(npcName, excludedName)
     return nearest
 end
 
+-- Прототип #9: время движения до числовых x, y, z в студах.
+-- Используется _G.speed (175 в инициализации оригинального хаба); модуль его
+-- не устанавливает. В оригинале x может быть userdata, но этот путь здесь НЕ
+-- обещается: квестовый маршрут передаёт три числа.
+local function calculateTime(x, y, z)
+    local current = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+    local duration = (Vector3.new(x, y, z)
+        - Vector3.new(current.X, current.Y, current.Z)).Magnitude / _G.speed
+    if tostring(duration):find("-") then
+        duration = math.abs(duration)
+    end
+    return duration
+end
+
+-- Прототип #12: вручную выделен ТОЛЬКО маршрут (number, number, number),
+-- когда getgenv().noclip == false. Оригинал поддерживает и userdata/CFrame
+-- через components(), но там у декомпиляторов остались неоднозначные open-pack.
+-- Для длинного пути (>1000 студов) и высоты >10 сначала спускает Position к
+-- Y=0, затем двигает HumanoidRootPart.CFrame к координатам назначения.
+-- Возвращает tween, duration. spawn и TweenService используются только при вызове.
+local function teleportNumeric(x, y, z)
+    if type(x) ~= "number" or type(y) ~= "number" or type(z) ~= "number" then
+        error("teleportNumeric: only numeric coordinates were recovered", 2)
+    end
+    if getgenv().noclip then
+        error("teleportNumeric: noclip branch was not recovered", 2)
+    end
+    local duration = calculateTime(x, y, z)
+    _G.teleporting = true
+    spawn(function()
+        while _G.teleporting == true do
+            wait(1)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0, 0, 0)
+            game.Players.LocalPlayer.Character.Humanoid:ChangeState(14)
+        end
+    end)
+
+    local root = game.Players.LocalPlayer.Character.HumanoidRootPart
+    local current = root.Position
+    local distance = (Vector3.new(x, y, z)
+        - Vector3.new(current.X, current.Y, current.Z)).Magnitude
+    if distance > 1000 and current.Y > 10 then
+        local lowerY = current.Y - current.Y -- 0 в поднятом байткоде
+        local lowerTween = game:GetService("TweenService"):Create(root,
+            TweenInfo.new(calculateTime(current.X, lowerY, current.Z),
+                Enum.EasingStyle.Linear, Enum.EasingDirection.InOut),
+            { Position = Vector3.new(current.X, lowerY, current.Z) })
+        lowerTween:Play()
+        lowerTween.Completed:wait()
+    end
+
+    local tween = game:GetService("TweenService"):Create(root,
+        TweenInfo.new(duration, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut),
+        { CFrame = CFrame.new(x, y, z) })
+    tween:Play()
+    tween.Completed:Wait()
+    _G.teleporting = false
+    return tween, duration
+end
+
 -- Прототип #31. npcName: ключ Quest/QuestPos (например, "Bandit").
--- Требует глобальную teleport(x, y, z) из полного хаба: она здесь не восстановлена.
+-- В оригинале вызывается глобальная teleport(x,y,z); здесь ей соответствует
+-- ТОЛЬКО восстановленный числовой путь без noclip. Нет QuestPos для трёх боссов.
 local function takeQuest(npcName)
     if npcName ~= "None" then
         local questName = Quest[npcName]
         local position = QuestPos[npcName]
-        teleport(position.X, position.Y, position.Z)
+        teleportNumeric(position.X, position.Y, position.Z)
         game:GetService("ReplicatedStorage").Events.Quest:InvokeServer({"takequest", questName})
     end
 end
@@ -152,6 +215,8 @@ return {
     QuestPos = QuestPos,
     nearestNpc = nearestNpc,
     nearestNpcExcept = nearestNpcExcept,
+    calculateTime = calculateTime,
+    teleportNumeric = teleportNumeric,
     takeQuest = takeQuest,
     damageNpc = damageNpc,
     hieWaterTouch = hieWaterTouch,

@@ -12,12 +12,15 @@
     "compiler": "Luau luau-compile --null",
     "compiler_commit": "9d7748a4f324213a18cb8283fa2a77c330225fa0",
     "all_luau_compiled": true,
-    "roblox_or_upstream_code_executed": false,
     "semantic_equivalence_proved": false,
     "gpo_partial_lua51_compiled": true,
     "gpo_partial_isolated_mock_tested": true,
     "astd_roghoul_partial_lua51_compiled": true,
-    "astd_roghoul_partial_isolated_mock_tested": true
+    "astd_roghoul_partial_isolated_mock_tested": true,
+    "full_game_script_executed": false,
+    "execution_scope": "Only detached PSU-lifted GPO Lua 5.1 bytecode prototypes 0_7, 0_10 and 0_20 in an isolated mock. No protected top-level Lua, Roblox session or network call executed.",
+    "isolated_selected_game_bytecode_prototypes_executed": true,
+    "roblox_or_full_protected_script_executed": false
   },
   "cases": [
     {
@@ -33,25 +36,33 @@
         "protection": "PSU 4.0.A (virtualized Lua 5.1 bytecode)",
         "third_party_rights": "license/redistribution rights not verified"
       },
-      "method": "memcpython/PSU-Deobfuscator@7d955d4d8e3bc14b744dc4afd52118787fc2bda4 bytecode lift; unluac-js@1.4.4 diagnostic recovery and Lua 5.1 disassembly of selected prototypes; manual extraction/renaming into a partial module (not an intact decompilation)",
+      "method": "memcpython/PSU-Deobfuscator@7d955d4d8e3bc14b744dc4afd52118787fc2bda4 static bytecode lift; unluac-js@1.4.4 diagnostic decompilation, Lua 5.1 disassembly; detached no-upvalue prototypes 0_7, 0_10 and 0_20 executed only under mocks to compare five numeric tween and three quest traces with a manually extracted partial module",
       "recovery": "partial_selected_prototypes",
       "intermediate": {
         "bytecode_bytes": 48400,
         "bytecode_sha256": "fe7dc0be0ad15266fd53765c2e53d60c4a4c61277696a93cc50cad3e06542241",
         "prototype_count": 99,
         "unknown_instructions": 0,
-        "unluac_status": "diagnostic-pseudocode; 49 recovery-error markers (not published)"
+        "unluac_status": "diagnostic-pseudocode; 49 recovery-error markers (not published)",
+        "selected_prototype_paths": [
+          "0_7:calculatetime",
+          "0_10:teleport (only number/number/number and noclip=false)",
+          "0_20:takeQuest"
+        ]
       },
       "artifacts": [
         {
           "path": "dobf scripts 1.0/Grand Piece Online - Lunar Hub (partial).lua",
-          "bytes": 8042,
-          "lines": 158,
-          "sha256": "b5ef23d211931d85b32e474bcd3efdaea27819dab7e015cd1668ab5f537d7144",
+          "bytes": 11541,
+          "lines": 223,
+          "sha256": "c5be6b26a5b4c086ece6974c8ce7a3df888c9ade1843aba6b0cf0ca9e3346ee2",
           "luau_compiled": true,
           "lua51_compiled": true,
           "isolated_mock_tested": true,
-          "roblox_tested": false
+          "roblox_tested": false,
+          "isolated_original_bytecode_differential_tested": true,
+          "numeric_routes_compared": 5,
+          "quest_outcomes_compared": 3
         }
       ],
       "functions": [
@@ -71,11 +82,29 @@
           "purpose": "Same, excluding one exact NPC name."
         },
         {
+          "name": "calculateTime",
+          "parameters": [
+            "x",
+            "y",
+            "z"
+          ],
+          "purpose": "Numerical distance from HumanoidRootPart.Position divided by _G.speed (seconds); from proto #9."
+        },
+        {
+          "name": "teleportNumeric",
+          "parameters": [
+            "x",
+            "y",
+            "z"
+          ],
+          "purpose": "Numeric, noclip-disabled path of proto #12; optional long-distance Y=0 Position tween, then CFrame tween, returns tween and duration; rejects userdata and noclip."
+        },
+        {
           "name": "takeQuest",
           "parameters": [
             "npcName"
           ],
-          "purpose": "Use Quest and QuestPos, call externally supplied teleport(x,y,z) and invoke Events.Quest with takequest."
+          "purpose": "Use Quest and QuestPos, call the reconstructed numeric-only teleport and then invoke Events.Quest with takequest."
         },
         {
           "name": "damageNpc",
@@ -94,10 +123,11 @@
         }
       ],
       "limitations": [
-        "Not the full Lunar Hub: no UI, original teleport implementation, auto-farm loops or Water.Touched subscription; function names and return table are presentation additions.",
+        "Not the full Lunar Hub: no GUI, CFrame/userdata teleport, noclip branch, auto-farm loops or Water.Touched subscription; function names and module return table are presentation additions.",
+        "teleportNumeric requires _G.speed set externally (175 in original hub initialization), getgenv().noclip=false, TweenService and an active HumanoidRootPart. Its spawn movement-state loop is not validated in Roblox.",
         "QuestPos lacks Bandit Boss, Axe Hand Logan and Gorilla King; takeQuest will dereference nil for these quest keys.",
         "unluac-js could not recover the complete program (49 diagnostic errors), and luadec crashes on the full bytecode; equivalence to the protected input is unproved.",
-        "Compiled with Lua 5.1 and Luau; isolated stub smoke test does not prove Roblox gameplay, current object names, safety or real remote behavior."
+        "Five mock numeric paths and three quest outcomes matched detached Lua 5.1 bytecode functions, but this does not prove Roblox gameplay, current object names, safety or real remote behavior."
       ]
     },
     {
