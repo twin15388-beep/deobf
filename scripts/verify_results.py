@@ -13,10 +13,12 @@ import re
 from pathlib import Path, PurePosixPath
 
 ROOT = Path(__file__).resolve().parents[1]
-REPORTS = (
-    "reports/game-recovery-2026-10-19.json",
+SOURCE_REPORTS = (
     "reports/game-sources-2026-10-21.json",
+    "reports/game-sources-2026-10-21-additions.json",
 )
+REPORTS = ("reports/game-recovery-2026-10-19.json", *SOURCE_REPORTS)
+ADDITIONS = SOURCE_REPORTS[-1]
 
 
 def verify() -> int:
@@ -63,19 +65,50 @@ def verify() -> int:
                 raise ValueError(f"Size or SHA-256 mismatch: {name}")
             # A filename is not sufficient evidence of a recovery. "src"
             # is mandatory for newly republished open-source code.
-            if report_name.endswith("game-sources-2026-10-21.json"):
+            if report_name in SOURCE_REPORTS:
                 status = artifact.get("status")
                 if status not in {"src", "deobfuscated"}:
                     raise ValueError(f"Unknown recovery/source status for {name}")
                 if name.endswith(" (src).lua") != (status == "src"):
                     raise ValueError(f"Incorrect source label for {name}")
-                text = path.read_text(encoding="utf-8")
-                if "MIT License" not in text[:2500] or "pastefy.app" in text.lower():
-                    raise ValueError(f"Missing license or prohibited host in {name}")
-                if name == "dobf scripts 1.0/Bloxstrike - Hotline UI.lua":
-                    body = text.partition("]]\n\n")[2]
-                    if not body or "HttpGet(" in body or "loadstring(" in body:
-                        raise ValueError("Bloxstrike telemetry loader must stay removed")
+                data = path.read_bytes()
+                header, separator, body = data.partition(b"]]\n\n")
+                if not separator or not body or b"pastefy.app" in body.lower():
+                    raise ValueError(f"Missing content or prohibited host in {name}")
+                if report_name == ADDITIONS:
+                    source = artifact["source"]
+                    if status != "src" or b"NOT DEOBFUSCATED" not in header:
+                        raise ValueError(f"Unlabeled open source in {name}")
+                    if source["sha256"].encode() not in header:
+                        raise ValueError(f"Missing pinned source hash in {name}")
+                    if hashlib.sha256(body).hexdigest() != artifact["source_body_sha256"]:
+                        raise ValueError(f"Altered source body in {name}")
+                    if not all(marker.encode() in body for marker in artifact["game_markers"]):
+                        raise ValueError(f"Missing game-specific code in {name}")
+                    if source["license"] == "MIT":
+                        if b"MIT License" not in header:
+                            raise ValueError(f"Missing MIT notice in {name}")
+                    elif source["license"] == "Apache-2.0":
+                        license_path = ROOT / "reports/licenses/0x5A46-Apache-2.0.txt"
+                        if (not license_path.is_file() or license_path.is_symlink()
+                                or hashlib.sha256(license_path.read_bytes()).hexdigest()
+                                != source["license_sha256"]
+                                or b"Apache-2.0 license" not in header):
+                            raise ValueError(f"Missing complete Apache-2.0 license for {name}")
+                    elif not (b"No standard LICENSE" in header and b"no SPDX" in header):
+                        raise ValueError(f"Missing source rights warning in {name}")
+                    if name == "dobf scripts 1.0/Grand Piece Online - Aztup main (src).lua":
+                        if (source["sha256"] == artifact["source_body_sha256"]
+                                or any(term in body for term in (
+                                    b"BanWebhook", b"FireWebhook", b"usedFeatures",
+                                    b"function lib.Webhook.send"))):
+                            raise ValueError("GPO automatic telemetry must stay removed")
+                else:
+                    if b"MIT License" not in header[:2500]:
+                        raise ValueError(f"Missing license in {name}")
+                    if name == "dobf scripts 1.0/Bloxstrike - Hotline UI.lua":
+                        if b"HttpGet(" in body or b"loadstring(" in body:
+                            raise ValueError("Bloxstrike telemetry loader must stay removed")
             total += 1
         print(f"OK  {report_name}")
     output_dir = ROOT / "dobf scripts 1.0"
