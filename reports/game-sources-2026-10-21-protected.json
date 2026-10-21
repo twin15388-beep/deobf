@@ -87,11 +87,85 @@
       ],
       "candidate_place_id": 92683694220101,
       "candidate_place_url": "https://www.roblox.com/games/92683694220101/Fight-Your-Zombie"
+    },
+    {
+      "published_path": "dobf scripts 1.0/Item Factory - MoonSec V3 (partial).lua",
+      "game": "Item Factory",
+      "status": "deobfuscated",
+      "mode": "partial: 10 manually rewritten game-specific handlers/helpers from selected valid MoonSec V3 -> Lua 5.1 child prototypes; invalid root excluded",
+      "bytes": 14185,
+      "sha256": "e44ee2de9c9def9cb1da94b4e9b962e6969d1d8781c4e5eca99692a77359836e",
+      "result_header_sha256": "ef564b09a43e3318e6727baf02f4ab2b44ae9f18f072f940fe9e96fa32fe0c85",
+      "result_body_sha256": "e12d81340f08d19d6299e88c553bde70d9ef8d014e8a36c1128ccd14d8a440e7",
+      "body_lines": 267,
+      "recovery_tool": "luaprojects/moonsec-js-deobf@7a4be80850f2b2a5ad20a02ef486d518f2164b27",
+      "recovery": {
+        "bytecode_bytes": 16558,
+        "bytecode_sha256": "2252ca2d8302f72b88b6c1b471a069be5eca7e9f4a81c16cbd4923e45a11d011",
+        "child_prototypes": 29,
+        "valid_children": 25,
+        "invalid_children": [
+          12,
+          14,
+          19,
+          21
+        ],
+        "selected_children": [
+          2,
+          8,
+          10,
+          11,
+          16,
+          18,
+          20,
+          23,
+          25,
+          27
+        ],
+        "root_lua51_valid": false
+      },
+      "source": {
+        "repo": "Xowie89/Roblox-Scripts",
+        "commit": "b6d7f6a456750eaac26a7bbbdcaa8e77798c6e56",
+        "url": "https://github.com/Xowie89/Roblox-Scripts/blob/b6d7f6a456750eaac26a7bbbdcaa8e77798c6e56/Item%20Factory.lua",
+        "path": "Item Factory.lua",
+        "bytes": 355657,
+        "sha256": "c389d0183e2c68b2e72c92fe2bfce8d926f119ddbe42984ca9b5031d9611c73c",
+        "license": "MIT",
+        "license_sha256": "32dc3feddb986e542b709237562c6ff61e5a6362c863b9ce84c449761ec502f3"
+      },
+      "game_markers": [
+        "deps.workspace.Islands[deps.player.Name .. \" Island\"].SellStation.MainTouch.Position",
+        "deps.replicatedStorage.Events.GoPlaces:FireServer(\"Home\")",
+        "tool.ItemInfo.Rarity.Value < state.rarityThreshold",
+        "deps.virtualUser:ClickButton1(",
+        "deps.workspace.KOTHMap.KOTH"
+      ],
+      "verification": {
+        "lua51_syntax": true,
+        "luau_syntax": true,
+        "isolated_prototype_mock_cases": 44,
+        "mock_game_cases": 45,
+        "repeat_decoder_output_identical": true,
+        "root_lua51_valid": false,
+        "protected_top_level_executed": false,
+        "tested_in_roblox": false
+      },
+      "limitations": [
+        "Not a complete deobfuscation: root and four children fail Lua 5.1 verification; 10 valid selected children were manually rewritten; name/state/deps/comments are adaptations",
+        "getconnections/press require an executor or explicit injection; the original moveTo/MoveToFinished child is invalid and absent",
+        "Auto-upgrade may spend currency; auto-sell drops tools; teleport/heal loops may not terminate; no UI/bootstrap or mutable UI download included",
+        "Partial mock comparisons are against deobfuscator-produced isolated bytecode, never against protected top-level or live Roblox"
+      ],
+      "candidate_place_id": 7280506312,
+      "candidate_place_url": "https://www.roblox.com/games/7280506312/Item-Factory"
     }
   ],
   "rejected_candidates": [
     "Anime Fighters Simulator: repaired PSU lift yielded suspicious CALLs and malformed full decompilation, not published",
-    "Trident Survival / Gakuran Luraph and MoonSec V3 Item Factory: no reliable result or redistribution terms for inspected candidates",
-    "King Legacy MythicHub and JJza007: no upstream LICENSE; do not publish"
+    "Trident Survival / Gakuran Luraph: no reliable result or redistribution terms; Item Factory MoonSec V3 root invalid, ONLY selected valid children published",
+    "King Legacy MythicHub and JJza007: no upstream LICENSE; do not publish",
+    "Seven other MomoHub007 game repositories have no LICENSE; the separate Fight Your Zombie MPL-2.0 does not apply to them",
+    "worstskid/MoonsecV3-Deobfuscator README says it is not open source; not used"
   ]
 }

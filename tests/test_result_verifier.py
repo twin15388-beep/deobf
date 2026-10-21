@@ -80,6 +80,41 @@ class PublishedResultVerifierTests(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, "duplicate"):
                     verify_results.verify()
 
+    def test_protected_moonsec_partial_rejects_false_recovery_claims(self):
+        """File integrity alone must not bless an invalid root or fake license."""
+        source_root = verify_results.ROOT
+        report_path = source_root / verify_results.PROTECTED
+        item = next(x for x in json.loads(report_path.read_text())["artifacts"]
+                    if x["game"] == "Item Factory")
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            target = root / item["published_path"]
+            target.parent.mkdir(parents=True)
+            target.write_bytes((source_root / item["published_path"]).read_bytes())
+            out_report = root / verify_results.PROTECTED
+            out_report.parent.mkdir(parents=True)
+
+            def check(current):
+                out_report.write_text(json.dumps({"artifacts": [current]}))
+                with patch.object(verify_results, "ROOT", root), patch.object(
+                    verify_results, "REPORTS", (verify_results.PROTECTED,)
+                ), contextlib.redirect_stdout(io.StringIO()):
+                    return verify_results.verify()
+
+            self.assertEqual(check(item), 1)
+            altered = json.loads(json.dumps(item))
+            altered["recovery"]["root_lua51_valid"] = True
+            with self.assertRaisesRegex(ValueError, "Incomplete or unsafe"):
+                check(altered)
+            altered = json.loads(json.dumps(item))
+            altered["source"]["license_sha256"] = "0" * 64
+            with self.assertRaisesRegex(ValueError, "MIT license"):
+                check(altered)
+            altered = json.loads(json.dumps(item))
+            altered["verification"]["isolated_prototype_mock_cases"] = 28
+            with self.assertRaisesRegex(ValueError, "Unlabeled"):
+                check(altered)
+
     def test_rejects_paths_outside_results_directory(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

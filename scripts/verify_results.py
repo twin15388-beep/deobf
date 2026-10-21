@@ -25,6 +25,10 @@ ADDITIONS = SOURCE_REPORTS[1]
 FOLLOWUP = SOURCE_REPORTS[2]
 EXTRA = SOURCE_REPORTS[3]
 PROTECTED = SOURCE_REPORTS[4]
+PROTECTED_PARTIAL_CASES = {
+    "dobf scripts 1.0/Zero Academia - ZeroScripts (partial).lua": 28,
+    "dobf scripts 1.0/Item Factory - MoonSec V3 (partial).lua": 44,
+}
 
 
 def verify() -> int:
@@ -133,11 +137,28 @@ def verify() -> int:
                                 or b"PARTIAL STATIC DEOBFUSCATION" not in header
                                 or b"manually rewritten" not in header
                                 or begin not in header or end not in header
-                                or verification["isolated_prototype_mock_cases"] != 28):
+                                or verification["isolated_prototype_mock_cases"]
+                                != PROTECTED_PARTIAL_CASES.get(name)):
                             raise ValueError(f"Unlabeled manually reconstructed module: {name}")
                         license_bytes = header.split(begin, 1)[1].split(end, 1)[0]
                         if hashlib.sha256(license_bytes).hexdigest() != source["license_sha256"]:
                             raise ValueError(f"Altered upstream MIT license: {name}")
+                        if name == "dobf scripts 1.0/Item Factory - MoonSec V3 (partial).lua":
+                            recovery = artifact["recovery"]
+                            if (artifact["recovery_tool"].encode() not in header
+                                    or b"FAIL Lua 5.1 bytecode verification" not in header
+                                    or recovery["root_lua51_valid"] is not False
+                                    or recovery["child_prototypes"] != 29
+                                    or recovery["valid_children"] != 25
+                                    or recovery["invalid_children"] != [12, 14, 19, 21]
+                                    or recovery["selected_children"]
+                                    != [2, 8, 10, 11, 16, 18, 20, 23, 25, 27]
+                                    or verification["repeat_decoder_output_identical"] is not True
+                                    or verification["root_lua51_valid"] is not False
+                                    or verification["mock_game_cases"] != 45
+                                    or any(host in body.lower() for host in
+                                           (b"https://", b"httpget(", b"loadstring("))):
+                                raise ValueError(f"Incomplete or unsafe partial MoonSec recovery: {name}")
                     elif source["license"] == "MPL-2.0":
                         license_name = source["license_path"]
                         parts = PurePosixPath(license_name).parts
