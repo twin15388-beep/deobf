@@ -1,0 +1,244 @@
+{
+  "date": "2026-10-21",
+  "scope": "Only protected, game-specific Lua; no new (src), no Pastefy, no script retrieval through APIs",
+  "artifacts": [
+    {
+      "published_path": "dobf scripts 1.0/Zero Academia - ZeroScripts (partial).lua",
+      "game": "Zero Academia",
+      "status": "deobfuscated",
+      "mode": "partial: 8 manually rewritten handlers from corrected isolated Lua 5.1 prototypes",
+      "bytes": 11691,
+      "sha256": "0a5261f892468cff62dae74fa42cd6c9d7f4bd90602ad10f8df35032a2541aba",
+      "result_header_sha256": "ed7c0c3a2e1d4853577ed99382fda8423a1e5bca7d6ef29b565c0f97ee38285e",
+      "result_body_sha256": "5743521addaba2b27258b90278eac7cf9ededbb86752bde9174059f54cd738b1",
+      "body_lines": 240,
+      "recovery_tool": "memcpython/PSU-Deobfuscator@7d955d4d8e3bc14b744dc4afd52118787fc2bda4 + scripts/lift_psu_multireturn.mjs",
+      "source": {
+        "repo": "teppyboy/RbxScripts",
+        "commit": "58a52a25dde88cd939d679ed74dc63542a2cacd2",
+        "url": "https://github.com/teppyboy/RbxScripts/blob/58a52a25dde88cd939d679ed74dc63542a2cacd2/ZeroScripts/ZeroAcademia/Script.lua",
+        "path": "ZeroScripts/ZeroAcademia/Script.lua",
+        "bytes": 64070,
+        "sha256": "0630d5d1c34ffe0ee1604c49cbc8c0dce83233cf638fb5b49a11f60fb309b4ad",
+        "license": "MIT",
+        "license_sha256": "a3fb4363c1345209d898a3a0bda853bf775d57a7b304b9b5efeada6836286900"
+      },
+      "game_markers": [
+        "workspace.Quests[player.Name]",
+        "deps.remotes.Quest.CancelQuest:FireServer()",
+        "workspace[deps.player.Name][deps.getQuirk()][key]",
+        "deps.remotes.Spin:FireServer(\"CommonSpin\")"
+      ],
+      "verification": {
+        "lua51_syntax": true,
+        "luau_syntax": true,
+        "isolated_prototype_mock_cases": 28,
+        "protected_top_level_executed": false,
+        "tested_in_roblox": false
+      },
+      "limitations": [
+        "Not an autonomous hub; eight selected handlers only; names/state/deps/wrapping/comments added by reconstructor",
+        "deps.getNPC, deps.useKey and further game helpers not included",
+        "Spin can spend in-game Cash; loops need external cancellation; real game not tested"
+      ]
+    },
+    {
+      "published_path": "dobf scripts 1.0/Fight Your Zombie - MoMoHub.lua",
+      "game": "Fight Your Zombie",
+      "status": "deobfuscated",
+      "mode": "static WeAreDevs/WAD v1.0.0 decode: entire tool output plus provenance header",
+      "bytes": 14181,
+      "sha256": "25f3f18e8f235ea0575832df3d6de61e0ce6d382413c97f351d38595fa32f7af",
+      "result_header_sha256": "203824043953d51a2b39a89fa2af694fde535c91df99e5540da0ea73ddb47a5e",
+      "result_body_sha256": "cc765936d850af40fc697159f46f1c0421aa1c6d623ae753726b420c99442d08",
+      "body_lines": 522,
+      "recovery_tool": "prostone4/Prometheus-Deobfuscator@6ee3291ec83fdc58c04e17bb1f1703386619711a",
+      "source": {
+        "repo": "MomoHub007/Fight-Your-Zombie",
+        "commit": "3af1c5938ef0b1c04505d1353d2cf4da1740f5f8",
+        "url": "https://github.com/MomoHub007/Fight-Your-Zombie/blob/3af1c5938ef0b1c04505d1353d2cf4da1740f5f8/README.md",
+        "path": "README.md",
+        "bytes": 110652,
+        "sha256": "5c7173796d6b8409f8b55aafb03c21e576484d3f24e602bd4447543fa78949f8",
+        "license": "MPL-2.0",
+        "license_path": "reports/licenses/MomoHub-MPL-2.0.txt",
+        "license_sha256": "3f3d9e0024b1921b067d6f7f88deb4a60cbe7a78e76c64e3f1d7fc3b779b9d04"
+      },
+      "game_markers": [
+        "workspace.Plots:GetChildren()",
+        "workspace:FindFirstChild(\"WalkingZombies\")",
+        "workspace.Orbs:GetChildren()",
+        "replicatedStorage.Remotes.EquipAxe:FireServer(d)",
+        "replicatedStorage.Remotes.AxeSwing:FireServer()"
+      ],
+      "verification": {
+        "lua51_syntax": true,
+        "luau_syntax": true,
+        "repeat_decoder_output_identical": true,
+        "protected_top_level_executed": false,
+        "tested_in_roblox": false,
+        "mock_game_assertions": 17
+      },
+      "limitations": [
+        "Title matches an official Roblox experience (PlaceId 92683694220101), but the code does not check PlaceId; correspondence to its current game version and live behavior are unverified",
+        "At startup the script loads mutable third-party X2ZU UI from GitHub (not included or audited); the game logic itself is inline",
+        "Uses executor APIs (fireproximityprompt, isfile/writefile, gethui); saving config, frequent teleports and remote calls can change game state",
+        "Static decode/syntax checks do not prove equivalence or game functionality"
+      ],
+      "candidate_place_id": 92683694220101,
+      "candidate_place_url": "https://www.roblox.com/games/92683694220101/Fight-Your-Zombie"
+    },
+    {
+      "published_path": "dobf scripts 1.0/Item Factory - MoonSec V3 (partial).lua",
+      "game": "Item Factory",
+      "status": "deobfuscated",
+      "mode": "partial: 10 manually rewritten game-specific handlers/helpers from selected valid MoonSec V3 -> Lua 5.1 child prototypes; invalid root excluded",
+      "bytes": 14185,
+      "sha256": "e44ee2de9c9def9cb1da94b4e9b962e6969d1d8781c4e5eca99692a77359836e",
+      "result_header_sha256": "ef564b09a43e3318e6727baf02f4ab2b44ae9f18f072f940fe9e96fa32fe0c85",
+      "result_body_sha256": "e12d81340f08d19d6299e88c553bde70d9ef8d014e8a36c1128ccd14d8a440e7",
+      "body_lines": 267,
+      "recovery_tool": "luaprojects/moonsec-js-deobf@7a4be80850f2b2a5ad20a02ef486d518f2164b27",
+      "recovery": {
+        "bytecode_bytes": 16558,
+        "bytecode_sha256": "2252ca2d8302f72b88b6c1b471a069be5eca7e9f4a81c16cbd4923e45a11d011",
+        "child_prototypes": 29,
+        "valid_children": 25,
+        "invalid_children": [
+          12,
+          14,
+          19,
+          21
+        ],
+        "selected_children": [
+          2,
+          8,
+          10,
+          11,
+          16,
+          18,
+          20,
+          23,
+          25,
+          27
+        ],
+        "root_lua51_valid": false
+      },
+      "source": {
+        "repo": "Xowie89/Roblox-Scripts",
+        "commit": "b6d7f6a456750eaac26a7bbbdcaa8e77798c6e56",
+        "url": "https://github.com/Xowie89/Roblox-Scripts/blob/b6d7f6a456750eaac26a7bbbdcaa8e77798c6e56/Item%20Factory.lua",
+        "path": "Item Factory.lua",
+        "bytes": 355657,
+        "sha256": "c389d0183e2c68b2e72c92fe2bfce8d926f119ddbe42984ca9b5031d9611c73c",
+        "license": "MIT",
+        "license_sha256": "32dc3feddb986e542b709237562c6ff61e5a6362c863b9ce84c449761ec502f3"
+      },
+      "game_markers": [
+        "deps.workspace.Islands[deps.player.Name .. \" Island\"].SellStation.MainTouch.Position",
+        "deps.replicatedStorage.Events.GoPlaces:FireServer(\"Home\")",
+        "tool.ItemInfo.Rarity.Value < state.rarityThreshold",
+        "deps.virtualUser:ClickButton1(",
+        "deps.workspace.KOTHMap.KOTH"
+      ],
+      "verification": {
+        "lua51_syntax": true,
+        "luau_syntax": true,
+        "isolated_prototype_mock_cases": 44,
+        "mock_game_cases": 45,
+        "repeat_decoder_output_identical": true,
+        "root_lua51_valid": false,
+        "protected_top_level_executed": false,
+        "tested_in_roblox": false
+      },
+      "limitations": [
+        "Not a complete deobfuscation: root and four children fail Lua 5.1 verification; 10 valid selected children were manually rewritten; name/state/deps/comments are adaptations",
+        "getconnections/press require an executor or explicit injection; the original moveTo/MoveToFinished child is invalid and absent",
+        "Auto-upgrade may spend currency; auto-sell drops tools; teleport/heal loops may not terminate; no UI/bootstrap or mutable UI download included",
+        "Partial mock comparisons are against deobfuscator-produced isolated bytecode, never against protected top-level or live Roblox"
+      ],
+      "candidate_place_id": 7280506312,
+      "candidate_place_url": "https://www.roblox.com/games/7280506312/Item-Factory"
+    },
+    {
+      "published_path": "dobf scripts 1.0/Anime Fighters Simulator - PSU (partial).lua",
+      "game": "Anime Fighters Simulator",
+      "status": "deobfuscated",
+      "mode": "partial: 10 manually rewritten gameplay handlers from selected Lua 5.1 PSU child prototypes after three narrow CALL-handler corrections",
+      "bytes": 8792,
+      "sha256": "9ff039c5869aa63eaf78047575408ebe729a8047cae927c8711da9b97e22b2bd",
+      "result_header_sha256": "c1ba65d9e27a595609ac7a37a9ff081866f4ea90c967bd094ca734a2df499de7",
+      "result_body_sha256": "038950316690c786f3dd2925ded3f03c1df78b49cff0970bbd3ba31b59f77668",
+      "body_lines": 137,
+      "recovery_tool": "memcpython/PSU-Deobfuscator@7d955d4d8e3bc14b744dc4afd52118787fc2bda4 + scripts/lift_psu_fixed_calls.mjs",
+      "recovery": {
+        "bytecode_bytes": 40696,
+        "bytecode_sha256": "dfd9f454a5381f4aca02550592867aebd2747170a1d891fbe6c7c6905a5967f2",
+        "lua51_valid": true,
+        "child_prototypes": 55,
+        "selected_children": [
+          "0_7",
+          "0_15_0",
+          "0_17",
+          "0_22",
+          "0_23",
+          "0_24",
+          "0_25",
+          "0_26",
+          "0_27",
+          "0_29"
+        ],
+        "corrected_call_handlers": {
+          "fixed_one_arg": 104,
+          "one_arg_multi_result": 39,
+          "other_multireturn": 3
+        },
+        "protected_vm_executed": false
+      },
+      "source": {
+        "repo": "Luciquad/robloxscripts",
+        "commit": "21735be73af9db5d6c3f9df4c532f08e9ddf7980",
+        "url": "https://github.com/Luciquad/robloxscripts/blob/21735be73af9db5d6c3f9df4c532f08e9ddf7980/animefighterssimulator",
+        "path": "animefighterssimulator",
+        "bytes": 121405,
+        "sha256": "f48e4db9cf568deba2c51e29940d57c65ce5eb678556870d08421e4270124f77",
+        "license": "MIT",
+        "license_sha256": "d4a1106b49a205dfbcd4aeceb62e8dc72f1eef3882911f75af6e491c4b00761d"
+      },
+      "game_markers": [
+        "ModuleScripts.PetStats",
+        "Remote.MassSell:FireServer({entry.UID.Value})",
+        "Remote.ClickerDamage:FireServer()",
+        "world.EnemySpawners:GetDescendants()",
+        "Remote.AttemptTravel"
+      ],
+      "verification": {
+        "lua51_syntax": true,
+        "luau_syntax": true,
+        "isolated_prototype_mock_cases": 20,
+        "protected_top_level_executed": false,
+        "tested_in_roblox": false,
+        "bytecode_corrected_before_comparison": true
+      },
+      "limitations": [
+        "Not a complete hub: selected handlers only; name/state/deps/single-tick API and comments added by the reconstructor, not author comments",
+        "Corrected static Lua 5.1 lift passes bytecode verification, but full decompiler output is malformed; protected VM and remote UI library not executed; equivalence to obfuscated top-level is unproven",
+        "The root rejects PlaceId 4042427666 (the different Anime Fighting Simulator) with Wrong Script, but does not explicitly validate the candidate Anime Fighters Simulator PlaceId 6299805723; current game compatibility not proven",
+        "PetStats modules, executor/game remotes and UI path may have changed; Require can execute Roblox modules; MassSell is destructive, AttemptTravel may travel, spawner scan moves the character and auto-click sends damage remotes",
+        "Offline comparisons use only ten isolated children from the CORRECTED static bytecode; cannot claim live game behavior or original unprotected source"
+      ],
+      "candidate_place_id": 6299805723,
+      "candidate_place_url": "https://www.roblox.com/games/6299805723/Anime-Fighters",
+      "excluded_place_id": 4042427666,
+      "excluded_place_url": "https://www.roblox.com/games/4042427666/Anime-Fighting-Simulator"
+    }
+  ],
+  "rejected_candidates": [
+    "Trident Survival / Gakuran Luraph: no reliable result or redistribution terms; Item Factory MoonSec V3 root invalid, ONLY selected valid children published",
+    "King Legacy MythicHub and JJza007: no upstream LICENSE; do not publish",
+    "Seven other MomoHub007 game repositories have no LICENSE; the separate Fight Your Zombie MPL-2.0 does not apply to them",
+    "worstskid/MoonsecV3-Deobfuscator README says it is not open source; not used",
+    "Anime Fighters Simulator full PSU decompilation remains malformed; only ten individually checked game-specific handlers from corrected lift are published, not the full farm/auto-buy hub",
+    "Anime Training Simulator, Hospital Tycoon and Factory Simulator MoonSec V2: tried SixZensED/Lua-Deobfuscator@fd3d632 (package declares ISC); bytecode converted from size_t 4 to 8 still failed Lua 5.1 root checks, valid isolated children were UI/decoder rather than verified gameplay; not published"
+  ]
+}

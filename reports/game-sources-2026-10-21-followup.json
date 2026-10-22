@@ -1,0 +1,1037 @@
+{
+  "date": "2026-10-21",
+  "scope": "Follow-up to 40 game-specific Luau files: GitHub clone/history, no Pastefy, no site APIs used to obtain Lua; 7 actual protected inputs recovered and 8 MIT source files.",
+  "validation": [
+    "Pinned upstream Git commits and original SHA-256, original MIT notices copied verbatim; local protected Lua never executed as a Roblox script.",
+    "prostone4/Prometheus-Deobfuscator statically recovered 6 WAD inputs; edwindev-spec/MoonVeil recovered one v1.4.5 VM and matched 305 isolated proxy events.",
+    "All 15 published Lua syntactically compiled with luau-compile --null (Luau commit 9d7748a4f324213a18cb8283fa2a77c330225fa0). No Roblox runtime/remote claims."
+  ],
+  "artifacts": [
+    {
+      "game": "Gakuran",
+      "variant": "Dep Hub",
+      "status": "deobfuscated",
+      "source": {
+        "repository": "DogFireBattle/gakuran",
+        "commit": "17bfd85455075a0908dd64c28a09505f2a98db6f",
+        "path": "gakuranscript.lua",
+        "url": "https://github.com/DogFireBattle/gakuran/blob/17bfd85455075a0908dd64c28a09505f2a98db6f/gakuranscript.lua",
+        "bytes": 498639,
+        "sha256": "fb9490f58ebec4081a379d0287d3d9985a09bd4ed0f01bf1fab9632d921533a0",
+        "license": "MIT",
+        "license_path": "LICENSE",
+        "license_sha256": "3c20cbde4c0354540719bebf1bd4ecc03dfc720e060583ebdcc8b16bfbc1f522"
+      },
+      "discovery": "История MIT-репозитория DogFireBattle/gakuran: индексированное имя оказалось удалено; извлечён собственно прежний WAD-обфусцированный game script.",
+      "result_body_sha256": "b00d0d94ac38386bede184a7b9db30e73d9560fffca7619d83802917cc05fa75",
+      "published_path": "dobf scripts 1.0/Gakuran - Dep Hub.lua",
+      "bytes": 55334,
+      "sha256": "73b17e12311aa8c65f89870ecae41aacdaf290a435129aa4a4b0a342b5155c1b",
+      "lines": 2252,
+      "luau_compiled": true,
+      "roblox_tested": false,
+      "game_markers": [
+        "workspace:WaitForChild(\"Hitboxes\", 30)",
+        "RhythmServiceUI",
+        "BasketballShotMeterAttach"
+      ],
+      "functions": [
+        {
+          "name": "f34(p27)",
+          "parameters": [
+            "p27: BasePart (incoming hitbox)"
+          ],
+          "purpose": "Проверяет игровую зону удара и расстояние до игрока; планирует парирование с поправкой на пинг."
+        },
+        {
+          "name": "f33()",
+          "parameters": [],
+          "purpose": "Нажимает выбранную клавишу парирования несколько раз: ParryBurst/ParryHold/ParryBurstGap."
+        },
+        {
+          "name": "f53(p42)",
+          "parameters": [
+            "p42: string (local MIDI path)"
+          ],
+          "purpose": "Читает MIDI через readfile и отдаёт данные парсеру f41 для автоматической игры на пианино."
+        },
+        {
+          "name": "f48()",
+          "parameters": [],
+          "purpose": "Ищет BasketballShotMeterAttach/Meter на персонаже для броска."
+        },
+        {
+          "name": "f49(p40)",
+          "parameters": [
+            "p40: Color3"
+          ],
+          "purpose": "Распознаёт зелёную область баскетбольного индикатора; обработчик RenderStepped отпускает F при попадании стрелки."
+        }
+      ],
+      "limitations": [
+        "Взят именно исторический commit 17bfd85: текущий HEAD удалил gakuranscript.lua и содержит универсальный DEPEMOTES.lua; последний намеренно не публикуется как игровой.",
+        "Требует workspace.Hitboxes, PlayerGui.RhythmServiceUI и баскетбольную шкалу; игровой PlaceId в файле не проверяется, соответствие определено по этим конкретным объектам.",
+        "Hydra Lib загружается и исполняется при старте с изменяемого GitHub main; readfile нужен только для MIDI; gameplay и удалённая библиотека в Roblox не тестировались.",
+        "Статическая распаковка WeAreDevs/Prometheus и компиляция не доказывают поведенческую эквивалентность."
+      ],
+      "modifications": [],
+      "verification": {
+        "method": "luau-compile --null",
+        "equivalent": null
+      },
+      "recovery_tool": "prostone4/Prometheus-Deobfuscator@6ee3291ec83fdc58c04e17bb1f1703386619711a"
+    },
+    {
+      "game": "SCP-3008",
+      "variant": "Sealient UI",
+      "status": "deobfuscated",
+      "source": {
+        "repository": "Sealient/Sealients-Roblox-Scripts",
+        "commit": "ac50da1fb3f21e357bd4f52d4f9b7203b6d0b967",
+        "path": "Sealient's 3008 UI.lua",
+        "url": "https://github.com/Sealient/Sealients-Roblox-Scripts/blob/ac50da1fb3f21e357bd4f52d4f9b7203b6d0b967/Sealient%27s%203008%20UI.lua",
+        "bytes": 184023,
+        "sha256": "2add113c086034788b03f4d67e494d91b60b5398977b0fb74818ef0a537fcb1f",
+        "license": "MIT",
+        "license_path": "LICENSE",
+        "license_sha256": "9052c1b23df7cf8d9cfc5fa4fa25e3858024d85e4711c24d66d203425d1415a9"
+      },
+      "discovery": "MIT-репозиторий Sealient: получен локальной статической распаковкой однофайлового WAD-обфусцированного UI.",
+      "result_body_sha256": "b0f803829054cb45fb1ab0c677749d24eeef5816983e8b9c1f897f5b89d5ba3c",
+      "published_path": "dobf scripts 1.0/SCP-3008 - Sealient UI.lua",
+      "bytes": 25943,
+      "sha256": "9ad5ebed2d8f165311ea6ba3258d906de17a8c93fab0adcdc351f4b1c6b1ef5e",
+      "lines": 971,
+      "luau_compiled": true,
+      "roblox_tested": false,
+      "game_markers": [
+        "WaitForChild(\"Employees\")",
+        "EmployeeESP",
+        "floor2:GetChildren()"
+      ],
+      "functions": [
+        {
+          "name": "f8(p7)",
+          "parameters": [
+            "p7: Model (employee NPC)"
+          ],
+          "purpose": "Создаёт BillboardGui/дистанцию для сотрудников из GameObjects.Physical.Employees."
+        },
+        {
+          "name": "f13(p9)",
+          "parameters": [
+            "p9: BasePart|Model (loot item)"
+          ],
+          "purpose": "Рисует ItemESP для еды/предметов из секций Items этажа."
+        },
+        {
+          "name": "f6()",
+          "parameters": [],
+          "purpose": "Сканирует floor.Items, отбирает предметы по имени и максимальной дистанции для списка телепорта."
+        },
+        {
+          "name": "f5(p5)",
+          "parameters": [
+            "p5: BasePart|Model (item)"
+          ],
+          "purpose": "Переносит корневую часть персонажа к выбранному предмету, предварительно сохраняя позицию."
+        }
+      ],
+      "limitations": [
+        "При запуске исполняет три удалённые библиотеки Fluent/SaveManager/InterfaceManager с изменяемых URL; кнопка Check Version может отдельно скачать и исполнить новую версию. Эти зависимости не включены и не проверены.",
+        "Нет проверки PlaceId; нужны GameObjects.Physical.Employees и floor.Items. Локальный ESP/телепорт не гарантия серверного эффекта; Roblox не тестировался.",
+        "Это вариант с Fluent UI, не совпадающий с двумя вариантами Abyssal в той же коллекции."
+      ],
+      "modifications": [],
+      "verification": {
+        "method": "luau-compile --null",
+        "equivalent": null
+      },
+      "recovery_tool": "prostone4/Prometheus-Deobfuscator@6ee3291ec83fdc58c04e17bb1f1703386619711a"
+    },
+    {
+      "game": "SCP-3008",
+      "variant": "Abyssal Luminx",
+      "status": "deobfuscated",
+      "source": {
+        "repository": "Sealient/Sealients-Roblox-Scripts",
+        "commit": "ac50da1fb3f21e357bd4f52d4f9b7203b6d0b967",
+        "path": "3008- UPDATED/3008 (new).lua",
+        "url": "https://github.com/Sealient/Sealients-Roblox-Scripts/blob/ac50da1fb3f21e357bd4f52d4f9b7203b6d0b967/3008-%20UPDATED/3008%20%28new%29.lua",
+        "bytes": 223185,
+        "sha256": "f9d194286f131534198665e7718ed97ac1c91dbaff083f3870e643b1715f425c",
+        "license": "MIT",
+        "license_path": "LICENSE",
+        "license_sha256": "9052c1b23df7cf8d9cfc5fa4fa25e3858024d85e4711c24d66d203425d1415a9"
+      },
+      "discovery": "Второй отдельный MIT-файл Sealient из 3008- UPDATED; полноценные обработчики предметов, сотрудников и сцены.",
+      "result_body_sha256": "2d7c6f3ba0f20e4e82d19d34c406d5e258a6ad8d131dc49b16e7e0f9c847cf78",
+      "published_path": "dobf scripts 1.0/SCP-3008 - Abyssal Luminx.lua",
+      "bytes": 30321,
+      "sha256": "03e9c9ddc83dab9d30a6470c3723423b7a91edb57dbc02fb06ae6fb33bcdbf70",
+      "lines": 1152,
+      "luau_compiled": true,
+      "roblox_tested": false,
+      "game_markers": [
+        "f3(\"GameObjects\", \"Physical\", \"Employees\")",
+        "Medkits = true",
+        "Teleport to Selected"
+      ],
+      "functions": [
+        {
+          "name": "f3(...)",
+          "parameters": [
+            "...: string[] (path segments)"
+          ],
+          "purpose": "Находит вложенный объект Workspace.GameObjects.Physical.* для сотрудников, игроков и предметов."
+        },
+        {
+          "name": "f6(p9, p10, text)",
+          "parameters": [
+            "p9: Instance (target)",
+            "p10: Color3",
+            "text: string"
+          ],
+          "purpose": "Создаёт Highlight и настраиваемый BillboardGui для объекта 3008 в пределах MaxRange."
+        },
+        {
+          "name": "f12()",
+          "parameters": [],
+          "purpose": "Обновляет сортируемый по расстоянию список предметов из Map/Items для телепорта."
+        },
+        {
+          "name": "Teleport to Selected callback()",
+          "parameters": [],
+          "purpose": "Переносит персонажа к предмету из списка и по опции возвращает через Return Delay (s)."
+        }
+      ],
+      "limitations": [
+        "В самом начале исполняет внешнюю Sealient/LuminxUI.lua с изменяемой ветки main; не проверялась. Кнопки «God Mode» и «Auto Rejoin on Kick» не подтверждены как серверные механики.",
+        "Нет проверки PlaceId; используются конкретные GameObjects.Physical.Map/Items/Employees. Не тестировано в Roblox; только статическая компиляция."
+      ],
+      "modifications": [],
+      "verification": {
+        "method": "luau-compile --null",
+        "equivalent": null
+      },
+      "recovery_tool": "prostone4/Prometheus-Deobfuscator@6ee3291ec83fdc58c04e17bb1f1703386619711a"
+    },
+    {
+      "game": "SCP-3008",
+      "variant": "Abyssal Redux",
+      "status": "deobfuscated",
+      "source": {
+        "repository": "Sealient/Sealients-Roblox-Scripts",
+        "commit": "ac50da1fb3f21e357bd4f52d4f9b7203b6d0b967",
+        "path": "3008- UPDATED/3008.lua",
+        "url": "https://github.com/Sealient/Sealients-Roblox-Scripts/blob/ac50da1fb3f21e357bd4f52d4f9b7203b6d0b967/3008-%20UPDATED/3008.lua",
+        "bytes": 669703,
+        "sha256": "20bf0fca34b40ab629b93551187212217ab3e456982ee7cae1b1919af152f925",
+        "license": "MIT",
+        "license_path": "LICENSE",
+        "license_sha256": "9052c1b23df7cf8d9cfc5fa4fa25e3858024d85e4711c24d66d203425d1415a9"
+      },
+      "discovery": "Третий отдельный WAD-вход из MIT-каталога Sealient; восстановлен статически, без запуска gameplay-кода.",
+      "result_body_sha256": "4b0abafd0dd3e4eeff7ac1bd906292723c06a06668b34950d06a7901c846da75",
+      "published_path": "dobf scripts 1.0/SCP-3008 - Abyssal Redux.lua",
+      "bytes": 97966,
+      "sha256": "fdbbe652856fb93a436f1f0ec01868604caae31da06bd66209538aca3ac4c0e0",
+      "lines": 3285,
+      "luau_compiled": true,
+      "roblox_tested": false,
+      "game_markers": [
+        "FindFirstChild(\"Employees\")",
+        "ItemESP_",
+        "Drawing.new"
+      ],
+      "functions": [
+        {
+          "name": "f4(p5)",
+          "parameters": [
+            "p5: Model (employee NPC)"
+          ],
+          "purpose": "Создаёт Drawing Box/Text для NPC сотрудника в GameObjects.Physical.Employees."
+        },
+        {
+          "name": "f23(p16, p17)",
+          "parameters": [
+            "p16: BasePart|Model (loot)",
+            "p17: string (item name)"
+          ],
+          "purpose": "Создаёт BillboardGui/Highlight выбранного по категории ресурса или еды."
+        },
+        {
+          "name": "f31(p20, p21)",
+          "parameters": [
+            "p20: BasePart|Model (item)",
+            "p21: string (label)"
+          ],
+          "purpose": "Телепортирует к объекту с сохранением позиции, cooldown и задержкой возврата."
+        },
+        {
+          "name": "f34(p27)",
+          "parameters": [
+            "p27: string (item name)"
+          ],
+          "purpose": "Ищет ближайший разрешённый ресурс и вызывает f31 для перемещения."
+        }
+      ],
+      "limitations": [
+        "Это более старая и существенно более крупная версия Abyssal с Drawing API, Item ESP и UI-инструментами; не дубликат Luminx или Fluent UI.",
+        "При запуске исполняет удалённую ReduxV2 UI с ветки main; без UI и Drawing не автономен. Серверный эффект телепорта не проверен.",
+        "Нет проверки PlaceId и теста в Roblox. В старом интерфейсе присутствуют просьбы о поддержке автора; они не являются игровой механикой."
+      ],
+      "modifications": [],
+      "verification": {
+        "method": "luau-compile --null",
+        "equivalent": null
+      },
+      "recovery_tool": "prostone4/Prometheus-Deobfuscator@6ee3291ec83fdc58c04e17bb1f1703386619711a"
+    },
+    {
+      "game": "Piggy",
+      "variant": "Sealient UI",
+      "status": "deobfuscated",
+      "source": {
+        "repository": "Sealient/Sealients-Roblox-Scripts",
+        "commit": "ac50da1fb3f21e357bd4f52d4f9b7203b6d0b967",
+        "path": "Piggy/Sealient's Piggy UI.lua",
+        "url": "https://github.com/Sealient/Sealients-Roblox-Scripts/blob/ac50da1fb3f21e357bd4f52d4f9b7203b6d0b967/Piggy/Sealient%27s%20Piggy%20UI.lua",
+        "bytes": 201173,
+        "sha256": "dac295e7e7f0b5a389a00913a52c632c5b47d0770ef6a168a69a2d41274ba1d0",
+        "license": "MIT",
+        "license_path": "LICENSE",
+        "license_sha256": "9052c1b23df7cf8d9cfc5fa4fa25e3858024d85e4711c24d66d203425d1415a9"
+      },
+      "discovery": "MIT-репозиторий Sealient: однофайловый WAD-обфусцированный Piggy UI, не загрузчик.",
+      "result_body_sha256": "529907f66a28c0fab7d11af0cc58bf075b70f552053d1083d0c9961ef188e397",
+      "published_path": "dobf scripts 1.0/Piggy - Sealient UI.lua",
+      "bytes": 29760,
+      "sha256": "21a4c2c72ea45f05df95a4f68afc2b5c2d3baa8afd0116c4cf2fbaaceeed1a94",
+      "lines": 1050,
+      "luau_compiled": true,
+      "roblox_tested": false,
+      "game_markers": [
+        "CreatePiggyESP(p4)",
+        "ItemFolder",
+        "CreateItemESP(p3)"
+      ],
+      "functions": [
+        {
+          "name": "v8:CreateItemESP(p3)",
+          "parameters": [
+            "p3: BasePart|Model (map item)"
+          ],
+          "purpose": "Создаёт ItemESP/Highlight для объекта; RenderStepped-подписка на расстояние задаётся отдельным UI-toggle."
+        },
+        {
+          "name": "v8:CreatePiggyESP(p4)",
+          "parameters": [
+            "p4: Model (Piggy NPC)"
+          ],
+          "purpose": "Рисует метку и Highlight для преследующего NPC Piggy."
+        },
+        {
+          "name": "v8:UpdatePiggyDistances()",
+          "parameters": [],
+          "purpose": "Обновляет расстояния до отмеченных Piggy во время RenderStepped."
+        },
+        {
+          "name": "f2()",
+          "parameters": [],
+          "purpose": "Находит ItemFolder либо числовую папку с предметами текущей главы."
+        }
+      ],
+      "limitations": [
+        "При запуске загружает Fluent и два аддона с изменяемых внешних URL; кнопка Check for Updates при подтверждении скачивает и исполняет новый Piggy UI.",
+        "Нет проверки PlaceId; ItemFolder/Piggy модель могут отличаться по главам. В Roblox не проверено; UI/Highlight локальные."
+      ],
+      "modifications": [],
+      "verification": {
+        "method": "luau-compile --null",
+        "equivalent": null
+      },
+      "recovery_tool": "prostone4/Prometheus-Deobfuscator@6ee3291ec83fdc58c04e17bb1f1703386619711a"
+    },
+    {
+      "game": "Demonology",
+      "variant": "Luminx Ghost ESP",
+      "status": "deobfuscated",
+      "source": {
+        "repository": "Sealient/Sealients-Roblox-Scripts",
+        "commit": "ac50da1fb3f21e357bd4f52d4f9b7203b6d0b967",
+        "path": "Demonology/Demonology.lua",
+        "url": "https://github.com/Sealient/Sealients-Roblox-Scripts/blob/ac50da1fb3f21e357bd4f52d4f9b7203b6d0b967/Demonology/Demonology.lua",
+        "bytes": 181207,
+        "sha256": "30756c399b77accb1c4762b65b6796506ae526bb301af40e59f0bf66097f3b56",
+        "license": "MIT",
+        "license_path": "LICENSE",
+        "license_sha256": "9052c1b23df7cf8d9cfc5fa4fa25e3858024d85e4711c24d66d203425d1415a9"
+      },
+      "discovery": "MIT MoonVeil v1.4.5 ввод из репозитория Sealient; decompile через закреплённый Python-движок и изолированный Luau runtime.",
+      "result_body_sha256": "3b7ae4a68cd0fbed713803aa6bd88d479aefa18044ff99729ffb981c9ba797c1",
+      "published_path": "dobf scripts 1.0/Demonology - Luminx Ghost ESP.lua",
+      "bytes": 50265,
+      "sha256": "c53975c9a0993e2743a666dd2c13fa651a3fd9bf88f870a6c762fe7ea3a723f7",
+      "lines": 1513,
+      "luau_compiled": true,
+      "roblox_tested": false,
+      "game_markers": [
+        "FindFirstChild(\"Ghost\")",
+        "FindFirstChild(\"Items\")",
+        "CreateToggle(\"Ghost Highlight ESP\""
+      ],
+      "functions": [
+        {
+          "name": "R34(player, value2, value3, value4)",
+          "parameters": [
+            "player: Player|Model",
+            "value2: Color3",
+            "value3: Color3",
+            "value4: unknown"
+          ],
+          "purpose": "Ставит Highlight на персонажей/сущности с переданными цветами; имя параметра value4 и его роль не подтверждены."
+        },
+        {
+          "name": "R38(value)",
+          "parameters": [
+            "value: Model (world item)"
+          ],
+          "purpose": "Для FlowerPot/SpiritBook по OptimizedFlower/Pencil получает или создаёт WorldPivot для камеры."
+        },
+        {
+          "name": "R39()",
+          "parameters": [],
+          "purpose": "Перечисляет Player и игровые предметы из Workspace.Items как цели для переключения камеры."
+        },
+        {
+          "name": "R40(value1, value2)",
+          "parameters": [
+            "value1: Model (camera target)",
+            "value2: Vector3 (camera origin)"
+          ],
+          "purpose": "Лучом проверяет препятствия и локально повышает прозрачность заслоняющих объектов."
+        },
+        {
+          "name": "Ghost/Player/Item ESP callbacks(argument1)",
+          "parameters": [
+            "argument1: boolean"
+          ],
+          "purpose": "Включают Highlight для Ghost, игроков и предметов из Workspace.Ghost/jneedse/Items."
+        }
+      ],
+      "limitations": [
+        "Настоящий MoonVeil v1.4.5, не MoonSec V3: инструмент поднял все 41 прототип и 2 991 слот инструкции; proxy-трассы совпали в 305 событиях. Protected target не исполнялся в Roblox, совпадение прокси не равно полной эквивалентности в игре.",
+        "Локальные имена и комментарии исходника утрачены; R/U и значение value4 — реконструкция. При старте исполняет Sealient/LuminxUI.lua с изменяемой ветки GitHub.",
+        "Нет подтверждённого механизма определения типа призрака или автоматической охоты; обнаружены визуализация, цели камеры, fullbright/noclip. Не выдавать этот UI за полный Demonology-автофарм."
+      ],
+      "modifications": [],
+      "verification": {
+        "method": "MoonVeil proxy replay + luau-compile",
+        "equivalent": true,
+        "original_event_count": 305,
+        "recovered_event_count": 305,
+        "prototype_count": 41,
+        "instruction_count": 2991,
+        "profile": "structured",
+        "protected_target_executed": false
+      },
+      "recovery_tool": "edwindev-spec/MoonVeil@a948c4849a692f0af40d554708cac28b610c5115"
+    },
+    {
+      "game": "Prison Life",
+      "variant": "Vex Hub",
+      "status": "deobfuscated",
+      "source": {
+        "repository": "0x100C/Roblox-Scripts",
+        "commit": "97fa45e403a00a3d7d1a06c4271e0a787269dd33",
+        "path": "Obsfucate/Prison-Life(Half-Broken).lua",
+        "url": "https://github.com/0x100C/Roblox-Scripts/blob/97fa45e403a00a3d7d1a06c4271e0a787269dd33/Obsfucate/Prison-Life%28Half-Broken%29.lua",
+        "bytes": 420012,
+        "sha256": "dd8a5a7502a263969db9031bfb3a99389d722c9921dc5a678d9979e131962bea",
+        "license": "MIT",
+        "license_path": "LICENSE",
+        "license_sha256": "df5d9dac8dfda407387b42b3db2a6938da05528562a3c3075f5c196abd56515a"
+      },
+      "discovery": "MIT game-specific WAD-вход 0x100C: восстановлен статически, не перепутан с Magma-модулем для той же игры.",
+      "result_body_sha256": "f11e85d3a5889604f94787438b87bc3db4295ba0acaf1f03502d0bab80a476dd",
+      "published_path": "dobf scripts 1.0/Prison Life - Vex Hub.lua",
+      "bytes": 50537,
+      "sha256": "f7a7f2f6bbdc1e889482153a38fd720ed73bcda548a9e06d50fc6d6c3d964b0a",
+      "lines": 1967,
+      "luau_compiled": true,
+      "roblox_tested": false,
+      "game_markers": [
+        "ArrestPlayer",
+        "Criminals",
+        "Vex Hub | Prison Life"
+      ],
+      "functions": [
+        {
+          "name": "v1.equip(cframe)",
+          "parameters": [
+            "cframe: CFrame"
+          ],
+          "purpose": "Твинит HumanoidRootPart к точке спавна оружия, не вызывает item pickup remote."
+        },
+        {
+          "name": "Arrest All callback()",
+          "parameters": [],
+          "purpose": "Находит игроков команды Criminals; для Guards пытается InvokeServer(Remotes.ArrestPlayer, target) после перемещения."
+        },
+        {
+          "name": "Team/ESP callbacks(value)",
+          "parameters": [
+            "value: string|boolean"
+          ],
+          "purpose": "Фильтрует игроков по Guards/Criminals и включает локальный ESP/трассеры."
+        },
+        {
+          "name": "Remove All KeyCard Doors callback()",
+          "parameters": [],
+          "purpose": "Клиентски удаляет объекты с door_v3 из Workspace; на серверные двери влияние не подтверждено."
+        }
+      ],
+      "limitations": [
+        "Имя upstream-файла содержит Half-Broken: никаких гарантий работоспособности. Для Arrest All нужна команда Guards; список remotes и координаты оружия/дверей могут устареть.",
+        "При запуске исполняет изменяемую WindUI GitHub releases/latest, а ветки UI могут требовать API executor; Roblox не тестировался.",
+        "MIT относится к репозиторию 0x100C, в окне исходника указаны два соавтора .interception. & s0ulz.lua; атрибуция сохранена."
+      ],
+      "modifications": [],
+      "verification": {
+        "method": "luau-compile --null",
+        "equivalent": null
+      },
+      "recovery_tool": "prostone4/Prometheus-Deobfuscator@6ee3291ec83fdc58c04e17bb1f1703386619711a"
+    },
+    {
+      "game": "Retail Tycoon 2",
+      "variant": "Magma Hub module",
+      "status": "src",
+      "source": {
+        "repository": "Commandcracker/Magma-Hub",
+        "commit": "5d7e2f84de039e65f909b50c3533b199fff9e9fd",
+        "path": "games/2092410051.lua",
+        "url": "https://github.com/Commandcracker/Magma-Hub/blob/5d7e2f84de039e65f909b50c3533b199fff9e9fd/games/2092410051.lua",
+        "bytes": 11303,
+        "sha256": "644c75028acd6ae338aaafb59f1651be2717ff4eb1c80bc6f345cc44b3a3e1a7",
+        "license": "MIT",
+        "license_path": "LICENSE.txt",
+        "license_sha256": "ba6f2791cb175d75b0757c09737f2ebe15e76e018379fe7557a9c8ca7b3d74cb"
+      },
+      "discovery": "MIT game.GameId/UniverseId 2092410051, RootPlace 5865858426 из games.json Magma.",
+      "result_body_sha256": "644c75028acd6ae338aaafb59f1651be2717ff4eb1c80bc6f345cc44b3a3e1a7",
+      "published_path": "dobf scripts 1.0/Retail Tycoon 2 - Magma Hub module (src).lua",
+      "bytes": 12817,
+      "sha256": "427ff54d9c2553b971da79bd82365a70898323b16ebbd8d5597e68e983668368",
+      "lines": 350,
+      "luau_compiled": true,
+      "roblox_tested": false,
+      "game_markers": [
+        "StockShelfFunction:InvokeServer",
+        "BuyStorage:InvokeServer",
+        "LoadVehicle:InvokeServer"
+      ],
+      "functions": [
+        {
+          "name": "GetCar()",
+          "parameters": [],
+          "purpose": "Находит Vehicle_<Player.Name> в Workspace.PlayerVehicles."
+        },
+        {
+          "name": "TeleportCar(pos)",
+          "parameters": [
+            "pos: CFrame"
+          ],
+          "purpose": "Меняет CFrame деталей грузовика на переданную позицию."
+        },
+        {
+          "name": "GetPlot()",
+          "parameters": [],
+          "purpose": "Возвращает строительный участок игрока; используется для загрузочного дока."
+        },
+        {
+          "name": "Auto Restock/Auto Delivery Threads:Add()",
+          "parameters": [],
+          "purpose": "Пополняет полки через StockShelfFunction и перевозит склад с LoadVehicle/UnloadVehicle."
+        }
+      ],
+      "limitations": [
+        "Модуль не автономен: нужны глобальные MagmaHub, Threads и его UI; main.lua хаба сам подгружает game-файлы из сети, здесь не включён.",
+        "GetLoadingDock/GetPlot зависят от старой геометрии и getrenv()._G.Data; серверные покупки/цвет не подтверждены на текущей игре. Roblox не тестировался."
+      ],
+      "modifications": [],
+      "verification": {
+        "method": "luau-compile --null",
+        "equivalent": null
+      }
+    },
+    {
+      "game": "Super Power Training Simulator",
+      "variant": "Magma Hub module",
+      "status": "src",
+      "source": {
+        "repository": "Commandcracker/Magma-Hub",
+        "commit": "5d7e2f84de039e65f909b50c3533b199fff9e9fd",
+        "path": "games/767752328.lua",
+        "url": "https://github.com/Commandcracker/Magma-Hub/blob/5d7e2f84de039e65f909b50c3533b199fff9e9fd/games/767752328.lua",
+        "bytes": 10806,
+        "sha256": "3838627aee214247117562f6db6ec85828c4f15d446e09345234e25d6445a647",
+        "license": "MIT",
+        "license_path": "LICENSE.txt",
+        "license_sha256": "ba6f2791cb175d75b0757c09737f2ebe15e76e018379fe7557a9c8ca7b3d74cb"
+      },
+      "discovery": "MIT модуль Magma для SPTS Classic; именно игровые тренировки, не универсальный speed-toggle.",
+      "result_body_sha256": "3838627aee214247117562f6db6ec85828c4f15d446e09345234e25d6445a647",
+      "published_path": "dobf scripts 1.0/Super Power Training Simulator - Magma Hub module (src).lua",
+      "bytes": 12319,
+      "sha256": "497c8c882d920c8f889b69ec95979aa5ec8c4f891e48860cefc0cf272cb9b4b6",
+      "lines": 397,
+      "luau_compiled": true,
+      "roblox_tested": false,
+      "game_markers": [
+        "RemoteEvent:FireServer({\"+FS1\"})",
+        "RemoteEvent:FireServer({\"Respawn\"})",
+        "\"City Port\""
+      ],
+      "functions": [
+        {
+          "name": "onHealthChanged(health)",
+          "parameters": [
+            "health: number"
+          ],
+          "purpose": "При активном Auto Respawn отправляет RemoteEvent {\"Respawn\"} после смерти."
+        },
+        {
+          "name": "onCharacterAdded(character)",
+          "parameters": [
+            "character: Model"
+          ],
+          "purpose": "Подписывает Humanoid.HealthChanged для нового персонажа."
+        },
+        {
+          "name": "Training Threads:Add()",
+          "parameters": [],
+          "purpose": "Отправляет +FS1..+FS6 и другие команды тренировки через ReplicatedStorage.RemoteEvent по выбранным переключателям."
+        }
+      ],
+      "limitations": [
+        "Модуль требует MagmaHub/Threads, без загрузчика не автономен. RemoteEvent может ограничивать частоту, игровой API изменился с публикации Magma в 2023.",
+        "UniverseId 767752328, RootPlace 2202352383 по games.json; настройки и выполнение в Roblox не проверены."
+      ],
+      "modifications": [],
+      "verification": {
+        "method": "luau-compile --null",
+        "equivalent": null
+      }
+    },
+    {
+      "game": "Prison Life",
+      "variant": "Magma Hub module",
+      "status": "src",
+      "source": {
+        "repository": "Commandcracker/Magma-Hub",
+        "commit": "5d7e2f84de039e65f909b50c3533b199fff9e9fd",
+        "path": "games/73885730.lua",
+        "url": "https://github.com/Commandcracker/Magma-Hub/blob/5d7e2f84de039e65f909b50c3533b199fff9e9fd/games/73885730.lua",
+        "bytes": 5153,
+        "sha256": "2523d56b9cda3aa2dbd533b9b3544592a4f164e65cb93982d7489ce65481909f",
+        "license": "MIT",
+        "license_path": "LICENSE.txt",
+        "license_sha256": "ba6f2791cb175d75b0757c09737f2ebe15e76e018379fe7557a9c8ca7b3d74cb"
+      },
+      "discovery": "MIT game.GameId 73885730, RootPlace 155615604 из Magma games.json.",
+      "result_body_sha256": "2523d56b9cda3aa2dbd533b9b3544592a4f164e65cb93982d7489ce65481909f",
+      "published_path": "dobf scripts 1.0/Prison Life - Magma Hub module (src).lua",
+      "bytes": 6665,
+      "sha256": "b6c59fd22765065c94722938ca60bd0bcf5c01756d7c40492b099b4f99a572ab",
+      "lines": 185,
+      "luau_compiled": true,
+      "roblox_tested": false,
+      "game_markers": [
+        "workspace.Remote.ItemHandler",
+        "ReplicatedStorage\").meleeEvent:FireServer(player)",
+        "workspace.Remote.TeamEvent:FireServer"
+      ],
+      "functions": [
+        {
+          "name": "Give M9/Remington/AK-47 callbacks()",
+          "parameters": [],
+          "purpose": "Вызывает workspace.Remote.ItemHandler:InvokeServer для выбранного ITEMPICKUP."
+        },
+        {
+          "name": "Kill Aura Threads:Add()",
+          "parameters": [],
+          "purpose": "Отправляет meleeEvent для других игроков при включенном флаге; результат не проверен."
+        },
+        {
+          "name": "Auto Reload Threads:Add()",
+          "parameters": [],
+          "purpose": "Находит ModuleScript у инструмента и посылает ReplicatedStorage.ReloadEvent."
+        },
+        {
+          "name": "Teams:addButton callback()",
+          "parameters": [],
+          "purpose": "Запрашивает смену команды через workspace.Remote.TeamEvent с BrickColor-названием."
+        }
+      ],
+      "limitations": [
+        "Не автономен: MagmaHub/Threads; отличается от независимого WAD-защищённого Vex Hub.",
+        "Spawn Guns включенным циклом зануляет Health и пытается loadchar:InvokeServer; это может убить персонажа/потерять текущую позицию.",
+        "Старые remotes workspace.Remote/ReloadEvent и команды могут не работать сегодня. Roblox не тестировался."
+      ],
+      "modifications": [],
+      "verification": {
+        "method": "luau-compile --null",
+        "equivalent": null
+      }
+    },
+    {
+      "game": "Vehicle Simulator",
+      "variant": "Magma Hub module",
+      "status": "src",
+      "source": {
+        "repository": "Commandcracker/Magma-Hub",
+        "commit": "5d7e2f84de039e65f909b50c3533b199fff9e9fd",
+        "path": "games/81762198.lua",
+        "url": "https://github.com/Commandcracker/Magma-Hub/blob/5d7e2f84de039e65f909b50c3533b199fff9e9fd/games/81762198.lua",
+        "bytes": 6297,
+        "sha256": "cf04e248e6b2252d35274731c4fbb94eb277221dd1b915129da86533cf5b6d36",
+        "license": "MIT",
+        "license_path": "LICENSE.txt",
+        "license_sha256": "ba6f2791cb175d75b0757c09737f2ebe15e76e018379fe7557a9c8ca7b3d74cb"
+      },
+      "discovery": "MIT game.GameId 81762198, RootPlace 171391948; исходник содержит игровые оси/ящики/owner.",
+      "result_body_sha256": "cf04e248e6b2252d35274731c4fbb94eb277221dd1b915129da86533cf5b6d36",
+      "published_path": "dobf scripts 1.0/Vehicle Simulator - Magma Hub module (src).lua",
+      "bytes": 7809,
+      "sha256": "1e228a2d3e1bbe5c9db6ab6404a2d719514869ec0c4e18bda3ce0a25c1e6093d",
+      "lines": 210,
+      "luau_compiled": true,
+      "roblox_tested": false,
+      "game_markers": [
+        "Vehicle.Chassis.Axles.FL.MotorMaxTorque",
+        "workspace.Vehicles:getChildren()",
+        "\"Crate ESP\""
+      ],
+      "functions": [
+        {
+          "name": "GetVehicle()",
+          "parameters": [],
+          "purpose": "Перебирает workspace.Vehicles, сверяет owner.Value с LocalPlayer.Name."
+        },
+        {
+          "name": "Auto Farm Threads:Add()",
+          "parameters": [],
+          "purpose": "Переносит машину к трассе и меняет крутящий момент колес; зависит от старой физики."
+        },
+        {
+          "name": "Crate ESP callback()",
+          "parameters": [],
+          "purpose": "Создаёт BoxHandleAdornment у ящиков/дымящихся деталей."
+        },
+        {
+          "name": "Max Speed input(Input)",
+          "parameters": [
+            "Input: number|string"
+          ],
+          "purpose": "Меняет локальное значение Vehicle.Handling.MaxSpeed.Value."
+        }
+      ],
+      "limitations": [
+        "Требует оболочку MagmaHub/Threads; локальные настройки машины и UserId могут быть read-only и не влиять на сервер.",
+        "Кнопка Give All Perks присваивает LocalPlayer.UserId = 1099580: вероятный runtime error; не считать рабочей выдачей перков. Roblox не тестировался."
+      ],
+      "modifications": [],
+      "verification": {
+        "method": "luau-compile --null",
+        "equivalent": null
+      }
+    },
+    {
+      "game": "Magnet Simulator",
+      "variant": "Magma Hub module",
+      "status": "src",
+      "source": {
+        "repository": "Commandcracker/Magma-Hub",
+        "commit": "5d7e2f84de039e65f909b50c3533b199fff9e9fd",
+        "path": "games/1237829262.lua",
+        "url": "https://github.com/Commandcracker/Magma-Hub/blob/5d7e2f84de039e65f909b50c3533b199fff9e9fd/games/1237829262.lua",
+        "bytes": 2991,
+        "sha256": "00cc584e0dcea3922267685aa43e5fe443a48d7d30862f48bf80df815a2fc193",
+        "license": "MIT",
+        "license_path": "LICENSE.txt",
+        "license_sha256": "ba6f2791cb175d75b0757c09737f2ebe15e76e018379fe7557a9c8ca7b3d74cb"
+      },
+      "discovery": "MIT Magma module с игровыми Rings/MagnetEvents/RebirthEvents.",
+      "result_body_sha256": "00cc584e0dcea3922267685aa43e5fe443a48d7d30862f48bf80df815a2fc193",
+      "published_path": "dobf scripts 1.0/Magnet Simulator - Magma Hub module (src).lua",
+      "bytes": 4505,
+      "sha256": "22773a8f984f4a17c640be009877dea24ffd6ceaa7f1b8d82ad4e774888e381f",
+      "lines": 126,
+      "luau_compiled": true,
+      "roblox_tested": false,
+      "game_markers": [
+        "MagnetEvents.requestGrab:FireServer",
+        "RebirthEvents.requestRebirth:InvokeServer",
+        "\"Magnet Island\""
+      ],
+      "functions": [
+        {
+          "name": "Auto Sell Threads:Add()",
+          "parameters": [],
+          "purpose": "Касается площадки Rings.Sellx2 или перемещает площадку к игроку при отсутствии firetouchinterest."
+        },
+        {
+          "name": "Auto Collect Coins Threads:Add()",
+          "parameters": [],
+          "purpose": "Вызывает MagnetEvents.requestGrab с жёсткой строкой 6080000000 и ReplicatedStorage.Tools[\"Lucky Long Tri-Magnet\"]."
+        },
+        {
+          "name": "Auto Rebirth Threads:Add()",
+          "parameters": [],
+          "purpose": "Вызывает RebirthEvents.requestRebirth для доступных настроек перерождения."
+        }
+      ],
+      "limitations": [
+        "Требует MagmaHub/Threads, firetouchinterest у executor либо локальное изменение CFrame кассы. Жёстко заданное значение в requestGrab может устареть.",
+        "UniverseId 1237829262, RootPlace 3486025575. Не проверено в Roblox."
+      ],
+      "modifications": [],
+      "verification": {
+        "method": "luau-compile --null",
+        "equivalent": null
+      }
+    },
+    {
+      "game": "Dashing Simulator",
+      "variant": "Magma Hub module",
+      "status": "src",
+      "source": {
+        "repository": "Commandcracker/Magma-Hub",
+        "commit": "5d7e2f84de039e65f909b50c3533b199fff9e9fd",
+        "path": "games/962480973.lua",
+        "url": "https://github.com/Commandcracker/Magma-Hub/blob/5d7e2f84de039e65f909b50c3533b199fff9e9fd/games/962480973.lua",
+        "bytes": 6276,
+        "sha256": "c63f8514b1625f5fd6730ae283e0a36504cbcf153a8ec591c31118592db01424",
+        "license": "MIT",
+        "license_path": "LICENSE.txt",
+        "license_sha256": "ba6f2791cb175d75b0757c09737f2ebe15e76e018379fe7557a9c8ca7b3d74cb"
+      },
+      "discovery": "MIT игровой модуль Magma для Dashing Simulator.",
+      "result_body_sha256": "c63f8514b1625f5fd6730ae283e0a36504cbcf153a8ec591c31118592db01424",
+      "published_path": "dobf scripts 1.0/Dashing Simulator - Magma Hub module (src).lua",
+      "bytes": 7789,
+      "sha256": "4f22aec20b512a6b2fc6291b5c92630ab0042b0c969c30adebce6745ef3bf5b9",
+      "lines": 224,
+      "luau_compiled": true,
+      "roblox_tested": false,
+      "game_markers": [
+        "Events.AddSpeed:InvokeServer()",
+        "Events.RaceRequest:FireServer()",
+        "Events.Discover:InvokeServer(Land.Name)"
+      ],
+      "functions": [
+        {
+          "name": "Add Speed Threads:Add()",
+          "parameters": [],
+          "purpose": "В цикле отправляет Events.AddSpeed:InvokeServer по переключателю."
+        },
+        {
+          "name": "Auto Accept Race Threads:Add()",
+          "parameters": [],
+          "purpose": "Запрашивает участие через Events.RaceRequest:FireServer."
+        },
+        {
+          "name": "Discover Lands callback()",
+          "parameters": [],
+          "purpose": "Выполняет Events.Discover:InvokeServer(Land.Name) для доступных регионов."
+        },
+        {
+          "name": "Collect Orbs Threads:Add()",
+          "parameters": [],
+          "purpose": "Перебирает снимок Workspace.CollectableOrbs, ищет видимые орбы с Name == \"35\" и касается их через firetouchinterest (или телепорт)."
+        }
+      ],
+      "limitations": [
+        "Не автономен: MagmaHub/Threads, данные старого игры и серверные ограничения неизвестны. Бесконечные циклы с wait() могут флудить remotes.",
+        "UniverseId 962480973, RootPlace 2673595672. Roblox не тестировался."
+      ],
+      "modifications": [],
+      "verification": {
+        "method": "luau-compile --null",
+        "equivalent": null
+      }
+    },
+    {
+      "game": "Anime Origins",
+      "variant": "Ultimate tower-defense",
+      "status": "src",
+      "source": {
+        "repository": "Truyem/Anime-Origins",
+        "commit": "a8bb98346af9a6446c46de1b8d24fcb2896e3329",
+        "path": "AnimeOriginsUltimate.lua",
+        "url": "https://github.com/Truyem/Anime-Origins/blob/a8bb98346af9a6446c46de1b8d24fcb2896e3329/AnimeOriginsUltimate.lua",
+        "bytes": 475307,
+        "sha256": "b9dd7bf5f19e4d3179540dd87913b0c968ca8300a6322ab87511a1bced97f809",
+        "license": "MIT",
+        "license_path": "LICENSE",
+        "license_sha256": "4b23efbe0430bfa3c50092e6ba97db7dfc57eac4916cfe3d62aff045879ef6bf"
+      },
+      "discovery": "MIT исходник Truyem из именного Anime Origins tower defense, PlaceId 129932912185311 (lobby) / 116173040971120 (game).",
+      "result_body_sha256": "b9dd7bf5f19e4d3179540dd87913b0c968ca8300a6322ab87511a1bced97f809",
+      "published_path": "dobf scripts 1.0/Anime Origins - Ultimate (src).lua",
+      "bytes": 476816,
+      "sha256": "9f2b73bf7910d2cf5af869ae04ce7713e9d12478b0a5577180d65249087b0002",
+      "lines": 9455,
+      "luau_compiled": true,
+      "roblox_tested": false,
+      "game_markers": [
+        "\"PlaceTower\", action.Slot",
+        "SummonFunction:InvokeServer(\"SummonTower\"",
+        "ShopRemote:FireServer(\"BuyShopItem\""
+      ],
+      "functions": [
+        {
+          "name": "executeAction(action)",
+          "parameters": [
+            "action: table (Type/Position/Slot/Ref/...)"
+          ],
+          "purpose": "Повторяет записанные игровые действия PlaceTower/UpgradeTower/SellTower, привязывает tower UUID к макросу."
+        },
+        {
+          "name": "autoRiftTarget()",
+          "parameters": [],
+          "purpose": "Оценивает таймер и CrashSite.RiftPart, подбирает режим ShibuyaRift/сложность/мир."
+        },
+        {
+          "name": "standardSummon(requestedAmount, reserve, owner)",
+          "parameters": [
+            "requestedAmount: number|\"Max\"",
+            "reserve: number",
+            "owner: string"
+          ],
+          "purpose": "Считает доступные валюту/слоты и зовёт SummonFunction(\"SummonTower\",\"Standard\",amount)."
+        },
+        {
+          "name": "runAutoShops()",
+          "parameters": [],
+          "purpose": "Выбирает товары по ротации магазина и балансу, вызывает ShopRemote(\"BuyShopItem\",...)."
+        }
+      ],
+      "limitations": [
+        "Это открытый MIT Luau-исходник, НЕ деобфускация; 9 тыс. строк TD-макро и lobby/in-game. Требует реальные Assets/Misc, GameUI/MainUI и executor с файловыми/HTTP API.",
+        "Опциональные WebhookUrl и Macro Share отправляют выбранные данные во внешние Discord/Netlify; по умолчанию URL пустой и Webhook*Enabled=false, но конфигурация может сохраняться. Кнопка FakeVisual явно скачивает и исполняет зашифрованный kocogi.lua с truyem789.site — не нажимать без аудита.",
+        "При старте может загружаться изменяемый Fluent; использует thumbnails.roblox.com для иконки. Никакие внешние загрузки/POST не выполнялись здесь; Roblox не тестировался."
+      ],
+      "modifications": [],
+      "verification": {
+        "method": "luau-compile --null",
+        "equivalent": null
+      }
+    },
+    {
+      "game": "SCP-096",
+      "variant": "MaddHub module",
+      "status": "src",
+      "source": {
+        "repository": "MaddHub-Official/MaddHub",
+        "commit": "2109e33d3d0f6cdd0a187eede1fc56af17630852",
+        "path": "Games/096 [SCP]/script.lua",
+        "url": "https://github.com/MaddHub-Official/MaddHub/blob/2109e33d3d0f6cdd0a187eede1fc56af17630852/Games/096%20%5BSCP%5D/script.lua",
+        "bytes": 6826,
+        "sha256": "4801dfd84fd2c3d853629b9f41f82ce8eca97ee34dc998116b8299b86e12fb4b",
+        "license": "MIT",
+        "license_path": "LICENSE",
+        "license_sha256": "40f2443e8575ab85cac39c1fad6235773275aa579792670bc4baea5d1882b046"
+      },
+      "discovery": "MIT игра [SCP] 096: функции инвентаря, SCP и добычи конкретного плейса, не универсальный admin скрипт.",
+      "result_body_sha256": "4801dfd84fd2c3d853629b9f41f82ce8eca97ee34dc998116b8299b86e12fb4b",
+      "published_path": "dobf scripts 1.0/SCP-096 - MaddHub module (src).lua",
+      "bytes": 8345,
+      "sha256": "9ab66fae1ebfbbe5fc6fe93913007d1d85e8a51aa18a9887e89cdceba716b9b4",
+      "lines": 297,
+      "luau_compiled": true,
+      "roblox_tested": false,
+      "game_markers": [
+        "WaitForChild(\"Backpack\"):FireServer",
+        "getSCP():FindFirstChildOfClass(\"Humanoid\")",
+        "getgenv().FARM"
+      ],
+      "functions": [
+        {
+          "name": "returnObjs(loc, typ)",
+          "parameters": [
+            "loc: Instance",
+            "typ: string"
+          ],
+          "purpose": "Отбирает в игровом контейнере дочерние объекты по атрибуту Type."
+        },
+        {
+          "name": "spawnPart(partName)",
+          "parameters": [
+            "partName: string"
+          ],
+          "purpose": "Локально перемещает выбранный тип предмета возле персонажа."
+        },
+        {
+          "name": "farmMats(resource)",
+          "parameters": [
+            "resource: \"Stone\"|\"Tree\""
+          ],
+          "purpose": "Экипирует кирку/топор, обходит игровые Decoration nodes и вызывает Remotes.ToolAction."
+        },
+        {
+          "name": "equipTool(toolName)",
+          "parameters": [
+            "toolName: string"
+          ],
+          "purpose": "Вызывает Remotes.Backpack(\"Equip\", материал .. toolName, \"Tool\") для Wood/Stone/Iron."
+        },
+        {
+          "name": "Teleport SCP To Player Callback(Value)",
+          "parameters": [
+            "Value: string (player name)"
+          ],
+          "purpose": "Перемещает модель SCP-096 к выбранному игроку и меняет CanAggro (локальный эффект может не реплицироваться)."
+        }
+      ],
+      "limitations": [
+        "Это MIT-модуль MaddHub, не самостоятельный скрипт: нужны Svc, Lp, Chr, HumRP, GameTab, Window, TeleportSect и UI; сам key-loader MaddHub выполняет внешние запросы, сюда не включён.",
+        "maxBackpack()/grantPerms() меняют локальные атрибуты/Perms; серверного разрешения/максимальных статов это не доказывает.",
+        "Вызовы ToolAction/Backpack и getsenv зависят от старого состояния игры; Roblox не тестировался."
+      ],
+      "modifications": [],
+      "verification": {
+        "method": "luau-compile --null",
+        "equivalent": null
+      }
+    }
+  ],
+  "unresolved": [
+    {
+      "game": "King Legacy",
+      "reason": "Имеется только прежний UI/ESP Luxury Core; нового исходника с подтверждёнными правами и настоящими квестами/фруктами/фарм-remote не найдено."
+    },
+    {
+      "game": "Demonfall",
+      "reason": "NOOBHUBX и debunked69 хранят MoonSec без разрешения на распространение; в README LucaMichael06 прямо запрещено заимствование; у французских игровых сниппетов нет стандартной лицензии."
+    },
+    {
+      "game": "Trident Survival",
+      "reason": "PINGUIN/TridentZ прямо запрещает копирование; у realuwo WAD нет лицензии. Прочие результаты — .exe/ZIP-загрузчики либо универсальный аимбот."
+    },
+    {
+      "game": "Anime Vanguards",
+      "reason": "Многие страницы содержат лишь короткие загрузчики, приватный runtime или внешние Python-макросы; найденный MIT-кандидат GigaMechanicRear был универсальным, без специфичных AV remotes."
+    },
+    {
+      "game": "VV Ultimatum",
+      "reason": "Защищённый кандидат остановил pdeobf с ошибкой unexpected char backslash; нового игрового исходника с проверенными правами не найдено."
+    },
+    {
+      "game": "Illegal Sorcer",
+      "reason": "Не найден разрешённый Lua с подтверждённой механикой именно этого плейса; Illegal Soccer нельзя выдавать за Sorcer."
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+
+# Never stage future local analysis scratch or Lua compiler output.
+/local-results/
+/luac.out
+*.luac
+node_modules/
+
+# Offline API-delivery snapshots can contain auth tokens and personal data.
+*.har
+/captures/

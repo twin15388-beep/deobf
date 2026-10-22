@@ -1,0 +1,44 @@
+"""Synthetic fixtures for extraction without executing or fetching any Lua."""
+
+import unittest
+
+from scripts.decode_decimal_loadstring import Chunk, extract_chunks
+
+
+def wrap(data: bytes, quote: bytes = b"'") -> bytes:
+    return b"loadstring(" + quote + b"".join(f"\\{value:03d}".encode() for value in data) + quote + b")()"
+
+
+class DecimalLiteralTests(unittest.TestCase):
+    def test_one_exact_chunk_including_nonascii_bytes(self):
+        data = b'print("hello")\n' + bytes([0, 255, 9, 10])
+        self.assertEqual(extract_chunks(b"-- title\n" + wrap(data)), [Chunk(data)])
+
+    def test_separate_scopes_and_literal_wait_are_recorded(self):
+        source = (b"--[[ wrapper with loadstring('\\065')() inside comment ]]\n" +
+                  wrap(b"local a = 1\n") + b"\nwait(2)\n-- other chunk\n" +
+                  wrap(b"local a = 2\n", quote=b'"'))
+        self.assertEqual(extract_chunks(source), [
+            Chunk(b"local a = 1\n"), Chunk(b"local a = 2\n", 2)
+        ])
+
+    def test_refuse_bad_literals_and_unrelated_code(self):
+        good = wrap(b"return 1")
+        for source in [
+            b"", b"-- loadstring('\\065')()\n", b"print('extra')\n" + good,
+            good + b"\ngetfenv()", b"wait(2)\n" + good,
+            good + b"\nwait(2)", good + b"\nwait(2)\nwait(2)\n" + good,
+            b"loadstring('\\256')()", b"loadstring('\\065x')()",
+            b"loadstring(encode('a'))()", b"--[[ unterminated " + good,
+            b"--[=[ unsupported ]=]\n" + good,
+        ]:
+            with self.subTest(source=source[:65]), self.assertRaises(ValueError):
+                extract_chunks(source)
+
+    def test_size_limit(self):
+        with self.assertRaisesRegex(ValueError, "size limit"):
+            extract_chunks(b" " * 5_000_001)
+
+
+if __name__ == "__main__":
+    unittest.main()
