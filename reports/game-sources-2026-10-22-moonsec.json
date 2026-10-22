@@ -1,0 +1,65 @@
+{
+  "date": "2026-10-22",
+  "scope": "One protected, game-specific Lua recovered offline; no (src), no Pastefy, no script code via APIs",
+  "artifacts": [
+    {
+      "published_path": "dobf scripts 1.0/Meme Adventure - MoonSec V3.lua",
+      "game": "Meme Adventure",
+      "status": "deobfuscated",
+      "mode": "static MoonSec V3 devirtualization to valid Lua 5.1 root, then full 29-prototype source decompilation; no live Roblox claim",
+      "bytes": 16178,
+      "sha256": "4b82fcbcee77e19ed7a6ea8633e753ceedea44df418504211cab0d8de8534822",
+      "result_header_sha256": "cf6470c366efdfb3e0646cc0b9dfc1fc1217ceeb0a3e4062c185593303e02187",
+      "result_body_sha256": "d879107e15dde5ac462678f7ec82ca02bbee72c59eb236e573c443c902842b1c",
+      "body_lines": 315,
+      "recovery_tool": "luaprojects/moonsec-js-deobf@7a4be80850f2b2a5ad20a02ef486d518f2164b27 + scripts/prepare_moonsec_safe_eval.py + unluac-js@1.4.4",
+      "source": {
+        "repo": "neowaree/free-version",
+        "commit": "81dfc296449f332766b0ce22e24f0b751d67c319",
+        "url": "https://github.com/neowaree/free-version/blob/81dfc296449f332766b0ce22e24f0b751d67c319/CustomModules/9566949295.lua",
+        "path": "CustomModules/9566949295.lua",
+        "bytes": 107603,
+        "sha256": "3c14a7868e8cba18ff447d59053425371cc9285ea635f57427afa567b4bb4d27",
+        "license": "MPL-2.0",
+        "license_path": "reports/licenses/Neoware-MPL-2.0.txt",
+        "license_sha256": "1f256ecad192880510e84ad60474eab7589218784b9a50bc7ceee34c2b91f1d5"
+      },
+      "game_markers": [
+        "r11_1.Name == \"Gift\"",
+        "fireproximityprompt(r11_3, 10)",
+        "workspace.FISH.Desert.Fishing1.ProximityPrompt.HoldDuration = 0",
+        "game:GetService(\"ReplicatedStorage\").OtherThing.Tools:FireServer(unpack(r4_0))",
+        "[\"Geto Boss\"] = CFrame.new(5636.91943359375"
+      ],
+      "recovery": {
+        "protection": "MoonSec V3",
+        "place_id": 9566949295,
+        "bytecode_bytes": 11609,
+        "bytecode_sha256": "2df2d2acc40f972c98d1128201ccbddeff3bdd32a026c3ef4a827c9e80fae8d6",
+        "lua51_root_valid": true,
+        "prototypes_recovered": 29,
+        "decompiler_output_bytes": 14266,
+        "arithmetic_only_fengari_keys": true,
+        "lua_standard_libraries_opened": false
+      },
+      "verification": {
+        "lua51_syntax": true,
+        "repeat_decoder_output_identical": true,
+        "repeat_decompiler_output_identical": true,
+        "isolated_prototype_mock_cases": 10,
+        "source_only_mock_cases": 10,
+        "protected_top_level_executed": false,
+        "decoded_root_executed": false,
+        "tested_in_roblox": false
+      },
+      "limitations": [
+        "README upstream marks Meme Adventure as patched; PlaceId derives from the MainLoader.lua path, official game title independently confirmed, but live behavior not tested",
+        "The recovered body decompiles the valid root but exact semantics of all 29 prototypes versus the original MoonSec VM are not proven; tests compare only isolated game-specific children",
+        "At startup it uses loadstring(game:HttpGet(...DrRay.lua))() to run a mutable unaudited third-party UI; only this local game body is included",
+        "Auto Farm Mobs and Teleport Loop callbacks check for targets but do not farm/teleport; Faster Fishing actually fires Armor requests",
+        "Armor and Void Head toggles share _G.ez; undefined autoGrabTools, game-specific indices and remotes may fail or alter server state"
+      ],
+      "candidate_place_url": "https://www.roblox.com/games/9566949295/Meme-Adventure"
+    }
+  ]
+}

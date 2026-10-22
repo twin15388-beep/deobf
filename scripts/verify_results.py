@@ -19,12 +19,14 @@ SOURCE_REPORTS = (
     "reports/game-sources-2026-10-21-followup.json",
     "reports/game-sources-2026-10-21-extra.json",
     "reports/game-sources-2026-10-21-protected.json",
+    "reports/game-sources-2026-10-22-moonsec.json",
 )
 REPORTS = ("reports/game-recovery-2026-10-19.json", *SOURCE_REPORTS)
 ADDITIONS = SOURCE_REPORTS[1]
 FOLLOWUP = SOURCE_REPORTS[2]
 EXTRA = SOURCE_REPORTS[3]
 PROTECTED = SOURCE_REPORTS[4]
+MOONSEC_GAME = SOURCE_REPORTS[5]
 PROTECTED_PARTIAL_CASES = {
     "dobf scripts 1.0/Zero Academia - ZeroScripts (partial).lua": 28,
     "dobf scripts 1.0/Item Factory - MoonSec V3 (partial).lua": 44,
@@ -200,6 +202,56 @@ def verify() -> int:
                             raise ValueError(f"Missing licensed decoder output: {name}")
                     else:
                         raise ValueError(f"Unsupported protected result license: {name}")
+                elif report_name == MOONSEC_GAME:
+                    source = artifact["source"]
+                    recovery = artifact["recovery"]
+                    verification = artifact["verification"]
+                    license_name = source["license_path"]
+                    if (name != "dobf scripts 1.0/Meme Adventure - MoonSec V3.lua"
+                            or status != "deobfuscated"
+                            or source["repo"] != "neowaree/free-version"
+                            or len(source["commit"]) != 40
+                            or source["commit"] not in source["url"]
+                            or not source["url"].startswith("https://github.com/")
+                            or source["sha256"].encode() not in header
+                            or source["url"].encode() not in header
+                            or source["bytes"] < 100_000
+                            or source["license"] != "MPL-2.0"
+                            or license_name != "reports/licenses/Neoware-MPL-2.0.txt"
+                            or license_name.encode() not in header
+                            or not (ROOT / license_name).is_file()
+                            or (ROOT / license_name).is_symlink()
+                            or hashlib.sha256((ROOT / license_name).read_bytes()).hexdigest()
+                            != source["license_sha256"]
+                            or b"Mozilla Public" not in header
+                            or b"STATIC MOONSEC V3 DEOBFUSCATION" not in header
+                            or b"DECOMPILER OUTPUT" not in header
+                            or b"NOT a guarantee" not in header
+                            or recovery["place_id"] != 9566949295
+                            or source["path"] != "CustomModules/9566949295.lua"
+                            or recovery["lua51_root_valid"] is not True
+                            or recovery["prototypes_recovered"] != 29
+                            or recovery["bytecode_bytes"] != 11609
+                            or recovery["bytecode_sha256"].encode() not in header
+                            or recovery["arithmetic_only_fengari_keys"] is not True
+                            or recovery["lua_standard_libraries_opened"] is not False
+                            or verification["lua51_syntax"] is not True
+                            or verification["repeat_decoder_output_identical"] is not True
+                            or verification["repeat_decompiler_output_identical"] is not True
+                            or verification["isolated_prototype_mock_cases"] != 10
+                            or verification["protected_top_level_executed"] is not False
+                            or verification["decoded_root_executed"] is not False
+                            or verification["tested_in_roblox"] is not False
+                            or len(body) < 10_000
+                            or artifact["body_lines"] != body.count(b"\n")
+                            or hashlib.sha256(body).hexdigest() != artifact["result_body_sha256"]
+                            or hashlib.sha256(header + separator).hexdigest()
+                            != artifact["result_header_sha256"]
+                            or not all(marker.encode() in body for marker in artifact["game_markers"])
+                            or body.count(b"loadstring(") != 1
+                            or b"fireproximityprompt(" not in body
+                            or b"Tools:FireServer(" not in body):
+                        raise ValueError(f"Incomplete or unlicensed MoonSec game result: {name}")
                 elif report_name in (FOLLOWUP, EXTRA):
                     source = artifact["source"]
                     if (source["license"] != "MIT" or len(source["commit"]) != 40

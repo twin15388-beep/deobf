@@ -115,6 +115,48 @@ class PublishedResultVerifierTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "Unlabeled"):
                 check(altered)
 
+    def test_full_moonsec_game_requires_real_handlers_and_mpl(self):
+        """Rehashing a loader or changing provenance cannot create game source."""
+        source_root = verify_results.ROOT
+        item = json.loads((source_root / verify_results.MOONSEC_GAME).read_text())[
+            "artifacts"][0]
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            for name in (item["published_path"], item["source"]["license_path"]):
+                destination = root / name
+                destination.parent.mkdir(parents=True, exist_ok=True)
+                destination.write_bytes((source_root / name).read_bytes())
+            manifest = root / verify_results.MOONSEC_GAME
+            manifest.parent.mkdir(parents=True, exist_ok=True)
+
+            def check(artifact):
+                manifest.write_text(json.dumps({"artifacts": [artifact]}))
+                with patch.object(verify_results, "ROOT", root), patch.object(
+                    verify_results, "REPORTS", (verify_results.MOONSEC_GAME,)
+                ), contextlib.redirect_stdout(io.StringIO()):
+                    return verify_results.verify()
+
+            self.assertEqual(check(item), 1)
+            modified = json.loads(json.dumps(item))
+            modified["verification"]["decoded_root_executed"] = True
+            with self.assertRaisesRegex(ValueError, "Incomplete or unlicensed"):
+                check(modified)
+            modified = json.loads(json.dumps(item))
+            modified["source"]["license_sha256"] = "0" * 64
+            with self.assertRaisesRegex(ValueError, "Incomplete or unlicensed"):
+                check(modified)
+            path = root / item["published_path"]
+            header, separator, _ = path.read_bytes().partition(b"]]\n\n")
+            loader = b"-- only an unrelated UI loader\nloadstring(game:HttpGet('https://example.com'))()\n"
+            path.write_bytes(header + separator + loader * 250)
+            modified = json.loads(json.dumps(item))
+            modified["bytes"] = path.stat().st_size
+            modified["sha256"] = hashlib.sha256(path.read_bytes()).hexdigest()
+            modified["result_body_sha256"] = hashlib.sha256(loader * 250).hexdigest()
+            modified["body_lines"] = (loader * 250).count(b"\n")
+            with self.assertRaisesRegex(ValueError, "Incomplete or unlicensed"):
+                check(modified)
+
     def test_rejects_paths_outside_results_directory(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
