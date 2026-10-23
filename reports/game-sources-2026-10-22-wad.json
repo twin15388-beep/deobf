@@ -142,7 +142,8 @@
       "external_dependencies": [
         "WindUI: loadstring(game:HttpGet(\"https://github.com/Footagesus/WindUI/releases/latest/download/main.lua\", true))() at startup; mutable release asset, not included, not audited",
         "Executor APIs: readfile/writefile/delfile (NotSameServers.json), VirtualInputManager",
-        "games.roblox.com public server list API"
+        "games.roblox.com public server list API",
+        "Ссылка автора в вкладке Credits: https://discord.gg/G5ZyAzVTsC копируется в буфер обмена по нажатию кнопки (toclipboard); код по этой ссылке не загружается."
       ],
       "limitations": [
         "Восстановленный код создаёт вкладки Server Hop/Visual/Fast Travel/Credits/Tips через глобальную переменную Window, хотя объект окна лежит в локальной v11; upstream WindUI глобальный Window не выставляет, поэтому без такого глобала скрипт падает на Window:Tab сразу после вкладки Yba God. Проверено только статически и на макете, в Roblox не проверялось; нельзя исключить и артефакт области видимости при деобфускации.",

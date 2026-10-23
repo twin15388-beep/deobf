@@ -1,4 +1,16 @@
-# Игровые Luau: восстановленные и открытые исходники — 22 октября 2026
+# Игровые Luau: восстановленные и открытые исходники — 23 октября 2026
+
+**66 игровых `.lua` в этой папке: 31 раскрытие/частичное восстановление и 35 прежних `(src)`** — добавлены **три полных статических раскрытия WeAreDevs/WAD** из MIT-входов с закреплённых коммитов, новых `(src)` нет. [Отчёт с параметрами и пределами](../reports/game-sources-2026-10-23-wad.md) · [SHA-256](../reports/game-sources-2026-10-23-wad.json).
+
+| Игра | Восстановленный файл | Игровые обработчики и предел |
+| --- | --- | --- |
+| Slap Battles | [Tryhard AI Demo](Slap%20Battles%20-%20Tryhard%20AI%20Demo.lua) — **всё тело вывода WAD-декодера, 1 149 строк** | Авто-бой: выбор перчатки через `replicatedStorage:FindFirstChild(name .. "Slap")` с `GeneralHit`/`SnowHit`, атака `b:FireServer(humanoidRootPart)`, слежение за `LastSlappedBy`, приоритеты целей, рейкаст земли перед `Humanoid:MoveTo`, панель `"Control Panel"` с шестью тумблерами. **Дефект оригинала:** весь код внутри окна времени 2025-11-15…2025-11-22 UTC, которое истекло, — сейчас скрипт ничего не делает; внешних загрузок нет вообще. 14 статических проверок. |
+| Prison Life | [volmaks ESP Freecam](Prison%20Life%20-%20volmaks%20ESP%20Freecam.lua) — **тело вывода декодера минус одна строка, 1 090 строк** | ESP на `Drawing` (Box/Tracer/HP/Name + скелет по R6/R15-именам, цвет по команде), `workspace.CellDoors`/`Prison_ITEMS`/`Prison_Fences`, свободная камера (`FC_KEYS`/`FC_MOUSE`/`FC_WHEEL`, скорость 0.05…4), полный свет, `setfpscap`. **Ни одного remote** — только клиентская визуализация. Удалена единственная строка `goto L9209319`, выданная декодером без метки (задокументировано). Гейт подписки читает ваш список подписок через `friends.roproxy.com`. 15 статических проверок. |
+| Work at a Pizza Place | [Order4](Work%20at%20a%20Pizza%20Place%20-%20Order4.lua) — **всё тело вывода WAD-декодера, 1 244 строки** | `ManagerChannel:FireServer("GiveBonus")`, `FireServer("EmployeeOfTheDay")`, `FireServer("OrderComplete", …)` в цикле кражи, `GetVehicle()`/`GetCurrentVehicle()`/`GetManager()`/`FindFirstCustomer()`, `workspace.Customers`/`Ovens`/`CheesePizza`…`SausagePizza`, тумблеры `"Auto steal items"`, `"Enable Noclip"`, `"Enable Fling"` и др. **Заявляет игровые награды от вашего имени**; UI грузит Linoria/ThemeManager/SaveManager с изменяемых raw-URL. 14 статических проверок. |
+
+Поведенческих макетов у этих трёх нет сознательно (в манифесте `mock_game_assertions: 0`, верификатор без `static_body_assertions` такой файл не принимает). **В Roblox ничего не проверялось.** Раскрытые, но **не опубликованные** входы и причины — в [отрицательных результатах отчёта](../reports/game-sources-2026-10-23-wad.md#отрицательные-результаты-и-сознательно-неопубликованное).
+
+## Проход 22 октября 2026
 
 **63 игровых `.lua` в этой папке: 28 раскрытий/частичных восстановлений и 35 прежних `(src)`** — добавлены **два полных статических раскрытия WeAreDevs/WAD v1.0.0**, новых `(src)` нет. [Отчёт с параметрами и пределами](../reports/game-sources-2026-10-22-wad.md) · [SHA-256](../reports/game-sources-2026-10-22-wad.json).
 

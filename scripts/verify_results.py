@@ -20,6 +20,7 @@ SOURCE_REPORTS = (
     "reports/game-sources-2026-10-21-extra.json",
     "reports/game-sources-2026-10-21-protected.json",
     "reports/game-sources-2026-10-22-wad.json",
+    "reports/game-sources-2026-10-23-wad.json",
 )
 REPORTS = ("reports/game-recovery-2026-10-19.json", *SOURCE_REPORTS)
 ADDITIONS = SOURCE_REPORTS[1]
@@ -27,6 +28,10 @@ FOLLOWUP = SOURCE_REPORTS[2]
 EXTRA = SOURCE_REPORTS[3]
 PROTECTED = SOURCE_REPORTS[4]
 WAD = SOURCE_REPORTS[5]
+WAD2 = SOURCE_REPORTS[6]
+# Both reports share the same shape: verbatim (or minimally repaired) decoder
+# bodies from MIT-pinned WeAreDevs/WAD inputs.
+WAD_REPORTS = (WAD, WAD2)
 PROTECTED_PARTIAL_CASES = {
     "dobf scripts 1.0/Zero Academia - ZeroScripts (partial).lua": 28,
     "dobf scripts 1.0/Item Factory - MoonSec V3 (partial).lua": 44,
@@ -55,6 +60,36 @@ WAD_EVIDENCE = {
             b'GetAttribute("Moveset") ~= "Naoya"',
         ),
         "body_excludes": (b"loadstring(",),
+    },
+    "dobf scripts 1.0/Slap Battles - Tryhard AI Demo.lua": {
+        "mock_game_assertions": 0,
+        "static_body_assertions": 14,
+        "body_contains": (
+            b'b:FireServer(humanoidRootPart)',
+            b'replicatedStorage.GeneralHit',
+            b'tick() < 1763809636.9279',
+        ),
+        "body_excludes": (b"HttpGet", b"loadstring(", b"goto "),
+    },
+    "dobf scripts 1.0/Prison Life - volmaks ESP Freecam.lua": {
+        "mock_game_assertions": 0,
+        "static_body_assertions": 15,
+        "body_contains": (
+            b"https://friends.roproxy.com/v1/users/",
+            b"workspace.Prison_ITEMS",
+            b'"FC_KEYS"',
+        ),
+        "body_excludes": (b"FireServer(", b"InvokeServer(", b"goto "),
+    },
+    "dobf scripts 1.0/Work at a Pizza Place - Order4.lua": {
+        "mock_game_assertions": 0,
+        "static_body_assertions": 14,
+        "body_contains": (
+            b'replicatedStorage.ManagerChannel:FireServer("GiveBonus"',
+            b'"Auto steal items"',
+            b"Additional/Linoria.lua",
+        ),
+        "body_excludes": (b"goto ", b"pastefy"),
     },
 }
 
@@ -227,7 +262,7 @@ def verify() -> int:
                             raise ValueError(f"Missing licensed decoder output: {name}")
                     else:
                         raise ValueError(f"Unsupported protected result license: {name}")
-                elif report_name == WAD:
+                elif report_name in WAD_REPORTS:
                     # Full static WeAreDevs/WAD recoveries: verbatim decoder body,
                     # pinned MIT source, and honest offline evidence per file.
                     source = artifact["source"]
@@ -280,6 +315,9 @@ def verify() -> int:
                         raise ValueError(f"Recovered body no longer matches its report: {name}")
                     if not artifact["limitations"] or not artifact["external_dependencies"]:
                         raise ValueError(f"Missing limits or dependencies for {name}")
+                    # A body that was edited after decoding must say so.
+                    if b"goto " in body and not artifact["modifications"]:
+                        raise ValueError(f"Undocumented decoder repair in {name}")
                 elif report_name in (FOLLOWUP, EXTRA):
                     source = artifact["source"]
                     if (source["license"] != "MIT" or len(source["commit"]) != 40

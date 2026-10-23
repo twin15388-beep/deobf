@@ -1,0 +1,463 @@
+{
+  "date": "2026-10-23",
+  "scope": "Three more WeAreDevs/WAD-protected game scripts recovered from MIT-licensed pinned commits; no new (src), no Pastefy, no script retrieval through APIs",
+  "artifacts": [
+    {
+      "published_path": "dobf scripts 1.0/Slap Battles - Tryhard AI Demo.lua",
+      "game": "Slap Battles",
+      "variant": "Tryhard AI Demo (celerity)",
+      "status": "deobfuscated",
+      "mode": "static WeAreDevs/WAD v1.0.0 decode (banner present): entire tool output plus provenance header",
+      "bytes": 39746,
+      "sha256": "50b539dd90e82201b454e9ab051a625d939dd6c39fbaec69b194225a3db5ca55",
+      "result_header_sha256": "f55cf924ee6a7e01550aef2ce5a158d0cfd258d930fa1e545e7d7c9c899e04c8",
+      "result_body_sha256": "d361a868982123ee11967e68838621d991cadb99bf0618089c1a22343c79459d",
+      "body_lines": 1149,
+      "recovery_tool": "prostone4/Prometheus-Deobfuscator@6ee3291ec83fdc58c04e17bb1f1703386619711a",
+      "source": {
+        "repository": "CelerityRBLX/Roblox",
+        "commit": "5fe709f2a15f8b9e900529bc32d6badb78437607",
+        "path": "Tryhard AI Demo.lua",
+        "url": "https://github.com/CelerityRBLX/Roblox/blob/5fe709f2a15f8b9e900529bc32d6badb78437607/Slap%20Battles/Tryhard%20AI%20Demo.lua",
+        "bytes": 250479,
+        "sha256": "71dd77491da4f847ff87ecc3303b01a8973c6d36e007cbcaba8d5ee2490d5a67",
+        "license": "MIT",
+        "license_path": "LICENSE",
+        "license_sha256": "c5a94d034dc2fab5214ebf257c0a507ac7be47199f1371a4fe63d786b205bad7"
+      },
+      "game_markers": [
+        "replicatedStorage:FindFirstChild(p5.Text .. \"Slap\")",
+        "b:FireServer(humanoidRootPart)",
+        "workspace.Arena",
+        "tick() < 1763809636.9279",
+        "getgenv().BSF"
+      ],
+      "functions": [
+        {
+          "name": "f5(p5)",
+          "parameters": [
+            "p5: TextButton выбранной перчатки"
+          ],
+          "purpose": "Выбор перчатки: slap = replicatedStorage:FindFirstChild(p5.Text .. \"Slap\") or replicatedStorage.Slap; для \"Default\" берёт replicatedStorage.b, для Dual/Snow — GeneralHit/SnowHit, и пишет \"Selected: <name>\"."
+        },
+        {
+          "name": "f13(p6)",
+          "parameters": [
+            "p6: TextButton"
+          ],
+          "purpose": "Привязывает MouseButton1Click и TouchTap кнопки к f5."
+        },
+        {
+          "name": "f6(p8)",
+          "parameters": [
+            "p8: Model персонажа"
+          ],
+          "purpose": "Привязка к персонажу: Humanoid с таймаутом 10 с, LoadAnimation(slap) на Animator или Humanoid, затем цикл repeat wait()."
+        },
+        {
+          "name": "f8(p10, p11)",
+          "parameters": [
+            "p10: ValueBase LastSlappedBy",
+            "p11: boolean"
+          ],
+          "purpose": "Слежение за LastSlappedBy: если значение равно имени локального игрока, ставит флаг и выбирает случайную цель из v16."
+        },
+        {
+          "name": "f9(p12)",
+          "parameters": [
+            "p12: игрок/имя"
+          ],
+          "purpose": "Классификация приоритета цели: v19 = 4 по умолчанию, 2 для списка v20, 3 для списка v22."
+        },
+        {
+          "name": "f1() / f11()",
+          "parameters": [],
+          "purpose": "Два основных цикла авто-боя: ближайшая цель по расстоянию, учёт LastSlappedBy, атака через b:FireServer(humanoidRootPart)."
+        },
+        {
+          "name": "f3(p13)",
+          "parameters": [
+            "p13: список кандидатов"
+          ],
+          "purpose": "Поиск ближайшего игрока в радиусе 50 studs и не ближе 1.25 studs."
+        },
+        {
+          "name": "f10(p14)",
+          "parameters": [
+            "p14: Vector3"
+          ],
+          "purpose": "Проверка земли: workspace:Raycast(p14, Vector3.yAxis * -10, v2) и только затем Humanoid:MoveTo(p14)."
+        },
+        {
+          "name": "f2()",
+          "parameters": [],
+          "purpose": "Баннер статуса: ScreenGui + TextLabel, уничтожается через Debris:AddItem(instance8, 10)."
+        },
+        {
+          "name": "f15()",
+          "parameters": [],
+          "purpose": "Создаёт \"Control Panel\" ScreenGui (IgnoreGuiInset, DisplayOrder 123, ResetOnSpawn = false) с кнопками."
+        },
+        {
+          "name": "f16() .. f21()",
+          "parameters": [],
+          "purpose": "Шесть тумблеров панели: v8 вкл/выкл ИИ, перебор целей v85/v86, v10, v11 режим \"Rigged\"/\"Not Rigged\", v12, v26 переключение 100<->400."
+        },
+        {
+          "name": "f4(p1, thickness, applyStrokeMode, p2)",
+          "parameters": [
+            "p1: GuiObject",
+            "thickness: number",
+            "applyStrokeMode: Enum",
+            "p2: number (прозрачность, по умолчанию 0)"
+          ],
+          "purpose": "Создаёт UIStroke с LineJoinMode.Round для оформления панели."
+        },
+        {
+          "name": "f12(p3, p4, text2)",
+          "parameters": [
+            "p3: GuiObject-родитель",
+            "p4: number (позиция X)",
+            "text2: string"
+          ],
+          "purpose": "Фабрика кнопок-картинок: ImageLabel с rbxassetid://17184741588, AnchorPoint 0.5/0.5."
+        },
+        {
+          "name": "f14(p7)",
+          "parameters": [
+            "p7: Vector3"
+          ],
+          "purpose": "Отладочный Part в workspace с именем \"X\" или \"Z\" в зависимости от большей компоненты."
+        }
+      ],
+      "limitations": [
+        "Скрипт неработоспособен по времени: весь код внутри if v1 then, где v1 = tick() < 1763809636.9279 and tick() > 1763204836.9279, то есть окно с 2025-11-15T11:07:16Z по 2025-11-22T11:07:16Z. Оно истекло, поэтому сейчас скрипт лишь печатает остаток секунд; это дефект оригинала, а не деобфускации.",
+        "getgenv().BSF блокирует повторный запуск в той же сессии.",
+        "Поведенческого макета нет: 14 статических проверок тела и компиляция Lua 5.1. Top-level строит GUI, подключает TextChatService и запускает бесконечные циклы.",
+        "Скрипт автоматически атакует других игроков (Slap/GeneralHit/SnowHit) и пишет сообщения в textChatService.TextChannels.RBXGeneral:SendAsync.",
+        "PlaceId не проверяется; соответствие текущей версии Slap Battles и приём сервером этих remote не проверены.",
+        "Статическая распаковка WeAreDevs/WAD и компиляция Lua 5.1 не доказывают поведенческую эквивалентность незащищённому оригиналу."
+      ],
+      "external_dependencies": [
+        "Executor API: getgenv()",
+        "rbxassetid://17184741588 (собственные кнопки)"
+      ],
+      "modifications": [],
+      "verification": {
+        "lua51_syntax": true,
+        "lua51_method": "scripts/prepare_lua51.py (lua/lua tag v5.1.1, commit 98194db4295726069137d13b8d24fca8cbf892b6), loadfile compile-only",
+        "repeat_decoder_output_identical": true,
+        "protected_top_level_executed": false,
+        "tested_in_roblox": false,
+        "mock_game_assertions": 0,
+        "static_body_assertions": 14,
+        "static_test": "tests/test_wad_batch2_static.lua"
+      }
+    },
+    {
+      "published_path": "dobf scripts 1.0/Prison Life - volmaks ESP Freecam.lua",
+      "game": "Prison Life",
+      "variant": "volmaks ESP + Freecam",
+      "status": "deobfuscated",
+      "mode": "static WAD-style decode without the v1.0.0 banner (--force): tool output minus one dangling goto line, plus provenance header",
+      "bytes": 29945,
+      "sha256": "ce8afdaf2f324ba29b9297bba7e02fc8947555d62ad14b695eb38370515580ca",
+      "result_header_sha256": "2d0e366de8671e7440be6a971014dd91a4c97a613aa5a9c8e8f30f0d207073cf",
+      "result_body_sha256": "386b65e3930a8c119b6f578050d7377e41687784621a1385fce35b8bf5f2c3f7",
+      "body_lines": 1090,
+      "recovery_tool": "prostone4/Prometheus-Deobfuscator@6ee3291ec83fdc58c04e17bb1f1703386619711a",
+      "source": {
+        "repository": "volmaksDev/My-Scripts",
+        "commit": "231da028cc84a5e0dcd9ece97a0008aec47dc794",
+        "path": "Prison Life",
+        "url": "https://github.com/volmaksDev/My-Scripts/blob/231da028cc84a5e0dcd9ece97a0008aec47dc794/Prison%20Life",
+        "bytes": 250071,
+        "sha256": "ba3ecd9f3315cf751c7bef4d5825661704e7546285182f4bf1ba798d504ae547",
+        "license": "MIT",
+        "license_path": "LICENSE",
+        "license_sha256": "24ba1203a72495d8537a3b1eabfa866255cb91e0f83b2e65694f5fe76d098af7"
+      },
+      "game_markers": [
+        "https://friends.roproxy.com/v1/users/",
+        "583171793",
+        "workspace.Prison_ITEMS",
+        "function StartFreecam()",
+        "\"FC_KEYS\""
+      ],
+      "functions": [
+        {
+          "name": "f1(p1)",
+          "parameters": [
+            "p1: userId"
+          ],
+          "purpose": "Проверка подписки: постранично (limit=100, nextPageCursor) читает https://friends.roproxy.com/v1/users/<id>/followings через game:HttpGet и возвращает true, если найден id 583171793."
+        },
+        {
+          "name": "f2(title, content, duration)",
+          "parameters": [
+            "title: string",
+            "content: string",
+            "duration: number"
+          ],
+          "purpose": "Уведомление через windUI:Notify."
+        },
+        {
+          "name": "v14.new(f, p2) / v14:Update(p3, p4) / v14:Reset(p6)",
+          "parameters": [
+            "f: частота",
+            "p2: начальная позиция",
+            "p3: dt",
+            "p4: цель",
+            "p6: сброс"
+          ],
+          "purpose": "Демпфированное сглаживание (exp(-v15 * p3)) для камеры и векторов движения."
+        },
+        {
+          "name": "v7.new() / v7:createComponents() / v7:createDrawing(p20, p21)",
+          "parameters": [
+            "p20: тип Drawing",
+            "p21: таблица свойств"
+          ],
+          "purpose": "ESP-набор на Drawing: Box (\"Square\", Thickness 1), Tracer (\"Line\"), HP (\"Line\"), Name (\"Text\"); кэш по игрокам в espCache."
+        },
+        {
+          "name": "v7:removeEsp(p23) / v7:hideComponents(p22)",
+          "parameters": [
+            "p23: игрок",
+            "p22: таблица компонентов"
+          ],
+          "purpose": "Удаление/скрытие ESP-компонентов игрока."
+        },
+        {
+          "name": "f8(p24)",
+          "parameters": [
+            "p24: Player"
+          ],
+          "purpose": "Возвращает имя команды из p24.Team либо \"Unknown\"."
+        },
+        {
+          "name": "f15(p29)",
+          "parameters": [
+            "p29: Player"
+          ],
+          "purpose": "Цвет ESP по команде: Guards = Color3.fromRGB(0, 0, 255) и другие ветки для Inmates/Criminals."
+        },
+        {
+          "name": "f9(p25)",
+          "parameters": [
+            "p25: Player"
+          ],
+          "purpose": "Проекция мировой точки в экранные координаты через workspace.CurrentCamera."
+        },
+        {
+          "name": "f10()",
+          "parameters": [],
+          "purpose": "Проверка видимости: RaycastParams из позиции камеры по LookVector."
+        },
+        {
+          "name": "StartFreecam() / StopFreecam()",
+          "parameters": [],
+          "purpose": "Свободная камера: BindAction \"FC_KEYS\"/\"FC_MOUSE\"/\"FC_WHEEL\" в v22.Start, отключение в v22.Stop."
+        },
+        {
+          "name": "v22.Vel(p8) / v22.Pan() / v22.Fov()",
+          "parameters": [
+            "p8: dt"
+          ],
+          "purpose": "Скорость камеры clamp(v25 + p8 * (Up - Down) * 0.75, 0.05, 4) по W/A/S/D, ускорение LeftShift, панорама мыши * 0.05, зум по колесу."
+        },
+        {
+          "name": "v26.Push() / v26.Pop()",
+          "parameters": [],
+          "purpose": "Сохраняет и возвращает CFrame, FieldOfView, CameraType и MouseBehavior камеры."
+        },
+        {
+          "name": "f4(p7)",
+          "parameters": [
+            "p7: boolean"
+          ],
+          "purpose": "Полный свет: lighting.Brightness = 3, ClockTime = 12, FogEnd = 1000000000."
+        },
+        {
+          "name": "f6(p19)",
+          "parameters": [
+            "p19: boolean"
+          ],
+          "purpose": "setfpscap(0) или setfpscap(60); при отсутствии API предупреждает и показывает уведомление."
+        },
+        {
+          "name": "f11() / f12() / f13() / f14(p26, p27, p28)",
+          "parameters": [
+            "p26: цель",
+            "p27: число (по умолчанию 10)",
+            "p28: опция"
+          ],
+          "purpose": "Доступ к Character/HumanoidRootPart/Humanoid локального игрока и телепорт-подобное перемещение."
+        },
+        {
+          "name": "f16(p30) / f17()",
+          "parameters": [
+            "p30: игрок"
+          ],
+          "purpose": "Скелетный ESP: линии между R6/R15-частями (Torso/UpperTorso, Left Arm/LeftUpperArm, Left Leg/LeftUpperLeg ...) с скрытием при выключении."
+        }
+      ],
+      "limitations": [
+        "Одно документированное изменение: удалена единственная строка \"      goto L9209319\" (строка 37 сырого вывода декодера, 20 байт). Декодер выдал этот continue-переход без метки, файл не компилировался; goto был последним оператором тела цикла проверки подписки перед until not nextPageCursor, поэтому удаление эквивалентно проваливанию в проверку цикла.",
+        "Поведенческого макета нет: 15 статических проверок тела и компиляция Lua 5.1.",
+        "ESP, скелет и свободная камера — типично наказуемые античитом действия; скрипт требует executor API Drawing и setfpscap.",
+        "Стартовая проверка подписки отправляет ваш список подписок стороннему прокси friends.roproxy.com.",
+        "Внешние зависимости AdvancedUtils.lua и WindUI подгружаются с изменяемых URL, не включены и не аудированы; без них скрипт не запускается.",
+        "PlaceId не проверяется; имена CellDoors/Prison_ITEMS/Prison_Fences могли измениться в текущей версии Prison Life. Статическая распаковка не доказывает эквивалентность оригиналу."
+      ],
+      "external_dependencies": [
+        "AdvancedUtils.lua: loadstring(game:HttpGet(\"https://raw.githubusercontent.com/volmaksDev/My-Scripts/refs/heads/main/AdvancedUtils.lua\"))().init()",
+        "WindUI: loadstring(game:HttpGet(\"https://github.com/Footagesus/WindUI/releases/latest/download/main.lua\", true))()",
+        "friends.roproxy.com (проверка подписок)",
+        "Executor APIs: Drawing, setfpscap"
+      ],
+      "modifications": [
+        "Удалена одна строка \"      goto L9209319\" (строка 37 сырого вывода декодера, 20 байт) — декодер не выдал метку перехода; удаление эквивалентно проваливанию в проверку цикла until not nextPageCursor. Всё остальное тело побайтово совпадает с выводом декодера."
+      ],
+      "verification": {
+        "lua51_syntax": true,
+        "lua51_method": "scripts/prepare_lua51.py (lua/lua tag v5.1.1, commit 98194db4295726069137d13b8d24fca8cbf892b6), loadfile compile-only",
+        "repeat_decoder_output_identical": true,
+        "protected_top_level_executed": false,
+        "tested_in_roblox": false,
+        "mock_game_assertions": 0,
+        "static_body_assertions": 15,
+        "static_test": "tests/test_wad_batch2_static.lua"
+      }
+    },
+    {
+      "published_path": "dobf scripts 1.0/Work at a Pizza Place - Order4.lua",
+      "game": "Work at a Pizza Place",
+      "variant": "Order4 (volmaks)",
+      "status": "deobfuscated",
+      "mode": "static WeAreDevs/WAD v1.0.0 decode (banner present): entire tool output plus provenance header",
+      "bytes": 36002,
+      "sha256": "32b4c26b698205df649d5c8cc520530bc26e9a16bb5a0cf328a6c639cc963706",
+      "result_header_sha256": "ebc2c3ac3e27160fd5a81a03fa6d5526ea1559c12f4ddfe385d90ffae9e3ff9c",
+      "result_body_sha256": "8c44e114dbb72d3f89447a3d35deed150b59fc3fe67844f587c4ef6780f38113",
+      "body_lines": 1244,
+      "recovery_tool": "prostone4/Prometheus-Deobfuscator@6ee3291ec83fdc58c04e17bb1f1703386619711a",
+      "source": {
+        "repository": "volmaksDev/My-Scripts",
+        "commit": "231da028cc84a5e0dcd9ece97a0008aec47dc794",
+        "path": "Order4.lua",
+        "url": "https://github.com/volmaksDev/My-Scripts/blob/231da028cc84a5e0dcd9ece97a0008aec47dc794/Additional/Orders/Order4.lua",
+        "bytes": 276344,
+        "sha256": "796bb79caa7a4f6007ad692376ed9f93eff233204943fb77ed62976d1bd0d3c3",
+        "license": "MIT",
+        "license_path": "LICENSE",
+        "license_sha256": "24ba1203a72495d8537a3b1eabfa866255cb91e0f83b2e65694f5fe76d098af7"
+      },
+      "game_markers": [
+        "replicatedStorage.ManagerChannel:FireServer(\"GiveBonus\"",
+        "workspace.Customers",
+        "\"HoodSeat\"",
+        "\"Auto steal items\"",
+        "\"CheesePizza\""
+      ],
+      "functions": [
+        {
+          "name": "GetVehicle()",
+          "parameters": [],
+          "purpose": "Ищет в workspace.Cars машину с пустым сиденьем Driver и дочерним HoodSeat; возвращает таблицу кандидатов."
+        },
+        {
+          "name": "GetCurrentVehicle()",
+          "parameters": [],
+          "purpose": "Текущая машина локального игрока через Character.Humanoid.SeatPart."
+        },
+        {
+          "name": "GetManager()",
+          "parameters": [],
+          "purpose": "Возвращает Teams.Manager:GetPlayers()[1]."
+        },
+        {
+          "name": "FindFirstCustomer()",
+          "parameters": [],
+          "purpose": "Первый клиент из workspace.Customers:GetChildren() с дочерним Head."
+        },
+        {
+          "name": "f6(p10)",
+          "parameters": [
+            "p10: string имя команды (по умолчанию \"Manager\")"
+          ],
+          "purpose": "Смена команды через v2:FindFirstChild(name) с предупреждением, если команды нет."
+        },
+        {
+          "name": "TP(p4, cframe)",
+          "parameters": [
+            "p4: BasePart/Model",
+            "cframe: CFrame"
+          ],
+          "purpose": "Прямая установка CFrame для телепортов по станциям (Cashier Area, Delivery Area, Boxing Area)."
+        },
+        {
+          "name": "f2()",
+          "parameters": [],
+          "purpose": "Применяет Script.WalkSpeed/Script.JumpPower к Humanoid, если тумблеры включены, иначе 16."
+        },
+        {
+          "name": "startFly() / stopFly()",
+          "parameters": [],
+          "purpose": "Полёт: флаги v10/v12/v13, управление W/A/S/D/Space/LeftShift, скорость из слайдера FlySpeedSlider."
+        },
+        {
+          "name": "f1(p1, p2)",
+          "parameters": [
+            "p1, p2: ключи настроек"
+          ],
+          "purpose": "Проверка сохранённых настроек в v14 перед применением."
+        },
+        {
+          "name": "f3(p3)",
+          "parameters": [
+            "p3: Model персонажа"
+          ],
+          "purpose": "CharacterAdded-обработчик: WaitForChild Humanoid/HumanoidRootPart и повторное применение f2()."
+        },
+        {
+          "name": "f4(p5) / f5() / f7()",
+          "parameters": [
+            "p5: значение"
+          ],
+          "purpose": "Переподключение соединений, основной шаг авто-режима и отключение всех соединений (v9:Disconnect)."
+        }
+      ],
+      "limitations": [
+        "Поведенческого макета нет: 14 статических проверок тела и компиляция Lua 5.1. Top-level грузит внешние UI-библиотеки и строит меню.",
+        "Скрипт заявляет игровые награды от вашего имени: replicatedStorage.ManagerChannel:FireServer(\"GiveBonus\", v56) и FireServer(\"EmployeeOfTheDay\", v56) после чтения счётчиков через v15:SendData(\"GetCounters\", \"ManagerChannel\", 2, LocalPlayer), а также FireServer(\"OrderComplete\", v67, \"I'll take your order and then I'll eat your food\") в цикле кражи.",
+        "Тумблеры Enable Fling/Enable Gravity/Enable Noclip двигают персонажа и могут толкать других игроков.",
+        "Внешние Linoria.lua, ThemeManager.lua и SaveManager.lua подгружаются с изменяемых raw-URL того же репозитория; без них UI не строится.",
+        "PlaceId не проверяется; приём сервером GiveBonus/EmployeeOfTheDay/OrderComplete не проверен.",
+        "Статическая распаковка WeAreDevs/WAD и компиляция Lua 5.1 не доказывают поведенческую эквивалентность незащищённому оригиналу."
+      ],
+      "external_dependencies": [
+        "Linoria.lua: loadstring(game:HttpGet(\"https://raw.githubusercontent.com/volmaksDev/My-Scripts/refs/heads/main/Additional/Linoria.lua\"))()",
+        "ThemeManager.lua и SaveManager.lua: те же изменяемые raw-URL репозитория volmaksDev/My-Scripts"
+      ],
+      "modifications": [],
+      "verification": {
+        "lua51_syntax": true,
+        "lua51_method": "scripts/prepare_lua51.py (lua/lua tag v5.1.1, commit 98194db4295726069137d13b8d24fca8cbf892b6), loadfile compile-only",
+        "repeat_decoder_output_identical": true,
+        "protected_top_level_executed": false,
+        "tested_in_roblox": false,
+        "mock_game_assertions": 0,
+        "static_body_assertions": 14,
+        "static_test": "tests/test_wad_batch2_static.lua"
+      }
+    }
+  ],
+  "negative_results": [
+    "CelerityRBLX/Roblox (MIT), Slap Battles: Slap Farm/{Regular,Killstreak,No One Shot,New Players}.lua и Tycoon Farm.lua — MoonSec V3 (инструмент C#, в среде нет .NET); Legit Slap Farm.lua и Car Keys Mastery.lua — Fairifyer Obfuscator (инструмента нет); Chara.lua — открытый исходник, то есть (src), который сейчас не добавляем.",
+    "CelerityRBLX/Roblox, Jujutsu Shenanigans/Sun Rage.lua — после распаковки получается копия loader'а, игрового кода нет.",
+    "volmaksDev/My-Scripts (MIT): Fling Things And People.lua восстановлен (32 332 байта, 1 253 строки), но НЕ опубликован: тело загружает внешний код с https://paste.ee/r/7X7NLEPB, а непроверяемые paste-хосты в публикуемом артефакте противоречат правилам каталога.",
+    "volmaksDev/My-Scripts, Additional/test2.0.lua восстановлен (35 176 байт, 1 421 строка), но не опубликован: игру по маркерам (Auto Battle, Manual Fuse, адреса кошелька 0xFDe67...) однозначно определить не удалось, а публиковать результат без установленной игры нельзя.",
+    "volmaksDev/My-Scripts: Additional/testR.lua — Luraph v14.7, Additional/tst.lua — Luraph v14.8 (рабочего инструмента нет); Additional/d.lua — дамп числовых констант VM; Additional/luraph.lua, meshes2.0.luau, mm2_meshes, UI.lua, Linoria.lua, WindUI.lua — не игровой код."
+  ]
+}

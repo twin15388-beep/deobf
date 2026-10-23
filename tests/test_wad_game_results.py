@@ -24,12 +24,19 @@ from unittest.mock import patch
 from scripts import verify_results
 
 ROOT = Path(__file__).resolve().parents[1]
-REPORT = ROOT / "reports/game-sources-2026-10-22-wad.json"
+REPORTS = (ROOT / "reports/game-sources-2026-10-22-wad.json",
+           ROOT / "reports/game-sources-2026-10-23-wad.json")
 LUA_TESTS = {
     "dobf scripts 1.0/Your Bizarre Adventure - Revenge Hub.lua":
-        ("tests/test_yba_revenge_hub.lua", "mock_game_assertions"),
+        ("tests/test_yba_revenge_hub.lua", "mock_game_assertions", None),
     "dobf scripts 1.0/Jujutsu Shenanigans - Sonic Moveset.lua":
-        ("tests/test_jjs_sonic_static.lua", "static_body_assertions"),
+        ("tests/test_jjs_sonic_static.lua", "static_body_assertions", None),
+    "dobf scripts 1.0/Slap Battles - Tryhard AI Demo.lua":
+        ("tests/test_wad_batch2_static.lua", "static_body_assertions", "slapbattles"),
+    "dobf scripts 1.0/Prison Life - volmaks ESP Freecam.lua":
+        ("tests/test_wad_batch2_static.lua", "static_body_assertions", "prisonlife"),
+    "dobf scripts 1.0/Work at a Pizza Place - Order4.lua":
+        ("tests/test_wad_batch2_static.lua", "static_body_assertions", "pizzaplace"),
 }
 
 
@@ -44,15 +51,18 @@ def lua_binary() -> str | None:
 
 
 def load_artifacts() -> dict[str, dict]:
-    manifest = json.loads(REPORT.read_text(encoding="utf-8"))
-    return {artifact["published_path"]: artifact
-            for artifact in manifest["artifacts"]}
+    artifacts = {}
+    for report in REPORTS:
+        manifest = json.loads(report.read_text(encoding="utf-8"))
+        for artifact in manifest["artifacts"]:
+            artifacts[artifact["published_path"]] = artifact
+    return artifacts
 
 
 class WadManifestTests(unittest.TestCase):
     def setUp(self):
         self.artifacts = load_artifacts()
-        self.assertEqual(len(self.artifacts), 2)
+        self.assertEqual(len(self.artifacts), 5)
 
     def test_pinned_mit_sources_and_verbatim_decoder_bodies(self):
         for name, artifact in self.artifacts.items():
@@ -75,8 +85,9 @@ class WadManifestTests(unittest.TestCase):
                 self.assertEqual(body.count(b"\n")
                                  + (0 if body.endswith(b"\n") else 1),
                                  artifact["body_lines"])
-                # Full recoveries: the decoder body is the bulk of the file.
-                self.assertGreater(len(body), 30000)
+                # Full recoveries, not fragments: every published body is a
+                # complete decoder output (25-40 KB here).
+                self.assertGreater(len(body), 20000)
                 self.assertNotEqual(source["sha256"], artifact["result_body_sha256"])
                 self.assertNotIn(b"pastefy.app", body.lower())
                 for marker in artifact["game_markers"]:
@@ -103,8 +114,14 @@ class WadManifestTests(unittest.TestCase):
                 self.assertIs(verification["lua51_syntax"], True)
                 self.assertTrue(artifact["limitations"])
                 self.assertTrue(artifact["external_dependencies"])
-                self.assertTrue(any("WindUI" in item or "mp3" in item
-                                    for item in artifact["external_dependencies"]))
+                # Every host the body can reach must be declared, so no hidden
+                # remote payload slips into a published artifact.
+                body = (ROOT / name).read_bytes().partition(b"]]\n\n")[2].decode("utf-8")
+                declared = " ".join(artifact["external_dependencies"]
+                                    + artifact["limitations"]).lower()
+                for host in set(re.findall(r"https?://([A-Za-z0-9._-]+)", body)):
+                    self.assertIn(host.lower(), declared,
+                                  f"undeclared external host {host} in {name}")
 
     def test_verifier_rejects_altered_evidence_or_license(self):
         artifacts = load_artifacts()
@@ -124,7 +141,7 @@ class WadManifestTests(unittest.TestCase):
                 with patch.object(verify_results, "ROOT", root), patch.object(
                     verify_results, "REPORTS", ("report.json",)
                 ), patch.object(verify_results, "SOURCE_REPORTS", ("report.json",)), \
-                        patch.object(verify_results, "WAD", "report.json"), \
+                        patch.object(verify_results, "WAD_REPORTS", ("report.json",)), \
                         contextlib.redirect_stdout(io.StringIO()):
                     return verify_results.verify()
 
@@ -165,7 +182,7 @@ class WadManifestTests(unittest.TestCase):
             with patch.object(verify_results, "ROOT", root), patch.object(
                 verify_results, "REPORTS", ("report.json",)
             ), patch.object(verify_results, "SOURCE_REPORTS", ("report.json",)), \
-                    patch.object(verify_results, "WAD", "report.json"), \
+                    patch.object(verify_results, "WAD_REPORTS", ("report.json",)), \
                     contextlib.redirect_stdout(io.StringIO()):
                 with self.assertRaisesRegex(ValueError, "Unregistered WAD result"):
                     verify_results.verify()
@@ -175,16 +192,20 @@ class WadManifestTests(unittest.TestCase):
                  "no Lua 5.1 interpreter; build one with scripts/prepare_lua51.py")
 class WadLuaEvidenceTests(unittest.TestCase):
     def test_lua_tests_pass_and_report_manifest_counts(self):
-        for name, (test_path, field) in LUA_TESTS.items():
+        artifacts = load_artifacts()
+        self.assertEqual(set(LUA_TESTS), set(artifacts))
+        for name, (test_path, field, case) in LUA_TESTS.items():
             with self.subTest(name):
+                command = [lua_binary(), str(ROOT / test_path), str(ROOT / name)]
+                if case:
+                    command.append(case)
                 result = subprocess.run(
-                    [lua_binary(), str(ROOT / test_path), str(ROOT / name)],
-                    capture_output=True, text=True, timeout=300)
+                    command, capture_output=True, text=True, timeout=300)
                 self.assertEqual(result.returncode, 0, result.stderr)
                 match = re.search(r"OK .*?: (\d+) ", result.stdout)
                 self.assertIsNotNone(match, result.stdout)
                 self.assertEqual(int(match.group(1)),
-                                 load_artifacts()[name]["verification"][field])
+                                 artifacts[name]["verification"][field])
 
 
 if __name__ == "__main__":
