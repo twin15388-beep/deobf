@@ -1,0 +1,88 @@
+{
+  "date": "2026-10-21",
+  "method": "Pinned WaveHub string-table static decode + MIT Aztup Deepwoken source with automatic telemetry removed; neither game module was run.",
+  "artifacts": [
+    {
+      "published_path": "dobf scripts 1.0/Anime War RNG - WaveHub.lua",
+      "status": "deobfuscated",
+      "bytes": 129197,
+      "sha256": "92354aa770eaf8ff8a9c6db397b0af280b415ab22667af6bb2f3f98b11af3b96",
+      "result_body_sha256": "293569d2e111c66ce898888650d14fea857da05e63be59b3d52340c29bf916da",
+      "result_header_sha256": "d464e131d0ad3bc026d34c48b4a5d32f6a4d6f64d0787df48b2493cf7468659b",
+      "recovery_tool": "scripts/decode_wavehub_anime_war_rng.py",
+      "source": {
+        "repository": "wavechayakon/WaveHub",
+        "path": "games/anime-war-rng.lua",
+        "commit": "198b5d26877c44b0533b6c3f1826a87515d59faf",
+        "url": "https://github.com/wavechayakon/WaveHub/blob/198b5d26877c44b0533b6c3f1826a87515d59faf/games/anime-war-rng.lua",
+        "sha256": "7377afb9d1b8cc7d6390b504080a4f8cddb5f04bb2373c7179dbca4397f4f643",
+        "bytes": 161322,
+        "license": "MIT",
+        "license_sha256": "4015e16f6e5380ebed222e74a65e5d870320e7358fc44218a2c898cc8b9fb62b"
+      },
+      "recovery": {
+        "layer": "custom string table only; executable game body otherwise intact, external WindUI omitted",
+        "constants": 607,
+        "literal_uses": 1070,
+        "decoded_text_bytes": 8299,
+        "luau_constant_comparison": "607/607 equal between extracted-only helper, Python decoder, and generated Luau literals",
+        "luau_index_length_value_sha256": "422321a3b2d44518208e1ad91d08bb9bdaa0f1afbabc44569e4a2dde38849b4d",
+        "compiled_by_luau": true,
+        "roblox_executed": false
+      },
+      "game_markers": [
+        "local function BuildAnimeWarRNG(WaveHub)",
+        "local function processInventorySync(payload)",
+        "RequestTraitReroll",
+        "RequestFuse",
+        "RequestBuyTreeNode",
+        "RequestRebirth",
+        "watch(\"RaidSync\""
+      ]
+    },
+    {
+      "published_path": "dobf scripts 1.0/Deepwoken - Aztup main (src).lua",
+      "status": "src",
+      "sanitized": true,
+      "bytes": 223925,
+      "sha256": "969da5328b0211fa1067ad6964603566aed208ae8d47012accfe642b34745ea5",
+      "result_body_sha256": "c34bb9317284c9a2a21ae62cde68f7b26bb332119c6bcdd570700f2cff53e10b",
+      "result_header_sha256": "7ce4bc8a6dc7531f2651244660008b0d8cc4c09ca04a1fe1882ad592c5786ae1",
+      "recovery_tool": "scripts/sanitize_aztup_deepwoken.py",
+      "source": {
+        "repository": "ModerkaScripts/Aztup-Hub-V3",
+        "path": "files/games/DeepWoken.lua",
+        "commit": "45bcead9541ad13c2adc631c1afaecf8bdfc8ed5",
+        "url": "https://github.com/ModerkaScripts/Aztup-Hub-V3/blob/45bcead9541ad13c2adc631c1afaecf8bdfc8ed5/files/games/DeepWoken.lua",
+        "sha256": "535232a58188f77c8793fbd25b2433fe7d05e1a913cf619b36bbc5c960bae190",
+        "bytes": 224784,
+        "license": "MIT",
+        "license_sha256": "ad08d694b5670b07c473ca110b9195c50b4e1707004ea5452ad5634fed69eddb"
+      },
+      "sanitization": {
+        "removed": [
+          "unused AnalyticsAPI import (only call was commented)",
+          "automatic logError HTTP POST of username to blank URL",
+          "blank debug Webhook.new replaced with local warn",
+          "unreachable auto loot analytics block",
+          "periodic auto parry timing POST loop"
+        ],
+        "remains": [
+          "websiteKey moderatorDetection GET",
+          "two MP3 downloads via AudioPlayer",
+          "optional user-configured Ores Farm and Animal King webhook notifiers",
+          "Aztup Hub sharedRequire and account/websiteKey dependencies"
+        ],
+        "compiled_by_luau": true,
+        "roblox_executed": false
+      },
+      "game_markers": [
+        "function functions.autoParry(toggle)",
+        "function functions.autoLoot(toggle)",
+        "function functions.oresFarm(toggle)",
+        "function functions.fishFarm(toggle)",
+        "function functions.fortMeritFarm(toggle)"
+      ]
+    }
+  ]
+}

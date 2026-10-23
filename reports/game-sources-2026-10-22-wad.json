@@ -1,0 +1,313 @@
+{
+  "date": "2026-10-22",
+  "scope": "Two WeAreDevs/WAD v1.0.0 protected game scripts recovered from MIT-licensed pinned commits; no new (src), no Pastefy, no script retrieval through APIs",
+  "artifacts": [
+    {
+      "published_path": "dobf scripts 1.0/Your Bizarre Adventure - Revenge Hub.lua",
+      "game": "Your Bizarre Adventure",
+      "variant": "Revenge Hub (volmaks.dev)",
+      "status": "deobfuscated",
+      "mode": "static WeAreDevs/WAD v1.0.0 decode: entire tool output plus provenance header",
+      "bytes": 39566,
+      "sha256": "c50a3769ab8933b39348c79627671c54d6f7524a1d667acb08f4ffbf46edab96",
+      "result_header_sha256": "ce6a01bca8e1296448297892a6540b441d31194f9b7f01475b043f8bba7ffa32",
+      "result_body_sha256": "f8a9821d6257b7e402a3e64e533febd1ee71b158acc004207427f72b4a2c1ba0",
+      "body_lines": 1353,
+      "recovery_tool": "prostone4/Prometheus-Deobfuscator@6ee3291ec83fdc58c04e17bb1f1703386619711a",
+      "source": {
+        "repository": "volmaksDev/My-Scripts",
+        "commit": "231da028cc84a5e0dcd9ece97a0008aec47dc794",
+        "path": "YBA.lua",
+        "url": "https://github.com/volmaksDev/My-Scripts/blob/231da028cc84a5e0dcd9ece97a0008aec47dc794/YBA.lua",
+        "bytes": 261300,
+        "sha256": "f86244ca7b694f450f42182039bce37f4d296c5639c1c9f85f35cf5d636f40ff",
+        "license": "MIT",
+        "license_path": "LICENSE",
+        "license_sha256": "24ba1203a72495d8537a3b1eabfa866255cb91e0f83b2e65694f5fe76d098af7"
+      },
+      "game_markers": [
+        "f2(workspace, \"Item_Spawns\")",
+        "workspace.FastTravel[\"Merchant's Keep\"].TeleportTo.Value.Position",
+        "\"EndDialogue\", { Option = \"Option2\", Dialogue = \"Dialogue5\", NPC = \"Merchant\" }",
+        "\"PurchaseShopItem\", { ItemName = \"1x Lucky Arrow\" }",
+        "players.LocalPlayer.PlayerStats.Money"
+      ],
+      "functions": [
+        {
+          "name": "TPReturner() / Teleport()",
+          "parameters": [],
+          "purpose": "Собирает публичные серверы через games.roblox.com/v1/games/<PlaceId>/servers/Public (лимит 100, курсор nextPageCursor) и пишет историю в NotSameServers.json. Teleport() — бесконечный while wait(); TeleportService в файле нет, фактического перехода на сервер не происходит."
+        },
+        {
+          "name": "f2(parent, name, timeout)",
+          "parameters": [
+            "parent: Instance",
+            "name: string",
+            "timeout: number (по умолчанию 10)"
+          ],
+          "purpose": "Опрос FindFirstChild каждые 0,1 с до таймаута; замена WaitForChild с явным пределом."
+        },
+        {
+          "name": "f3(target, speed, step)",
+          "parameters": [
+            "target: Vector3",
+            "speed: number (кнопки передают 10)",
+            "step: number (кнопки передают 0,1)"
+          ],
+          "purpose": "Телепорт по Lerp от текущей позиции с сохранением LookVector; число шагов = max(1, ceil(distance/speed)) * step."
+        },
+        {
+          "name": "f5(substring)",
+          "parameters": [
+            "substring: string"
+          ],
+          "purpose": "Поиск игрока по подстроке имени (string.match по нижнему регистру) для списка игнорирования."
+        },
+        {
+          "name": "f9()",
+          "parameters": [],
+          "purpose": "Инициализация Money Farm: проверяет Character/HumanoidRootPart/CurrentCamera, находит workspace.Item_Spawns.Items, определяет f12..f25, подключает Items.ChildAdded/ChildRemoved и CharacterAdded, возвращает функцию остановки (Disconnect, сброс очереди, CameraType = Custom)."
+        },
+        {
+          "name": "f13(position)",
+          "parameters": [
+            "position: Vector3"
+          ],
+          "purpose": "Фарм-телепорт к предмету; скорость из _G.TeleportSpeed (по умолчанию 15), множитель 0,07, прерывается флагом _G.MoneyFarm_Enabled/_G.MoneyFarm_Stop."
+        },
+        {
+          "name": "f18()",
+          "parameters": [],
+          "purpose": "Нажатие E через VirtualInputManager:SendKeyEvent с удержанием 0,22 с для подбора предмета через ProximityPrompt."
+        },
+        {
+          "name": "f19(item)",
+          "parameters": [
+            "item: Instance из Item_Spawns.Items"
+          ],
+          "purpose": "Подбор одного предмета: телепорт на +3 studs, Scriptable-камера на +6 studs, дистанция из ProximityPrompt.MaxActivationDistance (иначе 6), две попытки с опросом 0,2 с, возврат камеры и пауза 0,3 с."
+        },
+        {
+          "name": "f20(character) / f21(tool)",
+          "parameters": [
+            "character: Model",
+            "tool: Tool"
+          ],
+          "purpose": "Продажа: ищет RemoteEvent персонажа (3 с), проверяет tool.Parent == character и шлёт FireServer(\"EndDialogue\", {Option=\"Option2\", Dialogue=\"Dialogue5\", NPC=\"Merchant\"})."
+        },
+        {
+          "name": "f22(character)",
+          "parameters": [
+            "character: Model"
+          ],
+          "purpose": "Бесконечный цикл продажи: перебирает Tool из Backpack, для 16 имён списка (Mysterious Arrow, Rokakaka, Gold Coin, Diamond, Pure Rokakaka, Quinton's Glove, Steel Ball, Rib Cage of The Saint's Corpse, Zepellin's Headband, Zeppeli's Hat, Caesar's Headband, Clackers, Stone Mask, Ancient Scroll, Dio's Diary) делает EquipTool, ждёт 1 с и продаёт с троттлингом 0,5 с на имя."
+        },
+        {
+          "name": "f6()",
+          "parameters": [],
+          "purpose": "YBA god mode: для каждой модели в workspace.Living с именем существующего игрока ставит HumanoidRootPart.CFrame на CFrame локального игрока, пропуская список игнорирования; вызывается каждый Heartbeat при _G.YbaGodMode_Enabled."
+        },
+        {
+          "name": "f7(adornee, kind, text) / f10(kind, enabled)",
+          "parameters": [
+            "adornee: BasePart (Head)",
+            "kind: playerEsp|standEsp|raceEsp",
+            "text: string",
+            "enabled: boolean"
+          ],
+          "purpose": "ESP: BillboardGui со StudsOffset 2/3,5/5,5 и TextLabel; RenderStepped обновляет текст из Name, PlayerStats.Stand.Value и PlayerStats.Race.Value; выключение уничтожает GUI и отключает соединение."
+        },
+        {
+          "name": "f8(target)",
+          "parameters": [
+            "target: Vector3"
+          ],
+          "purpose": "Телепорт к Ascended Dio с фиксированными 18 studs/с и множителем 0,05 (вектор 8490.5439453125, -469.50018310547, 8151.3793945312)."
+        },
+        {
+          "name": "f11()",
+          "parameters": [],
+          "purpose": "Покупка стрелы: Character.RemoteEvent:FireServer(\"PurchaseShopItem\", {ItemName=\"1x Lucky Arrow\"}); цикл покупки раз в 2 с при PlayerStats.Money.Value >= 50000."
+        }
+      ],
+      "verification": {
+        "lua51_syntax": true,
+        "lua51_method": "scripts/prepare_lua51.py (lua/lua tag v5.1.1, commit 98194db4295726069137d13b8d24fca8cbf892b6), loadfile compile-only",
+        "repeat_decoder_output_identical": true,
+        "protected_top_level_executed": false,
+        "tested_in_roblox": false,
+        "mock_game_assertions": 36,
+        "mock_test": "tests/test_yba_revenge_hub.lua"
+      },
+      "external_dependencies": [
+        "WindUI: loadstring(game:HttpGet(\"https://github.com/Footagesus/WindUI/releases/latest/download/main.lua\", true))() at startup; mutable release asset, not included, not audited",
+        "Executor APIs: readfile/writefile/delfile (NotSameServers.json), VirtualInputManager",
+        "games.roblox.com public server list API",
+        "Ссылка автора в вкладке Credits: https://discord.gg/G5ZyAzVTsC копируется в буфер обмена по нажатию кнопки (toclipboard); код по этой ссылке не загружается."
+      ],
+      "limitations": [
+        "Восстановленный код создаёт вкладки Server Hop/Visual/Fast Travel/Credits/Tips через глобальную переменную Window, хотя объект окна лежит в локальной v11; upstream WindUI глобальный Window не выставляет, поэтому без такого глобала скрипт падает на Window:Tab сразу после вкладки Yba God. Проверено только статически и на макете, в Roblox не проверялось; нельзя исключить и артефакт области видимости при деобфускации.",
+        "Server Hop никогда не вызывает TeleportService: Teleport() бесконечно перечисляет серверы, фактической смены сервера в коде нет.",
+        "Покупка Lucky Arrow тратит игровые деньги (50000 за штуку, каждые 2 с), god mode пишет CFrame чужих персонажей (репликация не гарантирована), ESP создаёт GUI на чужих персонажах.",
+        "Игровой PlaceId в коде не проверяется; соответствие текущей версии YBA и приём сервером вызовов EndDialogue/PurchaseShopItem не проверены.",
+        "Внешний WindUI подгружается с изменяемого release-URL: содержимое может отличаться от проанализированного и не входит в этот файл.",
+        "Статическая распаковка WeAreDevs/WAD и компиляция Lua 5.1 не доказывают поведенческую эквивалентность незащищённому оригиналу."
+      ],
+      "modifications": []
+    },
+    {
+      "published_path": "dobf scripts 1.0/Jujutsu Shenanigans - Sonic Moveset.lua",
+      "game": "Jujutsu Shenanigans",
+      "variant": "Sonic (Naoya moveset rework by celerity)",
+      "status": "deobfuscated",
+      "mode": "static WeAreDevs/WAD v1.0.0 decode: entire tool output plus provenance header",
+      "bytes": 43025,
+      "sha256": "798c0be68288f551790f38f4a862a2f4150c07c8b669ccdcfbb49d3702b022cf",
+      "result_header_sha256": "fa4ab811a6884bced75bb6d47b98e0209e0e27d7335d4e18c880e2ae422162a9",
+      "result_body_sha256": "7cd429ed7fa480b1d009438b756fbcea71fff0d3792d956cb205e28bab9bf2f4",
+      "body_lines": 1472,
+      "recovery_tool": "prostone4/Prometheus-Deobfuscator@6ee3291ec83fdc58c04e17bb1f1703386619711a",
+      "source": {
+        "repository": "CelerityRBLX/Roblox",
+        "commit": "5fe709f2a15f8b9e900529bc32d6badb78437607",
+        "path": "Jujutsu Shenanigans/Sonic.lua",
+        "url": "https://github.com/CelerityRBLX/Roblox/blob/5fe709f2a15f8b9e900529bc32d6badb78437607/Jujutsu%20Shenanigans/Sonic.lua",
+        "bytes": 272712,
+        "sha256": "dd255706af4fddd62f16a0ce814c1b1da6c88f8e0ec8cf76ae5236b6e28d8b57",
+        "license": "MIT",
+        "license_path": "LICENSE",
+        "license_sha256": "c5a94d034dc2fab5214ebf257c0a507ac7be47199f1371a4fe63d786b205bad7"
+      },
+      "game_markers": [
+        "replicatedStorage.Knit.Knit.Services.CursoryImpactService.RE.Activated",
+        "replicatedStorage.Knit.Knit.Services.NaoyaService.RE.RightActivated",
+        "replicatedStorage.Knit.Knit.Services.JoinService.RE.Talk",
+        "localPlayer:GetAttribute(\"Moveset\") ~= \"Naoya\"",
+        "workspace:WaitForChild(\"Characters\")"
+      ],
+      "functions": [
+        {
+          "name": "f1() / f2()",
+          "parameters": [],
+          "purpose": "Катсцена: ColorCorrectionEffect (Brightness -0.02, Contrast 0.1, Saturation -0.02) и две полосы ScreenGui 0.15/0.85 с Tween 0,2 с Quad; f2 additionally отключает чат через StarterGui:SetCoreGuiEnabled."
+        },
+        {
+          "name": "Wait(seconds)",
+          "parameters": [
+            "seconds: number"
+          ],
+          "purpose": "Активное ожидание на Heartbeat по os.clock; возвращает фактическое время."
+        },
+        {
+          "name": "f4(target) / f5(target)",
+          "parameters": [
+            "target: Model"
+          ],
+          "purpose": "Переключение метки цели: f4 создаёт/уничтожает Highlight \"Pin\" (OutlineColor 250,50,50), f5 — \"GreenPin\" (50,250,200); вызываются клавишами Y и C."
+        },
+        {
+          "name": "f7() / f8()",
+          "parameters": [],
+          "purpose": "Разрешение четырёх слотов мувесета из character.Moveset: (Projection Breaker|Mach Breaker|Machshot), (Bleedout|Strike Of The Wind|Crushing Wind), (Decisive Strike|Sonic Wind|Supersonic), (Cursory Impact|Extender); f7 через WaitForChild с таймаутом 0,5 с, f8 через FindFirstChild."
+        },
+        {
+          "name": "f9()",
+          "parameters": [],
+          "purpose": "Выбор ближайшей цели в workspace.Characters: точка прицела = (HRP.Position + normalize(LookVector + AssemblyLinearVelocity + camera.LookVector) * 5 + mouse.Hit.Position) * 0.5; лимит 100 studs, Humanoid.Health > 0, вес Pin 0.75 и GreenPin 1.25."
+        },
+        {
+          "name": "f11(t, origin)",
+          "parameters": [
+            "t: number (секунды упреждения)",
+            "origin: Vector3 (по умолчанию позиция цели)"
+          ],
+          "purpose": "Предсказание позиции цели с компенсацией гравитации (константа -196.2 по Y) при v23.Y < -150."
+        },
+        {
+          "name": "f12(parent) / f13(parent) / f14(part, velocity, lifetime)",
+          "parameters": [
+            "parent: Instance",
+            "part: BasePart",
+            "velocity: Vector3",
+            "lifetime: number"
+          ],
+          "purpose": "VFX и физика: Attachment + LinearVelocity с MaxForce = math.huge, ParticleEmitter \"Speed VFX\" (Rate 700, Lifetime 0.5-1, Brightness 10) и очистка через Debris:AddItem."
+        },
+        {
+          "name": "f15()",
+          "parameters": [],
+          "purpose": "Cursory Impact: CursoryImpactService.RE.Activated:FireServer(character.Moveset.Extender или \"Cursory Impact\", nil)."
+        },
+        {
+          "name": "f16(part, base)",
+          "parameters": [
+            "part: BasePart",
+            "base: number (по умолчанию 250; Heartbeat передаёт 120/144)"
+          ],
+          "purpose": "Raycast на 20 studs вперёд с фильтром по workspace.Characters; при попадании в Anchored+CanCollide скорость снижается пропорционально расстоянию до стены."
+        },
+        {
+          "name": "f17(a, b)",
+          "parameters": [
+            "a, b: аргументы правой атаки"
+          ],
+          "purpose": "NaoyaService.RE.RightActivated:FireServer(a, b) — правая атака/комбо мувесета Naoya."
+        },
+        {
+          "name": "InputBegan handler",
+          "parameters": [
+            "input: InputObject",
+            "gameProcessed: boolean"
+          ],
+          "purpose": "Space — воздушный рывок (Jumping + knockback-анимация, 0,5 с на повтор); T — flash/boost: LinearVelocity, ускорение со 150 до 200 studs/с в течение 0,6 с, звук Sonic Boost; Q — пустая ветка; Y/C — Pin/GreenPin; 1-4 — состояние v44; L — ультимейт: Scriptable-камера 1,5 с, talk:FireServer(13997948756), состояние \"Ultimate\". Всё gated на GetAttribute(\"Moveset\") == \"Naoya\"."
+        },
+        {
+          "name": "CharacterAppearanceLoaded handler",
+          "parameters": [
+            "character: Model"
+          ],
+          "purpose": "При Moveset == \"Naoya\": workspace.Gravity = 170, Humanoid.AutomaticScalingEnabled = false, HipHeight = 0.05, загрузка 15 анимаций из ReplicatedStorage.Animations, переименование четырёх слотов, Extender:SetAttribute(\"Key\", 9)/(\"Tip\", \"PASSIVE\"), правка PlayerGui.Main.Controls.Ultimate (Title \"I've Had Enough\", градиент 30,100,250 -> 15,250,250, Evade/Special скрыты)."
+        },
+        {
+          "name": "Heartbeat handler",
+          "parameters": [],
+          "purpose": "Движение: WalkSpeed = 0 в ультимейте, иначе 120/144 через f16 при ускорении, 33 при Info.Stun, иначе 66; JumpPower 0/80/60; проигрывание mahitoSprint при MoveDirection ~= 0 и не в скилле."
+        },
+        {
+          "name": "GUI override loop",
+          "parameters": [],
+          "purpose": "Каждые 0,1 с перебирает PlayerGui и меняет TextLabel \"Head of the Hei\" на \"The Blue Blur\" с цветом 30,200,250."
+        }
+      ],
+      "verification": {
+        "lua51_syntax": true,
+        "lua51_method": "scripts/prepare_lua51.py (lua/lua tag v5.1.1, commit 98194db4295726069137d13b8d24fca8cbf892b6), loadfile compile-only",
+        "repeat_decoder_output_identical": true,
+        "protected_top_level_executed": false,
+        "tested_in_roblox": false,
+        "mock_game_assertions": 0,
+        "static_body_assertions": 35,
+        "static_test": "tests/test_jjs_sonic_static.lua"
+      },
+      "external_dependencies": [
+        "writefile + game:HttpGet(\"https://github.com/CelerityRBLX/Roblox/raw/refs/heads/main/wontstopjustgo.mp3\") + getcustomasset: mutable audio download at startup",
+        "Eight rbxassetid:// sounds/animations and ReplicatedStorage.Animations trees",
+        "Executor APIs: writefile, getcustomasset, settings()"
+      ],
+      "limitations": [
+        "Поведенческого mock-теста нет: восстановленный top-level создаёт десятки типов Roblox (ColorSequence, NumberRange, RaycastParams, TweenService, Debris, Stats), запускает неограниченные циклы и требует writefile/getcustomasset, поэтому макет проверял бы скорее сам макет. Есть только 35 статических проверок тела и компиляция Lua 5.1.",
+        "Название игры подтверждено структурой кода (Knit-сервисы JJS, мувесет Naoya, workspace.Characters) и путём в upstream-репозитории; PlaceId в коде не проверяется, соответствие текущей сборке JJS не доказано.",
+        "Скрипт меняет workspace.Gravity, HipHeight/масштаб персонажа, тексты GUI и стреляет игровыми remote; сервер может отклонять вызовы, а античит — наказывать.",
+        "Звук качается с изменяемого raw-URL того же репозитория; содержимое может измениться.",
+        "Статическая распаковка WeAreDevs/WAD и компиляция Lua 5.1 не доказывают поведенческую эквивалентность незащищённому оригиналу."
+      ],
+      "modifications": []
+    }
+  ],
+  "negative_results": [
+    "Lone Survival, Trident Survival, Slayers 2, Grand Piece Online и King Legacy: новые защищённые входы с подтверждённым правом на перепубликацию не найдены; найденные репозитории не имеют LICENSE либо содержат только loader/открытый исходник.",
+    "MomoHub007: 16 репозиториев с WeAreDevs-входами (Sailor-Piece, Anime-Tactical, All-Star-, Scirpt-Standard, AZ, SpearTrain и др.) не содержат LICENSE; публиковать их нельзя.",
+    "Luciquad/robloxscripts (MIT): bloxfruits — Perth-обфускация (нет инструмента), bigpaintballv1 — Synapse Xen v1.1.2 (нет инструмента), stfu/dgqst — MoonSec V2 (рабочего лицензированного девиртуализатора нет), sl2 autofarm — открытый исходник Shindo Life 2.",
+    "Xowie89/Roblox-Scripts (MIT): Anime Training Simulator, Factory Simulator [OVERHAUL], Hospital Tycoon — MoonSec V2; рабочий девиртуализатор не найден, публикация невозможна."
+  ]
+}

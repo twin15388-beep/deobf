@@ -1,0 +1,848 @@
+{
+  "date": "2026-10-21",
+  "scope": "Genuine game-specific Roblox Luau; MIT upstream sources labelled src, static WeAreDevs recoveries labelled deobfuscated. No universal loader-only files.",
+  "validation": {
+    "compiler": "Luau luau-compile --null",
+    "compiler_commit": "9d7748a4f324213a18cb8283fa2a77c330225fa0",
+    "roblox_tested": false,
+    "source_executed": false,
+    "semantic_equivalence_proved": false,
+    "note": "Compilation is only syntax validation; no remote/game execution."
+  },
+  "artifacts": [
+    {
+      "game": "Bloxstrike",
+      "variant": "Hotline UI",
+      "status": "deobfuscated",
+      "source": {
+        "repository": "orjinalwasexd/bloxstrike",
+        "commit": "7f1babe48727e63bea57b78526c921b2dc1d4722",
+        "path": "bloxstrike.lua",
+        "url": "https://github.com/orjinalwasexd/bloxstrike/blob/7f1babe48727e63bea57b78526c921b2dc1d4722/bloxstrike.lua",
+        "bytes": 231625,
+        "sha256": "5f8a56ddbda201521d57d71f0823608c01b03f896631e8c934a514b99f04b05a",
+        "license": "MIT",
+        "license_sha256": "97c261a86c2c2c4c761d04c7b04b56ebb4714087180f12ebe6124cfbf49c8f0d"
+      },
+      "published_path": "dobf scripts 1.0/Bloxstrike - Hotline UI.lua",
+      "bytes": 38585,
+      "sha256": "94ce7f8534d48c402d544927404ac3e3ddfec55d6d3e44148d86728fe835b6db",
+      "lines": 1294,
+      "luau_compiled": true,
+      "roblox_tested": false,
+      "functions": [
+        {
+          "name": "f1 / ParsaGetTeam",
+          "parameters": [
+            "player"
+          ],
+          "purpose": "Определяет команду Terrorists / Counter-Terrorists по player.Team, атрибуту Character.Team либо родительской модели."
+        },
+        {
+          "name": "f15",
+          "parameters": [
+            "hitPart"
+          ],
+          "purpose": "Проверяет прямую видимость части цели лучом из камеры; флаг Wallbang обходится без проверки."
+        },
+        {
+          "name": "f16",
+          "parameters": [],
+          "purpose": "Выбирает ближайшую видимую часть игрока другой команды внутри FOV и задаёт getgenv().ParsaSilentTarget."
+        },
+        {
+          "name": "hookfunction(_performRaycast)",
+          "parameters": [
+            "original arguments..."
+          ],
+          "purpose": "Подменяет запись попадания в результате _performRaycast при включённом SilentEnabled."
+        }
+      ],
+      "limitations": [
+        "Нужны API executor Drawing/getgc/hookfunction и прежнее устройство команд/оружия Bloxstrike. Исполняемый блок загрузки телеметрии RScripts удалён; в теле файла больше нет HttpGet/loadstring. Локальные имена декомпилятора условные. В Roblox не проверено."
+      ],
+      "method": "prostone4/Prometheus-Deobfuscator@6ee3291ec83fdc58c04e17bb1f1703386619711a (static, original not executed)",
+      "intermediate_sha256": "121cc122d2cca52a21139ab8aa63da9c8c0f293b7a277487505b7d355feb82ca",
+      "modifications": [
+        "Removed one executable RScripts telemetry loader task.spawn block."
+      ]
+    },
+    {
+      "game": "Bloxstrike",
+      "variant": "Memesense (src)",
+      "status": "src",
+      "source": {
+        "repository": "xqmt/Bloxstrike-Memesense",
+        "commit": "e4dea49aca0d409ca761e2bcffb7fc47bf18df9e",
+        "path": "Meme.lua",
+        "url": "https://github.com/xqmt/Bloxstrike-Memesense/blob/e4dea49aca0d409ca761e2bcffb7fc47bf18df9e/Meme.lua",
+        "bytes": 208417,
+        "sha256": "af4960f7af235056483f65af7b150e510af705a984cd44b9de8d3017a5821215",
+        "license": "MIT",
+        "license_sha256": "84a28f61b10999b544344199d00d2c22358e4de3d8e435a8971a77a8bdbcd0ef"
+      },
+      "published_path": "dobf scripts 1.0/Bloxstrike - Memesense (src).lua",
+      "bytes": 209816,
+      "sha256": "d39a91a71f461c2db841fd6aabd739dd52ec94c2fcf8803a2f729b66dfd7e4f3",
+      "lines": 5008,
+      "luau_compiled": true,
+      "roblox_tested": false,
+      "functions": [
+        {
+          "name": "GetPenetrationStats",
+          "parameters": [
+            "origin",
+            "direction",
+            "maxPen",
+            "ignoreList",
+            "targetRoot"
+          ],
+          "purpose": "Считает прохождение выстрела через препятствия с учётом материала, толщины и предела maxPen."
+        },
+        {
+          "name": "IsValidTarget",
+          "parameters": [
+            "character",
+            "teamCheckEnabled"
+          ],
+          "purpose": "Проверяет персонажа противника и необязательный фильтр команды."
+        },
+        {
+          "name": "getTrueSpread hook",
+          "parameters": [
+            "weaponObject"
+          ],
+          "purpose": "При флаге NoSpread возвращает нулевой разброс, заменяя getTrueSpread."
+        },
+        {
+          "name": "espfunctions.add_box",
+          "parameters": [
+            "character"
+          ],
+          "purpose": "Рисует ESP-рамку вокруг отслеживаемого персонажа."
+        }
+      ],
+      "limitations": [
+        "Открытый исходник с добавленной лицензией. Во время работы загружает три файла UI Obsidian с raw.githubusercontent.com; зависимости не включены. Требует Drawing и перехваты executor. В Roblox не проверено."
+      ],
+      "modifications": [
+        "Added full MIT attribution/provenance header."
+      ]
+    },
+    {
+      "game": "Blade Ball",
+      "variant": "Nexus Hub",
+      "status": "deobfuscated",
+      "source": {
+        "repository": "GreenicScripts/Nexus-Hub",
+        "commit": "7b6c8172503bb418f9e45bd113d384bc4ee8bf2a",
+        "path": "main.lua",
+        "url": "https://github.com/GreenicScripts/Nexus-Hub/blob/7b6c8172503bb418f9e45bd113d384bc4ee8bf2a/main.lua",
+        "bytes": 412661,
+        "sha256": "3d17a78ae7b5b15f6a818a4a9469ec2fe3efcfe0001b00d8fa1c959644642eba",
+        "license": "MIT",
+        "license_sha256": "2fcb4ed14205888a643cc3c591f9862e8742fc0b3d113f0b88f243b45643babf"
+      },
+      "published_path": "dobf scripts 1.0/Blade Ball - Nexus Hub.lua",
+      "bytes": 51320,
+      "sha256": "46369a1939dd3f6c468f6588ce635d8472a7526e87574dc150a6807a061fdd59",
+      "lines": 1985,
+      "luau_compiled": true,
+      "roblox_tested": false,
+      "functions": [
+        {
+          "name": "f16",
+          "parameters": [],
+          "purpose": "Подключает обработчик PreSimulation для частого парирования прилетающего мяча с компонентом zoomies."
+        },
+        {
+          "name": "f32",
+          "parameters": [],
+          "purpose": "Подключает автоматическое парирование настоящего мяча по атрибуту realBall и скорости zoomies.VectorVelocity."
+        },
+        {
+          "name": "f13",
+          "parameters": [
+            "p11",
+            "p12"
+          ],
+          "purpose": "Передаёт два параметра в обработчики парирования/имитации ввода; исходные имена и смысл параметров не восстановлены."
+        }
+      ],
+      "limitations": [
+        "Только статическое раскрытие: эквивалентность и работа в Roblox не доказаны. Проверяет PlaceId 13772394625 и перенаправляет игрока из другой игры. Загружает внешнюю Rayfield UI с sirius.menu."
+      ],
+      "method": "prostone4/Prometheus-Deobfuscator@6ee3291ec83fdc58c04e17bb1f1703386619711a (static, original not executed)",
+      "intermediate_sha256": "ac21a5d375a83b668f979fb8f7473dd0e6fec0f96e053cf1cb729aa01cbbf75f",
+      "modifications": []
+    },
+    {
+      "game": "Blade Ball",
+      "variant": "Nightmare Hub (src)",
+      "status": "src",
+      "source": {
+        "repository": "GigaMechanicRear/blade_ball",
+        "commit": "c9dc81c35fabeffaff1001334a8985efe4174643",
+        "path": "blade_ball.lua",
+        "url": "https://github.com/GigaMechanicRear/blade_ball/blob/c9dc81c35fabeffaff1001334a8985efe4174643/blade_ball.lua",
+        "bytes": 12071,
+        "sha256": "7af6220ec0beac83d8b9978e5c5c7ef3a94302b434864202970caf77e481b249",
+        "license": "MIT",
+        "license_sha256": "2b6a3c36beb41ffd245748fbea4308df0ff4995892e48b846837d6866905f2f1"
+      },
+      "published_path": "dobf scripts 1.0/Blade Ball - Nightmare Hub (src).lua",
+      "bytes": 13490,
+      "sha256": "40b398691bfb10060c43991960ba3dd0c0bcbe55df851ef03443361772f4d68f",
+      "lines": 419,
+      "luau_compiled": true,
+      "roblox_tested": false,
+      "functions": [
+        {
+          "name": "getBall",
+          "parameters": [],
+          "purpose": "Находит активный Part в workspace.Balls, предпочитая realBall."
+        },
+        {
+          "name": "ballTargetsMe",
+          "parameters": [
+            "ball"
+          ],
+          "purpose": "Сверяет атрибут target мяча с LocalPlayer.Name."
+        },
+        {
+          "name": "pressParry",
+          "parameters": [],
+          "purpose": "Вызывает Remotes.ParryButtonPress либо имитирует клавишу F, если remote отсутствует."
+        }
+      ],
+      "limitations": [
+        "Открытый исходник, загрузка Rayfield UI при запуске. Резервный remote/клавиатурный путь — предположение автора и не проверялся на сервере Roblox."
+      ],
+      "modifications": [
+        "Added full MIT attribution/provenance header."
+      ]
+    },
+    {
+      "game": "Forsaken",
+      "variant": "Forsaken Plus (src)",
+      "status": "src",
+      "source": {
+        "repository": "quins-max/ForsakenPlus",
+        "commit": "e58979c290421f48f12b28f9440d12ef2df306eb",
+        "path": "script.lua",
+        "url": "https://github.com/quins-max/ForsakenPlus/blob/e58979c290421f48f12b28f9440d12ef2df306eb/script.lua",
+        "bytes": 289209,
+        "sha256": "002c3957a0965deb7de49305054ac6871f1b58ef3c160308052117d6cf355115",
+        "license": "MIT",
+        "license_sha256": "1ad6d70361f256c74d27c2370eee1735df7c180e888271d6b2c7ad5e16f87e68"
+      },
+      "published_path": "dobf scripts 1.0/Forsaken - Forsaken Plus (src).lua",
+      "bytes": 290607,
+      "sha256": "247baa13063c5ed550fb72d7703b3fc5566127e5d4f979607ded4576b26bb86f",
+      "lines": 5476,
+      "luau_compiled": true,
+      "roblox_tested": false,
+      "functions": [
+        {
+          "name": "FeatureLoadout.Automation.AutoGeneratorPuzzle.OnLoop",
+          "parameters": [
+            "self"
+          ],
+          "purpose": "Ищет поблизости генератор на карте, ждёт случайную задержку и шлёт прогресс RemoteEvent при открытой PuzzleUI."
+        },
+        {
+          "name": "FeatureLoadout.Automation.AutoGeneratorPuzzle.IsPlayersNear",
+          "parameters": [
+            "self",
+            "distance"
+          ],
+          "purpose": "Проверяет, есть ли другой игрок ближе distance студов, прежде чем ускорять цикл генератора."
+        },
+        {
+          "name": "GetValue",
+          "parameters": [
+            "featureName",
+            "instanceOnly"
+          ],
+          "purpose": "Читает активную настройку игровой панели по имени функции."
+        },
+        {
+          "name": "Initializer.Start",
+          "parameters": [],
+          "purpose": "Создаёт UI и настройки, при наличии файлов может дополнительно исполнить локальные плагины."
+        }
+      ],
+      "limitations": [
+        "Открытый исходник с сохранёнными кредитами автора. Проверяет GameId 6331902150/7464167604; зависит от иерархии Forsaken. Опциональные локальные плагины выполняются через loadstring, также запрашивается история обновлений у apis.rovalra.com; проверьте перед запуском. В Roblox не тестировалось."
+      ],
+      "modifications": [
+        "Added full MIT attribution/provenance header."
+      ]
+    },
+    {
+      "game": "Forsaken",
+      "variant": "Emotes GUI (src)",
+      "status": "src",
+      "source": {
+        "repository": "X3KT00/EmotesGUI",
+        "commit": "81ce095ab406a044affdd78ad9a5ec60eb8fac29",
+        "path": "Code.lua",
+        "url": "https://github.com/X3KT00/EmotesGUI/blob/81ce095ab406a044affdd78ad9a5ec60eb8fac29/Code.lua",
+        "bytes": 36642,
+        "sha256": "5f4d64d85b70bb0625055a5be485a64c557664dd8d17598ed476133eeb7dc05a",
+        "license": "MIT",
+        "license_sha256": "d0a00653291296dcd6c83e8432efca0eb065cbcc82f97d9440712926817d3d0c"
+      },
+      "published_path": "dobf scripts 1.0/Forsaken - Emotes GUI (src).lua",
+      "bytes": 38034,
+      "sha256": "b0fc874abb563b0c24de799380eb663f081ed2ea0d913fa2310f98b045249a04",
+      "lines": 1060,
+      "luau_compiled": true,
+      "roblox_tested": false,
+      "functions": [
+        {
+          "name": "findPlayerByNickname",
+          "parameters": [
+            "nickname"
+          ],
+          "purpose": "Находит игрока для применения эмоции по логину или отображаемому имени."
+        },
+        {
+          "name": "playAudio",
+          "parameters": [
+            "sfxData",
+            "parent",
+            "targetKey"
+          ],
+          "purpose": "Воспроизводит SFX выбранной эмоции на указанном игровом объекте."
+        },
+        {
+          "name": "playSpecialEffects",
+          "parameters": [
+            "emoteName",
+            "data",
+            "targetChar",
+            "targetKey"
+          ],
+          "purpose": "Применяет к персонажу эффекты выбранной эмоции."
+        }
+      ],
+      "limitations": [
+        "Открытый исходник. Требует модулей ReplicatedStorage.Assets.Emotes с AssetID/SFX как в Forsaken. Нет проверки PlaceId и нет фарма; в Roblox не проверено."
+      ],
+      "modifications": [
+        "Added full MIT attribution/provenance header."
+      ]
+    },
+    {
+      "game": "Blue Lock Rivals",
+      "variant": "Denzel Dribble (src)",
+      "status": "src",
+      "source": {
+        "repository": "AshTheScripter/Denzel-s-script-blr",
+        "commit": "2c847fa2801a2a9803da438118cf91da396e7c54",
+        "path": "Denzels script blr",
+        "url": "https://github.com/AshTheScripter/Denzel-s-script-blr/blob/2c847fa2801a2a9803da438118cf91da396e7c54/Denzels%20script%20blr",
+        "bytes": 85850,
+        "sha256": "7547fdda4b4d9e2c8468a3da2e55420b7bb5354ab5c11781e010dba7cb120fa3",
+        "license": "MIT",
+        "license_sha256": "eab74b01a646151363c1c6f769ed858a774a32e996d39452d7ff8044884473d7"
+      },
+      "published_path": "dobf scripts 1.0/Blue Lock Rivals - Denzel Dribble (src).lua",
+      "bytes": 87279,
+      "sha256": "b184cab92c53f0277f303c7581b945603b37d846d0232e2776bd544488288f63",
+      "lines": 1752,
+      "luau_compiled": true,
+      "roblox_tested": false,
+      "functions": [
+        {
+          "name": "GetBallOffset",
+          "parameters": [],
+          "purpose": "Вычисляет смещение футбольного мяча по горизонтальной скорости HumanoidRootPart."
+        },
+        {
+          "name": "FireServer",
+          "parameters": [],
+          "purpose": "При Values.HasBall шлёт Knit BallService.RE.Dribble; при высоком ping планирует повтор."
+        },
+        {
+          "name": "simLand",
+          "parameters": [
+            "position",
+            "velocity"
+          ],
+          "purpose": "Оценивает точку приземления Football для маркера траектории."
+        }
+      ],
+      "limitations": [
+        "Открытый исходник с жёсткой привязкой к Knit BallService и workspace.Football. Клиентское перемещение мяча может не приниматься сервером. В Roblox не проверено."
+      ],
+      "modifications": [
+        "Added full MIT attribution/provenance header."
+      ]
+    },
+    {
+      "game": "Tower Defense X",
+      "variant": "TDX Autofarm (src)",
+      "status": "src",
+      "source": {
+        "repository": "jellyfishhhhhhh/TDXAutofarm",
+        "commit": "ca430b23ce3f1395d8d972ddfcb34d61785104cb",
+        "path": "main.lua",
+        "url": "https://github.com/jellyfishhhhhhh/TDXAutofarm/blob/ca430b23ce3f1395d8d972ddfcb34d61785104cb/main.lua",
+        "bytes": 6600,
+        "sha256": "2ed20ebb6a5ea0604aa3a806bee90dacb9b245041cf570f0273ad74e5721128f",
+        "license": "MIT",
+        "license_sha256": "7f1aa306bb6666f474f4166866920a3ee9aa08a08ac3a02d240a43d7a6493931"
+      },
+      "published_path": "dobf scripts 1.0/Tower Defense X - TDX Autofarm (src).lua",
+      "bytes": 8006,
+      "sha256": "2974102d25d45ac4717506ebab5d3e1e5777f878b8a8f2128da17aab14e79e17",
+      "lines": 230,
+      "luau_compiled": true,
+      "roblox_tested": false,
+      "functions": [
+        {
+          "name": "tdxScript:Start",
+          "parameters": [
+            "difficulty"
+          ],
+          "purpose": "Голосует за выбранную сложность и отправляет DifficultyVoteReady."
+        },
+        {
+          "name": "tdxScript:placeTower",
+          "parameters": [
+            "tower",
+            "strangeValue",
+            "location",
+            "tryUntilSucceed"
+          ],
+          "purpose": "Вызывает TDX PlaceTower с башней и координатами; сверяет UI-счётчик башен."
+        },
+        {
+          "name": "tdxScript:upgradeTower",
+          "parameters": [
+            "tower",
+            "option"
+          ],
+          "purpose": "Передаёт tower и option в TowerUpgradeRequest."
+        },
+        {
+          "name": "tdxScript:JoinMap",
+          "parameters": [
+            "mapName"
+          ],
+          "purpose": "Находит карту на экранах APC в лобби PlaceId 9503261072 и входит в очередь."
+        },
+        {
+          "name": "tdxScript:StartLogging",
+          "parameters": [],
+          "purpose": "Перехватывает игровые remotes и записывает строительство/улучшения в локальный текст."
+        }
+      ],
+      "limitations": [
+        "Открытый модуль, возвращает tdxScript; не готовый самостоятельный автофарм. StartLogging зависит от hookfunction/hookmetamethod и файловых API, также может содержать старые ошибки. В исходной ветке placeTower с tryUntilSucceed=true повторно читается устаревший текст счётчика — возможное вечное ожидание. В Roblox не проверено."
+      ],
+      "modifications": [
+        "Added full MIT attribution/provenance header."
+      ]
+    },
+    {
+      "game": "Vesteria",
+      "variant": "Cheater Soul (src)",
+      "status": "src",
+      "source": {
+        "repository": "Luciquad/robloxscripts",
+        "commit": "21735be73af9db5d6c3f9df4c532f08e9ddf7980",
+        "path": "vesteria-soul.lua",
+        "url": "https://github.com/Luciquad/robloxscripts/blob/21735be73af9db5d6c3f9df4c532f08e9ddf7980/vesteria-soul.lua",
+        "bytes": 134140,
+        "sha256": "740123fc0f259630846dca77e2393fead6317c18aca4e69d41dad5fc56b838bf",
+        "license": "MIT",
+        "license_sha256": "d4a1106b49a205dfbcd4aeceb62e8dc72f1eef3882911f75af6e491c4b00761d"
+      },
+      "published_path": "dobf scripts 1.0/Vesteria - Cheater Soul (src).lua",
+      "bytes": 132593,
+      "sha256": "e5346506cf157ebd136bccb00c7d781a1e62cc71192fc3bd2e2bee78360c81af",
+      "lines": 2988,
+      "luau_compiled": true,
+      "roblox_tested": false,
+      "functions": [
+        {
+          "name": "GetSetting",
+          "parameters": [
+            "name"
+          ],
+          "purpose": "Читает настройку из epicthing.config по game.GameId."
+        },
+        {
+          "name": "CastSpell",
+          "parameters": [
+            "executionData"
+          ],
+          "purpose": "Для выбранных способностей шлёт playerRequest_damageEntity с тегом ability и ability-guid."
+        },
+        {
+          "name": "Attack",
+          "parameters": [
+            "enemy",
+            "attackingPlayers"
+          ],
+          "purpose": "Посылает запросы урона по сущностям Vesteria при включённом фарме."
+        }
+      ],
+      "limitations": [
+        "Исходник без изменений логики (добавлена лицензия, CRLF → LF). Читает/пишет epicthing.config; переход между серверами обращается к games.roblox.com. В Roblox не проверено."
+      ],
+      "modifications": [
+        "Added full MIT attribution/provenance header."
+      ]
+    },
+    {
+      "game": "Blox Fruits",
+      "variant": "Ardi Hub (src)",
+      "status": "src",
+      "source": {
+        "repository": "raizu25112005/ArdiHub",
+        "commit": "e10421c58f87e89fbb3b8ef33cbc2b68cf28ae06",
+        "path": "script.lua",
+        "url": "https://github.com/raizu25112005/ArdiHub/blob/e10421c58f87e89fbb3b8ef33cbc2b68cf28ae06/script.lua",
+        "bytes": 9411,
+        "sha256": "3d0a066e6cca14e909ac5668cc6f82c6c386b287a3b71710687014219b88b4b0",
+        "license": "MIT",
+        "license_sha256": "87a5cfe63fde0f5601af908649a30f9f86a76c3fb3e7b4078b51128ec07880f5"
+      },
+      "published_path": "dobf scripts 1.0/Blox Fruits - Ardi Hub (src).lua",
+      "bytes": 10519,
+      "sha256": "d8977b1a04ee0497838c0143a4a4cc5f48bc207fdd1da1a580ecfe75a2e146c4",
+      "lines": 325,
+      "luau_compiled": true,
+      "roblox_tested": false,
+      "functions": [
+        {
+          "name": "getNearestMob",
+          "parameters": [],
+          "purpose": "Выбирает ближайшего живого NPC в workspace.Enemies."
+        },
+        {
+          "name": "AutoFarmLevel",
+          "parameters": [],
+          "purpose": "В цикле перемещает персонажа к ближайшему NPC и вызывает attackMob."
+        },
+        {
+          "name": "attackMob",
+          "parameters": [
+            "mob"
+          ],
+          "purpose": "Отправляет в Remotes.CommF_ действие Combat с координатой моба."
+        },
+        {
+          "name": "AutoSubmergeQuest",
+          "parameters": [],
+          "purpose": "Пытается пройти квест SubmergeQuest через CommF_ и proximity prompt."
+        }
+      ],
+      "limitations": [
+        "Исходник с атрибуцией и нормализацией CRLF. Имена/аргументы AutoSubmergeQuest не сверены с сервером Roblox и могут быть вымышленными или устаревшими. Загружает Kavo UI извне, перехватывает Kick через executor; «anti-ban» не доказан. В Roblox не проверено."
+      ],
+      "modifications": [
+        "Added full MIT attribution/provenance header."
+      ]
+    },
+    {
+      "game": "Swordburst 2",
+      "variant": "Magma Hub module (src)",
+      "status": "src",
+      "source": {
+        "repository": "Commandcracker/Magma-Hub",
+        "commit": "5d7e2f84de039e65f909b50c3533b199fff9e9fd",
+        "path": "games/212154879.lua",
+        "url": "https://github.com/Commandcracker/Magma-Hub/blob/5d7e2f84de039e65f909b50c3533b199fff9e9fd/games/212154879.lua",
+        "bytes": 5561,
+        "sha256": "8203f918973797ddd4724ef16819e1a6176068493fa08ca8ad7ddfd746b68228",
+        "license": "MIT",
+        "license_sha256": "ba6f2791cb175d75b0757c09737f2ebe15e76e018379fe7557a9c8ca7b3d74cb"
+      },
+      "published_path": "dobf scripts 1.0/Swordburst 2 - Magma Hub module (src).lua",
+      "bytes": 6984,
+      "sha256": "ed13c0c9ee803bcdbf191a2de4b5ff2c015ebc6ea920dc0cb6e909cabe7d9781",
+      "lines": 217,
+      "luau_compiled": true,
+      "roblox_tested": false,
+      "functions": [
+        {
+          "name": "BigHitBox toggle callback",
+          "parameters": [],
+          "purpose": "При включении меняет размер HumanoidRootPart у мобов из workspace.Mobs."
+        },
+        {
+          "name": "Dismantle All input callback",
+          "parameters": [
+            "itemName"
+          ],
+          "purpose": "По названию предмета посылает игровое Equipment/Dismantle для инвентаря."
+        },
+        {
+          "name": "Max Upgrade input callback",
+          "parameters": [
+            "itemName"
+          ],
+          "purpose": "По названию предмета делает до 100 Equipment/Upgrade; может расходовать ресурсы."
+        },
+        {
+          "name": "InfiniteStamina toggle callback",
+          "parameters": [],
+          "purpose": "В цикле меняет клиентское значение Entity.Stamina персонажа."
+        }
+      ],
+      "limitations": [
+        "Игровой MIT-модуль, требует глобалов MagmaHub и Threads исходного хаба; отдельно не работает. Клиентская стамина и локальные флаги игровых пропусков могут не дать эффекта на сервере. В Roblox не проверено."
+      ],
+      "modifications": [
+        "Added full MIT attribution/provenance header."
+      ]
+    },
+    {
+      "game": "Swordburst 2",
+      "variant": "Aztup module (src)",
+      "status": "src",
+      "source": {
+        "repository": "ModerkaScripts/Aztup-Hub-V3",
+        "commit": "45bcead9541ad13c2adc631c1afaecf8bdfc8ed5",
+        "path": "files/games/SwordBurst2.lua",
+        "url": "https://github.com/ModerkaScripts/Aztup-Hub-V3/blob/45bcead9541ad13c2adc631c1afaecf8bdfc8ed5/files/games/SwordBurst2.lua",
+        "bytes": 4556,
+        "sha256": "d4ad3d8e173b15b8ad060d1dae1ae43982c16210024b496ca9736a7545d4010d",
+        "license": "MIT",
+        "license_sha256": "ad08d694b5670b07c473ca110b9195c50b4e1707004ea5452ad5634fed69eddb"
+      },
+      "published_path": "dobf scripts 1.0/Swordburst 2 - Aztup module (src).lua",
+      "bytes": 5980,
+      "sha256": "e93582a78a5dda82f8333124b8aaba4d99d660a7de1e7ad6b9104965c07c3160",
+      "lines": 150,
+      "luau_compiled": true,
+      "roblox_tested": false,
+      "functions": [
+        {
+          "name": "getClosestTarget",
+          "parameters": [
+            "respectFlags"
+          ],
+          "purpose": "Выбирает ближайшего живого моба из workspace.Mobs либо игрока согласно флагам UI."
+        },
+        {
+          "name": "toggleAutoAttack",
+          "parameters": [
+            "toggle"
+          ],
+          "purpose": "Вызывает ReplicatedStorage.Event Combat Attack с ключом из захваченного игрового framework."
+        },
+        {
+          "name": "toggleAutoFarm",
+          "parameters": [
+            "toggle"
+          ],
+          "purpose": "Перемещается Tween над ближайшим мобом с BodyVelocity."
+        }
+      ],
+      "limitations": [
+        "Отдельный игровой модуль Aztup; нужен оригинальный loader/sharedRequire, UI и API executor getgc/getupvalue. При отсутствии игрового framework сам вызывает LocalPlayer:Kick (в том числе в лобби). Не автономен, не проверен в Roblox."
+      ],
+      "modifications": [
+        "Added full MIT attribution/provenance header."
+      ]
+    },
+    {
+      "game": "Arcane Odyssey",
+      "variant": "Aztup module (src)",
+      "status": "src",
+      "source": {
+        "repository": "ModerkaScripts/Aztup-Hub-V3",
+        "commit": "45bcead9541ad13c2adc631c1afaecf8bdfc8ed5",
+        "path": "files/games/ArcaneOdyssey.lua",
+        "url": "https://github.com/ModerkaScripts/Aztup-Hub-V3/blob/45bcead9541ad13c2adc631c1afaecf8bdfc8ed5/files/games/ArcaneOdyssey.lua",
+        "bytes": 29281,
+        "sha256": "74a4ae72c55fe07c554ab78c5b2c9dcb790f259bda754bf75283fad679f6c400",
+        "license": "MIT",
+        "license_sha256": "ad08d694b5670b07c473ca110b9195c50b4e1707004ea5452ad5634fed69eddb"
+      },
+      "published_path": "dobf scripts 1.0/Arcane Odyssey - Aztup module (src).lua",
+      "bytes": 30707,
+      "sha256": "eee30a31d50cb16faec1e56bde21fb8e1118f6bc1f091a35bb9c93dc5aee2174",
+      "lines": 949,
+      "luau_compiled": true,
+      "roblox_tested": false,
+      "functions": [
+        {
+          "name": "functions.autoFish",
+          "parameters": [
+            "toggle"
+          ],
+          "purpose": "Управляет рыбалкой через fishClock/FishBiteGoal, выбирает тип водоёма и подматывает улов."
+        },
+        {
+          "name": "functions.teleportToQuestObjective",
+          "parameters": [],
+          "purpose": "Перемещается к отслеживаемой цели квеста Arcane Odyssey."
+        },
+        {
+          "name": "functions.infiniteStamina",
+          "parameters": [],
+          "purpose": "Через staminaCost remote пытается компенсировать расход выносливости (рискованно)."
+        }
+      ],
+      "limitations": [
+        "Игровой модуль Aztup, не самостоятельный файл: нужны sharedRequire/UILibrary/Services/Utility и API executor. Сервер может заблокировать старые remotes. В Roblox не проверено."
+      ],
+      "modifications": [
+        "Added full MIT attribution/provenance header."
+      ]
+    },
+    {
+      "game": "Voxl Blade",
+      "variant": "Aztup module (src)",
+      "status": "src",
+      "source": {
+        "repository": "ModerkaScripts/Aztup-Hub-V3",
+        "commit": "45bcead9541ad13c2adc631c1afaecf8bdfc8ed5",
+        "path": "files/games/VoxlBlade.lua",
+        "url": "https://github.com/ModerkaScripts/Aztup-Hub-V3/blob/45bcead9541ad13c2adc631c1afaecf8bdfc8ed5/files/games/VoxlBlade.lua",
+        "bytes": 45307,
+        "sha256": "b7c8c8a04abbc81dfe213befaa9259cc43c56aa3ffc01d5b84edfc4aafd96844",
+        "license": "MIT",
+        "license_sha256": "ad08d694b5670b07c473ca110b9195c50b4e1707004ea5452ad5634fed69eddb"
+      },
+      "published_path": "dobf scripts 1.0/Voxl Blade - Aztup module (src).lua",
+      "bytes": 46729,
+      "sha256": "9d94e2088fe2670d13c93ce5c94171092a9a0d5680c0fa398781eaebd10e84e8",
+      "lines": 1347,
+      "luau_compiled": true,
+      "roblox_tested": false,
+      "functions": [
+        {
+          "name": "funcs.mobAutoFarm",
+          "parameters": [
+            "toggle"
+          ],
+          "purpose": "Выбирает мобов Voxl Blade/подземелье по PlaceId и управляет noclip/автофармом."
+        },
+        {
+          "name": "funcs.dungeonAutoFarm",
+          "parameters": [
+            "toggle"
+          ],
+          "purpose": "Проходит подземелье по текущему dungeonName и состоянию игровых алтарей."
+        },
+        {
+          "name": "funcs.autoSell",
+          "parameters": [],
+          "purpose": "Собирает игровые предметы для автопродажи."
+        }
+      ],
+      "limitations": [
+        "Модуль Aztup, требует sharedRequire/UI/mobfarm utility и API executor. Есть экспериментальные действия с сохранением данных: не включать без понимания рисков. Подключает необязательный Webhook helper. В Roblox не проверено."
+      ],
+      "modifications": [
+        "Added full MIT attribution/provenance header."
+      ]
+    },
+    {
+      "game": "Adventure Tales",
+      "variant": "Aztup module (src)",
+      "status": "src",
+      "source": {
+        "repository": "ModerkaScripts/Aztup-Hub-V3",
+        "commit": "45bcead9541ad13c2adc631c1afaecf8bdfc8ed5",
+        "path": "files/games/AdventureTales.lua",
+        "url": "https://github.com/ModerkaScripts/Aztup-Hub-V3/blob/45bcead9541ad13c2adc631c1afaecf8bdfc8ed5/files/games/AdventureTales.lua",
+        "bytes": 11746,
+        "sha256": "d13289e1b86307f67a585b19800d29d63d4d252a80c028c61eff1113e1525090",
+        "license": "MIT",
+        "license_sha256": "ad08d694b5670b07c473ca110b9195c50b4e1707004ea5452ad5634fed69eddb"
+      },
+      "published_path": "dobf scripts 1.0/Adventure Tales - Aztup module (src).lua",
+      "bytes": 13173,
+      "sha256": "a505d930701bdd6f9a34b2bf70e91533cbf41a65f17b24b30008b289bb04e74e",
+      "lines": 482,
+      "luau_compiled": true,
+      "roblox_tested": false,
+      "functions": [
+        {
+          "name": "getAttackSpeed",
+          "parameters": [],
+          "purpose": "Вычисляет задержку удара по ItemData, редкости и экипировке."
+        },
+        {
+          "name": "functions.killAura",
+          "parameters": [
+            "toggle"
+          ],
+          "purpose": "Связывает атаки NPC Adventure Tales с meleeRemote и флагами UI."
+        },
+        {
+          "name": "functions.autoSell",
+          "parameters": [
+            "toggle"
+          ],
+          "purpose": "По выбранной редкости отправляет предметы в Remotes.UI.MassSell."
+        }
+      ],
+      "limitations": [
+        "Игровой модуль Aztup; без sharedRequire/UILibrary/Utility и API executor originalFunctions не работает самостоятельно. В Roblox не проверено."
+      ],
+      "modifications": [
+        "Added full MIT attribution/provenance header."
+      ]
+    }
+  ],
+  "unresolved": [
+    {
+      "game": "King Legacy",
+      "reason": "Есть только прежний Luxury Core (в основном UI/ESP). Среди лицензированных находок нет второго проверенного Lua для King Legacy."
+    },
+    {
+      "game": "Grand Piece Online",
+      "reason": "Есть только прежний частичный Lunar Hub. Лицензированные кандидаты — внешние макросы рыбалки, не Roblox Lua."
+    },
+    {
+      "game": "Demonfall",
+      "reason": "В MIT-кандидате только тестовый hello-world, не Demonfall. Другие входы без лицензии и защищены MoonSec V3; статический Prometheus-деобфускатор к ним не применим, полного игрового Lua нет."
+    },
+    {
+      "game": "Trident Survival",
+      "reason": "В 6segs/kira есть Lua для Trident, но явного разрешения перепубликовать код не найдено; подходящего лицензированного файла нет."
+    },
+    {
+      "game": "VV Ultimatum",
+      "reason": "sensaix-d/vvultimatumhub без лицензии; vv.txt содержит домен-двойник roblox.com.et. Защищённый vvultimatum.lua.txt ещё и повреждён: Luau отвергает хвост после end)(...) на столбце 66861; pdeobf --force сообщает unexpected char \\ на 66864. Не публикуем."
+    },
+    {
+      "game": "Gakuran",
+      "reason": "MIT-репозиторий theodorbrand/gakuran распакован статически: внутри универсальный Emotes GUI, не Gakuran. peptise/gakuran без лицензии."
+    },
+    {
+      "game": "Illegal Sorcer",
+      "reason": "Достоверный игровой Lua не найден. Уже опубликованный Illegal Soccer — другая игра."
+    },
+    {
+      "game": "A Universal Time",
+      "reason": "Найден неразрешённый MoonSec V3 без лицензии и Apache-репозиторий лишь с README; текущий статический инструмент не восстанавливает MoonSec V3, публиковать игровой Lua нечего."
+    },
+    {
+      "game": "Anime Vanguards",
+      "reason": "MIT Lua оказался универсальным шаблоном поиска remotes, а внешний макрос — заготовкой GUI. Не подменяем им игровые обработчики."
+    },
+    {
+      "game": "Ride a Pet",
+      "reason": "Скрипты поиска яиц в существующих репозиториях без явной лицензии; лицензированный кандидат — рекламный HTML."
+    },
+    {
+      "game": "Blue Lock Rivals (second independent script)",
+      "reason": "Другой MIT Lua выполняет общий поиск футбольных remote без специфики Knit-служб Blue Lock Rivals. Не считаем вторым результатом."
+    },
+    {
+      "game": "Tower Defense Simulator (additional Lua)",
+      "reason": "MIT-кандидат угадывает remote и меняет только клиентские деньги; вместо него опубликован конкретный модуль TDX и старый частичный ASTD."
+    }
+  ]
+}
