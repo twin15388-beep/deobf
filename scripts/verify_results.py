@@ -10,9 +10,14 @@ from __future__ import annotations
 import hashlib
 import json
 import re
+import sys
 from pathlib import Path, PurePosixPath
 
 ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:  # allow `python3 scripts/verify_results.py`
+    sys.path.insert(0, str(ROOT))
+
+from scripts.check_decoder_output import dangling_gotos, strip_header  # noqa: E402
 SOURCE_REPORTS = (
     "reports/game-sources-2026-10-21.json",
     "reports/game-sources-2026-10-21-additions.json",
@@ -136,6 +141,14 @@ def verify() -> int:
                     digest.update(chunk)
             if path.stat().st_size != artifact["bytes"] or digest.hexdigest() != artifact["sha256"]:
                 raise ValueError(f"Size or SHA-256 mismatch: {name}")
+            data = path.read_bytes()
+            # A jump without its label compiles nowhere (Lua 5.1 or Luau), and the
+            # pinned WAD decoder can emit one without any warning; see
+            # reports/decoder-goto-defect-2026-10-23.md. Provenance headers are
+            # skipped because they legitimately quote such a line.
+            dangling = dangling_gotos(strip_header(data.decode("utf-8", errors="replace")))
+            if dangling:
+                raise ValueError(f"Dangling goto in published file {name}: {dangling[:3]}")
             # A filename is not sufficient evidence of a recovery. "src"
             # is mandatory for newly republished open-source code.
             if report_name in SOURCE_REPORTS:
@@ -144,7 +157,6 @@ def verify() -> int:
                     raise ValueError(f"Unknown recovery/source status for {name}")
                 if name.endswith(" (src).lua") != (status == "src"):
                     raise ValueError(f"Incorrect source label for {name}")
-                data = path.read_bytes()
                 header, separator, body = data.partition(b"]]\n\n")
                 if not separator or not body or b"pastefy.app" in body.lower():
                     raise ValueError(f"Missing content or prohibited host in {name}")

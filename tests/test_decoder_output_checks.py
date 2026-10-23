@@ -111,5 +111,61 @@ class AuditGateTests(unittest.TestCase):
                 self.assertEqual(report["paste_hosts"], [])
 
 
+class CatalogGuardTests(unittest.TestCase):
+    """verify_results.py must refuse any published file with a dangling jump."""
+
+    def test_verifier_rejects_a_dangling_goto_in_a_published_file(self):
+        import contextlib
+        import hashlib
+        import io
+        import json
+        import tempfile
+        from pathlib import Path
+        from unittest.mock import patch
+
+        from scripts import verify_results
+
+        root = Path(__file__).resolve().parents[1]
+        name = "dobf scripts 1.0/Slap Battles - Tryhard AI Demo.lua"
+        manifest = json.loads((root / "reports/game-sources-2026-10-23-wad.json")
+                              .read_text(encoding="utf-8"))
+        artifact = next(a for a in manifest["artifacts"]
+                        if a["published_path"] == name)
+        data = (root / name).read_bytes() + b"\ngoto L12345\n"
+
+        with tempfile.TemporaryDirectory() as directory:
+            temp = Path(directory)
+            (temp / "dobf scripts 1.0").mkdir(parents=True)
+            (temp / name).write_bytes(data)
+            # Keep size/hashes consistent so only the new guard can fire.
+            doctored = json.loads(json.dumps(artifact))
+            body = data.partition(b"]]\n\n")[2]
+            header = data.partition(b"]]\n\n")[0] + b"]]\n\n"
+            doctored["bytes"] = len(data)
+            doctored["sha256"] = hashlib.sha256(data).hexdigest()
+            doctored["result_body_sha256"] = hashlib.sha256(body).hexdigest()
+            doctored["result_header_sha256"] = hashlib.sha256(header).hexdigest()
+            (temp / "report.json").write_text(json.dumps({"artifacts": [doctored]}),
+                                              encoding="utf-8")
+            with patch.object(verify_results, "ROOT", temp), patch.object(
+                verify_results, "REPORTS", ("report.json",)
+            ), patch.object(verify_results, "SOURCE_REPORTS", ("report.json",)), \
+                    patch.object(verify_results, "WAD_REPORTS", ("report.json",)), \
+                    contextlib.redirect_stdout(io.StringIO()):
+                with self.assertRaisesRegex(ValueError, "Dangling goto"):
+                    verify_results.verify()
+
+            # The untouched file still passes the same path.
+            (temp / name).write_bytes((root / name).read_bytes())
+            (temp / "report.json").write_text(json.dumps({"artifacts": [artifact]}),
+                                              encoding="utf-8")
+            with patch.object(verify_results, "ROOT", temp), patch.object(
+                verify_results, "REPORTS", ("report.json",)
+            ), patch.object(verify_results, "SOURCE_REPORTS", ("report.json",)), \
+                    patch.object(verify_results, "WAD_REPORTS", ("report.json",)), \
+                    contextlib.redirect_stdout(io.StringIO()):
+                self.assertEqual(verify_results.verify(), 1)
+
+
 if __name__ == "__main__":
     unittest.main()
