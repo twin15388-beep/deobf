@@ -26,6 +26,7 @@ SOURCE_REPORTS = (
     "reports/game-sources-2026-10-21-protected.json",
     "reports/game-sources-2026-10-22-wad.json",
     "reports/game-sources-2026-10-23-wad.json",
+    "reports/game-sources-2026-10-23-popular.json",
 )
 REPORTS = ("reports/game-recovery-2026-10-19.json", *SOURCE_REPORTS)
 ADDITIONS = SOURCE_REPORTS[1]
@@ -34,9 +35,10 @@ EXTRA = SOURCE_REPORTS[3]
 PROTECTED = SOURCE_REPORTS[4]
 WAD = SOURCE_REPORTS[5]
 WAD2 = SOURCE_REPORTS[6]
+WAD3 = SOURCE_REPORTS[7]
 # Both reports share the same shape: verbatim (or minimally repaired) decoder
 # bodies from MIT-pinned WeAreDevs/WAD inputs.
-WAD_REPORTS = (WAD, WAD2)
+WAD_REPORTS = (WAD, WAD2, WAD3)
 PROTECTED_PARTIAL_CASES = {
     "dobf scripts 1.0/Zero Academia - ZeroScripts (partial).lua": 28,
     "dobf scripts 1.0/Item Factory - MoonSec V3 (partial).lua": 44,
@@ -85,6 +87,16 @@ WAD_EVIDENCE = {
             b'"FC_KEYS"',
         ),
         "body_excludes": (b"FireServer(", b"InvokeServer(", b"goto "),
+    },
+    "dobf scripts 1.0/Murder Mystery 2 - volmaks Coin Farm.lua": {
+        "mock_game_assertions": 0,
+        "static_body_assertions": 15,
+        "body_contains": (
+            b'GetAttribute("MapID")',
+            b'"GunDropHighlight"',
+            b'getPlayerLevel:InvokeServer(',
+        ),
+        "body_excludes": (b"goto ", b"pastefy", b"rscripts.net"),
     },
     "dobf scripts 1.0/Work at a Pizza Place - Order4.lua": {
         "mock_game_assertions": 0,

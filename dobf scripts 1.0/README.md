@@ -1,5 +1,15 @@
 # Игровые Luau: восстановленные и открытые исходники — 23 октября 2026
 
+**67 игровых `.lua` в этой папке: 32 раскрытия/частичных восстановления и 35 прежних `(src)`** — добавлено полное раскрытие **Murder Mystery 2** из MIT-входа; по All Star Tower Defense и Bloxstrike нового игрового файла нет (входы без лицензии либо дубликат уже опубликованного). [Отчёт](../reports/game-sources-2026-10-23-popular.md) · [SHA-256](../reports/game-sources-2026-10-23-popular.json).
+
+| Игра | Восстановленный файл | Игровые обработчики и предел |
+| --- | --- | --- |
+| Murder Mystery 2 | [volmaks Coin Farm](Murder%20Mystery%202%20-%20volmaks%20Coin%20Farm.lua) — **всё тело вывода WAD-декодера, 1 931 строка** | Карта по `GetAttribute("MapID")`, фарм монет из `CoinContainer`, подсветка выпавшего оружия `"GunDropHighlight"`, ESP по ролям Sheriff/Murderer/Innocent, аимбот по роли и Camera Lock, `miniFling` с тумблерами «Fling murderer/sheriff», Auto grab gun, чтение профиля через `getPlayerLevel:InvokeServer` и `GetPlayerData`, полёт, Fullbright. Опциональный Discord-webhook (по умолчанию пуст и выключен); UI грузит WindUI и AdvancedUtils с изменяемых URL. 15 статических проверок, макета нет. |
+
+**All Star Tower Defense:** 23 репозитория с файлами `ASTD*` и 7 с `All Star Tower Defense*` — лицензии нет ни у одного; единственный MIT-репозиторий содержит открытый исходник (`(src)`), который сейчас не добавляется. **Bloxstrike:** 18 репозиториев без лицензии; лицензированный MIT-вход `orjinalwasexd/bloxstrike` раскрыт полностью (37 203 байта / 1 269 строк), но это другая сборка уже опубликованного [Bloxstrike - Hotline UI](Bloxstrike%20-%20Hotline%20UI.lua) плюс стартовая загрузка телеметрии с `rscripts.net` — как дубликат не опубликован. [Подробности и хеши](../reports/game-sources-2026-10-23-popular.md).
+
+## Проход 23 октября 2026 (WAD, три игры)
+
 **66 игровых `.lua` в этой папке: 31 раскрытие/частичное восстановление и 35 прежних `(src)`** — добавлены **три полных статических раскрытия WeAreDevs/WAD** из MIT-входов с закреплённых коммитов, новых `(src)` нет. [Отчёт с параметрами и пределами](../reports/game-sources-2026-10-23-wad.md) · [SHA-256](../reports/game-sources-2026-10-23-wad.json).
 
 | Игра | Восстановленный файл | Игровые обработчики и предел |

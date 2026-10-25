@@ -16,7 +16,11 @@ from scripts.repair_violence_district_goto import BEFORE, AFTER, repair as repai
 from scripts.repair_wild_horse_goto import repair as repair_wild_horse
 
 ROOT = Path(__file__).resolve().parents[1]
-PRISON_RAW = ROOT / "local-results/wad-out/prisonlife-raw.lua"
+# Either the name the pipeline produces or the one from a manual decoder run.
+PRISON_CANDIDATES = (ROOT / "local-results/wad-out/Prison Life.decoded.raw.lua",
+                     ROOT / "local-results/wad-out/prisonlife-raw.lua")
+PRISON_RAW = next((path for path in PRISON_CANDIDATES if path.is_file()),
+                  PRISON_CANDIDATES[0])
 PRISON_PUBLISHED = ROOT / "dobf scripts 1.0/Prison Life - volmaks ESP Freecam.lua"
 
 

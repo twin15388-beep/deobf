@@ -25,7 +25,8 @@ from scripts import verify_results
 
 ROOT = Path(__file__).resolve().parents[1]
 REPORTS = (ROOT / "reports/game-sources-2026-10-22-wad.json",
-           ROOT / "reports/game-sources-2026-10-23-wad.json")
+           ROOT / "reports/game-sources-2026-10-23-wad.json",
+           ROOT / "reports/game-sources-2026-10-23-popular.json")
 LUA_TESTS = {
     "dobf scripts 1.0/Your Bizarre Adventure - Revenge Hub.lua":
         ("tests/test_yba_revenge_hub.lua", "mock_game_assertions", None),
@@ -37,6 +38,8 @@ LUA_TESTS = {
         ("tests/test_wad_batch2_static.lua", "static_body_assertions", "prisonlife"),
     "dobf scripts 1.0/Work at a Pizza Place - Order4.lua":
         ("tests/test_wad_batch2_static.lua", "static_body_assertions", "pizzaplace"),
+    "dobf scripts 1.0/Murder Mystery 2 - volmaks Coin Farm.lua":
+        ("tests/test_wad_batch2_static.lua", "static_body_assertions", "mm2"),
 }
 
 
@@ -62,7 +65,7 @@ def load_artifacts() -> dict[str, dict]:
 class WadManifestTests(unittest.TestCase):
     def setUp(self):
         self.artifacts = load_artifacts()
-        self.assertEqual(len(self.artifacts), 5)
+        self.assertEqual(len(self.artifacts), 6)
 
     def test_pinned_mit_sources_and_verbatim_decoder_bodies(self):
         for name, artifact in self.artifacts.items():

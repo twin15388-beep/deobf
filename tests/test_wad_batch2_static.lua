@@ -105,11 +105,34 @@ local function pizzaplace()
         "the Linoria suite URLs are visible")
 end
 
-local CASES = { slapbattles = slapbattles, prisonlife = prisonlife, pizzaplace = pizzaplace }
+
+local function mm2()
+    check(has('GetAttribute("MapID")'), "MM2 map lookup by MapID attribute survived")
+    check(has('"CoinContainer"'), "coin container lookup survived")
+    check(has('"GunDropHighlight"'), "gun drop highlight survived")
+    check(has("function CreateHighlight(") and has("function UpdateHighlights()"),
+        "role ESP helpers survived")
+    check(has('"Sheriff"') and has('"Murderer"'), "role names survived")
+    check(has("getPlayerLevel:InvokeServer(") and has('"GetPlayerData"'),
+        "MM2 data remotes survived")
+    check(has("function miniFling(") and has('"Fling murderer"') and has('"Fling sheriff"'),
+        "fling helpers and toggles survived")
+    check(has("function startFly()") and has("function stopFly()"), "fly survived")
+    check(has("_G.SetFullBright("), "fullbright toggle survived")
+    check(has('"Auto grab gun"') and has('"Coin farm speed"'), "farm toggles survived")
+    check(has('SavedWebhookUrl = ""') and has("WebhookEnabled = false"),
+        "the webhook is empty and disabled by default")
+    check(has("WindUI/releases/latest/download/main.lua") and has("AdvancedUtils.lua"),
+        "both mutable external dependencies are visible")
+end
+
+local CASES = { slapbattles = slapbattles, prisonlife = prisonlife, pizzaplace = pizzaplace,
+                mm2 = mm2 }
 local TITLES = {
     slapbattles = "Slap Battles",
     prisonlife = "Prison Life",
     pizzaplace = "Work at a Pizza Place",
+    mm2 = "Murder Mystery 2",
 }
 
 local case = arg[2]
@@ -118,6 +141,8 @@ if not case then
         case = "slapbattles"
     elseif has("workspace.Prison_ITEMS") then
         case = "prisonlife"
+    elseif has('GetAttribute("MapID")') then
+        case = "mm2"
     else
         case = "pizzaplace"
     end
