@@ -10,3 +10,7 @@ node_modules/
 # Offline API-delivery snapshots can contain auth tokens and personal data.
 *.har
 /captures/
+
+# working tree: cloned tools, build objects, corpora (too large for git)
+work/
+_work/

@@ -1,0 +1,7 @@
+input: corpus/psu_small.lua
+detected: psu
+result: /home/user/deobf/_work/res/corpus/psu_small/deobfuscated.lua
+
+detected: psu
+psu exit=0 ['handlers=42 layouts=1 unknown=0']
+unluac: 1479 lines
