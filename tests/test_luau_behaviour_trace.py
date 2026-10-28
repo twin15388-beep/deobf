@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from scripts.luau_behaviour_trace import HEADER, FOOTER, TERMINATOR, build_driver  # noqa: E402
+from scripts.luau_behaviour_trace import HEADER, TERMINATOR, build_driver, extract_strings  # noqa: E402
 
 
 class BuildDriverTest(unittest.TestCase):
@@ -18,7 +18,7 @@ class BuildDriverTest(unittest.TestCase):
         sample = 'local x = 1\nprint("hello")\n'
         driver = build_driver(sample)
         self.assertTrue(driver.startswith(HEADER))
-        self.assertTrue(driver.endswith(FOOTER))
+        self.assertIn("TOPRUN ok=", driver)
         self.assertIn(sample, driver)
 
     def test_sample_appears_exactly_once(self) -> None:
@@ -41,6 +41,22 @@ class BuildDriverTest(unittest.TestCase):
             self.assertIn(marker, driver)
         self.assertIn("BEGIN tracer", driver)
         self.assertIn("TOPRUN ok=", driver)
+
+    def test_string_dump_is_opt_in(self) -> None:
+        off = build_driver("return nil\n")
+        on = build_driver("return nil\n", dump_strings=True)
+        self.assertIn("local DUMP_STRINGS = false", off)
+        self.assertIn("local DUMP_STRINGS = true", on)
+        self.assertIn('print("S " .. string.gsub', on)
+
+    def test_extract_strings_decodes_and_dedupes(self) -> None:
+        trace = "BEGIN tracer\nS 4b616974756e204661726d\nS 4b616974756e204661726d\nS 00ff\nT event\n"
+        self.assertEqual(extract_strings(trace), ["Kaitun Farm"])
+
+    def test_extract_strings_ignores_malformed_lines(self) -> None:
+        trace = "S 4b616974\nS zz\nS 4b61\nS\n"
+        self.assertEqual(extract_strings(trace), ["Kait", "Ka"])
+        self.assertEqual(extract_strings(trace, min_length=4), ["Kait"])
 
     def test_writable_environment_replaces_readonly_globals(self) -> None:
         driver = build_driver("return nil\n")
