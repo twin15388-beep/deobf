@@ -1,0 +1,7 @@
+input: samples/KL_msv3_v14_ZombieAttack.lua
+detected: moonsec_v3
+result: /home/user/deobf/_work/res/king_legacy/KL_msv3_v14_ZombieAttack/deobfuscated.lua
+
+detected: moonsec_v3
+moonsec-v3 exit=0 o /home/user/deobf/_work/res/king_legacy/KL_msv3_v14_ZombieAttack/extracted.luac
+unluac: 6765 lines

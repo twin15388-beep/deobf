@@ -1,0 +1,6 @@
+input: samples/KL_msv2_v13.lua
+detected: moonsec_v2
+result: /home/user/deobf/_work/res/king_legacy/KL_msv2_v13/deobfuscated.lua
+
+detected: moonsec_v2
+moonsec-v2 ok (137181 bytes)

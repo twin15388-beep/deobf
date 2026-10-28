@@ -1,2 +1,4 @@
 # working tree: cloned tools, build objects, corpora (too large for git)
 work/
+_work/
+__pycache__/

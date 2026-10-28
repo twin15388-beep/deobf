@@ -1,0 +1,7 @@
+input: samples/KL_psu40_Kingpiece.lua
+detected: psu
+result: /home/user/deobf/_work/res/king_legacy/KL_psu40_Kingpiece/deobfuscated.lua
+
+detected: psu
+psu exit=0 ['handlers=255 layouts=1 unknown=0']
+unluac: 26393 lines

@@ -1,0 +1,7 @@
+input: samples/KL_psu40_BloxFruit.lua
+detected: psu
+result: /home/user/deobf/_work/res/king_legacy/KL_psu40_BloxFruit/deobfuscated.lua
+
+detected: psu
+psu exit=0 ['handlers=120 layouts=1 unknown=0']
+unluac: 36695 lines
