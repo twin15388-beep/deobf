@@ -1,0 +1,8 @@
+input: new_samples/FSOCIETY-WYLD__TWWLEAN/Nocoal.lua
+detected: moonsec_v3
+result: /home/user/deobf/_work/res2/MoonSec/Nocoal/deobfuscated.lua
+
+detected: moonsec_v3
+moonsec-v3 exit=0 Wrote 12726 bytes to /home/user/deobf/_work/res2/MoonSec/Nocoal/extracted.luac
+unluac failed: Exception in thread "main" java.lang.IllegalStateException: unluac.decompile.block.IfThenEndBlock@6df97b55
+salvage: 2411 lines (function-by-function)

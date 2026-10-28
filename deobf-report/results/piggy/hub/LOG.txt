@@ -1,0 +1,7 @@
+input: new_samples/TrixAde__scripts/piggy.lua
+detected: psu
+result: /home/user/deobf/_work/res2/TrixAde/piggy/deobfuscated.lua
+
+detected: psu
+psu exit=0 ['handlers=255 layouts=2 unknown=0']
+unluac: 2881 lines

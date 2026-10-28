@@ -1,0 +1,158 @@
+# Разбор частей скрипта
+- файл: `script.lua`
+- размер: 296 КБ, 10450 строк
+
+## Части (функционал)
+- **AutoSell** — 9 упоминаний
+- **ESP** — 48 упоминаний
+- **Fly/Noclip** — 2 упоминаний
+- **Speed/Jump** — 3 упоминаний
+- **Teleport** — 19 упоминаний
+- **Key system** — 1 упоминаний
+- **Config / Save settings** — 11 упоминаний
+- **Inventory / Item ESP** — 34 упоминаний
+
+## UI-библиотека
+- Hydra, Solara, Rain
+
+## URL / webhook-и (11)
+- `https://api.luarmor.net/files/v3/loaders/`
+- `https://discord.gg/speedhubx`
+- `https://games.roblox.com/v1/games/`
+- `https://raw.githubusercontent.com/AhmadV99/Main/refs/heads/main/Data%20Game/Grow%20A%20Garden/`
+- `https://raw.githubusercontent.com/AhmadV99/Main/refs/heads/main/Library/Key%20System/Encrypted`
+- `https://raw.githubusercontent.com/AhmadV99/Main/refs/heads/main/Library/Key%20System/Get%20Key%20API.lua`
+- `https://raw.githubusercontent.com/AhmadV99/Main/refs/heads/main/Library/KeySystemV2.5.lua`
+- `https://raw.githubusercontent.com/AhmadV99/Main/refs/heads/main/Library/Lib_5.5.0.lua`
+- `https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua\`
+- `https://sdkapi-public.luarmor.net/sync`
+- `https://thumbnails.roblox.com/v1/assets?assetIds=`
+
+## Сервисы / remotes
+- сервисы: Players, ReplicatedStorage, Lighting, RunService, UserInputService, VirtualUser, HttpService, MarketplaceService, TeleportService, StarterGui, CoreGui
+- WaitForChild: `Backpack`, `BackpackGui`, `GameEvents`, `Gift_Notification`, `Hotbar`, `Inventory`, `PlayerGui`, `ScrollingFrame`, `UIGridFrame`
+- remote-вызовы: FireServer(, InvokeServer(
+
+## Названия партов / объектов в игре (566 уникальных)
+- `Auto Switch Loadouts` (21)
+- `Auto Switch File` (21)
+- `Selling Pet` (19)
+- `Hatching Egg` (17)
+- `Stop Switch` (17)
+- `Place Egg` (16)
+- `Instant Collect` (16)
+- `PetsPhysical` (13)
+- `Switch Lock` (12)
+- `Humanoid` (11)
+- `Weight` (11)
+- `Backpack` (10)
+- `TextLabel` (10)
+- `ESP` (7)
+- `Egg Reduction Time` (7)
+- `Auto Switch File ` (7)
+- `Auto Switch Loadouts ` (7)
+- `Select Variant Favorite` (7)
+- `Frame` (6)
+- `val` (6)
+- `Is Switching` (6)
+- `Allows Switch Loadouts` (6)
+- `Stop Collect If Backpack Is Full Max` (6)
+- `Delay To Collect` (6)
+- `All Eggs Ready Only` (6)
+- `HumanoidRootPart` (5)
+- `Shovel [Destroy Plants]` (5)
+- `BillboardGui` (5)
+- `Current Operation` (5)
+- `Webhook URL` (5)
+- `Auto Mutations Pets` (5)
+- `Important` (4)
+- `Variant` (4)
+- `Stop Collect If Weather Is Here` (4)
+- `Auto Hatch Eggs` (4)
+- `Select Fruits Favourite` (4)
+- `Select Mutations Favorite` (4)
+- `Threshold Weight Mode  ` (4)
+- `Threshold Weight   ` (4)
+- `Select Pets Favourite` (4)
+- `Select Threshold Mode     ` (4)
+- `Weights Threshold     ` (4)
+- `Age Threshold     ` (4)
+- `Select Players` (4)
+- `Hop Server If Not Found` (4)
+- `Webhook URL Snipe` (4)
+- `Fruits` (3)
+- `SurfaceGui` (3)
+- `American Traveling Merchant` (3)
+- `Gnome Traveling Merchant` (3)
+- `Honey Traveling Merchant` (3)
+- `SkyTravelingMerchant` (3)
+- `Spray Traveling Merchant` (3)
+- `Sprinkler Traveling Merchant` (3)
+- `Summer Traveling Merchant` (3)
+- `Fall Traveling Merchant` (3)
+- `Halloween Traveling Merchant` (3)
+- `Safari Traveling Merchant` (3)
+- `Pick Place Active` (3)
+- `Last Switch Time` (3)
+
+## Подписи UI / названия функций (первые 60)
+- Above
+- Accept
+- Acidwing Wasp
+- Acorn
+- ActivePetUI
+- ActivePetsService_Replicator
+- Admin Pack
+- Advanced Sprinkler
+- Age Threshold  
+- Age Threshold   
+- Age Threshold     
+- Age Threshold      
+- All Eggs Ready Only
+- AllWeather
+- Allow Ping On Ping Message/ID
+- Allow Placing If No Egg in Garden
+- Allow Sell If Backpack Is Max
+- Allow Show Value Money
+- AllowFakePurchase
+- Allows Switch Loadouts
+- Amber
+- American Traveling Merchant
+- Ancestral Horn
+- Anchor
+- Ancient Seed Pack
+- Animation
+- AnimationController
+- Anti-Sell Pets
+- ApplyBoost
+- ApplyShard
+- Arrow
+- Artisan Container
+- Auto Accept Trade
+- Auto Activate Crystal
+- Auto Ascension
+- Auto Boost Pets
+- Auto Buy All Eggs
+- Auto Buy All Garden
+- Auto Buy All Gears
+- Auto Buy All Merchant
+- Auto Buy All Seeds
+- Auto Buy Bee Egg Shop
+- Auto Buy Best Eggs
+- Auto Buy Best Garden
+- Auto Buy Best Gears
+- Auto Buy Best Merchant
+- Auto Buy Best Seeds
+- Auto Buy Cosmetic
+- Auto Buy Dailys Deals
+- Auto Buy Eggs
+- Auto Buy Fall Shop
+- Auto Buy Garden
+- Auto Buy Gears
+- Auto Buy Honey Coin Shop
+- Auto Buy Honey Seed Shop
+- Auto Buy Merchant
+- Auto Buy Pass Season
+- Auto Buy Royal Jelly Shop
+- Auto Buy Seeds
+- Auto Claim Booths

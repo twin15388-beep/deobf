@@ -1,5 +1,5 @@
 # Разбор частей скрипта
-- файл: `deobfuscated.lua`
+- файл: `script.lua`
 - размер: 849 КБ, 26393 строк
 
 ## Части (функционал)
@@ -26,6 +26,9 @@
 
 ## Сервисы / remotes
 - сервисы: Players, ReplicatedStorage, ReplicatedFirst, Workspace, Lighting, TweenService, RunService, UserInputService, VirtualUser, HttpService, MarketplaceService, TeleportService, CoreGui
+
+## Названия партов / объектов в игре (1 уникальных)
+- `Data Ping` (1)
 
 ## Подписи UI / названия функций (первые 60)
 - ARandomFruit

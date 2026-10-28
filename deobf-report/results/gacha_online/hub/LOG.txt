@@ -1,0 +1,7 @@
+input: new_samples/TrixAde__scripts/GachaOnline.lua
+detected: psu
+result: /home/user/deobf/_work/res2/TrixAde/GachaOnline/deobfuscated.lua
+
+detected: psu
+psu exit=0 ['handlers=120 layouts=1 unknown=0']
+unluac: 10451 lines

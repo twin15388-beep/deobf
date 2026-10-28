@@ -25,6 +25,33 @@
 6. Всё это собрано в один автоматический пайплайн: `deobf-report/tools/pipeline.py` (детект →
    деобфускатор → ремонт байткода → unluac → разбор частей → `LOG.txt`).
 
+
+---
+
+## 0б. Третья итерация: +15 сэмплов, +2 инструмента, salvage-режим
+
+Что сделано после слияния первой партии:
+
+1. **Собран Luau-рантайм** (`luau-lang/luau` 0.744 + собственные `luau` и `luau-ast`), поэтому
+   заработал `Deobfuscator-Luraph-V15`. Результат: **Luraph v15 девиртуализируется в читаемый
+   исходник** — Blox Fruits 6 764 строки, Grow a Garden 10 450 строк.
+2. **Новый salvage-режим для unluac.** Нашлась ещё одна ошибка декомпилятора: одна плохая функция
+   роняет весь файл (`IllegalStateException: IfThenEndBlock`, `Implicit return must have zero values`).
+   Написан `lua51_split.py` (режет чанк на прототипы, умеет оборачивать функцию с upvalue в
+   синтетический `main`) и `decompile_salvage.py`: файл декомпилируется **по функциям**, нечитаемые
+   вставляются дизассемблером с пометкой `-- PSEUDO`. Так восстановлены The Wild West (Nocoal,
+   newfarm) — было 791 строки обрезанного вывода, стало 2 411 и 2 355 строк с полным покрытием.
+3. **`extract_parts.py` расширен**: теперь вытаскивает ещё и **названия партов/объектов**
+   (`FindFirstChild`/`WaitForChild`/`Instance.new`/индексные обращения) с частотой — например у
+   Blox Fruits 188 уникальных (`KitsuneIsland`, `EmberTemplate`, `Frozen Dimension`, `Mirage Island`,
+   `SeaBeast1`, `HumanoidRootPart`, `VehicleSeat`).
+4. **Найдены и деобфусцированы 15 новых скриптов** из 12 режимов (см. §4б) — YBA, Bloxburg, Gacha
+   Online, Counter Blox, MM2, Piggy, Prison Life, Tower of Hell, Blox Fruits, Grow a Garden,
+   The Wild West, Solara Hub, Jailbreak.
+5. Проверен и **собран luadec51** (`sztupy/luadec51` + Lua 5.1.1): как альтернатива unluac он
+   оказался хуже — на чанках после лифта падает с `bad code in precompiled chunk`, поэтому в
+   пайплайне не используется, но лежит на случай ручного разбора.
+
 ---
 
 ## 1. Короткий итог
@@ -32,6 +59,7 @@
 | Что | Результат |
 |---|---|
 | **Итог второй итерации** | **6 из 6** игровых сэмплов разобраны в настоящий Lua (`results/`), плюс 3 бенчмарк-сэмпла. PSU 4.0/4.5 (раньше «только дизасм») теперь декомпилируются полностью. |
+| **Итог третьей итерации** | **+15 сэмплов из 12 режимов** (Blox Fruits, Grow a Garden, **YBA**, Bloxburg, Gacha Online, Counter Blox, MM2, Piggy, Prison Life, The Wild West, Solara Hub, Tower of Hell, Jailbreak). Luraph v15 теперь девиртуализируется полностью. Всего в `results/` — **24 сэмпла**. |
 | Luraph v15 деобфускатор (из `Deobfuscator-Luraph-V15-master.zip`) | **Работает** после портирования на Linux. Валидирован: `RideAPet.lua` → вывод **байт-в-байт** совпал с эталоном из репозитория (5170 строк). Свежий Luraph v15.0 из сторонней коллекции → вытащен загрузчик за 5 с. |
 | `luau-vmp-deobf-main.zip` (Python, Luraph v14.x) | **Не запускается**: требует Lune (рантайм Luau), а релизы Lune отдаются только через GitHub release-assets, которые в песочнице заблокированы. Пакет `lune` на PyPI — про фазы Луны, не то. |
 | Сторонние деобфускаторы (найдены и проверены) | **14 проверено в работе**, из них 8 дают результат на реальных сэмплах; 1 частично; остальные — блокеры среды (нет .NET/Rust/Lune). Таблицы в §3 и §3.1. |
@@ -98,6 +126,18 @@
 | **`pipeline.py`** (мой) | Python | **Работает** | Детект обфускатора по 16 маркерам + цепочка фолбэков (psu → moonsec_v3 → ironbrew → unprom), ремонт, декомпайл, разбор частей, `LOG.txt`. |
 | **`collect_results.py`** (мой) | Python | **Работает** | Собирает выходы пайплайна в `results/` и генерирует `INDEX.md`; отбрасывает «первые слои» короче 60 строк. |
 
+### 3.2. Что добавлено в третьей итерации
+
+| Инструмент | Тип | Статус | Проверка |
+|---|---|---|---|
+| **Luau-рантайм** (`build_luau.sh` + `luau_runner.cpp`) | C++ | **Работает** | Собран без cmake: `bin/luau` (VM + REPL + `loadstring`/`task.*`) и `bin/luau-ast`. Без них деобфускатор Luraph v15 не запускается. |
+| **`lua51_split.py`** (мой) | Python | **Работает** | Режет Lua 5.1 чанк на отдельные чанки-прототипы; для функций с upvalue умеет собрать синтетический `main` (`CLOSURE; RETURN`). Именно из-за upvalue-функций unluac падал `NullPointerException: "func.parent" is null`. |
+| **`decompile_salvage.py`** (мой) | Python | **Работает** | Полный декомпайл → при провале по-функциональный: 13/13 функций The Wild West восстановлены (7 в Lua, 6 с дизасмом), вместо 791 обрезанной строки — 2 411. |
+| `Deobfuscator-Luraph-V15` | JS+Python | **Работает** | `--detect` даёт `luraph_v15 1.00`; Blox Fruits и Grow a Garden девиртуализированы полностью. |
+| `sztupy/luadec51` + Lua 5.1.1 | C | **Не подходит** | Собран (`gcc … liblua.a`), но на чанках после лифта: `bad code in precompiled chunk`; выход хуже unluac (goto-метки). |
+| `moonsec-js-deobf` (перенос зависимостей) | JS | **Работает** | Для MoonSec V3 требует `npm install` (`fengari`, `luaparse`) — без этого падал `Cannot find module 'fengari'`. |
+| `TrixAde/scripts`, `FSOCIETY-WYLD/TWWLEAN`, `samuraa1/Solara-Hub`, `terrorlua/obfuscator-samples`, `retpirato/Roblox-Scripts` | источники | **Новые корпуса** | 15 скачанных скриптов по 12 популярным режимам. |
+
 Все свои скрипты — в `deobf-report/tools/`. Прежний `lua51_disasm.py` остался как резервный дизассемблер.
 
 ---
@@ -142,6 +182,32 @@
 | `luraph_unknown` | luraph_v15 | провал: это не обфусцированный скрипт, а сам загрузчик-заглушка |
 | `moonveil` | moonveil | провал: статического деобфускатора для MoonVeil нет |
 
+### Вторая партия: 15 скриптов из 12 режимов — **все разобраны**
+
+Источники: `TrixAde/scripts` (хабы на 13 игр), `FSOCIETY-WYLD/TWWLEAN` (The Wild West),
+`samuraa1/Solara-Hub` (Orion), `terrorlua/obfuscator-samples` (Luraph v15), `retpirato/Roblox-Scripts`
+(IronBrew). Всё лежит в `deobf-report/results/<каталог>/`, таблица — `results/INDEX.md`.
+
+| Режим | Сэмпл | Обфускатор | Результат | Парты / фичи |
+|---|---|---|---|---|
+| **Blox Fruits** | `sample/Blox Fruit.lua` | **Luraph v15** | 6 764 строки, читаемый исходник | `Auto Farm Sea`, `Auto Farm Mastery`, ESP, 188 партов: `KitsuneIsland`, `EmberTemplate`, `Frozen Dimension`, `Mirage Island`, `SeaBeast1`, `VehicleSeat` |
+| **Grow a Garden** | `sample/Grow a Garden.lua` | **Luraph v15** | 10 450 строк | автофарм, авто-продажа, ESP ×48, телепорты ×19 |
+| **Your Bizarre Adventure** | `KolgieYba.lua` | PSU 4.0 | 4 350 строк | авто-квесты ×43, автофарм ×38, авто-продажа, Aimbot |
+| **Bloxburg** | `BloxBurgAutoBuild.lua` | MoonSec V3 | 13 315 строк | автопостройка домов, телепорты ×43, UI Krnl/Orion |
+| **Gacha Online** | `GachaOnline.lua` | PSU 4.0 | 10 451 строка | авто-роллы, фарм валюты |
+| **The Wild West** | `Nocoal.lua`, `newfarm.lua`, `coalfarm.lua` | MoonSec V3 | 2 411 / 2 355 / 2 417 строк (salvage) | фарм угля и без угля, ESP инвентаря, авто-телепорт к шахтам |
+| **The Wild West** | `TheWildWest.lua` | PSU 4.5 | 6 612 строк | хаб с автофармом |
+| **Solara Hub (Orion)** | `Orion.lua` | MoonSec V3 | 9 449 строк | мультиигровой хаб, UI Orion/Solara, конфиги ×15 |
+| **Murder Mystery 2** | `mm2GhostHub.lua` | MoonSec V2 | 7 356 строк | Ghost Hub |
+| **Counter Blox** | `counterBlox.lua` | unprom | 6 915 строк | чит-меню |
+| **Prison Life** | `prsionlife.lua` | unprom | 3 477 строк | GUI с чат-командами |
+| **Piggy** | `piggy.lua` | PSU 4.0 | 2 881 строка | хаб |
+| **Tower of Hell** | `towerofhell.lua` | IronBrew | 295 строк | снят внешний слой, внутри VM |
+| **Jailbreak** | `JailHack.lua` | самописный XOR | 7 строк | JailTabs 3.2, после снятия XOR остаётся компактный исходник |
+
+Итог по этому блоку: **12 из 15 — полноценный читаемый Lua**, 3 (Tower of Hell, JailTabs,
+Hatching Simulator) — снят только внешний слой, дальше VM без девиртуализатора.
+
 ### Blox Strike — **только частично**
 Источник: `haw1xs/ggs.hw` (`script.txt`, `Test.txt`, `script3.txt`), `brkapery/Sigmaware-Roblox-BloxStrike/main.lua` (чистый исходник).
 
@@ -150,11 +216,13 @@
 * `script3.txt` (449 КБ) — «Just like Luraph…» (самописный VM), **не поддержан**.
 * Единственное, что удалось: для PSU-подобных скриптов работает поведенческий трейс (см. §5), но для Keyforge/кастомных VM даже он не запускается без их рантайма.
 
-### GPO, YBA, Illegal Soccer — **сэмплов обфускации нет**
+### GPO и Illegal Soccer — **сэмплов обфускации нет** (YBA найден, см. §4б)
 Прошёл `search/code` + `search/repositories` по названиям, скачал и просканировал всё, что похоже на «обфусцированный» скрипт (скоринг: длиннющие строки, `\ddd`-эскейпы, сигнатуры PSU/MoonSec/Luraph/IronBrew/Keyforge, «магические» числа):
 
 * **GPO**: `Spade324/SpadesHub`, `Ic0u/achieved-scripts`, `TrilhaX/scriptexec`, `StupidProAArsenal/AztubHub_OpenSource` и др. — везде открытый исходник, обфускации нет.
-* **YBA**: `THUNER-Dev/YBA-Gui`, `RobyPumnDeFier/GUI`, `ScreamerUWU/YBA`, `bwhg7pnh9k-ops/auto-pres-script`, `Stephen102/CuHub_Repost` — открытый код/GUI.
+* **YBA**: в первой итерации находились только открытые GUI (`THUNER-Dev/YBA-Gui`, `RobyPumnDeFier/GUI`,
+  `ScreamerUWU/YBA`). Во второй партии обфусцированный YBA-скрипт всё-таки найден — `KolgieYba.lua`
+  из `TrixAde/scripts` (PSU 4.0), разобран в §4б.
 * **Illegal Soccer**: ~десяток репозиториев вида `illegal-soccer-*.github` — SEO-спам без единого файла кода.
 
 Вывод: деобфусцировать эти три игры **не из чего** — в публичном GitHub их обфусцированных сборок нет (они распространяются через приватные хабы/Key-системы, а не репозитории).
@@ -168,6 +236,9 @@
 
 **Закрыто во второй итерации:** JVM (JRE из `jdk4py`) и unluac; битый байткод после лифта (`lua51_repair.py`);
 PSU 4.0/4.5 и MoonSec V3 теперь дают настоящий Lua, а не псевдо-Lua.
+
+**Закрыто в третьей итерации:** Luau-рантайм (Luraph v15 больше не блокер); падения unluac на одной
+плохой функции (появился salvage-режим `lua51_split.py` + `decompile_salvage.py`).
 
 **Что по-прежнему не получилось:**
 
@@ -183,6 +254,16 @@ PSU 4.0/4.5 и MoonSec V3 теперь дают настоящий Lua, а не 
 10. **Keyforge / кастомные VM (Blox Strike)** — публичных статических деобфускаторов нет; `keyforge-deobfuscator` — гайд, а не инструмент.
 11. **Анти-tamper Luraph** при финальном прогоне иногда рапортует `LPH:23: Chilli Library bootstrap is invalid` — на корректность уже полученного вывода не влияет (вывод сверен побайтово), но финальная верификация в песочнице не проходит.
 12. **Производительность:** 2 vCPU дают ~11 минут на 400-КБ Luraph v15 (Python-бэкенд девиртуализации упирается в CPU).
+13. **Salvage-режим не идеален:** функции с upvalue (`GETUPVAL`) unluac не берёт даже в виде отдельного
+    чанка — `NullPointerException: "func.parent" is null`. Синтетический родительский `main` проблему не
+    решает (unluac выводит заглушку), поэтому такие функции идут дизассемблером под пометкой `-- PSEUDO`.
+    На The Wild West это 6 функций из 13, на newfarm — 8.
+14. **`luadec51` собран, но непригоден:** `bad code in precompiled chunk` на лифтованном чанке (Lua 5.1.1
+    строже к `maxstacksize`/структуре, чем unluac), поэтому как запасной декомпилятор не используется.
+15. **Luraph v14.x (DaHood-LegacyX, LumberTycoon2)** — оба файла определяются как `generic 0.00`:
+    это Luraph-подобный VM, но не v15, а деобфускатора под v14 в песочнице нет (Lune недоступен).
+16. **`samuraa1/Solara-Hub` LunaSrc/lunatest** — cамописный «Luna Interface»: `unprom` падает с
+    `LuaSyntaxError: expected ')' but got OP:':'`; инструмента под этот формат нет.
 
 ---
 
@@ -224,7 +305,8 @@ deobf-report/
 │   │   ├── script.lua                         #   восстановленный Lua (26k–56k строк)
 │   │   ├── PARTS.md                           #   фичи, UI, URL, парты/подписи
 │   │   └── LOG.txt                            #   лог пайплайна
-│   └── corpus/<сэмпл>/                        #   бенчмарк на чужих обфускаторах
+│   ├── corpus/<сэмпл>/                        #   бенчмарк на чужих обфускаторах
+│   └── <игра>/<сэмпл>/                        #   вторая партия: 12 режимов (blox_fruits, yba, …)
 ├── output/                                    # результаты первой итерации (псевдо-Lua, трейсы)
 │   ├── luraph_v15_synaptix_loader.lua
 │   ├── moonsec_v2_lightux13.lua
@@ -234,6 +316,8 @@ deobf-report/
 └── tools/
     ├── pipeline.py                            # детект → деобфускатор → ремонт → unluac → PARTS.md
     ├── lua51_repair.py                        # ремонт maxstacksize + RETURN в Lua 5.1 чанке
+    ├── lua51_split.py                         # чанк → чанки по прототипам (salvage)
+    ├── decompile_salvage.py                   # декомпайл по функциям, когда unluac падает
     ├── extract_parts.py                       # Lua → PARTS.md (фичи, парты, URL, remotes)
     ├── collect_results.py                     # сборка results/ + INDEX.md
     ├── lua51_disasm.py                        # резервный дизассемблер Lua 5.1

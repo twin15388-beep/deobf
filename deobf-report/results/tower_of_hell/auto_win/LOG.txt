@@ -1,0 +1,12 @@
+input: new_samples/TrixAde__scripts/towerofhell.lua
+detected: ironbrew (via unprom)
+result: /home/user/deobf/_work/res2/TrixAde/towerofhell/deobfuscated.lua
+
+detected: ironbrew
+CASCADE failed: 0) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [ '/home/user/deobf/_work/tools/CASCADE/index.js' ]
+}
+
+Node.js v22.22.3
+unprom exit=0 rom: wrote /home/user/deobf/_work/res2/TrixAde/towerofhell/deobfuscated.lua (294323 bytes)

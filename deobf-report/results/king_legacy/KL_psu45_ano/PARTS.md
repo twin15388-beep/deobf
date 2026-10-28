@@ -1,5 +1,5 @@
 # Разбор частей скрипта
-- файл: `deobfuscated.lua`
+- файл: `script.lua`
 - размер: 3421 КБ, 56150 строк
 
 ## Части (функционал)
@@ -31,6 +31,11 @@
 
 ## Сервисы / remotes
 - сервисы: Players, ReplicatedStorage, ReplicatedFirst, Workspace, Lighting, TweenService, RunService, UserInputService, VirtualUser, HttpService, TeleportService, CoreGui
+
+## Названия партов / объектов в игре (3 уникальных)
+- `Kingdom of Rose` (1)
+- `Dark Arena` (1)
+- `Boat Castle` (1)
 
 ## Подписи UI / названия функций (первые 60)
 - AFMMain

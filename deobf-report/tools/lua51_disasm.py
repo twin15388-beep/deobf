@@ -73,7 +73,7 @@ def parse(data):
 
 
 def parse_function(r):
-    f = {}
+    f = {"_start": r.p}
     f["source"] = r.string()
     f["linedefined"] = r.int()
     f["lastlinedefined"] = r.int()
@@ -108,6 +108,7 @@ def parse_function(r):
     n = r.int()
     for _ in range(n):
         r.string()
+    f["_end"] = r.p
     return f
 
 

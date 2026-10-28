@@ -65,6 +65,12 @@ class Pipe:
         self.java = os.path.join(self.root, "jdk/jdk4py/java-runtime/bin/java")
         self.unluac = os.path.join(self.root, "PSU-Deobfuscator/tools/unluac.jar")
         self.log = []
+        # make the bundled JRE visible to the node tools that shell out to `java`
+        self.env = dict(os.environ)
+        jbin = os.path.dirname(self.java)
+        if os.path.isdir(jbin):
+            self.env["PATH"] = jbin + os.pathsep + self.env.get("PATH", "")
+            self.env["JAVA_HOME"] = os.path.dirname(jbin)
 
     @staticmethod
     def plausible(path):
@@ -98,6 +104,15 @@ class Pipe:
         r = run([self.java, "-jar", self.unluac, fixed, "--output", out_lua])
         if r.returncode != 0 or not os.path.exists(out_lua):
             self.note("unluac failed: " + (r.stderr.strip().splitlines() or [""])[0][:160])
+            # one bad prototype kills the whole file for unluac: decompile the
+            # chunk function by function instead and keep what works
+            s = run([sys.executable, os.path.join(here, "decompile_salvage.py"),
+                     luac_path, out_lua, "--java", self.java, "--unluac", self.unluac, "-q"])
+            if s.returncode == 0 and os.path.exists(out_lua) and \
+                    os.path.getsize(out_lua) > 400:
+                self.note("salvage: %d lines (function-by-function)" %
+                          len(open(out_lua, encoding="utf-8", errors="replace").readlines()))
+                return True
             run([sys.executable, os.path.join(here, "lua51_disasm.py"), fixed, out_lua + ".dis.txt"])
             return False
         self.note("unluac: %d lines" % len(open(out_lua, encoding="utf-8", errors="replace").readlines()))
@@ -117,7 +132,8 @@ class Pipe:
     def do_psu(self, src_path, outdir):
         cli = os.path.join(self.root, "PSU-Deobfuscator/src/cli.js")
         luac = os.path.join(outdir, "extracted.luac")
-        r = run(["node", cli, os.path.abspath(src_path), "--bytecode", os.path.abspath(luac)])
+        r = run(["node", cli, os.path.abspath(src_path), "--bytecode", os.path.abspath(luac)],
+                env=self.env)
         self.note("psu exit=%d %s" % (r.returncode, (r.stdout or "").strip().splitlines()[-1:]))
         return luac if os.path.exists(luac) else None
 
@@ -172,7 +188,7 @@ class Pipe:
             self.note("prometheus-axom not installed")
             return None
         out = os.path.join(outdir, "deobfuscated.axom.lua")
-        r = run([sys.executable, cli, src_path, "-o", out], cwd=os.path.dirname(cli))
+        r = run([sys.executable, cli, src_path, "-o", out], cwd=os.path.dirname(cli), env=self.env)
         self.note("prometheus-axom exit=%d" % r.returncode)
         return out if os.path.exists(out) else None
 

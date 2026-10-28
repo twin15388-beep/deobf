@@ -1,0 +1,7 @@
+input: new_samples/samuraa1__Solara-Hub/Orion.lua
+detected: moonsec_v3
+result: /home/user/deobf/_work/res2/MoonSec/Orion/deobfuscated.lua
+
+detected: moonsec_v3
+moonsec-v3 exit=0 Wrote 67466 bytes to /home/user/deobf/_work/res2/MoonSec/Orion/extracted.luac
+unluac: 9449 lines

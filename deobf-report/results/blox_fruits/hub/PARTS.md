@@ -1,0 +1,167 @@
+# Разбор частей скрипта
+- файл: `script.lua`
+- размер: 186 КБ, 6764 строк
+
+## Части (функционал)
+- **AutoFarm** — 71 упоминаний
+- **AutoSell** — 6 упоминаний
+- **AutoFish** — 3 упоминаний
+- **AutoRaid/Boss** — 6 упоминаний
+- **Aimbot** — 2 упоминаний
+- **ESP** — 25 упоминаний
+- **Teleport** — 44 упоминаний
+- **Auto Rejoin** — 1 упоминаний
+- **Anti-Ban/Detection** — 1 упоминаний
+- **Key system** — 1 упоминаний
+- **Config / Save settings** — 24 упоминаний
+- **Inventory / Item ESP** — 8 упоминаний
+
+## UI-библиотека
+- Magma, Hydra, Solara, Vision, Rain, Crescent
+
+## URL / webhook-и (16)
+- `http://www.roblox.com/asset/?id=9709143733`
+- `http://www.roblox.com/asset/?id=9709149052`
+- `http://www.roblox.com/asset/?id=9709149431`
+- `http://www.roblox.com/asset/?id=9709149680`
+- `http://www.roblox.com/asset/?id=9709150401`
+- `http://www.roblox.com/asset/?id=9884584522`
+- `https://api.luarmor.net/files/v3/loaders/`
+- `https://prvf.onrender.com/data`
+- `https://raw.githubusercontent.com/AhmadV99/Main/main/Codes_BloxFruit`
+- `https://raw.githubusercontent.com/AhmadV99/Main/main/Library/Example/FuncsV3`
+- `https://raw.githubusercontent.com/AhmadV99/Main/refs/heads/main/Library/Key%20System/Encrypted`
+- `https://raw.githubusercontent.com/AhmadV99/Main/refs/heads/main/Library/Key%20System/Get%20Key%20API.lua`
+- `https://raw.githubusercontent.com/AhmadV99/Main/refs/heads/main/Library/KeySystemV2.5.lua`
+- `https://raw.githubusercontent.com/AhmadV99/Main/refs/heads/main/Library/Lib_5.5.0.lua`
+- `https://raw.githubusercontent.com/AhmadV99/Main/refs/heads/main/Webhook/Tracker%20Bosses.lua`
+- `https://sdkapi-public.luarmor.net/sync`
+
+## Сервисы / remotes
+- сервисы: Players, ReplicatedStorage, Workspace, Lighting, TweenService, RunService, UserInputService, HttpService, TeleportService
+- WaitForChild: `Beli`, `Bounty/Honor`, `CommF_`, `Data`, `EmberTemplate`, `Exp`, `Fragments`, `Humanoid`, `Level`, `Locations`, `Mouse`, `Net`, `RE/ReceivedHit`, `RE/RegisterAttack`, `RE/RegisterHit`, `RE/ShootGunEvent`, `Race`, `Remotes`, `Sky`, `TrackedQuestFrame`, `VisionRadius`, `WaterBase-Plane`, `leaderstats`
+- remote-вызовы: FireServer(, InvokeServer(
+
+## Названия партов / объектов в игре (188 уникальных)
+- `HumanoidRootPart` (38)
+- `Auto Farm Sea` (13)
+- `Choose Equip ` (10)
+- `Humanoid` (8)
+- `VehicleSeat` (8)
+- `Handle` (8)
+- `KitsuneIsland` (5)
+- `EmberTemplate` (5)
+- `Auto Farm Mastery` (5)
+- `Skill  ` (5)
+- `SeaBeast1` (4)
+- `Part` (4)
+- `Frozen Dimension` (4)
+- `PrehistoricIsland` (4)
+- `Mirage Island` (4)
+- `Island 1` (4)
+- `Choose Mastery Mode` (4)
+- `Farm Distance` (4)
+- `Auto Dragon Hunter Quests` (4)
+- `Auto Monster Magnet` (4)
+- `Data` (3)
+- `Race` (3)
+- `Main` (3)
+- `Folder` (3)
+- `BodyVelocity` (3)
+- `Auto Farm Level` (3)
+- `Boat Castle` (3)
+- `Auto V3` (3)
+- `Choose World` (3)
+- `Auto Trial` (3)
+- `Remotes` (2)
+- `Temple of Time` (2)
+- `SpeedHubX_ESP` (2)
+- `TrackedQuestFrame` (2)
+- `WaterBase-Plane` (2)
+- `RF/KitsuneStatuePray` (2)
+- `AttachedAzureEmber` (2)
+- `ShrineActive` (2)
+- `NeonShrinePart` (2)
+- `RF/JobsRemoteFunction` (2)
+- `Locations` (2)
+- `Fast Attack Delay` (2)
+- `Count Player` (2)
+- `Choose Material` (2)
+- `Choose Boss` (2)
+- `Magma Ore` (2)
+- `Fish Tail` (2)
+- `Set Length` (2)
+- `Set Speed` (2)
+- `No Quest` (2)
+- `Take Quest` (2)
+- `Neareast Range` (2)
+- `Haunted Castle` (2)
+- `Attack Ghost Ship` (2)
+- `Attack Sea Beasts` (2)
+- `Auto Shark Anchor` (2)
+- `Auto Gets Fruit Spawner` (2)
+- `Auto Kill Player After Trial` (2)
+- `Choose Chips` (2)
+- `Auto Raid` (2)
+
+## Подписи UI / названия функций (первые 60)
+- Ability Teacher
+- Accessory
+- Activate priority system
+- ActivateAbility
+- Active
+- AddPoint
+- Alchemist
+- Ancient Vampire
+- Ancient Zombie
+- Angel Wings
+- Animation
+- Animator
+- Anti-Cheat Bypass
+- Anti-Flag
+- Apply Dash Length
+- Apply Speed
+- Apply dash length
+- Apply speed multiplier
+- Area2Quest
+- AttachedAzureEmber
+- Attack Fish Crew
+- Attack Fish Crew Member
+- Attack Ghost Ship
+- Attack Ghost Ships
+- Attack Leviathan
+- Attack Leviathan segments
+- Attack Leviathan tail
+- Attack Piranha
+- Attack Sea Beasts
+- Attack Shark
+- Attack Terrorshark
+- Attack all bosses
+- Attack selected boss
+- Auto 
+- Auto Abilities
+- Auto Attack All Boss
+- Auto Attack All Bosses
+- Auto Attack Boss
+- Auto Attack Leviathan
+- Auto Attack Leviathan Segment
+- Auto Attack Leviathan Tail
+- Auto Buy Chips
+- Auto Buy Fruits Sniper
+- Auto Buy Fruits Sniper (Mirage Island)
+- Auto Buy Fruits Sniper (Mirage)
+- Auto Buy Haki Color
+- Auto Buy Haki Colors
+- Auto Buy Legendary Sword
+- Auto Buy True Triple Katana
+- Auto Cake Prince
+- Auto Citizen Quest
+- Auto Collect Azure Ember
+- Auto Collect Berry
+- Auto Collect Chest
+- Auto Collect Gift
+- Auto Dodge Rough Sea
+- Auto Dodge Sea Beasts Skill
+- Auto Dodge Skill
+- Auto Dodge Terrorshark Skill
+- Auto Dough King
