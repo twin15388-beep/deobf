@@ -1,0 +1,8 @@
+source: Prison Life.lua
+size: 169948 B (165 KB)
+detected: none (обычный Lua, минифицирован)
+description: Prison Life: большой мультитул-скрипт (килл-аура, ESP, телепорты)
+method: lua_beautify.py (token-safe reindent, токены сверены)
+beautify: /home/user/deobf/deobf-report/results/prison_life/main/script.lua: 4018 строк -> 3658 строк, токены совпадают
+parts: parts -> /home/user/deobf/deobf-report/results/prison_life/main/PARTS.md (124 labels)
+result: OK, 3659 строк, 158 КБ

@@ -1,0 +1,8 @@
+source: Jailbreak - Jailbreaker V4.2.lua
+size: 31806 B (31 KB)
+detected: none (обычный Lua, минифицирован)
+description: Jailbreak: Jailbreaker V4.2
+method: lua_beautify.py (token-safe reindent, токены сверены)
+beautify: /home/user/deobf/deobf-report/results/jailbreak/jailbreaker_v42/script.lua: 990 строк -> 908 строк, токены совпадают
+parts: parts -> /home/user/deobf/deobf-report/results/jailbreak/jailbreaker_v42/PARTS.md (81 labels)
+result: OK, 909 строк, 31 КБ

@@ -1,0 +1,8 @@
+source: UNJAILBREAK.lua
+size: 165474 B (161 KB)
+detected: none (обычный Lua, минифицирован)
+description: Jailbreak: UNJAILBREAK — авто-ограбления, ESP
+method: lua_beautify.py (token-safe reindent, токены сверены)
+beautify: /home/user/deobf/deobf-report/results/jailbreak/unjailbreak/script.lua: 4717 строк -> 4509 строк, токены совпадают
+parts: parts -> /home/user/deobf/deobf-report/results/jailbreak/unjailbreak/PARTS.md (522 labels)
+result: OK, 4510 строк, 183 КБ

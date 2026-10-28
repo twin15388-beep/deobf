@@ -1,0 +1,8 @@
+source: Close Quarters Combat.lua
+size: 54337 B (53 KB)
+detected: none (обычный Lua, минифицирован)
+description: Close Quarters Combat: чит-меню
+method: lua_beautify.py (token-safe reindent, токены сверены)
+beautify: /home/user/deobf/deobf-report/results/close_quarters_combat/gui/script.lua: 1761 строк -> 1612 строк, токены совпадают
+parts: parts -> /home/user/deobf/deobf-report/results/close_quarters_combat/gui/PARTS.md (53 labels)
+result: OK, 1613 строк, 50 КБ

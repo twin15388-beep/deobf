@@ -1,0 +1,8 @@
+source: Prison Life Simple Gui.lua
+size: 95812 B (93 KB)
+detected: none (обычный Lua, минифицирован)
+description: Prison Life: простое GUI-меню
+method: lua_beautify.py (token-safe reindent, токены сверены)
+beautify: /home/user/deobf/deobf-report/results/prison_life/simple_gui/script.lua: 2956 строк -> 2755 строк, токены совпадают
+parts: parts -> /home/user/deobf/deobf-report/results/prison_life/simple_gui/PARTS.md (150 labels)
+result: OK, 2756 строк, 95 КБ

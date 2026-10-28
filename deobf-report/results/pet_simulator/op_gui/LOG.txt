@@ -1,0 +1,8 @@
+source: Pet Simulator - OP Pet Simulator GUI!.lua
+size: 24762 B (24 KB)
+detected: none (обычный Lua, минифицирован)
+description: Pet Simulator: OP GUI
+method: lua_beautify.py (token-safe reindent, токены сверены)
+beautify: /home/user/deobf/deobf-report/results/pet_simulator/op_gui/script.lua: 1 строк -> 998 строк, токены совпадают
+parts: parts -> /home/user/deobf/deobf-report/results/pet_simulator/op_gui/PARTS.md (0 labels)
+result: OK, 999 строк, 28 КБ

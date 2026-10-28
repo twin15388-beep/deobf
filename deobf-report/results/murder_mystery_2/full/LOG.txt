@@ -1,0 +1,8 @@
+source: Murder Mystery 2.lua
+size: 62496 B (61 KB)
+detected: none (обычный Lua, минифицирован)
+description: Murder Mystery 2: полный скрипт (роли, ESP, авто-нож)
+method: lua_beautify.py (token-safe reindent, токены сверены)
+beautify: /home/user/deobf/deobf-report/results/murder_mystery_2/full/script.lua: 1933 строк -> 1505 строк, токены совпадают
+parts: parts -> /home/user/deobf/deobf-report/results/murder_mystery_2/full/PARTS.md (32 labels)
+result: OK, 1506 строк, 56 КБ

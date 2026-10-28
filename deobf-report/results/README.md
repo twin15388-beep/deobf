@@ -8,7 +8,7 @@
 
 Индекс с размерами — `INDEX.md`.
 
-Всего **24 сэмпла**, 12 игр/режимов, 7 разных обфускаторов (Luraph v15, MoonSec V3, MoonSec V2,
+Всего **36 сэмплов**, 18 игр/режимов, 9 разных обфускаторов (Luraph v15, MoonSec V3, MoonSec V2,
 PSU 4.0/4.5, AztupBrew, wYnFuscate, самописные XOR-загрузчики). Полная таблица — `INDEX.md`.
 
 ## Что внутри (кратко)
@@ -44,6 +44,36 @@ PSU 4.0/4.5, AztupBrew, wYnFuscate, самописные XOR-загрузчик�
 | `prison_life/cmd_gui` | unprom | Prison Life: GUI с чат-командами. |
 | `tower_of_hell/auto_win` | IronBrew | Tower of Hell: снят только внешний слой (VM остался). |
 | `jailbreak/jailtabs` | самописный | Jailbreak: JailTabs 3.2, XOR-загрузчик снят, внутри компактный исходник. |
+
+### Третья партия (4-я итерация): ещё 7 игр/режимов, 12 сэмплов
+
+Источник — репозиторий `hexahigh/Scripts` (6 132 Lua-файла; сканировали все, отобрали
+файлы с читаемым Lua и типовые обфусцированные). Для этой партии код **не был обфусцирован VM**,
+но был **минифицирован в одну строку** — поэтому использован новый инструмент
+`tools/lua_beautify.py`: он не меняет ни одного токена, только расставляет переводы строк и
+отступы, и в конце сам сверяет поток токенов (гарантия, что код остался тем же).
+
+| Каталог | Что это | Строк | Статус |
+|---|---|---|---|
+| `jailbreak/unjailbreak` | Jailbreak: авто-ограбления, ESP, aimbot, 71 телепорт, UI Rain | 4 510 | функциональный код |
+| `jailbreak/gui_2` | Jailbreak: GUI-меню | 1 834 | функциональный код |
+| `jailbreak/jailbreaker_v42` | Jailbreak: Jailbreaker V4.2 | 909 | функциональный код |
+| `prison_life/main` | Prison Life: мультитул (килл-аура, ESP, телепорты, админ-команды) | 3 659 | функциональный код |
+| `prison_life/simple_gui` | Prison Life: простое GUI | 2 756 | функциональный код |
+| `prison_life/gui` | Prison Life: GUI с командами | 1 228 | функциональный код |
+| `murder_mystery_2/full` | Murder Mystery 2: роли, ESP, авто-нож | 1 506 | функциональный код |
+| `murder_mystery_2/gui` | Murder Mystery 2: GUI | 1 149 | функциональный код |
+| `close_quarters_combat/gui` | Close Quarters Combat: чит-меню | 1 613 | функциональный код |
+| `pet_simulator/gui` | Pet Simulator: GUI-автофарм, UI Hydra/Rain | 1 354 | функциональный код |
+| `pet_simulator/op_gui` | Pet Simulator: OP GUI | 999 | функциональный код |
+| `tower_defense_simulator/autofarm` | Tower Defense Simulator: автофарм | 11 121 | **частично** (виден блок настроек `_G.*`, тело — VM Luraph v6-типа) |
+
+Плюс:
+
+* `_failed.md` — 12 обфусцированных файлов из того же репозитория (Synapse Xen 1.1.2, IronBrew 2.7.0/2.7.2,
+  Luraph 6.0-beta1 / 11.1 / 11.5, неизвестный Luraph-подобный VM) — с перечнем того, что именно пробовали;
+* `_corpus_prometheus/` — новый инструмент `unprom` на 6 эталонных сэмплах Prometheus / wearedevs v1.0 /
+  luaobfuscator.com: 6 из 6 разобраны (девиртуализация в плоский CFG + расшифровка строк и ConstantArray).
 
 ## Как это получено
 

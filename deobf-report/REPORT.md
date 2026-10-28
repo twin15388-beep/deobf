@@ -54,12 +54,37 @@
 
 ---
 
+## 0в. Четвёртая итерация: новый источник, +12 сэмплов, unprom и свой «разминификатор»
+
+1. **Новый крупный источник.** Взяли `hexahigh/Scripts` — 6 132 Lua-файла (256 МБ); прогнали по всем
+   файлам детектор обфускатора. Итог сканирования: IronBrew — 34, Synapse Xen — 47, Luraph — 6,
+   остальные ~6 000 — обычный (в основном минифицированный в одну строку) Lua.
+2. **Новый инструмент: `tools/lua_beautify.py`.** Токенайзер Lua 5.1/5.2, который расставляет
+   переводы строк и отступы, **не меняя ни одного токена**, и в конце сверяет поток токенов
+   (если поток изменился — файл не пишется). Это безопасный способ превратить
+   `local a=1;local b=2` в читаемый код: семантика гарантированно та же, потому что в Lua
+   перевод строки не является разделителем операторов. Первая версия «съедала» код после
+   строчных комментариев — проверка токенов это поймала, баг исправлен.
+3. **Проверен `unprom`** (деобфускатор Prometheus, ранее лежал без дела): 6 из 6 эталонных сэмплов
+   (`disrobe/corpus/lua/obfuscators/*`, `prometheus/*`) разобраны, включая luaobfuscator.com,
+   который в третьей итерации падал. Строки, ConstantArray и арифметика восстанавливаются;
+   `Vmify` разворачивается в плоский CFG (лифтер `--devirt lift` в этой сборке не работает).
+4. **12 новых сэмплов из 7 режимов** (Jailbreak, Prison Life, Murder Mystery 2, Pet Simulator,
+   Close Quarters Combat, Tower Defense Simulator) — в `deobf-report/results/`, функциональный Lua
+   + `PARTS.md` с названиями партов.
+5. **Честный минус:** 12 обфусцированных файлов из того же репозитория (Synapse Xen 1.1.2,
+   IronBrew 2.7.0/2.7.2, Luraph 6.0-beta1 / 11.1 / 11.5, неизвестный Luraph-подобный VM) разобрать
+   не удалось — подробности в `results/_failed.md` и §5.
+
+---
+
 ## 1. Короткий итог
 
 | Что | Результат |
 |---|---|
 | **Итог второй итерации** | **6 из 6** игровых сэмплов разобраны в настоящий Lua (`results/`), плюс 3 бенчмарк-сэмпла. PSU 4.0/4.5 (раньше «только дизасм») теперь декомпилируются полностью. |
 | **Итог третьей итерации** | **+15 сэмплов из 12 режимов** (Blox Fruits, Grow a Garden, **YBA**, Bloxburg, Gacha Online, Counter Blox, MM2, Piggy, Prison Life, The Wild West, Solara Hub, Tower of Hell, Jailbreak). Luraph v15 теперь девиртуализируется полностью. Всего в `results/` — **24 сэмпла**. |
+| **Итог четвёртой итерации** | **+12 сэмплов из 7 режимов** (Jailbreak ×3, Prison Life ×3, Murder Mystery 2 ×2, Pet Simulator ×2, Close Quarters Combat, Tower Defense Simulator) — функциональный Lua через новый `lua_beautify.py`. Плюс проверен `unprom` (6/6 сэмплов Prometheus). Всего в `results/` — **36 сэмплов из 18 режимов**. 12 обфусцированных файлов (Xen, IronBrew 2.7, Luraph 6/11) разобрать не удалось — `results/_failed.md`. |
 | Luraph v15 деобфускатор (из `Deobfuscator-Luraph-V15-master.zip`) | **Работает** после портирования на Linux. Валидирован: `RideAPet.lua` → вывод **байт-в-байт** совпал с эталоном из репозитория (5170 строк). Свежий Luraph v15.0 из сторонней коллекции → вытащен загрузчик за 5 с. |
 | `luau-vmp-deobf-main.zip` (Python, Luraph v14.x) | **Не запускается**: требует Lune (рантайм Luau), а релизы Lune отдаются только через GitHub release-assets, которые в песочнице заблокированы. Пакет `lune` на PyPI — про фазы Луны, не то. |
 | Сторонние деобфускаторы (найдены и проверены) | **14 проверено в работе**, из них 8 дают результат на реальных сэмплах; 1 частично; остальные — блокеры среды (нет .NET/Rust/Lune). Таблицы в §3 и §3.1. |
@@ -138,6 +163,17 @@
 | `moonsec-js-deobf` (перенос зависимостей) | JS | **Работает** | Для MoonSec V3 требует `npm install` (`fengari`, `luaparse`) — без этого падал `Cannot find module 'fengari'`. |
 | `TrixAde/scripts`, `FSOCIETY-WYLD/TWWLEAN`, `samuraa1/Solara-Hub`, `terrorlua/obfuscator-samples`, `retpirato/Roblox-Scripts` | источники | **Новые корпуса** | 15 скачанных скриптов по 12 популярным режимам. |
 
+### 3.3. Что добавлено в четвёртой итерации
+
+| Инструмент | Тип | Статус | Проверка |
+|---|---|---|---|
+| **`lua_beautify.py`** (мой) | Python | **Работает** | Токен-безопасная нормализация минифицированного Lua: склейка `local a=1;local b=2` в строки, отступы по `then/do/repeat/function`/`end/until`, корректная обработка длинных строк `[[ ]]`, `[=[ ]=]`, shebang, `\ddd`-escape. На 12 файлах (до 183 КБ) поток токенов совпал 12/12. |
+| **`collect3.py`** (мой) | Python | **Работает** | Сборщик партии: detect → нормализация → `PARTS.md` → `LOG.txt` → сводная таблица. |
+| `unprom` (`_work/tools/unprom`) | Python | **Работает** | 6/6 эталонных сэмплов Prometheus / wearedevs v1.0 / luaobfuscator.com. Снимает `WrapInFunction`, `NumbersToExpressions`, `EncryptStrings`, `ConstantArray`, `AntiTamper`; `Vmify` — только «де-флэттен» в плоский CFG. |
+| `axomtools/ironbrew2-deobfuscator` | Python | **Не подходит** | Заявлен IB 2.7.0/2.7.1/AztupBrew 2.7.2, но написан под другую версию `luaparser` (`Index.obj`, `Index.index`); после патча под 3.3.0 детектор движка не срабатывает на реальных IB 2.7.2 (другая форма обёртки). |
+| `CASCADE` (GNAA/Fission) | JS | **Не подходит** | Заявлен MS/IBW (`node index.js`, вход `input.lua`), но на IB 2.7.2 совпадает <10 инструкций, `output.luac` — 301 байт. |
+| `hexahigh/Scripts` | источник | **+6 132 файла** | Скачан tarball'ом (41 МБ) через `codeload.github.com` — `git clone` на таких объёмах не нужен. |
+
 Все свои скрипты — в `deobf-report/tools/`. Прежний `lua51_disasm.py` остался как резервный дизассемблер.
 
 ---
@@ -208,6 +244,31 @@
 Итог по этому блоку: **12 из 15 — полноценный читаемый Lua**, 3 (Tower of Hell, JailTabs,
 Hatching Simulator) — снят только внешний слой, дальше VM без девиртуализатора.
 
+### Третья партия: 12 сэмплов из 7 режимов (4-я итерация)
+
+Источник — `hexahigh/Scripts`. В этой партии VM-обфускации не было, но код был **минифицирован в одну
+строку**, поэтому применён `tools/lua_beautify.py` (токен-безопасная нормализация).
+
+| Игра / режим | Сэмпл | Что это | Строк | Результат |
+|---|---|---|---|---|
+| Jailbreak | `jailbreak/unjailbreak` | авто-ограбления, ESP, aimbot, 71 телепорт, UI Rain | 4 510 | функциональный Lua |
+| Jailbreak | `jailbreak/gui_2` | GUI-меню | 1 834 | функциональный Lua |
+| Jailbreak | `jailbreak/jailbreaker_v42` | Jailbreaker V4.2 | 909 | функциональный Lua |
+| Prison Life | `prison_life/main` | мультитул: килл-аура, ESP, телепорты, админ-команды | 3 659 | функциональный Lua |
+| Prison Life | `prison_life/simple_gui` | простое GUI | 2 756 | функциональный Lua |
+| Prison Life | `prison_life/gui` | GUI с командами | 1 228 | функциональный Lua |
+| Murder Mystery 2 | `murder_mystery_2/full` | роли, ESP, авто-нож | 1 506 | функциональный Lua |
+| Murder Mystery 2 | `murder_mystery_2/gui` | GUI | 1 149 | функциональный Lua |
+| Close Quarters Combat | `close_quarters_combat/gui` | чит-меню | 1 613 | функциональный Lua |
+| Pet Simulator | `pet_simulator/gui` | GUI-автофарм, UI Hydra/Rain | 1 354 | функциональный Lua |
+| Pet Simulator | `pet_simulator/op_gui` | OP GUI | 999 | функциональный Lua |
+| Tower Defense Simulator | `tower_defense_simulator/autofarm` | автофарм | 11 121 | **частично**: виден блок настроек `_G.*`, тело — VM Luraph v6-типа |
+
+Пример `PARTS.md` (Jailbreak/UNJAILBREAK): фичи — Aimbot (34), ESP (32), Fly/Noclip (48),
+Speed/Jump (35), Teleport (71), Config (77); UI — Rain; сервисы — `Players`, `Workspace`,
+`Lighting`, `RunService`, `UserInputService`; парты — `HumanoidRootPart`, `HopperBin`,
+`BillboardGui`, `ScreenGui`.
+
 ### Blox Strike — **только частично**
 Источник: `haw1xs/ggs.hw` (`script.txt`, `Test.txt`, `script3.txt`), `brkapery/Sigmaware-Roblox-BloxStrike/main.lua` (чистый исходник).
 
@@ -265,6 +326,26 @@ PSU 4.0/4.5 и MoonSec V3 теперь дают настоящий Lua, а не 
 16. **`samuraa1/Solara-Hub` LunaSrc/lunatest** — cамописный «Luna Interface»: `unprom` падает с
     `LuaSyntaxError: expected ')' but got OP:':'`; инструмента под этот формат нет.
 
+17. **Synapse Xen 1.1.2** (One Piece Millennium, Vesteria, Bee Swarm, Doge Simulator, Dark Dex, Boku No
+    Roblox): VM с шифрованным байткодом, `VM Hash` в шапке. Публичного деобфускатора нет — три
+    поисковых запроса по GitHub (`synapse+xen+deobfuscator`, `xen+deobf+lua`, `xen deobfuscator`) дают
+    только скрипт-хабы. Внутри — анти-констант-«троллинг» (строки вида `PSU|23F1w…`).
+18. **IronBrew 2.7.x** (Clone Tycoon 2, Mega Fun Obby, Stackables, Blox Piece 232, Troll GUI,
+    Prison Life Destroyer Hub): `CASCADE` выдаёт 301-байтный `output.luac`, `axomtools/ironbrew2-deobfuscator`
+    падает на разборе AST (в актуальном `luaparser` у `Index` поля `value/idx`, а не `obj/index` —
+    после патча детектор движка IB не срабатывает). Полного IB2-девиртуализатора в песочнице нет.
+19. **Luraph 6.0-beta1 / 11.1 / 11.5** (Ro-Ghoul, Loomian Legacy, Da Hood): `deob.js` умеет только v15
+    (`--detect` → `generic 0.00`), `unprom` на Luraph-десериализатор не реагирует. Отдельно проверены
+    репозитории `larpcorrupt/luraph-v15-v14.x-deobfuscator` (только v14/v15) и
+    `caomod2077/Deobfuscator-Luraph-V15` (то же).
+20. **«Luraph-подобный» VM без шапки** (PEPSI AIMBOT, Arsenal GUI, Arsenal Aimbot): заголовок
+    `local a=string.byte;local b=string.char;…` — тот же десериализатор с base-36 константами и
+    `bit.bxor`-строками; ни один инструмент его не распознаёт (`detect → unknown`), `lua_beautify`
+    даёт только форматирование.
+21. **`unprom --devirt lift`** — флаг принимается молча и ничего не меняет (в README обещан полноценный
+    лифтер); фактический результат по `Vmify` — плоский CFG с блоками `while pos do if pos < K then …`.
+    Код читается, но это не исходный Lua.
+
 ---
 
 ## 6. Что ещё можно скачать (коллекции и инструменты)
@@ -306,7 +387,11 @@ deobf-report/
 │   │   ├── PARTS.md                           #   фичи, UI, URL, парты/подписи
 │   │   └── LOG.txt                            #   лог пайплайна
 │   ├── corpus/<сэмпл>/                        #   бенчмарк на чужих обфускаторах
-│   └── <игра>/<сэмпл>/                        #   вторая партия: 12 режимов (blox_fruits, yba, …)
+│   ├── _failed.md                             #   что не удалось и что пробовали (4-я итерация)
+│   ├── _batch3.md                             #   сводная таблица третьей партии
+│   ├── _corpus_prometheus/                    #   проверка unprom: 6/6 сэмплов Prometheus
+│   ├── <игра>/<сэмпл>/                        #   вторая партия: 12 режимов (blox_fruits, yba, …)
+│   └── <игра>/<сэмпл>/                        #   третья партия: jailbreak, prison_life, pet_simulator, …
 ├── output/                                    # результаты первой итерации (псевдо-Lua, трейсы)
 │   ├── luraph_v15_synaptix_loader.lua
 │   ├── moonsec_v2_lightux13.lua
@@ -320,6 +405,8 @@ deobf-report/
     ├── decompile_salvage.py                   # декомпайл по функциям, когда unluac падает
     ├── extract_parts.py                       # Lua → PARTS.md (фичи, парты, URL, remotes)
     ├── collect_results.py                     # сборка results/ + INDEX.md
+    ├── collect3.py                            # сборка третьей партии (4-я итерация)
+    ├── lua_beautify.py                        # токен-безопасная нормализация минифицированного Lua
     ├── lua51_disasm.py                        # резервный дизассемблер Lua 5.1
     ├── build_luau.sh / build_ast.sh           # сборка Luau-рантайма без cmake
     └── luau_runner.cpp                        # раннер+REPL+loadstring+require для харнесса

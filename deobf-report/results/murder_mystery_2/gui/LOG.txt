@@ -1,0 +1,8 @@
+source: Murder Mystery 2 GUI.lua
+size: 35514 B (34 KB)
+detected: none (обычный Lua, минифицирован)
+description: Murder Mystery 2: GUI
+method: lua_beautify.py (token-safe reindent, токены сверены)
+beautify: /home/user/deobf/deobf-report/results/murder_mystery_2/gui/script.lua: 1143 строк -> 1148 строк, токены совпадают
+parts: parts -> /home/user/deobf/deobf-report/results/murder_mystery_2/gui/PARTS.md (57 labels)
+result: OK, 1149 строк, 40 КБ
