@@ -1,0 +1,157 @@
+{
+  "date": "2026-10-23",
+  "scope": "Popular-game pass requested by the user (All Star Tower Defense, Bloxstrike, other popular titles): one new full recovery from an MIT-pinned protected input, plus the licensed candidates that turned out to be duplicates, loaders or plaintext source",
+  "artifacts": [
+    {
+      "published_path": "dobf scripts 1.0/Murder Mystery 2 - volmaks Coin Farm.lua",
+      "game": "Murder Mystery 2",
+      "variant": "volmaks coin farm / role ESP / aimbot",
+      "status": "deobfuscated",
+      "mode": "static WAD-style decode without the v1.0.0 banner (--force): entire tool output plus provenance header",
+      "bytes": 48598,
+      "sha256": "23d847f31d7ef1b63a5faa674e1bacd29fb3ca89960af0ad77ed5c9e88e87256",
+      "result_header_sha256": "e3afb2f4853a0a5838be5fc4fc76b00aebc54bf08c2b3327e8c525b1ea2b96e8",
+      "result_body_sha256": "7e19e208846af00ff68be7de8a80e8de91a11d96280ee7273675acbaff21ea6e",
+      "body_lines": 1931,
+      "recovery_tool": "prostone4/Prometheus-Deobfuscator@6ee3291ec83fdc58c04e17bb1f1703386619711a",
+      "source": {
+        "repository": "volmaksDev/My-Scripts",
+        "commit": "231da028cc84a5e0dcd9ece97a0008aec47dc794",
+        "path": "test.lua",
+        "url": "https://github.com/volmaksDev/My-Scripts/blob/231da028cc84a5e0dcd9ece97a0008aec47dc794/test.lua",
+        "bytes": 412745,
+        "sha256": "144d0c252f0246add56d0ae721d1d667e1365b41d61ee492416ac266dd60b7cf",
+        "license": "MIT",
+        "license_path": "LICENSE",
+        "license_sha256": "24ba1203a72495d8537a3b1eabfa866255cb91e0f83b2e65694f5fe76d098af7"
+      },
+      "game_markers": [
+        "GetAttribute(\"MapID\")",
+        "\"CoinContainer\"",
+        "\"GunDropHighlight\"",
+        "getPlayerLevel:InvokeServer(",
+        "\"GetPlayerData\""
+      ],
+      "functions": [
+        {
+          "name": "f9()",
+          "parameters": [],
+          "purpose": "Ищет карту: перебирает workspace:GetChildren() и берёт Model с GetAttribute(\"MapID\")."
+        },
+        {
+          "name": "f20()",
+          "parameters": [],
+          "purpose": "Ищет CoinContainer среди детей workspace — источник монет для Coin Farm."
+        },
+        {
+          "name": "f12(p6)",
+          "parameters": [
+            "p6: Instance выпавшего оружия"
+          ],
+          "purpose": "Создаёт \"GunDropHighlight\" у выпавшего пистолета, если ESP включён и подсветки ещё нет."
+        },
+        {
+          "name": "CreateHighlight(p7) / UpdateHighlights()",
+          "parameters": [
+            "p7: Player"
+          ],
+          "purpose": "ESP игроков: Highlight на персонаже и обновление по ролям (innocent/murderer/sheriff), локальный игрок пропускается."
+        },
+        {
+          "name": "f15() / f16() / f17()",
+          "parameters": [],
+          "purpose": "Аимбот: f15 выбирает цель по роли (selectRole), f16 — обычный аимбот, f17 — слежение камерой за AimbotTarget; есть вариант \"Aimbot (Camera Lock)\"."
+        },
+        {
+          "name": "miniFling(p9) / f18(p10, p11, p12)",
+          "parameters": [
+            "p9: Player-цель",
+            "p10/p11/p12: параметры импульса"
+          ],
+          "purpose": "Флинг: при nil-цели показывает уведомление \"Fling target is nil.\"; тумблеры \"Fling murderer\" и \"Fling sheriff\"."
+        },
+        {
+          "name": "f28() / f30()",
+          "parameters": [],
+          "purpose": "Auto grab gun: f28 собирает список выпавшего оружия, f30 — цикл while Script.AutoGrabGun."
+        },
+        {
+          "name": "f6()",
+          "parameters": [],
+          "purpose": "Читает данные MM2: getPlayerLevel:InvokeServer(lp) и getProfileData:InvokeServer() через pcall."
+        },
+        {
+          "name": "f11()",
+          "parameters": [],
+          "purpose": "ReplicatedStorage:FindFirstChild(\"GetPlayerData\", true):InvokeServer() — профиль/баланс игрока."
+        },
+        {
+          "name": "f8()",
+          "parameters": [],
+          "purpose": "Webhook-уведомление: работает только при Script.WebhookEnabled и непустом Script.SavedWebhookUrl, отправляет один раз и выключается."
+        },
+        {
+          "name": "startFly() / stopFly()",
+          "parameters": [],
+          "purpose": "Полёт (PC + мобильные): W/A/S/D/Space/LeftShift, сброс флагов v10/v11."
+        },
+        {
+          "name": "f27() / f26() / _G.SetFullBright(p15)",
+          "parameters": [
+            "p15: boolean"
+          ],
+          "purpose": "Полный свет: Brightness 1 / ClockTime 12 и возврат сохранённых _G.NormalLightingSettings."
+        },
+        {
+          "name": "f1(p1) / f2() / f3() / f4()",
+          "parameters": [
+            "p1: Model персонажа"
+          ],
+          "purpose": "CharacterAdded: кэш Humanoid/HumanoidRootPart, поиск workspace.Lobby, переподключение соединений и шаг авто-режима."
+        },
+        {
+          "name": "f19(p13) / f22() / f24(p14) / IsAlive(p8)",
+          "parameters": [
+            "p13/p14: цель",
+            "p8: Player"
+          ],
+          "purpose": "Замеры времени, расстояние до цели, перемещение к ней и проверка, жив ли игрок."
+        }
+      ],
+      "limitations": [
+        "Поведенческого макета нет: 15 статических проверок тела и компиляция Lua 5.1. Top-level грузит внешние UI-библиотеки и строит меню, поэтому макет проверял бы в основном сам макет.",
+        "Игра определена по маркерам в самом теле (GetAttribute(\"MapID\"), CoinContainer, GunDropHighlight, роли Sheriff/Murderer/Innocent, remote GetPlayerData/getPlayerLevel) и подтверждена совпадением имён GunDropHighlight/SolunaFlingVel с другими MM2-скриптами на GitHub; PlaceId в коде не проверяется.",
+        "Аимбот, ESP по ролям и Fling направлены на других игроков; скрипт меняет workspace.Gravity и Lighting.",
+        "Есть отправка уведомления в Discord-webhook: URL вводит сам пользователь (SavedWebhookUrl по умолчанию пуст, WebhookEnabled = false), но при включении данные уходят на сторонний сервис.",
+        "Внешние WindUI и AdvancedUtils.lua подгружаются с изменяемых URL и не аудированы; без них UI не строится.",
+        "Статическая распаковка WAD и компиляция Lua 5.1 не доказывают поведенческую эквивалентность незащищённому оригиналу и приём сервером InvokeServer-вызовов."
+      ],
+      "external_dependencies": [
+        "WindUI: loadstring(game:HttpGet(\"https://github.com/Footagesus/WindUI/releases/latest/download/main.lua\"))()",
+        "AdvancedUtils.lua: https://raw.githubusercontent.com/volmaksDev/My-Scripts/refs/heads/main/AdvancedUtils.lua",
+        "Discord-webhook по URL пользователя (по умолчанию выключен)",
+        "Ссылки автора: discord.gg / discord.com в элементах меню"
+      ],
+      "modifications": [],
+      "verification": {
+        "lua51_syntax": true,
+        "lua51_method": "scripts/prepare_lua51.py (lua/lua tag v5.1.1, commit 98194db4295726069137d13b8d24fca8cbf892b6), loadfile compile-only",
+        "repeat_decoder_output_identical": true,
+        "protected_top_level_executed": false,
+        "tested_in_roblox": false,
+        "mock_game_assertions": 0,
+        "static_body_assertions": 15,
+        "static_test": "tests/test_wad_batch2_static.lua (case mm2)",
+        "pipeline": "scripts/wad_recover.py: input sha 144d0c25..., license gate passed, two identical decoder runs, audit classification game_code, publishable=True"
+      }
+    }
+  ],
+  "negative_results": [
+    "All Star Tower Defense: 23 репозитория с файлами имени ASTD (поиск по filename) и 7 с именем \"All Star Tower Defense\" проверены по API — лицензии нет ни у одного (CenteredSniper/Kenzen, IsNanTinfem/Krypton, search-scripts/CodeSourcers и др.). Единственный MIT-репозиторий jewmin/astd содержит открытый исходник китайского UI-помощника, то есть (src), который сейчас не добавляется. Защищённого входа с правом перепубликации нет.",
+    "Bloxstrike: 18 репозиториев с файлами имени Bloxstrike без лицензии (ArtChivegroup/Roblox, jiajia67-code/BloxStrike, KScroom/universal-duels, d0inks/moon.lua и др.).",
+    "Bloxstrike, лицензированный вход найден, но это дубликат: orjinalwasexd/bloxstrike@7f1babe48727e63bea57b78526c921b2dc1d4722 (MIT, \"onyxinc\") — WAD v1.0.0, 231 625 байт, sha256 5f8a56ddbda201521d57d71f0823608c01b03f896631e8c934a514b99f04b05a — раскрывается полностью в 37 203 байта / 1 269 строк (sha256 121cc122d2cca52a21139ab8aa63da9c8c0f293b7a277487505b7d355feb82ca), но это другая сборка уже опубликованного Bloxstrike - Hotline UI (тело 37 042 байта, sha256 d76c2de4f311246a38ffcb924efc8d40586660e64aef569ccc3850aaa7d8c9a5): тот же заголовок \"HOTLINE\", то же имя автора \"ony - orjinalwase\", тот же набор ESP/Silent. Отличие — стартовая загрузка телеметрии loadstring(game:HttpGet(\"https://rscripts.net/api/telemetry/client.lua?s=...\"))(). Не опубликовано как дубликат, счётчик не увеличен.",
+    "InfinitelyMNDEV/Tetoware (MIT) содержит SupportedGames/Bloxstrike/Bloxstrike_verision2.3.lua — открытый исходник (в шапке заявлен GNU GPL при MIT-файле LICENSE), то есть (src).",
+    "volmaksDev/My-Scripts: Tower Of Hell.lua (82 289 байт) раскрывается в 8 882 байта / 370 строк и оказывается loader'ом с гейтом подписки и внешней загрузкой — не игровой результат; Additional/t1.lua (495 633 байт) раскрывается в 56 133 байта / 2 316 строк (\"SKRR HUB\"), но загружает внешний модуль обхода античита ([SKRR] AC Bypass Module) — не опубликовано.",
+    "Кандидаты по другим популярным играм (Infinite-Unknown/CaseBot_Bloxstrike — Python-бот без Lua, xqmt/Bloxstrike-Memesense — уже опубликованный (src), muradrew/cameraman-td-script — без Lua-файлов) игрового защищённого кода не дали."
+  ]
+}

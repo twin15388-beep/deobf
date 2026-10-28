@@ -1,0 +1,786 @@
+{
+  "date": "2026-10-21",
+  "scope": "Дополнение к 27 игровым файлам: GitHub/RScripts/ScriptBlox user-visible cards, only actual game-specific Luau, no site APIs or Pastefy.",
+  "validation": [
+    "Pinned Git commit and original SHA-256 (or publicly viewable ScriptBlox raw SHA-256)",
+    "Static review of game references and network calls; Lua never executed",
+    "luau-compile --null for every published file; no Roblox/runtime claim"
+  ],
+  "artifacts": [
+    {
+      "game": "Grand Piece Online",
+      "variant": "Aztup main",
+      "status": "src",
+      "source": {
+        "repository": "ModerkaScripts/Aztup-Hub-V3",
+        "commit": "45bcead9541ad13c2adc631c1afaecf8bdfc8ed5",
+        "path": "files/games/GrandPieceOnline/main.lua",
+        "url": "https://github.com/ModerkaScripts/Aztup-Hub-V3/blob/45bcead9541ad13c2adc631c1afaecf8bdfc8ed5/files/games/GrandPieceOnline/main.lua",
+        "bytes": 68499,
+        "sha256": "03c1e5270797a413a551d99e74d2b552155da9439661b5cd513a0a2ad421a2d3",
+        "license": "MIT",
+        "license_sha256": "ad08d694b5670b07c473ca110b9195c50b4e1707004ea5452ad5634fed69eddb"
+      },
+      "discovery": "GitHub: MIT-плейс-модуль, найден повторным изучением дерева ранее клонированного Aztup.",
+      "source_body_sha256": "fa4b8411ea530206a45c58433849828fe5f4beeb234113f9c69ca81f556fc31e",
+      "published_path": "dobf scripts 1.0/Grand Piece Online - Aztup main (src).lua",
+      "bytes": 65648,
+      "sha256": "fc07e65e575eafda757201933ebd9258df5db9c2237d67f0557bed9dd3ea440a",
+      "lines": 1764,
+      "luau_compiled": true,
+      "roblox_tested": false,
+      "game_markers": [
+        "ReplicatedStorage.Events.Quest:InvokeServer",
+        "function functions.autoAttack(toggle)",
+        "function functions.shipFarm(toggle)"
+      ],
+      "functions": [
+        {
+          "name": "functions.getNPC(searchNpcName)",
+          "parameters": [
+            "searchNpcName: string"
+          ],
+          "purpose": "Ищет живого NPC GPO с атрибутом NPCID; возвращает npc, Humanoid и квест из Modules.NPCInteractions."
+        },
+        {
+          "name": "functions.autoQuest(toggle)",
+          "parameters": [
+            "toggle: boolean"
+          ],
+          "purpose": "Обрабатывает Defeat/Find квесты через Events.Quest:InvokeServer с takequest/quit/founditem/returnitem."
+        },
+        {
+          "name": "functions.autoAttack(toggle)",
+          "parameters": [
+            "toggle: boolean"
+          ],
+          "purpose": "Меняет константы GunHandle/Hitbox и запускает боевой цикл с выбором ближайшего NPC; fireCombat имитирует ввод мыши/клавиши."
+        },
+        {
+          "name": "functions.shipFarm(toggle)",
+          "parameters": [
+            "toggle: boolean"
+          ],
+          "purpose": "Автофарм кораблей, определяет судно в инвентаре и перемещает персонажа к целям."
+        }
+      ],
+      "limitations": [
+        "Модуль не автономен: sharedRequire, accountData, library, getgc, syn, hookmetamethod и другие части Aztup отсутствуют.",
+        "В upstream functions.newTeleportAsync(...) — ЗАГЛУШКА: только assert с некорректным логическим условием и return {await=function() end}; autoQuest/autoFarm не получают от неё перемещения.",
+        "Удалены две отправки на BanWebhook и несколько FireWebhook-вызовов с accountData.uuid/trace; опциональный DF Notifier Webhook.new(webhookLink) оставлен и включается пользователем. Исходный Aztup loader отдельно передаёт аналитику; сюда он не включён.",
+        "В Roblox не проверено; синтаксическая проверка не доказывает эффект и безопасность."
+      ],
+      "modifications": [
+        "scripts/sanitize_aztup_gpo.py удалил Ban/FireWebhook transport, бан-аналитику, вызовы Send и сбор usedFeatures; блокировка некоторых Skill вызовов сохранена. Сравнение diff: только эти удаления."
+      ]
+    },
+    {
+      "game": "Grand Piece Online",
+      "variant": "Aztup Perfect Block",
+      "status": "src",
+      "source": {
+        "repository": "ModerkaScripts/Aztup-Hub-V3",
+        "commit": "45bcead9541ad13c2adc631c1afaecf8bdfc8ed5",
+        "path": "files/games/GrandPieceOnline/PerfectBlock.lua",
+        "url": "https://github.com/ModerkaScripts/Aztup-Hub-V3/blob/45bcead9541ad13c2adc631c1afaecf8bdfc8ed5/files/games/GrandPieceOnline/PerfectBlock.lua",
+        "bytes": 8816,
+        "sha256": "b5804fa7724ce78c87121781f428bc512898e13078cf1cf5cd18492427ad227e",
+        "license": "MIT",
+        "license_sha256": "ad08d694b5670b07c473ca110b9195c50b4e1707004ea5452ad5634fed69eddb"
+      },
+      "discovery": "GitHub: файл из дерева Aztup; не путать с полным самостоятельным автофармом.",
+      "source_body_sha256": "b5804fa7724ce78c87121781f428bc512898e13078cf1cf5cd18492427ad227e",
+      "published_path": "dobf scripts 1.0/Grand Piece Online - Aztup Perfect Block (src).lua",
+      "bytes": 10386,
+      "sha256": "7da488558592766fae96537584376cf63f856771443cd7e5d81f0ae3dd6bf65e",
+      "lines": 297,
+      "luau_compiled": true,
+      "roblox_tested": false,
+      "game_markers": [
+        "Fishman Karate Punch",
+        "workspace.PlayerCharacters",
+        "function PerfectBlock.new(character)"
+      ],
+      "functions": [
+        {
+          "name": "PerfectBlock.new(character)",
+          "parameters": [
+            "character: Model"
+          ],
+          "purpose": "Подписывается на Humanoid.AnimationPlayed для NPC/другого игрока и отслеживает удаление персонажа."
+        },
+        {
+          "name": "parryAttack(timings, rootPart, animationTrack, maxRange, useAnimSpeed)",
+          "parameters": [
+            "timings: number[]",
+            "rootPart",
+            "animationTrack",
+            "maxRange",
+            "useAnimSpeed"
+          ],
+          "purpose": "Планирует нажатия клавиши F по ID анимации и длительности; rootPart/maxRange в parry сейчас не используются."
+        },
+        {
+          "name": "init(t)",
+          "parameters": [
+            "t: boolean"
+          ],
+          "purpose": "Включает/выключает слушателей workspace.NPCs и workspace.PlayerCharacters; возвращён модулем для GPO main."
+        }
+      ],
+      "limitations": [
+        "Нужны sharedRequire Aztup, getgenv, keypress/keyrelease и GPO-анимации из старого набора; модуль импортируется main.lua, но не является самостоятельным хабом.",
+        "Пинг в calculatePingWait(n) фактически не учитывается, maxRange в parry не проверяется; в Roblox не проверено."
+      ],
+      "modifications": []
+    },
+    {
+      "game": "Ro-Ghoul",
+      "variant": "Aztup module",
+      "status": "src",
+      "source": {
+        "repository": "ModerkaScripts/Aztup-Hub-V3",
+        "commit": "45bcead9541ad13c2adc631c1afaecf8bdfc8ed5",
+        "path": "files/games/RoGhoul/main.lua",
+        "url": "https://github.com/ModerkaScripts/Aztup-Hub-V3/blob/45bcead9541ad13c2adc631c1afaecf8bdfc8ed5/files/games/RoGhoul/main.lua",
+        "bytes": 22505,
+        "sha256": "27e3b957f00ba7056c12a6883541a712df487fa9ad26fc07448a1683985b19df",
+        "license": "MIT",
+        "license_sha256": "ad08d694b5670b07c473ca110b9195c50b4e1707004ea5452ad5634fed69eddb"
+      },
+      "discovery": "GitHub: реальный Ro-Ghoul автофарм вместо прежнего частичного Quest-фрагмента.",
+      "source_body_sha256": "27e3b957f00ba7056c12a6883541a712df487fa9ad26fc07448a1683985b19df",
+      "published_path": "dobf scripts 1.0/Ro-Ghoul - Aztup module (src).lua",
+      "bytes": 24105,
+      "sha256": "f8b12ad74a06279960b729303cd4be95893574376d45cd497045492999d02308",
+      "lines": 646,
+      "luau_compiled": true,
+      "roblox_tested": false,
+      "game_markers": [
+        "workspace.NPCSpawns",
+        "ReputationCashOut",
+        "KaguneStages"
+      ],
+      "functions": [
+        {
+          "name": "getClosestMob()",
+          "parameters": [],
+          "purpose": "Выбирает по дистанции/приоритетам моба в NPCSpawns или BossSpawns, учитывая выбранный квест и безопасность зоны."
+        },
+        {
+          "name": "toggleAutoFarm(toggle)",
+          "parameters": [
+            "toggle: boolean"
+          ],
+          "purpose": "Ставит персонажа под мобом, посылает KeyEvent:FireServer(RemoteKey, Mouse1/E/R/F, ...) для Kagune/Katana/Quinque."
+        },
+        {
+          "name": "toggleCashOutReputation(toggle)",
+          "parameters": [
+            "toggle: boolean"
+          ],
+          "purpose": "Делает InvokeServer ReputationCashOut в игровом цикле."
+        },
+        {
+          "name": "toggleAutoTrainer(t)",
+          "parameters": [
+            "t: boolean"
+          ],
+          "purpose": "Вызывает Remotes.Trainers.RequestTraining для тренера своей команды."
+        }
+      ],
+      "limitations": [
+        "Полагается на getgc/getconstants для получения динамического RemoteKey и инфраструктуру Aztup; если ключ не получен, исходник вызывает LocalPlayer:Kick.",
+        "Включён старый UI и dataloss-опции; перед использованием анализируйте ограничения сохранений. В Roblox не проверено."
+      ],
+      "modifications": []
+    },
+    {
+      "game": "Project Mugetsu",
+      "variant": "Aztup module",
+      "status": "src",
+      "source": {
+        "repository": "ModerkaScripts/Aztup-Hub-V3",
+        "commit": "45bcead9541ad13c2adc631c1afaecf8bdfc8ed5",
+        "path": "files/games/ProjectMugetsu.lua",
+        "url": "https://github.com/ModerkaScripts/Aztup-Hub-V3/blob/45bcead9541ad13c2adc631c1afaecf8bdfc8ed5/files/games/ProjectMugetsu.lua",
+        "bytes": 13995,
+        "sha256": "cfb2dd642faf7d388f6bed1195fe5d37a69eeb77ed3b7cc06d956d9ed106fbb3",
+        "license": "MIT",
+        "license_sha256": "ad08d694b5670b07c473ca110b9195c50b4e1707004ea5452ad5634fed69eddb"
+      },
+      "discovery": "GitHub: MIT-модуль для RPG Project Mugetsu.",
+      "source_body_sha256": "cfb2dd642faf7d388f6bed1195fe5d37a69eeb77ed3b7cc06d956d9ed106fbb3",
+      "published_path": "dobf scripts 1.0/Project Mugetsu - Aztup module (src).lua",
+      "bytes": 15604,
+      "sha256": "8f4c7161f8445bc7cd3e06a1bf49441841b823a1536481958525581752769eab",
+      "lines": 430,
+      "luau_compiled": true,
+      "roblox_tested": false,
+      "game_markers": [
+        "UpdateKeys",
+        "Initiate_Server",
+        "Customization"
+      ],
+      "functions": [
+        {
+          "name": "isDatalossSet(myData)",
+          "parameters": [
+            "myData: Instance"
+          ],
+          "purpose": "Проверяет длину игровых Keys у Player_Data для определения состояния данных."
+        },
+        {
+          "name": "funcs.setUpDataloss(t)",
+          "parameters": [
+            "t: boolean"
+          ],
+          "purpose": "Отправляет UpdateKeys с различными именами клавиш; функция определяется повторно в ветке лобби."
+        },
+        {
+          "name": "funcs.rollBackData(t, bypass)",
+          "parameters": [
+            "t: boolean",
+            "bypass: boolean"
+          ],
+          "purpose": "Пытается откатить данные кастомизации; может повредить прогресс."
+        },
+        {
+          "name": "funcs.doSpin(bypass)",
+          "parameters": [
+            "bypass: boolean"
+          ],
+          "purpose": "Планирует запросы Customization для вращения клана (вызов в UI частично закомментирован)."
+        }
+      ],
+      "limitations": [
+        "Опасный модуль с манипуляцией dataloss/UpdateKeys и профилем игрока, НЕ рекомендуется запускать на основном аккаунте; исходник содержит закомментированные UI-вызовы.",
+        "Требует библиотеку Aztup и game.PlaceId из набора GAME_PLACE_IDS; в Roblox не проверено."
+      ],
+      "modifications": []
+    },
+    {
+      "game": "Deepwoken",
+      "variant": "Aztup Race Changer",
+      "status": "src",
+      "source": {
+        "repository": "ModerkaScripts/Aztup-Hub-V3",
+        "commit": "45bcead9541ad13c2adc631c1afaecf8bdfc8ed5",
+        "path": "files/games/DeepWokenRaceChanger.lua",
+        "url": "https://github.com/ModerkaScripts/Aztup-Hub-V3/blob/45bcead9541ad13c2adc631c1afaecf8bdfc8ed5/files/games/DeepWokenRaceChanger.lua",
+        "bytes": 6733,
+        "sha256": "489a70d4e37e343e4875debdd43bd74b1f4c2cf1f2326f1d47935c6df6708081",
+        "license": "MIT",
+        "license_sha256": "ad08d694b5670b07c473ca110b9195c50b4e1707004ea5452ad5634fed69eddb"
+      },
+      "discovery": "GitHub: самостоятельный (в рамках Aztup) визуальный модуль RPG Deepwoken.",
+      "source_body_sha256": "489a70d4e37e343e4875debdd43bd74b1f4c2cf1f2326f1d47935c6df6708081",
+      "published_path": "dobf scripts 1.0/Deepwoken - Aztup Race Changer (src).lua",
+      "bytes": 8284,
+      "sha256": "9576d29e03e07283f6c313d4037088307df4b5977659b270df4a9ab6eee7eccb",
+      "lines": 225,
+      "luau_compiled": true,
+      "roblox_tested": false,
+      "game_markers": [
+        "LightbornCirclet",
+        "ContractorString",
+        "function functions.lightbornSkinColor(t)"
+      ],
+      "functions": [
+        {
+          "name": "createCirclet(parent, weldPart, cframe, color)",
+          "parameters": [
+            "parent",
+            "weldPart",
+            "cframe",
+            "color"
+          ],
+          "purpose": "Клонирует ассет обруча и приваривает к нужной части аватара."
+        },
+        {
+          "name": "functions.lightbornSkinColor(t)",
+          "parameters": [
+            "t: boolean"
+          ],
+          "purpose": "Меняет локально отображаемые части лица/кожи под Lightborn; для возврата нужен respawn."
+        },
+        {
+          "name": "contractorToggle(t)",
+          "parameters": [
+            "t: boolean"
+          ],
+          "purpose": "Добавляет эффект ContractorString к рукам и торсу и чистит через Maid."
+        }
+      ],
+      "limitations": [
+        "Только КОСМЕТИКА, не смена серверной расы. Нужны sharedRequire Aztup, UI misc, ассет rbxassetid://12562484379 и эффекты игры.",
+        "Некоторые части аватара могут называться иначе; в Roblox не проверено."
+      ],
+      "modifications": []
+    },
+    {
+      "game": "Ride a Pet",
+      "variant": "0x5A46 Eggs",
+      "status": "src",
+      "source": {
+        "repository": "0x5448OIOI/0x5A46-Ride-A-Pet",
+        "commit": "391c3853e944a64fda47744f5a17a79784d8f0b2",
+        "path": "Code",
+        "url": "https://github.com/0x5448OIOI/0x5A46-Ride-A-Pet/blob/391c3853e944a64fda47744f5a17a79784d8f0b2/Code",
+        "bytes": 117989,
+        "sha256": "7d28ac24652e010113b1f295f2a5c081c8df00f90161c9eb19f5269ef72fb6bd",
+        "license": "Apache-2.0",
+        "license_sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+      },
+      "discovery": "GitHub: разрешённая Apache-2.0 альтернатива загрузчику карточки ScriptBlox Ride A Pet.",
+      "source_body_sha256": "7d28ac24652e010113b1f295f2a5c081c8df00f90161c9eb19f5269ef72fb6bd",
+      "published_path": "dobf scripts 1.0/Ride a Pet - 0x5A46 Eggs (src).lua",
+      "bytes": 118633,
+      "sha256": "92cb183dc9ca74deac19fa0e226b44e6a930af461d8faedf1e796eb86f0fefd5",
+      "lines": 3046,
+      "luau_compiled": true,
+      "roblox_tested": false,
+      "game_markers": [
+        "RenderedEggs",
+        "EggSpawns",
+        "local function coletar(relatar)"
+      ],
+      "functions": [
+        {
+          "name": "acharRaridade(ovo, pos)",
+          "parameters": [
+            "ovo: Model",
+            "pos: Vector3"
+          ],
+          "purpose": "Связывает отрисованное яйцо с EggSpawns в радиусе 25 studs и читает A_OrigRarity."
+        },
+        {
+          "name": "lerOvos()",
+          "parameters": [],
+          "purpose": "Считывает RenderedEggs с типом, редкостью и расстоянием для ESP по фильтру."
+        },
+        {
+          "name": "escolherAlvo()",
+          "parameters": [],
+          "purpose": "Выбирает лучшее по luck или ближайшее яйцо выбранного типа."
+        },
+        {
+          "name": "coletar(relatar)",
+          "parameters": [
+            "relatar: function(status)"
+          ],
+          "purpose": "Летит к яйцу, активирует ProximityPrompt, возвращается к плоту, ждёт подтверждения через счётчик яиц на базе."
+        }
+      ],
+      "limitations": [
+        "Apache-2.0; полный лицензионный текст добавлен в reports/licenses. Интерфейс/фон опционально получают произвольный URL изображения, читают/пишут файлы executor.",
+        "Работа зависит от RenderedEggs/EggSpawns и API fireproximityprompt/getcustomasset; авторская проверка сервера не подтверждена локально. Сеть в Roblox не проверялась."
+      ],
+      "modifications": []
+    },
+    {
+      "game": "All Star Tower Defense",
+      "variant": "KarmaPanda",
+      "status": "src",
+      "source": {
+        "repository": "KarmaPanda/Roblox",
+        "commit": "1e2656974551c234c8296f3761c3a133177fcf8c",
+        "path": "astd.lua",
+        "url": "https://github.com/KarmaPanda/Roblox/blob/1e2656974551c234c8296f3761c3a133177fcf8c/astd.lua",
+        "bytes": 169952,
+        "sha256": "bf863c3c3538c8d91d2138c02eafb60f855c79be2ef4af8ad329cd4475bbdeb6",
+        "license": "author release / attribution requested (no SPDX)"
+      },
+      "discovery": "GitHub/web: по README исходник ASTD выпущен автором и просит указать его имя; не деобфускация.",
+      "source_body_sha256": "bf863c3c3538c8d91d2138c02eafb60f855c79be2ef4af8ad329cd4475bbdeb6",
+      "published_path": "dobf scripts 1.0/All Star Tower Defense - KarmaPanda (src).lua",
+      "bytes": 170726,
+      "sha256": "a8904a2758e9d4015673ba5d0b4df94213fdcee8fb28d0b58e57751a3810ec6e",
+      "lines": 4572,
+      "luau_compiled": true,
+      "roblox_tested": false,
+      "game_markers": [
+        "game.GameId ~= 1720936166",
+        "local function SummonUnit(rotation, cframe, unit_name)",
+        "function StartMacroRecord()"
+      ],
+      "functions": [
+        {
+          "name": "SummonUnit(rotation, cframe, unit_name)",
+          "parameters": [
+            "rotation",
+            "cframe",
+            "unit_name"
+          ],
+          "purpose": "Шлёт Remotes.Input Summon и проверяет появление юнита Owner в workspace.Unit."
+        },
+        {
+          "name": "UpgradeUnit(unit, upgrade_level)",
+          "parameters": [
+            "unit: Model",
+            "upgrade_level: number"
+          ],
+          "purpose": "Планирует игровые Upgrade до заданного уровня с учётом денег/очереди действий."
+        },
+        {
+          "name": "StartMacroRecord() / StartMacroPlayback()",
+          "parameters": [],
+          "purpose": "Записывает игровые Summon/Sell/Upgrade/SkipWave и воспроизводит профиль макроса."
+        },
+        {
+          "name": "AutoJoinGame()",
+          "parameters": [],
+          "purpose": "Выбирает ASTD-карту/режим через UI лобби и игровые события."
+        }
+      ],
+      "limitations": [
+        "Автор README прямо разрешил использовать опубликованный исходник при указании KarmaPanda, но стандартной LICENSE нет; код не выдаётся за MIT.",
+        "Хаб снят с поддержки автором; не гарантируется работа. При исполнении загружает Rayfield с GitHub main; при включении auto_execute обращается к api.irisapp.ca и повторно загружает себя. Опциональные GUI и user-configured webhook, хранилище макросов; в Roblox не проверено."
+      ],
+      "modifications": []
+    },
+    {
+      "game": "A Universal Time",
+      "variant": "Hyper Zoro",
+      "status": "src",
+      "source": {
+        "repository": null,
+        "commit": null,
+        "path": "public View Raw",
+        "url": "https://scriptblox.com/raw/JUJUTSU-KAISEN-A-Universal-Time-3.8-Universl-OP-uto-scend-20583",
+        "card_url": "https://scriptblox.com/script/JUJUTSU-KAISEN-A-Universal-Time-3.8-Universl-OP-uto-scend-20583",
+        "bytes": 828,
+        "sha256": "3a64589ff6c8e472624b1f19db944d16e5ec9c9436c38f602901bbe830e7c96e",
+        "license": "self-described open source (no SPDX license)"
+      },
+      "discovery": "ScriptBlox user-visible View Raw (НЕ API): публичный код самой карточки, не загрузчик.",
+      "source_body_sha256": "3a64589ff6c8e472624b1f19db944d16e5ec9c9436c38f602901bbe830e7c96e",
+      "published_path": "dobf scripts 1.0/A Universal Time - Hyper Zoro (src).lua",
+      "bytes": 1480,
+      "sha256": "913c97debf9f8c2d769b4494333e4a64556e87d0e11cd99ceddcc99cf9b836f0",
+      "lines": 34,
+      "luau_compiled": true,
+      "roblox_tested": false,
+      "game_markers": [
+        "Zoros_Swords_Adventure",
+        "AdventureService.RF.PickedUpSword",
+        "LevelService.RF.AscendAbility"
+      ],
+      "functions": [
+        {
+          "name": "Heartbeat callback()",
+          "parameters": [],
+          "purpose": "На каждом Heartbeat создаёт task.spawn с тремя запросами Knit для квеста Zoro."
+        },
+        {
+          "name": "CheckDialogue:InvokeServer(\"Zoros_Swords_Adventure\")",
+          "parameters": [
+            "questName: string"
+          ],
+          "purpose": "Проверяет диалог задания Zoro (в опубликованном коде вызывается как PickedUpSword.InvokeServer(CheckDialogue, ...))."
+        },
+        {
+          "name": "PickedUpSword:InvokeServer() / AscendAbility:InvokeServer(ability)",
+          "parameters": [
+            "ability: значение player.Data.Ability"
+          ],
+          "purpose": "Пытается подобрать меч и повысить способность."
+        }
+      ],
+      "limitations": [
+        "Выложено ScriptBlox автором neutral с названием «open source», но формального SPDX/лицензии нет; права на дальнейшее распространение не уточнялись.",
+        "Историческая версия 2024 года и только режим тренировки; без ограничения частоты шлёт три InvokeServer на Heartbeat (потенциальный троттлинг/кик). Roblox не проверено."
+      ],
+      "modifications": []
+    },
+    {
+      "game": "RO-Wizard",
+      "variant": "Magma Hub module",
+      "status": "src",
+      "source": {
+        "repository": "Commandcracker/Magma-Hub",
+        "commit": "5d7e2f84de039e65f909b50c3533b199fff9e9fd",
+        "path": "games/1111920082.lua",
+        "url": "https://github.com/Commandcracker/Magma-Hub/blob/5d7e2f84de039e65f909b50c3533b199fff9e9fd/games/1111920082.lua",
+        "bytes": 2641,
+        "sha256": "ab4310d15d3c72a726f379ea2017a7136b4aa33884ffe920a6cb5078a946f012",
+        "license": "MIT",
+        "license_sha256": "ba6f2791cb175d75b0757c09737f2ebe15e76e018379fe7557a9c8ca7b3d74cb"
+      },
+      "discovery": "GitHub: MIT игровой модуль RO-Wizard по GameId 1111920082.",
+      "source_body_sha256": "ab4310d15d3c72a726f379ea2017a7136b4aa33884ffe920a6cb5078a946f012",
+      "published_path": "dobf scripts 1.0/RO-Wizard - Magma Hub module (src).lua",
+      "bytes": 4178,
+      "sha256": "0fc7825f6b46c8da9ac0277c1fc2c6d02d5eb9cd3e11c00ce26097bc69db05fb",
+      "lines": 118,
+      "luau_compiled": true,
+      "roblox_tested": false,
+      "game_markers": [
+        "TogglePrompter",
+        "BookStands",
+        "Workspace\").Ingredients"
+      ],
+      "functions": [
+        {
+          "name": "UsePrompter(Prompter)",
+          "parameters": [
+            "Prompter: Instance"
+          ],
+          "purpose": "Посылает Modules.Network.RemoteEvent TogglePrompter Down/Up."
+        },
+        {
+          "name": "Unlock All Spells callback()",
+          "parameters": [],
+          "purpose": "Перемещает персонажа к BookStands и использует Prompter каждой стойки."
+        },
+        {
+          "name": "Collect All Ingredients callback()",
+          "parameters": [],
+          "purpose": "Пробегает разные Ingredients и вызывает их Prompter до пяти раз."
+        }
+      ],
+      "limitations": [
+        "Это вкладка Magma Hub, нужны MagmaHub и Btable; телепортация напрямую меняет HumanoidRootPart.CFrame, могут возникнуть откаты/детект.",
+        "Игра может изменить имена объектов или проверять позицию на сервере; в Roblox не проверено."
+      ],
+      "modifications": []
+    },
+    {
+      "game": "Pet Simulator X",
+      "variant": "Magma Hub module",
+      "status": "src",
+      "source": {
+        "repository": "Commandcracker/Magma-Hub",
+        "commit": "5d7e2f84de039e65f909b50c3533b199fff9e9fd",
+        "path": "games/2316994223.lua",
+        "url": "https://github.com/Commandcracker/Magma-Hub/blob/5d7e2f84de039e65f909b50c3533b199fff9e9fd/games/2316994223.lua",
+        "bytes": 2511,
+        "sha256": "1467665e670ab3c57b5721b15ab069beb961bdaf411093fd131808a477c0c609",
+        "license": "MIT",
+        "license_sha256": "ba6f2791cb175d75b0757c09737f2ebe15e76e018379fe7557a9c8ca7b3d74cb"
+      },
+      "discovery": "GitHub: MIT игровой модуль Pet Simulator X по GameId 2316994223.",
+      "source_body_sha256": "1467665e670ab3c57b5721b15ab069beb961bdaf411093fd131808a477c0c609",
+      "published_path": "dobf scripts 1.0/Pet Simulator X - Magma Hub module (src).lua",
+      "bytes": 4054,
+      "sha256": "f24bcd73a4561be6799bcb452fd12b5b8c5e629bc2c57ed03f24a4ea90e9a728",
+      "lines": 121,
+      "luau_compiled": true,
+      "roblox_tested": false,
+      "game_markers": [
+        "workspace[\"__THINGS\"].Coins",
+        "Framework.Signal.Fire(\"Select Coin\", Coin)",
+        "workspace[\"__THINGS\"].Orbs"
+      ],
+      "functions": [
+        {
+          "name": "FindNearestCoin()",
+          "parameters": [],
+          "purpose": "Выбирает ближайшую монету __THINGS.Coins по расстоянию до персонажа."
+        },
+        {
+          "name": "Auto Farm toggle callback()",
+          "parameters": [],
+          "purpose": "Вызывает Framework.Signal.Fire(\"Select Coin\", Coin) для числа экипированных питомцев."
+        },
+        {
+          "name": "Auto Collect Orbs / Lootbags toggle callbacks()",
+          "parameters": [],
+          "purpose": "Двигает __THINGS.Orbs и Lootbags к локальному персонажу."
+        }
+      ],
+      "limitations": [
+        "Требует MagmaHub/Threads и старую структуру Pet Simulator X; Auto Collect Gifts находит RemoteFunction по общему имени и может обращаться не к тому remote.",
+        "Если монет нет, обращение к Coin:GetChildren() в AutoFarm может упасть; в Roblox не проверено."
+      ],
+      "modifications": []
+    },
+    {
+      "game": "Bloodlines",
+      "variant": "Aztup module",
+      "status": "src",
+      "source": {
+        "repository": "ModerkaScripts/Aztup-Hub-V3",
+        "commit": "45bcead9541ad13c2adc631c1afaecf8bdfc8ed5",
+        "path": "files/games/Bloodlines.lua",
+        "url": "https://github.com/ModerkaScripts/Aztup-Hub-V3/blob/45bcead9541ad13c2adc631c1afaecf8bdfc8ed5/files/games/Bloodlines.lua",
+        "bytes": 31382,
+        "sha256": "bf254aae3c687d771dcc69184f8c067add64e695dabd78e4eb859010411621a5",
+        "license": "MIT",
+        "license_sha256": "ad08d694b5670b07c473ca110b9195c50b4e1707004ea5452ad5634fed69eddb"
+      },
+      "discovery": "GitHub: дополнительный именованный RPG-модуль Aztup, включён после аудита автоматических сетевых вызовов и рисков dataloss.",
+      "source_body_sha256": "bf254aae3c687d771dcc69184f8c067add64e695dabd78e4eb859010411621a5",
+      "published_path": "dobf scripts 1.0/Bloodlines - Aztup module (src).lua",
+      "bytes": 32999,
+      "sha256": "c11120ddb8b994bdd71a96389620fd9ccdf911692f08dc271d17e26bc7d5b437",
+      "lines": 965,
+      "luau_compiled": true,
+      "roblox_tested": false,
+      "game_markers": [
+        "local MAIN_PLACE_ID = 10266164381",
+        "dataEvent:FireServer('PickUp', obj.ID.Value)",
+        "function funcs.findThunderstormServer(state)"
+      ],
+      "functions": [
+        {
+          "name": "funcs.autoPickup(toggle)",
+          "parameters": [
+            "toggle: boolean"
+          ],
+          "purpose": "Отслеживает ID предметов с Pickupable в workspace и вызывает Events.DataEvent PickUp в радиусе 50."
+        },
+        {
+          "name": "funcs.teleportToChakraPoint()",
+          "parameters": [],
+          "purpose": "Перемещает HumanoidRootPart к выбранной ChakraPoints.PointName."
+        },
+        {
+          "name": "funcs.findThunderstormServer(state)",
+          "parameters": [
+            "state: boolean"
+          ],
+          "purpose": "Проверяет Thunderstorm в workspace, запрашивает публичные серверы через syn.request и вызывает DataEvent ServerTeleport."
+        },
+        {
+          "name": "funcs.rollbackData()",
+          "parameters": [],
+          "purpose": "Отправляет UpdateSettings с огромной строкой и проверяет GetData.Footsteps; намеренная попытка dataloss/отката."
+        }
+      ],
+      "limitations": [
+        "Этот модуль Bloodlines привязан к PlaceId 10266164381, не автономен: нужны sharedRequire, library, Utility и другие классы Aztup.",
+        "Содержит опасный Rollback Data: намеренный dataloss через 10 млн NUL-байтов, и Purchase Item через Pay; НЕ запускайте эти команды без понимания последствий.",
+        "При исполнении автоматически скачивает два mp3 с aztupscripts.xyz и записывает файлы через executor; функция поиска грозы посылает запросы к games.roblox.com, требует syn.request. Исходный Aztup runtime отдельно использует аналитику.",
+        "В Roblox не проверено; серверная проверка DataEvent PickUp/ServerTeleport неизвестна."
+      ],
+      "modifications": []
+    },
+    {
+      "game": "Doors",
+      "variant": "Abysall Lobby",
+      "status": "src",
+      "source": {
+        "repository": "bocaj111004/Abysall",
+        "commit": "66d4192d00d9b824a304b654bc2d2eb89c3b372b",
+        "path": "Games/Doors/Lobby.luau",
+        "url": "https://github.com/bocaj111004/Abysall/blob/66d4192d00d9b824a304b654bc2d2eb89c3b372b/Games/Doors/Lobby.luau",
+        "bytes": 15849,
+        "sha256": "cdeeb00e48765a600c6b037c44b7cdb8fd78c9d434ca04f62758e85571518739",
+        "license": "MIT",
+        "license_sha256": "6211a34427f1581e241fef6c22dbbfddef523b3a1622628f8ba29e210926fd4b"
+      },
+      "discovery": "GitHub: MIT модуль лобби Doors, отдельно от Main; телеметрический upstream Loader исключён.",
+      "source_body_sha256": "cdeeb00e48765a600c6b037c44b7cdb8fd78c9d434ca04f62758e85571518739",
+      "published_path": "dobf scripts 1.0/Doors - Abysall Lobby (src).lua",
+      "bytes": 17443,
+      "sha256": "a40932a98f788970896cd1cbeed76416c1f23a93037c95f885abe8da83f8c4f0",
+      "lines": 583,
+      "luau_compiled": true,
+      "roblox_tested": false,
+      "game_markers": [
+        "RemotesFolder.ElevatorJoin:FireServer",
+        "RemotesFolder.CreateElevator:FireServer",
+        "RemotesFolder.ShopCode:FireServer"
+      ],
+      "functions": [
+        {
+          "name": "Functions.CheckElevators()",
+          "parameters": [],
+          "purpose": "Ищет лифт в Workspace.Lobby.LobbyElevators с InGameElevator выбранного игрока и вызывает ElevatorJoin/ElevatorExit."
+        },
+        {
+          "name": "ShopCode input callback(Code)",
+          "parameters": [
+            "Code: string"
+          ],
+          "purpose": "Отправляет купон RemotesFolder.ShopCode:FireServer(Code)."
+        },
+        {
+          "name": "CreateElevator button callbacks()",
+          "parameters": [],
+          "purpose": "Открывает лифты Doors с разными модификаторами через RemotesFolder.CreateElevator."
+        }
+      ],
+      "limitations": [
+        "Отдельный модуль Abysall без Loader/Interface; upstream Loader.luau автоматически загружает Components/Analytics.luau и отправляет username/executor/game в сторонний сервис. НЕ запускайте upstream Loader без отдельного аудита.",
+        "Не тестировалось в Roblox; команды лифтов и купонов могут измениться."
+      ],
+      "modifications": []
+    },
+    {
+      "game": "Doors",
+      "variant": "Abysall Main",
+      "status": "src",
+      "source": {
+        "repository": "bocaj111004/Abysall",
+        "commit": "66d4192d00d9b824a304b654bc2d2eb89c3b372b",
+        "path": "Games/Doors/Main.luau",
+        "url": "https://github.com/bocaj111004/Abysall/blob/66d4192d00d9b824a304b654bc2d2eb89c3b372b/Games/Doors/Main.luau",
+        "bytes": 195949,
+        "sha256": "c54a3d40029b73ee592fb59d1dc7466e4760bbed8cad2faf103fb8d08f5f65ce",
+        "license": "MIT",
+        "license_sha256": "6211a34427f1581e241fef6c22dbbfddef523b3a1622628f8ba29e210926fd4b"
+      },
+      "discovery": "GitHub: MIT модуль основного режима Doors с реальными обработчиками комнат, не универсальный ESP.",
+      "source_body_sha256": "c54a3d40029b73ee592fb59d1dc7466e4760bbed8cad2faf103fb8d08f5f65ce",
+      "published_path": "dobf scripts 1.0/Doors - Abysall Main (src).lua",
+      "bytes": 197541,
+      "sha256": "f45e54d81e8922a9ed6a63d3f01ada793c8ba350964547b3a9892ce1a43aa834",
+      "lines": 4630,
+      "luau_compiled": true,
+      "roblox_tested": false,
+      "game_markers": [
+        "RushMoving",
+        "Functions.GetNearestFigure = function()",
+        "Functions.TriggerPrompt = function(Prompt)"
+      ],
+      "functions": [
+        {
+          "name": "Functions.GetNearestEntity(CheckDisabled, List, UseRaycasting)",
+          "parameters": [
+            "CheckDisabled",
+            "List",
+            "UseRaycasting"
+          ],
+          "purpose": "Выбирает ближайшую сущность Doors (Rush/Ambush/Figure и др.) для уведомлений и укрытий."
+        },
+        {
+          "name": "Functions.GetNearestHidingSpot()",
+          "parameters": [],
+          "purpose": "Ищет шкафы/укрытия для защиты от монстров."
+        },
+        {
+          "name": "Functions.HandleObject(Object)",
+          "parameters": [
+            "Object: Instance"
+          ],
+          "purpose": "Разбирает игровые комнаты, двери, предметы и события по типам; регистрирует ESP/подсказки."
+        },
+        {
+          "name": "Functions.TriggerPrompt(Prompt)",
+          "parameters": [
+            "Prompt: ProximityPrompt"
+          ],
+          "purpose": "Активирует игровой ProximityPrompt через доступный API executor."
+        }
+      ],
+      "limitations": [
+        "Отдельный модуль Abysall, требует глобальные Abysall.Interface/Environment/ESPLibrary; STX.luau загружается И ИСПОЛНЯЕТСЯ автоматически с изменяемой ветки GitHub main, а DeathFarm только по кнопке.",
+        "Upstream Loader.luau автоматически отправляет username/executor/game через Components/Analytics.luau; Loader сюда не включён. В Roblox не проверено."
+      ],
+      "modifications": []
+    }
+  ],
+  "unresolved": [
+    "King Legacy: RScripts Fazium target Luraph v14.3, no source distribution rights or full static deobfuscation.",
+    "Demonfall: RScripts HumilityCC target Luraph v14.1, no source distribution rights or full static deobfuscation.",
+    "Trident Survival: PUSCRIPTS/PINGUIN LICENSE.md forbids copying/publishing; other targets without permission.",
+    "Anime Vanguards: ScriptBlox card leads to MoonSec V3 and no license; MIT GigaMechanicRear/anime_vanguards uses generic guesses rather than confirmed game mechanics.",
+    "Gakuran: OweHub ScriptBlox link points at nonexistent GitHub tree; MIT nora385 repo has no Lua and DEPEMOTES is universal.",
+    "VV Ultimatum: protected file has syntax error; no recovered game code.",
+    "Illegal Sorcer: searches lead to Illegal Soccer rather than a separately verified game.",
+    "A Universal Time: only a tiny training-mode open-source handler added, not a complete hub.",
+    "Ride a Pet: Apache-2.0 version added; ScriptBlox open-source card points to unlicensed GitHub and author reported script dead."
+  ]
+}
