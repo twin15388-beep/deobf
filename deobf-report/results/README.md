@@ -8,7 +8,7 @@
 
 Индекс с размерами — `INDEX.md`.
 
-Всего **36 сэмплов**, 18 игр/режимов, 9 разных обфускаторов (Luraph v15, MoonSec V3, MoonSec V2,
+Всего **55 сэмплов**, 22 игры/режима, 10 разных обфускаторов (Luraph v15, MoonSec V3, MoonSec V2,
 PSU 4.0/4.5, AztupBrew, wYnFuscate, самописные XOR-загрузчики). Полная таблица — `INDEX.md`.
 
 ## Что внутри (кратко)
@@ -74,6 +74,25 @@ PSU 4.0/4.5, AztupBrew, wYnFuscate, самописные XOR-загрузчик�
   Luraph 6.0-beta1 / 11.1 / 11.5, неизвестный Luraph-подобный VM) — с перечнем того, что именно пробовали;
 * `_corpus_prometheus/` — новый инструмент `unprom` на 6 эталонных сэмплах Prometheus / wearedevs v1.0 /
   luaobfuscator.com: 6 из 6 разобраны (девиртуализация в плоский CFG + расшифровка строк и ConstantArray).
+
+### Четвёртая партия (5-я итерация): GPO, Illegal Soccer, Blox Strike, YBA
+
+Запрос был «GPO / King Legacy / Illegal Soccer / Blox Strike / YBA + популярные режимы».
+Что нашлось и что с этим сделано:
+
+| Режим | Сэмплы | Источник | Состояние |
+|---|---|---|---|
+| **Grand Piece Online** | `gpo/tempest_hub`, `gpo/a7dev_loader`, `gpo/venomware`, `gpo/austina_ui` | `TrilhaX/scriptexec` (`Games/gpo.lua`), `moa456811-prog/roblox-hubs`, `lenny2010/VenomWare-V1`, `Ic0u/achieved-scripts` (`seahub.lua`) | рабочего обфусцированного сэмпла GPO **в паблике нет** — все 4 файла открытые (Tempest Hub на Linoria: AutoFarm + 19 партов) |
+| **King Legacy** | 6 сэмплов из прошлых партий (`king_legacy/*`) | `XxBoomer/script`, `hankiwastaken/Cracks` | **все 6 разобраны** (PSU 4.0/4.5, MoonSec V2/V3) — новых обфусцированных за итерацию не появилось |
+| **Illegal Soccer** | `illegal_soccer/polsec_loader`, `maxlegends_loader`, `luarmor_router`, `super_futebol` | `s1mpl33222-glitch/lua-obfuscator-samples`, `arthurtrovoada21-arch/Super-Futebol-Proibido` | открытые лоадеры. В `polsec_loader` — таблица `GameList` на **81 игру** (PlaceId → scriptId), включая сам Illegal Soccer (`10155360168`). Сами читы отдаются по ключу с `api.polsec.net` / Luarmor — статически их не достать |
+| **Blox Strike** | `blox_strike/*` — 7 сэмплов | `Friezer71/script`, `twistedk1d/BloxStrike`, `nathanathan69420-pixel/PPS`, `d0inks/moon.lua`, `brkapery/Sigmaware-Roblox-BloxStrike`, `4raff/MahmutHub` | 5 открытых + 2 обфусцированных: `mahmuthub_wearedevs` (wearedevs/Prometheus, de-flatten 7 184 строки) и `moon_ext_doink` (doink obfuscator v1, `unprom` 1 712 строк) |
+| **YBA** | `yba/ysf_luraph14`, `azero_hub`, `aethelburg_v16` + ранее `kolgie` | `rorri-cm/yba-autofarm`, `thatguyscousin9/azero-hub`, `EYDB0812/YBA-SCR-PT` | **Luraph v14.4.2** (`ysf_luraph14`) — новый обфускатор, девиртуализован **частично** (1 корневой proto → 172 строки) |
+| Бонус | `one_piece/kaitun_nav` | `Spade324/SpadesHub` | открытый хаб One Piece Kaitun (Rayfield) |
+
+Плюс к этому в этой итерации впервые заработал путь **Luraph v14** в `Deobfuscator-Luraph-V15`
+(для этого пришлось собрать `bin/luau` и `bin/luau-ast` под Linux) и обновлён `lua_beautify.py`:
+нашёлся класс ошибок, когда `a - -b` склеивалось в `--b` (комментарий) — теперь склейка, образующая
+новый токен (`--`, `[[`, `]]`, `<<`, `==`, `..`), запрещена.
 
 ## Как это получено
 

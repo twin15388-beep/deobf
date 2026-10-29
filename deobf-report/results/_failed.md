@@ -25,3 +25,16 @@
 - **PEPSI/Arsenal** — тот же Luraph-подобный десериализатор (`local a=string.byte;local b=string.char;...`), готового инструмента нет.
 
 Файлы не удалены: исходники лежат в `_work/new_samples/hexahigh/` (вне git) и в `hexahigh/Scripts` на GitHub.
+
+## Пятая итерация (GPO / Illegal Soccer / Blox Strike / YBA)
+
+| Файл | Игра | Обфускатор | Что пробовали | Итог |
+|---|---|---|---|---|
+| `rorri-cm/yba-autofarm` — `YSF PROTECTED.lua` | YBA | **Luraph v14.4.2** | `deob.js` (v14-путь, собран `luau`/`luau-ast`), бюджеты 180/420 с | **частично**: 1 корневой proto → 172 строки, остальное VM |
+| `d0inks/moon.lua` — `ext/bloxstrike.lua` | Blox Strike | **doink obfuscator v1** | `unprom` (deflatten/lift), `deob.js`, CASCADE | **частично**: свернуто 1 176 выражений, VM не поднята |
+| `4raff/MahmutHub` — `BloxStrike/production/main.lua` | Blox Strike | wearedevs / Prometheus | `unprom` (`vm_lift` → `RecursionError` на 531 блоке) | **частично**: de-flatten 7 184 строки |
+| GPO: `TrilhaX/scriptexec`, `moa456811-prog/roblox-hubs`, `lenny2010/VenomWare-V1`, `Ic0u/achieved-scripts` | GPO | — | поиск обфусцированных сэмплов: `search/code` по `"Grand Piece Online" PSU`, `"GPO" IronBrew`, `search/repositories` | **обфусцированных нет**, все 4 файла — открытый Lua |
+| Illegal Soccer: `api.polsec.net`, Luarmor, `loader.sportsclub.fun`, MAXLEGENDS (Cloudflare KV) | Illegal Soccer | Luarmor/key-system | попытка достать полезную нагрузку: всё отдаётся по ключу после проверки PlaceId | **недостижимо статически**: публичных обфусцированных файлов нет |
+
+Отдельно: `s1mpl33222-glitch/lua-obfuscator-samples` содержит `.lua`, который на деле является
+HTML-страницей (`<!DOCTYPE html>` — AirFlow) — проверять содержимое перед прогоном.

@@ -1,0 +1,8 @@
+source: bs_twistedk1d.lua
+size: 17532 B (17 KB)
+detected: unknown
+description: Blox Strike: скрипт twistedk1d
+method: lua_beautify.py (token-safe reindent, токены сверены)
+beautify: deobf-report/results/blox_strike/twistedk1d/script.lua: 532 строк -> 410 строк, токены совпадают
+parts: parts -> deobf-report/results/blox_strike/twistedk1d/PARTS.md (75 labels)
+result: OK, 411 строк, 15 КБ

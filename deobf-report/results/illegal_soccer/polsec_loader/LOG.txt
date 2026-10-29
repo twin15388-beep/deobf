@@ -1,0 +1,8 @@
+source: soccer_fetched.lua
+size: 76232 B (74 KB)
+detected: luraph_v15
+description: Illegal Soccer: лоадер sportsclub на api.polsec.net (key-system, SDK, LoadGame по PlaceId)
+method: lua_beautify.py (token-safe reindent, токены сверены)
+beautify: deobf-report/results/illegal_soccer/polsec_loader/script.lua: 1942 строк -> 1580 строк, токены совпадают
+parts: parts -> deobf-report/results/illegal_soccer/polsec_loader/PARTS.md (105 labels)
+result: OK, 1581 строк, 71 КБ

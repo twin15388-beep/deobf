@@ -82,3 +82,41 @@ Python 3.12). Даже после двух правок в `modules/vmify.py` о
 Первая версия приклеивала строчные комментарии друг к другу (`-- a -- b -- c<код>`), из-за чего
 код после третьего комментария попадал в комментарий. Поймано встроенной проверкой «поток токенов
 до == поток токенов после»; исправлено немедленным `flush()` после токена `comment`.
+
+## 8. `Deobfuscator-Luraph-V15` под Linux (bin/luau, bin/luau-ast)
+
+В релизе лежат только `luau.exe`/`luau-ast.exe`, поэтому deob.js падал `luau-ast ENOENT`.
+Сборка из `luau-lang/luau` 0.744 без cmake:
+
+```bash
+# bin/luau (раннер из deobf-report/tools/luau_runner.cpp)
+g++ -std=c++17 -O1 $INC -c luau_runner.cpp -o obj/luau_runner.o
+g++ -o bin/luau obj/luau_runner.o $(ls obj/*.o | grep -v luau_runner) -lm -ldl -lpthread
+
+# bin/luau-ast (JSON-дамп AST)
+g++ -std=c++17 -O1 $INC -o bin/luau-ast \
+    luau-src/CLI/src/Ast.cpp luau-src/Analysis/src/AstJsonEncoder.cpp \
+    luau-src/CLI/src/FileUtils.cpp luau-src/Ast/src/PrettyPrinter.cpp \
+    luau-src/Ast/src/Allocator.cpp flags_stub.cpp locstub.cpp \
+    $(ls obj/*.o | grep -vE "luau_runner|PrettyPrinter|Allocator") -lm -ldl -lpthread
+```
+
+Стабы (без них линковка падает):
+
+```cpp
+// flags_stub.cpp
+#include "Luau/Common.h"
+LUAU_FASTFLAGVARIABLE(LuauExperimentalIfLocalAnalysis);
+// locstub.cpp
+#include <string>
+#include "Luau/Location.h"
+namespace Luau { std::string toString(const Location&, int, bool) { return ""; } }
+```
+
+Плюс в `src/driver.js` добавлен проброс prelude через env (нужно, чтобы подделать `game.PlaceId`
+для скриптов с проверкой места):
+
+```js
+if (process.env.GAME_PLACEID) cfg.prelude = `setprop(game, 'PlaceId', ${process.env.GAME_PLACEID})`;
+if (process.env.PRELUDE) cfg.prelude = process.env.PRELUDE;
+```

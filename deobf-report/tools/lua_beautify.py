@@ -198,6 +198,13 @@ def _need_space(prev, prev2, cur) -> bool:
     if prev is None:
         return False
     p, c = prev.text, cur.text
+    # склейка не должна образовать новый токен: `- -` -> `--` (комментарий),
+    # `[ [` -> `[[` (длинная строка), `< <` -> `<<`, `=` `=` -> `==`, `.` `.` -> `..`
+    tail = p[-1:] if p else ""
+    head = c[:1] if c else ""
+    if (tail, head) in {("-", "-"), ("[", "["), ("]", "]"), ("<", "<"), (">", ">"),
+                        ("=", "="), (".", "."), ("~", "="), (":", ":"), ("/", "/")}:
+        return True
     if prev.kind in ("comment", "longcomment") or cur.kind in ("comment", "longcomment"):
         return True
     # скобки вызова/индексации: f(x), t[i], a.b

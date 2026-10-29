@@ -1,0 +1,8 @@
+source: gpo_venomware.lua
+size: 4476 B (4 KB)
+detected: unknown
+description: Grand Piece Online: VenomWare — лоадер с UI-библиотекой
+method: lua_beautify.py (token-safe reindent, токены сверены)
+beautify: deobf-report/results/gpo/venomware/script.lua: 147 строк -> 70 строк, токены совпадают
+parts: parts -> deobf-report/results/gpo/venomware/PARTS.md (22 labels)
+result: OK, 71 строк, 4 КБ

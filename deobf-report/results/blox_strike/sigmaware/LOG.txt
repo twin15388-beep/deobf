@@ -1,0 +1,8 @@
+source: sigmaware_bloxstrike.lua
+size: 58531 B (57 KB)
+detected: unknown
+description: Blox Strike: Sigmaware (дамп инстансов/модулей)
+method: lua_beautify.py (token-safe reindent, токены сверены)
+beautify: deobf-report/results/blox_strike/sigmaware/script.lua: 1737 строк -> 1406 строк, токены совпадают
+parts: parts -> deobf-report/results/blox_strike/sigmaware/PARTS.md (137 labels)
+result: OK, 1407 строк, 55 КБ
