@@ -1,0 +1,152 @@
+# Iron_Man_Sim_Script_ (IronBrew/CASCADE, код не собран) — имена объектов (из констант чанка)
+
+Источник: `/home/user/deobf/_work/res6/ib/Iron_Man_Sim_Script_//fixed.luac` (28415 B, 36 прототипов, 183 строковых констант)
+
+> Извлечено из строковых констант байткода. Порядок — алфавитный, в скобках — сколько раз строка встречается.
+
+
+## Классы Roblox (11)
+
+`BodyVelocity`, `Camera`, `Frame`, `Humanoid`, `Players`, `RunService`, `ScreenGui`, `TextBox`, `TextButton`, `TextLabel`, `UserInputService`
+
+
+## Имена объектов / партов (138)
+
+- `Active`
+- `AllPart`
+- `Angles`
+- `AngularVelocity`
+- `Assets` ×29
+- `BackgroundColor3`
+- `BackgroundTransparency`
+- `Backpack` ×29
+- `BodyAngularVelocity`
+- `BodyVelocity`
+- `BorderSizePixel`
+- `ButtonStyle`
+- `CFrame`
+- `Camera`
+- `Character` ×5
+- `Chat`
+- `Chest`
+- `ClassName` ×3
+- `Color3`
+- `Connect`
+- `CoreGui`
+- `Custom`
+- `Destroy`
+- `Died`
+- `Eject` ×5
+- `EjectAll`
+- `EjectOth`
+- `Enum` ×2
+- `Events` ×29
+- `Feet`
+- `FindFirstChild` ×8
+- `FireServer` ×29
+- `Font`
+- `FontSize`
+- `Frame`
+- `GetChildren` ×8
+- `GetService` ×3
+- `Gloves`
+- `God`
+- `Hands`
+- `Head`
+- `Heartbeat`
+- `Helm`
+- `Helmet` ×2
+- `Highway`
+- `Humanoid`
+- `HumanoidRootPart` ×3
+- `InputBegan`
+- `Instance` ×2
+- `IronArm`
+- `IronLad` ×2
+- `JustFeet`
+- `KeyCode`
+- `Kill`
+- `LLtaketheL`
+- `LeftArm`
+- `LeftFoot` ×3
+- `LeftHand` ×5
+- `LeftLeg`
+- `LeftLowerArm` ×4
+- `LeftLowerLeg` ×3
+- `LeftUpperArm` ×3
+- `LeftUpperLeg` ×3
+- `LocalPlayer` ×26
+- `LowerTorso` ×3
+- `M21`
+- `M30`
+- `M33`
+- `M42`
+- `Mark2` ×2
+- `Mark21` ×2
+- `Mark30` ×2
+- `Mark33` ×2
+- `Mark42` ×2
+- `Mark6` ×2
+- `Mask` ×3
+- `MaxForce`
+- `MaxTorque`
+- `Misc`
+- `MouseButton1Click`
+- `MoveTo`
+- `Moving` ×2
+- `Name` ×9
+- `Parent` ×2
+- `PartMask`
+- `Parts`
+- `Person`
+- `PlatformStand`
+- `Player` ×3
+- `Players` ×31
+- `Position` ×2
+- `PrimaryPart`
+- `RightArm`
+- `RightFoot` ×3
+- `RightHand` ×4
+- `RightLeg`
+- `RightLowerArm` ×3
+- `RightLowerLeg` ×3
+- `RightUpperArm` ×2
+- `RightUpperLeg` ×3
+- `RunService`
+- `ScreenGui`
+- `Selectable`
+- `SetPrimaryPartCFrame`
+- `Size`
+- `Size12`
+- `Size14`
+- `Style`
+- `Text` ×9
+- `TextBox`
+- `TextButton`
+- `TextColor3`
+- `TextLabel`
+- `TextTransparency`
+- `Three`
+- `Thrusterduster`
+- `Torso`
+- `TranslateBy`
+- `UDim2`
+- `UpperTorso` ×2
+- `UserInputService`
+- `Vector3` ×6
+- `Velocity`
+- `Visible` ×3
+- `WaitForChild` ×2
+- `WarMachine1`
+- `callPiece` ×10
+- `callSuit` ×8
+- `fireRepulsor`
+- `ironMan` ×18
+- `lookVector`
+- `punchHit` ×4
+- `rightVector`
+- `setVec`
+- `suitControl` ×11
+- `toEulerAnglesXYZ`
+- `toggleFlight`
+- `toggleMask`

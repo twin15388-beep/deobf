@@ -8,8 +8,8 @@
 
 Индекс с размерами — `INDEX.md`.
 
-Всего **55 сэмплов**, 22 игры/режима, 10 разных обфускаторов (Luraph v15, MoonSec V3, MoonSec V2,
-PSU 4.0/4.5, AztupBrew, wYnFuscate, самописные XOR-загрузчики). Полная таблица — `INDEX.md`.
+Всего **67 сэмплов**, 29 игр/режимов, 11 обфускаторов (Luraph v15, MoonSec V3, MoonSec V2,
+PSU 4.0/4.5, IronBrew/AztupBrew 2.7.x, wYnFuscate, самописные XOR-загрузчики). Полная таблица — `INDEX.md`.
 
 ## Что внутри (кратко)
 

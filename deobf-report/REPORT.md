@@ -121,12 +121,46 @@
 
 ---
 
+## 0д. Шестая итерация: IronBrew / AztupBrew — девиртуализация заработала
+
+Задача: IronBrew — самый частый обфускатор в собранном корпусе (36 файлов), и до сих пор
+он снимался только «по внешний слой». Теперь — до настоящего Lua.
+
+| Шаг | Было | Стало |
+|---|---|---|
+| `CASCADE` на IB 2.7.x | падал `throw "ayo"` на середине / 301-байтный пустой чанк | доходит до конца, чанк 200 B – 270 КБ |
+| Формат чанка | `bad header in precompiled chunk` | конвертер 32→64 бита (`luac32to64.py`) |
+| Заголовок прототипа | `nups=0`, `is_vararg=2`, `maxstack=250` → `bad code` | честные `nups`/`is_vararg`/`maxstack` (`luac_fix.py`) |
+| Проверка результата | никакой | свой **Lua 5.1.1** + `luac_inspect.py` (полная проверка кода, как `luaG_checkcode`) |
+| unluac | `Index 250 out of bounds` | **12 файлов декомпилированы**, 5 166 строк |
+
+**Итог: 12 из 36 IronBrew-файлов дали загружаемый чанк и декомпилировались в Lua**
+(самый большой — мультиигровой хаб `_Script_Hub` на 3 932 строки, в нём видно ~100 игр,
+HttpGet-загрузчик и XOR-декодер строк). Для остальных 24 извлечены **имена объектов**
+(`PARTS.md`) — константы читаются из байткода независимо от корректности инструкций.
+
+Почему остальные 24 не грузятся: CASCADE при девиртуализации **пропускает** инструкции
+(`Skip Instruction` / `Skip Sub-Instruction`), после чего операнды `Inst[OP_B]/Inst[OP_C]`
+съезжают на соседнюю инструкцию — в дампе это видно как `CALL R4 511 0`, `CALL R5 510 511`.
+Плюс `JMP` за пределы кода в мелких прототипах (там лежат служебные обёртки VM, а не Lua-функции).
+Корреляция железная: **у всех 12 успешных файлов `Skip = 0`**, у всех с `Skip > 0` чанк битый.
+
+Подробности: `results/_batch6.md`, `results/ironbrew_cascade/README.md`, `tools/PATCHES.md` §9–10.
+
+Отдельно проверены новые инструменты: `SynapseXenDeobfuscator` (распаковывает payload Xen,
+но лифтер выдаёт мусор), `Lua-Deobfuscator` (сломан), `IronBrew2-Deobfuscator` (C#, без dotnet).
+
+Результат в цифрах: **+12 сэмплов** (55 → **67**, 29 режимов), плюс 24 набора имён объектов.
+
+---
+
 ## 1. Короткий итог
 
 | Что | Результат |
 |---|---|
 | **Итог второй итерации** | **6 из 6** игровых сэмплов разобраны в настоящий Lua (`results/`), плюс 3 бенчмарк-сэмпла. PSU 4.0/4.5 (раньше «только дизасм») теперь декомпилируются полностью. |
 | **Итог третьей итерации** | **+15 сэмплов из 12 режимов** (Blox Fruits, Grow a Garden, **YBA**, Bloxburg, Gacha Online, Counter Blox, MM2, Piggy, Prison Life, The Wild West, Solara Hub, Tower of Hell, Jailbreak). Luraph v15 теперь девиртуализируется полностью. Всего в `results/` — **24 сэмпла**. |
+| **Итог шестой итерации** | **IronBrew девиртуализован**: 12 из 36 файлов корпуса → настоящий Lua (5 166 строк), для 24 — имена объектов. Починены CASCADE (`nups`/`is_vararg`/skip), собран Lua 5.1.1, написаны `luac_fix/luac_inspect/luac32to64/chunk_parts`. Всего в `results/` — **67 сэмплов из 29 режимов**. |
 | **Итог пятой итерации** | **+19 сэмплов** по GPO, Illegal Soccer, Blox Strike, YBA, One Piece Kaitun. Заработал путь **Luraph v14** (собран `luau`/`luau-ast`), разобран wearedevs/Prometheus на Blox Strike (de-flatten 7 184 строки), найден новый обфускатор **doink v1**. Всего в `results/` — **55 сэмплов из 22 режимов**. Обфусцированных GPO/Illegal Soccer в паблике нет. |
 | **Итог четвёртой итерации** | **+12 сэмплов из 7 режимов** (Jailbreak ×3, Prison Life ×3, Murder Mystery 2 ×2, Pet Simulator ×2, Close Quarters Combat, Tower Defense Simulator) — функциональный Lua через новый `lua_beautify.py`. Плюс проверен `unprom` (6/6 сэмплов Prometheus). Всего в `results/` — **36 сэмплов из 18 режимов**. 12 обфусцированных файлов (Xen, IronBrew 2.7, Luraph 6/11) разобрать не удалось — `results/_failed.md`. |
 | Luraph v15 деобфускатор (из `Deobfuscator-Luraph-V15-master.zip`) | **Работает** после портирования на Linux. Валидирован: `RideAPet.lua` → вывод **байт-в-байт** совпал с эталоном из репозитория (5170 строк). Свежий Luraph v15.0 из сторонней коллекции → вытащен загрузчик за 5 с. |
@@ -233,6 +267,23 @@
 
 ---
 
+### 3.5. Что добавлено в шестой итерации (инструменты и свои утилиты)
+
+| Инструмент | Тип | Статус | Проверка / что дал |
+|---|---|---|---|
+| **`CASCADE`** (`disingeunity/CASCADE`) | JS | **Работает** (после 3 патчей) | IronBrew/AztupBrew 2.7.x: падение `throw "ayo"` → skip+continue; `nups` берётся из `GETUPVAL/SETUPVAL`; `is_vararg = 1`. 36/36 файлов корпуса доходят до чанка |
+| **Свой Lua 5.1.1** (`_work/tools/lua51`) | C | **Работает** | `lua/lua v5.1.5` на GitHub нет; 5.1.1 собирается `gcc -DLUA_USE_POSIX ... -lm -ldl`. Плюс `bit.lua` (чистый Lua `bxor/band/bor/lshift/rshift`) — в ванильном 5.1 нет `bit`, а он нужен и IronBrew-, и Xen-скриптам |
+| `luac32to64.py` | Python | **Работает** | Перепаковка чанка 32→64 бита: CASCADE пишет `sizeof(size_t)=4`, иначе `loadfile` → `bad header in precompiled chunk` |
+| `luac_inspect.py` | Python | **Работает** | Разбор чанка + проверки как в `luaG_checkcode`: регистры ≥ `maxstack`, константы вне диапазона, `CALL C=0` без «открывающей» инструкции, прыжки за код, `GETUPVAL` при `nups=0`, отсутствие `RETURN` |
+| `luac_fix.py` | Python | **Работает** | Пересчёт `maxstacksize` (`250 → 9` на God Mode), `nups`, `is_vararg` прямо в байтах чанка |
+| `chunk_parts.py` | Python | **Работает** | Имена объектов/классы/URL из констант чанка — работает даже на битом чанке |
+| `lua_threeaddr.py` | Python | **Работает (консервативно)** | Схлопывает `arg = X; arg = arg.f; L = arg` → `L = X.f` внутри блока; межпеременная подстановка по «единственному использованию» отключена — unluac переиспользует имена и такой вариант давал неверный код |
+| `SynapseXenDeobfuscator` (`lovesyko`) | Python | **Частично** | С `lua`+`bit` распаковывает payload (ключ, magic `Xen`), но лифтер выдаёт `v0(v248, v85)` — таблица опкодов не от Xen v1.1.2 |
+| `SynapseXenDeobfuscator` без Lua | — | не работал | `decrypt_sample_runtime` вызывает `lua` через `subprocess` — без бинарника и `bit.bxor` payload не извлекался вообще |
+| `Lua-Deobfuscator` (`nguyenthaitrung`), `lua-deobf-actions`, `IronBrew2-Deobfuscator` (C#) | JS / C# | **Не работают** | См. §5 |
+
+---
+
 ## 4. Результаты по играм
 
 ### King Legacy / Blox Fruits — **есть результат: 6 из 6**
@@ -253,6 +304,46 @@
 Проверка «настоящий ли это Lua»: файлы синтаксически корректны; часть из них не компилируется
 обратно стоковым `luac -p` из-за лимита Lua 5.1 «more than 200 local variables» — unluac объявляет
 регистры VM локалями (см. §5, п. 3). Читаемость и корректность логики от этого не страдают.
+
+### IronBrew / AztupBrew — **12 из 36** (6-я итерация)
+
+Корпус: все 36 файлов с заголовком `IronBrew:tm: obfuscation` из `hexahigh/Scripts`
+(включая 1.30 МБ `Troll_GUI.lua` и 1.52 МБ `OP_Finality_Character_Hub.lua`).
+
+Декомпилированы в настоящий Lua (каталог `results/ironbrew_cascade/`):
+
+| Файл | Игра / тема | Строк |
+|---|---|---:|
+| `_Script_Hub.lua` | мультиигровой хаб (~100 игр, HttpGet + XOR-строки) | 3 932 |
+| `Tower_of_Hell_Script.lua` | Tower of Hell | 274 |
+| `Tiny_Tanks_GUI.lua` | Tiny Tanks | 212 |
+| `Piggy_Item_Hub.lua` / `Prison_Life_Destroyer_Hub.lua` (дубликат) | Piggy / Prison Life | 166 |
+| `God_Mode_Any_Game.lua` | универсальный | 142 |
+| `Make_Your_Avatar_A_Swatstika.lua` | скин персонажа | 91 |
+| `Ctrl_Click_TP.lua` | универсальный | 77 |
+| `FPS_Booster.lua` | универсальный | 37 |
+| `Anti_AFK.lua` | универсальный | 34 |
+| `Mega_Fun_Obby_Auto_Skip_Stages.lua` | Mega Fun Obby | 28 |
+| `Clone_Tycoon_2_1_Billion_Gems.lua` | Clone Tycoon 2 | 7 |
+
+Пример качества (фрагмент `god_mode_any_game/script.lua`):
+
+```lua
+arg = game
+arg = (arg.GetService(L1_1, L2_1)).LocalPlayer      -- game:GetService("Players").LocalPlayer
+Local = arg
+arg = Local.Character
+Char = arg
+...
+    arg = Char.HumanoidRootPart.Position
+    loc = arg
+    L4_2 = Vector3.new(L5_2, L6_2, L7_2)
+    L3_2 = box.Position + L4_2
+    arg(L2_2, L3_2)                                  -- Character:MoveTo(box.Position + offset)
+```
+
+Остальные 24 файла: чанк не грузится (см. §5), в каталогах — `PARTS.md` с именами объектов,
+классами Roblox и URL, извлечёнными прямо из констант байткода.
 
 ### Бенчмарк на чужих обфускаторах (`vyxonq-dev/obfuscator-samples`)
 
@@ -377,7 +468,21 @@ PSU 4.0/4.5 и MoonSec V3 теперь дают настоящий Lua, а не 
 **Закрыто в третьей итерации:** Luau-рантайм (Luraph v15 больше не блокер); падения unluac на одной
 плохой функции (появился salvage-режим `lua51_split.py` + `decompile_salvage.py`).
 
+**Закрыто в шестой итерации:** IronBrew/AztupBrew девиртуализируется (CASCADE после 3 патчей);
+`nups=0` и `maxstack=250` в чанке CASCADE (unluac падал `Index 250 out of bounds`);
+проверка «а чанк вообще валиден?» — теперь есть свой Lua 5.1.1 и `luac_inspect.py`;
+Lua 5.1.5 (её нет на GitHub) заменена сборкой 5.1.1; отсутствие `bit.bxor` — свой шим.
+
 **Что по-прежнему не получилось:**
+
+0. **24 из 36 IronBrew-файлов** дают невалидный чанк: CASCADE **пропускает** инструкции
+   (`Skip Instruction`/`Skip Sub-Instruction`), после чего операнды `Inst[OP_B]/Inst[OP_C]`
+   съезжают (`CALL R4 511 0`, `CALL R5 510 511`), плюс `JMP` за пределы кода в мелких
+   служебных прототипах. Все 12 успешных файлов имеют `Skip = 0`. Чинить нужно матчер
+   инструкций IronBrew 2.7.x, а не пост-обработку чанка.
+0б. **Synapse Xen** — 62 файла в корпусе, но лифтер `SynapseXenDeobfuscator` не соответствует
+   Xen v1.1.2: payload распакован (ключ `DZTFR34V8I59TVCZ`), а инструкции выводятся как
+   `v0(v248, v85)`. Нужен разбор таблицы опкодов конкретной сборки.
 
 1. **Lune** — бинарник не скачать (release-assets заблокированы) ⇒ `luau-vmp-deobf` (Luraph v14.x) не проверен в работе.
 2. **Свой unluac из исходников** — `jdk4py` содержит только JRE, `javac` нет. Используется готовый `unluac.jar` (v1.2.3.569).
@@ -494,6 +599,8 @@ deobf-report/
 │   ├── corpus/<сэмпл>/                        #   бенчмарк на чужих обфускаторах
 │   ├── _failed.md                             #   что не удалось и что пробовали
 │   ├── _batch5.md                             #   таблица партии GPO / Illegal Soccer / Blox Strike / YBA
+│   ├── _batch6.md                             #   таблица 6-й итерации (IronBrew через CASCADE)
+│   ├── ironbrew_cascade/                      #   36 IronBrew/AztupBrew: 12 script.lua + 36 PARTS.md
 │   ├── gpo/, illegal_soccer/, blox_strike/, yba/, one_piece/   # 4-я партия
 │   ├── _batch3.md                             #   сводная таблица третьей партии
 │   ├── _corpus_prometheus/                    #   проверка unprom: 6/6 сэмплов Prometheus
@@ -516,7 +623,14 @@ deobf-report/
     ├── lua_beautify.py                        # токен-безопасная нормализация минифицированного Lua
     ├── lua51_disasm.py                        # резервный дизассемблер Lua 5.1
     ├── build_luau.sh / build_ast.sh           # сборка Luau-рантайма без cmake
-    └── luau_runner.cpp                        # раннер+REPL+loadstring+require для харнесса
+    ├── luau_runner.cpp                        # раннер+REPL+loadstring+require для харнесса
+    ├── luac32to64.py                          # чанк 32-битного Lua 5.1 → 64-битный
+    ├── luac_inspect.py                        # разбор чанка + проверки уровня luaG_checkcode
+    ├── luac_fix.py                            # пересчёт maxstack/nups/is_vararg в чанке
+    ├── chunk_parts.py                         # имена объектов/классы/URL из констант чанка
+    ├── lua_threeaddr.py                       # схлопывание трёхадресного кода после unluac
+    ├── batch_ib.sh / postprocess_ib.sh        # прогон CASCADE по корпусу + полный пост-процессинг
+    └── PATCHES.md                             # все правки чужих инструментов (§1–10)
 ```
 
 Как повторить:

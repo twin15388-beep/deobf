@@ -2,11 +2,14 @@
 
 В каждом каталоге: `script.lua` — восстановленный/нормализованный Lua-код, `PARTS.md` — функционал, UI, URL и **названия партов/объектов**, `LOG.txt` — чем определяли, чем деобфусцировали, что вышло.
 
-Всего сэмплов: **55**, игр/режимов: **22**.
+Всего сэмплов: **67**, игр/режимов: **29** (55 из прошлых итераций + 12 новых из IronBrew-корпуса, см. `ironbrew_cascade/`).
 
 - `_failed.md` — что не удалось и почему.
 - `_batch5.md` — таблица последней партии (GPO / Illegal Soccer / Blox Strike / YBA).
 - `_corpus_prometheus/` — проверка `unprom` на эталонных сэмплах Prometheus.
+- `_batch6.md` — таблица 6-й итерации (девиртуализация IronBrew через CASCADE).
+- `ironbrew_cascade/` — **36 IronBrew/AztupBrew-скриптов**: 12 декомпилированы в настоящий Lua,
+  для остальных 24 — только `PARTS.md` (имена объектов). Подробности — `ironbrew_cascade/README.md`.
 
 | Игра (каталог) | Сэмпл | Обфускатор | Что это | Строк Lua | Размер |
 |---|---|---|---|---|---|
@@ -66,3 +69,27 @@
 | yba | `kolgie` | psu | Your Bizarre Adventure: хаб, авто-квесты/фарм | 4351 | 99 КБ |
 | yba | `ysf_luraph14` | luraph_v14 (0.50, "Luraph Obfuscator v14.4.2") | YSF Protected для YBA: Luraph v14.4.2 | 173 | 47 КБ |
 
+
+## 6-я итерация: IronBrew / AztupBrew (каталог `ironbrew_cascade/`)
+
+36 файлов с заголовком IronBrew/AztupBrew из `hexahigh/Scripts` прогнаны через CASCADE
+с починенным рантаймом (свой Lua 5.1.1 + конвертер чанка 32→64 бита + пересчёт `maxstack`).
+
+**Декомпилировано в настоящий Lua — 12 из 36:**
+
+| Каталог | Игра/тема | Строк | Что внутри |
+|---|---|---:|---|
+| `_script_hub` | мультиигровой хаб (~100 игр) | 3932 | список игр, HttpGet + XOR-декодер строк, кнопки GUI |
+| `tiny_tanks_gui` | Tiny Tanks | 212 | GUI, Color3/UDim2, обработчики кнопок |
+| `piggy_item_hub` / `prison_life_destroyer_hub` | Piggy, Prison Life | 166 | хаб предметов (дубликаты одного скрипта) |
+| `tower_of_hell_script` | Tower of Hell | 274 | авто-прохождение, `goto` в выводе (Lua 5.2+) |
+| `god_mode_any_game` | универсальный | 142 | MoveTo/Tween к персонажу, UserInputService |
+| `avatar_swastika` | скин персонажа | 91 | BodyForce, HumanoidRootPart |
+| `ctrl_click_tp` | универсальный | 77 | телепорт по Ctrl+клик |
+| `fps_booster` | универсальный | 37 | очистка эффектов/Lighting |
+| `anti_afk` | универсальный | 34 | VirtualUser/Idled |
+| `mega_fun_obby_auto_skip_stages` | Mega Fun Obby | 28 | авто-скип стадий |
+| `clone_tycoon_2_1_billion_gems` | Clone Tycoon 2 | 7 | минимальный скрипт |
+
+**Остальные 24** — чанк не грузится (`CALL C=0` со съехавшими операндами / `JMP` за пределы
+кода в служебных прототипах); в каталогах лежат `PARTS.md` с именами объектов и классов.
