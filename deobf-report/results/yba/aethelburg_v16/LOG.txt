@@ -1,0 +1,8 @@
+source: yba_scrpt.lua
+size: 31730 B (30 KB)
+detected: unknown
+description: YBA: Aethelburg V16 (автофарм/ESP)
+method: lua_beautify.py (token-safe reindent, токены сверены)
+beautify: deobf-report/results/yba/aethelburg_v16/script.lua: 841 строк -> 681 строк, токены совпадают
+parts: parts -> deobf-report/results/yba/aethelburg_v16/PARTS.md (65 labels)
+result: OK, 682 строк, 27 КБ

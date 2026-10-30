@@ -1,0 +1,6 @@
+input: new_samples/TrixAde__scripts/mm2GhostHub.lua
+detected: moonsec_v2
+result: /home/user/deobf/_work/res2/TrixAde/mm2GhostHub/deobfuscated.lua
+
+detected: moonsec_v2
+moonsec-v2 ok (223026 bytes)

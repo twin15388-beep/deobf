@@ -1,0 +1,253 @@
+# OP_Finality_Character_Hub_ (IronBrew/CASCADE, код не собран) — имена объектов (из констант чанка)
+
+Источник: `/home/user/deobf/_work/res6/ib/OP_Finality_Character_Hub_//fixed.luac` (123372 B, 136 прототипов, 470 строковых констант)
+
+> Извлечено из строковых констант байткода. Порядок — алфавитный, в скобках — сколько раз строка встречается.
+
+
+## Классы Roblox (16)
+
+`Accessory`, `Animation`, `BodyGyro`, `BodyVelocity`, `Frame`, `Humanoid`, `ImageButton`, `ImageLabel`, `Players`, `RocketPropulsion`, `RunService`, `ScreenGui`, `TextBox`, `TextButton`, `TextLabel`, `Workspace`
+
+
+## Имена объектов / партов (314)
+
+- `Accessory`
+- `Active`
+- `AimHead` ×2
+- `AimHeading` ×3
+- `All` ×2
+- `Angles`
+- `Animate` ×7
+- `Animated` ×3
+- `Animateding` ×4
+- `Animation`
+- `AnimationId`
+- `Animations_DANCE`
+- `Animations_HEROIC`
+- `Animations_SPOOKY`
+- `Annoy`
+- `ArmFollow` ×3
+- `Attach`
+- `BackGroundChar`
+- `BackGroundChar2`
+- `BackGroundChar3`
+- `BackgroundColor3` ×80
+- `BackgroundTransparency` ×2
+- `Backpack` ×6
+- `BodyGyro`
+- `BodyVelocity`
+- `BorderColor3`
+- `BorderSizePixel`
+- `BrickHats`
+- `Bring`
+- `CFrame` ×14
+- `CameraSubject` ×17
+- `CanCollide` ×12
+- `Carpet` ×3
+- `Carpett` ×3
+- `Cartoon`
+- `CartoonFactor` ×9
+- `Char2_Image`
+- `Char_Image`
+- `Char_Image_2`
+- `Character` ×53
+- `CharacterAdded`
+- `CharacterText`
+- `CharacterText_2`
+- `CharacterTitle`
+- `CharacterTitle_2`
+- `Character_1` ×8
+- `Character_2` ×8
+- `Character_backPAGE1`
+- `Character_toPAGE1_IMAGE`
+- `Character_toPAGE1_IMAGE_2`
+- `Character_toPAGE1_IMAGE_3`
+- `Character_toPAGE1_IMAGE_4`
+- `Character_toPAGE2`
+- `Character_toPAGE2_IMAGE`
+- `Character_toPAGE2_IMAGE_2`
+- `Character_toPAGE2_IMAGE_3`
+- `Character_toPAGE3_IMAGE`
+- `Chat`
+- `ClipsDescendants`
+- `Clone` ×7
+- `CloneIllusion` ×3
+- `CloseGUI`
+- `Color3` ×80
+- `Connect`
+- `CoolSpin` ×3
+- `CoordinateFrame`
+- `CoreGui` ×2
+- `Crawl`
+- `CrazySpin`
+- `CreepyWatch`
+- `CrouchAttack` ×3
+- `CrouchRocket` ×3
+- `CurrentCamera` ×18
+- `DELETEIMAGE`
+- `Dance`
+- `Darkness` ×9
+- `DefaultChatSystemChatEvents` ×2
+- `DeleteGUI`
+- `Destroy` ×30
+- `Disabled` ×7
+- `DisplayDistanceType` ×7
+- `Draggable`
+- `Enum`
+- `EquipTool` ×6
+- `Extra`
+- `ExtraBaseBackGround1`
+- `ExtraBaseBackGround1Side`
+- `ExtraBaseBackGround2`
+- `ExtraBaseBackGround2Side`
+- `ExtraBaseBackGround2Side_2`
+- `ExtraBaseBackGround2_2`
+- `ExtraBaseBackGround3`
+- `ExtraBaseBackGround3Side`
+- `ExtraText`
+- `ExtraText_2`
+- `Extra_1` ×8
+- `Extra_2` ×8
+- `Extra_Image`
+- `Extra_Image_2`
+- `Extra_Title`
+- `Extra_Title_2`
+- `Extra_backPAGE1`
+- `Extra_toPAGE2`
+- `FEGodmode`
+- `Faint` ×3
+- `FilteringEnabled`
+- `Fire` ×19
+- `FireServer` ×2
+- `Flatten` ×3
+- `Float` ×2
+- `Fly` ×2
+- `FlyFunction`
+- `Follow`
+- `Font`
+- `FontSize`
+- `Frame`
+- `Frappe`
+- `Frappe_2`
+- `FreeFall`
+- `Games` ×6
+- `GamesText`
+- `GamesText2`
+- `Games_IMAGE`
+- `Games_IMAGE2`
+- `Games_TITLE`
+- `GetChildren` ×7
+- `GetMouse`
+- `GetPlayer` ×25
+- `GetPlayers`
+- `GetService` ×18
+- `Handle`
+- `Happy`
+- `Head` ×27
+- `HeadWalk`
+- `Heroic`
+- `HipHeight` ×2
+- `Humanoid` ×46
+- `HumanoidRootPart` ×30
+- `Image`
+- `ImageButton`
+- `ImageLabel`
+- `Image_FE_DISABLED`
+- `Image_FE_ENABLED`
+- `Info_Background`
+- `Info_Bar`
+- `Info_Image`
+- `Information` ×6
+- `Insane`
+- `Instance` ×21
+- `IsA`
+- `IsPlaying` ×28
+- `JumpHeight`
+- `JumpPower`
+- `JumpRocket` ×3
+- `KeyDown`
+- `KeyUp`
+- `Kill`
+- `Left`
+- `Levitate`
+- `LoadAnimation` ×34
+- `LocalPlayer` ×50
+- `MainFrame`
+- `Max` ×2
+- `MaxSpeed` ×9
+- `MaxThrust` ×9
+- `Maxing` ×3
+- `MenuEnterFrame` ×9
+- `MenuFrame` ×9
+- `Mesh`
+- `MouseButton1Click`
+- `MoveTo` ×2
+- `Multiple` ×2
+- `Multipleing` ×3
+- `Name` ×32
+- `NameOfPlayer`
+- `Next`
+- `NoLimbs`
+- `Noclip` ×2
+- `None` ×7
+- `Normal`
+- `Number`
+- `OPFin_Description`
+- `OPFin_Warning`
+- `OPFinality` ×2
+- `OpenMenu` ×2
+- `Orbit` ×2
+- `Other_Image2`
+- `Other_Image3`
+- `Others`
+- `OthersText`
+- `OthersText_2`
+- `OthersText_3`
+- `OthersTitle`
+- `OthersTitle_2`
+- `OthersTitle_3`
+- `Others_1` ×8
+- `Others_2` ×10
+- `Others_3` ×8
+- `Others_backPAGE1`
+- `Others_backPAGE2`
+- … ещё 114
+
+
+## Ссылки / ассеты (34)
+
+- `http://www.roblox.com/asset/?id=1280184088`
+- `http://www.roblox.com/asset/?id=1281284684`
+- `http://www.roblox.com/asset/?id=1281286925`
+- `http://www.roblox.com/asset/?id=1281289312`
+- `http://www.roblox.com/asset/?id=1281290326`
+- `http://www.roblox.com/asset/?id=1281299598`
+- `http://www.roblox.com/asset/?id=1281454262`
+- `http://www.roblox.com/asset/?id=1281475635`
+- `http://www.roblox.com/asset/?id=1281476978`
+- `http://www.roblox.com/asset/?id=1281477720`
+- `http://www.roblox.com/asset/?id=1282737326`
+- `http://www.roblox.com/asset/?id=1282894968`
+- `http://www.roblox.com/asset/?id=1282931168`
+- `http://www.roblox.com/asset/?id=1284941440`
+- `rbxassetid://`
+- `rbxassetid://121572214`
+- `rbxassetid://126753849`
+- `rbxassetid://180612465`
+- `rbxassetid://181525546`
+- `rbxassetid://184574340`
+- `rbxassetid://186934910`
+- `rbxassetid://188632011`
+- `rbxassetid://204062532`
+- `rbxassetid://204295235`
+- `rbxassetid://215384594`
+- `rbxassetid://282574440`
+- `rbxassetid://313762630`
+- `rbxassetid://33169583`
+- `rbxassetid://33796059`
+- `rbxassetid://35154961`
+- `rbxassetid://35654637`
+- `rbxassetid://429703734`
+- `rbxassetid://429730430`
+- `rbxassetid://45834924`

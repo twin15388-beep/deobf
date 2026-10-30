@@ -1,0 +1,220 @@
+# Mad_City_Gui_2_ (IronBrew/CASCADE, код не собран) — имена объектов (из констант чанка)
+
+Источник: `/home/user/deobf/_work/res6/ib/Mad_City_Gui_2_//fixed.luac` (35311 B, 86 прототипов, 406 строковых констант)
+
+> Извлечено из строковых констант байткода. Порядок — алфавитный, в скобках — сколько раз строка встречается.
+
+
+## Классы Roblox (21)
+
+`Accessory`, `BoolValue`, `Frame`, `Humanoid`, `Part`, `Players`, `RemoteEvent`, `RemoteFunction`, `RunService`, `ScreenGui`, `ScrollingFrame`, `Seat`, `Sound`, `StarterGui`, `TextBox`, `TextButton`, `TextLabel`, `TweenService`, `UIListLayout`, `UserInputService`, `Workspace`
+
+
+## Имена объектов / партов (255)
+
+- `ATM`
+- `AbsolutePosition` ×3
+- `Accessory`
+- `Active` ×2
+- `Addbutton` ×2
+- `Addframe`
+- `Addtextbox`
+- `Airport`
+- `Ammo`
+- `Amount`
+- `AnchorPoint`
+- `Annoy` ×2
+- `AntiTeleport`
+- `ArkOfTheCluck`
+- `BackgroundColor3`
+- `BackgroundTransparency`
+- `Backpack`
+- `Badaboum`
+- `Bank` ×2
+- `BoolValue` ×3
+- `BorderSizePixel`
+- `BossKey`
+- `BottomImage`
+- `BrickColor` ×2
+- `Button1Down`
+- `Button1Up`
+- `CFrame` ×2
+- `Cancel`
+- `CanvasSize` ×3
+- `CaptureController`
+- `Car`
+- `CarChassis`
+- `Cash`
+- `CashBagHUD`
+- `CashRegister`
+- `Casino` ×2
+- `Center` ×3
+- `ChangeState` ×2
+- `Changed` ×2
+- `Character` ×10
+- `CharacterAdded`
+- `ChildAdded` ×2
+- `ClickButton2`
+- `Clip`
+- `Clone` ×3
+- `Clothing`
+- `Club` ×2
+- `Color3` ×2
+- `Combat`
+- `Completed` ×2
+- `ComputerStore`
+- `Connect` ×6
+- `Core1` ×2
+- `Core2`
+- `Create`
+- `CrosshairGUI`
+- `CurrentCamera`
+- `DeathLights`
+- `DeathRay`
+- `Destroy` ×7
+- `DiamondBox`
+- `Direction`
+- `Duration`
+- `EasingDirection`
+- `EasingStyle`
+- `Enabled` ×2
+- `Enum` ×5
+- `EquipTool`
+- `Event` ×8
+- `FindFirstChild` ×8
+- `FindFirstChildOfClass` ×2
+- `FindPartOnRayWithIgnoreList`
+- `FireGem`
+- `FireServer` ×8
+- `FocusLost`
+- `Font`
+- `Frame` ×6
+- `GUI`
+- `GUI_LOADED` ×2
+- `GetChildren` ×9
+- `GetDescendants` ×3
+- `GetMouse` ×2
+- `GetMousePoint` ×3
+- `GetPlayers` ×2
+- `GetService` ×5
+- `Gives`
+- `GothamBlack`
+- `HackComputer`
+- `HackKeyPad`
+- `Handle`
+- `Heartbeat`
+- `HeistStatus` ×3
+- `Heroes` ×2
+- `Hovermode`
+- `Humanoid` ×5
+- `Idled`
+- `Ignore` ×2
+- `InputBegan` ×2
+- `Instance` ×6
+- `InvokeServer` ×3
+- `IsA` ×4
+- `IsMouseButtonPressed`
+- `Jewel` ×2
+- `JewelryBoxes`
+- `JewelryManager`
+- `JewelryStore` ×2
+- `Jewlery`
+- `JumpPower`
+- `KeyCode`
+- `Kick`
+- `Laptop`
+- `Lasers`
+- `Lava`
+- `LayoutOrder` ×3
+- `Lever1`
+- `Lever2`
+- `Lever3`
+- `Lever4`
+- `Linear` ×2
+- `Loaded`
+- `LocalPlayer` ×11
+- `Locked` ×3
+- `Looped` ×3
+- `Luggage`
+- `MadShitty`
+- `Magnitude` ×3
+- `MainGUI`
+- `MarketplaceService`
+- `MaxSpeed`
+- `Mesh`
+- `Minimize` ×3
+- `Modules`
+- `MouseButton1`
+- `MouseButton1Click` ×4
+- `MouseEnter`
+- `MouseLeave`
+- `Name` ×15
+- `NameTag` ×2
+- `Nope` ×2
+- `OFF` ×10
+- `ObjectSelection` ×4
+- `Offset` ×3
+- `Origin`
+- `Out` ×3
+- `Parent` ×5
+- `Part`
+- `Parts`
+- `Phone`
+- `Pitch` ×2
+- `PlaceholderColor3`
+- `PlaceholderText` ×2
+- `Play`
+- `PlaySound` ×4
+- `PlaybackState`
+- `PlayerGui` ×2
+- `Players` ×12
+- `Playing` ×3
+- `Police` ×2
+- `Position` ×10
+- `PrimaryPart` ×11
+- `Prisoners`
+- `Pyramid` ×3
+- `Quad`
+- `RPG`
+- `Ray`
+- `RemoteEvent`
+- `RemoteFunction` ×3
+- `RenderStepped` ×6
+- `ReplicatedStorage` ×9
+- `ResetOnSpawn`
+- `RightShift`
+- `Robbing` ×2
+- `RunService`
+- `Screen`
+- `ScreenGui`
+- `ScreenPointToRay`
+- `ScrollBarThickness`
+- `ScrollingFrame`
+- `Seat`
+- `SendNotification`
+- `SetCore`
+- `SetTeam` ×3
+- `Settings`
+- `ShakeOnce`
+- `Shoot` ×2
+- `ShootGun`
+- `ShootRPG`
+- `Size` ×3
+- `SlotMachine`
+- `SmashCash`
+- `SortOrder`
+- `Sound` ×3
+- `SoundId`
+- `SourceSansBold`
+- `Speed`
+- `Start`
+- `StarterGui`
+- `StatsHUD`
+- `Status` ×13
+- `Steal`
+- … ещё 55
+
+
+## Ссылки / ассеты (1)
+
+- `rbxassetid://`

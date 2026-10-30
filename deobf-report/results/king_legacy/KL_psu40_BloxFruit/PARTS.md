@@ -1,5 +1,5 @@
 # Разбор частей скрипта
-- файл: `deobfuscated.lua`
+- файл: `script.lua`
 - размер: 1295 КБ, 36695 строк
 
 ## Части (функционал)
@@ -29,6 +29,11 @@
 
 ## Сервисы / remotes
 - сервисы: Players, ReplicatedStorage, ReplicatedFirst, Workspace, Lighting, TweenService, RunService, UserInputService, VirtualUser, HttpService, MarketplaceService, TeleportService, CoreGui
+
+## Названия партов / объектов в игре (3 уникальных)
+- `Data Ping` (1)
+- `Kingdom of Rose` (1)
+- `Dark Arena` (1)
 
 ## Подписи UI / названия функций (первые 60)
 - AbandonQuest

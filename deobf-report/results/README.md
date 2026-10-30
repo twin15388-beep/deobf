@@ -8,7 +8,12 @@
 
 Индекс с размерами — `INDEX.md`.
 
+Всего **67 сэмплов**, 29 игр/режимов, 11 обфускаторов (Luraph v15, MoonSec V3, MoonSec V2,
+PSU 4.0/4.5, IronBrew/AztupBrew 2.7.x, wYnFuscate, самописные XOR-загрузчики). Полная таблица — `INDEX.md`.
+
 ## Что внутри (кратко)
+
+### King Legacy / тестовый корпус (первая партия)
 
 | Каталог | Обфускатор | Что это за скрипт |
 |---|---|---|
@@ -19,6 +24,75 @@
 | `king_legacy/KL_msv3_v15_ZombieAttack` | MoonSec V3 | Lightux v1.5 — то же, но новее и в 1.5 раза больше кода. |
 | `king_legacy/KL_msv2_v13` | MoonSec V2 | Lightux v1.3: читаемый Lua с `game.HttpGet`, `loadstring`, анти-tamper `__secureeq`. |
 | `corpus/psu_small`, `corpus/aztupbrew`, `corpus/wynfuscate` | PSU / AztupBrew / wYnFuscate | Тестовые сэмплы обфускаторов из `vyxonq-dev/obfuscator-samples` (не игровые) — доказательство, что пайплайн работает не только на King Legacy. |
+
+### Вторая партия: 12 игр, 15 новых сэмплов
+
+| Каталог | Обфускатор | Что это за скрипт |
+|---|---|---|
+| `blox_fruits/hub` | **Luraph v15** | Blox Fruits: автофарм/квесты, ESP, телепорты, 188 уникальных партов (`KitsuneIsland`, `EmberTemplate`, `Frozen Dimension`, `Mirage Island`, `SeaBeast1`). Полная девиртуализация — читаемый исходник с настоящими именами. |
+| `grow_a_garden/hub` | **Luraph v15** | Grow a Garden: автофарм, ESP (48 упоминаний), авто-продажа, телепорты. |
+| `bloxburg/autobuild` | MoonSec V3 | Bloxburg: автопостройка домов, 43 телепорта, UI Krnl/Orion. |
+| `gacha_online/hub` | PSU 4.0 | Gacha Online: авто-роллы, фарм валюты. |
+| `yba/kolgie` | PSU 4.0 | **Your Bizarre Adventure**: хаб, авто-квесты (43), автофарм (38), Aimbot. |
+| `the_wild_west/hub` | PSU 4.0 | The Wild West: хаб с автофармом. |
+| `the_wild_west/no_coal`, `new_farm`, `coal_farm` | MoonSec V3 | The Wild West: три фермы (без угля / новая / уголь) — восстановлены функционально (salvage-режим). |
+| `the_wild_west/send` | MoonSec V3 | Маленькая обёртка-отправитель. |
+| `solara_hub/orion` | MoonSec V3 | Solara Hub: Orion, мультиигровой хаб, UI Orion/Solara. |
+| `counter_blox/hub` | unprom | Counter Blox: чит-меню. |
+| `murder_mystery_2/ghost_hub` | MoonSec V2 | Murder Mystery 2: Ghost Hub. |
+| `piggy/hub` | PSU 4.0 | Piggy: хаб. |
+| `prison_life/cmd_gui` | unprom | Prison Life: GUI с чат-командами. |
+| `tower_of_hell/auto_win` | IronBrew | Tower of Hell: снят только внешний слой (VM остался). |
+| `jailbreak/jailtabs` | самописный | Jailbreak: JailTabs 3.2, XOR-загрузчик снят, внутри компактный исходник. |
+
+### Третья партия (4-я итерация): ещё 7 игр/режимов, 12 сэмплов
+
+Источник — репозиторий `hexahigh/Scripts` (6 132 Lua-файла; сканировали все, отобрали
+файлы с читаемым Lua и типовые обфусцированные). Для этой партии код **не был обфусцирован VM**,
+но был **минифицирован в одну строку** — поэтому использован новый инструмент
+`tools/lua_beautify.py`: он не меняет ни одного токена, только расставляет переводы строк и
+отступы, и в конце сам сверяет поток токенов (гарантия, что код остался тем же).
+
+| Каталог | Что это | Строк | Статус |
+|---|---|---|---|
+| `jailbreak/unjailbreak` | Jailbreak: авто-ограбления, ESP, aimbot, 71 телепорт, UI Rain | 4 510 | функциональный код |
+| `jailbreak/gui_2` | Jailbreak: GUI-меню | 1 834 | функциональный код |
+| `jailbreak/jailbreaker_v42` | Jailbreak: Jailbreaker V4.2 | 909 | функциональный код |
+| `prison_life/main` | Prison Life: мультитул (килл-аура, ESP, телепорты, админ-команды) | 3 659 | функциональный код |
+| `prison_life/simple_gui` | Prison Life: простое GUI | 2 756 | функциональный код |
+| `prison_life/gui` | Prison Life: GUI с командами | 1 228 | функциональный код |
+| `murder_mystery_2/full` | Murder Mystery 2: роли, ESP, авто-нож | 1 506 | функциональный код |
+| `murder_mystery_2/gui` | Murder Mystery 2: GUI | 1 149 | функциональный код |
+| `close_quarters_combat/gui` | Close Quarters Combat: чит-меню | 1 613 | функциональный код |
+| `pet_simulator/gui` | Pet Simulator: GUI-автофарм, UI Hydra/Rain | 1 354 | функциональный код |
+| `pet_simulator/op_gui` | Pet Simulator: OP GUI | 999 | функциональный код |
+| `tower_defense_simulator/autofarm` | Tower Defense Simulator: автофарм | 11 121 | **частично** (виден блок настроек `_G.*`, тело — VM Luraph v6-типа) |
+
+Плюс:
+
+* `_failed.md` — 12 обфусцированных файлов из того же репозитория (Synapse Xen 1.1.2, IronBrew 2.7.0/2.7.2,
+  Luraph 6.0-beta1 / 11.1 / 11.5, неизвестный Luraph-подобный VM) — с перечнем того, что именно пробовали;
+* `_corpus_prometheus/` — новый инструмент `unprom` на 6 эталонных сэмплах Prometheus / wearedevs v1.0 /
+  luaobfuscator.com: 6 из 6 разобраны (девиртуализация в плоский CFG + расшифровка строк и ConstantArray).
+
+### Четвёртая партия (5-я итерация): GPO, Illegal Soccer, Blox Strike, YBA
+
+Запрос был «GPO / King Legacy / Illegal Soccer / Blox Strike / YBA + популярные режимы».
+Что нашлось и что с этим сделано:
+
+| Режим | Сэмплы | Источник | Состояние |
+|---|---|---|---|
+| **Grand Piece Online** | `gpo/tempest_hub`, `gpo/a7dev_loader`, `gpo/venomware`, `gpo/austina_ui` | `TrilhaX/scriptexec` (`Games/gpo.lua`), `moa456811-prog/roblox-hubs`, `lenny2010/VenomWare-V1`, `Ic0u/achieved-scripts` (`seahub.lua`) | рабочего обфусцированного сэмпла GPO **в паблике нет** — все 4 файла открытые (Tempest Hub на Linoria: AutoFarm + 19 партов) |
+| **King Legacy** | 6 сэмплов из прошлых партий (`king_legacy/*`) | `XxBoomer/script`, `hankiwastaken/Cracks` | **все 6 разобраны** (PSU 4.0/4.5, MoonSec V2/V3) — новых обфусцированных за итерацию не появилось |
+| **Illegal Soccer** | `illegal_soccer/polsec_loader`, `maxlegends_loader`, `luarmor_router`, `super_futebol` | `s1mpl33222-glitch/lua-obfuscator-samples`, `arthurtrovoada21-arch/Super-Futebol-Proibido` | открытые лоадеры. В `polsec_loader` — таблица `GameList` на **81 игру** (PlaceId → scriptId), включая сам Illegal Soccer (`10155360168`). Сами читы отдаются по ключу с `api.polsec.net` / Luarmor — статически их не достать |
+| **Blox Strike** | `blox_strike/*` — 7 сэмплов | `Friezer71/script`, `twistedk1d/BloxStrike`, `nathanathan69420-pixel/PPS`, `d0inks/moon.lua`, `brkapery/Sigmaware-Roblox-BloxStrike`, `4raff/MahmutHub` | 5 открытых + 2 обфусцированных: `mahmuthub_wearedevs` (wearedevs/Prometheus, de-flatten 7 184 строки) и `moon_ext_doink` (doink obfuscator v1, `unprom` 1 712 строк) |
+| **YBA** | `yba/ysf_luraph14`, `azero_hub`, `aethelburg_v16` + ранее `kolgie` | `rorri-cm/yba-autofarm`, `thatguyscousin9/azero-hub`, `EYDB0812/YBA-SCR-PT` | **Luraph v14.4.2** (`ysf_luraph14`) — новый обфускатор, девиртуализован **частично** (1 корневой proto → 172 строки) |
+| Бонус | `one_piece/kaitun_nav` | `Spade324/SpadesHub` | открытый хаб One Piece Kaitun (Rayfield) |
+
+Плюс к этому в этой итерации впервые заработал путь **Luraph v14** в `Deobfuscator-Luraph-V15`
+(для этого пришлось собрать `bin/luau` и `bin/luau-ast` под Linux) и обновлён `lua_beautify.py`:
+нашёлся класс ошибок, когда `a - -b` склеивалось в `--b` (комментарий) — теперь склейка, образующая
+новый токен (`--`, `[[`, `]]`, `<<`, `==`, `..`), запрещена.
 
 ## Как это получено
 
@@ -31,6 +105,10 @@ python3 deobf-report/tools/pipeline.py obfuscated.lua --out results/<игра>/<
 `unluac` → `extract_parts.py` → `PARTS.md` + `LOG.txt`.
 
 ## Важная оговорка
+
+Часть файлов собрана в **salvage-режиме**: если unluac не может разобрать файл целиком из-за одной
+плохой функции, чанк режется по прототипам, каждая функция декомпилируется отдельно, а нечитаемые
+вставляются дизассемблером с пометкой `-- PSEUDO`. Такие файлы помечены в `LOG.txt`.
 
 Код читаемый и синтаксически корректный, но **не всегда компилируется обратно** стоковым
 Lua 5.1: `unluac` объявляет регистры виртуальной машины обычными локалями, и в самых больших

@@ -1,5 +1,5 @@
 # Разбор частей скрипта
-- файл: `deobfuscated.lua`
+- файл: `script.lua`
 - размер: 133 КБ, 4207 строк
 
 ## Части (функционал)
@@ -20,6 +20,19 @@
 ## Сервисы / remotes
 - сервисы: Players, ReplicatedStorage, Workspace, TweenService, RunService, UserInputService, CoreGui
 - remote-вызовы: FireServer(
+
+## Названия партов / объектов в игре (11 уникальных)
+- `UICorner` (64)
+- `TextButton` (36)
+- `Frame` (17)
+- `TextLabel` (14)
+- `Part` (3)
+- `Tool` (2)
+- `ScreenGui` (1)
+- `ImageButton` (1)
+- `Animation` (1)
+- `SelectionBox` (1)
+- `Middle Room` (1)
 
 ## Подписи UI / названия функций (первые 60)
 - Animation

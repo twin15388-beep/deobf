@@ -1,0 +1,7 @@
+input: new_samples/TrixAde__scripts/BloxBurgAutoBuild.lua
+detected: moonsec_v3
+result: /home/user/deobf/_work/res2/TrixAde/BloxBurgAutoBuild/deobfuscated.lua
+
+detected: moonsec_v3
+moonsec-v3 exit=0 42 bytes to /home/user/deobf/_work/res2/TrixAde/BloxBurgAutoBuild/extracted.luac
+unluac: 13315 lines

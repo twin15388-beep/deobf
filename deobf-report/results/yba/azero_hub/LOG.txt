@@ -1,0 +1,8 @@
+source: yba_azero_hub.lua
+size: 30026 B (29 KB)
+detected: unknown
+description: YBA: Azero Hub
+method: lua_beautify.py (token-safe reindent, токены сверены)
+beautify: deobf-report/results/yba/azero_hub/script.lua: 1340 строк -> 992 строк, токены совпадают
+parts: parts -> deobf-report/results/yba/azero_hub/PARTS.md (138 labels)
+result: OK, 993 строк, 30 КБ

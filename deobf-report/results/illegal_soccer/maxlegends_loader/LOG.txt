@@ -1,0 +1,8 @@
+source: soccer_main.lua
+size: 49281 B (48 KB)
+detected: unknown
+description: Illegal Soccer: MAXLEGENDS master-loader (ключи в Cloudflare KV)
+method: lua_beautify.py (token-safe reindent, токены сверены)
+beautify: deobf-report/results/illegal_soccer/maxlegends_loader/script.lua: 1246 строк -> 1131 строк, токены совпадают
+parts: parts -> deobf-report/results/illegal_soccer/maxlegends_loader/PARTS.md (60 labels)
+result: OK, 1132 строк, 47 КБ

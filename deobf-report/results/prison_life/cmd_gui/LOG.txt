@@ -1,0 +1,16 @@
+input: new_samples/TrixAde__scripts/prsionlife.lua
+detected: unknown (via unprom)
+result: /home/user/deobf/_work/res2/TrixAde/prsionlife/deobfuscated.lua
+
+detected: unknown
+obfuscator not recognised; trying every bytecode producer
+psu exit=1 []
+moonsec-v3 exit=1 
+CASCADE failed: 0) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [ '/home/user/deobf/_work/tools/CASCADE/index.js' ]
+}
+
+Node.js v22.22.3
+fallback chain exhausted
+unprom exit=0 prom: wrote /home/user/deobf/_work/res2/TrixAde/prsionlife/deobfuscated.lua (133175 bytes)

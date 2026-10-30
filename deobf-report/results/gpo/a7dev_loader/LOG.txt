@@ -1,0 +1,8 @@
+source: gpo_loader.lua
+size: 47928 B (46 KB)
+detected: unknown
+description: Grand Piece Online: A7DEV Hub — премиум-загрузчик (key-system, Supabase-эндпоинт)
+method: lua_beautify.py (token-safe reindent, токены сверены)
+beautify: deobf-report/results/gpo/a7dev_loader/script.lua: 1452 строк -> 842 строк, токены совпадают
+parts: parts -> deobf-report/results/gpo/a7dev_loader/PARTS.md (66 labels)
+result: OK, 843 строк, 41 КБ

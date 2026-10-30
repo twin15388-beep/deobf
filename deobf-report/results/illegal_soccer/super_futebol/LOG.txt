@@ -1,0 +1,8 @@
+source: superfutebol.lua
+size: 14704 B (14 KB)
+detected: unknown
+description: Футбольный режим: Super Futebol Proibido v1.0 (аналог Illegal Soccer)
+method: lua_beautify.py (token-safe reindent, токены сверены)
+beautify: deobf-report/results/illegal_soccer/super_futebol/script.lua: 441 строк -> 398 строк, токены совпадают
+parts: parts -> deobf-report/results/illegal_soccer/super_futebol/PARTS.md (35 labels)
+result: OK, 399 строк, 14 КБ

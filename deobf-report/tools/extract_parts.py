@@ -94,6 +94,20 @@ def main():
         out.append("\n## Чат-команды\n")
         out.append("- " + ", ".join("`%s`" % c for c in cmds[:40]) + "\n")
 
+    # game objects: the names the script actually looks up or creates
+    objs = []
+    for pat in (r'FindFirstChild\(\s*"([^"]{2,50})"', r'WaitForChild\(\s*"([^"]{2,50})"',
+                r'Instance\.new\(\s*"([^"]{2,50})"', r'\["([A-Z][\w ]{2,40})"\]'):
+        objs += re.findall(pat, text)
+    counts = {}
+    for o in objs:
+        counts[o] = counts.get(o, 0) + 1
+    top = sorted(counts.items(), key=lambda kv: -kv[1])[:60]
+    if top:
+        out.append("\n## Названия партов / объектов в игре (%d уникальных)\n" % len(counts))
+        for name, n in top:
+            out.append("- `%s` (%d)\n" % (name, n))
+
     strings = sorted({s for s in re.findall(r'"([^"\\\n]{4,60})"', text)})
     ui_labels = [s for s in strings if re.match(
         r"^[A-ZА-Я][\w \-/()]{2,40}$", s) and not s.startswith("http")]

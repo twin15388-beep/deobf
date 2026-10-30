@@ -1,0 +1,8 @@
+source: soccer_luarmor_BFLoader.lua
+size: 8241 B (8 KB)
+detected: unknown
+description: Illegal Soccer: Luarmor-роутер (PlaceId → URL лоадера), запись для Illegal Soccer
+method: lua_beautify.py (token-safe reindent, токены сверены)
+beautify: deobf-report/results/illegal_soccer/luarmor_router/script.lua: 121 строк -> 66 строк, токены совпадают
+parts: parts -> deobf-report/results/illegal_soccer/luarmor_router/PARTS.md (2 labels)
+result: OK, 67 строк, 7 КБ

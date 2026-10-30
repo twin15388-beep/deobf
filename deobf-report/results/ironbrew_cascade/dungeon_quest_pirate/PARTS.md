@@ -1,0 +1,184 @@
+# Dungeon_Quest_Pirate_ (IronBrew/CASCADE, код не собран) — имена объектов (из констант чанка)
+
+Источник: `/home/user/deobf/_work/res6/ib/Dungeon_Quest_Pirate_//fixed.luac` (29288 B, 70 прототипов, 321 строковых констант)
+
+> Извлечено из строковых констант байткода. Порядок — алфавитный, в скобках — сколько раз строка встречается.
+
+
+## Классы Roblox (6)
+
+`Frame`, `Humanoid`, `Players`, `RemoteEvent`, `RunService`, `ScrollingFrame`
+
+
+## Имена объектов / партов (170)
+
+- `AutoEquip`
+- `AutoEquipClass`
+- `AutoLeave`
+- `AutoSell` ×2
+- `AutoUpgrade`
+- `Backpack`
+- `BeginWaitForPlayers` ×2
+- `Berserk`
+- `BindToRenderStep`
+- `Bodyguard` ×2
+- `CFrame` ×8
+- `CaptureController`
+- `ChangeState` ×2
+- `Changed` ×3
+- `Character` ×3
+- `CharacterAdded`
+- `ChildAdded` ×2
+- `ChildRemoved`
+- `ClickButton1`
+- `Connect` ×6
+- `CoreGui`
+- `Current`
+- `CustomD` ×2
+- `Data`
+- `Dead`
+- `DescendantAdded`
+- `Destroy` ×5
+- `Died`
+- `Difficulty`
+- `Dungeon`
+- `DupeSlot`
+- `Easy`
+- `Enabled` ×2
+- `Enum`
+- `FindFirstChild` ×8
+- `FindFirstChildOfClass` ×4
+- `FireServer` ×7
+- `Fireball`
+- `Frame` ×4
+- `Frost`
+- `GetChildren` ×3
+- `GetDescendants` ×3
+- `GetService` ×3
+- `GetState`
+- `HandleInstakill`
+- `HandleTP`
+- `Hard`
+- `Hardcore` ×2
+- `HasDescendant`
+- `Head`
+- `Health`
+- `HideName`
+- `Hitman`
+- `HttpGet`
+- `Humanoid` ×6
+- `HumanoidRootPart` ×9
+- `HumanoidStateType`
+- `INSTAKILL`
+- `Innervate`
+- `Insane`
+- `InstaRejoin` ×2
+- `InvokeServer` ×6
+- `IsA`
+- `Items`
+- `Key`
+- `Kolvumar`
+- `LeftFoot`
+- `LeftHand`
+- `LeftLowerArm`
+- `LeftLowerLeg`
+- `LeftUpperArm`
+- `LeftUpperLeg`
+- `Level`
+- `LocalPlayer` ×10
+- `LowerTorso`
+- `Mage`
+- `Medium`
+- `Name` ×7
+- `NameHealthContainer`
+- `Nightmare`
+- `None`
+- `Parent`
+- `Pirate`
+- `PlaceId` ×4
+- `PlayerGui` ×2
+- `Players` ×10
+- `PlayersToWaitFor` ×2
+- `Pot`
+- `PrimaryPart`
+- `Pulsefire`
+- `Rank`
+- `Rarities`
+- `RemoteEvent`
+- `ReplicatedStorage` ×9
+- `RightFoot`
+- `RightHand`
+- `RightLowerArm`
+- `RightLowerLeg`
+- `RightUpperArm`
+- `RightUpperLeg`
+- `RobloxGui`
+- `RunService`
+- `ScrollingFrame`
+- `SkillPoints`
+- `Swipe`
+- `Teleport` ×2
+- `TeleportService` ×2
+- `Text` ×4
+- `TimeToWait`
+- `TopBarContainer`
+- `Touched`
+- `Tsunami`
+- `UpperTorso`
+- `UserId`
+- `Username`
+- `Value` ×3
+- `Vector2`
+- `Vector3`
+- `VirtualUser`
+- `Vortex`
+- `WaitForChild` ×11
+- `WaitForPlayers`
+- `Warrior`
+- `WaveDefense` ×2
+- `Whirlwind`
+- `__index`
+- `addPlayerToWhitelist`
+- `backgroundFill`
+- `bigMageBeam`
+- `bit32_band`
+- `bookClone`
+- `bossRoom` ×2
+- `cannonBarrageHit`
+- `changeStartValue`
+- `createLobby`
+- `currentUpgrade` ×3
+- `dungeonFinished` ×2
+- `enemyFolder`
+- `equipItem` ×3
+- `finalBossArrowShotHitbox`
+- `fingerBlastHit`
+- `forceField` ×2
+- `golemRockClap`
+- `golemRockThrow`
+- `hitBox`
+- `kingLandingArea`
+- `levelReq`
+- `loadPlayerCharacter`
+- `lobbyInfo`
+- `maxUpgrades` ×3
+- `npcMageShot`
+- `npcMageSpikes`
+- `overgrowthLongLineSpikes`
+- `physicalDamage`
+- `physicalPower` ×2
+- `playerName` ×4
+- `playerNameplate` ×2
+- `playerStatus` ×4
+- `queueGui`
+- `reloadInvy` ×5
+- `safeSpotCircle` ×3
+- `secondBossMark`
+- `sellItemEvent`
+- `spellPower` ×2
+- `spendSkillPoint`
+- `spikePrecast`
+- `spiritStrike`
+- `startDungeon`
+- `unequipItem` ×2
+- `upgradeItem`

@@ -1,0 +1,8 @@
+source: Jailbreak - Jailbreak GUI 2.lua
+size: 74388 B (72 KB)
+detected: none (обычный Lua, минифицирован)
+description: Jailbreak: GUI-меню
+method: lua_beautify.py (token-safe reindent, токены сверены)
+beautify: /home/user/deobf/deobf-report/results/jailbreak/gui_2/script.lua: 1897 строк -> 1833 строк, токены совпадают
+parts: parts -> /home/user/deobf/deobf-report/results/jailbreak/gui_2/PARTS.md (105 labels)
+result: OK, 1834 строк, 75 КБ

@@ -1,0 +1,8 @@
+source: Prison Life GUI.lua
+size: 45443 B (44 KB)
+detected: none (обычный Lua, минифицирован)
+description: Prison Life: GUI с командами
+method: lua_beautify.py (token-safe reindent, токены сверены)
+beautify: /home/user/deobf/deobf-report/results/prison_life/gui/script.lua: 1349 строк -> 1227 строк, токены совпадают
+parts: parts -> /home/user/deobf/deobf-report/results/prison_life/gui/PARTS.md (117 labels)
+result: OK, 1228 строк, 45 КБ
