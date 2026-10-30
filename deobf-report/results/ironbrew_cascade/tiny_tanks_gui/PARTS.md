@@ -1,58 +1,30 @@
-# Tiny_Tanks_GUI_ (IronBrew/CASCADE) — имена объектов (из констант чанка)
+# `tiny_tanks_gui` — функционал и механики
 
-Источник: `/home/user/deobf/_work/res6/ib/Tiny_Tanks_GUI_//fixed.luac` (3542 B, 6 прототипов, 58 строковых констант)
+Игра/тема: **ironbrew_cascade** · восстановленный код: `script.lua` (212 строк)
 
-> Извлечено из строковых констант байткода. Порядок — алфавитный, в скобках — сколько раз строка встречается.
+## Что делает (по восстановленному коду)
 
+- **GUI / меню** — улики: `screengui`, `textbutton`
+- **аимбот / наведение** — улики: `mousebutton`
 
-## Классы Roblox (4)
+## Вызовы API
 
-`Frame`, `Players`, `ScreenGui`, `TextButton`
+- Сервисы: `CoreGui`, `Players`
+- Классы/объекты: `Frame`, `ScreenGui`, `TextButton`
+- Методы: `GetChildren`×1
 
+## Имена функций (0)
 
-## Имена объектов / партов (44)
+_имена не сохранились — функции пронумерованы лифтом (`L2_1` и т.п.), смысл восстанавливается по вызовам выше_
 
-- `AbilityCooldown`
-- `AvailableAmmo`
-- `BackgroundColor3`
-- `BackgroundTransparency`
-- `BorderColor3`
-- `BorderSizePixel`
-- `Color3`
-- `CoreGui`
-- `Enum`
-- `FastTankButton`
-- `Font`
-- `FontSize`
-- `Frame`
-- `GetChildren`
-- `Highway`
-- `InfFireRateButton`
-- `InfSpecialAmmoButton`
-- `Instance`
-- `LoadedShots`
-- `LocalPlayer` ×5
-- `MainFrame`
-- `MaxFireRate`
-- `MouseButton1Down`
-- `MoveSpeed`
-- `Name` ×6
-- `NoAbilityCooldown`
-- `NoReloadButton`
-- `Parent`
-- `Players` ×5
-- `Position`
-- `RotationSpeed`
-- `ScreenGui`
-- `Settings` ×4
-- `Size`
-- `Size14`
-- `Tanks` ×5
-- `Text`
-- `TextButton`
-- `TextColor3`
-- `TextSize`
-- `TextWrapped`
-- `TinyTanksCheatGuiByLeviTheOtaku`
-- `UDim2`
-- `Value` ×5
+## Строковые константы (UI, подписи)
+
+- `Tank-` ×5
+
+## Ссылки / webhooks / ассеты (0)
+
+_нет_
+
+## Парты / объекты (14)
+
+- идентификаторы в коде: `AvailableAmmo`, `Color3`, `Enum`, `Font`, `FontSize`, `GetChildren`, `Highway`, `LocalPlayer`, `MouseButton1Down`, `Name`, `Size14`, `Tank`, `Tanks`, `UDim2`

@@ -1,97 +1,55 @@
-# Разбор частей скрипта
-- файл: `script.lua`
-- размер: 56 КБ, 2881 строк
+# `hub` — функционал и механики
 
-## Части (функционал)
-- **Aimbot** — 1 упоминаний
-- **ESP** — 10 упоминаний
-- **Fly/Noclip** — 15 упоминаний
-- **Speed/Jump** — 21 упоминаний
-- **Teleport** — 10 упоминаний
-- **Config / Save settings** — 5 упоминаний
+Игра/тема: **piggy** · восстановленный код: `script.lua` (2881 строк)
 
-## UI-библиотека
-- Rain
+## Что делает (по восстановленному коду)
 
-## URL / webhook-и (4)
+- **телепорт / движение** — улики: `cframe`, `humanoidrootpart`, `jumppower`, `teleport`, `tweenservice`, `walkspeed`
+- **GUI / меню** — улики: `dropdown`, `screengui`, `slider`, `toggle`
+- **сеть / загрузка кода** — улики: `discord`, `httpget`, `loadstring`, `require`
+- **урон / убийство** — улики: `breakjoints`, `godmode`, `noclip`
+- **анти-АФК / ввод** — улики: `inputbegan`, `keydown`, `virtualuser`
+- **аимбот / наведение** — улики: `aimbot`, `mousebutton`
+- **инвентарь / предметы** — улики: `drop`, `item`
+- **ESP / подсветка** — улики: `esp`
+- **деньги / ресурсы** — улики: `infinite`
+- **квесты / стадии** — улики: `quest`
+
+## Вызовы API
+
+- Сервисы: `Chat`, `CoreGui`, `GuiService`, `Lighting`, `Players`, `ReplicatedFirst`, `ReplicatedStorage`, `RunService`, `SoundService`, `Teams`, `TextService`, `TweenService`, `UserInputService`, `VirtualUser`
+- Классы/объекты: `BindableEvent`, `BodyForce`, `BodyGyro`, `Camera`, `ClickDetector`, `Decal`, `Folder`, `Frame`, `Humanoid`, `ImageButton`, `Lighting`, `ModuleScript`, `RemoteEvent`, `RemoteFunction`, `ScreenGui`, `StringValue`, `TextBox`, `Tool`, `Trail`, `Weld`
+- Методы: `Connect`×30, `FindFirstChild`×12, `IsA`×10, `GetChildren`×7, `GetService`×6, `WaitForChild`×6, `HttpGet`×4, `loadstring`×4, `GetPlayers`×3, `FireServer`×2, `InvokeServer`×1, `TweenService`×1
+
+## Имена функций (0)
+
+_имена не сохранились — функции пронумерованы лифтом (`L2_1` и т.п.), смысл восстанавливается по вызовам выше_
+
+## Строковые константы (UI, подписи)
+
+- `AddToggle` ×17
+- `AddCategory` ×11
+- `BasePart` ×6
+- `Piggy` ×5
+- `JumpPower` ×5
+- `Map` ×5
+- `AddSlider` ×5
+- `Value` ×4
+- `AddButton` ×4
+- `Head` ×4
+- `Name` ×3
+- `WalkSpeed` ×3
+- `Infinite Energy` ×3
+- `Disarm Traps` ×3
+- `AddDropdown` ×3
+
+## Ссылки / webhooks / ассеты (4)
+
 - `https://raw.githubusercontent.com/RegularVynixu/IreXion-UI-Library/main/Revamp/IreXion%20UI%20Library`
 - `https://raw.githubusercontent.com/RegularVynixu/Random-Scripts/main/ESP%20Module/Module.lua`
 - `https://raw.githubusercontent.com/RegularVynixu/Vynixius/main/Discord%20Invite`
 - `https://raw.githubusercontent.com/RegularVynixu/Vynixius/main/Discord%20Username`
 
-## Сервисы / remotes
-- сервисы: Players, ReplicatedStorage, ReplicatedFirst, Lighting, TweenService, RunService, UserInputService, VirtualUser, TeleportService, CoreGui
+## Парты / объекты (258)
 
-## Названия партов / объектов в игре (10 уникальных)
-- `Infinite Energy` (2)
-- `Disarm Traps` (2)
-- `Player ESP` (2)
-- `Enemy ESP` (2)
-- `Loop Toggle All Doors` (1)
-- `Rainbow Mode` (1)
-- `Infinite Jump` (1)
-- `Click Teleport` (1)
-- `Item ESP` (1)
-- `Auto Voting Enabled` (1)
-
-## Подписи UI / названия функций (первые 60)
-- Accessory
-- Activated
-- AddBind
-- AddBox
-- AddButton
-- AddCategory
-- AddDropdown
-- AddDualLabel
-- AddLabel
-- AddSlider
-- AddToggle
-- Anchored
-- Asset
-- Auto Voting
-- Auto Voting Enabled
-- Backpack
-- BasePart
-- BindableEvent
-- BodyForce
-- BodyGyro
-- BreakJoints
-- BrianSucksVexu
-- Button1Down
-- CFrame
-- Camera
-- Changed
-- Character
-- Chat
-- Chatted
-- ChildAdded
-- ChildRemoved
-- Click Teleport
-- ClickDetector
-- Color3
-- Connect
-- Contact Me
-- Copy Discord Invite
-- CoreGui
-- Credits
-- CurrentCamera
-- Debris
-- Decal
-- DefaultChatSystemChatEvents
-- Disarm Traps
-- Enabled
-- Enemy
-- Enemy ESP
-- Energy
-- Enum
-- Extra
-- FederalWasHereAttribute
-- Field of View
-- FileMesh
-- FilteringEnabled
-- FindFirstChild
-- FireServer
-- Fly Speed
-- Folder
-- Frame
-- GameId
+- идентификаторы в коде: `Accessory`, `Activated`, `Add`, `AddBind`, `AddBox`, `AddButton`, `AddCategory`, `AddDropdown`, `AddDualLabel`, `AddGui`, `AddItem`, `AddLabel`, `AddSlider`, `AddTab`, `AddToggle`, `Added`, `All`, `AncestryChanged`, `Anchored`, `Asset`, `Auto`, `Backpack`, `BasePart`, `Book`, `BreakJoints`, `BrianSucksVexu`, `Button1Down`, `CFrame`, `CanCollide`, `ChangeState`, `Changed`, `Character`, `CharacterAdded`, `Chatted`, `ChildAdded`, `ChildRemoved`, `Click`, `Color3`, `Colours`, `Connect`

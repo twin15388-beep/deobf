@@ -1,31 +1,25 @@
-# Ctrl_Click_TP_ (IronBrew/CASCADE) — имена объектов (из констант чанка)
+# `ctrl_click_tp` — функционал и механики
 
-Источник: `/home/user/deobf/_work/res6/ib/Ctrl_Click_TP_//fixed.luac` (926 B, 4 прототипов, 20 строковых констант)
+Игра/тема: **ironbrew_cascade** · восстановленный код: `script.lua` (77 строк)
 
-> Извлечено из строковых констант байткода. Порядок — алфавитный, в скобках — сколько раз строка встречается.
+## Что делает (по восстановленному коду)
 
+- **телепорт / движение** — улики: `moveto`
+- **анти-АФК / ввод** — улики: `inputbegan`
 
-## Классы Roblox (2)
+## Вызовы API
 
-`Players`, `UserInputService`
+- Сервисы: `Players`, `UserInputService`
+- Методы: `GetService`×1, `MoveTo`×1, `GetMouse`×1
 
+## Имена функций (0)
 
-## Имена объектов / партов (17)
+_имена не сохранились — функции пронумерованы лифтом (`L2_1` и т.п.), смысл восстанавливается по вызовам выше_
 
-- `Button1Down`
-- `Character`
-- `Enum` ×2
-- `GetMouse`
-- `GetService`
-- `Hit`
-- `InputBegan`
-- `InputEnded`
-- `KeyCode` ×2
-- `Keyboard` ×2
-- `LeftControl` ×2
-- `LocalPlayer`
-- `MoveTo`
-- `Players`
-- `RightControl` ×2
-- `UserInputService`
-- `UserInputType` ×2
+## Ссылки / webhooks / ассеты (0)
+
+_нет_
+
+## Парты / объекты (16)
+
+- идентификаторы в коде: `Button1Down`, `Character`, `Enum`, `GetMouse`, `GetService`, `Hit`, `InputBegan`, `InputEnded`, `KeyCode`, `Keyboard`, `LeftControl`, `LocalPlayer`, `MoveTo`, `RightControl`, `UserInputType`, `lbl_26`

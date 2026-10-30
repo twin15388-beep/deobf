@@ -1,84 +1,54 @@
-# Разбор частей скрипта
-- файл: `script.lua`
-- размер: 99 КБ, 4350 строк
+# `kolgie` — функционал и механики
 
-## Части (функционал)
-- **AutoFarm** — 38 упоминаний
-- **AutoQuest** — 43 упоминаний
-- **AutoSell** — 7 упоминаний
-- **Aimbot** — 1 упоминаний
-- **Speed/Jump** — 1 упоминаний
-- **Teleport** — 12 упоминаний
-- **Config / Save settings** — 3 упоминаний
+Игра/тема: **yba** · восстановленный код: `script.lua` (4350 строк)
 
-## UI-библиотека
-- Kavo, Rain
+## Что делает (по восстановленному коду)
 
-## URL / webhook-и (2)
+- **телепорт / движение** — улики: `cframe`, `humanoidrootpart`, `moveto`, `teleport`, `tp`, `tweenservice`
+- **GUI / меню** — улики: `dropdown`, `screengui`, `textbutton`, `textlabel`, `toggle`
+- **сеть / загрузка кода** — улики: `discord`, `httpget`, `loadstring`, `require`
+- **анти-АФК / ввод** — улики: `button2down`, `idled`, `inputbegan`, `virtualuser`
+- **автофарм / авто-клик** — улики: `auto farm`, `autofarm`, `farm`
+- **инвентарь / предметы** — улики: `drop`, `item`, `sell`
+- **аимбот / наведение** — улики: `aimbot`, `mousebutton`
+- **урон / убийство** — улики: `breakjoints`, `godmode`
+- **квесты / стадии** — улики: `completed`, `quest`
+- **ESP / подсветка** — улики: `esp`
+- **деньги / ресурсы** — улики: `code`
+
+## Вызовы API
+
+- Сервисы: `Chat`, `CoreGui`, `GuiService`, `Lighting`, `Players`, `ReplicatedFirst`, `ReplicatedStorage`, `RunService`, `SoundService`, `Teams`, `TextService`, `TweenService`, `UserInputService`, `VirtualUser`, `Workspace`
+- Классы/объекты: `BindableEvent`, `BodyForce`, `BodyGyro`, `Camera`, `ClickDetector`, `Decal`, `Frame`, `Humanoid`, `ImageButton`, `Lighting`, `MeshPart`, `Model`, `ModuleScript`, `Part`, `RemoteEvent`, `RemoteFunction`, `ScreenGui`, `StringValue`, `TextBox`, `TextButton`
+- Методы: `GetService`×53, `FireServer`×31, `GetChildren`×17, `FindFirstChild`×12, `InvokeServer`×7, `TweenService`×4, `Create`×4, `MoveTo`×1, `Connect`×1, `HttpGet`×1, `loadstring`×1, `IsA`×1
+
+## Имена функций (0)
+
+_имена не сохранились — функции пронумерованы лифтом (`L2_1` и т.п.), смысл восстанавливается по вызовам выше_
+
+## Строковые константы (UI, подписи)
+
+- `NewToggle` ×21
+- `Option1` ×19
+- `EndDialogue` ×19
+- `NewSection` ×12
+- `KeyCode` ×11
+- `Uses your skills for autofarm` ×10
+- `Prestige` ×10
+- `NewTab` ×7
+- `Dialogue5` ×5
+- `Teleports you to` ×5
+- `Dialogue2` ×5
+- `Deo` ×4
+- `Item Farm` ×4
+- `NewDropdown` ×4
+- `Angles` ×4
+
+## Ссылки / webhooks / ассеты (2)
+
 - `https://discord.gg/zQXxyuycwq`
 - `https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua`
 
-## Сервисы / remotes
-- сервисы: Players, ReplicatedStorage, ReplicatedFirst, Workspace, Lighting, TweenService, RunService, UserInputService, VirtualUser, TeleportService, CoreGui
+## Парты / объекты (298)
 
-## Подписи UI / названия функций (первые 60)
-- Accessory
-- Activated
-- Alpha Thug
-- AnchorPoint
-- Angles
-- Asset
-- Attack
-- Auto Arcade
-- Auto Farm
-- Auto Prestige
-- Auto Sell
-- Auto Skills
-- AutoArcade
-- AutoItem
-- AutoQuest
-- AutoQuestTarget
-- AutoSell
-- AutoSell2
-- Autofarm
-- Backpack
-- BasePart
-- BindableEvent
-- BodyForce
-- BodyGyro
-- BreakJoints
-- BrianSucksVexu
-- CFrame
-- Camera
-- Cars
-- Changed
-- Changelog
-- Character
-- Chat
-- Chatted
-- Client
-- Color3
-- Connect
-- Copies link to discord
-- Copy Discord Link
-- CoreGui
-- Corrupt Police
-- CreateLib
-- Credits to singularity for tp bypass
-- Credits to singularity for tp bypassd
-- CurrentCamera
-- Debris
-- Decal
-- DefaultChatSystemChatEvents
-- Delay
-- Deputy Bertrude
-- Dialogue1
-- Dialogue2
-- Dialogue3
-- Dialogue4
-- Dialogue5
-- Dialogue7
-- Dialogues
-- Discord Link
-- Dopey
-- Dracula
+- идентификаторы в коде: `AUTO`, `Abbacho`, `Accessory`, `Activated`, `Added`, `All`, `Alpha`, `AnchorPoint`, `Anchored`, `Angles`, `Arcade`, `Arrow`, `Asset`, `Attack`, `Auto`, `AutoArcade`, `AutoItem`, `AutoQuest`, `AutoQuestTarget`, `AutoSell`, `AutoSell2`, `Autofarm`, `Automatic`, `BackgroundColor3`, `BackgroundTransparency`, `Backpack`, `Bar`, `BasePart`, `Bertrude`, `BorderColor3`, `BorderSizePixel`, `BreakJoints`, `BrianSucksVexu`, `Button2Down`, `Button2Up`, `CFrame`, `Cars`, `Changed`, `Changelog`, `Character`

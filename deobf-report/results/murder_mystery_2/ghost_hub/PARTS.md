@@ -1,102 +1,56 @@
-# Разбор частей скрипта
-- файл: `script.lua`
-- размер: 217 КБ, 7356 строк
+# `ghost_hub` — функционал и механики
 
-## Части (функционал)
-- **AutoFarm** — 14 упоминаний
-- **AutoSell** — 2 упоминаний
-- **ESP** — 2 упоминаний
-- **Fly/Noclip** — 5 упоминаний
-- **Teleport** — 55 упоминаний
-- **Config / Save settings** — 4 упоминаний
+Игра/тема: **murder_mystery_2** · восстановленный код: `script.lua` (7356 строк)
 
-## UI-библиотека
-- Magma, Rain
+## Что делает (по восстановленному коду)
 
-## URL / webhook-и (5)
-- `https://discord.gg/D3ZFcWjAzJ`
+- **телепорт / движение** — улики: `cframe`, `humanoidrootpart`, `teleport`, `tp`, `tweenservice`
+- **деньги / ресурсы** — улики: `coin`, `coins`, `gems`, `redeem`, `reward`
+- **GUI / меню** — улики: `dropdown`, `tab`, `textlabel`, `toggle`
+- **сеть / загрузка кода** — улики: `discord`, `httpget`, `loadstring`, `require`
+- **анти-АФК / ввод** — улики: `button2down`, `idled`, `inputbegan`, `virtualuser`
+- **автофарм / авто-клик** — улики: `auto collect`, `autofarm`, `farm`
+- **инвентарь / предметы** — улики: `chest`, `drop`, `sell`
+- **ESP / подсветка** — улики: `billboardgui`, `esp`
+- **урон / убийство** — улики: `noclip`
+- **квесты / стадии** — улики: `daily`
+
+## Вызовы API
+
+- Сервисы: `CoreGui`, `Lighting`, `MarketplaceService`, `Players`, `ReplicatedStorage`, `RunService`, `StarterGui`, `TweenService`, `UserInputService`, `VirtualUser`, `Workspace`
+- Классы/объекты: `Animation`, `Attachment`, `BillboardGui`, `BlurEffect`, `Camera`, `ClickDetector`, `ColorCorrectionEffect`, `Decal`, `Explosion`, `Frame`, `Humanoid`, `Lighting`, `MeshPart`, `Part`, `ParticleEmitter`, `Texture`, `Tool`, `Trail`, `Weld`
+- Методы: `GetService`×151, `FindFirstChild`×52, `GetChildren`×27, `IsA`×23, `InvokeServer`×20, `FireServer`×15, `Connect`×14, `WaitForChild`×10, `Destroy`×7, `loadstring`×6, `HttpGet`×5, `Create`×4
+
+## Имена функций (6)
+
+`comma_value`, `__secureeq`, `Tween`, `Repeat`, `GetPoint`, `MakeESP`
+
+## Строковые константы (UI, подписи)
+
+- `Durability` ×12
+- `Chakra` ×9
+- `Strength` ×8
+- `Knife` ×6
+- `Section` ×6
+- `TeleportService` ×5
+- `Plastic` ×5
+- `^(-?%d+)(%d%d%d)` ×5
+- `Line` ×5
+- `BasePart` ×4
+- `Sword` ×4
+- `Dimension 1` ×4
+- `Dimension 2` ×4
+- `Dimension 3` ×4
+- `Dimension 4` ×4
+
+## Ссылки / webhooks / ассеты (5)
+
 - `https://pastebin.com/raw/dPXXyp4A`
+- `https://discord.gg/D3ZFcWjAzJ`
 - `https://raw.githubusercontent.com/ScriptRUs/Ryans/main/Ghosthub.lua`
 - `https://raw.githubusercontent.com/vep1032/VepStuff/main/Rgb%20Ui`
 - `https://raw.githubusercontent.com/xHeptc/Luxware-UI-Library/main/Source.lua`
 
-## Сервисы / remotes
-- сервисы: Players, ReplicatedStorage, Workspace, TweenService, RunService, UserInputService, VirtualUser, MarketplaceService, TeleportService, StarterGui, CoreGui
-- remote-вызовы: FireServer(, InvokeServer(
+## Парты / объекты (1447)
 
-## Названия партов / объектов в игре (13 уникальных)
-- `Animation` (2)
-- `Tool` (1)
-- `Part` (1)
-- `Coin Rewards HUD` (1)
-- `Halloween Candy` (1)
-- `Tech Coins` (1)
-- `Fantasy Coins` (1)
-- `Enchanted Forest` (1)
-- `Ice Tech` (1)
-- `Tech City` (1)
-- `Dark Tech` (1)
-- `Alien Forest` (1)
-- `Alien Lab` (1)
-
-## Подписи UI / названия функций (первые 60)
-- Alien Forest
-- Alien Forest FRONT
-- Alien Lab
-- Alien Lab FRONT
-- All Menu Uis
-- Ancient
-- Angel Chest
-- Animation
-- Anime Fighting Simulator
-- AntiPortNew
-- Area
-- Attachment
-- Aura
-- Auras
-- Auto Buy Commons
-- Auto Buy Egg
-- Auto Buy Epic
-- Auto Buy Legendary
-- Auto Buy Rare
-- Auto Buy Uncommons
-- Auto Collect Loot Bags
-- Auto Daily
-- Auto Golden
-- Auto Rainbow
-- Auto Sabers
-- Auto Sell
-- Auto Sell when Full
-- Auto Tp
-- AutoBuy Tab
-- AutoCombine
-- AutoEggChosen
-- AutoFarm - Full Complete
-- Autofarm
-- Autofarm Settings
-- Autofarm Tab
-- Autofarm Toggles
-- Autofarms
-- BABFT
-- Backpack
-- Backpacks
-- Bank Menu
-- BasePart
-- Basic Egg
-- Beach
-- Beach FRONT
-- BloomEffect
-- BlurEffect
-- Body
-- Boss
-- Candy
-- Chakra
-- Chest
-- Chikara
-- ChikaraCrate
-- Class
-- ClassShop
-- ClickBox
-- ClickDetector
-- Coin Rewards HUD
-- Coins
+- идентификаторы в коде: `Abilities`, `ActivateKey`, `Alien`, `All`, `AllChests`, `Amount`, `Anchored`, `Ancient`, `Angel`, `AnimationId`, `Anime`, `Anti`, `AntiPortNew`, `Area`, `Attachment0`, `Attachment1`, `Aura`, `Auras`, `Auto`, `AutoBuy`, `AutoBuyEgg`, `AutoCombine`, `AutoEggChosen`, `AutoFarm`, `AutoRewards`, `Autofarm`, `Autofarms`, `BABFT`, `Backpack`, `BackpackFull`, `Backpacks`, `Bags`, `Bank`, `BasePart`, `Basic`, `Beach`, `Beta`, `BlastPressure`, `BlastRadius`, `BloomEffect`

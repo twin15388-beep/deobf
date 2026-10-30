@@ -1,130 +1,49 @@
+# `twistedk1d` — функционал и механики
 
-Игра: **blox_strike**
-# Разбор частей скрипта
-- файл: `script.lua`
-- размер: 15 КБ, 410 строк
+Игра/тема: **blox_strike** · восстановленный код: `script.lua` (410 строк)
 
-## Части (функционал)
-- **Config / Save settings** — 2 упоминаний
+## Что делает (по восстановленному коду)
 
-## UI-библиотека
-- Rayfield, Nova
+- **GUI / меню** — улики: `dropdown`, `tab`, `toggle`
+- **телепорт / движение** — улики: `cframe`, `tweenservice`
+- **сеть / загрузка кода** — улики: `httpget`, `loadstring`
+- **аимбот / наведение** — улики: `mousebutton`
+- **деньги / ресурсы** — улики: `code`
+- **инвентарь / предметы** — улики: `drop`
 
-## URL / webhook-и (1)
+## Вызовы API
+
+- Сервисы: `ContextActionService`, `Players`, `ReplicatedStorage`, `RunService`, `TweenService`
+- Классы/объекты: `AnimationController`, `Animator`, `BasePart`, `Camera`, `MeshPart`, `Motor6D`, `SurfaceAppearance`, `Texture`
+- Методы: `FindFirstChild`×33, `Create`×23, `WaitForChild`×19, `GetChildren`×6, `IsA`×6, `GetService`×5, `Clone`×5, `Destroy`×4, `TweenService`×3, `Connect`×2, `HttpGet`×1, `loadstring`×1
+
+## Имена функций (13)
+
+`isAlive`, `getKnifeInCamera`, `cleanPart`, `disableCollisions`, `hideOriginalKnife`, `playSound`, `attachAsset`, `handleAction`, `removeViewmodel`, `spawnViewmodel`, `isAlive_Skin`, `applyWeaponSkin`, `CreateSkinDropdown`
+
+## Строковые константы (UI, подписи)
+
+- `Left Arm` ×8
+- `Right Arm` ×8
+- `Butterfly Knife` ×5
+- `Glove` ×5
+- `SkinApplied` ×4
+- `Karambit` ×3
+- `M9 Bayonet` ×3
+- `Flip Knife` ×3
+- `Gut Knife` ×3
+- `Terrorists` ×3
+- `Sports Gloves` ×3
+- `[📜] Blox Strike` ×2
+- `Skins` ×2
+- `Counter-Terrorists` ×2
+- `T Knife` ×2
+
+## Ссылки / webhooks / ассеты (1)
+
 - `https://raw.githubusercontent.com/twistedk1d/BloxStrike/refs/heads/main/Source/UI/source.lua`
 
-## Сервисы / remotes
-- сервисы: Players, ReplicatedStorage, TweenService, RunService
-- WaitForChild: `Assets`, `CT Glove`, `Camera`, `CameraAnimations`, `Characters`, `Equip`, `Heavy Swing`, `IDF`, `Idle`, `Inspect`, `Skins`, `Swing1`, `Swing2`, `T Glove`
+## Парты / объекты (288)
 
-## Названия партов / объектов в игре (48 уникальных)
-- `Camera` (3)
-- `Sports Gloves` (3)
-- `Terrorists` (2)
-- `Counter-Terrorists` (2)
-- `T Knife` (2)
-- `CT Knife` (2)
-- `T Glove` (2)
-- `CT Glove` (2)
-- `Karambit` (2)
-- `Butterfly Knife` (2)
-- `M9 Bayonet` (2)
-- `Flip Knife` (2)
-- `Gut Knife` (2)
-- `Left Arm` (1)
-- `Right Arm` (1)
-- `Glove` (1)
-- `Weapon` (1)
-- `Characters` (1)
-- `IDF` (1)
-- `CameraAnimations` (1)
-- `Equip` (1)
-- `Idle` (1)
-- `Inspect` (1)
-- `Heavy Swing` (1)
-- `Swing1` (1)
-- `Swing2` (1)
-- `Assets` (1)
-- `Skins` (1)
-- `Motor6D` (1)
-- `MP9` (1)
-- `FAMAS` (1)
-- `M4A4` (1)
-- `AUG` (1)
-- `P250` (1)
-- `Desert Eagle` (1)
-- `Dual Berettas` (1)
-- `Negev` (1)
-- `P90` (1)
-- `Nova` (1)
-- `XM1014` (1)
-- `AWP` (1)
-- `SSG 08` (1)
-- `HE Grenade` (1)
-- `Incendiary Grenade` (1)
-- `Molotov` (1)
-- `Smoke Grenade` (1)
-- `Flashbang` (1)
-- `Decoy Grenade` (1)
-
-## Подписи UI / названия функций (первые 60)
-- All scripts were written manually
-- AnimationController
-- Animator
-- Assets
-- AttackKnifeAction
-- BasePart
-- BloxStrike
-- Butterfly Knife
-- CT Glove
-- CT Knife
-- Camera
-- CameraAnimations
-- Characters
-- ContextActionService
-- Counter-Terrorists
-- Decoy Grenade
-- Default
-- Desert Eagle
-- Dual Berettas
-- Enable SkinChanger
-- Enabled Custom Knife
-- Equip
-- Factory New
-- Five-SeveN
-- Flashbang
-- Flip Knife
-- Glove
-- Gut Knife
-- HE Grenade
-- Heavy Swing
-- HitOne
-- HitThree
-- HitTwo
-- Idle
-- Incendiary Grenade
-- Info
-- Inspect
-- InspectKnifeAction
-- Karambit
-- KnifeDropdown
-- KnifeToggle
-- Knives Skins
-- Left Arm
-- M9 Bayonet
-- MainToggle
-- MeshPart
-- Molotov
-- Motor6D
-- Negev
-- P250
-- Players
-- ReplicatedStorage
-- Right Arm
-- RunService
-- Script
-- Script developed by twistedk1d
-- Selected Custom Knife
-- SkinApplied
-- Skin_
-- Skins
+- через `WaitForChild`/`FindFirstChild`: `Camera`, `Terrorists`, `Counter-Terrorists`, `Characters`, `T Knife`, `CT Knife`, `T Glove`, `IDF`, `CT Glove`, `CameraAnimations`, `Equip`, `Idle`, `Inspect`, `Heavy Swing`, `Swing1`, `Swing2`, `Assets`, `Skins`, `Left Arm`, `Right Arm`, `Sports Gloves`, `Glove`, `Weapon`
+- идентификаторы в коде: `ACTION_ATTACK`, `ACTION_INSPECT`, `ATTACK_COOLDOWN`, `AUG`, `AWP`, `Action`, `All`, `Anchored`, `AnimationController`, `Any`, `Apply`, `Arm`, `Assets`, `AttackKnifeAction`, `BasePart`, `Bayonet`, `Begin`, `Berettas`, `BindAction`, `Blox`, `BloxStrike`, `Butterfly`, `CAS`, `CFrame`, `COOLDOWN`, `CT_ONLY`, `Callback`, `CameraAnimations`, `CanCollide`, `CanQuery`, `CanTouch`, `CastShadow`, `Changer`, `Characters`, `ChildAdded`, `Clone`, `Color3`, `ConfigurationSaving`, `Connect`, `ContextActionResult`

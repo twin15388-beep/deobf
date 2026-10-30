@@ -1,8 +1,0 @@
-source: Tower Defense Simulator Autofarm.lua
-size: 129871 B (126 KB)
-detected: none (обычный Lua, минифицирован)
-description: Tower Defense Simulator: автофарм (частично: виден блок настроек, тело — VM Luraph v6-типа)
-method: lua_beautify.py (token-safe reindent, токены сверены)
-beautify: /home/user/deobf/deobf-report/results/tower_defense_simulator/autofarm/script.lua: 6 строк -> 11120 строк, токены совпадают
-parts: parts -> /home/user/deobf/deobf-report/results/tower_defense_simulator/autofarm/PARTS.md (1 labels)
-result: OK, 11121 строк, 306 КБ

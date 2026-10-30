@@ -1,87 +1,50 @@
+# `pps_hub` — функционал и механики
 
-Игра: **blox_strike**
-# Разбор частей скрипта
-- файл: `script.lua`
-- размер: 13 КБ, 365 строк
+Игра/тема: **blox_strike** · восстановленный код: `script.lua` (365 строк)
 
-## Части (функционал)
-- **ESP** — 3 упоминаний
-- **Config / Save settings** — 5 упоминаний
+## Что делает (по восстановленному коду)
 
-## UI-библиотека
-- Obsidian
+- **ESP / подсветка** — улики: `chams`, `esp`, `highlight`, `outline`
+- **GUI / меню** — улики: `dropdown`, `slider`, `toggle`
+- **телепорт / движение** — улики: `cframe`, `humanoidrootpart`
+- **сеть / загрузка кода** — улики: `httpget`, `loadstring`
+- **аимбот / наведение** — улики: `mousebutton`
+- **урон / убийство** — улики: `hitbox`
+- **инвентарь / предметы** — улики: `drop`
 
-## URL / webhook-и (1)
+## Вызовы API
+
+- Сервисы: `Players`, `RunService`
+- Классы/объекты: `Folder`, `Highlight`, `Humanoid`, `Model`, `Part`
+- Методы: `FindFirstChild`×12, `Destroy`×5, `GetService`×3, `HttpGet`×3, `loadstring`×3, `Connect`×2, `GetPlayers`×2, `Create`×1, `GetMouse`×1
+
+## Имена функций (8)
+
+`cleanup`, `isEnemy`, `setupBypass`, `draw`, `createProxy`, `updateProxy`, `removeProxy`, `safeClick`
+
+## Строковые константы (UI, подписи)
+
+- `Head` ×6
+- `UpperTorso` ×4
+- `LowerTorso` ×3
+- `Triggerbot` ×2
+- `Chams` ×2
+- `LeftUpperArm` ×2
+- `LeftLowerArm` ×2
+- `RightUpperArm` ×2
+- `RightLowerArm` ×2
+- `LeftUpperLeg` ×2
+- `LeftLowerLeg` ×2
+- `RightUpperLeg` ×2
+- `RightLowerLeg` ×2
+- `Line` ×2
+- `Menu bind` ×2
+
+## Ссылки / webhooks / ассеты (1)
+
 - `https://raw.githubusercontent.com/deividcomsono/Obsidian/refs/heads/main/`
 
-## Сервисы / remotes
-- сервисы: Players, RunService
+## Парты / объекты (189)
 
-## Названия партов / объектов в игре (8 уникальных)
-- `Head` (4)
-- `HumanoidRootPart` (3)
-- `Humanoid` (3)
-- `Part` (2)
-- `Folder` (1)
-- `Model` (1)
-- `Highlight` (1)
-- `Default` (1)
-
-## Подписи UI / названия функций (первые 60)
-- Aiming
-- AxisProxy
-- Box ESP
-- BoxESP
-- BoxType
-- Chams
-- Chams Color
-- ChamsColor
-- Circle
-- Config
-- Default
-- Folder
-- Head
-- Highlight
-- Hitbox Expander
-- Hitbox Size
-- HitboxExpander
-- HitboxSize
-- Home
-- Humanoid
-- HumanoidRootPart
-- KeyMenu
-- Keybind Menu
-- Kick
-- LeftFoot
-- LeftHand
-- LeftLowerArm
-- LeftLowerLeg
-- LeftUpperArm
-- LeftUpperLeg
-- Line
-- LowerTorso
-- Main
-- Menu bind
-- MenuKeybind
-- Model
-- Part
-- Players
-- PlowsScriptHub
-- PlowsScriptHub/BloxStrike
-- RightControl
-- RightFoot
-- RightHand
-- RightLowerArm
-- RightLowerLeg
-- RightUpperArm
-- RightUpperLeg
-- RunService
-- Settings
-- Square
-- Status
-- TriggerDelay
-- Triggerbot
-- Triggerbot Delay
-- UpperTorso
-- VirtualInputManager
-- Visuals
+- через `WaitForChild`/`FindFirstChild`: `Head`, `HumanoidRootPart`, `Humanoid`
+- идентификаторы в коде: `AccentColor`, `AddButton`, `AddColorPicker`, `AddDropdown`, `AddKeyPicker`, `AddLabel`, `AddLeftGroupbox`, `AddRightGroupbox`, `AddSlider`, `AddTab`, `AddToggle`, `Aiming`, `Anchored`, `ApplyToTab`, `Axis`, `AxisProxy`, `BONE_PAIRS`, `BOX_CONNECTIONS`, `BackgroundColor`, `Blox`, `BloxStrike`, `Box`, `BoxESP`, `BoxType`, `BuildConfigSection`, `BuiltInThemes`, `CFrame`, `Callback`, `CanCollide`, `CanQuery`, `CanTouch`, `Chams`, `ChamsColor`, `Character`, `Circle`, `Color`, `Color3`, `Compact`, `Config`, `Connect`

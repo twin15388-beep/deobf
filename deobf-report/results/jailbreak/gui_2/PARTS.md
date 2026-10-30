@@ -1,113 +1,52 @@
+# `gui_2` — функционал и механики
 
-Игра: **jailbreak**
-# Разбор частей скрипта
-- файл: `script.lua`
-- размер: 75 КБ, 1833 строк
+Игра/тема: **jailbreak** · восстановленный код: `script.lua` (1833 строк)
 
-## Части (функционал)
-- **ESP** — 3 упоминаний
-- **Fly/Noclip** — 5 упоминаний
-- **Speed/Jump** — 2 упоминаний
-- **Teleport** — 133 упоминаний
-- **Config / Save settings** — 2 упоминаний
+## Что делает (по восстановленному коду)
 
-## UI-библиотека
-- Rain
+- **телепорт / движение** — улики: `cframe`, `humanoidrootpart`, `jumppower`, `moveto`, `teleport`, `tp`
+- **GUI / меню** — улики: `screengui`, `scrollingframe`, `textbutton`, `textlabel`, `toggle`
+- **ESP / подсветка** — улики: `billboardgui`, `esp`
+- **урон / убийство** — улики: `god mode`, `godmode`
+- **анти-АФК / ввод** — улики: `inputbegan`, `keydown`
+- **аимбот / наведение** — улики: `mousebutton`
+- **деньги / ресурсы** — улики: `infinite`
+- **квесты / стадии** — улики: `quest`
+- **сеть / загрузка кода** — улики: `loadstring`
 
-## URL / webhook-и (0)
+## Вызовы API
 
-## Сервисы / remotes
-- сервисы: Players, ReplicatedStorage, Workspace, RunService, UserInputService, StarterGui
-- WaitForChild: `Camera`, `UpperTorso`
+- Сервисы: `CoreGui`, `Players`, `ReplicatedStorage`, `RunService`, `StarterGui`, `Teams`, `UserInputService`, `Workspace`
+- Классы/объекты: `BasePart`, `BillboardGui`, `BindableFunction`, `BodyAngularVelocity`, `BodyGyro`, `BodyPosition`, `BodyVelocity`, `Camera`, `ClickDetector`, `Decal`, `Frame`, `HopperBin`, `Humanoid`, `ImageButton`, `ImageLabel`, `MeshPart`, `Model`, `ObjectValue`, `Part`, `ScreenGui`
+- Методы: `GetService`×31, `FindFirstChild`×18, `GetChildren`×14, `Destroy`×12, `WaitForChild`×4, `GetPlayers`×3, `Connect`×2, `loadstring`×2, `Create`×2, `IsA`×2, `Clone`×2, `GetMouse`×2
 
-## Названия партов / объектов в игре (28 уникальных)
-- `TextButton` (46)
-- `TextLabel` (8)
-- `Frame` (6)
-- `Part` (4)
-- `HopperBin` (3)
-- `Model` (2)
-- `Rob` (2)
-- `ScreenGui` (2)
-- `BodyVelocity` (2)
-- `BodyGyro` (2)
-- `BindableFunction` (2)
-- `Givers` (1)
-- `Banks` (1)
-- `Jewelrys` (1)
-- `Trains` (1)
-- `BoxCar` (1)
-- `Skeleton` (1)
-- `UpperTorso` (1)
-- `TextBox` (1)
-- `ScrollingFrame` (1)
-- `ObjectValue` (1)
-- `BodyAngularVelocity` (1)
-- `BillboardGui` (1)
-- `SelectionPartLasso` (1)
-- `SurfaceGui` (1)
-- `ImageLabel` (1)
-- `ImageButton` (1)
-- `BodyPosition` (1)
+## Имена функций (12)
 
-## Подписи UI / названия функций (первые 60)
-- All Items Giver
-- AutoRob All Stores
-- AutoRob Trains (Hella Buggy)
-- Back
-- Bank
-- Bank (In)
-- Bank (Out)
-- Bank Notification
-- Banks
-- BasePart
-- BillboardGui
-- BindableFunction
-- BodyAngularVelocity
-- BodyGyro
-- BodyPosition
-- BodyVelocity
-- BoxCar
-- Btools
-- Click TP
-- ClickDetector
-- Criminal
-- Criminal Base 1 
-- Criminal Base 2
-- Decryptance
-- Dismiss
-- Donut Shop
-- ESP (All)
-- ExtraStuff
-- FRIEND
-- Frame
-- Game Related
-- GameStuff
-- Gas Station
-- Givers
-- God Mode
-- Goto
-- High Jump
-- HopperBin
-- Humanoid
-- HumanoidRootPart
-- ImageButton
-- ImageLabel
-- Infinite Ammo
-- Infinite Jump
-- JailFix
-- Jailbreak ESP Disabled
-- Jailbreak ESP Enabled
-- Jewelry
-- Jewelrys
-- Jewerly Store (In)
-- Jewerly Store (Out)
-- Jewerly Store Notification
-- Jumping
-- KeyCard
-- Keycard
-- Low Gravity
-- MeshPart
-- Model
-- Moving
-- Multi Purpose
+`Bypass`, `onButton1Down`, `onButton1Up`, `onSelected`, `Create`, `Find`, `Clear`, `AddLasso`, `RemoveLasso`, `ToggleTracers`, `CharAdded`, `PlrAdded`
+
+## Строковые константы (UI, подписи)
+
+- `UnionOperation` ×4
+- `Teleport` ×4
+- `None` ×4
+- `Back` ×3
+- `Low Gravity` ×3
+- `JailFix` ×2
+- `Teleports` ×2
+- `Game Related` ×2
+- `Multi Purpose` ×2
+- `Moving` ×2
+- `Criminal` ×2
+- `Infinite Jump: ` ×2
+- `Off` ×2
+- `SourceSansBold` ×2
+- `Size10` ×2
+
+## Ссылки / webhooks / ассеты (0)
+
+_нет_
+
+## Парты / объекты (311)
+
+- через `WaitForChild`/`FindFirstChild`: `Model`, `Rob`, `Camera`, `Givers`, `Banks`, `Jewelrys`, `Trains`, `BoxCar`, `Skeleton`, `UpperTorso`
+- идентификаторы в коде: `AIM_AT`, `Active`, `AddLasso`, `Adornee`, `All`, `AlwaysOnTop`, `Ammo`, `Anchored`, `Angles`, `AngularVelocity`, `Animate`, `ArialBold`, `Arrest`, `AutoRob`, `Back`, `BackgroundColor3`, `BackgroundTransparency`, `Backpack`, `Bank`, `Banks`, `Base`, `BasePart`, `BinType`, `BindableFunction`, `Blocks`, `BodyAngularVelocity`, `BodyPosition`, `BorderColor3`, `BorderSizePixel`, `BoxCar`, `Btools`, `Buggy`, `Button1`, `Button2`, `Bypass`, `CESP`, `CFrame`, `Call`, `Callback`, `CameraSubject`

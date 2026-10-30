@@ -1,23 +1,25 @@
-# Mega_Fun_Obby_Auto_Skip_Stages_ (IronBrew/CASCADE) — имена объектов (из констант чанка)
+# `mega_fun_obby_auto_skip_stages` — функционал и механики
 
-Источник: `/home/user/deobf/_work/res6/ib/Mega_Fun_Obby_Auto_Skip_Stages_//fixed.luac` (442 B, 1 прототипов, 15 строковых констант)
+Игра/тема: **ironbrew_cascade** · восстановленный код: `script.lua` (28 строк)
 
-> Извлечено из строковых констант байткода. Порядок — алфавитный, в скобках — сколько раз строка встречается.
+## Что делает (по восстановленному коду)
 
+- **телепорт / движение** — улики: `cframe`, `humanoidrootpart`
+- **квесты / стадии** — улики: `stage`
 
-## Классы Roblox (2)
+## Вызовы API
 
-`Players`, `Workspace`
+- Сервисы: `Players`, `Workspace`
+- Методы: `FindFirstChild`×2
 
+## Имена функций (0)
 
-## Имена объектов / партов (9)
+_имена не сохранились — функции пронумерованы лифтом (`L2_1` и т.п.), смысл восстанавливается по вызовам выше_
 
-- `CFrame`
-- `Character`
-- `FindFirstChild`
-- `HumanoidRootPart`
-- `LocalPlayer`
-- `Players`
-- `Stage`
-- `Value`
-- `Workspace`
+## Ссылки / webhooks / ассеты (0)
+
+_нет_
+
+## Парты / объекты (7)
+
+- идентификаторы в коде: `CFrame`, `Character`, `FindFirstChild`, `HumanoidRootPart`, `LocalPlayer`, `Stage`, `Value`

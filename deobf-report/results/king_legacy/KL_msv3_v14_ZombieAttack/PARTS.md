@@ -1,21 +1,51 @@
-# Разбор частей скрипта
-- файл: `script.lua`
-- размер: 149 КБ, 6765 строк
+# `KL_msv3_v14_ZombieAttack` — функционал и механики
 
-## Части (функционал)
-- **AutoFarm** — 12 упоминаний
-- **Aimbot** — 2 упоминаний
-- **Fly/Noclip** — 7 упоминаний
-- **Speed/Jump** — 5 упоминаний
-- **Teleport** — 5 упоминаний
-- **Anti-AFK** — 1 упоминаний
-- **Discord check (IsInGroup)** — 1 упоминаний
-- **Admin commands** — 5 упоминаний
+Игра/тема: **king_legacy** · восстановленный код: `script.lua` (6765 строк)
 
-## UI-библиотека
-- не определена
+## Что делает (по восстановленному коду)
 
-## URL / webhook-и (9)
+- **телепорт / движение** — улики: `cframe`, `humanoidrootpart`, `jumppower`, `moveto`, `teleport`, `tweenservice`
+- **GUI / меню** — улики: `screengui`, `textbutton`, `textlabel`, `toggle`
+- **урон / убийство** — улики: `fling`, `hitbox`, `kill`
+- **сеть / загрузка кода** — улики: `discord`, `httpget`, `loadstring`
+- **ESP / подсветка** — улики: `highlight`, `outline`
+- **аимбот / наведение** — улики: `mousebutton`, `silent aim`
+- **квесты / стадии** — улики: `completed`, `quest`
+- **анти-АФК / ввод** — улики: `inputbegan`, `keydown`
+- **автофарм / авто-клик** — улики: `autofarm`
+- **деньги / ресурсы** — улики: `infinite`
+- **инвентарь / предметы** — улики: `drop`
+
+## Вызовы API
+
+- Сервисы: `CoreGui`, `Players`, `ReplicatedStorage`, `RunService`, `StarterGui`, `TweenService`, `UserInputService`, `Workspace`
+- Классы/объекты: `BodyGyro`, `BodyVelocity`, `Frame`, `Highlight`, `Humanoid`, `ImageLabel`, `MeshPart`, `Model`, `Part`, `ScreenGui`, `TextBox`, `TextButton`, `TextLabel`, `Tool`, `UICorner`, `UIListLayout`
+- Методы: `GetService`×27, `Connect`×24, `FindFirstChild`×19, `GetChildren`×12, `Destroy`×7, `FireServer`×4, `GetMouse`×4, `TweenService`×2, `Create`×2, `GetPlayers`×2, `MoveTo`×1, `HttpGet`×1
+
+## Имена функций (0)
+
+_имена не сохранились — функции пронумерованы лифтом (`L2_1` и т.п.), смысл восстанавливается по вызовам выше_
+
+## Строковые константы (UI, подписи)
+
+- `UIPadding` ×24
+- `LocalScript` ×22
+- `Head` ×10
+- `HopperBin` ×4
+- `UnionOperation` ×4
+- `INFO` ×3
+- `Icon` ×3
+- `All` ×2
+- `HIDDEN` ×2
+- `Combat` ×2
+- `Player` ×2
+- `Setting` ×2
+- `PlayerTitle` ×2
+- `Credits` ×2
+- `Value` ×2
+
+## Ссылки / webhooks / ассеты (9)
+
 - `http://roblox.com/asset/?id=902843398`
 - `http://www.roblox.com/asset/?id=11378036715`
 - `http://www.roblox.com/asset/?id=11378105473`
@@ -26,70 +56,6 @@
 - `https://discord.gg/sdCSmXRjuX`
 - `https://pastebin.com/raw/0EJsh19M`
 
-## Сервисы / remotes
-- сервисы: Players, ReplicatedStorage, Workspace, TweenService, RunService, UserInputService, StarterGui
+## Парты / объекты (254)
 
-## Чат-команды
-- `:ban .`, `:benx .`, `:bring`, `:fling .`, `:freeusers`, `:freeze .`, `:grave .`, `:kick`, `:kill .`, `:premcmds`, `:thaw .`, `:unbenx .`, `:unfreeze .`, `:ungrave .`
-
-## Подписи UI / названия функций (первые 60)
-- Anti-AFK
-- AntiAfkButton
-- Auto Equip
-- AutoEquipFrame
-- AutoEquipToggle
-- AutoFarm
-- Autofarm
-- BodyGyro
-- BodyThrust
-- BodyVelocity
-- BtoolsButton
-- Building Tools
-- ButtonsHolder
-- Click Teleport Tool
-- ClickTPButton
-- Collect Powerups
-- Combat
-- CombatButton
-- CombatPage
-- Combattitle
-- Copy Discord Invite
-- CopyDiscord
-- Credits
-- DropShadow
-- DropShadowHolder
-- Extend Head Hitbox
-- FarmOff
-- FarmOn
-- FlyButton
-- Frame
-- HIDDEN
-- Head
-- HeadHitboxExtenderButton
-- Highlight
-- HopperBin
-- Humanoid
-- INFO
-- Icon
-- ImageLabel
-- InfiniiteJumpFrame
-- Infinite Jump
-- InfiniteJumpToggle
-- JumpPower
-- Jumping
-- Kicked by Premium User 
-- LIGHTUX
-- LocalScript
-- MeshPart
-- Model
-- Navigation
-- PERMA BAN
-- PageHolder
-- Part
-- Player
-- PlayerButton
-- PlayerPage
-- PlayerTitle
-- Players
-- PowerupFrame
-- PowerupsOFFToggle
+- идентификаторы в коде: `AFK`, `Active`, `Adornee`, `Aim`, `All`, `AlwaysOnTop`, `AnchorPoint`, `Anchored`, `Angles`, `Anti`, `AntiAfkButton`, `ArialBold`, `Auto`, `AutoButtonColor`, `AutoEquipFrame`, `AutoEquipToggle`, `AutoFarm`, `Autofarm`, `BAN`, `BackgroundColor3`, `BackgroundTransparency`, `Backpack`, `BinType`, `BodyThrust`, `BorderColor3`, `BorderSizePixel`, `BossFolder`, `Bosses`, `BtoolsButton`, `Building`, `Button1Down`, `ButtonsHolder`, `CFrame`, `CanCollide`, `ChangeState`, `Character`, `Chatted`, `ClassName`, `Click`, `ClickTPButton`

@@ -1,114 +1,50 @@
+# `unjailbreak` — функционал и механики
 
-Игра: **jailbreak**
-# Разбор частей скрипта
-- файл: `script.lua`
-- размер: 183 КБ, 4509 строк
+Игра/тема: **jailbreak** · восстановленный код: `script.lua` (4509 строк)
 
-## Части (функционал)
-- **Aimbot** — 34 упоминаний
-- **ESP** — 32 упоминаний
-- **Fly/Noclip** — 48 упоминаний
-- **Speed/Jump** — 35 упоминаний
-- **Teleport** — 71 упоминаний
-- **Config / Save settings** — 77 упоминаний
+## Что делает (по восстановленному коду)
 
-## UI-библиотека
-- Rain
+- **телепорт / движение** — улики: `cframe`, `humanoidrootpart`, `jumppower`, `teleport`, `tp`, `walkspeed`
+- **урон / убийство** — улики: `god mode`, `godmode`, `kill`, `noclip`
+- **GUI / меню** — улики: `screengui`, `scrollingframe`, `textbutton`, `textlabel`
+- **ESP / подсветка** — улики: `billboardgui`, `esp`, `outline`
+- **аимбот / наведение** — улики: `aimbot`, `mousebutton`
+- **анти-АФК / ввод** — улики: `inputbegan`, `keydown`
+- **деньги / ресурсы** — улики: `infinite`
 
-## URL / webhook-и (1)
+## Вызовы API
+
+- Сервисы: `CoreGui`, `Lighting`, `Players`, `RunService`, `StarterGui`, `Teams`, `UserInputService`, `Workspace`
+- Классы/объекты: `BasePart`, `BillboardGui`, `BindableFunction`, `BodyForce`, `BodyGyro`, `BodyPosition`, `BodyVelocity`, `CoreScript`, `CornerWedgePart`, `Explosion`, `Folder`, `ForceField`, `FormFactorPart`, `Frame`, `HopperBin`, `Humanoid`, `ImageButton`, `ImageLabel`, `IntValue`, `Lighting`
+- Методы: `GetService`×128, `IsA`×49, `GetChildren`×33, `FindFirstChild`×13, `Destroy`×10, `Clone`×9, `GetMouse`×8, `Create`×6, `GetPlayers`×5, `WaitForChild`×1
+
+## Имена функций (33)
+
+`Create`, `Find`, `Clear`, `Aimbot`, `bigggHead`, `onButton1Down`, `onButton1Up`, `onSelected`, `chk`, `start`, `isBanned`, `AddButton`, `AddOption`, `AddTextOption`, `AddBrickColorOption`, `UnanchorObject`, `Recurse`, `AddBoolOption`, `TestProperty`, `LoadOptions`, `AddForceField`, `Killp`, `AddExplode`, `AddSparkles`, `FreezeParts`, `TPToObject`, `Search`, `MoveUp`, `MoveDown`, `ScriptSearch`, `alphabetize`, `update`, `getPlayer`
+
+## Строковые константы (UI, подписи)
+
+- `Out` ×20
+- `Quint` ×20
+- `Explorer` ×6
+- `HomeImage` ×4
+- `ESP` ×4
+- `Station` ×4
+- `Scroll` ×4
+- `Map` ×4
+- `GoTo` ×3
+- `Pistol` ×3
+- `Black` ×3
+- `Unlisting` ×3
+- `Decryptance` ×3
+- `Size14` ×3
+- `Police` ×3
+
+## Ссылки / webhooks / ассеты (1)
+
 - `https://assetgame.roblox.com/Thumbs/Avatar.ashx?x=250&y=250&Format=Png&username=`
 
-## Сервисы / remotes
-- сервисы: Players, Workspace, Lighting, RunService, UserInputService
-- WaitForChild: `HumanoidRootPart`
+## Парты / объекты (884)
 
-## Названия партов / объектов в игре (27 уникальных)
-- `TextLabel` (88)
-- `TextButton` (78)
-- `Frame` (19)
-- `TextBox` (8)
-- `ImageLabel` (7)
-- `ImageButton` (7)
-- `HumanoidRootPart` (5)
-- `Part` (5)
-- `ScreenGui` (4)
-- `NumberValue` (3)
-- `HopperBin` (3)
-- `ESP` (2)
-- `Flame` (2)
-- `ScrollingFrame` (2)
-- `BillboardGui` (2)
-- `BodyGyro` (2)
-- `BodyPosition` (2)
-- `Engine` (1)
-- `NewForce` (1)
-- `BodyForce` (1)
-- `VectorForce` (1)
-- `Folder` (1)
-- `BindableFunction` (1)
-- `BodyVelocity` (1)
-- `ForceField` (1)
-- `Explosion` (1)
-- `Sparkles` (1)
-
-## Подписи UI / названия функций (первые 60)
-- AASamples
-- AG-3
-- AK-47
-- AK12
-- AK44
-- AK47
-- AK74
-- AN-94
-- AS VAL
-- AUG A1
-- AUG A2
-- AUG A3
-- AUG A3 PARA
-- AUG HBAR
-- AccountAge
-- AccountAgeReplicate
-- ActivationState
-- ActiveMenu
-- AdminDetected
-- AdminJoined
-- Aimbot Is Very
-- Aimbot Keybind
-- Aimbotkeybind
-- AllowInsertFreeModels
-- AllowSweep
-- Ambient
-- Anchored
-- And Is An Admin On Unjailbreak
-- Annoy Server
-- AnnoyServer
-- Archivable
-- ArialBold
-- Auto Rob
-- AutoRob
-- AutoRotate
-- AutoRuns
-- AyeJoey
-- BFG 50
-- BNotifierOpen
-- Back
-- Bank Notifier
-- Bank Store
-- BankKeyBox
-- BankKeyy
-- BankStore
-- BasePart
-- Bat Cave
-- BatCave
-- BatchSize
-- Bevels
-- Big Head
-- BillboardGui
-- BinType
-- BindableFunction
-- Black
-- BlackColor
-- BlackHole
-- BlastPressure
-- BlastRadius
-- Blue
+- через `WaitForChild`/`FindFirstChild`: `HumanoidRootPart`, `ESP`, `Flame`, `Engine`, `NewForce`, `BodyForce`, `VectorForce`
+- идентификаторы в коде: `AASamples`, `AIM_AT`, `AK12`, `AK44`, `AK47`, `AK74`, `AKM`, `AUG`, `AWS`, `AccountAge`, `AccountAgeReplicate`, `ActivationState`, `Active`, `ActiveMenu`, `AddBoolOption`, `AddBrickColorOption`, `AddButton`, `AddExplode`, `AddForceField`, `AddOption`, `AddSparkles`, `AddTextOption`, `Added`, `Admin`, `AdminDetected`, `AdminJoined`, `Admins`, `Adornee`, `Aimbot`, `Aimbotkeybind`, `All`, `AllowInsertFreeModels`, `AllowSweep`, `AlwaysOnTop`, `Ambient`, `Ammo`, `Amount`, `Anchored`, `And`, `Angles`

@@ -1,131 +1,52 @@
-# Разбор частей скрипта
-- файл: `script.lua`
-- размер: 130 КБ, 3477 строк
+# `cmd_gui` — функционал и механики
 
-## Части (функционал)
-- **Fly/Noclip** — 3 упоминаний
-- **Speed/Jump** — 16 упоминаний
-- **Teleport** — 48 упоминаний
-- **Auto Rejoin** — 2 упоминаний
-- **Admin commands** — 20 упоминаний
+Игра/тема: **prison_life** · восстановленный код: `script.lua` (3477 строк)
 
-## UI-библиотека
-- не определена
+## Что делает (по восстановленному коду)
 
-## URL / webhook-и (1)
+- **телепорт / движение** — улики: `cframe`, `humanoidrootpart`, `jumppower`, `teleport`, `tp`, `walkspeed`
+- **урон / убийство** — улики: `damage`, `fling`, `god mode`, `godmode`, `kill`, `noclip`
+- **GUI / меню** — улики: `screengui`, `scrollingframe`, `textbutton`, `textlabel`
+- **сеть / загрузка кода** — улики: `httpget`, `loadstring`, `require`
+- **ESP / подсветка** — улики: `outline`
+- **аимбот / наведение** — улики: `mousebutton`
+- **квесты / стадии** — улики: `quest`
+- **инвентарь / предметы** — улики: `item`
+- **анти-АФК / ввод** — улики: `keydown`
+
+## Вызовы API
+
+- Сервисы: `Chat`, `CoreGui`, `Lighting`, `MarketplaceService`, `Players`, `ReplicatedStorage`, `RunService`, `StarterGui`, `Teams`, `Workspace`
+- Классы/объекты: `Animation`, `Beam`, `Camera`, `Frame`, `HopperBin`, `Humanoid`, `Lighting`, `Part`, `ScreenGui`, `ScrollingFrame`, `StringValue`, `TextBox`, `TextButton`, `TextLabel`, `Tool`, `UIListLayout`, `Weld`
+- Методы: `FindFirstChild`×106, `InvokeServer`×76, `Connect`×30, `GetPlayers`×28, `FireServer`×24, `Destroy`×22, `GetService`×16, `GetChildren`×11, `Create`×7, `Clone`×6, `GetMouse`×4, `IsA`×3
+
+## Имена функций (34)
+
+`GetPlayer`, `GetPos`, `GetCamPos`, `GetTeam`, `Goto`, `Split`, `ChatNotify`, `Chat`, `WaitForChild`, `Kill`, `Tase`, `Teleport`, `TeleportV`, `ArrestEvent`, `Arrest`, `CreateBeam`, `CreateBeam2`, `CreateBeam3`, `Beam`, `LagBeam`, `DetectMove`, `FeGodMode`, `GetPlayerPart`, `CopyChat`, `Died`, `PlayerPickUp`, `Notify`, `Loadstring`, `Command`, `PrefixCommand`, `PlayerChatted`, `Punch`, `AdminPlayerChatted`, `CheckPermissions`
+
+## Строковые константы (UI, подписи)
+
+- `Success` ×119
+- ` .. Prefix .. ` ×34
+- `Error` ×30
+- `Remington 870` ×23
+- `Medium stone grey` ×13
+- `AK-47` ×12
+- `No player found` ×12
+- `Bright orange` ×11
+- `Really red` ×11
+- `Changed name tag color to ` ×11
+- `), Color3.fromRGB(0, 255, 0), ` ×11
+- `CurrentAmmo` ×10
+- `Bright blue` ×8
+- `handcuffedGui` ×8
+- `MaxAmmo` ×8
+
+## Ссылки / webhooks / ассеты (1)
+
 - `https://pastebin.com/raw/9ab2s523`
 
-## Сервисы / remotes
-- сервисы: Players, ReplicatedStorage, RunService, MarketplaceService, TeleportService, CoreGui
-- remote-вызовы: FireServer(, InvokeServer(
+## Парты / объекты (506)
 
-## Названия партов / объектов в игре (47 уникальных)
-- `Remington 870` (23)
-- `TextLabel` (10)
-- `CurrentAmmo` (10)
-- `M9` (9)
-- `HumanoidRootPart` (9)
-- `handcuffedGui` (8)
-- `MaxAmmo` (8)
-- `StoredAmmo` (8)
-- `AmmoPerClip` (8)
-- `GunStates` (7)
-- `AutoFire` (6)
-- `AK-47` (5)
-- `Crude Knife` (5)
-- `TextButton` (5)
-- `FireRate` (5)
-- `Bullets` (5)
-- `ReloadTime` (5)
-- `Head` (4)
-- `Taser` (4)
-- `Frame` (4)
-- `StringValue` (4)
-- `HopperBin` (4)
-- `Range` (4)
-- `Damage` (4)
-- `Part` (3)
-- `M4A1` (3)
-- `Backpack` (2)
-- `Torso` (2)
-- `ShieldFolder` (2)
-- `Doors` (2)
-- `Bat` (2)
-- `Bin_1` (2)
-- `Bin_2` (2)
-- `Bin_3` (2)
-- `Bin_4` (2)
-- `TextBox` (2)
-- `Weld` (2)
-- `Prison Gate` (2)
-- `Criminals Spawn` (2)
-- `ForceField` (1)
-- `meleeEvent` (1)
-- `ScreenGui` (1)
-- `ScrollingFrame` (1)
-- `UIListLayout` (1)
-- `Tool` (1)
-- `Animation` (1)
-- `Prison_ITEMS` (1)
-
-## Подписи UI / названия функций (первые 60)
-- AK-47
-- Activate anti fling
-- Activate anti spam arrest
-- Activate auto gun when respawned
-- Activate fast punch
-- Activate kill aura
-- Activate no clips
-- Activate rapid fire
-- Activate super punch
-- Activated rapid fire
-- AmmoPerClip
-- Animation
-- Anti crash when someone spamming armor
-- Anti shield users
-- Arrest all criminals
-- Arrest player that is a criminal
-- Arrested 
-- Arrested all criminals
-- Auto activate rapid fire
-- Auto respawn on old position when died
-- AutoFire
-- BEPP BOP BEEP BEEP BOP
-- Background
-- Background3
-- Background4
-- Backpack
-- Beamed 
-- Become a criminal
-- Become criminal team
-- Become guard
-- Become guard team
-- Become inmate
-- Become inmate team
-- Become neutral
-- Become neutral team
-- Bin_1
-- Bin_2
-- Bin_3
-- Bin_4
-- Boost a little fps
-- Bright blue
-- Bright green
-- Bright orange
-- Bright red
-- Bright yellow
-- Broght all
-- Brought 
-- Brown
-- Bullets
-- Bypass taser when got tased
-- COMMANDS
-- Changed gravity to 
-- Changed hip height to 
-- Changed jump power to 
-- Changed name tag color
-- Changed name tag color to 
-- Changed prefix to 
-- Changed walk speed to 
-- Changes fire speed for the gun
-- Changes gravity
+- через `WaitForChild`/`FindFirstChild`: `M9`, `HumanoidRootPart`, `handcuffedGui`, `Remington 870`, `GunStates`, `AK-47`, `Head`, `Taser`, `Crude Knife`, `Backpack`, `Torso`, `ShieldFolder`, `Doors`, `Bat`, `Bin_1`, `Bin_2`, `Bin_3`, `Bin_4`, `ForceField`, `meleeEvent`
+- идентификаторы в коде: `ALL`, `ALl`, `ARE`, `Activate`, `Activated`, `Active`, `Admin`, `AdminPlayerChatted`, `AmmoPerClip`, `Anchored`, `Animate`, `AnimationId`, `Anti`, `Anti_Crash`, `Anti_Fling`, `Anti_Shield`, `Anti_Spam_Arrest`, `Anti_Void`, `Arg1`, `Arg2`, `Arg3`, `Arg4`, `Arguaments`, `Arrest`, `ArrestEvent`, `Arrested`, `Attacked`, `Attacking`, `Auto`, `AutoFire`, `Auto_Guns`, `Auto_RapidFire`, `Auto_Refresh`, `AutomaticCanvasSize`, `BEEP`, `BEPP`, `BOP`, `Background`, `Background2`, `Background3`

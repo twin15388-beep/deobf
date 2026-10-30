@@ -1,25 +1,50 @@
-# Разбор частей скрипта
-- файл: `script.lua`
-- размер: 186 КБ, 6764 строк
+# `hub` — функционал и механики
 
-## Части (функционал)
-- **AutoFarm** — 71 упоминаний
-- **AutoSell** — 6 упоминаний
-- **AutoFish** — 3 упоминаний
-- **AutoRaid/Boss** — 6 упоминаний
-- **Aimbot** — 2 упоминаний
-- **ESP** — 25 упоминаний
-- **Teleport** — 44 упоминаний
-- **Auto Rejoin** — 1 упоминаний
-- **Anti-Ban/Detection** — 1 упоминаний
-- **Key system** — 1 упоминаний
-- **Config / Save settings** — 24 упоминаний
-- **Inventory / Item ESP** — 8 упоминаний
+Игра/тема: **blox_fruits** · восстановленный код: `script.lua` (6764 строк)
 
-## UI-библиотека
-- Magma, Hydra, Solara, Vision, Rain, Crescent
+## Что делает (по восстановленному коду)
 
-## URL / webhook-и (16)
+- **инвентарь / предметы** — улики: `chest`, `drop`, `inventory`, `item`, `sell`, `trade`
+- **сеть / загрузка кода** — улики: `discord`, `httpget`, `loadstring`, `require`, `webhook`
+- **автофарм / авто-клик** — улики: `auto collect`, `auto farm`, `autocollect`, `farm`
+- **телепорт / движение** — улики: `cframe`, `humanoidrootpart`, `teleport`, `tweenservice`
+- **деньги / ресурсы** — улики: `code`, `infinite`, `redeem`, `reward`
+- **GUI / меню** — улики: `dropdown`, `tab`, `textlabel`, `toggle`
+- **ESP / подсветка** — улики: `billboardgui`, `boxhandle`, `esp`
+- **урон / убийство** — улики: `breakjoints`, `damage`, `kill`
+- **квесты / стадии** — улики: `completed`, `quest`
+- **аимбот / наведение** — улики: `aimbot`
+
+## Вызовы API
+
+- Сервисы: `CollectionService`, `HttpService`, `Lighting`, `Players`, `ReplicatedStorage`, `RunService`, `TweenService`, `UserInputService`, `Workspace`
+- Классы/объекты: `Animation`, `Animator`, `BasePart`, `BillboardGui`, `BodyGyro`, `BodyVelocity`, `BoxHandleAdornment`, `ClickDetector`, `Configuration`, `Folder`, `Frame`, `Humanoid`, `Lighting`, `Model`, `Part`, `ProximityPrompt`, `RemoteEvent`, `Sky`, `Sound`, `TextBox`
+- Методы: `FindFirstChild`×185, `Create`×88, `GetChildren`×55, `InvokeServer`×45, `IsA`×45, `Connect`×27, `WaitForChild`×25, `Destroy`×10, `loadstring`×7, `GetService`×6, `FireServer`×6, `HttpGet`×6
+
+## Имена функций (68)
+
+`_unpack`, `_pcall`, `fn`, `LPH_NO_VIRTUALIZE`, `LPH_JIT_MAX`, `LPH_JIT`, `LPH_ENCNUM`, `LPH_ENCSTR`, `LPH_ENCFUNC`, `LPH_ENCBUF`, `LPH_ATTRIBUTES`, `LPH_REWRITE`, `LPH_STACKALLOC`, `LPH_PRECHECK`, `VM`, `PRESET`, `ENCRYPT`, `OPTIMIZE`, `ERROR_HANDLING`, `TRANSFORM`, `fn2`, `fn3`, `fn4`, `print`, `warn`, `error`, `fn5`, `fn6`, `fn7`, `fn8`, `SetSave`, `SetLoad`, `fn9`, `ValidateState`, `HandleError`, `CreateLoop`, `fn10`, `fn11`, `ExecuteFruitM1`, `check`
+
+## Строковые константы (UI, подписи)
+
+- `Save` ×91
+- `BuyItem` ×18
+- `Melee` ×18
+- `Blox Fruit` ×18
+- `Auto Farm Sea` ×18
+- `Gun` ×16
+- `Sword` ×15
+- `Auto Farm Mastery` ×13
+- `Auto V3` ×13
+- `Speed Hub X` ×12
+- `Choose Equip ` ×11
+- `Auto Farm Level` ×10
+- `Cake Prince` ×10
+- `Soul Reaper` ×10
+- `Auto Kill Tyrant of the Skies` ×10
+
+## Ссылки / webhooks / ассеты (16)
+
 - `http://www.roblox.com/asset/?id=9709143733`
 - `http://www.roblox.com/asset/?id=9709149052`
 - `http://www.roblox.com/asset/?id=9709149431`
@@ -28,6 +53,7 @@
 - `http://www.roblox.com/asset/?id=9884584522`
 - `https://api.luarmor.net/files/v3/loaders/`
 - `https://prvf.onrender.com/data`
+- `https://sdkapi-public.luarmor.net/sync`
 - `https://raw.githubusercontent.com/AhmadV99/Main/main/Codes_BloxFruit`
 - `https://raw.githubusercontent.com/AhmadV99/Main/main/Library/Example/FuncsV3`
 - `https://raw.githubusercontent.com/AhmadV99/Main/refs/heads/main/Library/Key%20System/Encrypted`
@@ -35,133 +61,8 @@
 - `https://raw.githubusercontent.com/AhmadV99/Main/refs/heads/main/Library/KeySystemV2.5.lua`
 - `https://raw.githubusercontent.com/AhmadV99/Main/refs/heads/main/Library/Lib_5.5.0.lua`
 - `https://raw.githubusercontent.com/AhmadV99/Main/refs/heads/main/Webhook/Tracker%20Bosses.lua`
-- `https://sdkapi-public.luarmor.net/sync`
 
-## Сервисы / remotes
-- сервисы: Players, ReplicatedStorage, Workspace, Lighting, TweenService, RunService, UserInputService, HttpService, TeleportService
-- WaitForChild: `Beli`, `Bounty/Honor`, `CommF_`, `Data`, `EmberTemplate`, `Exp`, `Fragments`, `Humanoid`, `Level`, `Locations`, `Mouse`, `Net`, `RE/ReceivedHit`, `RE/RegisterAttack`, `RE/RegisterHit`, `RE/ShootGunEvent`, `Race`, `Remotes`, `Sky`, `TrackedQuestFrame`, `VisionRadius`, `WaterBase-Plane`, `leaderstats`
-- remote-вызовы: FireServer(, InvokeServer(
+## Парты / объекты (1337)
 
-## Названия партов / объектов в игре (188 уникальных)
-- `HumanoidRootPart` (38)
-- `Auto Farm Sea` (13)
-- `Choose Equip ` (10)
-- `Humanoid` (8)
-- `VehicleSeat` (8)
-- `Handle` (8)
-- `KitsuneIsland` (5)
-- `EmberTemplate` (5)
-- `Auto Farm Mastery` (5)
-- `Skill  ` (5)
-- `SeaBeast1` (4)
-- `Part` (4)
-- `Frozen Dimension` (4)
-- `PrehistoricIsland` (4)
-- `Mirage Island` (4)
-- `Island 1` (4)
-- `Choose Mastery Mode` (4)
-- `Farm Distance` (4)
-- `Auto Dragon Hunter Quests` (4)
-- `Auto Monster Magnet` (4)
-- `Data` (3)
-- `Race` (3)
-- `Main` (3)
-- `Folder` (3)
-- `BodyVelocity` (3)
-- `Auto Farm Level` (3)
-- `Boat Castle` (3)
-- `Auto V3` (3)
-- `Choose World` (3)
-- `Auto Trial` (3)
-- `Remotes` (2)
-- `Temple of Time` (2)
-- `SpeedHubX_ESP` (2)
-- `TrackedQuestFrame` (2)
-- `WaterBase-Plane` (2)
-- `RF/KitsuneStatuePray` (2)
-- `AttachedAzureEmber` (2)
-- `ShrineActive` (2)
-- `NeonShrinePart` (2)
-- `RF/JobsRemoteFunction` (2)
-- `Locations` (2)
-- `Fast Attack Delay` (2)
-- `Count Player` (2)
-- `Choose Material` (2)
-- `Choose Boss` (2)
-- `Magma Ore` (2)
-- `Fish Tail` (2)
-- `Set Length` (2)
-- `Set Speed` (2)
-- `No Quest` (2)
-- `Take Quest` (2)
-- `Neareast Range` (2)
-- `Haunted Castle` (2)
-- `Attack Ghost Ship` (2)
-- `Attack Sea Beasts` (2)
-- `Auto Shark Anchor` (2)
-- `Auto Gets Fruit Spawner` (2)
-- `Auto Kill Player After Trial` (2)
-- `Choose Chips` (2)
-- `Auto Raid` (2)
-
-## Подписи UI / названия функций (первые 60)
-- Ability Teacher
-- Accessory
-- Activate priority system
-- ActivateAbility
-- Active
-- AddPoint
-- Alchemist
-- Ancient Vampire
-- Ancient Zombie
-- Angel Wings
-- Animation
-- Animator
-- Anti-Cheat Bypass
-- Anti-Flag
-- Apply Dash Length
-- Apply Speed
-- Apply dash length
-- Apply speed multiplier
-- Area2Quest
-- AttachedAzureEmber
-- Attack Fish Crew
-- Attack Fish Crew Member
-- Attack Ghost Ship
-- Attack Ghost Ships
-- Attack Leviathan
-- Attack Leviathan segments
-- Attack Leviathan tail
-- Attack Piranha
-- Attack Sea Beasts
-- Attack Shark
-- Attack Terrorshark
-- Attack all bosses
-- Attack selected boss
-- Auto 
-- Auto Abilities
-- Auto Attack All Boss
-- Auto Attack All Bosses
-- Auto Attack Boss
-- Auto Attack Leviathan
-- Auto Attack Leviathan Segment
-- Auto Attack Leviathan Tail
-- Auto Buy Chips
-- Auto Buy Fruits Sniper
-- Auto Buy Fruits Sniper (Mirage Island)
-- Auto Buy Fruits Sniper (Mirage)
-- Auto Buy Haki Color
-- Auto Buy Haki Colors
-- Auto Buy Legendary Sword
-- Auto Buy True Triple Katana
-- Auto Cake Prince
-- Auto Citizen Quest
-- Auto Collect Azure Ember
-- Auto Collect Berry
-- Auto Collect Chest
-- Auto Collect Gift
-- Auto Dodge Rough Sea
-- Auto Dodge Sea Beasts Skill
-- Auto Dodge Skill
-- Auto Dodge Terrorshark Skill
-- Auto Dough King
+- через `WaitForChild`/`FindFirstChild`: `HumanoidRootPart`, `Humanoid`, `VehicleSeat`, `Handle`, `KitsuneIsland`, `EmberTemplate`, `SeaBeast1`, `Part`, `Frozen Dimension`, `PrehistoricIsland`, `Mirage Island`, `Island 1`, `Data`, `Race`, `Main`, `Remotes`, `SpeedHubX_ESP`, `TrackedQuestFrame`, `WaterBase-Plane`, `RF/KitsuneStatuePray`, `AttachedAzureEmber`, `ShrineActive`, `NeonShrinePart`, `RF/JobsRemoteFunction`, `Locations`
+- идентификаторы в коде: `API`, `Abilities`, `Ability`, `Accessories`, `Accessory`, `Activate`, `ActivateAbility`, `ActivateHaki`, `Active`, `AddLine`, `AddParagraph`, `AddPoint`, `AddSection`, `AddSeperator`, `Admiral`, `Adornee`, `After`, `AhmadV99`, `Alchemist`, `All`, `AlwaysOnTop`, `Anchor`, `Anchored`, `Ancient`, `Angel`, `Angles`, `AnimationId`, `AnimationPlayed`, `Anims`, `Anti`, `Apply`, `Archer`, `Area2Quest`, `Art`, `Assailant`, `Assailants`, `AssemblyAngularVelocity`, `AssemblyLinearVelocity`, `Asset`, `Assets`

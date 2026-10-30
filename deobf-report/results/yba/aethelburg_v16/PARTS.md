@@ -1,113 +1,50 @@
+# `aethelburg_v16` — функционал и механики
 
-Игра: **yba**
-# Разбор частей скрипта
-- файл: `script.lua`
-- размер: 27 КБ, 681 строк
+Игра/тема: **yba** · восстановленный код: `script.lua` (681 строк)
 
-## Части (функционал)
-- **ESP** — 4 упоминаний
-- **Speed/Jump** — 5 упоминаний
-- **Teleport** — 1 упоминаний
-- **Anti-AFK** — 3 упоминаний
-- **Anti-Ban/Detection** — 1 упоминаний
-- **Config / Save settings** — 59 упоминаний
+## Что делает (по восстановленному коду)
 
-## UI-библиотека
-- не определена
+- **GUI / меню** — улики: `dropdown`, `screengui`, `scrollingframe`, `slider`, `tab`, `textbutton`
+- **телепорт / движение** — улики: `cframe`, `humanoidrootpart`, `teleport`, `tweenservice`, `walkspeed`
+- **автофарм / авто-клик** — улики: `auto collect`, `autocollect`, `farm`
+- **ESP / подсветка** — улики: `billboardgui`, `esp`
+- **аимбот / наведение** — улики: `mousebutton`, `mousemove`
+- **инвентарь / предметы** — улики: `drop`, `item`
+- **анти-АФК / ввод** — улики: `idled`, `inputbegan`
 
-## URL / webhook-и (0)
+## Вызовы API
 
-## Сервисы / remotes
-- сервисы: Players, Workspace, TweenService, RunService, UserInputService, CoreGui
-- WaitForChild: `PlayerGui`
+- Сервисы: `CoreGui`, `Players`, `RunService`, `TweenService`, `UserInputService`, `Workspace`
+- Классы/объекты: `Animation`, `BasePart`, `BillboardGui`, `Camera`, `ClickDetector`, `Folder`, `Frame`, `Humanoid`, `Model`, `Part`, `ProximityPrompt`, `ScreenGui`, `ScrollingFrame`, `TextButton`, `TextLabel`, `UICorner`, `UIListLayout`, `UIStroke`
+- Методы: `Create`×29, `FindFirstChild`×21, `Connect`×17, `IsA`×10, `TweenService`×9, `GetService`×7, `Destroy`×7, `GetChildren`×3, `GetMouse`×2, `WaitForChild`×1
 
-## Названия партов / объектов в игре (27 уникальных)
-- `UICorner` (10)
-- `HumanoidRootPart` (8)
-- `Frame` (7)
-- `Humanoid` (5)
-- `TextLabel` (5)
-- `TextButton` (4)
-- `Living` (2)
-- `UIStroke` (2)
-- `UIListLayout` (2)
-- `Part` (2)
-- `AethelApexUI` (1)
-- `AethelApexESP` (1)
-- `Stand` (1)
-- `PlayerGui` (1)
-- `ScreenGui` (1)
-- `ScrollingFrame` (1)
-- `Folder` (1)
-- `BillboardGui` (1)
-- `Lucky Arrow` (1)
-- `Pure Rokakaka` (1)
-- `Requiem Arrow` (1)
-- `Mysterious Arrow` (1)
-- `Rokakaka` (1)
-- `Diamond` (1)
-- `Ancient Scroll` (1)
-- `Steel Ball` (1)
-- `Candy` (1)
+## Имена функций (8)
 
-## Подписи UI / названия функций (первые 60)
-- AbsoluteContentSize
-- AethelApexESP
-- AethelApexUI
-- AethelCombatRaft
-- Ancient Scroll
-- Auto Collect Nearby Items
-- Auto Combat Engine
-- Background
-- BasePart
-- BillboardGui
-- Candy
-- ClickDetector
-- Common
-- CoreGui
-- Diamond
-- Epic
-- Event
-- Filtering
-- Folder
-- Frame
-- Glide Speed
-- Humanoid
-- HumanoidRootPart
-- Item Billboard ESP
-- Legendary
-- Living
-- Logo
-- Lucky Arrow
-- Model
-- Mysterious Arrow
-- Page
-- PageContainer
-- Part
-- PlayerGui
-- Players
-- ProximityPrompt
-- Pure Rokakaka
-- Rare
-- Requiem Arrow
-- Rokakaka
-- RunService
-- SHUTDOWN SYSTEM COMPLETELY
-- ScreenGui
-- ScrollingFrame
-- Sensors
-- Sidebar
-- Skill Spam (All Keys)
-- Smart Pose-Heal
-- Speed Multiplier
-- Stand
-- Steel Ball
-- TELEPORT TO NEAREST ITEM (GLIDE)
-- TextButton
-- TextLabel
-- Time Stop Immunity
-- Tools
-- TweenService
-- UICorner
-- UIListLayout
-- UIStroke
+`SecureCleanUI`, `CreateTab`, `CreateToggle`, `CreateButton`, `CreateSlider`, `UpdateSlider`, `BuildItemCache`, `GlideToNearestItem`
+
+## Строковые константы (UI, подписи)
+
+- `Common` ×4
+- `All` ×3
+- `Epic` ×3
+- `Legendary` ×2
+- `s Corpse` ×2
+- `AethelApexUI` ×2
+- `AethelApexESP` ×2
+- `AethelCombatRaft` ×2
+- `Living` ×2
+- `UPDATE ENEMY LIST` ×2
+- `VirtualInputManager`
+- `PlayerGui`
+- `Lucky Arrow`
+- `Pelvis of The Saint`
+- `Left Arm of The Saint`
+
+## Ссылки / webhooks / ассеты (0)
+
+_нет_
+
+## Парты / объекты (409)
+
+- через `WaitForChild`/`FindFirstChild`: `HumanoidRootPart`, `Humanoid`, `Living`, `PlayerGui`, `AethelApexUI`, `AethelApexESP`, `Stand`
+- идентификаторы в коде: `AETHELBURG`, `AFK`, `AND`, `APEX`, `ARCHITECTURE`, `AbsoluteContentSize`, `AbsolutePosition`, `AbsoluteSize`, `Active`, `ActiveESP`, `ActiveFilters`, `ActivePage`, `ActiveTabBtn`, `Adornee`, `AethelApexESP`, `AethelApexUI`, `AethelCombatRaft`, `AethelConfig`, `AethelGui`, `Aethelburg`, `All`, `AlwaysOnTop`, `Anchored`, `Ancient`, `Anti`, `AntiAFK`, `AntiTimeStop`, `Apex`, `ApplyStrokeMode`, `Architecture`, `Arm`, `Arrow`, `AssemblyLinearVelocity`, `Attack`, `AttackDistance`, `AttackHeight`, `Auto`, `AutoButtonColor`, `AutoCollect`, `AutoHeal`

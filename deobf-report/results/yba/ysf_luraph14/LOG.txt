@@ -1,8 +1,0 @@
-source: rorri-cm/yba-autofarm "YSF PROTECTED.lua" (146 033 B)
-detected: luraph_v14 (0.50, "Luraph Obfuscator v14.4.2")
-method: Deobfuscator-Luraph-V15 (node deob.js) — в нём есть путь для v14 payload-VM
-  предварительно собран Luau: bin/luau и bin/luau-ast (без cmake, g++)
-result: ЧАСТИЧНО. Девиртуализован 1 корневой proto (#16) -> 172 строки: таблица окружения
-  (game, script, bit32, setfenv, "__index", "__newindex", "unpack", ":(%d+)[:\r\n]" ...).
-  Остальное тело осталось VM: инструмент сообщает "1 functions, 1 unlifted blocks".
-  Увеличение --budget/--timeout результат не меняет.

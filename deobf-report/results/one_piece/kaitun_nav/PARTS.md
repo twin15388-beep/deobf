@@ -1,108 +1,49 @@
+# `kaitun_nav` — функционал и механики
 
-Игра: **one_piece**
-# Разбор частей скрипта
-- файл: `script.lua`
-- размер: 34 КБ, 1107 строк
+Игра/тема: **one_piece** · восстановленный код: `script.lua` (1107 строк)
 
-## Части (функционал)
-- **AutoFarm** — 17 упоминаний
-- **Fly/Noclip** — 3 упоминаний
-- **Teleport** — 7 упоминаний
-- **Key system** — 1 упоминаний
-- **Config / Save settings** — 1 упоминаний
+## Что делает (по восстановленному коду)
 
-## UI-библиотека
-- Rayfield, Rain
+- **GUI / меню** — улики: `dropdown`, `screengui`, `slider`, `tab`, `textlabel`, `toggle`
+- **автофарм / авто-клик** — улики: `auto collect`, `autofarm`, `farm`
+- **телепорт / движение** — улики: `cframe`, `humanoidrootpart`, `tp`
+- **инвентарь / предметы** — улики: `chest`, `drop`
+- **сеть / загрузка кода** — улики: `httpget`, `loadstring`
+- **анти-АФК / ввод** — улики: `keydown`
 
-## URL / webhook-и (1)
+## Вызовы API
+
+- Сервисы: `Lighting`, `Players`, `ReplicatedStorage`, `RunService`, `UserInputService`
+- Классы/объекты: `BasePart`, `Frame`, `Humanoid`, `Lighting`, `ScreenGui`, `TextLabel`, `UICorner`, `UIListLayout`, `ValueBase`
+- Методы: `Create`×44, `FindFirstChild`×22, `GetService`×6, `FireServer`×3, `IsA`×3, `InvokeServer`×2, `Connect`×1, `HttpGet`×1, `loadstring`×1, `Destroy`×1
+
+## Имена функций (35)
+
+`getRoot`, `getHum`, `find_ocean`, `ocean`, `refresh_filter`, `ray`, `water_surface_y_at`, `apply_water_walk`, `tick_footstep`, `tick_stam`, `write_cframe`, `check_correction`, `init_toasts`, `toast`, `apply_no_fog`, `get_peli`, `has_rifle`, `chest_visible_at`, `any_chest_visible`, `probe_obstacle`, `step_walk`, `read_input`, `step_fly`, `resolve_pos`, `orb_fired`, `nudge_orb`, `retp_to_orb`, `confirm_orb_fired`, `travel_to`, `key_hold`, `press_e`, `press_t`, `buy_rifle`, `set_spawn`, `claim_chest`
+
+## Строковые константы (UI, подписи)
+
+- `Chest ` ×3
+- `, PlaceholderText = ` ×3
+- `, CurrentValue = ` ×3
+- `SetSpawn` ×2
+- `Ocean` ×2
+- `Stats` ×2
+- `Nav` ×2
+- `Fly` ×2
+- `Kaitun`
+- `Events`
+- `Town of Beginners`
+- `Sandora`
+- `Shell`
+- `Rifle`
+- `Env`
+
+## Ссылки / webhooks / ассеты (1)
+
 - `https://sirius.menu/rayfield`
 
-## Сервисы / remotes
-- сервисы: Players, ReplicatedStorage, Lighting, RunService, UserInputService
-- remote-вызовы: FireServer(, InvokeServer(
+## Парты / объекты (257)
 
-## Названия партов / объектов в игре (22 уникальных)
-- `Frame` (3)
-- `SetSpawn` (2)
-- `Stats` (2)
-- `UICorner` (2)
-- `Events` (1)
-- `footstep` (1)
-- `takestam` (1)
-- `HumanoidRootPart` (1)
-- `Env` (1)
-- `WaterStuff` (1)
-- `Ocean` (1)
-- `PlayerGui` (1)
-- `Peli` (1)
-- `Backpack` (1)
-- `BuyableItems` (1)
-- `Shop` (1)
-- `Tools` (1)
-- `ScreenGui` (1)
-- `UIListLayout` (1)
-- `TextLabel` (1)
-- `Town of Beginners` (1)
-- `Sandora` (1)
-
-## Подписи UI / названия функций (первые 60)
-- Autofarm
-- Back
-- Backpack
-- BasePart
-- BuyableItems
-- Buying rifle
-- Check Orb Distance
-- Chest 
-- Chest Testing
-- Claiming chest 
-- Debug Water
-- Destination
-- Direct tp sent
-- Direct tp to orb
-- Events
-- FAILED
-- Failed cleared
-- Farm finished
-- Farm stopped
-- Farming chests
-- Firing SetSpawn
-- Fly Speed
-- Frame
-- Going to chest 
-- Going to rifle
-- Heading to dive point
-- Humanoid
-- HumanoidRootPart
-- Kaitun
-- Kaitun Lvl Farm
-- Lighting
-- Misc
-- Movement
-- Movement corrected
-- Nav loaded
-- No Fog / Bright
-- No character
-- Nothing to reset
-- Ocean
-- Opening rifle dialog
-- Orb Testing
-- Orb failed after 
-- Orb retry 
-- Ownership not confirmed after 
-- Peli
-- PlayerGui
-- Players
-- Pressing T to interact
-- Print Chest Distances
-- Print Current Pos
-- Refresh Water Cache
-- ReplicatedStorage
-- Reset Failed Chests
-- Reset Lighting
-- Rifle
-- RunService
-- Sandora
-- ScreenGui
-- SetSpawn
-- SetSpawn missing
+- через `WaitForChild`/`FindFirstChild`: `SetSpawn`, `Stats`, `Events`, `footstep`, `takestam`, `HumanoidRootPart`, `Env`, `WaterStuff`, `Ocean`, `PlayerGui`, `Peli`, `Backpack`, `BuyableItems`, `Shop`, `Tools`
+- идентификаторы в коде: `AFTER_SPAWN_POS`, `AUTOFARM`, `Actions`, `All`, `AnchorPoint`, `AssemblyLinearVelocity`, `Auto`, `Autofarm`, `BUY`, `Back`, `BackgroundColor3`, `BackgroundTransparency`, `Backpack`, `BasePart`, `Beginners`, `BorderSizePixel`, `Bright`, `Brightness`, `BuyableItems`, `Buying`, `CFG`, `CFrame`, `CHEST`, `CHESTS`, `Cache`, `Callback`, `CanCollide`, `Character`, `Check`, `Chest`, `Chests`, `Claiming`, `ClockTime`, `Collect`, `Color3`, `ConfigurationSaving`, `Connect`, `Coord`, `Coords`, `CornerRadius`

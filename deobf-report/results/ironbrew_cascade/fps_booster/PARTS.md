@@ -1,44 +1,28 @@
-# FPS_Booster_ (IronBrew/CASCADE) — имена объектов (из констант чанка)
+# `fps_booster` — функционал и механики
 
-Источник: `/home/user/deobf/_work/res6/ib/FPS_Booster_//fixed.luac` (1300 B, 2 прототипов, 32 строковых констант)
+Игра/тема: **ironbrew_cascade** · восстановленный код: `script.lua` (37 строк)
 
-> Извлечено из строковых констант байткода. Порядок — алфавитный, в скобках — сколько раз строка встречается.
+## Что делает (по восстановленному коду)
 
+- явных механик по ключевым словам не найдено
 
-## Классы Roblox (0)
+## Вызовы API
+
+- Методы: `GetService`×1
+
+## Имена функций (0)
+
+_имена не сохранились — функции пронумерованы лифтом (`L2_1` и т.п.), смысл восстанавливается по вызовам выше_
+
+## Строковые константы (UI, подписи)
+
+- `UserGameSettings` ×2
+- `Game Options`
+
+## Ссылки / webhooks / ассеты (0)
 
 _нет_
 
+## Парты / объекты (27)
 
-## Имена объектов / партов (30)
-
-- `EagerBulkExecution`
-- `Enum`
-- `FindService`
-- `GetService`
-- `HasEverUsedVR`
-- `IncommingReplicationLag`
-- `Level01`
-- `LowResolution`
-- `Network`
-- `QualityLevel` ×2
-- `QualityLevel1`
-- `Rendering`
-- `SavedQualityLevel`
-- `SavedQualitySetting`
-- `UserGameSettings`
-- `UserSettings`
-- `VideoQuality`
-- `VideoQualitySettings`
-- `boostAttempt`
-- `eagerBulkExecution` ×2
-- `gameSettings` ×2
-- `hasEverUsedVR` ×2
-- `incommingReplicationLag` ×2
-- `lagConfiguration` ×2
-- `networkSettings` ×2
-- `qualityLevel` ×2
-- `renderSettings` ×2
-- `savedQualityLevel` ×2
-- `userGameSettings` ×2
-- `videoQualitySetting` ×2
+- идентификаторы в коде: `Enum`, `FindService`, `Game`, `GetService`, `Level01`, `LowResolution`, `Network`, `Options`, `QualityLevel`, `QualityLevel1`, `Rendering`, `SavedQualitySetting`, `UserGameSettings`, `UserSettings`, `VideoQualitySettings`, `boostAttempt`, `eagerBulkExecution`, `gameSettings`, `hasEverUsedVR`, `incommingReplicationLag`, `lagConfiguration`, `networkSettings`, `qualityLevel`, `renderSettings`, `savedQualityLevel`, `userGameSettings`, `videoQualitySetting`

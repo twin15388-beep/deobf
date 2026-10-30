@@ -1,92 +1,49 @@
+# `jailbreaker_v42` — функционал и механики
 
-Игра: **jailbreak**
-# Разбор частей скрипта
-- файл: `script.lua`
-- размер: 31 КБ, 908 строк
+Игра/тема: **jailbreak** · восстановленный код: `script.lua` (908 строк)
 
-## Части (функционал)
-- **Fly/Noclip** — 14 упоминаний
-- **Speed/Jump** — 20 упоминаний
-- **Teleport** — 49 упоминаний
+## Что делает (по восстановленному коду)
 
-## UI-библиотека
-- Rain
+- **телепорт / движение** — улики: `cframe`, `humanoidrootpart`, `moveto`, `teleport`, `tp`, `tweenservice`
+- **GUI / меню** — улики: `screengui`, `textbutton`, `textlabel`
+- **аимбот / наведение** — улики: `mousebutton`
+- **урон / убийство** — улики: `noclip`
+- **деньги / ресурсы** — улики: `infinite`
+- **анти-АФК / ввод** — улики: `keydown`
 
-## URL / webhook-и (0)
+## Вызовы API
 
-## Сервисы / remotes
-- сервисы: Players, Workspace, TweenService, MarketplaceService, StarterGui
+- Сервисы: `CoreGui`, `MarketplaceService`, `Players`, `StarterGui`, `Teams`, `TweenService`, `Workspace`
+- Классы/объекты: `BindableFunction`, `Decal`, `Frame`, `HopperBin`, `Humanoid`, `MeshPart`, `Model`, `Part`, `ScreenGui`, `StringValue`, `TextBox`, `TextButton`, `TextLabel`
+- Методы: `GetService`×44, `GetChildren`×19, `Destroy`×5, `Connect`×4, `IsA`×4, `FindFirstChild`×3, `WaitForChild`×3, `TweenService`×3, `GetMouse`×2, `MoveTo`×1, `Create`×1, `Clone`×1
 
-## Названия партов / объектов в игре (10 уникальных)
-- `TextButton` (31)
-- `Frame` (4)
-- `Part` (4)
-- `TextLabel` (3)
-- `HopperBin` (3)
-- `Banks` (2)
-- `BindableFunction` (2)
-- `Jewelrys` (1)
-- `ScreenGui` (1)
-- `TextBox` (1)
+## Имена функций (8)
 
-## Подписи UI / названия функций (первые 60)
-- AK47
-- Auto Arrest
-- Auto Rob
-- AutoROB
-- AutoRob
-- Bank Auto Rob
-- BankAutoRobBtn
-- BankFront
-- BankStatus
-- BankVault
-- Banks
-- BindableFunction
-- Btools
-- Close
-- CrimBase1
-- CrimBase2
-- Crimbase2
-- Criminal
-- Dismiss
-- Donut Shop
-- Finishing the robbery
-- Frame
-- Gas Station
-- Gravity
-- HopperBin
-- HumanoidRootPart
-- Infinite Nitro
-- Infinitenitro
-- JewIn
-- JewOut
-- Jewelry Inside
-- Jewelry Top
-- JewelryStatus
-- Jewelrys
-- M4A4
-- Main
-- MarketplaceService
-- MeshPart
-- Model
-- Museum
-- Museum 
-- Museum Roof
-- Open
-- Opening the vault
-- PLTP
-- Part
-- Pistol
-- Player Name
-- Player TP
-- PlayerTP_Input
-- PlayerTP_Teleport
-- PlayerTeleport
-- Players
-- PoliceBase
-- Remove Buildings
-- RemoveAll
-- RemoveBuildings
-- Removeall
-- RifleSWAT
-- SHOTGUN
+`JailbreakTp`, `TpMethod1`, `TpMethod2`, `Tween`, `b_noclip`, `x_walkspeed`, `Tp`, `RobTheBank`
+
+## Строковые константы (UI, подписи)
+
+- `Teleport` ×6
+- `UnionOperation` ×4
+- `SendNotification` ×4
+- `Dismiss` ×4
+- `AK47` ×3
+- `Station` ×3
+- `Pistol` ×3
+- `WalkSpeed` ×3
+- `Jailbreaker V4.2` ×2
+- `Teleports` ×2
+- `Auto Rob` ×2
+- `BankFront` ×2
+- `BankVault` ×2
+- `CrimBase1` ×2
+- `TrainSpawn` ×2
+
+## Ссылки / webhooks / ассеты (0)
+
+_нет_
+
+## Парты / объекты (186)
+
+- через `WaitForChild`/`FindFirstChild`: `Banks`, `Jewelrys`
+- идентификаторы в коде: `AK47`, `Active`, `Anchored`, `Antique`, `ArialBold`, `Arrest`, `Auto`, `AutoArrest`, `AutoROB`, `AutoRob`, `BackgroundColor3`, `BackgroundTransparency`, `Backpack`, `Bank`, `BankAutoRob`, `BankAutoRobBtn`, `BankFront`, `BankStatus`, `BankVault`, `Banks`, `BarbedWire`, `BinType`, `BindableFunction`, `BorderColor3`, `BorderSizePixel`, `Btools`, `Buildings`, `Button1`, `Button2`, `CFrame`, `Callback`, `CanCollide`, `Cartoon`, `CaseLasers`, `Cells`, `Character`, `ClassName`, `ClearAllChildren`, `Clone`, `Close`

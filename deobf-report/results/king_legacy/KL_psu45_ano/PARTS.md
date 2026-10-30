@@ -1,25 +1,51 @@
-# Разбор частей скрипта
-- файл: `script.lua`
-- размер: 3421 КБ, 56150 строк
+# `KL_psu45_ano` — функционал и механики
 
-## Части (функционал)
-- **AutoFarm** — 73 упоминаний
-- **AutoQuest** — 29 упоминаний
-- **AutoChest** — 4 упоминаний
-- **AutoRaid/Boss** — 12 упоминаний
-- **Aimbot** — 13 упоминаний
-- **ESP** — 7 упоминаний
-- **Fly/Noclip** — 6 упоминаний
-- **Speed/Jump** — 1 упоминаний
-- **Teleport** — 85 упоминаний
-- **Auto Rejoin** — 1 упоминаний
-- **Config / Save settings** — 4 упоминаний
-- **Inventory / Item ESP** — 12 упоминаний
+Игра/тема: **king_legacy** · восстановленный код: `script.lua` (56150 строк)
 
-## UI-библиотека
-- Magma, Vision, Rain, Krnl
+## Что делает (по восстановленному коду)
 
-## URL / webhook-и (8)
+- **GUI / меню** — улики: `dropdown`, `screengui`, `scrollingframe`, `slider`, `tab`, `textbutton`
+- **телепорт / движение** — улики: `cframe`, `humanoidrootpart`, `moveto`, `teleport`, `tp`, `tweenservice`
+- **урон / убийство** — улики: `breakjoints`, `godmode`, `hitbox`, `invisible`, `kill`, `noclip`
+- **деньги / ресурсы** — улики: `cash`, `code`, `inf`, `infinite`, `redeem`, `reward`
+- **автофарм / авто-клик** — улики: `auto click`, `auto farm`, `autoclick`, `autofarm`, `farm`
+- **инвентарь / предметы** — улики: `chest`, `drop`, `inventory`, `item`, `sell`
+- **анти-АФК / ввод** — улики: `button2down`, `idled`, `inputbegan`, `keydown`, `virtualuser`
+- **ESP / подсветка** — улики: `billboardgui`, `chams`, `esp`, `outline`
+- **аимбот / наведение** — улики: `aimbot`, `mousebutton`, `mousemove`
+- **сеть / загрузка кода** — улики: `discord`, `httpget`, `require`
+- **квесты / стадии** — улики: `completed`, `quest`
+
+## Вызовы API
+
+- Сервисы: `Chat`, `CoreGui`, `GuiService`, `HttpService`, `Lighting`, `Players`, `ReplicatedFirst`, `ReplicatedStorage`, `RunService`, `SoundService`, `StarterGui`, `Teams`, `TextService`, `TweenService`, `UserInputService`, `VirtualUser`, `Workspace`
+- Классы/объекты: `BillboardGui`, `BindableEvent`, `BlurEffect`, `BodyForce`, `BodyGyro`, `Camera`, `ClickDetector`, `ColorCorrectionEffect`, `Decal`, `Explosion`, `Frame`, `Humanoid`, `ImageButton`, `ImageLabel`, `Lighting`, `MeshPart`, `Model`, `ModuleScript`, `Part`, `ParticleEmitter`
+- Методы: `GetService`×682, `FindFirstChild`×675, `InvokeServer`×273, `GetChildren`×124, `Create`×73, `IsA`×65, `Connect`×48, `Destroy`×28, `FireServer`×24, `HttpGet`×16, `WaitForChild`×4, `TweenService`×4
+
+## Имена функций (0)
+
+_имена не сохранились — функции пронумерованы лифтом (`L2_1` и т.п.), смысл восстанавливается по вызовам выше_
+
+## Строковые константы (UI, подписи)
+
+- `Button` ×166
+- `SimulationRadius` ×60
+- `Buso` ×56
+- `HasBuso` ×53
+- `Label` ×50
+- `True` ×41
+- `False` ×40
+- `Line` ×35
+- `NameEsp` ×35
+- `VirtualInputManager` ×24
+- `Island 5` ×22
+- `Island 4` ×22
+- `Island 3` ×22
+- `Island 2` ×22
+- `Island 1` ×22
+
+## Ссылки / webhooks / ассеты (8)
+
 - `http://127.0.0.1:`
 - `http://203.159.94.151:3000/Hwid`
 - `http://203.159.94.151:3000/anonymoushubwhitelist?Key=`
@@ -29,72 +55,6 @@
 - `https://discord.com`
 - `https://games.roblox.com/v1/games/`
 
-## Сервисы / remotes
-- сервисы: Players, ReplicatedStorage, ReplicatedFirst, Workspace, Lighting, TweenService, RunService, UserInputService, VirtualUser, HttpService, TeleportService, CoreGui
+## Парты / объекты (1416)
 
-## Названия партов / объектов в игре (3 уникальных)
-- `Kingdom of Rose` (1)
-- `Dark Arena` (1)
-- `Boat Castle` (1)
-
-## Подписи UI / названия функций (первые 60)
-- AFMMain
-- AbandonQuest
-- Ability Teacher
-- AbsoluteContentSize
-- Accessory
-- Activated
-- AddPoint
-- Aimbot Gun
-- Alchemist
-- AmazonQuest
-- AmazonQuest2
-- Anchored
-- Anit AFK
-- Anoymous whitelist
-- Anti Kill Players
-- Archer
-- Arctic Warrior
-- Area1Quest
-- Area2Quest
-- Arowe
-- Asset
-- Auto Accessories
-- Auto Awakener
-- Auto Bounty Farm
-- Auto Buy Bizarre Rifle
-- Auto Buy Enhancement
-- Auto Buy Ghoul Mask
-- Auto Buy Legendary Sword
-- Auto Buy Midnight Blade
-- Auto Buy Random Devil Fruit
-- Auto Canvander
-- Auto Click
-- Auto Death Step
-- Auto Electric Clow
-- Auto Enma/Yama
-- Auto Factory
-- Auto Farm
-- Auto Farm All Boss
-- Auto Farm Boss
-- Auto Farm Chest
-- Auto Farm Devil Fruit Mastery
-- Auto Farm Ectoplasm
-- Auto Farm Elite Hunter
-- Auto Farm Gun Mastery
-- Auto Farm Level
-- Auto Farm Level Lock
-- Auto Farm Mastery Skill Setting
-- Auto Farm Misc
-- Auto Farm Near Mods
-- Auto Farm Observation
-- Auto Farm Observation (Daly 40 sce)
-- Auto Farm Sea king
-- Auto Farm Selected
-- Auto Farm Setting
-- Auto Farm Sword Mastery
-- Auto Haki
-- Auto Haki Rainbow
-- Auto Holy Torch
-- Auto Musketee Hat
-- Auto New World
+- идентификаторы в коде: `AFK`, `AFM`, `AFMMain`, `AFMQuest`, `AFMSelected`, `AUTOHAKI`, `AUTOHAKIObs`, `AbandonQuest`, `Abilities`, `Ability`, `AbsoluteContentSize`, `AbsolutePosition`, `AbsoluteSize`, `Accessories`, `Accessory`, `Activated`, `Active`, `AddPoint`, `Admin`, `Admiral`, `Adornee`, `Aim`, `Aimbot`, `AimbotSkill`, `AirTP`, `Alchemist`, `All`, `AlwaysOnTop`, `AmazonQuest`, `AmazonQuest2`, `AnchorPoint`, `Anchored`, `Angles`, `Animate`, `Anit`, `Anonymous`, `Anoymous`, `Anti`, `AntiKillPlayers`, `AppleSpawner`

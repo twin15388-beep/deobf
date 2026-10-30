@@ -1,99 +1,55 @@
+# `maxlegends_loader` — функционал и механики
 
-Игра: **illegal_soccer**
-# Разбор частей скрипта
-- файл: `script.lua`
-- размер: 47 КБ, 1131 строк
+Игра/тема: **illegal_soccer** · восстановленный код: `script.lua` (1131 строк)
 
-## Части (функционал)
-- **AutoFarm** — 2 упоминаний
-- **Aimbot** — 2 упоминаний
-- **Key system** — 2 упоминаний
+## Что делает (по восстановленному коду)
 
-## UI-библиотека
-- не определена
+- **GUI / меню** — улики: `screengui`, `textbutton`, `textlabel`
+- **сеть / загрузка кода** — улики: `discord`, `loadstring`, `require`
+- **деньги / ресурсы** — улики: `code`, `inf`
+- **квесты / стадии** — улики: `completed`, `quest`
+- **автофарм / авто-клик** — улики: `auto farm`
+- **телепорт / движение** — улики: `tweenservice`
+- **ESP / подсветка** — улики: `outline`
+- **аимбот / наведение** — улики: `aimbot`
+- **инвентарь / предметы** — улики: `sell`
 
-## URL / webhook-и (4)
+## Вызовы API
+
+- Сервисы: `GuiService`, `HttpService`, `Players`, `StarterGui`, `TweenService`
+- Классы/объекты: `Frame`, `ImageLabel`, `ScreenGui`, `TextBox`, `TextButton`, `TextLabel`, `UICorner`, `UIGradient`, `UIScale`, `UIStroke`
+- Методы: `TweenService`×18, `Connect`×16, `Create`×16, `Destroy`×7, `GetService`×5, `WaitForChild`×1, `loadstring`×1
+
+## Имена функций (18)
+
+`requestFn`, `post`, `decode`, `saveKey`, `readKey`, `openKeyPage`, `copyQuickKeyLink`, `add`, `resolveKey`, `loadProtected`, `crystal`, `makeButton`, `setStatus`, `destroy`, `gateButton`, `showDiscordGate`, `submit`, `showQuickKeyLink`
+
+## Строковые константы (UI, подписи)
+
+- `VERIFY DISCORD` ×3
+- `SPG HUB ULTIMATE` ×2
+- `spg-hub` ×2
+- `Legends Hub | Steal An Egg` ×2
+- `legends-hub` ×2
+- `Legends Hub | Steal an Egg` ×2
+- `Huss Ultimate Hub` ×2
+- `huss-ultimate-hub` ×2
+- `dogs-ultimate` ×2
+- `Inf Skill | Auto Complete` ×2
+- `stone-hub` ×2
+- `1-speed-hub` ×2
+- `SA Hub` ×2
+- `sa-hub` ×2
+- `SAE Ultimate Hub` ×2
+
+## Ссылки / webhooks / ассеты (4)
+
 - `https://bloxscripts.fun/get-key?script=`
-- `https://bloxscripts.fun/permanent-access-a8f26d91c4e73b05/signin`
 - `https://discord.gg/pFmwdebSe3`
 - `https://keyforge-owner-gated.pages.dev`
+- `https://bloxscripts.fun/permanent-access-a8f26d91c4e73b05/signin`
 
-## Сервисы / remotes
-- сервисы: Players, TweenService, HttpService, StarterGui
-- WaitForChild: `PlayerGui`
+## Парты / объекты (339)
 
-## Названия партов / объектов в игре (12 уникальных)
-- `Frame` (25)
-- `UICorner` (25)
-- `TextLabel` (21)
-- `UIStroke` (15)
-- `UIGradient` (7)
-- `TextBox` (2)
-- `TextButton` (2)
-- `ImageLabel` (2)
-- `PlayerGui` (1)
-- `ScreenGui` (1)
-- `UIScale` (1)
-- `Accept` (1)
-
-## Подписи UI / названия функций (первые 60)
-- ACCESS KEY
-- Accept
-- Access granted - loading 
-- Back to Key System
-- Ball HUB
-- CHECK ACCESS KEY
-- Chop A Forest Hub
-- Content-Type
-- Copy Link Manually
-- Copy the Key Link
-- DISCORD REQUIRED
-- Fire Ultimate
-- Frame
-- GET KEY
-- Get Key Quick
-- GetKeyQuick
-- GuiService
-- HTTP 
-- HttpService
-- Huss Ultimate Hub
-- Illegal Soccer Hub
-- ImageLabel
-- Invalid HTTP response
-- JOIN DISCORD
-- Join the Legends Hub Discord server
-- KEYFORGE_
-- Key Link Copied (Paste in browser)
-- Key-page link copied to clipboard
-- Loot Forge Ultimate Hub
-- MAXLEGENDS
-- MAXLEGENDS_KEY_SYSTEM_
-- ML-XXXX-XXXX-XXXX-XXXX
-- MaxLegends Key System
-- Opened key page
-- POST
-- PREMIUM
-- PlayerGui
-- Players
-- Rocket Hub
-- S2 Hub
-- SA Hub
-- SAE Ultimate Hub
-- SPG HUB ULTIMATE
-- ScreenGui
-- StarterGui
-- TextBox
-- TextButton
-- TextLabel
-- This key belongs to 
-- Tribes 3v3 Hub
-- TweenService
-- UICorner
-- UIGradient
-- UIScale
-- UIStroke
-- VERIFICATION OPENED
-- VERIFY DISCORD
-- Verification complete - loading 
-- Verify Discord to continue
-- Zero Hub
+- через `WaitForChild`/`FindFirstChild`: `PlayerGui`
+- идентификаторы в коде: `ACCESS`, `ALPHA`, `Accept`, `Access`, `Activated`, `Active`, `Actual`, `AimBot`, `All`, `AnchorPoint`, `Animal`, `Anomaly`, `Arena`, `Auto`, `AutoButtonColor`, `Automatic`, `BASE`, `Back`, `BackgroundColor3`, `BackgroundTransparency`, `Ball`, `BedWars`, `Body`, `BorderSizePixel`, `CHECK`, `CURE`, `Center`, `Chop`, `ClearTextOnFocus`, `Clipboard`, `ClipsDescendants`, `Cloudflare`, `Color`, `Color3`, `ColorSequence`, `ColorSequenceKeypoint`, `Compile`, `Complete`, `Completed`, `Connect`

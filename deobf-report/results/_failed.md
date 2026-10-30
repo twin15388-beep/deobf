@@ -51,3 +51,52 @@ HTML-страницей (`<!DOCTYPE html>` — AirFlow) — проверять �
 | `IronBrew2-Deobfuscator` (Gork3m, C#) | не проверен | нет dotnet в песочнице, nuget недоступен |
 | Lua 5.1.5 | не собрать | тега 5.1.5 на GitHub нет, `make linux` в 5.1.1 отсутствует; собрана 5.1.1 с `-DLUA_USE_POSIX` |
 | `goto lbl_N` в выводе unluac (3 файла) | синтаксис Lua 5.2+ | unluac не смог свернуть некоторые прыжки в структуры; чанк при этом грузится в 5.1 |
+
+## Переехало из `results/` при переходе на «только деобфнутое»
+
+Раньше в `results/` лежали сэмплы, где снят только внешний слой, а тело осталось
+обфусцированным (VM/диспетчер). По новому правилу такие каталоги в результатах не держим —
+**код, который не деобфусцирован до читаемого исходника, в `results/` не попадает**.
+
+| Было в results | Игра | Что внутри было | Почему убрано | Что успели вытащить |
+|---|---|---|---|---|
+| `tower_of_hell/auto_win` | Tower of Hell | 296 строк, 289 КБ в одну строку | это не код, а `IronBrew`-байткод (снята только обёртка `unprom`) | ничего читаемого |
+| `tower_defense_simulator/autofarm` | Tower Defense Simulator | 11 121 строка | блок настроек сверху, тело — VM Luraph v6-типа | `_G.troopName`, `_G.placeTroop`, `_G.waitDelay`, `_G.joinDelay` |
+| `corpus/wynfuscate` | бенчмарк | 325 строк | `enhanced-vm-compress` лоадер, строки зашифрованы | — |
+| `blox_strike/moon_ext_doink` | Blox Strike | 1 712 строк | doink obfuscator v1: `bit32.bxor` + CFG-flatten, VM не поднята | черновые имена `GH_R`, `GPrQa` |
+| `blox_strike/mahmuthub_wearedevs` | Blox Strike | 7 184 строки | де-flatten **диспетчера** (`while X do if X == 0 ... X = 405`), не исходник | интерфейс GUI-библиотеки: `CreateWindow`, `CreateTopbarButton`, `AddTheme`, `CreateConfig`, `Dropdown`, `Detected` |
+| `yba/ysf_luraph14` | YBA | 173 строки | Luraph v14.4.2, поднят 1 прототип из VM | `LPH_NO_UPVALUES`, `LPH_OBFUSCATED` (маркеры Luraph) |
+
+Исходники этих файлов не удалены — лежат вне git в `_work/` и в исходных репозиториях;
+если для них появится рабочий деобфускатор, они вернутся в `results/` уже как код.
+
+### Полный список 24 IronBrew-файлов, которые не собрались
+
+| Файл | Чанк, B | Проблем в чанке | Skip instr/sub | Первая ошибка `luac_inspect` |
+|---|---:|---:|---:|---|
+| `Bad_Business_SCRIPT_NEW_XDDD.lua` | 13165 | 23 | 31 / 21 | `CALL C=0 (open) followed by GETGLOBAL B=0` |
+| `Bad_Business_Script_NEW_ONE.lua` | 13165 | 23 | 31 / 21 | `CALL C=0 (open) followed by GETGLOBAL B=0` |
+| `Blox_Piece_1.9.5.lua` | 25831 | 13 | 0 / 0 | `CALL C=0 (open) followed by GETGLOBAL B=0` |
+| `Blox_Piece_232.lua` | 25831 | 13 | 15 / 90 | `CALL C=0 (open) followed by GETGLOBAL B=0` |
+| `Dungeon_Quest_Autofarm_Free__OUTDATED.lua` | 26858 | 39 | 105 / 88 | `JMP jump ->-1 out of code` |
+| `Dungeon_Quest_Desert.lua` | 26858 | 39 | 0 / 0 | `JMP jump ->-1 out of code` |
+| `Dungeon_Quest_Free_Autofarm_CRACKED.lua` | 29288 | 36 | 139 / 117 | `JMP jump ->-1 out of code` |
+| `Dungeon_Quest_King.lua` | 29288 | 36 | 0 / 0 | `JMP jump ->-1 out of code` |
+| `Dungeon_Quest_Pirate.lua` | 29288 | 36 | 0 / 0 | `JMP jump ->-1 out of code` |
+| `Dungeon_Quest_Winter.lua` | 29288 | 36 | 0 / 0 | `JMP jump ->-1 out of code` |
+| `FE_Invisible_Fling.lua` | 5195 | 8 | 0 / 0 | `CALL C=0 (open) followed by CALL B=504` |
+| `Heroes_Online_FREE_AUTOFARM_BY_BLAKE.lua` | 2657 | 5 | 5 / 10 | `CALL C=0 (open) followed by TEST B=0` |
+| `Iron_Man_Sim_Script.lua` | 28415 | 38 | 0 / 0 | `CALL C=0 (open) followed by CALL B=463` |
+| `JailBreak_NEW_BEST_GUI.lua` | 22013 | 41 | 63 / 122 | `CALL C=0 (open) followed by GETGLOBAL B=0` |
+| `JoJo_Blox_GUI.lua` | 9046 | 9 | 7 / 12 | `CALL C=0 (open) followed by GETGLOBAL B=0` |
+| `Jojo_Gui.lua` | 18586 | 14 | 16 / 27 | `CALL C=0 (open) followed by GETGLOBAL B=0` |
+| `Legends_of_Speed_auto_farm_new.lua` | 9788 | 5 | 0 / 14 | `CALL C=0 (open) followed by GETGLOBAL B=0` |
+| `Mad_City_Gui_2.lua` | 35311 | 28 | 104 / 235 | `EQ C reg 251 >= maxstack 250` |
+| `Magnet_Sim.lua` | 8198 | 5 | 7 / 8 | `JMP jump ->44 out of code` |
+| `OP_Finality_Character_Hub.lua` | 123372 | 28 | 0 / 0 | `CALL C=0 (open) followed by CALL B=420` |
+| `Stackables_Inf_Money.lua` | 301 | 1 | 0 / 0 | `CALL C=0 (open) followed by CALL B=1` |
+| `Texting_Simulator_GUI_UPDATED.lua` | 5368 | 6 | 6 / 13 | `CALL C=0 (open) followed by SELF B=4` |
+| `Troll_GUI.lua` | 270406 | 65 | 0 / 0 | `CALL C=0 (open) followed by CALL B=510` |
+| `one_Piece_mellinuim.lua` | 28922 | 17 | 22 / 92 | `CALL C=0 (open) followed by MOVE B=4` |
+
+Имена объектов из этих файлов остались в рабочей копии (`_work/res6/ib/<файл>/PARTS.md`); в git они не выкладываются, потому что кода там нет — в `results/` попадает только деобфнутое.

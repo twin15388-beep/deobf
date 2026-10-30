@@ -1,94 +1,47 @@
+# `gui` — функционал и механики
 
-Игра: **close_quarters_combat**
-# Разбор частей скрипта
-- файл: `script.lua`
-- размер: 50 КБ, 1612 строк
+Игра/тема: **close_quarters_combat** · восстановленный код: `script.lua` (1612 строк)
 
-## Части (функционал)
-- явных функциональных блоков не найдено (скрипт-загрузчик или VM)
+## Что делает (по восстановленному коду)
 
-## UI-библиотека
-- не определена
+- **телепорт / движение** — улики: `cframe`
+- **урон / убийство** — улики: `breakjoints`
+- **анти-АФК / ввод** — улики: `keydown`
 
-## URL / webhook-и (2)
+## Вызовы API
+
+- Сервисы: `Chat`, `Players`, `Workspace`
+- Классы/объекты: `BlockMesh`, `BodyForce`, `BodyGyro`, `BodyPosition`, `BodyVelocity`, `Explosion`, `Fire`, `HopperBin`, `Humanoid`, `Model`, `Part`, `Sound`, `SpecialMesh`, `StringValue`, `Weld`
+- Методы: `GetChildren`×17, `FindFirstChild`×5, `GetService`×2, `IsA`×1
+
+## Имена функций (15)
+
+`Part`, `Weld`, `ComputePos`, `getHumanoid`, `getHead`, `HpChange`, `startEff`, `JambleEff`, `endEff`, `ShowDMG`, `nilparts`, `attach`, `Talk`, `bloc`, `select`
+
+## Строковые константы (UI, подписи)
+
+- `Torso` ×19
+- `Smooth` ×17
+- `Right Leg` ×15
+- `Bright orange` ×9
+- `Left Leg` ×6
+- `Really Black` ×4
+- `Symmetric` ×4
+- `TorsoWeld2` ×4
+- `FileMesh` ×4
+- `Kicked` ×4
+- `Ball` ×4
+- `Ball2` ×3
+- `AirWalk` ×3
+- `RoundHouse` ×2
+- `Head` ×2
+
+## Ссылки / webhooks / ассеты (2)
+
 - `http://www.roblox.com/asset/?id=1051557`
 - `http://www.roblox.com/asset/?id=2801263`
 
-## Сервисы / remotes
-- сервисы: Players
+## Парты / объекты (162)
 
-## Названия партов / объектов в игре (19 уникальных)
-- `BodyVelocity` (16)
-- `Right Leg` (15)
-- `Part` (10)
-- `BodyGyro` (7)
-- `Fire` (7)
-- `Humanoid` (6)
-- `Left Leg` (6)
-- `SpecialMesh` (5)
-- `Weld` (5)
-- `Sound` (2)
-- `Model` (2)
-- `BlockMesh` (2)
-- `StringValue` (2)
-- `BodyForce` (1)
-- `BodyPosition` (1)
-- `Explosion` (1)
-- `HopperBin` (1)
-- `Right Arm` (1)
-- `Left Arm` (1)
-
-## Подписи UI / названия функций (первые 60)
-- AirWalk
-- BackSurface
-- Ball
-- Ball2
-- Block
-- BlockMesh
-- BodyForce
-- BodyGyro
-- BodyPosition
-- BodyVelocity
-- BottomSurface
-- Bright orange
-- Bright red
-- Chat
-- Close Quarters Combat
-- Custom
-- Doublekick
-- Edit
-- Explosion
-- FileMesh
-- Fire
-- FrontSurface
-- Head
-- HopperBin
-- Humanoid
-- Karate
-- Kick
-- Kicked
-- Left Arm
-- Left Leg
-- LeftSurface
-- Model
-- Neck
-- Part
-- Players
-- Punch
-- Really Black
-- Really black
-- Right Arm
-- Right Leg
-- RightSurface
-- RoundHouse
-- Smooth
-- Sound
-- SpecialMesh
-- Sphere
-- StringValue
-- Symmetric
-- TopSurface
-- Torso
-- TorsoWeld2
-- Weld
-- White
+- через `WaitForChild`/`FindFirstChild`: `Humanoid`
+- идентификаторы в коде: `Add`, `AddItem`, `AirWalk`, `Anchor`, `Anchored`, `Angles`, `Arm`, `BackSurface`, `Backpack`, `Ball`, `Ball2`, `Ball2Mesh`, `Black`, `BlastPressure`, `Block`, `BlockMesh`, `BodyPosition`, `BottomSurface`, `Break`, `BreakJoints`, `BrickColor`, `Bright`, `CF2`, `CFrame`, `CanCollide`, `Character`, `ChatColor`, `Close`, `Collide`, `Color`, `Combat`, `ComputePos`, `Custom`, `Debris`, `Diable`, `Doublekick`, `Edit`, `Enum`, `FileMesh`, `FindFirstChild`

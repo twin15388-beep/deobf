@@ -1,7 +1,0 @@
-input: corpus/wynfuscate.lua
-detected: wynfuscate (via unprom)
-result: /home/user/deobf/_work/res/corpus/wynfuscate/deobfuscated.lua
-
-detected: wynfuscate
-no dedicated static deobfuscator for wynfuscate
-unprom exit=0 unprom: wrote /home/user/deobf/_work/res/corpus/wynfuscate/deobfuscated.lua (99050 bytes)

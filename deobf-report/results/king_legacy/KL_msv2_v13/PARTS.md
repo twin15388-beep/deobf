@@ -1,97 +1,54 @@
-# Разбор частей скрипта
-- файл: `script.lua`
-- размер: 133 КБ, 4207 строк
+# `KL_msv2_v13` — функционал и механики
 
-## Части (функционал)
-- **Fly/Noclip** — 3 упоминаний
-- **Speed/Jump** — 6 упоминаний
-- **Teleport** — 6 упоминаний
-- **Config / Save settings** — 5 упоминаний
+Игра/тема: **king_legacy** · восстановленный код: `script.lua` (4207 строк)
 
-## UI-библиотека
-- не определена
+## Что делает (по восстановленному коду)
 
-## URL / webhook-и (4)
+- **телепорт / движение** — улики: `cframe`, `humanoidrootpart`, `jumppower`, `moveto`, `teleport`, `tp`
+- **урон / убийство** — улики: `damage`, `fling`, `hitbox`, `invisible`
+- **GUI / меню** — улики: `screengui`, `textbutton`, `textlabel`, `toggle`
+- **сеть / загрузка кода** — улики: `discord`, `httpget`, `loadstring`, `require`
+- **инвентарь / предметы** — улики: `chest`, `drop`
+- **анти-АФК / ввод** — улики: `inputbegan`, `keydown`
+- **автофарм / авто-клик** — улики: `farm`
+- **аимбот / наведение** — улики: `mousebutton`
+- **деньги / ресурсы** — улики: `infinite`
+
+## Вызовы API
+
+- Сервисы: `CoreGui`, `Players`, `ReplicatedStorage`, `RunService`, `StarterGui`, `TweenService`, `UserInputService`, `Workspace`
+- Классы/объекты: `Animation`, `BodyGyro`, `BodyVelocity`, `Frame`, `Humanoid`, `ImageButton`, `MeshPart`, `Model`, `Part`, `RemoteEvent`, `ScreenGui`, `SelectionBox`, `TextBox`, `TextButton`, `TextLabel`, `Tool`, `UICorner`
+- Методы: `GetService`×74, `Connect`×41, `FindFirstChild`×35, `Destroy`×26, `IsA`×12, `GetChildren`×9, `FireServer`×7, `GetPlayers`×5, `MoveTo`×4, `TweenService`×4, `Create`×4, `Clone`×4
+
+## Имена функций (12)
+
+`__secureeq`, `parent`, `parent3`, `apply`, `teleportPlayer`, `onButton1Down`, `onSelected`, `f42`, `f41`, `f65`, `ah`, `onTouched`
+
+## Строковые константы (UI, подписи)
+
+- `UndertitleLine` ×7
+- `ButtonList` ×7
+- `Block` ×6
+- `Sphere` ×6
+- `Axe` ×6
+- `UnionOperation` ×4
+- `HopperBin` ×4
+- `LocalScript` ×4
+- `Head` ×3
+- `Line` ×3
+- `BasePart` ×3
+- `Settings` ×3
+- `Lightux v1.3` ×2
+- `Player` ×2
+- `Fly` ×2
+
+## Ссылки / webhooks / ассеты (4)
+
 - `https://discord.gg/56D9EMjUnm`
-- `https://discord.gg/D3ZFcWjAzJ`
 - `https://pastebin.com/raw/NQzynGP6`
+- `https://discord.gg/D3ZFcWjAzJ`
 - `https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source`
 
-## Сервисы / remotes
-- сервисы: Players, ReplicatedStorage, Workspace, TweenService, RunService, UserInputService, CoreGui
-- remote-вызовы: FireServer(
+## Парты / объекты (1253)
 
-## Названия партов / объектов в игре (11 уникальных)
-- `UICorner` (64)
-- `TextButton` (36)
-- `Frame` (17)
-- `TextLabel` (14)
-- `Part` (3)
-- `Tool` (2)
-- `ScreenGui` (1)
-- `ImageButton` (1)
-- `Animation` (1)
-- `SelectionBox` (1)
-- `Middle Room` (1)
-
-## Подписи UI / названия функций (первые 60)
-- Animation
-- Anti HB - Prevents hitboxes
-- AntiHB
-- Arm Spaz - Makes arm spin fast
-- Arm1
-- Arm2
-- ArmSpaz
-- Backpack
-- Barrier
-- BasePart
-- Block
-- BlocksTitle
-- BodyGyro
-- BodyVelocity
-- Bottom Platform - Prevents falling
-- BottomPlatform
-- Btools
-- Button
-- ButtonList
-- Chest
-- Click TP - Gives you a tool to teleport
-- ClickTP
-- Close
-- Combat
-- CombatButton
-- CombatPage
-- CombatTitle
-- CopyDiscord
-- CoreGui
-- Equip All - Equips all tools
-- Equipall
-- FE / Others
-- FE/Others
-- FEOthersButton
-- FEOthersPage
-- FEShield
-- Fake Axe - Gives you fake axe
-- Fake Block - Gives you fake blocks
-- FakeAxe
-- FakeBlock
-- FakeBlocks
-- Fallingoff
-- Fe Shield - Requires shield (Unkillable)
-- FeOtherstitle
-- Fling Players - Flings everyone in match
-- FlingPlayers
-- Fly (f) - Allows you to fly
-- ForceField
-- Frame
-- Glitch Blocks - Bugs blocks out
-- Glitchblocks
-- Handle
-- Hat Aura - Spins accessories around you
-- HatAura
-- Head
-- High Jump Pot - Gives you the jump potion
-- HitBox
-- Hitbox - Gives everyone bigger hitbox
-- HopperBin
-- Humanoid
+- идентификаторы в коде: `Activate`, `Activated`, `Active`, `AdjustSpeed`, `Admin`, `Adornee`, `AdriIsABaby`, `All`, `Allows`, `AnchorPoint`, `Anchored`, `Angles`, `AnimationId`, `Anti`, `AntiHB`, `Arial`, `Arm`, `Arm1`, `Arm2`, `ArmSpaz`, `Armor`, `Armour`, `Aura`, `Axe`, `BUGGED`, `Back`, `BackgroundColor3`, `BackgroundTransparency`, `Backpack`, `Ball`, `Barrier`, `Base`, `BasePart`, `BinType`, `Block`, `Blocks`, `BlocksTitle`, `BorderColor3`, `BorderSizePixel`, `Borders`

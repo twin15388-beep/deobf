@@ -1,30 +1,33 @@
-# Make Your Avatar A Swastika (IronBrew → CASCADE → unluac) — имена объектов (из констант чанка)
+# `avatar_swastika` — функционал и механики
 
-Источник: `ironbrew_cascade/avatar_swastika/devirt.luac` (1149 B, 3 прототипов, 29 строковых констант)
+Игра/тема: **ironbrew_cascade** · восстановленный код: `script.lua` (91 строк)
 
-> Извлечено из строковых констант байткода. Порядок — алфавитный, в скобках — сколько раз строка встречается.
+## Что делает (по восстановленному коду)
 
+- **телепорт / движение** — улики: `cframe`, `humanoidrootpart`
+- **урон / убийство** — улики: `breakjoints`
 
-## Классы Roblox (2)
+## Вызовы API
 
-`Players`, `RunService`
+- Сервисы: `Players`, `RunService`
+- Классы/объекты: `BodyForce`
+- Методы: `WaitForChild`×1, `Connect`×1
 
+## Имена функций (0)
 
-## Имена объектов / партов (16)
+_имена не сохранились — функции пронумерованы лифтом (`L2_1` и т.п.), смысл восстанавливается по вызовам выше_
 
-- `Angles`
-- `BodyForce`
-- `BreakJoints`
-- `CFrame`
-- `Character`
-- `Connect`
-- `GetMass`
-- `HumanoidRootPart`
-- `Instance`
-- `LocalPlayer`
-- `Parent`
-- `Players`
-- `RenderStepped`
-- `RunService`
-- `Vector3`
-- `WaitForChild`
+## Строковые константы (UI, подписи)
+
+- `Left Arm`
+- `Right Arm`
+- `Left Leg`
+- `Right Leg`
+
+## Ссылки / webhooks / ассеты (0)
+
+_нет_
+
+## Парты / объекты (15)
+
+- идентификаторы в коде: `Angles`, `Arm`, `BreakJoints`, `CFrame`, `Character`, `Connect`, `GetMass`, `HumanoidRootPart`, `Left`, `Leg`, `LocalPlayer`, `RenderStepped`, `Right`, `Vector3`, `WaitForChild`

@@ -1,69 +1,50 @@
-# Разбор частей скрипта
-- файл: `script.lua`
-- размер: 53 КБ, 1479 строк
+# `psu_small` — функционал и механики
 
-## Части (функционал)
-- **AutoFarm** — 30 упоминаний
-- **Fly/Noclip** — 5 упоминаний
-- **Teleport** — 2 упоминаний
-- **Config / Save settings** — 2 упоминаний
-- **Inventory / Item ESP** — 3 упоминаний
+Игра/тема: **corpus** · восстановленный код: `script.lua` (1479 строк)
 
-## UI-библиотека
-- не определена
+## Что делает (по восстановленному коду)
 
-## URL / webhook-и (1)
+- **телепорт / движение** — улики: `cframe`, `humanoidrootpart`, `teleport`, `tweenservice`
+- **GUI / меню** — улики: `dropdown`, `slider`, `toggle`
+- **инвентарь / предметы** — улики: `drop`, `inventory`
+- **сеть / загрузка кода** — улики: `httpget`, `loadstring`
+- **анти-АФК / ввод** — улики: `idled`, `virtualuser`
+- **автофарм / авто-клик** — улики: `autofarm`
+- **урон / убийство** — улики: `noclip`
+- **квесты / стадии** — улики: `completed`
+
+## Вызовы API
+
+- Сервисы: `Players`, `ReplicatedStorage`, `RunService`, `TweenService`, `VirtualUser`
+- Классы/объекты: `BodyVelocity`, `Humanoid`, `Model`, `RemoteEvent`
+- Методы: `GetService`×15, `FindFirstChild`×14, `FireServer`×8, `Create`×7, `GetChildren`×2, `HttpGet`×2, `Destroy`×2, `WaitForChild`×1, `loadstring`×1, `TweenService`×1
+
+## Имена функций (0)
+
+_имена не сохранились — функции пронумерованы лифтом (`L2_1` и т.п.), смысл восстанавливается по вызовам выше_
+
+## Строковые константы (UI, подписи)
+
+- `Monster` ×3
+- `Boss` ×2
+- `MergeOneInventory` ×2
+- `AttackMonster` ×2
+- `AutoFarmingBoss` ×2
+- `Shark Evolution`
+- `Version: 1.0.2`
+- `Main Functions`
+- `Misc Functions`
+- `GUI Settings`
+- `Credits`
+- `Torso`
+- `Areas`
+- `Mobs`
+- `Artifacts`
+
+## Ссылки / webhooks / ассеты (1)
+
 - `https://raw.githubusercontent.com/HimikoToga1474/Public-Releases/master/Wally%20v3`
 
-## Сервисы / remotes
-- сервисы: Players, ReplicatedStorage, TweenService, RunService, VirtualUser, TeleportService
+## Парты / объекты (162)
 
-## Подписи UI / названия функций (первые 60)
-- Areas
-- Artifacts
-- AttackMonster
-- Auto Charge
-- Auto Evolve/Mutate
-- Auto Merge
-- AutoFarm
-- AutoFarm Boss
-- AutoFarmingBoss
-- AutoFarmingMob
-- AutoOpen Artifacts
-- BodyVelocity
-- Boss
-- ClickChargeSkill
-- Credits
-- Equip Best Skill
-- EquipSkill
-- EvolveOrMutateNextShark
-- GUI Settings
-- GetService
-- Health
-- HttpGet
-- Humanoid
-- HumanoidRootPart
-- LocalPlayer
-- Main Functions
-- MergeInventory
-- MergeOneInventory
-- Misc Functions
-- Mobs
-- Model
-- Monster
-- Noclip
-- Open 3 At Once
-- Open3
-- OpenArtifacts
-- OpenLootBoxOne
-- OpenLootBoxThree
-- Players
-- ReplicatedStorage
-- RunService
-- Shark Evolution
-- Speed
-- TeleportService
-- Torso
-- TweenService
-- Vector3
-- VirtualUser
+- идентификаторы в коде: `Aika`, `Areas`, `Artifact`, `Artifacts`, `AttackMonster`, `Auto`, `AutoChargeSkill`, `AutoEvolveOrMutate`, `AutoFarm`, `AutoFarmingBoss`, `AutoFarmingMob`, `AutoMerge`, `AutoOpen`, `Best`, `Boss`, `CFrame`, `CaptureController`, `ChangeState`, `Character`, `CharacterAdded`, `Charge`, `ClassName`, `ClickButton2`, `ClickChargeSkill`, `Completed`, `Create`, `CreateFolder`, `CreateWindow`, `Credits`, `Destroy`, `DestroyGUI`, `Dropdown`, `EasingStyle`, `Enum`, `Equip`, `EquipBest`, `EquipSkill`, `Evolution`, `Evolve`, `EvolveOrMutateNextShark`

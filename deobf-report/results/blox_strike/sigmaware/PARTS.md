@@ -1,143 +1,49 @@
+# `sigmaware` — функционал и механики
 
-Игра: **blox_strike**
-# Разбор частей скрипта
-- файл: `script.lua`
-- размер: 55 КБ, 1406 строк
+Игра/тема: **blox_strike** · восстановленный код: `script.lua` (1406 строк)
 
-## Части (функционал)
-- **Aimbot** — 18 упоминаний
-- **ESP** — 10 упоминаний
-- **Config / Save settings** — 91 упоминаний
+## Что делает (по восстановленному коду)
 
-## UI-библиотека
-- Rain
+- **GUI / меню** — улики: `screengui`, `scrollingframe`, `slider`, `tab`, `textbutton`, `textlabel`
+- **ESP / подсветка** — улики: `billboardgui`, `esp`, `highlight`, `outline`
+- **телепорт / движение** — улики: `cframe`, `humanoidrootpart`
+- **аимбот / наведение** — улики: `aimbot`, `mousebutton`
+- **сеть / загрузка кода** — улики: `require`
+- **анти-АФК / ввод** — улики: `inputbegan`
 
-## URL / webhook-и (0)
+## Вызовы API
 
-## Сервисы / remotes
-- сервисы: Players, RunService, UserInputService, HttpService
-- WaitForChild: `PlayerGui`
+- Сервисы: `HttpService`, `Players`, `RunService`, `StarterGui`, `UserInputService`, `Workspace`
+- Классы/объекты: `BillboardGui`, `Folder`, `Frame`, `Highlight`, `Humanoid`, `ImageButton`, `ImageLabel`, `LocalScript`, `Model`, `ModuleScript`, `ScreenGui`, `ScrollingFrame`, `TextBox`, `TextButton`, `TextLabel`, `UICorner`, `UIGradient`, `UIListLayout`, `UIPadding`, `UIStroke`
+- Методы: `GetService`×29, `Connect`×29, `FindFirstChild`×22, `Create`×14, `Clone`×6, `GetChildren`×5, `IsA`×5, `GetMouse`×5, `Destroy`×4, `GetPlayers`×4, `WaitForChild`×1
 
-## Названия партов / объектов в игре (73 уникальных)
-- `Name` (34)
-- `Size` (22)
-- `BorderSizePixel` (20)
-- `BackgroundColor3` (20)
-- `BorderColor3` (20)
-- `Frame` (18)
-- `UIStroke` (12)
-- `TextLabel` (12)
-- `BackgroundTransparency` (12)
-- `Position` (11)
-- `UIListLayout` (10)
-- `UICorner` (9)
-- `LocalScript` (8)
-- `Thickness` (8)
-- `Color` (8)
-- `Config Manager` (8)
-- `UIPadding` (7)
-- `TextWrapped` (7)
-- `TextSize` (7)
-- `TextColor3` (7)
-- `TextScaled` (7)
-- `FontFace` (7)
-- `Text` (7)
-- `xxx` (6)
-- `TextButton` (6)
-- `SortOrder` (6)
-- `some` (5)
-- `ApplyStrokeMode` (5)
-- `Visible` (5)
-- `ScrollingFrame` (4)
-- `LineJoinMode` (4)
-- `Padding` (4)
-- `PaddingRight` (4)
-- `PaddingLeft` (4)
-- `LayoutOrder` (4)
-- `UIGradient` (3)
-- `Wraps` (3)
-- `Transparency` (3)
-- `PlayerGui` (2)
-- `HumanoidRootPart` (2)
-- `ScreenGui` (2)
-- `ModuleScript` (2)
-- `ImageButton` (2)
-- `ZIndexBehavior` (2)
-- `ResetOnSpawn` (2)
-- `PaddingTop` (2)
-- `PaddingBottom` (2)
-- `ScrollBarImageColor3` (2)
-- `Modal` (2)
-- `Active` (2)
-- `HorizontalFlex` (2)
-- `TextBox` (1)
-- `BillboardGui` (1)
-- `ImageLabel` (1)
-- `Folder` (1)
-- `Highlight` (1)
-- `IgnoreGuiInset` (1)
-- `DisplayOrder` (1)
-- `ScreenInsets` (1)
-- `ScrollBarThickness` (1)
+## Имена функций (17)
 
-## Подписи UI / названия функций (первые 60)
-- AIMBOT_TriggerBot
-- Active
-- Aimbot
-- AimbotTab
-- AlwaysOnTop
-- AnchorPoint
-- ApplyStrokeMode
-- Armor
-- BackgroundColor3
-- BackgroundTransparency
-- BorderColor3
-- BorderSizePixel
-- BorderStrokePosition
-- BunnyHop
-- Button
-- Button already exists
-- CanvasSize
-- ClearTextOnFocus
-- ClipsDescendants
-- Color
-- Config
-- Config Manager
-- ConfigTab
-- CornerRadius
-- CursorPosition
-- Default
-- DisplayOrder
-- Distance
-- ESP_Box
-- ESP_Distance
-- ESP_Enabled
-- ESP_Glow
-- ESP_HealthBar
-- ESP_HealthText
-- ESP_Name
-- ESP_Pfp
-- ESP_Skeleton
-- Enabled
-- Esp Options
-- FontFace
-- Frame
-- Glow
-- Head
-- Health Bar
-- Health Text
-- Highlight
-- HorizontalFlex
-- HttpService
-- Humanoid
-- HumanoidRootPart
-- IgnoreGuiInset
-- Image
-- ImageButton
-- LayoutOrder
-- LeftFoot
-- LeftHand
-- LeftLowerArm
-- LeftLowerLeg
-- LeftUpperArm
-- LeftUpperLeg
+`require`, `ChangeTab`, `CreatingTab`, `C_20`, `C_22`, `C_23`, `Drag`, `C_37`, `BunnyHop`, `C_38`, `C_39`, `C_3a`, `ESP`, `createSkeleton`, `C_3b`, `ESP_GLOW`, `ESP_GLOW_DELETE`
+
+## Строковые константы (UI, подписи)
+
+- `Name` ×28
+- `Size` ×16
+- `] = Instance.new(` ×15
+- `BorderSizePixel` ×15
+- `BackgroundColor3` ×15
+- `BorderColor3` ×15
+- `, G2L[` ×14
+- `BackgroundTransparency` ×10
+- `Team` ×9
+- `Position` ×8
+- `Config Manager` ×8
+- `TextWrapped` ×6
+- `TextSize` ×6
+- `TextScaled` ×6
+- `TextColor3` ×6
+
+## Ссылки / webhooks / ассеты (0)
+
+_нет_
+
+## Парты / объекты (403)
+
+- через `WaitForChild`/`FindFirstChild`: `xxx`, `some`, `PlayerGui`, `HumanoidRootPart`
+- идентификаторы в коде: `AIMBOT_Test`, `AIMBOT_TriggerBot`, `AbsolutePosition`, `AbsoluteSize`, `Active`, `Additionals`, `Adornee`, `Aimbot`, `AimbotTab`, `AlwaysOnTop`, `AnchorPoint`, `ApplyStrokeMode`, `Armor`, `AutomaticSize`, `BackgroundColor3`, `BackgroundTransparency`, `Bar`, `Bhop`, `Blox`, `Bold`, `BonePairs`, `Border`, `BorderColor3`, `BorderSizePixel`, `BorderStrokePosition`, `Bot`, `Bottom`, `Box`, `BunnyHop`, `Button`, `Buttons`, `ButtonsTab`, `CFrame`, `CONVERTER`, `C_20`, `C_22`, `C_23`, `C_37`, `C_38`, `C_39`

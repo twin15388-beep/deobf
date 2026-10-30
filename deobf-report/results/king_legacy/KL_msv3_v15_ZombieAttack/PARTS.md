@@ -1,23 +1,51 @@
-# Разбор частей скрипта
-- файл: `script.lua`
-- размер: 279 КБ, 10423 строк
+# `KL_msv3_v15_ZombieAttack` — функционал и механики
 
-## Части (функционал)
-- **AutoFarm** — 12 упоминаний
-- **Aimbot** — 4 упоминаний
-- **Fly/Noclip** — 5 упоминаний
-- **Speed/Jump** — 10 упоминаний
-- **Teleport** — 8 упоминаний
-- **Anti-AFK** — 4 упоминаний
-- **Key system** — 8 упоминаний
-- **Discord check (IsInGroup)** — 1 упоминаний
-- **Config / Save settings** — 5 упоминаний
-- **Admin commands** — 5 упоминаний
+Игра/тема: **king_legacy** · восстановленный код: `script.lua` (10423 строк)
 
-## UI-библиотека
-- Rain
+## Что делает (по восстановленному коду)
 
-## URL / webhook-и (14)
+- **телепорт / движение** — улики: `cframe`, `humanoidrootpart`, `jumppower`, `moveto`, `teleport`, `tweenservice`
+- **GUI / меню** — улики: `screengui`, `slider`, `textbutton`, `textlabel`, `toggle`
+- **анти-АФК / ввод** — улики: `idled`, `inputbegan`, `keydown`, `virtualuser`
+- **аимбот / наведение** — улики: `mousebutton`, `mousemove`, `silent aim`
+- **урон / убийство** — улики: `fling`, `hitbox`, `kill`
+- **деньги / ресурсы** — улики: `code`, `inf`, `infinite`
+- **сеть / загрузка кода** — улики: `discord`, `httpget`, `loadstring`
+- **ESP / подсветка** — улики: `highlight`, `outline`
+- **квесты / стадии** — улики: `completed`, `quest`
+- **автофарм / авто-клик** — улики: `autofarm`
+- **инвентарь / предметы** — улики: `drop`
+
+## Вызовы API
+
+- Сервисы: `CoreGui`, `HttpService`, `Players`, `ReplicatedStorage`, `RunService`, `StarterGui`, `TweenService`, `UserInputService`, `VirtualUser`, `Workspace`
+- Классы/объекты: `BodyGyro`, `Folder`, `Frame`, `Highlight`, `Humanoid`, `ImageButton`, `ImageLabel`, `MeshPart`, `Model`, `Part`, `ScreenGui`, `TextBox`, `TextButton`, `TextLabel`, `Tool`, `UICorner`, `UIListLayout`
+- Методы: `Connect`×42, `GetService`×36, `FindFirstChild`×25, `GetMouse`×15, `GetChildren`×14, `Destroy`×8, `WaitForChild`×5, `FireServer`×4, `HttpGet`×4, `loadstring`×4, `MoveTo`×2, `TweenService`×2
+
+## Имена функций (0)
+
+_имена не сохранились — функции пронумерованы лифтом (`L2_1` и т.п.), смысл восстанавливается по вызовам выше_
+
+## Строковые константы (UI, подписи)
+
+- `LocalScript` ×36
+- `UIPadding` ×31
+- `Head` ×11
+- `lightuxkey.txt` ×5
+- `HopperBin` ×5
+- `INFO` ×4
+- `Icon` ×4
+- `UnionOperation` ×4
+- `bHSHsmd019sksasd` ×3
+- `Marker` ×3
+- `Zombie` ×3
+- `All` ×2
+- `HIDDEN` ×2
+- `Combat` ×2
+- `Miscellaneous` ×2
+
+## Ссылки / webhooks / ассеты (14)
+
 - `http://127.0.0.1:6463/rpc?v=1`
 - `http://roblox.com/asset/?id=902843398`
 - `http://www.roblox.com/asset/?id=11378036715`
@@ -33,70 +61,6 @@
 - `https://raw.githubusercontent.com/cool83birdcarfly02six/Premium/main/README.md`
 - `https://raw.githubusercontent.com/treeofplant/461d-4682-97/main/asa58700f.lua`
 
-## Сервисы / remotes
-- сервисы: Players, ReplicatedStorage, Workspace, TweenService, RunService, UserInputService, VirtualUser, HttpService, StarterGui
+## Парты / объекты (372)
 
-## Чат-команды
-- `:ban .`, `:benx .`, `:bring`, `:fling .`, `:freeusers`, `:freeze .`, `:grave .`, `:kick`, `:kill .`, `:premcmds`, `:thaw .`, `:unbenx .`, `:unfreeze .`, `:ungrave .`
-
-## Подписи UI / названия функций (первые 60)
-- Anti AFK
-- AntiAFK
-- AntiAFKToggle
-- Auto equip
-- AutoEquip
-- AutoEquipToggle
-- Autofarm
-- AutofarmToggle
-- Background color
-- BigheadToggle
-- BodyGyro
-- BodyPosition
-- BodyThrust
-- Btools
-- Building Tools
-- ButtonsHolder
-- Cartoon
-- Check Key
-- Click teleport tool
-- ClickTP
-- Collect powerups
-- Collectpowerups
-- Combat
-- CombatButton
-- CombatPage
-- Combattitle
-- Content-Type
-- Copied
-- Copied discord link to clipboard
-- Copy discord invite
-- CopyDiscord
-- Correct keys will automaticly save
-- Credits
-- Discord Server
-- Drag top
-- DropShadow
-- DropShadowHolder
-- EPIXPOS
-- Error
-- FlyToggle
-- Folder
-- Frame
-- Get Key
-- Get Your Key
-- GetKeyButton
-- GetKeyPage
-- HIDDEN
-- Head
-- HeadHitboxExtenderButton
-- Highlight
-- HopperBin
-- HttpService
-- Humanoid
-- HumanoidRootPart
-- INFO
-- INVITE_BROWSER
-- Icon
-- ImageButton
-- ImageLabel
-- ImageLeft
+- идентификаторы в коде: `AFK`, `AbsolutePosition`, `AbsoluteSize`, `Adornee`, `Aim`, `All`, `AlwaysOnTop`, `AnchorPoint`, `Anchored`, `Angles`, `Anti`, `AntiAFK`, `AntiAFKToggle`, `Arial`, `ArialBold`, `Auto`, `AutoEquip`, `AutoEquipToggle`, `Autofarm`, `AutofarmToggle`, `BAN`, `Background`, `BackgroundColor3`, `BackgroundTransparency`, `Backpack`, `Bar`, `Bighead`, `BigheadToggle`, `BinType`, `Body`, `BodyPosition`, `BodyThrust`, `BorderColor3`, `BorderSizePixel`, `BossFolder`, `Btools`, `Building`, `Button1Down`, `Button1Up`, `ButtonsHolder`

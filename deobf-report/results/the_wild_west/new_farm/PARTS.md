@@ -1,30 +1,49 @@
-# Разбор частей скрипта
-- файл: `script.lua`
-- размер: 108 КБ, 2355 строк
+# `new_farm` — функционал и механики
 
-## Части (функционал)
-- **AutoFarm** — 6 упоминаний
-- **Speed/Jump** — 8 упоминаний
-- **Teleport** — 6 упоминаний
-- **Inventory / Item ESP** — 9 упоминаний
+Игра/тема: **the_wild_west** · восстановленный код: `script.lua` (2355 строк)
 
-## UI-библиотека
-- не определена
+## Что делает (по восстановленному коду)
 
-## URL / webhook-и (1)
+- **телепорт / движение** — улики: `moveto`, `teleport`, `walkspeed`
+- **автофарм / авто-клик** — улики: `autofarm`, `grind`
+- **сеть / загрузка кода** — улики: `discord`, `httpget`
+- **аимбот / наведение** — улики: `mousebutton`
+- **деньги / ресурсы** — улики: `money`
+- **инвентарь / предметы** — улики: `inventory`
+- **анти-АФК / ввод** — улики: `inputbegan`
+
+## Вызовы API
+
+- Сервисы: `CoreGui`, `HttpService`, `PathfindingService`, `Players`, `ReplicatedStorage`, `RunService`, `UserInputService`, `Workspace`
+- Классы/объекты: `Humanoid`, `MeshPart`, `Part`
+- Методы: `GetService`×42, `FindFirstChild`×12, `Connect`×7, `MoveTo`×6, `WaitForChild`×5, `Destroy`×5, `InvokeServer`×4, `HttpGet`×3, `Create`×3, `Clone`×3, `GetChildren`×2, `IsA`×2
+
+## Имена функций (0)
+
+_имена не сохранились — функции пронумерованы лифтом (`L2_1` и т.п.), смысл восстанавливается по вызовам выше_
+
+## Строковые константы (UI, подписи)
+
+- `KeyCode` ×33
+- `PlayerGui` ×28
+- `VirtualInputManager` ×25
+- `Position` ×16
+- `Parent` ×15
+- `Text` ×12
+- `Size` ×12
+- `SendKeyEvent` ×12
+- `Container` ×11
+- `Transparency` ×11
+- `Anchored` ×11
+- `Material` ×11
+- `fromRGB` ×10
+- `Visible` ×9
+- `ConfirmPopup` ×9
+
+## Ссылки / webhooks / ассеты (1)
+
 - `https://games.roblox.com/v1/games/2317712696/servers/Public?sortOrder=Asc&limit=100`
 
-## Сервисы / remotes
-- сервисы: Players, ReplicatedStorage, Workspace, RunService, UserInputService, HttpService, TeleportService, CoreGui
+## Парты / объекты (220)
 
-## Подписи UI / названия функций (первые 60)
-- Base
-- Bronze
-- Humanoid
-- LowerTorso
-- PathfindingService
-- ReplicatedStorage
-- Stoped autofarm
-- TeleportService
-- VirtualInputManager
-- Workspace
+- идентификаторы в коде: `AcceptButton`, `Action`, `ActionBindsFeed`, `AgentCanClimb`, `AgentCanJump`, `Anchored`, `Asc`, `Base`, `Body`, `BodyText`, `BottomBar`, `BreakFree`, `Bronze`, `Bucks`, `Buildings`, `CanCollide`, `ChangeState`, `Changed`, `Character`, `ChildAdded`, `City`, `Clone`, `Color`, `Color3`, `Communication`, `ComputeAsync`, `ConfirmPopup`, `Connect`, `Container`, `Contents`, `CreatePath`, `DepositInfo`, `Destroy`, `DiscordName`, `Door`, `Enabled`, `Enum`, `ErrorFrame`, `ErrorPrompt`, `FindFirstChild`

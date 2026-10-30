@@ -1,56 +1,31 @@
-# Piggy_Item_Hub_ (IronBrew/CASCADE) — имена объектов (из констант чанка)
+# `piggy_item_hub` — функционал и механики
 
-Источник: `/home/user/deobf/_work/res6/ib/Piggy_Item_Hub_//fixed.luac` (2124 B, 2 прототипов, 51 строковых констант)
+Игра/тема: **ironbrew_cascade** · восстановленный код: `script.lua` (166 строк)
 
-> Извлечено из строковых констант байткода. Порядок — алфавитный, в скобках — сколько раз строка встречается.
+## Что делает (по восстановленному коду)
 
+- **GUI / меню** — улики: `screengui`, `scrollingframe`, `textbutton`
+- **телепорт / движение** — улики: `cframe`, `humanoidrootpart`
+- **аимбот / наведение** — улики: `mousebutton`
 
-## Классы Roblox (8)
+## Вызовы API
 
-`Camera`, `ClickDetector`, `Players`, `ScreenGui`, `ScrollingFrame`, `StarterGui`, `TextButton`, `UIGridLayout`
+- Сервисы: `CoreGui`, `Players`, `StarterGui`
+- Классы/объекты: `Camera`, `ClickDetector`, `ScreenGui`, `ScrollingFrame`, `TextButton`, `UIGridLayout`
 
+## Имена функций (0)
 
-## Имена объектов / партов (42)
+_имена не сохранились — функции пронумерованы лифтом (`L2_1` и т.п.), смысл восстанавливается по вызовам выше_
 
-- `BackgroundColor3`
-- `BackgroundTransparency`
-- `BorderSizePixel`
-- `CFrame` ×2
-- `Camera`
-- `CameraType`
-- `CellSize`
-- `Character`
-- `ClassName`
-- `ClickDetector` ×2
-- `Clone`
-- `Color3`
-- `CoordinateFrame`
-- `CoreGui`
-- `CurrentCamera`
-- `Enum`
-- `Fixed`
-- `HumanoidRootPart`
-- `Instance`
-- `ItemFrame`
+## Строковые константы (UI, подписи)
+
 - `ItemPickupScript`
-- `LocalPlayer`
-- `MouseButton1Down`
-- `Name`
-- `Parent`
-- `PiggyGui`
-- `Players`
-- `Position`
-- `ScreenGui`
-- `ScrollingFrame`
-- `Size`
-- `StarterGui`
-- `Text`
-- `TextButton`
-- `UDim2`
-- `UIGridLayout`
-- `Vector3`
-- `View`
 - `ViewportFrame`
-- `findFirstChild` ×2
-- `getChildren`
-- `getDescendants`
+
+## Ссылки / webhooks / ассеты (0)
+
+_нет_
+
+## Парты / объекты (20)
+
+- идентификаторы в коде: `CFrame`, `CameraType`, `Character`, `ClassName`, `Color3`, `Enum`, `Fixed`, `HumanoidRootPart`, `ItemPickupScript`, `LocalPlayer`, `MouseButton1Down`, `Name`, `Parent`, `Position`, `UDim2`, `Vector3`, `ViewportFrame`, `findFirstChild`, `getChildren`, `getDescendants`

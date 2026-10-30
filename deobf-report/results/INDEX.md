@@ -1,96 +1,82 @@
 # Результаты деобфускации
 
-В каждом каталоге: `script.lua` — восстановленный/нормализованный Lua-код, `PARTS.md` — функционал, UI, URL и **названия партов/объектов**, `LOG.txt` — чем определяли, чем деобфусцировали, что вышло.
+В индекс попадает только то, что **реально удалось деобфусцировать**: в каждом каталоге есть `script.lua` (восстановленный код) и `PARTS.md` (что делает: механики, вызовы API, имена функций, парты/объекты, ссылки).
 
-Всего сэмплов: **67**, игр/режимов: **29** (55 из прошлых итераций + 12 новых из IronBrew-корпуса, см. `ironbrew_cascade/`).
+Каталогов без кода здесь нет — неудачи и причины перечислены в `_failed.md`.
 
-- `BEST.md` — топ файлов, которые читаются как исходник (и антирейтинг).
-- `_failed.md` — что не удалось и почему.
-- `_batch5.md` — таблица последней партии (GPO / Illegal Soccer / Blox Strike / YBA).
+Всего: **61 сэмплов**, **21 игр/режимов**.
+
+
+- `BEST.md` — что читается как исходник (и антирейтинг).
+- `_failed.md` — что не получилось и почему.
+- `_batch6.md` — партия 6-й итерации (IronBrew через CASCADE).
 - `_corpus_prometheus/` — проверка `unprom` на эталонных сэмплах Prometheus.
-- `_batch6.md` — таблица 6-й итерации (девиртуализация IronBrew через CASCADE).
-- `ironbrew_cascade/` — **36 IronBrew/AztupBrew-скриптов**: 12 декомпилированы в настоящий Lua,
-  для остальных 24 — только `PARTS.md` (имена объектов). Подробности — `ironbrew_cascade/README.md`.
-
-| Игра (каталог) | Сэмпл | Обфускатор | Что это | Строк Lua | Размер |
-|---|---|---|---|---|---|
-| blox_fruits | `hub` | luraph_v15 | Blox Fruits: автофарм/квесты, ESP, телепорты (девиртуализация Luraph v15, читаемый исходник) | 6765 | 186 КБ |
-| blox_strike | `d0inks_router` | — | Blox Strike: роутер moon.lua (PlaceId → ext/bloxstrike.lua) | 12 | 0 КБ |
-| blox_strike | `friezer_hub` | — | Blox Strike: хаб на Rayfield | 1361 | 53 КБ |
-| blox_strike | `mahmuthub_wearedevs` | wearedevs / Prometheus (de-flatten) | MahmutHub для Blox Strike: wearedevs/Prometheus VM | 7185 | 155 КБ |
-| blox_strike | `moon_ext_doink` | — | Blox Strike: ext/bloxstrike.lua от d0inks, обфускатор doink v1 (после unprom) | 1712 | 87 КБ |
-| blox_strike | `pps_hub` | — | Blox Strike: PPS-скрипт (UI-библиотека из репозитория deividcomson) | 366 | 13 КБ |
-| blox_strike | `sigmaware` | — | Blox Strike: Sigmaware (дамп инстансов/модулей) | 1407 | 55 КБ |
-| blox_strike | `twistedk1d` | — | Blox Strike: скрипт twistedk1d | 411 | 15 КБ |
-| bloxburg | `autobuild` | moonsec_v3 | Bloxburg: автопостройка, телепорты, UI Krnl/Orion | 13316 | 432 КБ |
-| close_quarters_combat | `gui` | — (минифицирован) | Close Quarters Combat: чит-меню | 1613 | 50 КБ |
-| corpus | `aztupbrew` | psu | бенчмарк-сэмпл | 6875 | 219 КБ |
-| corpus | `psu_small` | psu | бенчмарк-сэмпл | 1480 | 53 КБ |
-| corpus | `wynfuscate` | wynfuscate (via unprom) | бенчмарк-сэмпл | 325 | 96 КБ |
-| counter_blox | `hub` | unknown (via unprom) | Counter Blox: чит-меню | 6916 | 296 КБ |
-| gacha_online | `hub` | psu | Gacha Online: авто-роллы, фарм валюты | 10452 | 331 КБ |
-| gpo | `a7dev_loader` | — | Grand Piece Online: A7DEV Hub — премиум-загрузчик (key-system, Supabase-эндпоинт) | 843 | 41 КБ |
-| gpo | `austina_ui` | — | Grand Piece Online: UI-библиотека Austina, вытащенная из декомпила SeaHub | 5283 | 217 КБ |
-| gpo | `tempest_hub` | — | Grand Piece Online: Tempest Hub — автофарм/ESP, UI Linoria | 291 | 11 КБ |
-| gpo | `venomware` | — | Grand Piece Online: VenomWare — лоадер с UI-библиотекой | 71 | 4 КБ |
-| grow_a_garden | `hub` | luraph_v15 | Grow a Garden: автофарм, ESP 48 упоминаний, авто-продажа | 10451 | 296 КБ |
-| illegal_soccer | `luarmor_router` | — | Illegal Soccer: Luarmor-роутер (PlaceId → URL лоадера), запись для Illegal Soccer | 67 | 7 КБ |
-| illegal_soccer | `maxlegends_loader` | — | Illegal Soccer: MAXLEGENDS master-loader (ключи в Cloudflare KV) | 1132 | 47 КБ |
-| illegal_soccer | `polsec_loader` | luraph_v15 | Illegal Soccer: лоадер sportsclub на api.polsec.net (key-system, SDK, LoadGame по PlaceId) | 1581 | 71 КБ |
-| illegal_soccer | `super_futebol` | — | Футбольный режим: Super Futebol Proibido v1.0 (аналог Illegal Soccer) | 399 | 14 КБ |
-| jailbreak | `gui_2` | — (минифицирован) | Jailbreak: GUI-меню | 1834 | 75 КБ |
-| jailbreak | `jailbreaker_v42` | — (минифицирован) | Jailbreak: Jailbreaker V4.2 | 909 | 31 КБ |
-| jailbreak | `unjailbreak` | — (минифицирован) | Jailbreak: UNJAILBREAK — авто-ограбления, ESP | 4510 | 183 КБ |
-| king_legacy | `KL_msv2_v13` | moonsec_v2 | Lightux v1.3 | 4208 | 133 КБ |
-| king_legacy | `KL_msv3_v14_ZombieAttack` | moonsec_v3 | Lightux v1.4 (Zombie Attack) | 6766 | 149 КБ |
-| king_legacy | `KL_msv3_v15_ZombieAttack` | moonsec_v3 | Lightux v1.5 (Zombie Attack) | 10424 | 279 КБ |
-| king_legacy | `KL_psu40_BloxFruit` | psu | Blox Fruits hub: автофарм, Aimbot Gun, 46 телепортов | 36696 | 1295 КБ |
-| king_legacy | `KL_psu40_Kingpiece` | psu | Kingpiece hub: автофарм NPC King Legacy / Blox Fruits | 26394 | 849 КБ |
-| king_legacy | `KL_psu45_ano` | psu | ano hub: King Legacy + key-система | 56151 | 3421 КБ |
-| murder_mystery_2 | `full` | — (минифицирован) | Murder Mystery 2: полный скрипт (роли, ESP, авто-нож) | 1506 | 56 КБ |
-| murder_mystery_2 | `ghost_hub` | moonsec_v2 | Murder Mystery 2: Ghost Hub | 7357 | 217 КБ |
-| murder_mystery_2 | `gui` | — (минифицирован) | Murder Mystery 2: GUI | 1149 | 40 КБ |
-| one_piece | `kaitun_nav` | — | One Piece Kaitun: Nav v2.1 (Rayfield, travel_to, авто-покупки) | 1108 | 34 КБ |
-| pet_simulator | `gui` | — (минифицирован) | Pet Simulator: GUI-автофарм | 1354 | 49 КБ |
-| pet_simulator | `op_gui` | — (минифицирован) | Pet Simulator: OP GUI | 999 | 28 КБ |
-| piggy | `hub` | psu | Piggy: хаб | 2882 | 56 КБ |
-| prison_life | `cmd_gui` | unknown (via unprom) | Prison Life: GUI с чат-командами | 3478 | 130 КБ |
-| prison_life | `gui` | — (минифицирован) | Prison Life: GUI с командами | 1228 | 45 КБ |
-| prison_life | `main` | — (минифицирован) | Prison Life: большой мультитул-скрипт (килл-аура, ESP, телепорты) | 3659 | 158 КБ |
-| prison_life | `simple_gui` | — (минифицирован) | Prison Life: простое GUI-меню | 2756 | 95 КБ |
-| solara_hub | `orion` | moonsec_v3 | Solara Hub: Orion, мультиигровой хаб | 9450 | 275 КБ |
-| the_wild_west | `coal_farm` | moonsec_v3 | The Wild West: фарм угля | 2418 | 112 КБ |
-| the_wild_west | `hub` | psu | The Wild West: хаб с автофармом | 6613 | 154 КБ |
-| the_wild_west | `new_farm` | moonsec_v3 | The Wild West: новый фарм (salvage) | 2356 | 109 КБ |
-| the_wild_west | `no_coal` | moonsec_v3 | The Wild West: фарм без угля (функция-за-функцией salvage) | 2412 | 111 КБ |
-| tower_defense_simulator | `autofarm` | — (минифицирован) | Tower Defense Simulator: автофарм (частично: виден блок настроек, тело — VM Luraph v6-типа) | 11121 | 306 КБ |
-| tower_of_hell | `auto_win` | ironbrew (via unprom) | Tower of Hell: авто-прохождение (снят только внешний слой IronBrew) | 296 | 287 КБ |
-| yba | `aethelburg_v16` | — | YBA: Aethelburg V16 (автофарм/ESP) | 682 | 27 КБ |
-| yba | `azero_hub` | — | YBA: Azero Hub | 993 | 30 КБ |
-| yba | `kolgie` | psu | Your Bizarre Adventure: хаб, авто-квесты/фарм | 4351 | 99 КБ |
-| yba | `ysf_luraph14` | luraph_v14 (0.50, "Luraph Obfuscator v14.4.2") | YSF Protected для YBA: Luraph v14.4.2 | 173 | 47 КБ |
 
 
-## 6-я итерация: IronBrew / AztupBrew (каталог `ironbrew_cascade/`)
+| Игра (каталог) | Сэмпл | Строк | Размер | Механики | Обфускатор | Парсится |
+|---|---|---:|---:|---|---|---|
+| IronBrew | `_script_hub` | 3932 | 111 КБ | сеть / загрузка кода; GUI / меню | — | Lua 5.2+ (goto) |
+| IronBrew | `tower_of_hell_script` | 274 | 5 КБ | телепорт / движение; GUI / меню; анти-АФК / ввод | — | Lua 5.2+ (goto) |
+| IronBrew | `tiny_tanks_gui` | 212 | 4 КБ | GUI / меню; аимбот / наведение | — | OK |
+| IronBrew | `piggy_item_hub` | 166 | 3 КБ | GUI / меню; телепорт / движение; аимбот / наведение | — | OK |
+| IronBrew | `prison_life_destroyer_hub` | 166 | 3 КБ | GUI / меню; телепорт / движение; аимбот / наведение | — | OK |
+| IronBrew | `god_mode_any_game` | 142 | 2 КБ | телепорт / движение; анти-АФК / ввод | — | OK |
+| IronBrew | `avatar_swastika` | 91 | 1 КБ | телепорт / движение; урон / убийство | — | OK |
+| IronBrew | `ctrl_click_tp` | 77 | 1 КБ | телепорт / движение; анти-АФК / ввод | — | Lua 5.2+ (goto) |
+| IronBrew | `fps_booster` | 37 | 1 КБ | — | — | OK |
+| IronBrew | `anti_afk` | 34 | 1 КБ | анти-АФК / ввод; телепорт / движение | — | OK |
+| IronBrew | `mega_fun_obby_auto_skip_stages` | 28 | 1 КБ | телепорт / движение; квесты / стадии | — | OK |
+| IronBrew | `clone_tycoon_2_1_billion_gems` | 7 | 1 КБ | — | — | OK |
+| blox_fruits | `hub` | 6764 | 186 КБ | инвентарь / предметы; сеть / загрузка кода; автофарм / авто-клик | — | Luau (continue) |
+| blox_strike | `sigmaware` | 1406 | 55 КБ | GUI / меню; ESP / подсветка; телепорт / движение | unknown | Luau (continue) |
+| blox_strike | `friezer_hub` | 1360 | 53 КБ | GUI / меню; ESP / подсветка; телепорт / движение | unknown | Luau (continue) |
+| blox_strike | `twistedk1d` | 410 | 15 КБ | GUI / меню; телепорт / движение; сеть / загрузка кода | unknown | OK |
+| blox_strike | `pps_hub` | 365 | 13 КБ | ESP / подсветка; GUI / меню; телепорт / движение | unknown | Luau (continue) |
+| blox_strike | `d0inks_router` | 11 | 1 КБ | сеть / загрузка кода | unknown | OK |
+| bloxburg | `autobuild` | 13315 | 432 КБ | GUI / меню; телепорт / движение; анти-АФК / ввод | moonsec_v3 | Lua 5.2+ (goto) |
+| close_quarters_combat | `gui` | 1612 | 50 КБ | телепорт / движение; урон / убийство; анти-АФК / ввод | none (обычный Lua, минифицирован) | OK |
+| corpus | `aztupbrew` | 6874 | 219 КБ | GUI / меню; телепорт / движение; аимбот / наведение | psu | артефакт unluac |
+| corpus | `psu_small` | 1479 | 53 КБ | телепорт / движение; GUI / меню; инвентарь / предметы | psu | Lua 5.2+ (goto) |
+| counter_blox | `hub` | 6915 | 296 КБ | GUI / меню; ESP / подсветка; аимбот / наведение | unknown (via unprom) | OK |
+| gacha_online | `hub` | 10451 | 331 КБ | телепорт / движение; урон / убийство; GUI / меню | psu | Lua 5.2+ (goto) |
+| gpo | `austina_ui` | 5282 | 217 КБ | GUI / меню; аимбот / наведение; сеть / загрузка кода | unknown | OK |
+| gpo | `a7dev_loader` | 842 | 41 КБ | GUI / меню; сеть / загрузка кода; инвентарь / предметы | unknown | артефакт unluac |
+| gpo | `tempest_hub` | 290 | 11 КБ | телепорт / движение; автофарм / авто-клик; ESP / подсветка | unknown | OK |
+| gpo | `venomware` | 70 | 4 КБ | ESP / подсветка; сеть / загрузка кода; аимбот / наведение | unknown | OK |
+| grow_a_garden | `hub` | 10450 | 296 КБ | GUI / меню; деньги / ресурсы; инвентарь / предметы | — | Luau (continue) |
+| illegal_soccer | `polsec_loader` | 1580 | 71 КБ | GUI / меню; сеть / загрузка кода; ESP / подсветка | luraph_v15 | Luau (continue) |
+| illegal_soccer | `maxlegends_loader` | 1131 | 47 КБ | GUI / меню; сеть / загрузка кода; деньги / ресурсы | unknown | OK |
+| illegal_soccer | `super_futebol` | 398 | 14 КБ | телепорт / движение; аимбот / наведение; GUI / меню | unknown | артефакт unluac |
+| illegal_soccer | `luarmor_router` | 66 | 7 КБ | сеть / загрузка кода; автофарм / авто-клик; деньги / ресурсы | unknown | OK |
+| jailbreak | `unjailbreak` | 4509 | 183 КБ | телепорт / движение; урон / убийство; GUI / меню | none (обычный Lua, минифицирован) | OK |
+| jailbreak | `gui_2` | 1833 | 75 КБ | телепорт / движение; GUI / меню; ESP / подсветка | none (обычный Lua, минифицирован) | OK |
+| jailbreak | `jailbreaker_v42` | 908 | 31 КБ | телепорт / движение; GUI / меню; аимбот / наведение | none (обычный Lua, минифицирован) | OK |
+| king_legacy | `KL_psu45_ano` | 56150 | 3421 КБ | GUI / меню; телепорт / движение; урон / убийство | psu | артефакт unluac |
+| king_legacy | `KL_psu40_BloxFruit` | 36695 | 1295 КБ | GUI / меню; телепорт / движение; деньги / ресурсы | psu | артефакт unluac |
+| king_legacy | `KL_psu40_Kingpiece` | 26393 | 849 КБ | GUI / меню; телепорт / движение; урон / убийство | psu | артефакт unluac |
+| king_legacy | `KL_msv3_v15_ZombieAttack` | 10423 | 279 КБ | телепорт / движение; GUI / меню; анти-АФК / ввод | moonsec_v3 | артефакт unluac |
+| king_legacy | `KL_msv3_v14_ZombieAttack` | 6765 | 149 КБ | телепорт / движение; GUI / меню; урон / убийство | moonsec_v3 | артефакт unluac |
+| king_legacy | `KL_msv2_v13` | 4207 | 133 КБ | телепорт / движение; урон / убийство; GUI / меню | moonsec_v2 | Luau (continue) |
+| murder_mystery_2 | `ghost_hub` | 7356 | 217 КБ | телепорт / движение; деньги / ресурсы; GUI / меню | moonsec_v2 | Luau (continue) |
+| murder_mystery_2 | `full` | 1505 | 56 КБ | телепорт / движение; GUI / меню; ESP / подсветка | none (обычный Lua, минифицирован) | OK |
+| murder_mystery_2 | `gui` | 1148 | 40 КБ | телепорт / движение; GUI / меню; урон / убийство | none (обычный Lua, минифицирован) | артефакт unluac |
+| one_piece | `kaitun_nav` | 1107 | 34 КБ | GUI / меню; автофарм / авто-клик; телепорт / движение | unknown | OK |
+| pet_simulator | `gui` | 1353 | 49 КБ | телепорт / движение; GUI / меню; деньги / ресурсы | none (обычный Lua, минифицирован) | OK |
+| pet_simulator | `op_gui` | 998 | 28 КБ | телепорт / движение; деньги / ресурсы; GUI / меню | none (обычный Lua, минифицирован) | OK |
+| piggy | `hub` | 2881 | 56 КБ | телепорт / движение; GUI / меню; сеть / загрузка кода | psu | Lua 5.2+ (goto) |
+| prison_life | `main` | 3658 | 158 КБ | телепорт / движение; урон / убийство; GUI / меню | none (обычный Lua, минифицирован) | OK |
+| prison_life | `cmd_gui` | 3477 | 130 КБ | телепорт / движение; урон / убийство; GUI / меню | unknown (via unprom) | OK |
+| prison_life | `simple_gui` | 2755 | 95 КБ | телепорт / движение; урон / убийство; GUI / меню | none (обычный Lua, минифицирован) | OK |
+| prison_life | `gui` | 1227 | 45 КБ | телепорт / движение; GUI / меню; аимбот / наведение | none (обычный Lua, минифицирован) | OK |
+| solara_hub | `orion` | 9449 | 275 КБ | GUI / меню; аимбот / наведение; телепорт / движение | moonsec_v3 | Lua 5.2+ (goto) |
+| the_wild_west | `hub` | 6612 | 154 КБ | телепорт / движение; сеть / загрузка кода; ESP / подсветка | psu | Lua 5.2+ (goto) |
+| the_wild_west | `coal_farm` | 2417 | 112 КБ | телепорт / движение; автофарм / авто-клик; сеть / загрузка кода | moonsec_v3 | OK |
+| the_wild_west | `no_coal` | 2411 | 111 КБ | телепорт / движение; автофарм / авто-клик; сеть / загрузка кода | moonsec_v3 | OK |
+| the_wild_west | `new_farm` | 2355 | 109 КБ | телепорт / движение; автофарм / авто-клик; сеть / загрузка кода | moonsec_v3 | OK |
+| yba | `kolgie` | 4350 | 99 КБ | телепорт / движение; GUI / меню; сеть / загрузка кода | psu | артефакт unluac |
+| yba | `azero_hub` | 992 | 30 КБ | телепорт / движение; GUI / меню; инвентарь / предметы | unknown | OK |
+| yba | `aethelburg_v16` | 681 | 27 КБ | GUI / меню; телепорт / движение; автофарм / авто-клик | unknown | Luau (continue) |
 
-36 файлов с заголовком IronBrew/AztupBrew из `hexahigh/Scripts` прогнаны через CASCADE
-с починенным рантаймом (свой Lua 5.1.1 + конвертер чанка 32→64 бита + пересчёт `maxstack`).
+**Проверка `loadfile` в Lua 5.1.1:** OK — 33, артефакт unluac — 10, Lua 5.2+ (goto) — 9, Luau (continue) — 9.
 
-**Декомпилировано в настоящий Lua — 12 из 36:**
-
-| Каталог | Игра/тема | Строк | Что внутри |
-|---|---|---:|---|
-| `_script_hub` | мультиигровой хаб (~100 игр) | 3932 | список игр, HttpGet + XOR-декодер строк, кнопки GUI |
-| `tiny_tanks_gui` | Tiny Tanks | 212 | GUI, Color3/UDim2, обработчики кнопок |
-| `piggy_item_hub` / `prison_life_destroyer_hub` | Piggy, Prison Life | 166 | хаб предметов (дубликаты одного скрипта) |
-| `tower_of_hell_script` | Tower of Hell | 274 | авто-прохождение, `goto` в выводе (Lua 5.2+) |
-| `god_mode_any_game` | универсальный | 142 | MoveTo/Tween к персонажу, UserInputService |
-| `avatar_swastika` | скин персонажа | 91 | BodyForce, HumanoidRootPart |
-| `ctrl_click_tp` | универсальный | 77 | телепорт по Ctrl+клик |
-| `fps_booster` | универсальный | 37 | очистка эффектов/Lighting |
-| `anti_afk` | универсальный | 34 | VirtualUser/Idled |
-| `mega_fun_obby_auto_skip_stages` | Mega Fun Obby | 28 | авто-скип стадий |
-| `clone_tycoon_2_1_billion_gems` | Clone Tycoon 2 | 7 | минимальный скрипт |
-
-**Остальные 24** — чанк не грузится (`CALL C=0` со съехавшими операндами / `JMP` за пределы
-кода в служебных прототипах); в каталогах лежат `PARTS.md` с именами объектов и классов.
+**Колонка «Парсится»** — проверка `loadfile` в Lua 5.1.1. `Lua 5.2+ (goto)` и `Luau (continue)` — код корректный, но использует конструкции новее 5.1 (unluac иногда оставляет `goto lbl_N`, а часть скриптов изначально Luau). `артефакт unluac` — известный дефект генератора на больших функциях.

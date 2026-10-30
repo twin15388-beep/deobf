@@ -1,70 +1,51 @@
+# `tempest_hub` — функционал и механики
 
-Игра: **gpo**
-# Разбор частей скрипта
-- файл: `script.lua`
-- размер: 11 КБ, 290 строк
+Игра/тема: **gpo** · восстановленный код: `script.lua` (290 строк)
 
-## Части (функционал)
-- **AutoFarm** — 15 упоминаний
-- **Config / Save settings** — 11 упоминаний
+## Что делает (по восстановленному коду)
 
-## UI-библиотека
-- Linoria
+- **телепорт / движение** — улики: `cframe`, `humanoidrootpart`, `tp`, `tweenservice`
+- **автофарм / авто-клик** — улики: `auto farm`, `autofarm`, `farm`
+- **ESP / подсветка** — улики: `billboardgui`, `highlight`, `outline`
+- **аимбот / наведение** — улики: `aim assist`, `mousebutton`
+- **квесты / стадии** — улики: `completed`, `quest`
+- **GUI / меню** — улики: `textlabel`, `toggle`
+- **сеть / загрузка кода** — улики: `httpget`, `loadstring`
+- **анти-АФК / ввод** — улики: `idled`
 
-## URL / webhook-и (1)
+## Вызовы API
+
+- Сервисы: `Players`, `RunService`, `TweenService`
+- Классы/объекты: `BillboardGui`, `CFrameValue`, `Frame`, `Highlight`, `Model`, `Part`, `TextLabel`
+- Методы: `FindFirstChild`×21, `Connect`×11, `GetService`×10, `Create`×4, `HttpGet`×3, `loadstring`×3, `TweenService`×3, `IsA`×2, `GetPlayers`×2, `Destroy`×1, `Clone`×1, `SetPrimaryPartCFrame`×1
+
+## Имена функций (10)
+
+`tweenModel`, `GetCFrame`, `autofarmcolar`, `autoenterimpelodown`, `autoimpelodown`, `createESP`, `onPlayerAdded`, `arma`, `UpdateWatermark`, `Unload`
+
+## Строковые константы (UI, подписи)
+
+- `UI Settings` ×5
+- `Head` ×4
+- `VirtualInputManager` ×3
+- `AutoFarmColar` ×3
+- `Failed to create tween` ×2
+- `NPCCHAT` ×2
+- `MouseCF` ×2
+- `[TEMPEST HUB] Loading Bypass`
+- `[TEMPEST HUB] Loading Ui`
+- `Library.lua`
+- `addons/ThemeManager.lua`
+- `addons/SaveManager.lua`
+- `Welcome to Tempest Hub`
+- `[TEMPEST HUB] Loading Function`
+- `[TEMPEST HUB] Loading Toggles`
+
+## Ссылки / webhooks / ассеты (1)
+
 - `https://raw.githubusercontent.com/TrapstarKSSKSKSKKS/LinoriaLib/main/`
 
-## Сервисы / remotes
-- сервисы: Players, TweenService, RunService
+## Парты / объекты (209)
 
-## Названия партов / объектов в игре (19 уникальных)
-- `Head` (4)
-- `HumanoidRootPart` (2)
-- `NPCCHAT` (2)
-- `Highlight` (2)
-- `Torso` (1)
-- `Sarah` (1)
-- `Quest` (1)
-- `Part` (1)
-- `Frame` (1)
-- `go` (1)
-- `Impel Base` (1)
-- `ImpelBase` (1)
-- `castle` (1)
-- `Bookshelf` (1)
-- `Book` (1)
-- `Model` (1)
-- `CFrameValue` (1)
-- `BillboardGui` (1)
-- `TextLabel` (1)
-
-## Подписи UI / названия функций (первые 60)
-- BillboardGui
-- Book
-- Bookshelf
-- CFrameValue
-- Colar Não Encontrado
-- Failed to create tween
-- Frame
-- Head
-- Highlight
-- HumanoidRootPart
-- Impel Base
-- ImpelBase
-- Instance
-- Model
-- NPCCHAT
-- Npc Não Encontrado
-- Part
-- Players
-- PrimaryPart is not set for the model
-- Quest
-- RunService
-- Sarah
-- TextLabel
-- Torso
-- Tp Error
-- TweenService
-- Value
-- Vector3
-- VirtualInputManager
+- через `WaitForChild`/`FindFirstChild`: `Head`, `HumanoidRootPart`, `NPCCHAT`, `Torso`, `Sarah`, `Quest`, `Part`, `Frame`, `go`, `Impel Base`, `ImpelBase`, `castle`, `Bookshelf`, `Book`, `Model`, `Highlight`
+- идентификаторы в коде: `Add`, `AddButton`, `AddKeyPicker`, `AddLabel`, `AddLeftGroupbox`, `AddTab`, `AddToggle`, `Adiciona`, `Adornee`, `Aim`, `AlwaysOnTop`, `Angles`, `Apply`, `ApplyToTab`, `Assist`, `Atualiza`, `Auto`, `AutoFarmColar`, `AutoShow`, `BackgroundTransparency`, `Base`, `Begin`, `Book`, `Bookshelf`, `BuildConfigSection`, `Bypass`, `CFrame`, `CFrameValue`, `CPU`, `Callback`, `Center`, `Character`, `CharacterAdded`, `Checking`, `Clone`, `Colar`, `Color3`, `Completed`, `Connect`, `Create`

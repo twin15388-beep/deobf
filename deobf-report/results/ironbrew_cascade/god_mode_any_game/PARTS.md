@@ -1,43 +1,30 @@
-# God Mode Any Game (IronBrew → CASCADE → unluac) — имена объектов (из констант чанка)
+# `god_mode_any_game` — функционал и механики
 
-Игра: **Universal (Any Game)**
+Игра/тема: **ironbrew_cascade** · восстановленный код: `script.lua` (142 строк)
 
-Источник: `ironbrew_cascade/god_mode_any_game/devirt.luac` (1805 B, 5 прототипов, 41 строковых констант)
+## Что делает (по восстановленному коду)
 
-> Извлечено из строковых констант байткода. Порядок — алфавитный, в скобках — сколько раз строка встречается.
+- **телепорт / движение** — улики: `humanoidrootpart`, `moveto`
+- **анти-АФК / ввод** — улики: `inputbegan`
 
+## Вызовы API
 
-## Классы Roblox (3)
+- Сервисы: `Players`, `UserInputService`
+- Классы/объекты: `Part`
+- Методы: `MoveTo`×3, `GetService`×2, `Destroy`×1, `Clone`×1
 
-`Part`, `Players`, `UserInputService`
+## Имена функций (0)
 
+_имена не сохранились — функции пронумерованы лифтом (`L2_1` и т.п.), смысл восстанавливается по вызовам выше_
 
-## Имена объектов / партов (27)
+## Строковые константы (UI, подписи)
 
-- `Anchored`
-- `CanCollide`
-- `Char` ×4
-- `Character`
-- `CharacterAdded`
-- `Clone`
-- `Destroy`
-- `Disabled` ×3
-- `Enum`
-- `Equals`
-- `GetService`
-- `HumanoidRootPart` ×3
-- `InputBegan`
-- `Instance`
-- `KeyCode`
-- `Local` ×2
-- `LocalPlayer`
-- `MoveTo` ×3
-- `Name`
-- `Parent` ×2
-- `Part`
-- `Players`
-- `Position` ×2
-- `Size`
-- `Touched`
-- `UserInputService`
-- `Vector3` ×2
+- `you may re-execute`
+
+## Ссылки / webhooks / ассеты (0)
+
+_нет_
+
+## Парты / объекты (21)
+
+- идентификаторы в коде: `Char`, `Character`, `CharacterAdded`, `Clone`, `Destroy`, `Disabled`, `Enum`, `Equals`, `GetService`, `HumanoidRootPart`, `InputBegan`, `Instance`, `KeyCode`, `Local`, `LocalPlayer`, `MoveTo`, `Name`, `Parent`, `Position`, `Touched`, `Vector3`

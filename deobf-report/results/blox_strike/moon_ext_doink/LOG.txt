@@ -1,8 +1,0 @@
-source: bs_moon_ext.lua
-size: 69604 B (67 KB)
-detected: unknown
-description: Blox Strike: ext/bloxstrike.lua от d0inks, обфускатор doink v1 (после unprom)
-method: lua_beautify.py (token-safe reindent, токены сверены)
-beautify: deobf-report/results/blox_strike/moon_ext_doink/script.lua: 3 строк -> 1711 строк, токены совпадают
-parts: parts -> deobf-report/results/blox_strike/moon_ext_doink/PARTS.md (0 labels)
-result: OK, 1712 строк, 87 КБ

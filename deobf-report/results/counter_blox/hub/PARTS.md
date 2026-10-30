@@ -1,127 +1,55 @@
-# Разбор частей скрипта
-- файл: `script.lua`
-- размер: 296 КБ, 6915 строк
+# `hub` — функционал и механики
 
-## Части (функционал)
-- **Aimbot** — 49 упоминаний
-- **Speed/Jump** — 1 упоминаний
-- **Config / Save settings** — 14 упоминаний
-- **Inventory / Item ESP** — 2 упоминаний
+Игра/тема: **counter_blox** · восстановленный код: `script.lua` (6915 строк)
 
-## UI-библиотека
-- Nebula
+## Что делает (по восстановленному коду)
 
-## URL / webhook-и (4)
+- **GUI / меню** — улики: `dropdown`, `screengui`, `scrollingframe`, `slider`, `tab`, `textbutton`
+- **ESP / подсветка** — улики: `billboardgui`, `boxhandle`, `chams`, `esp`, `outline`
+- **аимбот / наведение** — улики: `aim assist`, `aimbot`, `mousebutton`, `mousemove`, `silent aim`
+- **телепорт / движение** — улики: `cframe`, `humanoidrootpart`, `jumppower`, `tweenservice`
+- **инвентарь / предметы** — улики: `chest`, `drop`, `inventory`, `item`
+- **урон / убийство** — улики: `damage`, `hitbox`, `kill`
+- **деньги / ресурсы** — улики: `cash`, `inf`, `infinite`
+- **сеть / загрузка кода** — улики: `httpget`, `loadstring`, `require`
+- **анти-АФК / ввод** — улики: `button2down`, `inputbegan`, `keydown`
+
+## Вызовы API
+
+- Сервисы: `CoreGui`, `HttpService`, `Lighting`, `Players`, `ReplicatedStorage`, `RunService`, `SoundService`, `TextService`, `TweenService`, `UserInputService`
+- Классы/объекты: `Accessory`, `Animation`, `BasePart`, `BillboardGui`, `BlockMesh`, `BodyVelocity`, `Camera`, `Decal`, `Folder`, `ForceField`, `Frame`, `Humanoid`, `ImageButton`, `ImageLabel`, `Lighting`, `MeshPart`, `Model`, `NumberValue`, `Pants`, `Part`
+- Методы: `FindFirstChild`×195, `Connect`×191, `IsA`×58, `GetService`×54, `GetChildren`×53, `Destroy`×26, `Clone`×25, `FireServer`×19, `GetPlayers`×12, `GetMouse`×10, `TweenService`×3, `loadstring`×2
+
+## Имена функций (24)
+
+`rgbtotbl`, `tbltorgb`, `deepCopy`, `keybindadd`, `keybindremove`, `update`, `updatetext`, `updateColor`, `updateHue`, `updateTrans`, `VectorRGB`, `new`, `UpdateWeapon`, `MapSkin`, `GetDeg`, `AddLegit`, `AddRage`, `add`, `YROTATION`, `XYROTATION`, `GetWeaponRage`, `GetStatsRage`, `GetStatsLegit`, `CollisionTBL`
+
+## Строковые константы (UI, подписи)
+
+- `Button` ×25
+- `ToggleColor` ×17
+- `Map` ×17
+- `Left` ×15
+- `ToggleKeybind` ×14
+- `Right` ×13
+- `Color3Value` ×13
+- `double tap` ×13
+- `Jumbobox` ×12
+- `Hold` ×12
+- `Always` ×11
+- `self chams` ×11
+- `override default` ×11
+- `Head` ×10
+- `silent aim` ×10
+
+## Ссылки / webhooks / ассеты (4)
+
 - `http://www.roblox.com/asset/?id=6724771531`
 - `http://www.roblox.com/asset/?id=6724808282`
 - `http://www.roblox.com/asset/?id=7265208537`
 - `https://raw.githubusercontent.com/Quenty/NevermoreEngine/version2/Modules/Shared/Events/Signal.lua`
 
-## Сервисы / remotes
-- сервисы: Players, ReplicatedStorage, Lighting, TweenService, RunService, UserInputService, HttpService
-- WaitForChild: `Origin`
-- remote-вызовы: FireServer(
+## Парты / объекты (695)
 
-## Названия партов / объектов в игре (40 уникальных)
-- `Humanoid` (18)
-- `Map` (16)
-- `UpperTorso` (9)
-- `HumanoidRootPart` (7)
-- `Gun` (7)
-- `Smokes` (7)
-- `AIMING` (6)
-- `Killers` (6)
-- `Mesh` (5)
-- `Shirt` (5)
-- `Pants` (5)
-- `Fires` (5)
-- `Kevlar` (4)
-- `Helmet` (4)
-- `Melee` (3)
-- `FakeHead` (3)
-- `Animated` (2)
-- `Head` (2)
-- `KillersClone` (2)
-- `BackC4` (2)
-- `Climbing` (2)
-- `OldPosition` (2)
-- `v_` (2)
-- `Right Arm` (2)
-- `Left Arm` (2)
-- `Glove` (2)
-- `Sleeve` (2)
-- `Origin` (2)
-- `Parent` (2)
-- `ImageLabel` (1)
-- `Status` (1)
-- `PartModifier` (1)
-- `HeadHB` (1)
-- `RGlove` (1)
-- `LGlove` (1)
-- `SkinName` (1)
-- `Weapon` (1)
-- `Skin` (1)
-- `Hit` (1)
-- `Position` (1)
-
-## Подписи UI / названия функций (первые 60)
-- AIMING
-- AK47
-- Accessory
-- Always
-- Animated
-- Animation
-- Arms
-- Auto
-- BURNME
-- BackC4
-- Backspace
-- Banana
-- BasePart
-- Bayonet
-- Bearded Axe
-- BillboardGui
-- Bizon
-- BlockMesh
-- BodyVelocity
-- BoxHandleAdornment
-- Bullet
-- Butterfly Knife
-- Button
-- BuyTime
-- CT Knife
-- CameraMinZoomDistance
-- CameraOffset
-- Cardboard
-- Circle
-- Cleaver
-- Climbing
-- Color
-- Color3Value
-- ColorDrag
-- ColorP
-- Colorpick
-- ConfigLoad
-- ConfigSave
-- ControlTurn
-- Crowbar
-- Decal
-- Decoy Grenade
-- DesertEagle
-- Drop
-- Dropdown
-- DualBerettas
-- EquipTime
-- FakeHead
-- Fakelag
-- Falchion Knife
-- FallDamage
-- Famas
-- FieldOfView
-- Filter
-- FindPartOnRayWithIgnoreList
-- FindPartOnRayWithWhitelist
-- FireServer
-- Fires
-- FiveSeven
-- Flash
+- через `WaitForChild`/`FindFirstChild`: `Humanoid`, `Map`, `UpperTorso`, `HumanoidRootPart`, `Gun`, `Smokes`, `AIMING`, `Killers`, `Mesh`, `Shirt`, `Pants`, `Fires`, `Kevlar`, `Helmet`, `Melee`, `FakeHead`, `Animated`, `Head`, `KillersClone`, `BackC4`, `Climbing`, `OldPosition`, `v_`, `Right Arm`, `Left Arm`
+- идентификаторы в коде: `ACOS`, `AIMING`, `AK47`, `ATAN2`, `AUG`, `AWP`, `AbsolutePosition`, `AbsoluteSize`, `Accessory`, `Action`, `Active`, `AddLegit`, `AddRage`, `Additionals`, `AdornCullingMode`, `Adornee`, `Alive`, `AllCharacters`, `AllGloves`, `AllKnives`, `AllSkins`, `AllWeapons`, `Always`, `AlwaysOnTop`, `Amount`, `AnchorPoint`, `Anchored`, `Angle`, `Angles`, `Animated`, `AnimationId`, `AnimationPriority`, `Arguments`, `Arm`, `Armor`, `ArmorPenetration`, `Arms`, `Auto`, `AutoButtonColor`, `AutoRotate`

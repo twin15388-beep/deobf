@@ -1,15 +1,15 @@
-# Результаты: рабочий код + названия партов
+# Результаты: только деобфусцированный код
 
-Каждый подкаталог — один сэмпл:
+**Правило папки:** здесь лежит только то, что реально удалось деобфусцировать.
+Никакого обфусцированного кода, дизасма и «псевдо-Lua» — если тело не поднялось,
+каталога тут нет, а сэмпл с причиной лежит в `_failed.md`.
+
+В каждом каталоге:
 
 * `script.lua` — **восстановленный Lua-код** (не дизасм и не псевдо-Lua: настоящий Lua 5.1-байткод, прогнанный через декомпилятор `unluac`);
-* `PARTS.md` — «части» скрипта: функциональные блоки, UI-библиотека, URL/webhook-и, сервисы, подписи UI и **названия партов/фич**;
-* `LOG.txt` — лог пайплайна: чем определён обфускатор, что запускалось, что вернуло.
+* `PARTS.md` — **что делает скрипт**: механики (с уликами), вызовы Roblox API, имена функций, парты/объекты, ссылки/webhooks.
 
-Индекс с размерами — `INDEX.md`.
-
-Всего **67 сэмплов**, 29 игр/режимов, 11 обфускаторов (Luraph v15, MoonSec V3, MoonSec V2,
-PSU 4.0/4.5, IronBrew/AztupBrew 2.7.x, wYnFuscate, самописные XOR-загрузчики). Полная таблица — `INDEX.md`.
+Индекс — `INDEX.md`, «что читается лучше всего» — `BEST.md`, неудачи — `_failed.md`.
 
 ## Что внутри (кратко)
 
@@ -85,14 +85,33 @@ PSU 4.0/4.5, IronBrew/AztupBrew 2.7.x, wYnFuscate, самописные XOR-за
 | **Grand Piece Online** | `gpo/tempest_hub`, `gpo/a7dev_loader`, `gpo/venomware`, `gpo/austina_ui` | `TrilhaX/scriptexec` (`Games/gpo.lua`), `moa456811-prog/roblox-hubs`, `lenny2010/VenomWare-V1`, `Ic0u/achieved-scripts` (`seahub.lua`) | рабочего обфусцированного сэмпла GPO **в паблике нет** — все 4 файла открытые (Tempest Hub на Linoria: AutoFarm + 19 партов) |
 | **King Legacy** | 6 сэмплов из прошлых партий (`king_legacy/*`) | `XxBoomer/script`, `hankiwastaken/Cracks` | **все 6 разобраны** (PSU 4.0/4.5, MoonSec V2/V3) — новых обфусцированных за итерацию не появилось |
 | **Illegal Soccer** | `illegal_soccer/polsec_loader`, `maxlegends_loader`, `luarmor_router`, `super_futebol` | `s1mpl33222-glitch/lua-obfuscator-samples`, `arthurtrovoada21-arch/Super-Futebol-Proibido` | открытые лоадеры. В `polsec_loader` — таблица `GameList` на **81 игру** (PlaceId → scriptId), включая сам Illegal Soccer (`10155360168`). Сами читы отдаются по ключу с `api.polsec.net` / Luarmor — статически их не достать |
-| **Blox Strike** | `blox_strike/*` — 7 сэмплов | `Friezer71/script`, `twistedk1d/BloxStrike`, `nathanathan69420-pixel/PPS`, `d0inks/moon.lua`, `brkapery/Sigmaware-Roblox-BloxStrike`, `4raff/MahmutHub` | 5 открытых + 2 обфусцированных: `mahmuthub_wearedevs` (wearedevs/Prometheus, de-flatten 7 184 строки) и `moon_ext_doink` (doink obfuscator v1, `unprom` 1 712 строк) |
-| **YBA** | `yba/ysf_luraph14`, `azero_hub`, `aethelburg_v16` + ранее `kolgie` | `rorri-cm/yba-autofarm`, `thatguyscousin9/azero-hub`, `EYDB0812/YBA-SCR-PT` | **Luraph v14.4.2** (`ysf_luraph14`) — новый обфускатор, девиртуализован **частично** (1 корневой proto → 172 строки) |
+| **Blox Strike** | `blox_strike/*` — 5 сэмплов | `Friezer71/script`, `twistedk1d/BloxStrike`, `nathanathan69420-pixel/PPS`, `d0inks/moon.lua`, `brkapery/Sigmaware-Roblox-BloxStrike` | все 5 — открытый Lua (Rayfield/Obsidian-хабы, роутер `moon.lua`, дамп Sigmaware). Обфусцированные `mahmuthub_wearedevs` (wearedevs/Prometheus) и `moon_ext_doink` (doink v1) в результаты не попали: тело осталось VM → `_failed.md` |
+| **YBA** | `yba/kolgie` (PSU), `azero_hub`, `aethelburg_v16` | `rorri-cm/yba-autofarm`, `thatguyscousin9/azero-hub`, `EYDB0812/YBA-SCR-PT` | `kolgie` — PSU, разобран полностью; два остальных — открытый Lua. **Luraph v14.4.2** (`ysf_luraph14`) поднят только частично (1 proto из VM) → `_failed.md` |
 | Бонус | `one_piece/kaitun_nav` | `Spade324/SpadesHub` | открытый хаб One Piece Kaitun (Rayfield) |
 
 Плюс к этому в этой итерации впервые заработал путь **Luraph v14** в `Deobfuscator-Luraph-V15`
 (для этого пришлось собрать `bin/luau` и `bin/luau-ast` под Linux) и обновлён `lua_beautify.py`:
 нашёлся класс ошибок, когда `a - -b` склеивалось в `--b` (комментарий) — теперь склейка, образующая
 новый токен (`--`, `[[`, `]]`, `<<`, `==`, `..`), запрещена.
+
+### Пятая партия (6-я итерация): IronBrew / AztupBrew через CASCADE
+
+36 файлов с заголовком IronBrew из `hexahigh/Scripts`; **12 доведены до настоящего Lua**,
+остальные 24 в `results/` не попали (тело не собралось) — их имена объектов и причины в `_failed.md`.
+
+| Каталог | Игра/тема | Строк |
+|---|---|---:|
+| `ironbrew_cascade/_script_hub` | мультиигровой хаб (~100 игр, HttpGet + XOR-строки) | 3 932 |
+| `ironbrew_cascade/tower_of_hell_script` | Tower of Hell (авто-прохождение) | 274 |
+| `ironbrew_cascade/tiny_tanks_gui` | Tiny Tanks (GUI) | 212 |
+| `ironbrew_cascade/piggy_item_hub` / `prison_life_destroyer_hub` | Piggy, Prison Life (один и тот же хаб) | 166 |
+| `ironbrew_cascade/god_mode_any_game` | универсальный God Mode | 142 |
+| `ironbrew_cascade/avatar_swastika` | скин персонажа (BodyForce) | 91 |
+| `ironbrew_cascade/ctrl_click_tp` | телепорт по Ctrl+клик | 77 |
+| `ironbrew_cascade/fps_booster` | настройки графики | 37 |
+| `ironbrew_cascade/anti_afk` | анти-АФК (VirtualUser) | 34 |
+| `ironbrew_cascade/mega_fun_obby_auto_skip_stages` | Mega Fun Obby | 28 |
+| `ironbrew_cascade/clone_tycoon_2_1_billion_gems` | Clone Tycoon 2 | 7 |
 
 ## Как это получено
 
@@ -105,6 +124,9 @@ python3 deobf-report/tools/pipeline.py obfuscated.lua --out results/<игра>/<
 `unluac` → `extract_parts.py` → `PARTS.md` + `LOG.txt`.
 
 ## Важная оговорка
+
+Обфусцированного кода и «псевдо-Lua» в папке больше нет: если файл не декомпилировался
+в читаемый Lua, он переносится в `_failed.md`.
 
 Часть файлов собрана в **salvage-режиме**: если unluac не может разобрать файл целиком из-за одной
 плохой функции, чанк режется по прототипам, каждая функция декомпилируется отдельно, а нечитаемые

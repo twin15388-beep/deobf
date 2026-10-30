@@ -1,135 +1,53 @@
+# `austina_ui` — функционал и механики
 
-Игра: **gpo**
-# Разбор частей скрипта
-- файл: `script.lua`
-- размер: 217 КБ, 5282 строк
+Игра/тема: **gpo** · восстановленный код: `script.lua` (5282 строк)
 
-## Части (функционал)
-- **Aimbot** — 2 упоминаний
-- **Config / Save settings** — 36 упоминаний
+## Что делает (по восстановленному коду)
 
-## UI-библиотека
-- Rain, Rift
+- **GUI / меню** — улики: `dropdown`, `screengui`, `scrollingframe`, `slider`, `textbutton`, `textlabel`
+- **аимбот / наведение** — улики: `aimbot`, `mousebutton`, `mousemove`
+- **сеть / загрузка кода** — улики: `httpget`, `loadstring`, `require`
+- **квесты / стадии** — улики: `completed`, `quest`
+- **телепорт / движение** — улики: `tweenservice`
+- **ESP / подсветка** — улики: `highlight`
+- **урон / убийство** — улики: `invisible`
+- **деньги / ресурсы** — улики: `code`
+- **инвентарь / предметы** — улики: `drop`
+- **анти-АФК / ввод** — улики: `inputbegan`
 
-## URL / webhook-и (1)
+## Вызовы API
+
+- Сервисы: `CoreGui`, `HttpService`, `Players`, `RunService`, `TweenService`, `UserInputService`
+- Классы/объекты: `Animation`, `CanvasGroup`, `Frame`, `GuiObject`, `Highlight`, `ImageButton`, `ImageLabel`, `ScreenGui`, `ScrollingFrame`, `TextBox`, `TextButton`, `TextLabel`, `UICorner`, `UIGradient`, `UIListLayout`, `UIPadding`, `UIPageLayout`, `UIStroke`, `VideoFrame`
+- Методы: `Create`×117, `Connect`×91, `TweenService`×39, `IsA`×20, `GetService`×17, `GetChildren`×13, `FindFirstChild`×6, `Destroy`×6, `HttpGet`×4, `GetMouse`×3, `loadstring`×1
+
+## Имена функций (15)
+
+`CacheAsset`, `RegistryKey`, `BuildLibrary`, `CorrectTable`, `DCorrectTable`, `SaveCustomUISettings`, `ReadCustomUISetting`, `SetConfigFolder`, `GetConfigFolder`, `fadeProps`, `applyFade`, `CongColor`, `L_1383`, `ClearText`, `GetNewList`
+
+## Строковые константы (UI, подписи)
+
+- `Text Color` ×83
+- `Background 1 Transparency` ×64
+- `Background 1 Color` ×49
+- `Background 2 Color` ×37
+- `GUI Text Color` ×22
+- `Title Text Color` ×21
+- `Placeholder Text Color` ×19
+- `Tween Animation 1 Speed` ×18
+- `Tween Animation 2 Speed` ×18
+- `Background 3 Color` ×17
+- `TextColor` ×17
+- `Toggle Border Color` ×17
+- `Search Icon Color` ×16
+- `Austina` ×13
+- `Border Color` ×13
+
+## Ссылки / webhooks / ассеты (1)
+
 - `https://assetdelivery.roblox.com/v1/asset/?id=`
 
-## Сервисы / remotes
-- сервисы: Players, TweenService, RunService, UserInputService, HttpService, CoreGui
+## Парты / объекты (1312)
 
-## Названия партов / объектов в игре (53 уникальных)
-- `Frame` (98)
-- `Text Color` (80)
-- `Background 1 Transparency` (62)
-- `UICorner` (55)
-- `Background 1 Color` (47)
-- `Title Text Color` (35)
-- `Background 2 Color` (35)
-- `TextLabel` (28)
-- `TextButton` (21)
-- `GUI Text Color` (20)
-- `ImageLabel` (19)
-- `Tween Animation 1 Speed` (18)
-- `Tween Animation 2 Speed` (18)
-- `Placeholder Text Color` (17)
-- `Toggle Border Color` (17)
-- `Background 3 Color` (15)
-- `Search Icon Color` (14)
-- `TextBox` (12)
-- `UIListLayout` (11)
-- `Border Color` (11)
-- `Logo Image` (11)
-- `Section Underline Color` (11)
-- `Toggle Checked Color` (11)
-- `Toggle Desc Color` (11)
-- `Slider Line Color` (10)
-- `Section Text Color` (8)
-- `Dropdown Selected Color` (8)
-- `Tween Animation 3 Speed` (6)
-- `Setting Icon Color` (5)
-- `Search Icon Highlight Color` (5)
-- `Page Selected Color` (5)
-- `Button Color` (5)
-- `Label Color` (5)
-- `Dropdown Icon Color` (5)
-- `Textbox Highlight Color` (5)
-- `Box Highlight Color` (5)
-- `Background Main Color` (5)
-- `ScrollingFrame` (4)
-- `UIGradient` (4)
-- `Background Image` (4)
-- `Slider Highlight Color` (4)
-- `UIStroke` (3)
-- `Tween Easing Style` (3)
-- `Tween Easing Direction` (3)
-- `ScreenGui` (2)
-- `UIPageLayout` (2)
-- `VideoFrame` (2)
-- `UIPadding` (2)
-- `Click Effect Color` (2)
-- `Austina GUI` (1)
-- `Line` (1)
-- `PageInLine` (1)
-- `PageList` (1)
-
-## Подписи UI / названия функций (первые 60)
-- AbsoluteContentSize
-- Aimbot
-- Animation
-- Austina
-- Austina GUI
-- Austina Notification
-- Austina/
-- Austina/Assets
-- Austina/Assets/
-- Austina/Configs
-- BBox
-- BCor1
-- BCor2
-- BFrame
-- BText
-- Background
-- Background 1 Color
-- Background 1 Transparency
-- Background 2 Color
-- Background 3 Color
-- Background Image
-- Background Main Color
-- Background1
-- Background2
-- BackgroundTransparency
-- BarCorner
-- BindCorner
-- Bindkey
-- Border Color
-- Box Highlight Color
-- BoxCorner
-- BoxFrame
-- Breathing
-- Button
-- Button Color
-- ButtonBG
-- ButtonCorner
-- CanvasGroup
-- Click Effect Color
-- CloseContainer
-- CloseImage
-- Color
-- Color Picker
-- Color3
-- ColorPick
-- ColorPickCorner
-- ColorVal
-- ColorValButton
-- ColorValCorner
-- ColorpickBGCorner
-- Combat
-- Concac
-- Concacmain
-- Concacontainer
-- Concacpage
-- Config not found
-- ControlList
-- Cor1
-- Cor2
-- CoreGui
+- через `WaitForChild`/`FindFirstChild`: `Austina GUI`, `Frame`, `Line`, `PageInLine`, `PageList`
+- идентификаторы в коде: `ADDITION`, `AFTER`, `ANTI`, `AbsoluteContentSize`, `AbsolutePosition`, `AbsoluteSize`, `Accepts`, `Active`, `ActiveConnections`, `AddBackgroundPreset`, `AddPreset`, `Aimbot`, `AnchorPoint`, `Anchoring`, `Anti`, `Any`, `ApplyStrokeMode`, `AreRequirementsMet`, `Asset`, `Assets`, `Austina`, `AustinaConfig`, `AutomaticSize`, `BBox`, `BCor1`, `BCor2`, `BFrame`, `BText`, `Background`, `Background1`, `Background2`, `BackgroundColor3`, `BackgroundPresets`, `BackgroundTransparency`, `Bad`, `Bar`, `BarCorner`, `BindCorner`, `Bindkey`, `Body`

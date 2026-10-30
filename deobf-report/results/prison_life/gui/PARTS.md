@@ -1,101 +1,49 @@
+# `gui` — функционал и механики
 
-Игра: **prison_life**
-# Разбор частей скрипта
-- файл: `script.lua`
-- размер: 45 КБ, 1227 строк
+Игра/тема: **prison_life** · восстановленный код: `script.lua` (1227 строк)
 
-## Части (функционал)
-- **Kill Aura** — 42 упоминаний
-- **Fly/Noclip** — 3 упоминаний
-- **Speed/Jump** — 4 упоминаний
-- **Teleport** — 3 упоминаний
+## Что делает (по восстановленному коду)
 
-## UI-библиотека
-- не определена
+- **телепорт / движение** — улики: `cframe`, `humanoidrootpart`, `jumppower`, `teleport`, `tp`, `tweenservice`
+- **GUI / меню** — улики: `screengui`, `textbutton`, `textlabel`, `toggle`
+- **аимбот / наведение** — улики: `mousebutton`, `mousemove`
+- **урон / убийство** — улики: `damage`, `kill`
+- **анти-АФК / ввод** — улики: `inputbegan`, `keydown`
+- **инвентарь / предметы** — улики: `item`
+- **сеть / загрузка кода** — улики: `require`
 
-## URL / webhook-и (0)
+## Вызовы API
 
-## Сервисы / remotes
-- сервисы: Players, ReplicatedStorage, TweenService, UserInputService
-- remote-вызовы: FireServer(, InvokeServer(
+- Сервисы: `ContextActionService`, `CoreGui`, `Players`, `ReplicatedStorage`, `Teams`, `TweenService`, `UserInputService`, `Workspace`
+- Классы/объекты: `BodyGyro`, `BodyVelocity`, `Frame`, `HopperBin`, `Humanoid`, `ImageLabel`, `Part`, `ScreenGui`, `TextBox`, `TextButton`, `TextLabel`, `Tool`, `Weld`
+- Методы: `FireServer`×9, `GetChildren`×7, `Destroy`×7, `GetService`×6, `InvokeServer`×4, `Connect`×4, `FindFirstChild`×3, `Clone`×2, `GetMouse`×2, `WaitForChild`×1, `TweenService`×1, `Create`×1
 
-## Названия партов / объектов в игре (17 уникальных)
-- `TextButton` (31)
-- `TextLabel` (16)
-- `Frame` (6)
-- `HopperBin` (5)
-- `RayObject` (5)
-- `Distance` (5)
-- `Cframe` (5)
-- `Hit` (5)
-- `TextBox` (2)
-- `Criminals Spawn` (2)
-- `Remington 870` (2)
-- `ScreenGui` (1)
-- `ImageLabel` (1)
-- `BodyGyro` (1)
-- `BodyVelocity` (1)
-- `Part` (1)
-- `Weld` (1)
+## Имена функций (6)
 
-## Подписи UI / названия функций (первые 60)
-- ARREST ALL
-- AmokahsLogo
-- ArrestAll
-- BTOOLS
-- BeCriminal
-- BeGuard
-- BeInmate
-- BeNeutral
-- BodyGyro
-- BodyVelocity
-- Bright blue
-- Bright orange
-- Btools
-- COMMANDS FOR YOURSELF
-- CRIMINAL
-- CRIMINAL GUI
-- Cframe
-- Clone
-- Close
-- ComSeperateBar
-- Credit
-- CrimBaseTPbut
-- CrimG
-- CrimHideButton
-- CrimTitle
-- CrimTitleBar
-- Criminals Spawn
-- Dino
-- Distance
-- Doors
-- FALSE
-- FORCE CRIMINAL PLAYER
-- ForceCgui
-- Frame
-- GUARD
-- GameTool
-- Grab
-- GuardAreaTPbut
-- HIDE
-- Hammer
-- HopperBin
-- Humanoid
-- INMATE
-- ImageLabel
-- InsertUser
-- InsertUserTP
-- KILL ALL
-- KILL AURA 
-- KillAll
-- KillAura
-- Lame Prison Life GUI by Amokah
-- LocalCMD_BarTitle
-- LocalCMD_Title
-- LocalCommands
-- MOD YOUR GUN (Hold the item first)
-- MORE LOCAL COMMANDS
-- Main
-- Medium stone grey
-- ModGun
-- NEUTRAL
+`kill`, `Fly`, `punch`, `toggleKillAura`, `dragify`, `updateInput`
+
+## Строковые константы (UI, подписи)
+
+- `RayObject` ×5
+- `Distance` ×5
+- `Cframe` ×5
+- `Hit` ×5
+- `USERNAME` ×2
+- `HIDE` ×2
+- `TRUE` ×2
+- `Criminals Spawn` ×2
+- `Medium stone grey` ×2
+- `Remington 870` ×2
+- `Bright orange` ×2
+- `meleeEvent` ×2
+- `FALSE` ×2
+- `PrisonGui`
+- `Main`
+
+## Ссылки / webhooks / ассеты (0)
+
+_нет_
+
+## Парты / объекты (264)
+
+- идентификаторы в коде: `ALL`, `AREA`, `ARREST`, `AURA`, `A_1`, `A_2`, `Amokah`, `AmokahsLogo`, `Angles`, `Animate`, `ArrestAll`, `AutoFire`, `BASE`, `BTOOLS`, `BYPASS`, `BackgroundColor3`, `BackgroundTransparency`, `Backpack`, `BeCriminal`, `BeGuard`, `BeInmate`, `BeNeutral`, `Begin`, `BinType`, `BindAction`, `BorderColor3`, `BorderSizePixel`, `Bright`, `Btools`, `CFrame`, `COMMANDS`, `CRIMINAL`, `CameraSubject`, `CanCollide`, `Cframe`, `Changed`, `Character`, `CharacterAdded`, `ClassName`, `ClientInputHandler`

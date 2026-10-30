@@ -1,100 +1,48 @@
+# `simple_gui` — функционал и механики
 
-Игра: **prison_life**
-# Разбор частей скрипта
-- файл: `script.lua`
-- размер: 95 КБ, 2755 строк
+Игра/тема: **prison_life** · восстановленный код: `script.lua` (2755 строк)
 
-## Части (функционал)
-- **Kill Aura** — 14 упоминаний
-- **Fly/Noclip** — 51 упоминаний
-- **Speed/Jump** — 10 упоминаний
-- **Teleport** — 13 упоминаний
-- **Config / Save settings** — 12 упоминаний
+## Что делает (по восстановленному коду)
 
-## UI-библиотека
-- не определена
+- **телепорт / движение** — улики: `cframe`, `humanoidrootpart`, `jumppower`, `teleport`, `walkspeed`
+- **урон / убийство** — улики: `breakjoints`, `godmode`, `kill`, `noclip`
+- **GUI / меню** — улики: `screengui`, `textbutton`, `textlabel`, `toggle`
+- **аимбот / наведение** — улики: `mousebutton`
+- **анти-АФК / ввод** — улики: `keydown`
 
-## URL / webhook-и (0)
+## Вызовы API
 
-## Сервисы / remotes
-- сервисы: Players, Workspace, RunService
-- WaitForChild: `HumanoidRootPart`, `PlayerGui`
-- remote-вызовы: FireServer(, InvokeServer(
+- Сервисы: `ContextActionService`, `Players`, `ReplicatedStorage`, `RunService`, `Teams`, `Workspace`
+- Классы/объекты: `BodyGyro`, `BodyPosition`, `Frame`, `HopperBin`, `Humanoid`, `ImageButton`, `Model`, `Part`, `ScreenGui`, `TextBox`, `TextButton`, `TextLabel`
+- Методы: `GetService`×25, `GetPlayers`×11, `Destroy`×9, `GetMouse`×7, `FindFirstChild`×6, `WaitForChild`×5, `GetChildren`×5, `InvokeServer`×5, `FireServer`×4, `Clone`×2
 
-## Названия партов / объектов в игре (14 уникальных)
-- `Frame` (103)
-- `TextLabel` (44)
-- `TextButton` (44)
-- `HumanoidRootPart` (5)
-- `ImageButton` (4)
-- `BodyPosition` (4)
-- `BodyGyro` (4)
-- `HopperBin` (3)
-- `PlayerGui` (1)
-- `ScreenGui` (1)
-- `TextBox` (1)
-- `Model` (1)
-- `Part` (1)
-- `Humanoid` (1)
+## Имена функций (4)
 
-## Подписи UI / названия функций (первые 60)
-- AK-47
-- Activate
-- Activated
-- All Criminals
-- AllCrimsB
-- Arrest All
-- ArrestAllB
-- BodyGyro
-- BodyPosition
-- Bright blue
-- Bright orange
-- Btools
-- BtoolsOn
-- CAOnB
-- Click Arrest
-- ClickArrestOn
-- Clone
-- Close
-- CloseButton
-- Control Room
-- CriBasB
-- Criminal Base
-- CriminalBase
-- DefSetB
-- Default Settings
-- DefaultSettings
-- EPIXPOS
-- EscPriB
-- Escape Prison
-- EscapePrison
-- Execute
-- FlyOffB
-- FlyOnB
-- Flying
-- Frame
-- GMOffB
-- GMOnB
-- Gas Station
-- GasStaB
-- GasStation
-- GodMode
-- GotPlaB
-- Goto Player
-- GotoPlayer
-- Grab
-- GuaRooB
-- Guard
-- GuardB
-- Guards Room
-- GuardsRoom
-- Hammer
-- HopperBin
-- Humanoid
-- HumanoidRootPart
-- ImageButton
-- Inmate
-- InmateB
-- Inside
-- KAOffB
-- KAOnB
+`plrlist`, `toggleKillAura`, `start`, `allcrims`
+
+## Строковые константы (UI, подписи)
+
+- `Text` ×43
+- `Teleport` ×12
+- `Execute` ×10
+- `Close` ×6
+- `Activate` ×6
+- `Turn On` ×4
+- `Turn Off` ×4
+- `Open` ×4
+- `EPIXPOS` ×4
+- `Villanity GUI V3` ×3
+- `CloseButton` ×3
+- `Prison Gate` ×3
+- `Prison Yard` ×2
+- `Respawn` ×2
+- `meleeEvent` ×2
+
+## Ссылки / webhooks / ассеты (0)
+
+_нет_
+
+## Парты / объекты (364)
+
+- через `WaitForChild`/`FindFirstChild`: `HumanoidRootPart`, `PlayerGui`
+- идентификаторы в коде: `Activate`, `Activated`, `Active`, `All`, `AllCrimsB`, `Anchored`, `Angles`, `Animate`, `Arrest`, `ArrestAllB`, `BackgroundColor3`, `BackgroundTransparency`, `Backpack`, `Base`, `Begin`, `BinType`, `BindAction`, `BodyPosition`, `BorderColor3`, `BorderSizePixel`, `BreakJoints`, `Bright`, `Btools`, `BtoolsOn`, `Button1Down`, `CAOnB`, `CFrame`, `Cafeteria`, `CameraSubject`, `CanCollide`, `Cartoon`, `Cells`, `ChangeState`, `Character`, `Click`, `ClickArrestOn`, `Clone`, `Close`, `CloseButton`, `CloseButton_2`

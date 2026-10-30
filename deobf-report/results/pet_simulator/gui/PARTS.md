@@ -1,104 +1,51 @@
+# `gui` — функционал и механики
 
-Игра: **pet_simulator**
-# Разбор частей скрипта
-- файл: `script.lua`
-- размер: 49 КБ, 1353 строк
+Игра/тема: **pet_simulator** · восстановленный код: `script.lua` (1353 строк)
 
-## Части (функционал)
-- **Speed/Jump** — 46 упоминаний
-- **Teleport** — 32 упоминаний
-- **Inventory / Item ESP** — 1 упоминаний
+## Что делает (по восстановленному коду)
 
-## UI-библиотека
-- Hydra, Rain
+- **телепорт / движение** — улики: `cframe`, `humanoidrootpart`, `jumppower`, `teleport`, `tp`, `walkspeed`
+- **GUI / меню** — улики: `screengui`, `textbutton`, `textlabel`
+- **деньги / ресурсы** — улики: `coin`, `coins`
+- **инвентарь / предметы** — улики: `chest`, `inventory`
+- **анти-АФК / ввод** — улики: `idled`, `virtualuser`
+- **автофарм / авто-клик** — улики: `farm`
+- **аимбот / наведение** — улики: `mousebutton`
+- **сеть / загрузка кода** — улики: `require`
 
-## URL / webhook-и (0)
+## Вызовы API
 
-## Сервисы / remotes
-- сервисы: Players, ReplicatedStorage, Workspace, VirtualUser
-- WaitForChild: `Coins`, `Core`, `Game`, `Get Other Stats`, `__REMOTES`
-- remote-вызовы: FireServer(, InvokeServer(
+- Сервисы: `CoreGui`, `Players`, `ReplicatedStorage`, `StarterGui`, `VirtualUser`, `Workspace`
+- Классы/объекты: `Frame`, `Hint`, `Humanoid`, `ScreenGui`, `TextBox`, `TextButton`, `TextLabel`
+- Методы: `WaitForChild`×18, `InvokeServer`×13, `GetService`×6, `FindFirstChild`×5, `GetChildren`×2, `FireServer`×1
 
-## Названия партов / объектов в игре (20 уникальных)
-- `TextButton` (43)
-- `TextLabel` (28)
-- `TextBox` (13)
-- `Workspace` (7)
-- `__REMOTES` (6)
-- `Frame` (6)
-- `Shop` (5)
-- `Core` (4)
-- `Get Other Stats` (4)
-- `Save` (4)
-- `Pets` (4)
-- `Game` (3)
-- `Coins` (3)
-- `Hint` (2)
-- `LEVEL` (2)
-- `Get Stats` (2)
-- `ScreenGui` (1)
-- `MainGUI` (1)
-- `Inventory` (1)
-- `Hats` (1)
+## Имена функций (4)
 
-## Подписи UI / названия функций (первые 60)
-- Active Pet 
-- Agony
-- AllHealthLabel
-- AllHealthMax
-- AllHealthMaxLabel
-- AllHealthMin
-- AllHealthMinLabel
-- Area10
-- Area2
-- Area3
-- Area4
-- Area5
-- Area6
-- Area8
-- Area9
-- AreaDivider
-- BUY HATS
-- BUY PETS
-- Black Iron Domino Crown
-- Buy Hats
-- Buy Pets
-- BuyHatAmount1
-- BuyHatAmount2
-- BuyHatGo
-- BuyHatTier1
-- BuyHatTier2
-- BuyHatTitle1
-- BuyHatTitle2
-- BuyPetAmount1
-- BuyPetAmount2
-- BuyPetGo
-- BuyPetTier1
-- BuyPetTier2
-- BuyPetTitle2
-- BuyPetTitle3
-- BuyScreen
-- BuyScreenFrame
-- Candy Land
-- CandyLand
-- ClosePS
-- Coin/Chest Health
-- Coins
-- Core
-- Cursed Hallow
-- Cyborg Land
-- CyborgLand
-- Delete
-- Dominus Huge
-- EarthHealthLabel
-- EarthHealthMax
-- EarthHealthMaxLabel
-- EarthHealthMin
-- EarthHealthMinLabel
-- Egg Shop
-- Eggs
-- FARM
-- FarmCoins
-- FarmFrame
-- Frame
-- GAME TELEPORT
+`PetTable`, `hint`, `notify`, `mine`
+
+## Строковые константы (UI, подписи)
+
+- `__REMOTES` ×16
+- `Shop` ×6
+- `Buy` ×5
+- `Core` ×4
+- `Get Other Stats` ×4
+- `Save` ×4
+- `Pets` ×4
+- ` - ID: ` ×4
+- `Walk:1` ×3
+- `Jump:1` ×3
+- `Buy Pets` ×3
+- `Lord Fed: OFF` ×3
+- `Black Domino: OFF` ×3
+- `Buy Hats` ×3
+- `Coin/Chest Health` ×3
+
+## Ссылки / webhooks / ассеты (0)
+
+_нет_
+
+## Парты / объекты (298)
+
+- через `WaitForChild`/`FindFirstChild`: `__REMOTES`, `Game`, `Coins`, `Core`, `Get Other Stats`
+- идентификаторы в коде: `ADHatLabel1`, `ADPetLabel1`, `AGILITY`, `ALL`, `Active`, `Agony`, `AllHealthLabel`, `AllHealthMax`, `AllHealthMaxLabel`, `AllHealthMin`, `AllHealthMinLabel`, `Amount`, `Anti`, `Any`, `Area`, `Area10`, `Area11`, `Area12`, `Area2`, `Area3`, `Area4`, `Area5`, `Area6`, `Area7`, `Area8`, `Area9`, `AreaDivider`, `Auto`, `BEST`, `BUY`, `BackgroundColor3`, `BackgroundTransparency`, `Barriers`, `Black`, `BorderColor3`, `BorderSizePixel`, `Buy`, `BuyEgg`, `BuyHatAmount1`, `BuyHatAmount2`

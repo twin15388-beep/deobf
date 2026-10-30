@@ -1,46 +1,42 @@
-# _Script_Hub_ (IronBrew/CASCADE) — имена объектов (из констант чанка)
+# `_script_hub` — функционал и механики
 
-Источник: `/home/user/deobf/_work/res6/ib/_Script_Hub_//fixed.luac` (29691 B, 42 прототипов, 171 строковых констант)
+Игра/тема: **ironbrew_cascade** · восстановленный код: `script.lua` (3932 строк)
 
-> Извлечено из строковых констант байткода. Порядок — алфавитный, в скобках — сколько раз строка встречается.
+## Что делает (по восстановленному коду)
 
+- **сеть / загрузка кода** — улики: `httpget`, `loadstring`
+- **GUI / меню** — улики: `toggle`
 
-## Классы Roblox (0)
+## Вызовы API
+
+- Методы: `loadstring`×42, `HttpGet`×41, `Create`×1
+
+## Имена функций (0)
+
+_имена не сохранились — функции пронумерованы лифтом (`L2_1` и т.п.), смысл восстанавливается по вызовам выше_
+
+## Строковые константы (UI, подписи)
+
+- `PreacherHub`
+- `Games`
+- `Semi-Popular Games`
+- `Arsenal`
+- `Astray`
+- `Bad Business`
+- `Big Paintball`
+- `Bubble Gum Simulator`
+- `Breaking Point`
+- `Counter Blox`
+- `Critical Strike`
+- `D-Day`
+- `Imposter`
+- `Hoops`
+- `Jailbreak`
+
+## Ссылки / webhooks / ассеты (0)
 
 _нет_
 
+## Парты / объекты (89)
 
-## Имена объектов / партов (27)
-
-- `AddButton`
-- `AddFolder`
-- `Aimbot`
-- `Arsenal`
-- `Astray`
-- `Autofarm`
-- `Autorob`
-- `Bloxtap`
-- `CreateWindow`
-- `DarkHub`
-- `Desuhook`
-- `Duckhub`
-- `GUI`
-- `Games`
-- `GetObjects`
-- `Hoops`
-- `HttpGet` ×41
-- `Imposter`
-- `Init`
-- `Jailbreak`
-- `KAT`
-- `Lag`
-- `Notoriety`
-- `PreacherHub`
-- `RoWizards`
-- `Source`
-- `Strucid`
-
-
-## Ссылки / ассеты (1)
-
-- `rbxassetid://1461971147`
+- идентификаторы в коде: `AddButton`, `AddFolder`, `Arsenal`, `Astray`, `Bad`, `Big`, `Blox`, `Breaking`, `Bubble`, `Business`, `Counter`, `CreateWindow`, `Critical`, `Day`, `EAp`, `Eat`, `Facility`, `Flee`, `Forces`, `Games`, `GetObjects`, `Gum`, `Hell`, `Hoops`, `HttpGet`, `Hunt`, `Imposter`, `Init`, `J4aLX`, `JKO`, `Jailbreak`, `KAT`, `LG6`, `Legends`, `Life`, `Lift`, `Magic`, `N7Y`, `Ninja`, `Notoriety`

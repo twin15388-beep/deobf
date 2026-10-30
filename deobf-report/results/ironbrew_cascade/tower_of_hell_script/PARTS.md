@@ -1,89 +1,33 @@
-# Tower_of_Hell_Script_ (IronBrew/CASCADE) — имена объектов (из констант чанка)
+# `tower_of_hell_script` — функционал и механики
 
-Источник: `/home/user/deobf/_work/res6/ib/Tower_of_Hell_Script_//fixed.luac` (4163 B, 13 прототипов, 87 строковых констант)
+Игра/тема: **ironbrew_cascade** · восстановленный код: `script.lua` (274 строк)
 
-> Извлечено из строковых констант байткода. Порядок — алфавитный, в скобках — сколько раз строка встречается.
+## Что делает (по восстановленному коду)
 
+- **телепорт / движение** — улики: `humanoidrootpart`, `moveto`
+- **GUI / меню** — улики: `screengui`, `textbutton`
+- **анти-АФК / ввод** — улики: `inputbegan`, `keydown`
+- **аимбот / наведение** — улики: `mousebutton`
 
-## Классы Roblox (7)
+## Вызовы API
 
-`Humanoid`, `ImageLabel`, `Players`, `ScreenGui`, `StarterGui`, `TextButton`, `UserInputService`
+- Сервисы: `CoreGui`, `Players`, `StarterGui`, `UserInputService`
+- Классы/объекты: `Humanoid`, `ImageLabel`, `ScreenGui`, `TextButton`
+- Методы: `GetService`×4, `MoveTo`×1, `Connect`×1, `GetMouse`×1
 
+## Имена функций (0)
 
-## Имена объектов / партов (70)
+_имена не сохранились — функции пронумерованы лифтом (`L2_1` и т.п.), смысл восстанавливается по вызовам выше_
 
-- `Action` ×3
-- `Active`
-- `BackgroundColor3`
-- `Character` ×2
-- `ClickTP`
-- `CloseB`
-- `Color3`
-- `Connect`
-- `CoreGui`
-- `Draggable`
-- `Duration`
-- `Enum` ×4
-- `Font`
-- `Freefall`
-- `GetMouse`
-- `GetService` ×3
-- `GetState`
-- `Hit`
-- `Humanoid`
-- `HumanoidRootPart`
-- `HumanoidStateType`
-- `INFJUMP`
-- `Image`
-- `ImageLabel`
-- `InputBegan` ×2
-- `Instance` ×3
-- `IsKeyDown`
-- `JumpHeight` ×2
-- `Jumping`
-- `KeyCode` ×2
-- `Keyboard`
-- `LeftControl`
-- `LocalPlayer` ×2
+## Строковые константы (UI, подписи)
+
 - `LocalScript` ×2
-- `MainFrame`
-- `MouseButton1`
-- `MouseButton1Down`
-- `MoveTo`
-- `Name`
-- `Open`
-- `OpenB`
-- `Parent` ×3
-- `Players` ×2
-- `Position`
-- `SciFi`
-- `ScreenGui`
-- `Selectable`
 - `SendNotification`
-- `SetCore`
-- `Sibling`
-- `Size`
-- `SourceSans`
-- `Space`
-- `StarterGui`
-- `Text` ×2
-- `TextButton`
-- `TextColor3`
-- `TextScaled`
-- `TextSize`
-- `TextStrokeColor3`
-- `TextWrapped`
-- `Title`
-- `UDim2`
-- `UserInputService` ×2
-- `UserInputType` ×2
-- `Vector3`
-- `Velocity`
-- `Visible` ×3
-- `ZIndexBehavior`
-- `fromRGB`
 
-
-## Ссылки / ассеты (1)
+## Ссылки / webhooks / ассеты (1)
 
 - `http://www.roblox.com/asset/?id=4695436661`
+
+## Парты / объекты (40)
+
+- идентификаторы в коде: `Action`, `Character`, `Color3`, `Connect`, `Enum`, `Font`, `Freefall`, `GetMouse`, `GetService`, `GetState`, `Hit`, `HumanoidRootPart`, `HumanoidStateType`, `InputBegan`, `Instance`, `IsKeyDown`, `JumpHeight`, `Jumping`, `KeyCode`, `Keyboard`, `LeftControl`, `LocalPlayer`, `LocalScript`, `MouseButton1`, `MouseButton1Down`, `MoveTo`, `Parent`, `SciFi`, `SendNotification`, `SetCore`, `Sibling`, `SourceSans`, `Space`, `UDim2`, `UserInputType`, `Vector3`, `Velocity`, `ZIndexBehavior`, `fromRGB`, `lbl_20`

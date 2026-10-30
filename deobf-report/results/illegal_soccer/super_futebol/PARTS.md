@@ -1,73 +1,47 @@
+# `super_futebol` — функционал и механики
 
-Игра: **illegal_soccer**
-# Разбор частей скрипта
-- файл: `script.lua`
-- размер: 13 КБ, 398 строк
+Игра/тема: **illegal_soccer** · восстановленный код: `script.lua` (398 строк)
 
-## Части (функционал)
-- явных функциональных блоков не найдено (скрипт-загрузчик или VM)
+## Что делает (по восстановленному коду)
 
-## UI-библиотека
-- Rain
+- **телепорт / движение** — улики: `cframe`, `humanoidrootpart`, `tweenservice`
+- **аимбот / наведение** — улики: `mousebutton`, `mousemove`
+- **GUI / меню** — улики: `screengui`, `textlabel`
+- **анти-АФК / ввод** — улики: `inputbegan`
 
-## URL / webhook-и (0)
+## Вызовы API
 
-## Сервисы / remotes
-- сервисы: Players, ReplicatedStorage, TweenService, RunService, UserInputService
-- WaitForChild: `Kick`, `MatchState`, `PlayerGui`, `Skill`, `SuperFutebolRemotes`, `Tackle`, `UpdateUI`
-- remote-вызовы: FireServer(
+- Сервисы: `Players`, `ReplicatedStorage`, `RunService`, `ServerScriptService`, `Teams`, `TweenService`, `UserInputService`, `Workspace`
+- Классы/объекты: `Folder`, `Frame`, `Humanoid`, `LocalScript`, `Part`, `RemoteEvent`, `ScreenGui`, `TextLabel`
+- Методы: `Connect`×12, `FindFirstChild`×11, `GetService`×10, `WaitForChild`×8, `FireServer`×6, `TweenService`×4, `GetPlayers`×4, `Create`×2
 
-## Названия партов / объектов в игре (16 уникальных)
-- `HumanoidRootPart` (4)
-- `PlayerGui` (2)
-- `Frame` (2)
-- `Ball` (1)
-- `GoalBlue` (1)
-- `GoalRed` (1)
-- `SuperFutebolRemotes` (1)
-- `Kick` (1)
-- `Skill` (1)
-- `Tackle` (1)
-- `UpdateUI` (1)
-- `MatchState` (1)
-- `Folder` (1)
-- `ScreenGui` (1)
-- `TextLabel` (1)
-- `LocalScript` (1)
+## Имена функций (10)
 
-## Подписи UI / названия функций (первые 60)
-- Ball
-- Blue
-- Debris
-- Elastico
-- Empate
-- Folder
-- Frame
-- GoalBlue
-- GoalRed
-- Humanoid
-- HumanoidRootPart
-- Kick
-- LocalScript
-- MatchState
-- Nutmeg
-- PlayerGui
-- Players
-- Rainbow
-- RemoteEvent
-- ReplicatedStorage
-- Roulette
-- RunService
-- ScreenGui
-- Skill
-- Start
-- SuperFutebolClient
-- SuperFutebolRemotes
-- SuperFutebolUI
-- Tackle
-- Teams
-- TextLabel
-- TweenService
-- UpdateUI
-- UserInputService
-- Vector3
+`ensureFolder`, `ensureRemote`, `resetBall`, `applyBallPhysics`, `getPlayerData`, `assignTeam`, `startMatch`, `endMatch`, `setupGoal`, `injectClient`
+
+## Строковые константы (UI, подписи)
+
+- `Blue` ×4
+- `Red` ×3
+- `SuperFutebolRemotes` ×2
+- `Kick` ×2
+- `Skill` ×2
+- `Tackle` ×2
+- `UpdateUI` ×2
+- `MatchState` ×2
+- `Ball` ×2
+- `Start` ×2
+- `Empate` ×2
+- `End` ×2
+- `PlayerGui` ×2
+- `Debris`
+- ` no Workspace!`
+
+## Ссылки / webhooks / ассеты (0)
+
+_нет_
+
+## Парты / объекты (215)
+
+- через `WaitForChild`/`FindFirstChild`: `HumanoidRootPart`, `PlayerGui`, `Ball`, `GoalBlue`, `GoalRed`, `SuperFutebolRemotes`, `Kick`, `Skill`, `Tackle`, `UpdateUI`, `MatchState`
+- идентификаторы в коде: `Anchored`, `Angles`, `AssemblyAngularVelocity`, `AssemblyLinearVelocity`, `BALL_BOUNCE`, `BALL_FRICTION`, `BOLA`, `BackgroundColor3`, `BackgroundTransparency`, `Ball`, `BallOwner`, `Blue`, `Bounce`, `CFrame`, `CLIENT`, `COMO`, `CONFIG`, `CONTROLES`, `CONTROLLER`, `CURVE_STRENGTH`, `CUSTOM`, `CanCollide`, `Carregar`, `Carrinho`, `Character`, `CharacterAdded`, `Client`, `ClientCode`, `Cliente`, `Clique`, `Coloque`, `Color3`, `Connect`, `Controles`, `Controller`, `Create`, `Crie`, `Ctrl`, `CurrentCamera`, `Curve`

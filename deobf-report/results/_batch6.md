@@ -7,12 +7,12 @@
 
 | Метрика | Значение |
 |---|---|
-| Файлов IronBrew/AztupBrew в корпусе | 36 |
+| Файлов IronBrew/AztupBrew в корпусе | 36 (в `results/` — только 12 деобфнутых) |
 | Девиртуализовано CASCADE до чанка | 36 (было 0 — раньше падало на `throw "ayo"`) |
 | Чанк грузится в Lua 5.1.1 | 12 |
 | Декомпилировано в Lua (unluac) | 12 |
 | Строк кода получено | 5166 |
-| `PARTS.md` (имена объектов) | 36 |
+| `PARTS.md` (механики, API, парты) | 12 |
 
 ## Что починили
 
@@ -25,36 +25,25 @@
 4. **Lua 5.1.1 собран** (32-битных сборок нет — чанки конвертируются `luac32to64.py`),
    плюс шим `bit.bxor` — без него не работали ни запуск чанка, ни Xen-инструмент.
 
-## Таблица (36 файлов)
+## Декомпилировано в Lua (12)
 
-| Файл | Чанк, B | Статус | Строк | Skip instr/sub |
-|---|---:|---|---:|---|
-| `_Script_Hub` | 29691 | декомпилирован | 3932 | 0 / 0 |
-| `OP_Finality_Character_Hub` | 123372 | только PARTS | — | 0 / 0 |
-| `Troll_GUI` | 270406 | только PARTS | — | 0 / 0 |
-| `Iron_Man_Sim_Script` | 28415 | только PARTS | — | 0 / 0 |
-| `Tiny_Tanks_GUI` | 3542 | декомпилирован | 212 | 0 / 0 |
-| `Piggy_Item_Hub` | 2124 | декомпилирован | 166 | 0 / 0 |
-| `Prison_Life_Destroyer_Hub` | 2124 | декомпилирован | 166 | 0 / 0 |
-| `Tower_of_Hell_Script` | 4163 | декомпилирован (goto) | 274 | 0 / 0 |
-| `God_Mode_Any_Game` | 1805 | декомпилирован | 142 | 0 / 0 |
-| `Make_Your_Avatar_A_Swatstika` | 1149 | декомпилирован | 91 | 0 / 0 |
-| `Ctrl_Click_TP` | 926 | декомпилирован (goto) | 77 | 0 / 0 |
-| `FPS_Booster` | 1300 | декомпилирован | 37 | 0 / 0 |
-| `Anti_AFK` | 490 | декомпилирован | 34 | 0 / 0 |
-| `Mega_Fun_Obby_Auto_Skip_Stages` | 442 | декомпилирован | 28 | 0 / 0 |
-| `Clone_Tycoon_2_1_Billion_Gems` | 211 | декомпилирован | 7 | 0 / 0 |
-| `JailBreak_NEW_BEST_GUI` | 22013 | только PARTS | — | 63 / 122 |
-| `Mad_City_Gui_2` | 35311 | только PARTS | — | 104 / 235 |
-| `Dungeon_Quest_Free_Autofarm_CRACKED` | 29288 | только PARTS | — | 139 / 117 |
-| `Dungeon_Quest_Autofarm_Free__OUTDATED__` | 26858 | только PARTS | — | 105 / 88 |
-| `Dungeon_Quest_Desert/King/Pirate/Winter` (4) | 26858–29288 | только PARTS | — | 0–139 / 0–117 |
-| `Blox_Piece_232`, `Blox_Piece_1.9.5` | 25831 | только PARTS | — | 15 / 90 |
-| `Jojo_Gui`, `JoJo_Blox_GUI`, `one_Piece_mellinuim` | 9046–28922 | только PARTS | — | 7–22 / 12–92 |
-| `Bad_Business_SCRIPT_NEW_XDDD`, `..._NEW_ONE` | 13165 | только PARTS | — | 31 / 21 |
-| `Heroes_Online…`, `Legends_of_Speed…`, `Magnet_Sim`, `Texting_Simulator…`, `Stackables_Inf_Money`, `FE_Invisible_Fling` | 2124–9788 | только PARTS | — | 5–229 / 8–14 |
+| Файл | Чанк, B | Строк |
+|---|---:|---:|
+| `_Script_Hub` | 29691 | 3932 |
+| `Tower_of_Hell_Script` | 4163 | 274 |
+| `Tiny_Tanks_GUI` | 3542 | 212 |
+| `Piggy_Item_Hub` | 2124 | 166 |
+| `Prison_Life_Destroyer_Hub` | 2124 | 166 |
+| `God_Mode_Any_Game` | 1805 | 142 |
+| `Make_Your_Avatar_A_Swatstika` | 1149 | 91 |
+| `Ctrl_Click_TP` | 926 | 77 |
+| `FPS_Booster` | 1300 | 37 |
+| `Anti_AFK` | 490 | 34 |
+| `Mega_Fun_Obby_Auto_Skip_Stages` | 442 | 28 |
+| `Clone_Tycoon_2_1_Billion_Gems` | 211 | 7 |
 
-Полная таблица с точными числами — `ironbrew_cascade/README.md`.
+Остальные 24 файла в `results/` не попали (тело не собралось в валидный байткод) —
+их полный список, причины и извлечённые имена объектов: `_failed.md`, раздел «Шестая итерация».
 
 ## Ключевое наблюдение
 

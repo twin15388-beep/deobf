@@ -1,9 +1,0 @@
-source: 4raff/MahmutHub BloxStrike/production/main.lua (159 530 B)
-detected: unknown (шапка "--[[ v1.0.0 https://wearedevs.net/obfuscator ]]")
-фактический обфускатор: Prometheus-совместимый VM (wearedevs.net "Lua obfuscator" v1.0.0)
-method: unprom 0.1.0 (yennylol/unprom) -> ConstantArray + EncryptStrings + vm_lift
-  команда: python3 tools/unprom/unprom.py mahmuthub_bloxstrike.lua -o out.lua -v
-result: 7 184 строки, 159 КБ
-важно: vm_lift упал (RecursionError, 531 блок) -> сработал fallback devirtualize:
-  диспетчер «расплющен» в плоский CFG (if pos == N then ... end), строки и константы расшифрованы,
-  но это VM в читаемом виде, а не исходный Lua.

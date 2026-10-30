@@ -1,21 +1,51 @@
-# Разбор частей скрипта
-- файл: `script.lua`
-- размер: 849 КБ, 26393 строк
+# `KL_psu40_Kingpiece` — функционал и механики
 
-## Части (функционал)
-- **AutoFarm** — 4 упоминаний
-- **AutoRaid/Boss** — 3 упоминаний
-- **Aimbot** — 1 упоминаний
-- **ESP** — 3 упоминаний
-- **Speed/Jump** — 1 упоминаний
-- **Teleport** — 21 упоминаний
-- **Auto Rejoin** — 1 упоминаний
-- **Config / Save settings** — 10 упоминаний
+Игра/тема: **king_legacy** · восстановленный код: `script.lua` (26393 строк)
 
-## UI-библиотека
-- Magma, Rain
+## Что делает (по восстановленному коду)
 
-## URL / webhook-и (7)
+- **GUI / меню** — улики: `dropdown`, `screengui`, `scrollingframe`, `slider`, `tab`, `textbutton`
+- **телепорт / движение** — улики: `cframe`, `humanoidrootpart`, `moveto`, `teleport`, `tp`, `tweenservice`
+- **урон / убийство** — улики: `breakjoints`, `damage`, `god mode`, `godmode`, `invisible`, `kill`
+- **деньги / ресурсы** — улики: `code`, `gem`, `inf`, `infinite`, `money`, `redeem`
+- **ESP / подсветка** — улики: `billboardgui`, `chams`, `esp`
+- **аимбот / наведение** — улики: `aimbot`, `mousebutton`, `mousemove`
+- **сеть / загрузка кода** — улики: `discord`, `httpget`, `require`
+- **анти-АФК / ввод** — улики: `inputbegan`, `keydown`, `virtualuser`
+- **автофарм / авто-клик** — улики: `autofarm`, `farm`
+- **инвентарь / предметы** — улики: `drop`, `item`
+- **квесты / стадии** — улики: `quest`
+
+## Вызовы API
+
+- Сервисы: `Chat`, `CoreGui`, `GuiService`, `HttpService`, `Lighting`, `MarketplaceService`, `Players`, `ReplicatedFirst`, `ReplicatedStorage`, `RunService`, `SoundService`, `Teams`, `TextService`, `TweenService`, `UserInputService`, `VirtualUser`, `Workspace`
+- Классы/объекты: `BillboardGui`, `BindableEvent`, `BlurEffect`, `BodyForce`, `BodyGyro`, `Camera`, `ColorCorrectionEffect`, `Decal`, `Explosion`, `Folder`, `Frame`, `Humanoid`, `ImageButton`, `ImageLabel`, `Lighting`, `MeshPart`, `Model`, `ModuleScript`, `Part`, `ParticleEmitter`
+- Методы: `GetService`×185, `FindFirstChild`×119, `Connect`×53, `Create`×43, `GetChildren`×38, `IsA`×37, `InvokeServer`×23, `Destroy`×20, `FireServer`×9, `HttpGet`×2, `TweenService`×2, `GetMouse`×2
+
+## Имена функций (0)
+
+_имена не сохранились — функции пронумерованы лифтом (`L2_1` и т.п.), смысл восстанавливается по вызовам выше_
+
+## Строковые константы (UI, подписи)
+
+- `Button` ×55
+- `Behide` ×16
+- `Over` ×15
+- `Under` ×15
+- `NameEsp` ×15
+- `Label` ×14
+- `NameWeapon` ×12
+- `Title` ×10
+- `VirtualInputManager` ×10
+- `ToggleTitle` ×9
+- `Dialogue` ×8
+- `Decline` ×8
+- `UIGradient` ×7
+- `MyAccountBtnCorner` ×7
+- `Rotation` ×7
+
+## Ссылки / webhooks / ассеты (7)
+
 - `http://www.roblox.com/asset/?id=4805639000`
 - `http://www.roblox.com/asset/?id=6034818372`
 - `http://www.roblox.com/asset/?id=6035047409`
@@ -24,70 +54,6 @@
 - `https://games.roblox.com/v1/games/`
 - `https://www.roblox.com/headshot-thumbnail/image?userId=`
 
-## Сервисы / remotes
-- сервисы: Players, ReplicatedStorage, ReplicatedFirst, Workspace, Lighting, TweenService, RunService, UserInputService, VirtualUser, HttpService, MarketplaceService, TeleportService, CoreGui
+## Парты / объекты (848)
 
-## Названия партов / объектов в игре (1 уникальных)
-- `Data Ping` (1)
-
-## Подписи UI / названия функций (первые 60)
-- ARandomFruit
-- Accessory
-- Activated
-- Add Id Music
-- AlloAllo
-- Anchored
-- Arrow
-- Asset
-- Auto Buy Devil Fruit
-- Auto Buy Devil Random
-- Auto Fram
-- Auto Fram Anubis
-- Auto Fram Boss Dragon
-- Auto Fram Dragon Gem
-- Auto Fram Expert Swordman
-- Auto Fram Flame User
-- Auto Fram King Samurai
-- Auto Fram King of Sand
-- Auto Fram Level
-- Auto Fram Sea King
-- Auto Fram Shadow Master
-- Auto Frame Setting - Misc
-- Auto Haki
-- Auto Ken Haki
-- Auto New World
-- Auto Raids
-- Auto Skill
-- Awakening NPC
-- Backpack
-- BarrierBarrier
-- BasePart
-- BeckyStyle
-- Behide
-- BillboardGui
-- BindableEvent
-- Bisento
-- BloomEffect
-- Blox Fruits
-- BlurEffect
-- BodyForce
-- BodyGyro
-- BombBomb
-- Boxcolor
-- BoxcolorCorner
-- BrachioBrachio
-- BreakJoints
-- BrianSucksVexu
-- Bring Devil Fruit
-- BuddhaBuddha
-- Buso Haki
-- BusoHaki
-- Button
-- Button1Down
-- ButtonCorner
-- Buy Cyborg
-- Buy DarkLeg
-- Buy Item
-- Buy Katana
-- Buy Mini Mace
-- Buy Pipe
+- идентификаторы в коде: `AFM`, `ARandomFruit`, `AUTOHAKI`, `AUTOHAKIObs`, `Abilities`, `AbsoluteContentSize`, `AbsolutePosition`, `AbsoluteSize`, `Accept`, `Accessory`, `Activated`, `Active`, `Add`, `Admiral`, `Adornee`, `All`, `AlloAllo`, `AllspawnDF`, `AlwaysOnTop`, `AnchorPoint`, `Anchored`, `Angles`, `AntiTPNPC`, `Anubis`, `Armament`, `Arrow`, `Asc`, `Asset`, `Auto`, `AutoButtonColor`, `AutoBuyDevilFruit`, `AutoBuyDevilNPC`, `AutoFramBoss`, `AutoNewWorld`, `AutoRaid`, `Awakening`, `Axe`, `BackgroundColor3`, `BackgroundTransparency`, `Backpack`

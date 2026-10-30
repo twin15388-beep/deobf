@@ -1,24 +1,25 @@
-# Anti_AFK_ (IronBrew/CASCADE) — имена объектов (из констант чанка)
+# `anti_afk` — функционал и механики
 
-Источник: `/home/user/deobf/_work/res6/ib/Anti_AFK_//fixed.luac` (490 B, 2 прототипов, 15 строковых констант)
+Игра/тема: **ironbrew_cascade** · восстановленный код: `script.lua` (34 строк)
 
-> Извлечено из строковых констант байткода. Порядок — алфавитный, в скобках — сколько раз строка встречается.
+## Что делает (по восстановленному коду)
 
+- **анти-АФК / ввод** — улики: `button2down`, `idled`, `virtualuser`
+- **телепорт / движение** — улики: `cframe`
 
-## Классы Roblox (1)
+## Вызовы API
 
-`Players`
+- Сервисы: `Players`, `VirtualUser`
+- Методы: `GetService`×2
 
+## Имена функций (0)
 
-## Имена объектов / партов (10)
+_имена не сохранились — функции пронумерованы лифтом (`L2_1` и т.п.), смысл восстанавливается по вызовам выше_
 
-- `Button2Down`
-- `Button2Up`
-- `CFrame`
-- `CurrentCamera`
-- `GetService`
-- `Idled`
-- `LocalPlayer`
-- `Players`
-- `Vector2`
-- `VirtualUser`
+## Ссылки / webhooks / ассеты (0)
+
+_нет_
+
+## Парты / объекты (8)
+
+- идентификаторы в коде: `Button2Down`, `Button2Up`, `CFrame`, `CurrentCamera`, `GetService`, `Idled`, `LocalPlayer`, `Vector2`
