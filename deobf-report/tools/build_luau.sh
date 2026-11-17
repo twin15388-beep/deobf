@@ -1,5 +1,5 @@
 #!/bin/bash
-# Build a minimal luau runner + luau-ast from luau-src without cmake
+# Build the minimal luau runner from luau-src without cmake
 set -e
 SRC=/home/user/deobf/work/luau-src
 OUT=/home/user/deobf/work/luau-build
@@ -24,7 +24,8 @@ wait
 echo "[*] building luau runner..."
 g++ $FLAGS -c /home/user/deobf/work/luau_runner.cpp -o "$OUT/obj/luau_runner.o"
 g++ -o "$BIN/luau" "$OUT/obj/luau_runner.o" $(ls "$OUT"/obj/*.o | grep -v luau_runner) -lm -ldl -lpthread
-echo "[*] building luau-ast..."
-g++ $FLAGS -o "$BIN/luau-ast" "$SRC/CLI/src/Ast.cpp" "$SRC/CLI/src/FileUtils.cpp" "$SRC/CLI/src/Flags.cpp" "$OUT"/obj/*.o -lm -ldl -lpthread
-echo "[+] done"
+# bin/luau-ast is built by build_ast.sh: it needs Analysis/src/AstJsonEncoder.cpp
+# and two link stubs. Linking it here against CLI/src/Ast.cpp alone produces a
+# duplicate main() and undefined Luau::toString(Location)/toJson symbols.
+echo "[+] bin/luau built (run build_ast.sh for bin/luau-ast)"
 "$BIN/luau" --version || true

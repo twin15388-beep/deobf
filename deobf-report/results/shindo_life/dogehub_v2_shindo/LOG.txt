@@ -5,3 +5,11 @@
   python3 work/tools/ironbrew_disasm.py work/sources/dogehub_payload.bin all deobf-report/results/shindo_life/dogehub_v2_shindo/disasm.txt
   python3 - <<'PY' # base-35-подобный декод K13 -> 365 B (dogehub_layer3.bin); raw-parse как IronBrew proto tree -> EOF@4
 RC checks: all parsers exit 0; payload parse consumed 100% bytes.
+2026-11-17 commands (session 3):
+  timeout 10 work/lua51/lua work/sources/dogehub_sandbox.lua   # blackhole: bit arith lib, loadstring dump
+  gh api repos/Kasep6720/Secret/contents/Games/ShindoLife?ref=DogeHubV2 > work/sources/dogehub_final.lua  # 506964 B, plain
+  gh api <raw модулей: ChooseUrDevice, ShindoAutoSpinRELLBloodline, ShindoLifeAutoSpinRELLBloodline,
+        Project: Bullshit: Rebooted, NoobieDoge Bloodline/RCShop Changer, HDTerebi No CD Method,
+        Kasep6720 DogeHubV2UserLogs, Page Bloodline/RCShop Changer>
+  for f in recovered/*.lua: loadfile (Lua 5.1.1) -> OK x13
+  sha256sum recovered/*.lua > SHA256SUMS

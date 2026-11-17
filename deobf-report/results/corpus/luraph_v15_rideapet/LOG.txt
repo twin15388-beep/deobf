@@ -1,0 +1,8 @@
+source: Deobfuscator-Luraph-V15-master/sample/RideAPet.lua (заголовок "Luraph Obfuscator v15.0")
+size: 397458 B (388 KB)
+detected: luraph_v15
+method: pipeline.py --tools-root work -> deob.js (bin/luau + bin/luau-ast из Luau 0.744)
+reference: sample/output/RideAPet.lua — diff пустой, 112939 B / 5170 строк
+syntax: loadfile Lua 5.1.1 = FAIL ("n += 1", это Luau); luau-ast 0.744 = OK
+parts: PARTS.md (механики, UI, URL, сервисы)
+result: OK, 5170 строк, 110 КБ

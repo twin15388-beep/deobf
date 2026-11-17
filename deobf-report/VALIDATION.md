@@ -132,19 +132,31 @@ python3 deobf-report/tools/pipeline.py <файл.lua> \
 артефакту не названа (вероятно v6.2+ по репо-истерну al1n04ka_Loader-Code.lua,
 но измеренного подтверждения нет).
 
-### Shindo Life (приоритет 4)
-- DogeHub V2 (ScriptBlox 224947): тело скачано
-  (`NoobieDoge/DogeHubV2@Separated:ShindoLife`, 44 639 B), ScriptBlox badge
-  «Detected Key system». Полностью разобран контейнер; финальный слой НЕ
-  восстановлен. Артефакты: `deobf-report/results/shindo_life/dogehub_v2_shindo/`
-  (PARTS.md, dump.txt, disasm.txt) + `deobf-report/tools/{ironbrew_dump.py,
-  ironbrew_disasm.py,luac51_dump.py}`. Кратко: внешний слой — плейнтекстовый
-  Lua-VM; payload.bin 14 691 B — IronBrew («@Ironbrew/netcoreapp2.0/out.lua»)
-  Lua 5.1-байткод с перетасовкой OpArg-таблицы (контейнер распарсен на 100 %);
-  слои IronBrew-VM → K13 (570 символов, алфавит 0-9A-Z без 'F') → 365 B
-  финальный блоб мини-VM. Фича ScriptBlox «Detected Key system» подтверждает,
-  что финальный код, вероятно, подгружается по сети после проверки ключа;
-  статическая девиртуализация финального слоя не достигнута.
+### Shindo Life (приоритет 4) — обновлено 2026-11-17
+- DogeHub V2 (ScriptBlox 224947): **финальный слой восстановлен и прочитан**.
+  Цепочка: `NoobieDoge/DogeHubV2@Separated:ShindoLife` (44 639 B) — плейнтекстовый
+  IronBrew-VM контейнер («@Ironbrew/netcoreapp2.0/out.lua», OpArg-перетасовка,
+  контейнер распарсен на 100 %) → внешняя VM НЕ расшифровывает payload сама, а
+  вызывает `game:HttpGet(«Kasep6720/Secret@DogeHubV2:Games/ShindoLife»)` +
+  `loadstring()`. Черный ящик `work/sources/dogehub_sandbox.lua` (стоковый
+  Lua 5.1.1 + болванки Roblox-глобалов, `bit` на чистой арифметике, перехват
+  `loadstring`) подтвердил это по трассе (`work/sources/dogehub_trace.log`).
+  Файл по URL скачан напрямую через `gh api`: **506 964 B, 14 298 строк, обычный
+  читаемый Lua (sha256 64df4361…)** — это и есть «реальный» DogeHub V2 Shindo
+  (UI + авто-Spin REL Bloodline, Bloodline/Element/RC-Shop changers, No CD
+  Method, выбор устройства, логгер). Обфускации в финальном файле нет
+  (маркеры `L<d>_<d>` = 0, `loadfile` OK для всех 13 файлов цепочки).
+  Восстановлено в `results/shindo_life/dogehub_v2_shindo/recovered/`
+  (+ `RECOVERY.md`, `SHA256SUMS`): основной payload, ChooseUrDevice,
+  ShindoSpinRecords, AutoSpinRELL обёртка (проверка `GameId==1511883870`),
+  Project Bullshit Rebooted (100 591 B, plain), страницы Bloodline/RCShop
+  changer (plain), UserLogs.
+  НЕ восстановлено (честно): IronBrew-VM тела Bloodline/RCShop changers и
+  AutoSpin-RELL remote (`ShindoLifeAutoSpinRELLBloodline`, 18 166 B),
+  AztupBrew V2.7.2 «No CD Method» (221 422 B, HDTerebi) — девиртуализатора под
+  эти билды нет; тела не разбирались. Рантайм в Roblox не проверялся.
+  Внимание: `mod_userlogs.lua` постит вебхук → пользователь предупреждён в
+  RECOVERY.md; вебхук не вызывался.
 - No Key Open Source (ScriptBlox 239695): inline plaintext (~2 КБ), прочитан:
   авто-Spin для Bloodline/Element (`startevent:FireServer("spin", ...)`),
   библиотека `wall v3` через HttpGet. Обфускации нет, «деобфусцировать» нечего.

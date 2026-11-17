@@ -24,6 +24,7 @@
 | `king_legacy/KL_msv3_v15_ZombieAttack` | MoonSec V3 | Lightux v1.5 — то же, но новее и в 1.5 раза больше кода. |
 | `king_legacy/KL_msv2_v13` | MoonSec V2 | Lightux v1.3: читаемый Lua с `game.HttpGet`, `loadstring`, анти-tamper `__secureeq`. |
 | `corpus/psu_small`, `corpus/aztupbrew`, `corpus/wynfuscate` | PSU / AztupBrew / wYnFuscate | Тестовые сэмплы обфускаторов из `vyxonq-dev/obfuscator-samples` (не игровые) — доказательство, что пайплайн работает не только на King Legacy. |
+| `corpus/luraph_v15_rideapet` | **Luraph v15.0** | Эталонный сэмпл из `Deobfuscator-Luraph-V15-master.zip`: 5 170 строк Luau, diff с эталонным выводом пустой. Валидация тулчейна после пересборки. |
 
 ### Вторая партия: 12 игр, 15 новых сэмплов
 

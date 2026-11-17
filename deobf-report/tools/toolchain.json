@@ -1,0 +1,151 @@
+{
+  "schema": "deobf-toolchain/1",
+  "measured_at": "2026-11-16",
+  "date_note": "Дата сессии по системному контексту — 2026-11-16; `date -u` в песочнице вернул 2026-11-17T15:16:40Z. Расхождение зафиксировано, версии привязаны к коммитам, а не к часам.",
+  "purpose": "Единственный именованный конфиг с версиями инструментов и обфускаторов. Значения с тегом measured сняты в этой сессии; from_report_unverified — из REPORT.md от 2026-10-28, здесь не перепроверялись.",
+
+  "environment": {
+    "python": { "value": "3.11.2", "source": "python3 --version", "status": "measured" },
+    "node": { "value": "v22.22.3", "source": "node --version", "status": "measured" },
+    "gcc": { "value": "12.2.0", "source": "gcc --version", "status": "measured" },
+    "java": { "value": "OpenJDK 25.0.5 (Temurin), jdk4py 25.0.5.0, только JRE, javac отсутствует", "source": "java -version + pip download jdk4py==25.0.5.0", "status": "measured" },
+    "dotnet": { "value": null, "source": "command -v dotnet", "status": "absent" },
+    "cmake": { "value": null, "source": "command -v cmake", "status": "absent" },
+    "cargo": { "value": null, "source": "command -v cargo", "status": "absent" }
+  },
+
+  "tools": {
+    "luraph15": {
+      "repo": "caomod2077/Deobfuscator-Luraph-V15",
+      "source": "закоммиченный Deobfuscator-Luraph-V15-master.zip (sha256 cb95e2c6968ffde22847f812...)",
+      "version": "1.0.0",
+      "version_source": "package.json в архиве",
+      "commit": null,
+      "entry": "work/luraph15/Deobfuscator-Luraph-V15-master/deob.js",
+      "status": "measured_working",
+      "note": "Нужны собранные bin/luau и bin/luau-ast; применён патч DummyArgs.__getattr__ из PATCHES.md §1."
+    },
+    "PSU-Deobfuscator": {
+      "repo": "memcpython/PSU-Deobfuscator",
+      "commit": "7d955d4d8e3bc14b744dc4afd52118787fc2bda4",
+      "version": "1.1.0",
+      "version_source": "package.json",
+      "deps": ["luaparse@0.3.1"],
+      "entry": "work/PSU-Deobfuscator/src/cli.js",
+      "status": "measured_working",
+      "note": "Патч --bytecode fallback из PATCHES.md §2; unluac.jar лежит в tools/."
+    },
+    "moonsec-js-deobf": {
+      "repo": "luaprojects/moonsec-js-deobf",
+      "commit": "7a4be80850f2b2a5ad20a02ef486d518f2164b27",
+      "version": "1.0.0",
+      "deps": ["fengari@0.1.5", "luaparse@0.3.1"],
+      "entry": "work/moonsec-js-deobf/bin/moonsec.js",
+      "status": "measured_working"
+    },
+    "moonsec-v2-deobfuscator": {
+      "repo": "neosnappp/moonsec-v2-deobfuscator",
+      "commit": "b1caa0cd703dedb86b3a43078c40e3f3d045b742",
+      "entry": "work/moonsec-v2-deobfuscator/main.py",
+      "status": "measured_working",
+      "note": "Вывод содержит Luau-ключевое слово continue; Lua 5.1 его не парсит, luau-ast парсит."
+    },
+    "CASCADE": {
+      "repo": "disingeunity/CASCADE",
+      "commit": "c18d7e6ffd73d8d0a801d9f151476bfa9f76e274",
+      "version": "1.0.0",
+      "deps": ["chalk@4.1.2", "smart-buffer@4.2.0", "unicode-substring@1.0.0"],
+      "entry": "work/CASCADE/index.js",
+      "status": "measured_working_direct_only",
+      "note": "Применены 3 патча из PATCHES.md §9. pipeline.py отсекает результат по строке 'No Matched Instruction' в логе; рабочий путь — CASCADE + luac_fix.py + luac32to64.py + unluac напрямую."
+    },
+    "unprom": {
+      "repo": "yennylol/unprom",
+      "commit": "d37b9d97746160359fb68dbdbb5213317403e669",
+      "version": "0.1.0",
+      "version_source": "pyproject.toml",
+      "entry": "work/unprom/unprom.py",
+      "status": "measured_working",
+      "note": "Эталон samples/hello.obfuscated.lua -> hello.deobfuscated.lua совпал байт-в-байт."
+    },
+    "prometheus-deobfuscator-by-axom": {
+      "repo": "0x251/Prometheus-Deobfuscator",
+      "commit": "7d0582fc2d150713941f02f8988323629dd054e7",
+      "entry": "work/prometheus-deobfuscator-by-axom/pol.py",
+      "status": "installed_not_runnable",
+      "note": "Python 3.11: SyntaxError в pol.py:565 и pol.py:1084, vmify.py:95, consts.py:315 (f-строки с обратным слешем), плюс битый строковый литерал vmify.py:122. python3.12 в песочнице отсутствует, на 3.12 не проверено. Клон откатан к чистому состоянию; cli.py нет, do_promaxom в pipeline.py честно сообщает 'not installed'."
+    },
+    "unluac": {
+      "repo": "HansWessels/unluac",
+      "commit": "1b2bfed6045eb719a27f026311744d7a674847f5",
+      "version": "unluac v1.2.3.569",
+      "version_source": "java -jar PSU-Deobfuscator/tools/unluac.jar --help",
+      "entry": "work/PSU-Deobfuscator/tools/unluac.jar",
+      "status": "measured_working",
+      "note": "Тот же jar лежит в work/moonsec-js-deobf/tools/unluac.jar."
+    },
+    "ironbrew2-deobfuscator": {
+      "repo": "axomtools/ironbrew2-deobfuscator",
+      "commit": "dbd391e8c466dcbe7acf8611bad73ef5c6ad3122",
+      "status": "installed_unverified",
+      "note": "В этой сессии не запускался; REPORT.md сообщает о несовместимости с luaparser 3.3/4.2."
+    },
+    "luau-vmp-deobf": {
+      "source": "закоммиченный luau-vmp-deobf-main.zip (sha256 bd6e3a1c9cbea68f4b9d1940...)",
+      "status": "installed_not_runnable",
+      "note": "Требует Lune; release-assets GitHub в этой песочнице недоступны. В сессии не запускался."
+    },
+    "luau-src": {
+      "repo": "luau-lang/luau",
+      "tag": "0.744",
+      "commit": "32c28089305f488f901aaf1dbf3fd1cb65fa3d11",
+      "status": "measured_working",
+      "note": "Из него собраны bin/luau и bin/luau-ast (build_luau.sh + build_ast.sh)."
+    },
+    "lua51": {
+      "repo": "lua/lua",
+      "tag": "v5.1.1",
+      "commit": "98194db4295726069137d13b8d24fca8cbf892b6",
+      "status": "measured_working",
+      "note": "Собран gcc -DLUA_USE_POSIX -DLUA_USE_DLOPEN; используется для loadfile-проверки чанков."
+    },
+    "jdk4py": {
+      "version": "25.0.5.0",
+      "source": "pypi.org, wheel jdk4py-25.0.5.0-py3-none-manylinux_2_17_x86_64.whl",
+      "status": "measured_working"
+    }
+  },
+
+  "obfuscator_signatures": [
+    { "name": "Luraph v15.0", "kind": "signature", "value": "-- This file was protected using Luraph Obfuscator v15.0 [https://lura.ph/]", "artifact": "sample/RideAPet.lua, sample/5ae248d6527b5c01.lua", "status": "measured_on_artifact" },
+    { "name": "PSU 4.0.A", "kind": "signature", "value": "This file was obfuscated using PSU Obfuscator 4.0.A | https://www.psu.dev/", "artifact": "XxBoomer_script/fastfarmjinsl2.lua", "status": "measured_on_artifact" },
+    { "name": "MoonSec V3", "kind": "signature", "value": "This file was protected with MoonSec V3 by Federal#9999", "artifact": "hankiwastaken_Cracks/Lightux/v1.4/AllOfUsAreDead.lua", "status": "measured_on_artifact" },
+    { "name": "MoonSec V2", "kind": "signature", "value": "Protected_by_MoonSecV2", "artifact": "hankiwastaken_Cracks/BritishHUB/BH v3.lua", "status": "measured_on_artifact" },
+    { "name": "IronBrew 2.7.2", "kind": "signature", "value": "IronBrew:tm: obfuscation; Version 2.7.2", "artifact": "hexahigh/SCRIPTS/Anti_AFK.lua, CASCADE/input.lua", "status": "measured_on_artifact" },
+    { "name": "Luraph v14.4.2 / 14.7-14.9", "kind": "signature", "value": null, "artifact": null, "status": "from_report_unverified", "source": "REPORT.md 2026-10-28", "recipe": "проверить заголовок Luraph Obfuscator v14 в первых 80 строках и прогнать deob.js --detect" },
+    { "name": "MoonVeil v1.4.5", "kind": "signature", "value": null, "artifact": null, "status": "from_report_unverified", "source": "REPORT.md 2026-10-28", "recipe": "искать маркер MoonVeil в заголовке; в локальном корпусе сэмплов нет" },
+    { "name": "Synapse Xen 1.1.2", "kind": "signature", "value": null, "artifact": null, "status": "from_report_unverified", "source": "REPORT.md 2026-10-28", "recipe": "65 файлов корпуса hexahigh/Scripts содержат строку 'Synapse Xen'; версию подтвердить по заголовку" },
+    { "name": "Luraph 6.0-beta1 / 11.1 / 11.5", "kind": "signature", "value": null, "artifact": null, "status": "from_report_unverified", "source": "results/_failed.md", "recipe": "сверить заголовок с MARKERS в pipeline.py; по отчёту deob.js определяет их как generic 0.00" }
+  ],
+
+  "validation_2026_11_16": {
+    "pipeline": "python3 deobf-report/tools/pipeline.py <input> --out work/validation/<name> --tools-root /home/user/deobf/work -v",
+    "results": [
+      { "branch": "luraph_v15", "sample": "sample/5ae248d6527b5c01.lua", "rc": 0, "output": "15 B, 1 строка", "reference": "byte-identical", "syntax_lua51": "OK", "syntax_luau": "OK" },
+      { "branch": "luraph_v15", "sample": "sample/RideAPet.lua", "rc": 0, "output": "112939 B, 5170 строк", "reference": "byte-identical", "syntax_lua51": "FAIL (+=)", "syntax_luau": "OK" },
+      { "branch": "psu", "sample": "XxBoomer_script/fastfarmjinsl2.lua", "rc": 0, "output": "1332 B, 72 строки", "syntax_lua51": "OK", "bytecode_load": "LOAD_OK" },
+      { "branch": "moonsec_v3", "sample": "Lightux/v1.4/AllOfUsAreDead.lua", "rc": 0, "output": "103319 B, 4753 строки", "syntax_lua51": "FAIL (goto lbl_)", "syntax_luau": "FAIL", "bytecode_load": "LOAD_FAIL: bad code in precompiled chunk" },
+      { "branch": "moonsec_v2", "sample": "BritishHUB/BH v3.lua", "rc": 0, "output": "39546 B, 1118 строк", "syntax_lua51": "FAIL (continue)", "syntax_luau": "OK" },
+      { "branch": "ironbrew", "sample": "CASCADE/input.lua + postprocess вручную", "rc": 0, "output": "490 B чанк -> 48 строк Lua", "syntax_lua51": "OK", "bytecode_load": "LOAD_OK" },
+      { "branch": "ironbrew", "sample": "hexahigh/SCRIPTS/Anti_AFK.lua через pipeline.py", "rc": 0, "output": "FAILED", "note": "do_cascade отсекает по 'No Matched Instruction' в логе, хотя чанк валиден после luac_fix" },
+      { "branch": "prometheus", "sample": "unprom/samples/hello.obfuscated.lua", "rc": 0, "output": "123 B", "reference": "byte-identical", "syntax_lua51": "OK" }
+    ]
+  },
+
+  "known_gaps": [
+    "pipeline.py: detect() ищет только текстовые маркеры в первых 80 строках; 6 сэмплов _corpus_prometheus определяются как unknown. Для Prometheus/wearedevs нужен структурный признак или явный оверрайд.",
+    "pipeline.py: do_cascade() считает провалом любую строку 'No Matched Instruction' в логе CASCADE, даже когда output.luac валиден после luac_fix.py.",
+    "moonsec-js-deobf на truncаted сэмпле BloxFruit/lvllock.lua падает с 'unexpected symbol , near nil' — файл начинается с ',nil,nil;', это битый вход, а не поломка инструмента.",
+    "0x251/Prometheus-Deobfuscator не запускается на Python 3.11; подробности в tools.prometheus-deobfuscator-by-axom.note."
+  ]
+}

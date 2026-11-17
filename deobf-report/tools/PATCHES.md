@@ -49,6 +49,11 @@ Lua 5.1 байткод.
 `loadstring`, `warn`, `task.*`, `debug.profilebegin*` — без этого харнесс либо не стартует,
 либо теряет долгоживущий HarnessServer и работает в разы медленнее.
 
+С 2026-11-16 разделение уточнено: `build_luau.sh` строит только `bin/luau`,
+`build_ast.sh` — `bin/luau-ast` с `Analysis/src/AstJsonEncoder.cpp` и двумя стабами
+(см. §11). Раньше `build_luau.sh` пытался собрать `luau-ast` сам и падал на
+дублирующемся `main()` и неопределённых `Luau::toString(Location)` / `toJson`.
+
 ## 4. `Prometheus-Deobfuscator` (не починен)
 
 `pol.py` и `modules/vmify.py` содержат f-строки с `\` внутри выражений (валидно только с
@@ -170,3 +175,35 @@ gcc -O2 -w -DLUA_USE_POSIX -DLUA_USE_DLOPEN -o lua lua.c $(ls *.c | grep -v '^lu
 | `luac_fix.py` | пересчитывает `maxstacksize` (по реальным регистровым операндам + диапазоны `CALL/RETURN/SETLIST/TFORLOOP/FORPREP/LOADNIL/CONCAT/SELF`), `nups` и `is_vararg` прямо в байтах чанка |
 | `chunk_parts.py` | вытаскивает «имена партов»/классы Roblox/ссылки из строковых констант чанка — работает даже если чанк не грузится |
 | `batch_ib.sh`, `postprocess_ib.sh` | прогон CASCADE по корпусу IronBrew и полный пост-процессинг (fix → 64 бит → проверка загрузки → unluac → PARTS.md) |
+
+## 11. Восстановление тулчейна (2026-11-16)
+
+Все инструменты разворачиваются в `work/` (gitignored) одной командой
+`bash deobf-report/tools/install_tools.sh`; ревизии зафиксированы в `toolchain.json`,
+патчи — в `apply_patches.py` (идемпотентны, при повторном запуске пишут `skip`).
+
+Измеренные отличия от прежней сборки:
+
+1. **`build_luau.sh` больше не линкует `bin/luau-ast`.** На Luau 0.744 (коммит
+   `32c2808`) эта команда давала `multiple definition of 'main'` плюс
+   `undefined reference to Luau::toString(Location const&, int, bool)` и
+   `Luau::toJson(...)`. Скрипт теперь строит только `bin/luau` и завершается `rc=0`.
+2. **`build_ast.sh` переписан.** Линкует `CLI/src/Ast.cpp`, `FileUtils.cpp`,
+   `Flags.cpp`, `Analysis/src/AstJsonEncoder.cpp`, стабы `flags_stub.cpp`
+   (`LUAU_FASTFLAGVARIABLE(LuauExperimentalIfLocalAnalysis)`) и `locstub.cpp`
+   (`Luau::toString(Location, int, bool)`), плюс все объекты ядра кроме
+   `luau_runner.o`. Smoke-тест: `local a = 1; print(a)` → JSON-дерево AST. `rc=0`.
+3. **`rebuild_index.py`** указывал на несуществующий
+   `/home/user/deobf/_work/tools/lua51/lua`; путь исправлен на
+   `/home/user/deobf/work/lua51/lua`.
+4. **`0x251/Prometheus-Deobfuscator` оставлен непочиненным.** Попытка адаптации под
+   Python 3.11 уперлась не только в f-строки с `\` в выражении
+   (`pol.py:565`, `pol.py:1084`, `vmify.py:95`, `consts.py:315`), но и в битый
+   строковый литерал `vmify.py:122`. Клон откатан к чистому состоянию,
+   `python3.12` в песочнице отсутствует. Рабочая замена — `unprom`.
+5. **`CASCADE` в `pipeline.py`.** Три патча §9 наложены, чанк `Anti_AFK.lua`
+   после `luac_fix.py` → `luac32to64.py` грузится в Lua 5.1.1 (`LOAD_OK`) и
+   декомпилируется в 48 строк. Но `do_cascade()` по-прежнему отсекает результат
+   по строке `No Matched Instruction` в логе CASCADE. Для IronBrew используется
+   прямой путь CASCADE → `luac_fix.py` → `luac32to64.py` → `unluac`; правка
+   `pipeline.py` в этой сессии не делалась.

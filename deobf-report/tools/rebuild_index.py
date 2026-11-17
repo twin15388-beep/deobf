@@ -12,7 +12,7 @@ import re
 import glob
 import subprocess
 
-LUA = "/home/user/deobf/_work/tools/lua51/lua"
+LUA = "/home/user/deobf/work/lua51/lua"
 
 
 def parse_status(path):
