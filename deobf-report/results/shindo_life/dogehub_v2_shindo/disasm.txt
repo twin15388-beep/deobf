@@ -1,0 +1,1210 @@
+============================================================
+proto main (code=84 consts=17 protos=11)
+constants:
+  K0   string 'string'
+  K1   string 'byte'
+  K2   string 'char'
+  K3   string 'sub'
+  K4   string 'table'
+  K5   string 'concat'
+  K6   string 'math'
+  K7   string 'ldexp'
+  K8   string 'getfenv'
+  K9   string 'setmetatable'
+  K10  string 'select'
+  K11  string 'unpack'
+  K12  string 'tonumber'
+  K13  string '24624A24627622H24E22U22X22Q24E27622L23Q27A23123Q27622G23Q27J27I27723Y27H23Y27E25227H25227622K24E25I24623127D24622D24M27H24M27622028328227X27W28128E22G24627W23127624622G24E27J23228328N27622Z28324028L24524328L26E26C27326W26A24523K28L25U26X26P26R26626B26S25225C24K25225H27229326Q26X25226227326O26R24524C28L26Y26X26V26Q26D26A29226W26P24524228L26P26V26Z29T24128L26626A26A26E25T26R29526328L2722AG26E26D24S25525526C26V26925426P27326A27229E26B26D26R26C26T26X29426R2942542B826Z25526526V2B526E24G24H24K24M25525H26R26T26C2AK25529929B29D26S29H25525T2AA26R26D2BP29L26W29N29Q29S28L246'
+  K14  string 'bit'
+  K15  string 'bxor'
+  K16  number 1.0
+   0  GETGLOBAL A=0 Bx=0
+   1  GETTABLE A=0 B=0 C=257
+   2  GETGLOBAL A=1 Bx=0
+   3  GETTABLE A=1 B=1 C=258
+   4  GETGLOBAL A=2 Bx=0
+   5  GETTABLE A=2 B=2 C=259
+   6  GETGLOBAL A=3 Bx=4
+   7  GETTABLE A=3 B=3 C=261
+   8  GETGLOBAL A=4 Bx=6
+   9  GETTABLE A=4 B=4 C=263
+  10  GETGLOBAL A=5 Bx=8
+  11  TEST     A=5 C=1
+  12  JMP      A=0 sBx=1 (-> 14)
+  13  CLOSURE  A=5 Bx=0
+  14  GETGLOBAL A=6 Bx=9
+  15  GETGLOBAL A=7 Bx=10
+  16  GETGLOBAL A=8 Bx=11
+  17  GETGLOBAL A=9 Bx=12
+  18  CLOSURE  A=10 Bx=1
+  19  MOVE     A=0 B=1 C=0
+  20  MOVE     A=0 B=9 C=0
+  21  MOVE     A=0 B=2 C=0
+  22  MOVE     A=11 B=10 C=0
+  23  LOADK    A=12 Bx=13
+  24  CALL     A=11 B=2 C=2
+  25  GETGLOBAL A=12 Bx=14
+  26  TEST     A=12 C=0
+  27  JMP      A=0 sBx=4 (-> 32)
+  28  GETGLOBAL A=12 Bx=14
+  29  GETTABLE A=12 B=12 C=271
+  30  TEST     A=12 C=1
+  31  JMP      A=0 sBx=1 (-> 33)
+  32  CLOSURE  A=12 Bx=2
+  33  CLOSURE  A=13 Bx=3
+  34  LOADK    A=14 Bx=16
+  35  CLOSURE  A=15 Bx=4
+  36  MOVE     A=0 B=0 C=0
+  37  MOVE     A=0 B=11 C=0
+  38  MOVE     A=0 B=14 C=0
+  39  MOVE     A=0 B=12 C=0
+  40  CLOSURE  A=16 Bx=5
+  41  MOVE     A=0 B=12 C=0
+  42  MOVE     A=0 B=0 C=0
+  43  MOVE     A=0 B=11 C=0
+  44  MOVE     A=0 B=14 C=0
+  45  CLOSURE  A=17 Bx=6
+  46  MOVE     A=0 B=15 C=0
+  47  MOVE     A=0 B=13 C=0
+  48  MOVE     A=0 B=4 C=0
+  49  MOVE     A=18 B=15 C=0
+  50  CLOSURE  A=19 Bx=7
+  51  MOVE     A=0 B=18 C=0
+  52  MOVE     A=0 B=2 C=0
+  53  MOVE     A=0 B=11 C=0
+  54  MOVE     A=0 B=14 C=0
+  55  MOVE     A=0 B=1 C=0
+  56  MOVE     A=0 B=12 C=0
+  57  MOVE     A=0 B=0 C=0
+  58  MOVE     A=0 B=3 C=0
+  59  MOVE     A=20 B=15 C=0
+  60  CLOSURE  A=21 Bx=8
+  61  MOVE     A=0 B=7 C=0
+  62  CLOSURE  A=22 Bx=9
+  63  MOVE     A=0 B=16 C=0
+  64  MOVE     A=0 B=15 C=0
+  65  MOVE     A=0 B=12 C=0
+  66  MOVE     A=0 B=13 C=0
+  67  MOVE     A=0 B=17 C=0
+  68  MOVE     A=0 B=19 C=0
+  69  MOVE     A=0 B=22 C=0
+  70  CLOSURE  A=23 Bx=10
+  71  MOVE     A=0 B=21 C=0
+  72  MOVE     A=0 B=7 C=0
+  73  MOVE     A=0 B=8 C=0
+  74  MOVE     A=24 B=23 C=0
+  75  MOVE     A=25 B=22 C=0
+  76  CALL     A=25 B=1 C=2
+  77  NEWTABLE A=26 B=0 C=0
+  78  MOVE     A=27 B=5 C=0
+  79  CALL     A=27 B=1 C=0
+  80  CALL     A=24 B=0 C=2
+  81  TAILCALL A=24 B=1 C=0
+  82  RETURN   A=24 B=0 C=0
+  83  RETURN   A=0 B=1 C=0
+============================================================
+proto main/0 (code=3 consts=1 protos=0)
+constants:
+  K0   string '_ENV'
+   0  GETGLOBAL A=0 Bx=0
+   1  RETURN   A=0 B=2 C=0
+   2  RETURN   A=0 B=1 C=0
+============================================================
+proto main/1 (code=65 consts=6 protos=1)
+constants:
+  K0   string ''
+  K1   number 256.0
+  K2   number 0.0
+  K3   number 1.0
+  K4   string 'table'
+  K5   string 'concat'
+   0  LOADK    A=1 Bx=0
+   1  LOADK    A=2 Bx=0
+   2  NEWTABLE A=3 B=0 C=0
+   3  LOADK    A=4 Bx=1
+   4  NEWTABLE A=5 B=0 C=0
+   5  LOADK    A=6 Bx=2
+   6  SUB      A=7 B=4 C=259
+   7  LOADK    A=8 Bx=3
+   8  FORPREP  A=6 sBx=4 (-> 13)
+   9  GETUPVAL A=10 B=0 C=0
+  10  MOVE     A=11 B=9 C=0
+  11  CALL     A=10 B=2 C=2
+  12  SETTABLE A=5 B=9 C=10
+  13  FORLOOP  A=6 sBx=-5 (-> 9)
+  14  LOADK    A=6 Bx=3
+  15  CLOSURE  A=7 Bx=0
+  16  GETUPVAL A=0 B=1 C=0
+  17  GETUPVAL A=0 B=2 C=0
+  18  MOVE     A=0 B=0 C=0
+  19  MOVE     A=0 B=6 C=0
+  20  GETUPVAL A=8 B=0 C=0
+  21  MOVE     A=9 B=7 C=0
+  22  CALL     A=9 B=1 C=0
+  23  CALL     A=8 B=0 C=2
+  24  MOVE     A=1 B=8 C=0
+  25  SETTABLE A=3 B=259 C=1
+  26  LEN      A=8 B=0 C=0
+  27  LT       A=0 B=6 C=8
+  28  JMP      A=0 sBx=30 (-> 59)
+  29  MOVE     A=8 B=7 C=0
+  30  CALL     A=8 B=1 C=2
+  31  GETTABLE A=9 B=5 C=8
+  32  TEST     A=9 C=0
+  33  JMP      A=0 sBx=2 (-> 36)
+  34  GETTABLE A=2 B=5 C=8
+  35  JMP      A=0 sBx=7 (-> 43)
+  36  MOVE     A=9 B=1 C=0
+  37  GETUPVAL A=10 B=2 C=0
+  38  MOVE     A=11 B=1 C=0
+  39  LOADK    A=12 Bx=3
+  40  LOADK    A=13 Bx=3
+  41  CALL     A=10 B=4 C=2
+  42  CONCAT   A=2 B=9 C=10
+  43  MOVE     A=9 B=1 C=0
+  44  GETUPVAL A=10 B=2 C=0
+  45  MOVE     A=11 B=2 C=0
+  46  LOADK    A=12 Bx=3
+  47  LOADK    A=13 Bx=3
+  48  CALL     A=10 B=4 C=2
+  49  CONCAT   A=9 B=9 C=10
+  50  SETTABLE A=5 B=4 C=9
+  51  LEN      A=9 B=3 C=0
+  52  ADD      A=9 B=9 C=259
+  53  MOVE     A=10 B=2 C=0
+  54  MOVE     A=11 B=2 C=0
+  55  ADD      A=4 B=4 C=259
+  56  MOVE     A=1 B=11 C=0
+  57  SETTABLE A=3 B=9 C=10
+  58  JMP      A=0 sBx=-33 (-> 26)
+  59  GETGLOBAL A=8 Bx=4
+  60  GETTABLE A=8 B=8 C=261
+  61  MOVE     A=9 B=3 C=0
+  62  TAILCALL A=8 B=2 C=0
+  63  RETURN   A=8 B=0 C=0
+  64  RETURN   A=0 B=1 C=0
+============================================================
+proto main/1/0 (code=26 consts=2 protos=0)
+constants:
+  K0   number 36.0
+  K1   number 1.0
+   0  GETUPVAL A=0 B=0 C=0
+   1  GETUPVAL A=1 B=1 C=0
+   2  GETUPVAL A=2 B=2 C=0
+   3  GETUPVAL A=3 B=3 C=0
+   4  GETUPVAL A=4 B=3 C=0
+   5  CALL     A=1 B=4 C=2
+   6  LOADK    A=2 Bx=0
+   7  CALL     A=0 B=3 C=2
+   8  GETUPVAL A=1 B=3 C=0
+   9  ADD      A=1 B=1 C=257
+  10  SETUPVAL A=1 B=3 C=0
+  11  GETUPVAL A=1 B=0 C=0
+  12  GETUPVAL A=2 B=1 C=0
+  13  GETUPVAL A=3 B=2 C=0
+  14  GETUPVAL A=4 B=3 C=0
+  15  GETUPVAL A=5 B=3 C=0
+  16  ADD      A=5 B=5 C=0
+  17  SUB      A=5 B=5 C=257
+  18  CALL     A=2 B=4 C=2
+  19  LOADK    A=3 Bx=0
+  20  CALL     A=1 B=3 C=2
+  21  GETUPVAL A=2 B=3 C=0
+  22  ADD      A=2 B=2 C=0
+  23  SETUPVAL A=2 B=3 C=0
+  24  RETURN   A=1 B=2 C=0
+  25  RETURN   A=0 B=1 C=0
+============================================================
+proto main/2 (code=35 consts=3 protos=0)
+constants:
+  K0   number 1.0
+  K1   number 0.0
+  K2   number 2.0
+   0  LOADK    A=2 Bx=0
+   1  LOADK    A=3 Bx=1
+   2  LT       A=0 B=257 C=0
+   3  JMP      A=0 sBx=15 (-> 19)
+   4  LT       A=0 B=257 C=1
+   5  JMP      A=0 sBx=13 (-> 19)
+   6  MOD      A=4 B=0 C=258
+   7  MOD      A=5 B=1 C=258
+   8  EQ*      A=1 B=4 C=5
+   9  JMP      A=0 sBx=1 (-> 11)
+  10  ADD      A=3 B=3 C=2
+  11  SUB      A=6 B=0 C=4
+  12  DIV      A=6 B=6 C=258
+  13  SUB      A=7 B=1 C=5
+  14  DIV      A=7 B=7 C=258
+  15  MUL      A=2 B=2 C=258
+  16  MOVE     A=1 B=7 C=0
+  17  MOVE     A=0 B=6 C=0
+  18  JMP      A=0 sBx=-17 (-> 2)
+  19  LT       A=0 B=0 C=1
+  20  JMP      A=0 sBx=1 (-> 22)
+  21  MOVE     A=0 B=1 C=0
+  22  LT       A=0 B=257 C=0
+  23  JMP      A=0 sBx=9 (-> 33)
+  24  MOD      A=4 B=0 C=258
+  25  LT       A=0 B=257 C=4
+  26  JMP      A=0 sBx=1 (-> 28)
+  27  ADD      A=3 B=3 C=2
+  28  SUB      A=5 B=0 C=4
+  29  DIV      A=5 B=5 C=258
+  30  MUL      A=2 B=2 C=258
+  31  MOVE     A=0 B=5 C=0
+  32  JMP      A=0 sBx=-11 (-> 22)
+  33  RETURN   A=3 B=2 C=0
+  34  RETURN   A=0 B=1 C=0
+============================================================
+proto main/3 (code=27 consts=3 protos=0)
+constants:
+  K0   number 1.0
+  K1   number 2.0
+  K2   number 0.0
+   0  TEST     A=2 C=0
+   1  JMP      A=0 sBx=13 (-> 15)
+   2  SUB      A=3 B=1 C=256
+   3  POW      A=3 B=257 C=3
+   4  DIV      A=3 B=0 C=3
+   5  SUB      A=4 B=2 C=256
+   6  SUB      A=5 B=1 C=256
+   7  SUB      A=4 B=4 C=5
+   8  ADD      A=4 B=4 C=256
+   9  POW      A=4 B=257 C=4
+  10  MOD      A=3 B=3 C=4
+  11  MOD      A=4 B=3 C=256
+  12  SUB      A=4 B=3 C=4
+  13  RETURN   A=4 B=2 C=0
+  14  JMP      A=0 sBx=11 (-> 26)
+  15  SUB      A=3 B=1 C=256
+  16  POW      A=3 B=257 C=3
+  17  ADD      A=4 B=3 C=3
+  18  MOD      A=4 B=0 C=4
+  19  LE       A=0 B=3 C=4
+  20  JMP      A=0 sBx=3 (-> 24)
+  21  LOADK    A=4 Bx=0
+  22  TEST     A=4 C=1
+  23  JMP      A=0 sBx=1 (-> 25)
+  24  LOADK    A=4 Bx=2
+  25  RETURN   A=4 B=2 C=0
+  26  RETURN   A=0 B=1 C=0
+============================================================
+proto main/4 (code=37 consts=6 protos=0)
+constants:
+  K0   number 3.0
+  K1   number 150.0
+  K2   number 4.0
+  K3   number 16777216.0
+  K4   number 65536.0
+  K5   number 256.0
+   0  GETUPVAL A=0 B=0 C=0
+   1  GETUPVAL A=1 B=1 C=0
+   2  GETUPVAL A=2 B=2 C=0
+   3  GETUPVAL A=3 B=2 C=0
+   4  ADD      A=3 B=3 C=256
+   5  CALL     A=0 B=4 C=5
+   6  GETUPVAL A=4 B=3 C=0
+   7  MOVE     A=5 B=0 C=0
+   8  LOADK    A=6 Bx=1
+   9  CALL     A=4 B=3 C=2
+  10  MOVE     A=0 B=4 C=0
+  11  GETUPVAL A=4 B=3 C=0
+  12  MOVE     A=5 B=1 C=0
+  13  LOADK    A=6 Bx=1
+  14  CALL     A=4 B=3 C=2
+  15  MOVE     A=1 B=4 C=0
+  16  GETUPVAL A=4 B=3 C=0
+  17  MOVE     A=5 B=2 C=0
+  18  LOADK    A=6 Bx=1
+  19  CALL     A=4 B=3 C=2
+  20  MOVE     A=2 B=4 C=0
+  21  GETUPVAL A=4 B=3 C=0
+  22  MOVE     A=5 B=3 C=0
+  23  LOADK    A=6 Bx=1
+  24  CALL     A=4 B=3 C=2
+  25  MOVE     A=3 B=4 C=0
+  26  GETUPVAL A=4 B=2 C=0
+  27  ADD      A=4 B=4 C=258
+  28  SETUPVAL A=4 B=2 C=0
+  29  MUL      A=4 B=3 C=259
+  30  MUL      A=5 B=2 C=260
+  31  ADD      A=4 B=4 C=5
+  32  MUL      A=5 B=1 C=261
+  33  ADD      A=4 B=4 C=5
+  34  ADD      A=4 B=4 C=0
+  35  RETURN   A=4 B=2 C=0
+  36  RETURN   A=0 B=1 C=0
+============================================================
+proto main/5 (code=13 consts=2 protos=0)
+constants:
+  K0   number 150.0
+  K1   number 1.0
+   0  GETUPVAL A=0 B=0 C=0
+   1  GETUPVAL A=1 B=1 C=0
+   2  GETUPVAL A=2 B=2 C=0
+   3  GETUPVAL A=3 B=3 C=0
+   4  GETUPVAL A=4 B=3 C=0
+   5  CALL     A=1 B=4 C=2
+   6  LOADK    A=2 Bx=0
+   7  CALL     A=0 B=3 C=2
+   8  GETUPVAL A=1 B=3 C=0
+   9  ADD      A=1 B=1 C=257
+  10  SETUPVAL A=1 B=3 C=0
+  11  RETURN   A=0 B=2 C=0
+  12  RETURN   A=0 B=1 C=0
+============================================================
+proto main/6 (code=52 consts=11 protos=0)
+constants:
+  K0   number 1.0
+  K1   number 20.0
+  K2   number 4294967296.0
+  K3   number 21.0
+  K4   number 31.0
+  K5   number 32.0
+  K6   number -1.0
+  K7   number 0.0
+  K8   number 2047.0
+  K9   number 1023.0
+  K10  number 4503599627370496.0
+   0  GETUPVAL A=0 B=0 C=0
+   1  CALL     A=0 B=1 C=2
+   2  GETUPVAL A=1 B=0 C=0
+   3  CALL     A=1 B=1 C=2
+   4  LOADK    A=2 Bx=0
+   5  GETUPVAL A=3 B=1 C=0
+   6  MOVE     A=4 B=1 C=0
+   7  LOADK    A=5 Bx=0
+   8  LOADK    A=6 Bx=1
+   9  CALL     A=3 B=4 C=2
+  10  MUL      A=3 B=3 C=258
+  11  ADD      A=3 B=3 C=0
+  12  GETUPVAL A=4 B=1 C=0
+  13  MOVE     A=5 B=1 C=0
+  14  LOADK    A=6 Bx=3
+  15  LOADK    A=7 Bx=4
+  16  CALL     A=4 B=4 C=2
+  17  GETUPVAL A=5 B=1 C=0
+  18  MOVE     A=6 B=1 C=0
+  19  LOADK    A=7 Bx=5
+  20  CALL     A=5 B=3 C=2
+  21  POW      A=5 B=262 C=5
+  22  EQ       A=0 B=4 C=263
+  23  JMP      A=0 sBx=8 (-> 32)
+  24  EQ       A=0 B=3 C=263
+  25  JMP      A=0 sBx=3 (-> 29)
+  26  MUL      A=6 B=5 C=263
+  27  RETURN   A=6 B=2 C=0
+  28  JMP      A=0 sBx=14 (-> 43)
+  29  LOADK    A=4 Bx=0
+  30  LOADK    A=2 Bx=7
+  31  JMP      A=0 sBx=11 (-> 43)
+  32  EQ       A=0 B=4 C=264
+  33  JMP      A=0 sBx=9 (-> 43)
+  34  EQ       A=0 B=3 C=263
+  35  JMP      A=0 sBx=4 (-> 40)
+  36  DIV      A=6 B=256 C=263
+  37  MUL      A=6 B=5 C=6
+  38  TEST     A=6 C=1
+  39  JMP      A=0 sBx=2 (-> 42)
+  40  DIV      A=6 B=263 C=263
+  41  MUL      A=6 B=5 C=6
+  42  RETURN   A=6 B=2 C=0
+  43  GETUPVAL A=6 B=2 C=0
+  44  MOVE     A=7 B=5 C=0
+  45  SUB      A=8 B=4 C=265
+  46  CALL     A=6 B=3 C=2
+  47  DIV      A=7 B=3 C=266
+  48  ADD      A=7 B=2 C=7
+  49  MUL      A=6 B=6 C=7
+  50  RETURN   A=6 B=2 C=0
+  51  RETURN   A=0 B=1 C=0
+============================================================
+proto main/7 (code=44 consts=4 protos=0)
+constants:
+  K0   number 0.0
+  K1   string ''
+  K2   number 1.0
+  K3   number 150.0
+   0  TEST     A=0 C=1
+   1  JMP      A=0 sBx=7 (-> 9)
+   2  GETUPVAL A=2 B=0 C=0
+   3  CALL     A=2 B=1 C=2
+   4  MOVE     A=0 B=2 C=0
+   5  EQ       A=0 B=0 C=256
+   6  JMP      A=0 sBx=2 (-> 9)
+   7  LOADK    A=2 Bx=1
+   8  RETURN   A=2 B=2 C=0
+   9  GETUPVAL A=2 B=1 C=0
+  10  GETUPVAL A=3 B=2 C=0
+  11  GETUPVAL A=4 B=3 C=0
+  12  GETUPVAL A=5 B=3 C=0
+  13  ADD      A=5 B=5 C=0
+  14  SUB      A=5 B=5 C=258
+  15  CALL     A=2 B=4 C=2
+  16  MOVE     A=1 B=2 C=0
+  17  GETUPVAL A=2 B=3 C=0
+  18  ADD      A=2 B=2 C=0
+  19  SETUPVAL A=2 B=3 C=0
+  20  NEWTABLE A=2 B=0 C=0
+  21  LOADK    A=3 Bx=2
+  22  LEN      A=4 B=1 C=0
+  23  LOADK    A=5 Bx=2
+  24  FORPREP  A=3 sBx=13 (-> 38)
+  25  GETUPVAL A=7 B=4 C=0
+  26  GETUPVAL A=8 B=5 C=0
+  27  GETUPVAL A=9 B=6 C=0
+  28  GETUPVAL A=10 B=1 C=0
+  29  MOVE     A=11 B=1 C=0
+  30  MOVE     A=12 B=6 C=0
+  31  MOVE     A=13 B=6 C=0
+  32  CALL     A=10 B=4 C=0
+  33  CALL     A=9 B=0 C=2
+  34  LOADK    A=10 Bx=3
+  35  CALL     A=8 B=3 C=0
+  36  CALL     A=7 B=0 C=2
+  37  SETTABLE A=2 B=6 C=7
+  38  FORLOOP  A=3 sBx=-14 (-> 25)
+  39  GETUPVAL A=3 B=7 C=0
+  40  MOVE     A=4 B=2 C=0
+  41  TAILCALL A=3 B=2 C=0
+  42  RETURN   A=3 B=0 C=0
+  43  RETURN   A=0 B=1 C=0
+============================================================
+proto main/8 (code=9 consts=1 protos=0)
+constants:
+  K0   string '#'
+   0  NEWTABLE A=1 B=0 C=0
+   1  VARARG   A=2 B=0 C=0
+   2  SETLIST  A=1 B=0 C=1
+   3  GETUPVAL A=2 B=0 C=0
+   4  LOADK    A=3 Bx=0
+   5  VARARG   A=4 B=0 C=0
+   6  CALL     A=2 B=0 C=0
+   7  RETURN   A=1 B=0 C=0
+   8  RETURN   A=0 B=1 C=0
+============================================================
+proto main/9 (code=164 consts=16 protos=0)
+constants:
+  K0   number 0.0
+  K1   number 4.0
+  K2   number 1.0
+  K3   number 206.0
+  K4   number 251.0
+  K5   number 2.0
+  K6   number 11.0
+  K7   number 3.0
+  K8   number 12.0
+  K9   number 20.0
+  K10  number 5.0
+  K11  number 21.0
+  K12  number 29.0
+  K13  number 33.0
+  K14  number 32.0
+  K15  number 1048575.0
+   0  NEWTABLE A=0 B=12 C=0
+   1  LOADK    A=1 Bx=0
+   2  LOADK    A=2 Bx=0
+   3  LOADK    A=3 Bx=0
+   4  LOADK    A=4 Bx=0
+   5  LOADK    A=5 Bx=0
+   6  LOADK    A=6 Bx=0
+   7  LOADK    A=7 Bx=0
+   8  LOADK    A=8 Bx=0
+   9  LOADK    A=9 Bx=0
+  10  LOADK    A=10 Bx=0
+  11  LOADK    A=11 Bx=0
+  12  LOADK    A=12 Bx=0
+  13  SETLIST  A=0 B=12 C=1
+  14  NEWTABLE A=1 B=0 C=0
+  15  NEWTABLE A=2 B=0 C=0
+  16  NEWTABLE A=3 B=5 C=0
+  17  MOVE     A=4 B=0 C=0
+  18  LOADNIL  A=5 B=5 C=0
+  19  MOVE     A=6 B=1 C=0
+  20  LOADNIL  A=7 B=7 C=0
+  21  MOVE     A=8 B=2 C=0
+  22  SETLIST  A=3 B=5 C=1
+  23  GETUPVAL A=4 B=0 C=0
+  24  CALL     A=4 B=1 C=2
+  25  SETTABLE A=3 B=257 C=4
+  26  LOADK    A=4 Bx=2
+  27  GETUPVAL A=5 B=1 C=0
+  28  CALL     A=5 B=1 C=2
+  29  LOADK    A=6 Bx=2
+  30  FORPREP  A=4 sBx=80 (-> 111)
+  31  GETUPVAL A=8 B=2 C=0
+  32  GETUPVAL A=9 B=1 C=0
+  33  CALL     A=9 B=1 C=2
+  34  LOADK    A=10 Bx=3
+  35  CALL     A=8 B=3 C=2
+  36  GETUPVAL A=9 B=2 C=0
+  37  GETUPVAL A=10 B=1 C=0
+  38  CALL     A=10 B=1 C=2
+  39  LOADK    A=11 Bx=4
+  40  CALL     A=9 B=3 C=2
+  41  GETUPVAL A=10 B=3 C=0
+  42  MOVE     A=11 B=8 C=0
+  43  LOADK    A=12 Bx=2
+  44  LOADK    A=13 Bx=5
+  45  CALL     A=10 B=4 C=2
+  46  GETUPVAL A=11 B=3 C=0
+  47  MOVE     A=12 B=9 C=0
+  48  LOADK    A=13 Bx=2
+  49  LOADK    A=14 Bx=6
+  50  CALL     A=11 B=4 C=2
+  51  NEWTABLE A=12 B=5 C=0
+  52  MOVE     A=13 B=11 C=0
+  53  GETUPVAL A=14 B=3 C=0
+  54  MOVE     A=15 B=8 C=0
+  55  LOADK    A=16 Bx=7
+  56  LOADK    A=17 Bx=6
+  57  CALL     A=14 B=4 C=2
+  58  LOADNIL  A=15 B=16 C=0
+  59  MOVE     A=17 B=9 C=0
+  60  SETLIST  A=12 B=5 C=1
+  61  EQ       A=0 B=10 C=256
+  62  JMP      A=0 sBx=13 (-> 76)
+  63  GETUPVAL A=13 B=3 C=0
+  64  MOVE     A=14 B=8 C=0
+  65  LOADK    A=15 Bx=8
+  66  LOADK    A=16 Bx=9
+  67  CALL     A=13 B=4 C=2
+  68  SETTABLE A=12 B=263 C=13
+  69  GETUPVAL A=13 B=3 C=0
+  70  MOVE     A=14 B=8 C=0
+  71  LOADK    A=15 Bx=11
+  72  LOADK    A=16 Bx=12
+  73  CALL     A=13 B=4 C=2
+  74  SETTABLE A=12 B=266 C=13
+  75  JMP      A=0 sBx=34 (-> 110)
+  76  EQ       A=0 B=10 C=258
+  77  JMP      A=0 sBx=7 (-> 85)
+  78  GETUPVAL A=13 B=3 C=0
+  79  MOVE     A=14 B=9 C=0
+  80  LOADK    A=15 Bx=8
+  81  LOADK    A=16 Bx=13
+  82  CALL     A=13 B=4 C=2
+  83  SETTABLE A=12 B=263 C=13
+  84  JMP      A=0 sBx=25 (-> 110)
+  85  EQ       A=0 B=10 C=261
+  86  JMP      A=0 sBx=8 (-> 95)
+  87  GETUPVAL A=13 B=3 C=0
+  88  MOVE     A=14 B=9 C=0
+  89  LOADK    A=15 Bx=8
+  90  LOADK    A=16 Bx=14
+  91  CALL     A=13 B=4 C=2
+  92  SUB      A=13 B=13 C=271
+  93  SETTABLE A=12 B=263 C=13
+  94  JMP      A=0 sBx=15 (-> 110)
+  95  EQ       A=0 B=10 C=263
+  96  JMP      A=0 sBx=13 (-> 110)
+  97  GETUPVAL A=13 B=3 C=0
+  98  MOVE     A=14 B=9 C=0
+  99  LOADK    A=15 Bx=8
+ 100  LOADK    A=16 Bx=14
+ 101  CALL     A=13 B=4 C=2
+ 102  SUB      A=13 B=13 C=271
+ 103  SETTABLE A=12 B=263 C=13
+ 104  GETUPVAL A=13 B=3 C=0
+ 105  MOVE     A=14 B=8 C=0
+ 106  LOADK    A=15 Bx=11
+ 107  LOADK    A=16 Bx=12
+ 108  CALL     A=13 B=4 C=2
+ 109  SETTABLE A=12 B=266 C=13
+ 110  SETTABLE A=0 B=7 C=12
+ 111  FORLOOP  A=4 sBx=-81 (-> 31)
+ 112  GETUPVAL A=4 B=1 C=0
+ 113  CALL     A=4 B=1 C=2
+ 114  NEWTABLE A=5 B=6 C=0
+ 115  LOADK    A=6 Bx=0
+ 116  LOADK    A=7 Bx=0
+ 117  LOADK    A=8 Bx=0
+ 118  LOADK    A=9 Bx=0
+ 119  LOADK    A=10 Bx=0
+ 120  LOADK    A=11 Bx=0
+ 121  SETLIST  A=5 B=6 C=1
+ 122  LOADK    A=6 Bx=2
+ 123  MOVE     A=7 B=4 C=0
+ 124  LOADK    A=8 Bx=2
+ 125  FORPREP  A=6 sBx=24 (-> 150)
+ 126  GETUPVAL A=10 B=0 C=0
+ 127  CALL     A=10 B=1 C=2
+ 128  LOADNIL  A=11 B=11 C=0
+ 129  EQ       A=0 B=10 C=258
+ 130  JMP      A=0 sBx=7 (-> 138)
+ 131  GETUPVAL A=12 B=0 C=0
+ 132  CALL     A=12 B=1 C=2
+ 133  EQ       A=0 B=12 C=256
+ 134  JMP      A=0 sBx=1 (-> 136)
+ 135  LOADBOOL A=11 B=0 C=1 (skip next)
+ 136  LOADBOOL A=11 B=1 C=0
+ 137  JMP      A=0 sBx=11 (-> 149)
+ 138  EQ       A=0 B=10 C=256
+ 139  JMP      A=0 sBx=4 (-> 144)
+ 140  GETUPVAL A=12 B=4 C=0
+ 141  CALL     A=12 B=1 C=2
+ 142  MOVE     A=11 B=12 C=0
+ 143  JMP      A=0 sBx=5 (-> 149)
+ 144  EQ       A=0 B=10 C=263
+ 145  JMP      A=0 sBx=3 (-> 149)
+ 146  GETUPVAL A=12 B=5 C=0
+ 147  CALL     A=12 B=1 C=2
+ 148  MOVE     A=11 B=12 C=0
+ 149  SETTABLE A=5 B=9 C=11
+ 150  FORLOOP  A=6 sBx=-25 (-> 126)
+ 151  SETTABLE A=3 B=261 C=5
+ 152  LOADK    A=6 Bx=2
+ 153  GETUPVAL A=7 B=1 C=0
+ 154  CALL     A=7 B=1 C=2
+ 155  LOADK    A=8 Bx=2
+ 156  FORPREP  A=6 sBx=4 (-> 161)
+ 157  SUB      A=10 B=9 C=258
+ 158  GETUPVAL A=11 B=6 C=0
+ 159  CALL     A=11 B=1 C=2
+ 160  SETTABLE A=1 B=10 C=11
+ 161  FORLOOP  A=6 sBx=-5 (-> 157)
+ 162  RETURN   A=3 B=2 C=0
+ 163  RETURN   A=0 B=1 C=0
+============================================================
+proto main/10 (code=15 consts=4 protos=1)
+constants:
+  K0   number 1.0
+  K1   number 2.0
+  K2   number 3.0
+  K3   number 4.0
+   0  GETTABLE A=3 B=0 C=256
+   1  GETTABLE A=4 B=0 C=257
+   2  GETTABLE A=5 B=0 C=258
+   3  GETTABLE A=6 B=0 C=259
+   4  CLOSURE  A=7 Bx=0
+   5  MOVE     A=0 B=3 C=0
+   6  MOVE     A=0 B=4 C=0
+   7  MOVE     A=0 B=5 C=0
+   8  MOVE     A=0 B=6 C=0
+   9  GETUPVAL A=0 B=0 C=0
+  10  GETUPVAL A=0 B=1 C=0
+  11  GETUPVAL A=0 B=2 C=0
+  12  MOVE     A=0 B=2 C=0
+  13  RETURN   A=7 B=2 C=0
+  14  RETURN   A=0 B=1 C=0
+============================================================
+proto main/10/0 (code=497 consts=21 protos=0)
+constants:
+  K0   number 1.0
+  K1   number -1.0
+  K2   string '#'
+  K3   number 0.0
+  K4   number 8.0
+  K5   number 3.0
+  K6   number 2.0
+  K7   string 'A'
+  K8   number 5.0
+  K9   number 4.0
+  K10  number 6.0
+  K11  number 7.0
+  K12  number 13.0
+  K13  number 10.0
+  K14  number 9.0
+  K15  number 11.0
+  K16  number 12.0
+  K17  number 15.0
+  K18  number 14.0
+  K19  number 16.0
+  K20  number 17.0
+   0  GETUPVAL A=1 B=0 C=0
+   1  GETUPVAL A=2 B=1 C=0
+   2  GETUPVAL A=3 B=2 C=0
+   3  GETUPVAL A=4 B=3 C=0
+   4  GETUPVAL A=5 B=4 C=0
+   5  LOADK    A=6 Bx=0
+   6  LOADK    A=7 Bx=1
+   7  NEWTABLE A=8 B=0 C=0
+   8  NEWTABLE A=9 B=0 C=0
+   9  VARARG   A=10 B=0 C=0
+  10  SETLIST  A=9 B=0 C=1
+  11  GETUPVAL A=10 B=5 C=0
+  12  LOADK    A=11 Bx=2
+  13  VARARG   A=12 B=0 C=0
+  14  CALL     A=10 B=0 C=2
+  15  SUB      A=10 B=10 C=256
+  16  NEWTABLE A=11 B=0 C=0
+  17  NEWTABLE A=12 B=0 C=0
+  18  LOADK    A=13 Bx=3
+  19  MOVE     A=14 B=10 C=0
+  20  LOADK    A=15 Bx=0
+  21  FORPREP  A=13 sBx=10 (-> 32)
+  22  LE       A=0 B=4 C=16
+  23  JMP      A=0 sBx=5 (-> 29)
+  24  SUB      A=17 B=16 C=4
+  25  ADD      A=18 B=16 C=256
+  26  GETTABLE A=18 B=9 C=18
+  27  SETTABLE A=8 B=17 C=18
+  28  JMP      A=0 sBx=3 (-> 32)
+  29  ADD      A=17 B=16 C=256
+  30  GETTABLE A=17 B=9 C=17
+  31  SETTABLE A=12 B=16 C=17
+  32  FORLOOP  A=13 sBx=-11 (-> 22)
+  33  SUB      A=13 B=10 C=4
+  34  ADD      A=13 B=13 C=256
+  35  LOADNIL  A=14 B=15 C=0
+  36  GETTABLE A=14 B=1 C=6
+  37  GETTABLE A=15 B=14 C=256
+  38  LE       A=0 B=15 C=260
+  39  JMP      A=0 sBx=142 (-> 182)
+  40  LE       A=0 B=15 C=261
+  41  JMP      A=0 sBx=72 (-> 114)
+  42  LE       A=0 B=15 C=256
+  43  JMP      A=0 sBx=61 (-> 105)
+  44  EQ       A=0 B=15 C=259
+  45  JMP      A=0 sBx=23 (-> 69)
+  46  GETTABLE A=16 B=14 C=262
+  47  NEWTABLE A=17 B=0 C=0
+  48  LOADK    A=18 Bx=3
+  49  GETTABLE A=19 B=14 C=261
+  50  ADD      A=19 B=16 C=19
+  51  SUB      A=19 B=19 C=256
+  52  ADD      A=20 B=16 C=256
+  53  MOVE     A=21 B=19 C=0
+  54  LOADK    A=22 Bx=0
+  55  FORPREP  A=20 sBx=3 (-> 59)
+  56  ADD      A=18 B=18 C=256
+  57  GETTABLE A=24 B=12 C=23
+  58  SETTABLE A=17 B=18 C=24
+  59  FORLOOP  A=20 sBx=-4 (-> 56)
+  60  GETTABLE A=20 B=12 C=16
+  61  GETUPVAL A=21 B=6 C=0
+  62  MOVE     A=22 B=17 C=0
+  63  LOADK    A=23 Bx=0
+  64  SUB      A=24 B=19 C=16
+  65  CALL     A=21 B=4 C=0
+  66  CALL     A=20 B=0 C=1
+  67  MOVE     A=7 B=16 C=0
+  68  JMP      A=0 sBx=425 (-> 494)
+  69  GETTABLE A=16 B=14 C=262
+  70  NEWTABLE A=17 B=0 C=0
+  71  LOADK    A=18 Bx=3
+  72  GETTABLE A=19 B=14 C=261
+  73  ADD      A=19 B=16 C=19
+  74  SUB      A=19 B=19 C=256
+  75  ADD      A=20 B=16 C=256
+  76  MOVE     A=21 B=19 C=0
+  77  LOADK    A=22 Bx=0
+  78  FORPREP  A=20 sBx=3 (-> 82)
+  79  ADD      A=18 B=18 C=256
+  80  GETTABLE A=24 B=12 C=23
+  81  SETTABLE A=17 B=18 C=24
+  82  FORLOOP  A=20 sBx=-4 (-> 79)
+  83  MOVE     A=20 B=5 C=0
+  84  GETTABLE A=21 B=12 C=16
+  85  GETUPVAL A=22 B=6 C=0
+  86  MOVE     A=23 B=17 C=0
+  87  LOADK    A=24 Bx=0
+  88  SUB      A=25 B=19 C=16
+  89  CALL     A=22 B=4 C=0
+  90  CALL     A=21 B=0 C=0
+  91  CALL     A=20 B=0 C=3
+  92  ADD      A=22 B=21 C=16
+  93  SUB      A=21 B=22 C=256
+  94  LOADK    A=18 Bx=3
+  95  MOVE     A=22 B=16 C=0
+  96  MOVE     A=23 B=21 C=0
+  97  LOADK    A=24 Bx=0
+  98  FORPREP  A=22 sBx=3 (-> 102)
+  99  ADD      A=18 B=18 C=256
+ 100  GETTABLE A=26 B=20 C=18
+ 101  SETTABLE A=12 B=25 C=26
+ 102  FORLOOP  A=22 sBx=-4 (-> 99)
+ 103  MOVE     A=7 B=21 C=0
+ 104  JMP      A=0 sBx=389 (-> 494)
+ 105  LT       A=0 B=262 C=15
+ 106  JMP      A=0 sBx=5 (-> 112)
+ 107  GETTABLE A=16 B=14 C=262
+ 108  GETTABLE A=16 B=12 C=16
+ 109  CALL     A=16 B=1 C=1
+ 110  GETGLOBAL A=7 Bx=7
+ 111  JMP      A=0 sBx=382 (-> 494)
+ 112  RETURN   A=0 B=1 C=0
+ 113  JMP      A=0 sBx=380 (-> 494)
+ 114  LE       A=0 B=15 C=264
+ 115  JMP      A=0 sBx=17 (-> 133)
+ 116  EQ       A=0 B=15 C=265
+ 117  JMP      A=0 sBx=10 (-> 128)
+ 118  GETTABLE A=16 B=14 C=262
+ 119  GETTABLE A=17 B=14 C=261
+ 120  GETTABLE A=17 B=12 C=17
+ 121  ADD      A=18 B=16 C=256
+ 122  SETTABLE A=12 B=18 C=17
+ 123  GETTABLE A=18 B=14 C=264
+ 124  GETTABLE A=18 B=2 C=18
+ 125  GETTABLE A=18 B=17 C=18
+ 126  SETTABLE A=12 B=16 C=18
+ 127  JMP      A=0 sBx=366 (-> 494)
+ 128  GETTABLE A=16 B=14 C=262
+ 129  GETTABLE A=17 B=14 C=261
+ 130  GETTABLE A=17 B=2 C=17
+ 131  SETTABLE A=12 B=16 C=17
+ 132  JMP      A=0 sBx=361 (-> 494)
+ 133  LE       A=0 B=15 C=266
+ 134  JMP      A=0 sBx=2 (-> 137)
+ 135  RETURN   A=0 B=1 C=0
+ 136  JMP      A=0 sBx=357 (-> 494)
+ 137  EQ       A=0 B=15 C=267
+ 138  JMP      A=0 sBx=7 (-> 146)
+ 139  GETTABLE A=16 B=14 C=262
+ 140  GETUPVAL A=17 B=7 C=0
+ 141  GETTABLE A=18 B=14 C=261
+ 142  GETTABLE A=18 B=2 C=18
+ 143  GETTABLE A=17 B=17 C=18
+ 144  SETTABLE A=12 B=16 C=17
+ 145  JMP      A=0 sBx=348 (-> 494)
+ 146  GETTABLE A=16 B=14 C=262
+ 147  NEWTABLE A=17 B=0 C=0
+ 148  LOADK    A=18 Bx=3
+ 149  GETTABLE A=19 B=14 C=261
+ 150  ADD      A=19 B=16 C=19
+ 151  SUB      A=19 B=19 C=256
+ 152  ADD      A=20 B=16 C=256
+ 153  MOVE     A=21 B=19 C=0
+ 154  LOADK    A=22 Bx=0
+ 155  FORPREP  A=20 sBx=3 (-> 159)
+ 156  ADD      A=18 B=18 C=256
+ 157  GETTABLE A=24 B=12 C=23
+ 158  SETTABLE A=17 B=18 C=24
+ 159  FORLOOP  A=20 sBx=-4 (-> 156)
+ 160  MOVE     A=20 B=5 C=0
+ 161  GETTABLE A=21 B=12 C=16
+ 162  GETUPVAL A=22 B=6 C=0
+ 163  MOVE     A=23 B=17 C=0
+ 164  LOADK    A=24 Bx=0
+ 165  SUB      A=25 B=19 C=16
+ 166  CALL     A=22 B=4 C=0
+ 167  CALL     A=21 B=0 C=0
+ 168  CALL     A=20 B=0 C=3
+ 169  ADD      A=22 B=21 C=16
+ 170  SUB      A=21 B=22 C=256
+ 171  LOADK    A=18 Bx=3
+ 172  MOVE     A=22 B=16 C=0
+ 173  MOVE     A=23 B=21 C=0
+ 174  LOADK    A=24 Bx=0
+ 175  FORPREP  A=22 sBx=3 (-> 179)
+ 176  ADD      A=18 B=18 C=256
+ 177  GETTABLE A=26 B=20 C=18
+ 178  SETTABLE A=12 B=25 C=26
+ 179  FORLOOP  A=22 sBx=-4 (-> 176)
+ 180  MOVE     A=7 B=21 C=0
+ 181  JMP      A=0 sBx=312 (-> 494)
+ 182  LE       A=0 B=15 C=268
+ 183  JMP      A=0 sBx=89 (-> 273)
+ 184  LE       A=0 B=15 C=269
+ 185  JMP      A=0 sBx=33 (-> 219)
+ 186  EQ       A=0 B=15 C=270
+ 187  JMP      A=0 sBx=23 (-> 211)
+ 188  GETTABLE A=16 B=14 C=262
+ 189  NEWTABLE A=17 B=0 C=0
+ 190  LOADK    A=18 Bx=3
+ 191  GETTABLE A=19 B=14 C=261
+ 192  ADD      A=19 B=16 C=19
+ 193  SUB      A=19 B=19 C=256
+ 194  ADD      A=20 B=16 C=256
+ 195  MOVE     A=21 B=19 C=0
+ 196  LOADK    A=22 Bx=0
+ 197  FORPREP  A=20 sBx=3 (-> 201)
+ 198  ADD      A=18 B=18 C=256
+ 199  GETTABLE A=24 B=12 C=23
+ 200  SETTABLE A=17 B=18 C=24
+ 201  FORLOOP  A=20 sBx=-4 (-> 198)
+ 202  GETTABLE A=20 B=12 C=16
+ 203  GETUPVAL A=21 B=6 C=0
+ 204  MOVE     A=22 B=17 C=0
+ 205  LOADK    A=23 Bx=0
+ 206  SUB      A=24 B=19 C=16
+ 207  CALL     A=21 B=4 C=0
+ 208  CALL     A=20 B=0 C=1
+ 209  MOVE     A=7 B=16 C=0
+ 210  JMP      A=0 sBx=283 (-> 494)
+ 211  GETTABLE A=16 B=14 C=262
+ 212  GETTABLE A=17 B=14 C=261
+ 213  EQ       A=0 B=17 C=259
+ 214  JMP      A=0 sBx=1 (-> 216)
+ 215  LOADBOOL A=17 B=0 C=1 (skip next)
+ 216  LOADBOOL A=17 B=1 C=0
+ 217  SETTABLE A=12 B=16 C=17
+ 218  JMP      A=0 sBx=275 (-> 494)
+ 219  LE       A=0 B=15 C=271
+ 220  JMP      A=0 sBx=35 (-> 256)
+ 221  GETTABLE A=16 B=14 C=262
+ 222  NEWTABLE A=17 B=0 C=0
+ 223  LOADK    A=18 Bx=3
+ 224  MOVE     A=19 B=7 C=0
+ 225  ADD      A=20 B=16 C=256
+ 226  MOVE     A=21 B=19 C=0
+ 227  LOADK    A=22 Bx=0
+ 228  FORPREP  A=20 sBx=3 (-> 232)
+ 229  ADD      A=18 B=18 C=256
+ 230  GETTABLE A=24 B=12 C=23
+ 231  SETTABLE A=17 B=18 C=24
+ 232  FORLOOP  A=20 sBx=-4 (-> 229)
+ 233  NEWTABLE A=20 B=0 C=0
+ 234  GETTABLE A=21 B=12 C=16
+ 235  GETUPVAL A=22 B=6 C=0
+ 236  MOVE     A=23 B=17 C=0
+ 237  LOADK    A=24 Bx=0
+ 238  SUB      A=25 B=19 C=16
+ 239  CALL     A=22 B=4 C=0
+ 240  CALL     A=21 B=0 C=0
+ 241  SETLIST  A=20 B=0 C=1
+ 242  GETTABLE A=21 B=14 C=264
+ 243  ADD      A=21 B=16 C=21
+ 244  SUB      A=21 B=21 C=262
+ 245  LOADK    A=18 Bx=3
+ 246  MOVE     A=22 B=16 C=0
+ 247  MOVE     A=23 B=21 C=0
+ 248  LOADK    A=24 Bx=0
+ 249  FORPREP  A=22 sBx=3 (-> 253)
+ 250  ADD      A=18 B=18 C=256
+ 251  GETTABLE A=26 B=20 C=18
+ 252  SETTABLE A=12 B=25 C=26
+ 253  FORLOOP  A=22 sBx=-4 (-> 250)
+ 254  MOVE     A=7 B=21 C=0
+ 255  JMP      A=0 sBx=238 (-> 494)
+ 256  EQ       A=0 B=15 C=272
+ 257  JMP      A=0 sBx=10 (-> 268)
+ 258  GETTABLE A=16 B=14 C=262
+ 259  GETTABLE A=17 B=14 C=261
+ 260  GETTABLE A=17 B=12 C=17
+ 261  ADD      A=18 B=16 C=256
+ 262  SETTABLE A=12 B=18 C=17
+ 263  GETTABLE A=18 B=14 C=264
+ 264  GETTABLE A=18 B=2 C=18
+ 265  GETTABLE A=18 B=17 C=18
+ 266  SETTABLE A=12 B=16 C=18
+ 267  JMP      A=0 sBx=226 (-> 494)
+ 268  GETTABLE A=16 B=14 C=262
+ 269  GETTABLE A=17 B=14 C=261
+ 270  GETTABLE A=17 B=2 C=17
+ 271  SETTABLE A=12 B=16 C=17
+ 272  JMP      A=0 sBx=221 (-> 494)
+ 273  LE       A=0 B=15 C=273
+ 274  JMP      A=0 sBx=166 (-> 441)
+ 275  EQ       A=0 B=15 C=274
+ 276  JMP      A=0 sBx=5 (-> 282)
+ 277  GETTABLE A=16 B=14 C=262
+ 278  GETTABLE A=16 B=12 C=16
+ 279  CALL     A=16 B=1 C=1
+ 280  GETGLOBAL A=7 Bx=7
+ 281  JMP      A=0 sBx=212 (-> 494)
+ 282  LOADNIL  A=16 B=23 C=0
+ 283  GETTABLE A=24 B=14 C=262
+ 284  GETUPVAL A=25 B=7 C=0
+ 285  GETTABLE A=26 B=14 C=261
+ 286  GETTABLE A=26 B=2 C=26
+ 287  GETTABLE A=25 B=25 C=26
+ 288  SETTABLE A=12 B=24 C=25
+ 289  ADD      A=6 B=6 C=256
+ 290  GETTABLE A=14 B=1 C=6
+ 291  GETTABLE A=24 B=14 C=262
+ 292  GETTABLE A=25 B=14 C=261
+ 293  GETTABLE A=25 B=2 C=25
+ 294  SETTABLE A=12 B=24 C=25
+ 295  ADD      A=6 B=6 C=256
+ 296  GETTABLE A=14 B=1 C=6
+ 297  GETTABLE A=23 B=14 C=262
+ 298  NEWTABLE A=24 B=0 C=0
+ 299  MOVE     A=22 B=24 C=0
+ 300  LOADK    A=21 Bx=3
+ 301  GETTABLE A=24 B=14 C=261
+ 302  ADD      A=24 B=23 C=24
+ 303  SUB      A=20 B=24 C=256
+ 304  ADD      A=24 B=23 C=256
+ 305  MOVE     A=25 B=20 C=0
+ 306  LOADK    A=26 Bx=0
+ 307  FORPREP  A=24 sBx=3 (-> 311)
+ 308  ADD      A=21 B=21 C=256
+ 309  GETTABLE A=28 B=12 C=27
+ 310  SETTABLE A=22 B=21 C=28
+ 311  FORLOOP  A=24 sBx=-4 (-> 308)
+ 312  GETTABLE A=24 B=12 C=23
+ 313  GETUPVAL A=25 B=6 C=0
+ 314  MOVE     A=26 B=22 C=0
+ 315  LOADK    A=27 Bx=0
+ 316  SUB      A=28 B=20 C=23
+ 317  CALL     A=25 B=4 C=0
+ 318  CALL     A=24 B=0 C=1
+ 319  MOVE     A=7 B=23 C=0
+ 320  ADD      A=6 B=6 C=256
+ 321  GETTABLE A=14 B=1 C=6
+ 322  GETTABLE A=24 B=14 C=262
+ 323  GETUPVAL A=25 B=7 C=0
+ 324  GETTABLE A=26 B=14 C=261
+ 325  GETTABLE A=26 B=2 C=26
+ 326  GETTABLE A=25 B=25 C=26
+ 327  SETTABLE A=12 B=24 C=25
+ 328  ADD      A=6 B=6 C=256
+ 329  GETTABLE A=14 B=1 C=6
+ 330  GETTABLE A=24 B=14 C=262
+ 331  GETUPVAL A=25 B=7 C=0
+ 332  GETTABLE A=26 B=14 C=261
+ 333  GETTABLE A=26 B=2 C=26
+ 334  GETTABLE A=25 B=25 C=26
+ 335  SETTABLE A=12 B=24 C=25
+ 336  ADD      A=6 B=6 C=256
+ 337  GETTABLE A=14 B=1 C=6
+ 338  GETTABLE A=23 B=14 C=262
+ 339  GETTABLE A=24 B=14 C=261
+ 340  GETTABLE A=19 B=12 C=24
+ 341  ADD      A=24 B=23 C=256
+ 342  SETTABLE A=12 B=24 C=19
+ 343  GETTABLE A=24 B=14 C=264
+ 344  GETTABLE A=24 B=2 C=24
+ 345  GETTABLE A=24 B=19 C=24
+ 346  SETTABLE A=12 B=23 C=24
+ 347  ADD      A=6 B=6 C=256
+ 348  GETTABLE A=14 B=1 C=6
+ 349  GETTABLE A=24 B=14 C=262
+ 350  GETTABLE A=25 B=14 C=261
+ 351  GETTABLE A=25 B=2 C=25
+ 352  SETTABLE A=12 B=24 C=25
+ 353  ADD      A=6 B=6 C=256
+ 354  GETTABLE A=14 B=1 C=6
+ 355  GETTABLE A=24 B=14 C=262
+ 356  GETTABLE A=25 B=14 C=261
+ 357  EQ       A=0 B=25 C=259
+ 358  JMP      A=0 sBx=1 (-> 360)
+ 359  LOADBOOL A=25 B=0 C=1 (skip next)
+ 360  LOADBOOL A=25 B=1 C=0
+ 361  SETTABLE A=12 B=24 C=25
+ 362  ADD      A=6 B=6 C=256
+ 363  GETTABLE A=14 B=1 C=6
+ 364  GETTABLE A=23 B=14 C=262
+ 365  NEWTABLE A=24 B=0 C=0
+ 366  MOVE     A=22 B=24 C=0
+ 367  LOADK    A=21 Bx=3
+ 368  GETTABLE A=24 B=14 C=261
+ 369  ADD      A=24 B=23 C=24
+ 370  SUB      A=20 B=24 C=256
+ 371  ADD      A=24 B=23 C=256
+ 372  MOVE     A=25 B=20 C=0
+ 373  LOADK    A=26 Bx=0
+ 374  FORPREP  A=24 sBx=3 (-> 378)
+ 375  ADD      A=21 B=21 C=256
+ 376  GETTABLE A=28 B=12 C=27
+ 377  SETTABLE A=22 B=21 C=28
+ 378  FORLOOP  A=24 sBx=-4 (-> 375)
+ 379  MOVE     A=24 B=5 C=0
+ 380  GETTABLE A=25 B=12 C=23
+ 381  GETUPVAL A=26 B=6 C=0
+ 382  MOVE     A=27 B=22 C=0
+ 383  LOADK    A=28 Bx=0
+ 384  SUB      A=29 B=20 C=23
+ 385  CALL     A=26 B=4 C=0
+ 386  CALL     A=25 B=0 C=0
+ 387  CALL     A=24 B=0 C=3
+ 388  MOVE     A=20 B=25 C=0
+ 389  MOVE     A=17 B=24 C=0
+ 390  ADD      A=24 B=20 C=23
+ 391  SUB      A=20 B=24 C=256
+ 392  LOADK    A=21 Bx=3
+ 393  MOVE     A=24 B=23 C=0
+ 394  MOVE     A=25 B=20 C=0
+ 395  LOADK    A=26 Bx=0
+ 396  FORPREP  A=24 sBx=3 (-> 400)
+ 397  ADD      A=21 B=21 C=256
+ 398  GETTABLE A=28 B=17 C=21
+ 399  SETTABLE A=12 B=27 C=28
+ 400  FORLOOP  A=24 sBx=-4 (-> 397)
+ 401  MOVE     A=7 B=20 C=0
+ 402  ADD      A=6 B=6 C=256
+ 403  GETTABLE A=14 B=1 C=6
+ 404  GETTABLE A=23 B=14 C=262
+ 405  NEWTABLE A=24 B=0 C=0
+ 406  MOVE     A=22 B=24 C=0
+ 407  LOADK    A=21 Bx=3
+ 408  MOVE     A=20 B=7 C=0
+ 409  ADD      A=24 B=23 C=256
+ 410  MOVE     A=25 B=20 C=0
+ 411  LOADK    A=26 Bx=0
+ 412  FORPREP  A=24 sBx=3 (-> 416)
+ 413  ADD      A=21 B=21 C=256
+ 414  GETTABLE A=28 B=12 C=27
+ 415  SETTABLE A=22 B=21 C=28
+ 416  FORLOOP  A=24 sBx=-4 (-> 413)
+ 417  NEWTABLE A=24 B=0 C=0
+ 418  GETTABLE A=25 B=12 C=23
+ 419  GETUPVAL A=26 B=6 C=0
+ 420  MOVE     A=27 B=22 C=0
+ 421  LOADK    A=28 Bx=0
+ 422  SUB      A=29 B=20 C=23
+ 423  CALL     A=26 B=4 C=0
+ 424  CALL     A=25 B=0 C=0
+ 425  SETLIST  A=24 B=0 C=1
+ 426  MOVE     A=17 B=24 C=0
+ 427  GETTABLE A=24 B=14 C=264
+ 428  ADD      A=24 B=23 C=24
+ 429  SUB      A=20 B=24 C=262
+ 430  LOADK    A=21 Bx=3
+ 431  MOVE     A=24 B=23 C=0
+ 432  MOVE     A=25 B=20 C=0
+ 433  LOADK    A=26 Bx=0
+ 434  FORPREP  A=24 sBx=3 (-> 438)
+ 435  ADD      A=21 B=21 C=256
+ 436  GETTABLE A=28 B=17 C=21
+ 437  SETTABLE A=12 B=27 C=28
+ 438  FORLOOP  A=24 sBx=-4 (-> 435)
+ 439  MOVE     A=7 B=20 C=0
+ 440  JMP      A=0 sBx=53 (-> 494)
+ 441  LE       A=0 B=15 C=275
+ 442  JMP      A=0 sBx=7 (-> 450)
+ 443  GETTABLE A=16 B=14 C=262
+ 444  GETUPVAL A=17 B=7 C=0
+ 445  GETTABLE A=18 B=14 C=261
+ 446  GETTABLE A=18 B=2 C=18
+ 447  GETTABLE A=17 B=17 C=18
+ 448  SETTABLE A=12 B=16 C=17
+ 449  JMP      A=0 sBx=44 (-> 494)
+ 450  LT       A=0 B=276 C=15
+ 451  JMP      A=0 sBx=8 (-> 460)
+ 452  GETTABLE A=16 B=14 C=262
+ 453  GETTABLE A=17 B=14 C=261
+ 454  EQ       A=0 B=17 C=259
+ 455  JMP      A=0 sBx=1 (-> 457)
+ 456  LOADBOOL A=17 B=0 C=1 (skip next)
+ 457  LOADBOOL A=17 B=1 C=0
+ 458  SETTABLE A=12 B=16 C=17
+ 459  JMP      A=0 sBx=34 (-> 494)
+ 460  GETTABLE A=16 B=14 C=262
+ 461  NEWTABLE A=17 B=0 C=0
+ 462  LOADK    A=18 Bx=3
+ 463  MOVE     A=19 B=7 C=0
+ 464  ADD      A=20 B=16 C=256
+ 465  MOVE     A=21 B=19 C=0
+ 466  LOADK    A=22 Bx=0
+ 467  FORPREP  A=20 sBx=3 (-> 471)
+ 468  ADD      A=18 B=18 C=256
+ 469  GETTABLE A=24 B=12 C=23
+ 470  SETTABLE A=17 B=18 C=24
+ 471  FORLOOP  A=20 sBx=-4 (-> 468)
+ 472  NEWTABLE A=20 B=0 C=0
+ 473  GETTABLE A=21 B=12 C=16
+ 474  GETUPVAL A=22 B=6 C=0
+ 475  MOVE     A=23 B=17 C=0
+ 476  LOADK    A=24 Bx=0
+ 477  SUB      A=25 B=19 C=16
+ 478  CALL     A=22 B=4 C=0
+ 479  CALL     A=21 B=0 C=0
+ 480  SETLIST  A=20 B=0 C=1
+ 481  GETTABLE A=21 B=14 C=264
+ 482  ADD      A=21 B=16 C=21
+ 483  SUB      A=21 B=21 C=262
+ 484  LOADK    A=18 Bx=3
+ 485  MOVE     A=22 B=16 C=0
+ 486  MOVE     A=23 B=21 C=0
+ 487  LOADK    A=24 Bx=0
+ 488  FORPREP  A=22 sBx=3 (-> 492)
+ 489  ADD      A=18 B=18 C=256
+ 490  GETTABLE A=26 B=20 C=18
+ 491  SETTABLE A=12 B=25 C=26
+ 492  FORLOOP  A=22 sBx=-4 (-> 489)
+ 493  MOVE     A=7 B=21 C=0
+ 494  ADD      A=6 B=6 C=256
+ 495  JMP      A=0 sBx=-460 (-> 36)
+ 496  RETURN   A=0 B=1 C=0

@@ -1,0 +1,7 @@
+2026-11-17 commands:
+  gh api repos/NoobieDoge/DogeHubV2/contents/ShindoLife?ref=Separated > work/sources/dogehub_shindo.lua   # 44639 B
+  python3 work/tools/luac51_dump.py  # stock parse attempt -> desync at upvalues (expected: custom container)
+  python3 work/tools/ironbrew_dump.py work/sources/dogehub_payload.bin deobf-report/results/shindo_life/dogehub_v2_shindo/dump.txt   # consumed 14691/14691
+  python3 work/tools/ironbrew_disasm.py work/sources/dogehub_payload.bin all deobf-report/results/shindo_life/dogehub_v2_shindo/disasm.txt
+  python3 - <<'PY' # base-35-подобный декод K13 -> 365 B (dogehub_layer3.bin); raw-parse как IronBrew proto tree -> EOF@4
+RC checks: all parsers exit 0; payload parse consumed 100% bytes.

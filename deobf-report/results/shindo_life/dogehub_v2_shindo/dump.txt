@@ -1,0 +1,152 @@
+========================================================================
+proto main  name=@Ironbrew/netcoreapp2.0/out.lua  lines 0-0  args=0 upvals=0 vargs=2 stack=28
+code=84 consts=17 protos=11 upnames=[]
+  K0    string "string"
+  K1    string "byte"
+  K2    string "char"
+  K3    string "sub"
+  K4    string "table"
+  K5    string "concat"
+  K6    string "math"
+  K7    string "ldexp"
+  K8    string "getfenv"
+  K9    string "setmetatable"
+  K10   string "select"
+  K11   string "unpack"
+  K12   string "tonumber"
+  K13   string "24624A24627622H24E22U22X22Q24E27622L23Q27A23123Q27622G23Q27J27I27723Y27H23Y27E25227H25227622K24E25I24623127D24622D24M27H24M27622028328227X27W28128E22G24627W23127624622G24E27J23228328N27622Z28324028L24524328L26E26C27326W26A24523K28L25U26X26P26R26626B26S25225C24K25225H27229326Q26X25226227326O26R24524C28L26Y26X26V26Q26D26A29226W26P24524228L26P26V26Z29T24128L26626A26A26E25T26R29526328L2722AG26E26D24S25525526C26V26925426P27326A27229E26B26D26R26C26T26X29426R2942542B826Z25526526V2B526E24G24H24K24M25525H26R26T26C2AK25529929B29D26S29H25525T2AA26R26D2BP29L26W29N29Q29S28L246"
+  K14   string "bit"
+  K15   string "bxor"
+  K16   number 1
+  locals: t[2-83], f[4-83], c[6-83], E[8-83], L[10-83], H[14-83], l[15-83], u[16-83], i[17-83], h[18-83], s[22-83], a[25-83], n[33-83], o[34-83], l[35-83], e[40-83], d[45-83], s[49-83], r[50-83], h[59-83], l[60-83], r[62-83], L[70-83], b[74-83]
+========================================================================
+proto main/0  name=None  lines 1-1  args=0 upvals=0 vargs=0 stack=2
+code=3 consts=1 protos=0 upnames=[]
+  K0    string "_ENV"
+========================================================================
+proto main/1  name=None  lines 1-1  args=1 upvals=3 vargs=0 stack=14
+code=65 consts=6 protos=1 upnames=['f', 'h', 'c']
+  K0    string ""
+  K1    number 256
+  K2    number 0
+  K3    number 1
+  K4    string "table"
+  K5    string "concat"
+  locals: t[0-64], o[3-64], e[3-64], n[3-64], d[4-64], a[5-64], (for index)[8-14], (for limit)[8-14], (for step)[8-14], l[9-13], l[15-64], r[20-64], l[31-58]
+========================================================================
+proto main/1/0  name=None  lines 1-1  args=0 upvals=4 vargs=0 stack=6
+code=26 consts=2 protos=0 upnames=['h', 'c', 't', 'l']
+  K0    number 36
+  K1    number 1
+  locals: o[8-25], e[21-25]
+========================================================================
+proto main/2  name=None  lines 1-1  args=2 upvals=0 vargs=0 stack=8
+code=35 consts=3 protos=0 upnames=[]
+  K0    number 1
+  K1    number 0
+  K2    number 2
+  locals: l[0-34], e[0-34], o[2-34], n[2-34], c[8-18], a[8-18], e[25-32]
+========================================================================
+proto main/3  name=None  lines 1-1  args=3 upvals=0 vargs=0 stack=6
+code=27 consts=3 protos=0 upnames=[]
+  K0    number 1
+  K1    number 2
+  K2    number 0
+  locals: o[0-26], l[0-26], e[0-26], l[11-14], l[17-26]
+========================================================================
+proto main/4  name=None  lines 1-1  args=0 upvals=4 vargs=0 stack=7
+code=37 consts=6 protos=0 upnames=['t', 'a', 'l', 'n']
+  K0    number 3
+  K1    number 150
+  K2    number 4
+  K3    number 1.67772e+07
+  K4    number 65536
+  K5    number 256
+  locals: o[6-36], e[6-36], a[6-36], c[6-36]
+========================================================================
+proto main/5  name=None  lines 1-1  args=0 upvals=4 vargs=0 stack=5
+code=13 consts=2 protos=0 upnames=['n', 't', 'a', 'l']
+  K0    number 150
+  K1    number 1
+  locals: o[8-12]
+========================================================================
+proto main/6  name=None  lines 1-1  args=0 upvals=3 vargs=0 stack=9
+code=52 consts=11 protos=0 upnames=['e', 'o', 'L']
+  K0    number 1
+  K1    number 20
+  K2    number 4.29497e+09
+  K3    number 21
+  K4    number 31
+  K5    number 32
+  K6    number -1
+  K7    number 0
+  K8    number 2047
+  K9    number 1023
+  K10   number 4.5036e+15
+  locals: l[2-51], n[4-51], c[5-51], e[12-51], l[17-51], o[22-51]
+========================================================================
+proto main/7  name=None  lines 1-1  args=1 upvals=8 vargs=0 stack=14
+code=44 consts=4 protos=0 upnames=['r', 'c', 'a', 'l', 'f', 'n', 't', 'E']
+  K0    number 0
+  K1    string ""
+  K2    number 1
+  K3    number 150
+  locals: o[0-43], e[0-43], o[21-43], (for index)[24-39], (for limit)[24-39], (for step)[24-39], l[25-38]
+========================================================================
+proto main/8  name=None  lines 1-1  args=0 upvals=1 vargs=3 stack=5
+code=9 consts=1 protos=0 upnames=['u']
+  K0    string "#"
+  locals: arg[0-8]
+========================================================================
+proto main/9  name=None  lines 1-1  args=0 upvals=7 vargs=0 stack=18
+code=164 consts=16 protos=0 upnames=['d', 'e', 'n', 'o', 's', 'h', 'L']
+  K0    number 0
+  K1    number 4
+  K2    number 1
+  K3    number 206
+  K4    number 251
+  K5    number 2
+  K6    number 11
+  K7    number 3
+  K8    number 12
+  K9    number 20
+  K10   number 5
+  K11   number 21
+  K12   number 29
+  K13   number 33
+  K14   number 32
+  K15   number 1.04858e+06
+  locals: f[14-163], t[15-163], l[16-163], a[23-163], (for index)[30-112], (for limit)[30-112], (for step)[30-112], a[31-111], c[36-111], e[41-111], n[46-111], l[51-111], l[61-111], l[114-163], n[122-163], (for index)[125-151], (for limit)[125-151], (for step)[125-151], e[126-150], o[128-150], l[129-150], (for index)[156-162], (for limit)[156-162], (for step)[156-162], l[157-161]
+========================================================================
+proto main/10  name=None  lines 1-1  args=3 upvals=3 vargs=0 stack=8
+code=15 consts=4 protos=1 upnames=['r', 'u', 'i']
+  K0    number 1
+  K1    number 2
+  K2    number 3
+  K3    number 4
+  locals: l[0-14], o[0-14], h[0-14], o[1-14], n[2-14], e[3-14], l[4-14]
+========================================================================
+proto main/10/0  name=None  lines 1-1  args=0 upvals=8 vargs=3 stack=30
+code=497 consts=21 protos=0 upnames=['o', 'n', 'e', 'l', 'r', 'u', 'i', 'h']
+  K0    number 1
+  K1    number -1
+  K2    string "#"
+  K3    number 0
+  K4    number 8
+  K5    number 3
+  K6    number 2
+  K7    string "A"
+  K8    number 5
+  K9    number 4
+  K10   number 6
+  K11   number 7
+  K12   number 13
+  K13   number 10
+  K14   number 9
+  K15   number 11
+  K16   number 12
+  K17   number 15
+  K18   number 14
+  K19   number 16
+  K20   number 17
+  locals: arg[0-496], f[1-496], t[2-496], o[3-496], n[4-496], E[5-496], e[6-496], d[7-496], r[8-496], a[11-496], c[16-496], l[17-496], o[18-496], (for index)[21-33], (for limit)[21-33], (for step)[21-33], l[22-32], l[35-496], l[36-496], a[36-496], e[47-68], c[48-68], n[49-68], l[52-68], (for index)[55-60], (for limit)[55-60], (for step)[55-60], l[56-59], n[70-104], c[71-104], e[72-104], l[75-104], (for index)[78-83], (for limit)[78-83], (for step)[78-83], l[79-82], c[92-104], l[92-104], (for index)[98-103], (for limit)[98-103], (for step)[98-103], l[99-102], n[119-127], e[121-127], n[147-181], c[148-181], e[149-181], l[152-181], (for index)[155-160], (for limit)[155-160], (for step)[155-160], l[156-159], c[169-181], l[169-181], (for index)[175-180], (for limit)[175-180], (for step)[175-180], l[176-179], e[189-210], c[190-210], n[191-210], l[194-210], (for index)[197-202], (for limit)[197-202], (for step)[197-202], l[198-201], n[222-255], c[223-255], e[224-255], a[225-255], (for index)[228-233], (for limit)[228-233], (for step)[228-233], l[229-232], c[242-255], l[245-255], (for index)[249-254], (for limit)[249-254], (for step)[249-254], l[250-253], e[259-267], n[261-267], n[283-440], u[283-440], n[283-440], s[283-440], a[283-440], c[283-440], r[283-440], n[283-440], (for index)[307-312], (for limit)[307-312], (for step)[307-312], l[308-311], (for index)[374-379], (for limit)[374-379], (for step)[374-379], l[375-378], (for index)[396-401], (for limit)[396-401], (for step)[396-401], l[397-400], (for index)[412-417], (for limit)[412-417], (for step)[412-417], l[413-416], (for index)[434-439], (for limit)[434-439], (for step)[434-439], l[435-438], n[461-494], a[462-494], e[463-494], c[464-494], (for index)[467-472], (for limit)[467-472], (for step)[467-472], l[468-471], c[481-494], l[484-494], (for index)[488-493], (for limit)[488-493], (for step)[488-493], l[489-492]
