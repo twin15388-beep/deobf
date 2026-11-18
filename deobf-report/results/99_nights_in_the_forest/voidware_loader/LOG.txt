@@ -1,0 +1,12 @@
+2026-11-18 commands:
+  EXPLOITS-SCRIPTS repo (GitHub search, "99 nights in the forest script"):
+    gh api .../repos/exploiters-scripts/99NightsInTheForest-Script/contents/VoidWare   # 9495 B, plain
+  VapeVoidware/VW-Add@main (following the loader chain, all fetched via gh api):
+    loader.lua (115 B) -> loader2.lua (10325 B)                # реестр игр, Obsidian GUI, оркестрация
+    nightsintheforest.lua (165 B) -> nightsintheforest2.lua (10325 B)
+    newnightsintheforest.lua (1115831 B)                        # Luraph v14.7 — НЕ деобфусцирован
+  chain собран дословно -> script.lua (27561 B) -> describe_lua.py -> PARTS.md
+  deobfuscation attempt (Luraph v15.0 tool on the payload): НЕ удалась — см. VALIDATION.md §6
+
+Статус: obfuscated финального слоя НЕ восстановлен; цепочка описана; plain-файлы добавлены как результат.
+Запусков в Roblox не было. Происхождение: публичные репозитории, URL в комментариях разделов.

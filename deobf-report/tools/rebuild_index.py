@@ -45,9 +45,12 @@ def parse_status(path, lua):
     txt = read(path)
     if re.search(r"^\s*continue\s*$", txt, re.M):
         return "Luau (continue)"
+    if "`" in txt or "near '`'" in out:
+        return "Luau (backtick-строка)"
     if "lbl_" in out or "goto" in out:
         return "Lua 5.2+ (goto)"
-    return "артефакт unluac"
+    tail = out.rsplit(":", 1)[-1].strip()[:80]
+    return "не парсится: " + (tail or "неизвестная ошибка")
 
 
 def read(p):

@@ -1,0 +1,11 @@
+2026-11-18 commands:
+  GitHub: VapeVoidware/VWRewrite@main (VoidWare / Vape Bedwars), tree listing (225 files):
+    MainScript.lua (98140 B), games/universal.lua (262056 B), games/6872274481.lua (400306 B),
+    libraries/vm.lua (38607 B, Fiu MIT), guis/*.lua — PLAIN Lua (не обфусцированы)
+  Этот сэмпл = games/6872274481.lua (GameId 6872274481, Bedwars) ДОСЛОВНО -> script.lua
+  describe_lua.py -> PARTS.md
+  Соседние plain-файлы (MainScript/universal/vm/NewMainScript) в репо не дублируются целиком —
+  см. ссылки в VALIDATION.md §6 (fetchable через gh api по тому же пути).
+
+Статус: код plain (без обфускации), получен как есть; описан, не редактировался.
+Запусков в Roblox не было.

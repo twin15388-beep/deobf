@@ -190,3 +190,55 @@ Luau (CodeGen → `work/luau-build/codegen-obj/`, линковка с `obj/*.o` 
 `luau_runner.o`). `bin/luau-compile` проверен (`--help` печатает modes).
 `bin/luau` и `bin/luau-ast` уже были; `bin/luau-compile` в install_tools.sh
 НЕ прописан (install_tools.sh не трогал) — только build_compile.sh.
+
+## §6 Фаза 2 (2026-11-18): «другие режимы» — что реально найдено и где честные границы
+
+### Новые сэмплы (публичные репозитории, содержимое взято как есть)
+- **99_nights_in_the_forest / voidware_loader** — цепочка plain-загрузчиков VoidWare:
+  `exploiters-scripts/99NightsInTheForest-Script` → файл `VoidWare` (точка входа,
+  анти-debug, executor-blacklist, queue_on_teleport/isnetworkowner shims), затем
+  `VapeVoidware/VW-Add@main`: `loader.lua` → `loader2.lua` (GameId-реестр:
+  2619619496 Bedwars, 7008097940 Ink Game [no], 6331902150 Forsaken, 7326934954
+  99 Nights), `nightsintheforest.lua` → `nightsintheforest2.lua` (автовыбор).
+  Все 5 файлов сшиты в `script.combined.lua` дословно с URL-комментариями
+  (Sha: `f41fda250055…`). **Финальная полезная нагрузка Luraph v14.7
+  (`newnightsintheforest.lua`, 1 115 831 B) НЕ деобфусцирована и НЕ в репо.**
+- **bedwars / voidware_6872274481** — `VapeVoidware/VWRewrite@main:games/6872274481.lua`,
+  дословно (406 311 B; 12 262 строки читаемого кода): TP, ESP/chams,
+  `FireServer`-вызовы, GUI; HIGHEST-confidence "читаемый код", но механика только
+  инвентаризована, не запускалась. Sha: `d242c87daae9…`.
+- Сопутствующие plain-файлы того же репо (`MainScript.lua` 98 140 B,
+  `games/universal.lua` 262 056 B, `libraries/vm.lua` Fiu MIT, `guis/*`) в репозиторий
+  НЕ скопированы: повторили бы уже покрытое; адресуемы по тому же репо (`gh api
+  repos/VapeVoidware/VWRewrite/contents/...`).
+
+### Попытка девиртуализации Luraph v14-файлов (honest outcome)
+- Инструмент: vendored `tools/vendor/Deobfuscator-Luraph-V15-master.zip` →
+  `work/luraph15/`, `bin/luau-ast` собран из luau 0.744 (`tools/build_ast.sh`).
+- Входы: `vw_newforsaken.lua` (Luraph v14.4.1, 282 KB),
+  `vw_newinkgame.lua` (v14.4.2, 535 KB), `vw_newnightsintheforest.lua`
+  (v14.7, 1.1 MB) — все задетектированы как `luraph_v14` (0.50–1.00).
+- Результат: **все три «успешно завершены», но результат — НАБЛЮДАТЕЛЬНЫЙ ТРЕЙС
+  (behaviour trace), не восстановленный код** («attempt to index nil with
+  'Options'» / «Main Failure with loading Library!»). Персистентные артефакты
+  лежат в `work/results/` (вне репозитория), в таблицу в репо НЕ включены как
+  «восстановленное». Никаких вымышленных feature-списков не приводится.
+- `forsaken`/`inkgame` partial outputs (`work/results/vw_new*.deobf.lua`)
+  содержат ~20 строк инициализации (флаги `shared.VoidwareForsaken`, запрос
+  `VWUpdateLog`, выбор Obsidian-библиотеки) — не полезная нагрузка.
+
+### Lua 5.1.1 vs Luau AST (переизмерено на всех 65 файлах)
+- Lua 5.1.1 `loadfile`: **34 OK / 31 FAIL** (FAIL = Luau-диалект:
+  `continue`/`+=`/backtick-строки, либо артефакты unluac: >200 locals / too complex).
+- Luau AST (`bin/luau-ast`, Luau 0.744): **58 OK / 7 FAIL** (FAIL = лимиты парсинга
+  «Reached error limit (100)» в bloxburg/autobuild, gacha_online/hub,
+  ironbrew_cascade/_script_hub, corpus/psu_small, king_legacy/KL_psu40_*).
+- Ни один файл не исполнялся в Roblox; «OK» = только синтаксис/парс.
+
+### Границы
+- Ни один файл из этой фазы не является «подтверждённо работающей в игре сборкой».
+- Внешние серверы (`projectabyss.lol`, `luminon.top`, `api.jnkie.com`) мертвы
+  или недоступны — загрузочные хабы, зависящие от них, нефункциональны (факт, не догадка).
+- Инструменты: `rebuild_index.py` расширен разбором причин FAIL-статуса
+  (backtick/continue/goto/артефакт); `build_luau.sh`/`build_ast.sh`/`luau_runner.cpp`
+  — из фазы 1 (сборка `bin/luau`/`bin/luau-ast` из luau-src 0.744).
