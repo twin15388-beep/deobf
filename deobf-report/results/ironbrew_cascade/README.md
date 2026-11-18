@@ -29,8 +29,8 @@ CASCADE (devirtualize) → output.luac → luac_fix.py (maxstack/nups/vararg)
 | `mega_fun_obby_auto_skip_stages` | Mega Fun Obby | 28 | `leaderstats.Stage.Value + 1` → `Workspace.stages:FindFirstChild(tostring(clvl))` |
 | `clone_tycoon_2_1_billion_gems` | Clone Tycoon 2 | 7 | минимальный скрипт |
 
-В каждом каталоге: `script.lua` (код) и `PARTS.md` (механики с уликами, вызовы API,
-имена функций, парты/объекты, ссылки).
+В каждом каталоге: единый `script.combined.lua` — код восстановленного скрипта + вшитый PARTS-блок
+(механики с уликами, вызовы API, имена функций, парты/объекты, ссылки) как комментарии.
 
 ## Чем это отличается от прошлых итераций
 

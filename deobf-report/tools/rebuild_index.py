@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """rebuild_index.py — собрать results/INDEX.md прямо по каталогам.
 
-В индекс попадают ТОЛЬКО те каталоги, где есть деобфусцированный `script.lua`.
-Каталоги без кода (если такие остались) в индекс не попадают — их место в `_failed.md`.
+(2026-11-17, после дедупа) В индекс попадают ТОЛЬКО те каталоги, где есть
+`script.combined.lua` — единый файл: восстановленный код + PARTS.md как
+Lua-комментарии (раздел 1/2). `script.lua`/`PARTS.md` в репозитории больше не
+хранятся (байт-идентичная копия кода — в combined, раздел 2/2); история — в git.
 
     python3 rebuild_index.py [--results results] [-o results/INDEX.md]
 """
@@ -10,15 +12,30 @@ import argparse
 import os
 import re
 import glob
+import shutil
 import subprocess
 
-LUA = "/home/user/deobf/work/lua51/lua"
+LUA_CANDIDATES = [
+    "/home/user/deobf/work/lua51-src/lua",
+    "/home/user/deobf/work/lua51/lua",
+] + [shutil.which(n) for n in ("lua5.1", "lua51", "lua") if shutil.which(n)]
+
+MECH_LINE = re.compile(r"^\s*--\s+-\s+\*\*(.+?)\*\*\s+—", re.M)
 
 
-def parse_status(path):
-    """Проверка loadfile в Lua 5.1.1: OK / Luau-goto / Luau-continue / артефакт unluac."""
+def find_lua():
+    for p in LUA_CANDIDATES:
+        if p and os.path.isfile(p) and os.access(p, os.X_OK):
+            return p
+    return None
+
+
+def parse_status(path, lua):
+    """Проверка loadfile (Lua 5.1.1): OK / артефакт / не проверено."""
+    if not lua:
+        return "не проверено"
     try:
-        r = subprocess.run([LUA, "-e", "local f,e=loadfile('%s'); print(f and 'OK' or e)" % path],
+        r = subprocess.run([lua, "-e", "local f,e=loadfile('%s'); print(f and 'OK' or e)" % path],
                            capture_output=True, text=True, timeout=60)
         out = (r.stdout or "").strip().split("\n")[-1]
     except Exception:
@@ -32,8 +49,6 @@ def parse_status(path):
         return "Lua 5.2+ (goto)"
     return "артефакт unluac"
 
-MECH_LINE = re.compile(r"^- \*\*(.+?)\*\* —", re.M)
-
 
 def read(p):
     try:
@@ -42,74 +57,68 @@ def read(p):
         return ""
 
 
-def sample_info(d):
-    script = os.path.join(d, "script.lua")
-    lines = read(script).count("\n")
-    kb = max(1, os.path.getsize(script) // 1024)
-    parts = read(os.path.join(d, "PARTS.md"))
-    mech = [m for m in MECH_LINE.findall(parts)][:3]
+def sample_info(d, lua):
+    combined = os.path.join(d, "script.combined.lua")
+    text = read(combined)
+    # строки кода = все строки минус заголовок combined и минус раздел 1/2 (комментарии PARTS)
+    m_end = text.find("-- РАЗДЕЛ 2/2")
+    code_lines = text[m_end:].count("\n") if m_end != -1 else text.count("\n")
+    kb = max(1, os.path.getsize(combined) // 1024)
+    mech = [m for m in MECH_LINE.findall(text)][:3]
     log = read(os.path.join(d, "LOG.txt"))
     obf = ""
     for ln in log.split("\n"):
         if ln.lower().startswith("detected:") or "обфускатор" in ln.lower():
             obf = ln.split(":", 1)[-1].strip()
             break
-    return lines, kb, mech, obf
-
-
-def sample_info2(d):
-    lines, kb, mech, obf = sample_info(d)
-    return lines, kb, mech, obf, parse_status(os.path.join(d, "script.lua"))
+    return code_lines, kb, mech, obf, parse_status(combined, lua)
 
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--results", default=os.path.join(os.path.dirname(__file__), "..", "results"))
-    ap.add_argument("-o", "--output")
-    a = ap.parse_args()
-    root = os.path.abspath(a.results)
-    out_path = a.output or os.path.join(root, "INDEX.md")
-
+    ap.add_argument("--results", default=os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "results"))
+    ap.add_argument("-o", "--out", default=None)
+    args = ap.parse_args()
+    root = args.results
+    out = args.out or os.path.join(root, "INDEX.md")
+    lua = find_lua()
+    combineds = glob.glob(os.path.join(root, "*", "*", "script.combined.lua")) + \
+                glob.glob(os.path.join(root, "*", "*", "*", "script.combined.lua"))
     rows = []
-    for script in glob.glob(os.path.join(root, "*", "*", "script.lua")) + \
-            glob.glob(os.path.join(root, "*", "*", "*", "script.lua")):
-        d = os.path.dirname(script)
-        rel = os.path.relpath(d, root).split(os.sep)
-        game, sample = rel[0], "/".join(rel[1:])
-        if game == "ironbrew_cascade":
-            game = "IronBrew"
-        lines, kb, mech, obf, status = sample_info2(d)
-        rows.append((game, sample, lines, kb, mech, obf, status))
-
-    rows.sort(key=lambda r: (r[0], -r[2]))
-    games = sorted({r[0] for r in rows})
-
-    out = []
-    out.append("# Результаты деобфускации\n")
-    out.append("В индекс попадает только то, что **реально удалось деобфусцировать**: "
-               "в каждом каталоге есть `script.lua` (восстановленный код) и `PARTS.md` "
-               "(что делает: механики, вызовы API, имена функций, парты/объекты, ссылки).\n")
-    out.append("Каталогов без кода здесь нет — неудачи и причины перечислены в `_failed.md`.\n")
-    out.append("Всего: **%d сэмплов**, **%d игр/режимов**.\n" % (len(rows), len(games)))
-    out.append("\n- `BEST.md` — что читается как исходник (и антирейтинг).\n"
-               "- `_failed.md` — что не получилось и почему.\n"
-               "- `_batch6.md` — партия 6-й итерации (IronBrew через CASCADE).\n"
-               "- `_corpus_prometheus/` — проверка `unprom` на эталонных сэмплах Prometheus.\n")
-    out.append("\n| Игра (каталог) | Сэмпл | Строк | Размер | Механики | Обфускатор | Парсится |")
-    out.append("|---|---|---:|---:|---|---|---|")
-    for game, sample, lines, kb, mech, obf, status in rows:
-        out.append("| %s | `%s` | %d | %d КБ | %s | %s | %s |" % (
-            game, sample, lines, kb, "; ".join(mech) or "—", obf or "—", status))
-    from collections import Counter
-    cnt = Counter(r[6] for r in rows)
-    out.append("\n**Проверка `loadfile` в Lua 5.1.1:** " +
-               ", ".join("%s — %d" % (k, v) for k, v in cnt.most_common()) + ".")
-    out.append("\n**Колонка «Парсится»** — проверка `loadfile` в Lua 5.1.1. `Lua 5.2+ (goto)` и "
-               "`Luau (continue)` — код корректный, но использует конструкции новее 5.1 "
-               "(unluac иногда оставляет `goto lbl_N`, а часть скриптов изначально Luau). "
-               "`артефакт unluac` — известный дефект генератора на больших функциях.")
-    open(out_path, "w", encoding="utf-8").write("\n".join(out) + "\n")
-    print("[+] %s: %d сэмплов, %d игр" % (out_path, len(rows), len(games)))
+    for cf in sorted(combineds):
+        d = os.path.dirname(cf)
+        rel = os.path.relpath(d, root).replace(os.sep, "/")
+        parts = rel.split("/")
+        game = parts[0]
+        sample = "/".join(parts[1:])
+        info = sample_info(d, lua)
+        if info:
+            rows.append((game, sample, *info))
+    lines = [
+        "# Результаты деобфускации",
+        "",
+        "В индекс попадает только то, что **реально удалось деобфусцировать**: в каждом каталоге есть "
+        "`script.combined.lua` — единый файл: восстановленный код + `PARTS.md` (механики, API, имена "
+        "функций, парты) как комментарии. Отдельных `script.lua`/`PARTS.md` в репозитории больше нет.",
+        "",
+        "Каталогов без кода здесь нет — неудачи и причины перечислены в `_failed.md`.",
+        "",
+        f"Всего: **{len(rows)} сэмплов**, **{len(set(r[0] for r in rows))} игр/режимов**.",
+        "",
+        "- `BEST.md` — что читается как исходник (и антирейтинг).",
+        "- `COMBINED.md` — формат и проверка единых файлов.",
+        "- `_failed.md` — что не получилось и почему.",
+        "- `_batch6.md` — партия 6-й итерации (IronBrew через CASCADE).",
+        "- `_corpus_prometheus/` — проверка `unprom` на эталонных сэмплах Prometheus.",
+        "",
+        "| Игра (каталог) | Сэмпл | Строк | Размер | Механики | Обфускатор | Парсится |",
+        "|---|---|---:|---:|---|---|---|",
+    ]
+    for game, sample, ln, kb, mech, obf, status in rows:
+        mech_s = "; ".join(mech) if mech else "—"
+        lines.append(f"| {game} | `{sample}` | {ln} | {kb} КБ | {mech_s} | {obf or '—'} | {status} |")
+    open(out, "w", encoding="utf-8").write("\n".join(lines) + "\n")
+    print(f"INDEX.md: {len(rows)} сэмплов (lua={lua})")
 
 
 if __name__ == "__main__":

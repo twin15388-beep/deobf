@@ -1,4 +1,5 @@
 # Деобфускация скриптов Roblox: инструменты, проверка и результаты
+> 2026-11-17: дедуп — отдельные `script.lua`/`PARTS.md` удалены; код и PARTS вшиты в `<сэмпл>/script.combined.lua` (см. `results/COMBINED.md`). Промежуточный `deobf-report/output/` удалён; сторонние архивы перенесены в `tools/vendor/`.
 
 Дата: 2026-10-28. Песочница Linux, 2 vCPU, 3 GB RAM, Node 22, Python 3.11, g++/make.
 Все команды, логи и скрипты — в каталоге `deobf-report/` и в рабочем дереве `work/` (в git не попадает).
@@ -20,7 +21,7 @@
 3. **Следствие:** PSU 4.0 **и** PSU 4.5 теперь дают настоящий Lua-исходник (раньше — только дизасм):
    `ano.lua` — 56 150 строк, `Kingpiece.lua` — 26 393, `BloxFruit` — 36 695.
 4. **Инструментов стало заметно больше** (было 8, стало 14 рабочих/проверенных) — см. §3 и §3.1.
-5. **Появилась папка с результатами** `deobf-report/results/` — там рабочий код (`script.lua`) и
+5. **Появилась папка с результатами** `deobf-report/results/` — там рабочий код (`script.combined.lua`) и
    `PARTS.md` с названиями партов/фич по каждому сэмплу, плюс индекс `INDEX.md`.
 6. Всё это собрано в один автоматический пайплайн: `deobf-report/tools/pipeline.py` (детект →
    деобфускатор → ремонт байткода → unluac → разбор частей → `LOG.txt`).
@@ -171,7 +172,7 @@ HttpGet-загрузчик и XOR-декодер строк). Остальные
 | GPO (Grand Piece Online) | Обфусцированных публичных сэмплов **не найдено** — в паблике только исходники хабов. |
 | YBA (Your Bizarre Adventure) | То же: только открытые GUI-скрипты, обфусцированных версий в публичном GitHub нет. |
 | Illegal Soccer | Только SEO-мусорные репозитории (`.github`-заглушки), кода нет вообще. |
-| Где смотреть результат | `deobf-report/results/` — `INDEX.md`, по каталогам `script.lua` + `PARTS.md` + `LOG.txt`. |
+| Где смотреть результат | `deobf-report/results/` — `INDEX.md`, по каталогам `script.combined.lua` + `PARTS.md` + `LOG.txt`. |
 
 ---
 
@@ -290,7 +291,7 @@ HttpGet-загрузчик и XOR-декодер строк). Остальные
 
 Источники: `XxBoomer/script` (`unfazed/Kingpiece.lua`, `ano.lua`), `hankiwastaken/Cracks`
 (`Lightux/v1.3`, `v1.4`, `v1.5`), плюс сэмпл Blox Fruits из той же коллекции.
-Все выходы лежат в `deobf-report/results/king_legacy/<сэмпл>/{script.lua,PARTS.md,LOG.txt}`.
+Все выходы лежат в `deobf-report/results/king_legacy/<сэмпл>/{script.combined.lua,PARTS.md,LOG.txt}`.
 
 | Файл | Обфускатор | Вход | Результат | Что внутри (парты/фичи) |
 |---|---|---|---|---|
@@ -326,7 +327,7 @@ HttpGet-загрузчик и XOR-декодер строк). Остальные
 | `Mega_Fun_Obby_Auto_Skip_Stages.lua` | Mega Fun Obby | 28 |
 | `Clone_Tycoon_2_1_Billion_Gems.lua` | Clone Tycoon 2 | 7 |
 
-Пример качества (фрагмент `god_mode_any_game/script.lua`):
+Пример качества (фрагмент `god_mode_any_game/script.combined.lua`):
 
 ```lua
 arg = game
@@ -588,7 +589,7 @@ Lua 5.1.5 (её нет на GitHub) заменена сборкой 5.1.1; от�
 ## 7. Артефакты
 
 **Правило `results/`:** там лежит только то, что реально деобфусцировано до читаемого Lua —
-`script.lua` + `PARTS.md` (функционал: механики, вызовы API, **имена функций**, парты/объекты, ссылки).
+`script.combined.lua` + `PARTS.md` (функционал: механики, вызовы API, **имена функций**, парты/объекты, ссылки).
 Обфусцированный код, дизасм и «псевдо-Lua» в результаты не кладутся: такие сэмплы уходят
 в `_failed.md` вместе с причиной. Поэтому число каталогов в `results/` = число успехов,
 а не число попыток.
@@ -598,26 +599,19 @@ deobf-report/
 ├── results/                                   # ← ГЛАВНОЕ: рабочий код + названия партов
 │   ├── INDEX.md                               #   таблица всех результатов
 │   ├── README.md                              #   что внутри и как получено
-│   ├── king_legacy/<сэмпл>/
-│   │   ├── script.lua                         #   восстановленный Lua (26k–56k строк)
-│   │   ├── PARTS.md                           #   фичи, UI, URL, парты/подписи
+│   ├── <игра>/<сэмпл>/
+│   │   ├── script.combined.lua                         #   восстановленный Lua + PARTS вшит (один файл)
 │   │   └── LOG.txt                            #   лог пайплайна
 │   ├── corpus/<сэмпл>/                        #   бенчмарк на чужих обфускаторах
 │   ├── _failed.md                             #   что не удалось и что пробовали
 │   ├── _batch5.md                             #   таблица партии GPO / Illegal Soccer / Blox Strike / YBA
 │   ├── _batch6.md                             #   таблица 6-й итерации (IronBrew через CASCADE)
-│   ├── ironbrew_cascade/                      #   36 IronBrew/AztupBrew: 12 script.lua + 36 PARTS.md
+│   ├── ironbrew_cascade/                      #   36 IronBrew/AztupBrew: 12 script.combined.lua (PARTS вшит комментариями)
 │   ├── gpo/, illegal_soccer/, blox_strike/, yba/, one_piece/   # 4-я партия
 │   ├── _batch3.md                             #   сводная таблица третьей партии
 │   ├── _corpus_prometheus/                    #   проверка unprom: 6/6 сэмплов Prometheus
 │   ├── <игра>/<сэмпл>/                        #   вторая партия: 12 режимов (blox_fruits, yba, …)
 │   └── <игра>/<сэмпл>/                        #   третья партия: jailbreak, prison_life, pet_simulator, …
-├── output/                                    # результаты первой итерации (псевдо-Lua, трейсы)
-│   ├── luraph_v15_synaptix_loader.lua
-│   ├── moonsec_v2_lightux13.lua
-│   ├── moonsec_v3_lightux14.pseudo.lua.txt
-│   ├── psu40_kingpiece.pseudo.lua.txt
-│   └── psu40_kingpiece.behaviour_trace.lua
 └── tools/
     ├── pipeline.py                            # детект → деобфускатор → ремонт → unluac → PARTS.md
     ├── lua51_repair.py                        # ремонт maxstacksize + RETURN в Lua 5.1 чанке

@@ -63,7 +63,7 @@ v11 = getconstants2(p3)
 | `_script_hub` | 3 932 | самый крупный артефакт: список ~100 игр, `HttpGet`-загрузчик, XOR-декодер строк |
 | `tiny_tanks_gui` / `piggy_item_hub` / `prison_life_destroyer_hub` | 212 / 166 / 166 | полностью восстановлен GUI (Color3/UDim2/Enum.Font, обработчики кнопок) |
 
-Пример из `mega_fun_obby_auto_skip_stages/script.lua` (после `lua_threeaddr.py`):
+Пример из `mega_fun_obby_auto_skip_stages/script.combined.lua` (после `lua_threeaddr.py`):
 
 ```lua
 while true do
@@ -87,9 +87,9 @@ while true do
 
 ```bash
 # «живые» идентификаторы: чем больше, тем лучше
-grep -o '\b[A-Z][A-Za-z0-9_]\{4,\}\b' path/to/script.lua | sort -u | head -30
+grep -o '\b[A-Z][A-Za-z0-9_]\{4,\}\b' path/to/script.combined.lua | sort -u | head -30
 # «шум» лифта
-grep -c '^\s*L[0-9]*_[0-9]* = L[0-9]*_[0-9]*$' path/to/script.lua
+grep -c '^\s*L[0-9]*_[0-9]* = L[0-9]*_[0-9]*$' path/to/script.combined.lua
 # артефакты unluac
-grep -c 'goto lbl_' path/to/script.lua
+grep -c 'goto lbl_' path/to/script.combined.lua
 ```

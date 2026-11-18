@@ -13,3 +13,12 @@ RC checks: all parsers exit 0; payload parse consumed 100% bytes.
         Kasep6720 DogeHubV2UserLogs, Page Bloodline/RCShop Changer>
   for f in recovered/*.lua: loadfile (Lua 5.1.1) -> OK x13
   sha256sum recovered/*.lua > SHA256SUMS
+2026-11-17 commands (session 4, cleanup/dedupe):
+  mv *.zip -> deobf-report/tools/vendor/ (git mv) ; rm -r deobf-report/output/ ; rm HANDOFF.md
+  find results -name script.lua -delete ; find results -name PARTS.md -delete   # встроены в script.combined.lua
+  python3 deobf-report/tools/rebuild_index.py   # INDEX.md из script.combined.lua
+  git rm recovered/{dogehub_v2_shindo_loader_outer_vm, mod_bloodlinechanger_IRONBREW_notdeobfed,
+                    mod_rcshopchanger_IRONBREW_notdeobfed, mod_shindoautospinrellbloodline_IRONBREW_notdeobfed,
+                    mod_nocdmethod_AZTUPBREW_notdeobfed}.lua   # sha256+sources -> RECOVERY.md
+  git rm recovered/dogehub_v2_shindo_payload_remote_plaintext.lua   # встроен в ../script.combined.lua (раздел 2/2)
+  sha256sum recovered/*.lua > SHA256SUMS   # 7 plain-модулей

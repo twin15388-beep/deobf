@@ -16,7 +16,7 @@
 | `tools/build_ast.sh` | Рабочая сборка `bin/luau-ast` (AstJsonEncoder + 2 стаба), `rc=0`. |
 | `tools/PATCHES.md` | §11 с измеренными отличиями сборки и статусом axom. |
 | `tools/rebuild_index.py` | Исправлен путь к `work/lua51/lua`. |
-| `results/corpus/luraph_v15_rideapet/` | `script.lua` (5 170 строк), `PARTS.md`, `LOG.txt`. |
+| `results/corpus/luraph_v15_rideapet/` | `script.combined.lua` (5 170 строк кода + PARTS-комментарии, sha256 исходника в combined), `LOG.txt`. |
 | `results/INDEX.md`, `results/README.md` | Индекс пересобран: 62 сэмпла, 21 игра/режим. |
 
 Всё скачанное и собранное лежит в `work/` (в `.gitignore`), репо не раздуто.
@@ -107,7 +107,7 @@ python3 deobf-report/tools/pipeline.py <файл.lua> \
   0.13.0 (тот же движок, LUAU_PATH=bin/luau) → RC=2, то же самое сообщение.
   Nonition/MoonveilDeobfuscator 2.0.26 (target 2.0.26, другая версия) →
   RC=2, `Lua parse failed: [2:14275] '=' expected near 'elseif'`.
-  binxgtl/luau-vmp-deobf (`luau-vmp-deobf-main.zip` в корне репозитория,
+  binxgtl/luau-vmp-deobf (`deobf-report/tools/vendor/luau-vmp-deobf-main.zip`,
   pip -e + `work/pydeps/zstandard`): `luauvmp inspect` — восстановил спецификатор
   VM (byte_key=74, word_key=2013823922, varint_key=2489364247,
   str_prefix f9 e1 40 0c, 173/256 опкодов, 37 операций, 4 dispatch-цикла),

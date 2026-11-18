@@ -11,7 +11,7 @@
 | `Stackables_Inf_Money.lua` | Stackables | IronBrew 2.7.2 | 21 КБ | то же | VM не девиртуализирован, читаемого кода нет |
 | `Blox Piece 232.lua` | Blox Piece (Blox Fruits) | IronBrew 2.7.0 | 204 КБ | то же | VM не девиртуализирован, читаемого кода нет |
 | `Da Hood KILL ANY PLAYER GUI.lua` | Da Hood | Luraph 11.5 | 67 КБ | deob.js (только v15), unprom, salvage | VM не девиртуализирован, читаемого кода нет |
-| `Loomian Legacy script.lua` | Loomian Legacy | Luraph 11.1 | 53 КБ | то же | VM не девиртуализирован, читаемого кода нет |
+| `Loomian Legacy (script.combined.lua)` | Loomian Legacy | Luraph 11.1 | 53 КБ | то же | VM не девиртуализирован, читаемого кода нет |
 | `Ro-Ghoul Script.lua` | Ro-Ghoul | Luraph 6.0-beta1 | 96 КБ | то же | VM не девиртуализирован, читаемого кода нет |
 | `PEPSI AIMBOT ALPHA.lua` | Arsenal / универсальный | неизвестный VM (Luraph-подобный десериализатор) | 260 КБ | detect→unknown, deob.js 0.00, unprom, beautify (только форматирование) | снят только внешний слой (конфиг/строки видны, тело — VM) |
 | `Arsenal GUI Script.lua` | Arsenal | то же | 181 КБ | то же | VM не девиртуализирован, читаемого кода нет |

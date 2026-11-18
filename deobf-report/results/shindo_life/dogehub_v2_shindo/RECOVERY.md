@@ -1,105 +1,89 @@
 # Shindo Life — DogeHub V2: полная цепочка восстановления (2026-11-17)
 
-Статус: **Финальный слой восстановлен и прочитан** (обычный Lua, 14 298 строк).
-Три промежуточных обфусцированных слоя пройдены/вынесены за скобки по факту.
+Статус: **финальный слой восстановлен и прочитан** (обычный Lua, 14 298 строк).
 Ничего не запускалось в Roblox; «работает» = `loadfile` (Lua 5.1.1) + чтение кода.
+
+## Один файл на проект (2026-11-17, дедуп)
+
+Единый файл результата: **`../script.combined.lua`** — шапка + `PARTS.md`
+(статический разбор контейнера) как комментарии + **финальный payload дословно**
+(раздел 2/2, sha256 `64df436148bdf00b6257ac62fdf345cecad66c16713d8150b6a3880b9f7ea700`).
+Отдельная копия payload в репозитории больше не хранится (в git-истории — до коммита дедупа).
+
+Каталог `recovered/` — только **plain Lua**-модули цепочки (7 файлов, `SHA256SUMS`):
+
+| Файл | Размер | Что это |
+|---|---|---|
+| mod_chooseurdevice.lua | 6 624 B | Выбор PC/MOBILE, пишет Device.txt |
+| mod_spinrecords.lua | 1 812 B | Счётчик спинов (readfile/writefile) |
+| mod_spinblood_loader.lua | 29 374 B | Проверка `GameId==1511883870`, грузит IronBrew remote |
+| mod_projectbullshit_rebooted.lua | 100 591 B | «Project: Bullshit: Rebooted» (самостоятельное HUB-меню) |
+| mod_pagebloodlinechanger_ui.lua | 28 842 B | UI-страница Bloodline Changer |
+| mod_pagercshopchanger_ui.lua | 28 852 B | UI-страница RC Shop Changer |
+| mod_userlogs.lua | 715 B | POST на внешний вебхук (см. «Приватность») |
+
+Все 7 — `loadfile` (Lua 5.1.1) OK.
 
 ## Цепочка (от лоадера к коду)
 
 ```
-ScriptBlox 224947 («Detected Key system» — предупреждение ложно для этого лоадера)
+ScriptBlox 224947 (badge «Detected Key system» — для этого лоадера не подтверждается)
   └─ NoobieDoge/DogeHubV2@Separated:ShindoLife          44 639 B  plain Lua, IronBrew-VM
-       │  печатает «DogeHub V2 Shindo Life», затем game:HttpGet(...) LOADSTRING
+       │  печатает «DogeHub V2 Shindo Life», затем game:HttpGet(...) + loadstring()
        ▼
-  Kasep6720/Secret@DogeHubV2:Games/ShindoLife          506 964 B  PLAIN Lua (не обфусцирован)
-       │  14 298 строк; содержит UI DogeHub V2 Shindo, фичи (авто-Spin REL Bloodline,
-       │  Bloodline/Element/RC-shop changers, No CD Method, Project: Bullshit Rebooted,
-       │  выбор устройства, логгер). Ремоуты грузятся в рантайме.
-       │
-       ├─ ChooseUrDevice                                  6 624 B  plain Lua
-       │    (пишет Device.txt через writefile; UI выбора PC/MOBILE;
-       │     грузит «pornhub page format gui(s)» из Kasep6720/Secret — третьи GUI)
-       ├─ DogeHubV2ShindoSpinRecords                       1 812 B  plain Lua
-       ├─ DogeHubV2UserLogs                                  715 B  plain Lua (POST вебхука, см. «Приватность»)
-       ├─ ShindoAutoSpinRELLBloodline (меню)               29 374 B  plain Lua-обёртка:
-       │    GameId==1511883870 ? загрузка REMOTE:
-       │      NoobieDoge/DogeHubV2@Functions:ShindoLifeAutoSpinRELLBloodline  18 166 B  IronBrew-v1 (`return(function(...)local Q={...`), НЕ девиртуализирован
-       │    иначе «Game not supported»
-       ├─ Project: Bullshit: Rebooted                     100 591 B  plain Lua (+ внутри 1 loadstring на несуществующий DogeHub/DogeHub — мёртвая ссылка в комментарии)
-       ├─ HDTerebi/Shindo-Life@main:No CD Method          221 422 B  AztupBrew V2.7.2, НЕ девиртуализирован
-       ├─ NoobieDoge/DogeHub/Separated:ShindoBloodlineChanger 44 410 B  IronBrew-v1, НЕ девиртуализирован;
-       │    в рантайме тянет Page:
-       │      Kasep6720/Secret@Functions:…/Page Bloodline Changer     28 842 B  plain Lua (UI-страница)
-       ├─ NoobieDoge/DogeHub/Separated:ShindoRCShopChanger   44 348 B  IronBrew-v1, НЕ девиртуализирован;
-       │    в рантайме тянет Page:
-       │      Kasep6720/Secret@Functions:…/Page RC Shop Changer       28 852 B  plain Lua (UI-страница)
-       └─ (2 упоминания KylnDantas/InfRellCoinsSL — все в комментариях, «--patched»)
+  Kasep6720/Secret@DogeHubV2:Games/ShindoLife          506 964 B  PLAIN Lua — раздел 2/2 combined
+       │  14 298 строк; UI DogeHub V2 Shindo + фичи. Ремоуты грузятся в рантайме.
+       ├─ ChooseUrDevice (plain) ─ грузит «pornhub page format gui(s)» (не скачивались)
+       ├─ DogeHubV2ShindoSpinRecords (plain)
+       ├─ DogeHubV2UserLogs (plain, вебхук)
+       ├─ ShindoAutoSpinRELLBloodline (plain-обёртка) ─ GameId-gate ─ IronBrew-1 remote (НЕ включён)
+       ├─ Project: Bullshit: Rebooted (plain)
+       ├─ HDTerebi/Shindo-Life:No CD Method (AztupBrew V2.7.2, НЕ включён)
+       ├─ NoobieDoge BloodlineChanger / RCShopChanger (IronBrew-1, НЕ включены)
+       │     └─ Page Bloodline/RCShop Changer (plain, в recovered/)
+       └─ KylnDantas/InfRellCoinsSL — упоминается только в комментариях («--patched»)
 ```
 
 ## Как восстановлен финальный слой
 
-1. Внешний слой (`recovered/dogehub_v2_shindo_loader_outer_vm.lua`) — плейнтекст
-   с VM-обфускацией IronBrew-2-подобной формы, но **все операции VM, влияющие на
-   поток, статические**; VM не расшифровывает payload сам — она просто вызывает
-   `game:HttpGet(<url>)` и `loadstring(body)()`.
-2. Прямой запуск в стоковом Lua 5.1.1 падает на Roblox-глобалах; вместо дешифровки
-   написан чёрный ящик `work/sources/dogehub_sandbox.lua`: настоящие базовые
-   библиотеки + болванки всех Roblox/executor-глобалов (метатаблицы-чёрные дыры),
-   `bit`/`bit32` — чистая арифметика на Lua, `loadstring` перехватывается и дампит
-   тело. Запуск: `timeout 10 work/lua51/lua work/sources/dogehub_sandbox.lua`.
-   Трасса: `GET game.HttpGet(sandbox-stub, https://…/Games/ShindoLife, true)` →
-   `LOADSTRING(34 bytes)` (внутренний стаб из IronBrew-контейнера; в песочнице
-   HttpGet не ходит в сеть, поэтому аргумент — строка-болванка). Сам файл по URL
-   скачан отдельно, напрямую через `gh api` (публичный, remote в sandboxе доступен).
-3. Финальный файл — **не обфусцирован вообще**: это исходный Lua-исходник.
-   Проверка: `loadfile` (Lua 5.1.1) OK для всех файлов в `recovered/`; маркеры
-   IronBrew/AztupBrew (`L<digit>_<digits>`, десятичные `\\ddd`) = 0 совпадений в
-   финальном payload.
-4. IronBrew/AztupBrew-модули (`mod_bloodlinechanger`, `mod_rcshopchanger`,
-   `mod_shindoautospinrellbloodline`, `mod_nocdmethod`, `mod_pagercshopchanger`
-   НЕТ — он plain) **не девиртуализированы**; их функциональность восстанавливается
-   из загрузочных страниц (plain) и из имён. `loadfile` проходит (синтаксически
-   валидны), семантика VM не разобрана.
-5. `mod_nocdmethod` (AztupBrew V2.7.2) — Aztup-деобфускатор не применялся
-   (вне приоритета, третий источник, 221 КБ). Честно: НЕ восстановлен.
+1. Внешний слой — плейнтекстовый контейнер IronBrew-VM (`@Ironbrew/netcoreapp2.0/out.lua`,
+   OpArg-перетасовка; контейнер распарсен на 100 % инструментами `deobf-report/tools/ironbrew_*`,
+   см. `dump.txt`/`disasm.txt` в этом каталоге).
+2. Внешняя VM не расшифровывает payload локально — она вызывает `game:HttpGet(...)` и `loadstring(body)()`.
+   Подтверждено чёрным ящиком `work/sources/dogehub_sandbox.lua` (стоковый Lua 5.1.1, болванки
+   Roblox-глобалов, `bit`/`bit32` на чистой арифметике, перехват `loadstring`; сеть в sandbox не ходит).
+3. Файл по URL скачан отдельно через `gh api` (публичный). Финальный файл — **не обфусцирован**:
+   `loadfile` OK; маркеры IronBrew/AztupBrew (`L<digit>_<digits>`, десятичные `\ddd`) = 0 совпадений.
+4. Остальные IronBrew/AztupBrew-тела цепочки **не девиртуализированы** (нет деобфускатора под эти билды).
 
-## Восстановленные файлы (`recovered/`, sha256 в `SHA256SUMS`)
+## Что НЕ включено в репозиторий (и почему)
 
-| Файл | Размер | Шифр? | Что это |
+Чужой **обфусцированный** код в `results/` не хранится (правило папки). Это исходные, не
+девиртуализированные тела; восстановить можно скачиванием по URL (все публичные):
+
+| Файл (не деобфусцирован) | Размер | sha256 | Источник |
 |---|---|---|---|
-| dogehub_v2_shindo_loader_outer_vm.lua | 44 639 | VM (плейнтекст) | Внешний лоадер DogeHub V2 Shindo |
-| dogehub_v2_shindo_payload_remote_plaintext.lua | 506 964 | НЕТ | **Основной скрипт DogeHub V2 Shindo** (UI + фичи) |
-| mod_chooseurdevice.lua | 6 624 | НЕТ | Выбор PC/MOBILE, Device.txt |
-| mod_spinrecords.lua | 1 812 | НЕТ | Счётчик спинов (readfile/writefile) |
-| mod_spinblood_loader.lua | 29 374 | НЕТ (читаемо) | Проверка GameId, грузит IronBrew remote |
-| mod_shindoautospinrellbloodline_IRONBREW_notdeobfed.lua | 18 166 | IronBrew-1 | Remote-тело (за GameId-gate) |
-| mod_projectbullshit_rebooted.lua | 100 591 | НЕТ | «Project: Bullshit Rebooted» (самостоятельное HUB-меню игры) |
-| mod_nocdmethod_AZTUPBREW_notdeobfed.lua | 221 422 | AztupBrew V2.7.2 | «No CD Method» (fast-cast/домен) |
-| mod_bloodlinechanger_IRONBREW_notdeobfed.lua | 44 410 | IronBrew-1 | Лоадер страницы Bloodline Changer |
-| mod_pagebloodlinechanger_ui.lua | 28 842 | НЕТ | UI-страница Bloodline Changer |
-| mod_rcshopchanger_IRONBREW_notdeobfed.lua | 44 348 | IronBrew-1 | Лоадер страницы RC Shop Changer |
-| mod_pagercshopchanger_ui.lua | 28 852 | НЕТ | UI-страница RC Shop Changer |
-| mod_userlogs.lua | 715 | НЕТ | POST на внешний вебхук (см. ниже) |
+| dogehub_v2_shindo_loader_outer_vm.lua | 44 639 B | ee0525fff7d34e74e384180b4adcf74fb4ab1ff45fd0f0e5f5da9243189932ed | `github.com/NoobieDoge/DogeHubV2/contents/ShindoLife?ref=Separated` |
+| mod_bloodlinechanger (IronBrew-1) | 44 410 B | d96206f41f5bf15cbdcff088c393eafd19be2a47b7ed7e226263d862f5b45810 | `github.com/NoobieDoge/DogeHub/contents/ShindoBloodlineChanger?ref=Separated` |
+| mod_rcshopchanger (IronBrew-1) | 44 348 B | 0de74a95b0856b19063065d1e0c246342ac5067c6b83fe5a433f33efab80455c | `github.com/NoobieDoge/DogeHub/contents/ShindoRCShopChanger?ref=Separated` |
+| mod_shindoautospinrellbloodline (IronBrew-1) | 18 166 B | 076113a530cfdd0dc9a8d8f5c3eeacf7da43ed5969417675c788b408360f1d3e | `github.com/NoobieDoge/DogeHubV2/contents/ShindoLifeAutoSpinRELLBloodline?ref=Functions` |
+| mod_nocdmethod (AztupBrew V2.7.2) | 221 422 B | c3369e9982df5f93a4cc682ee92300fc124581474ed65c82d327be2ae0ee7eb4 | `github.com/HDTerebi/Shindo-Life/contents/No%20CD%20Method?ref=main` |
 
 ## Приватность / ответственно
 
-`mod_userlogs.lua` отправляет JSON-POST на внешний Discord-совместимый вебхук
-(URL и token в файле). Содержимое включает `game.PlaceId`/`LocalPlayer.Name`
-(точные поля — `Body` в файле). Мы его НЕ вызывали; он отмечен для пользователя.
-Токен вебхука в чат/отчёты не копируем.
+`mod_userlogs.lua` отправляет JSON-POST на внешний Discord-совместимый вебхук (URL/токен в файле):
+тело включает `game.PlaceId`/`LocalPlayer.Name` (точные поля — `Body` в файле). **Не вызывался.**
+Токен вебхука в отчёты/чат не копировался.
 
-## Что НЕ восстановлено (честно)
+## Что честно НЕ восстановлено
 
-- Девиртуализация IronBrew-1 модулей (Bloodline/RCShop changers, AutoSpin RELL remote) —
-  только обёртки пройдены; их тела: IronBrew VM (см. `ironbrew_dump.py` методология:
-  контейнер парсится на 100 %, финальный слой — мини-VM с K13).
-- AztupBrew V2.7.2 тело «No CD Method».
-- К13/мини-VM слой внешнего лоадера (365 B, sha256 29a8ed28…) — в рантайме не
-  использовался лоадером для payload (payload тянется по сети), ценности нет.
-- Рунтайм-поведение в Roblox не проверялось (по правилам).
+- Девиртуализация IronBrew-1 тел (Bloodline/RCShop changers, AutoSpin-RELL remote).
+- AztupBrew V2.7.2 «No CD Method».
+- Офлайн-дешифровка 365 B мини-VM слоя внешнего лоадера (sha256 `29a8ed28…`) — в рантайме
+  не используется (payload тянется по сети); ценности нет.
+- Рунтайм в Roblox не проверялся (по правилам).
 
-## Метод, пригодный для других IronBrew-обёрток
+## Метод (пригоден для других «лоадер ходит в сеть»)
 
-Чёрный ящик `work/sources/dogehub_sandbox.lua` + `loadstring`-перехват работает для
-любых «IronBrew-лоадер ходит в сеть» схем. Для тел, дешифруемых локально (AztupBrew),
-нужен девиртуализатор, которого под эту версию нет.
+Blackhole-песочница с перехватом `loadstring` работает для любых IronBrew-обёрток такого типа.
+Для тел с **локальной** дешифровкой (AztupBrew) нужен девиртуализатор — под эти версии его нет.

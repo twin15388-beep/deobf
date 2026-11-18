@@ -55,10 +55,10 @@ clone_tag() {
 
 echo "=== 1. committed archives ==="
 if [ ! -f "$WORK/luraph15/Deobfuscator-Luraph-V15-master/deob.js" ]; then
-  unzip -q -o "$ROOT/Deobfuscator-Luraph-V15-master.zip" -d "$WORK/luraph15"
+  unzip -q -o "$ROOT/deobf-report/tools/vendor/Deobfuscator-Luraph-V15-master.zip" -d "$WORK/luraph15"
 fi
 if [ ! -d "$WORK/luau-vmp-deobf-main/luauvmp" ]; then
-  unzip -q -o "$ROOT/luau-vmp-deobf-main.zip" -d "$WORK"
+  unzip -q -o "$ROOT/deobf-report/tools/vendor/luau-vmp-deobf-main.zip" -d "$WORK"
 fi
 cp "$TOOLS/luau_runner.cpp" "$WORK/luau_runner.cpp"
 echo "[+] archives unpacked"

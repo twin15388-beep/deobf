@@ -17,7 +17,7 @@
   "tools": {
     "luraph15": {
       "repo": "caomod2077/Deobfuscator-Luraph-V15",
-      "source": "закоммиченный Deobfuscator-Luraph-V15-master.zip (sha256 cb95e2c6968ffde22847f812...)",
+      "source": "закоммиченный deobf-report/tools/vendor/Deobfuscator-Luraph-V15-master.zip (sha256 cb95e2c6968ffde22847f812...)",
       "version": "1.0.0",
       "version_source": "package.json в архиве",
       "commit": null,
@@ -91,7 +91,7 @@
       "note": "В этой сессии не запускался; REPORT.md сообщает о несовместимости с luaparser 3.3/4.2."
     },
     "luau-vmp-deobf": {
-      "source": "закоммиченный luau-vmp-deobf-main.zip (sha256 bd6e3a1c9cbea68f4b9d1940...)",
+      "source": "закоммиченный deobf-report/tools/vendor/luau-vmp-deobf-main.zip (sha256 bd6e3a1c9cbea68f4b9d1940...)",
       "status": "installed_not_runnable",
       "note": "Требует Lune; release-assets GitHub в этой песочнице недоступны. В сессии не запускался."
     },
