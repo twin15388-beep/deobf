@@ -10,13 +10,13 @@
 
 ## Проверка синтаксиса (измерена на текущих файлах)
 
-- Файлов: **65**
-- Lua 5.1.1 `loadfile`: **34** OK / **31** FAIL
-- Luau AST (`luau-ast`, Luau 0.744): **58** OK / **7** FAIL
-- Оба OK: **34**
+- Файлов: **66**
+- Lua 5.1.1 `loadfile`: **35** OK / **31** FAIL
+- Luau AST (`luau-ast`, Luau 0.744): **59** OK / **7** FAIL
+- Оба OK: **35**
 
 FAIL (Lua 5.1.1) бывает Luau-диалектом (`continue`, `+=`, backtick-строки — в Roblox валидно);
-FAIL (Luau) — unluac-артефакты (`goto`/`lbl_*` не поддерживаются в Luau) и лимиты сложности.
+FAIL (Luau) — лимиты парсинга («Reached error limit (100)») либо unluac-артефакты.
 Ни одной FAIL-файла за «рабочие» не выдаётся; Roblox-рантайм нигде не запускался.
 
 ## Файлы по играм
@@ -140,6 +140,12 @@ FAIL (Luau) — unluac-артефакты (`goto`/`lbl_*` не поддержи�
 | `KL_psu40_BloxFruit` | 1332794 B | `34161b7df401…` | FAIL | FAIL |
 | `KL_psu40_Kingpiece` | 875470 B | `4d70bc8f9173…` | FAIL | FAIL |
 | `KL_psu45_ano` | 3509697 B | `8b1f8c6df678…` | FAIL | FAIL |
+
+### lifting_guccis_farm (1)
+
+| Сэмпл | Размер combined | Приставка sha256 | Lua 5.1 | Luau AST |
+|---|---:|---|---|---|
+| `inquisitor_hub` | 9479 B | `a2605e98960e…` | OK | OK |
 
 ### murder_mystery_2 (3)
 

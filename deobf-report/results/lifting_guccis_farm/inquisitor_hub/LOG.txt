@@ -1,0 +1,10 @@
+input: repos/gzyomi/Inquisitor-HUB/contents/AllusiveBladeBallScript (GitHub API, raw) 2026-11-18
+detected: none (обычный Lua, вывод «Gui to Lua» v3.2, минифицирован неполностью)
+результат: script.combined.lua (PARTS.md + script.lua дословно)
+
+ВАЖНО (честная маркировка): имя файла — «AllusiveBladeBallScript», автор позиционирует репо как blade ball.
+ПО ДЕЛУ это НЕ Blade Ball: GUI «Gucci's Farm», кнопки EquipDW/LiftDW (Double Weight), удаление HUD-элементов,
+Anti Afk. Игровой процесс — лифтинг (Rebirth/RebFrame, StrengthHolder, CashHolder, ProteinBuy).
+Имена объектов игры завязаны на клиента — после обновления игры скрипт может сломаться.
+Ничего по сети не тянет; только Roblox API (Players/StarterGui/VirtualUser/PlayerGui).
+Запусков в Roblox не было; «работает» = синтаксическая проверка (см. COMBINED.md).

@@ -75,6 +75,8 @@ Roblox» из этого файла не следует ни для одного
 | 99_nights_in_the_forest | `voidware_loader/script.combined.lua` | 34 117 B | FAIL (backtick-строки) | **OK** | Публичная ЦЕПОЧКА загрузчиков VoidWare под 99 Nights: точка входа с анти-debug/executor-проверками (`exploiters-scripts/99NightsInTheForest-Script` → «VoidWare», 9 495 B) → `VapeVoidware/VW-Add@main`: `loader.lua` → `loader2.lua` (реестр GameId → скрипт: Bedwars / Ink Game / Forsaken / 99 Nights, Obsidian UI, оркестрация) → `nightsintheforest.lua` → `nightsintheforest2.lua` (автовыбор «Pedrin Hub»/VoidWare). URL в комментариях разделов combined. Финальная полезная нагрузка (`newnightsintheforest.lua`, Luraph v14.7, 1.1 MB) НЕ деобфусцирована и в репозиторий НЕ кладётся |
 | bedwars | `voidware_6872274481/script.combined.lua` | 406 311 B | FAIL (`continue`) | **OK** | `VapeVoidware/VWRewrite@main:games/6872274481.lua` — модуль под GameId `6872274481` (Bedwars). 12 262 строки читаемого кода: неприкосновенные функции Vape (`run`, cloneref), GUI/ESP-механики (Menu, chams/ESP, телепорты), FireServer-вызовы. Соседние plain-файлы того же репо (`MainScript.lua` 98 140 B, `games/universal.lua` 262 056 B, `libraries/vm.lua` — Fiu MIT, `guis/*`) в репозиторий НЕ скопированы целиком — адресуемы по тому же репо |
 
+| lifting_guccis_farm | `inquisitor_hub/script.combined.lua` | 9 479 B | **OK** | **OK** | `gzyomi/Inquisitor-HUB` → `AllusiveBladeBallScript` (имя чужое: это НЕ Blade Ball). Вывод «Gui to Lua» v3.2: GUI «Gucci's Farm» (лифтинг-игра), авто-активация «Double Weight», equip из backpack, удаление HUD-кадров, Anti-Afk (VirtualUser). Сеть не использует, зависимости только Roblox API. Замечание: в игровом клиенте имена объектов могут не совпасть после обновлений |
+
 Lua 5.1 FAIL для обоих — диалект (backtick-строки / `continue`), в Roblox легален; синтаксис под Luau-AST парсится.
 Попытка прогнать три Luraph v14-файла через vendored `Deobfuscator-Luraph-V15-master` (`bin/luau-ast` после сборки):
 все три «recovered» результат — это Behaviour-трейсы/заголовки (`script error: attempt to index nil with 'Options'` /
@@ -106,30 +108,49 @@ HTTP-запрос на VWUpdateLog, запись Voidware_InkGame_Library_Choice
 в Roblox ни один файл не исполнялся. Ни один из этих файлов не является
 подтверждённо работающей в игре сборкой.
 
-## Что точно OK по Lua 5.1.1 — полный список (34 файла, из 65 сэмплов)
+## Что точно OK по Lua 5.1.1 — полный список (35 файлов, из 66 сэмплов)
 
 ```
-blox_strike/d0inks_router                 illegal_soccer/luarmor_router        pet_simulator/op_gui
-blox_strike/twistedk1d                    illegal_soccer/maxlegends_loader     prison_life/cmd_gui
-close_quarters_combat/gui                 ironbrew_cascade/anti_afk            prison_life/gui
-counter_blox/hub                          ironbrew_cascade/avatar_swastika     prison_life/main
-gpo/austina_ui                            ironbrew_cascade/clone_tycoon_2_1_billion_gems
-gpo/tempest_hub                           ironbrew_cascade/fps_booster         prison_life/simple_gui
-gpo/venomware                             ironbrew_cascade/god_mode_any_game
-yba/azero_hub                             ironbrew_cascade/mega_fun_obby_auto_skip_stages
-shindo_life/dogehub_v2_shindo             ironbrew_cascade/piggy_item_hub
-the_wild_west/coal_farm                   ironbrew_cascade/prison_life_destroyer_hub
-the_wild_west/new_farm                    ironbrew_cascade/tiny_tanks_gui
-the_wild_west/no_coal                     jailbreak/gui_2
-                                          jailbreak/jailbreaker_v42
-                                          jailbreak/unjailbreak
-                                          murder_mystery_2/full
-                                          one_piece/kaitun_nav
-                                          pet_simulator/gui
+blox_strike/d0inks_router
+blox_strike/twistedk1d
+close_quarters_combat/gui
+counter_blox/hub
+gpo/austina_ui
+gpo/tempest_hub
+gpo/venomware
+illegal_soccer/luarmor_router
+illegal_soccer/maxlegends_loader
+ironbrew_cascade/anti_afk
+ironbrew_cascade/avatar_swastika
+ironbrew_cascade/clone_tycoon_2_1_billion_gems
+ironbrew_cascade/fps_booster
+ironbrew_cascade/god_mode_any_game
+ironbrew_cascade/mega_fun_obby_auto_skip_stages
+ironbrew_cascade/piggy_item_hub
+ironbrew_cascade/prison_life_destroyer_hub
+ironbrew_cascade/tiny_tanks_gui
+jailbreak/gui_2
+jailbreak/jailbreaker_v42
+jailbreak/unjailbreak
+lifting_guccis_farm/inquisitor_hub
+murder_mystery_2/full
+one_piece/kaitun_nav
+pet_simulator/gui
+pet_simulator/op_gui
+prison_life/cmd_gui
+prison_life/gui
+prison_life/main
+prison_life/simple_gui
+shindo_life/dogehub_v2_shindo
+the_wild_west/coal_farm
+the_wild_west/new_farm
+the_wild_west/no_coal
+yba/azero_hub
+
 ```
 
-Остальные 31 — FAIL под Lua 5.1.1 ( Luau AST при этом OK для 58/65; полный статус: `deobf-report/results/COMBINED.md`).
-**Синтаксически рабочих файлов — 34 из 65; для приоритетных игр из них — GPO ×3, YBA ×1, Shindo ×1.**
+Остальные 31 — FAIL под Lua 5.1.1 (Luau AST при этом OK для 59/66; полный статус: `deobf-report/results/COMBINED.md`).
+**Синтаксически рабочих файлов — 35 из 66; для приоритетных игр из них — GPO ×3, YBA ×1, Shindo ×1.**
 Файлы FAIL за рабочие не выдаются.
 
 Список «что дать пользователю первым»: `shindo_life/dogehub_v2_shindo/script.combined.lua`

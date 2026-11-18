@@ -1,0 +1,63 @@
+--======================================================================
+-- script.combined.lua — ЕДИНЫЙ ФАЙЛ результата деобфускации
+-- Игра/тема: lifting_guccis_farm · Сэмпл: inquisitor_hub
+-- Каталог:   deobf-report/results/lifting_guccis_farm/inquisitor_hub/
+-- Дата сборки: 2026-11-17 · Сгенерировано deobf-report/tools/build_combined.py
+--
+-- Состав (в этом порядке):
+--   * PARTS.md (механики / Roblox API / имена функций / парты) — ниже как комментарии
+--   * script.lua — ниже дословно (sha256=4b206fe0380bc14e19e0d0c965ad15e82fe50f90249b78f70050ed885801a5ee)
+--
+-- Раздел 1/2 ниже — содержимое PARTS.md, построчно как Lua-комментарии.
+-- Раздел 2/2 — восстановленный код (script.lua) ДОСЛОВНО, без изменений.
+-- Комментарии в этом файле НЕ являются частью исходного кода игры.
+-- ВНИМАНИЕ: это чужой код (игровой скрипт/хаб). Не запускайте его в Roblox,
+-- не понимая, что он делает; результаты получены статической деобфускацией.
+--======================================================================
+--======================================================================
+-- РАЗДЕЛ 1/2: PARTS.md (инвентарь: механики / Roblox API / имена функций / парты)
+--======================================================================
+-- ## Что делает (по восстановленному коду)
+--
+-- - **GUI / меню** — улики: `screengui`, `textbutton`, `textlabel`
+-- - **анти-АФК / ввод** — улики: `button2down`, `idled`, `virtualuser`
+-- - **автофарм / авто-клик** — улики: `farm`
+-- - **телепорт / движение** — улики: `cframe`
+-- - **аимбот / наведение** — улики: `mousebutton`
+-- - **деньги / ресурсы** — улики: `cash`
+--
+-- ## Вызовы API
+--
+-- - Сервисы: `Players`, `VirtualUser`
+-- - Классы/объекты: `Frame`, `ImageLabel`, `LocalScript`, `ScreenGui`, `TextButton`, `TextLabel`
+-- - Методы: `GetService`×18, `Destroy`×16, `GetChildren`×2, `WaitForChild`×1
+--
+-- ## Имена функций (0)
+--
+-- _имена не сохранились — функции пронумерованы лифтом (`L2_1` и т.п.), смысл восстанавливается по вызовам выше_
+--
+-- ## Строковые константы (UI, подписи)
+--
+-- - `Anti Afk` ×2
+-- - `Double Weight` ×2
+-- - `PlayerGui`
+-- - `Info`
+-- - `Gucci`
+-- - `EquipDW`
+-- - `LiftDW`
+-- - `Delete Hud`
+--
+-- ## Ссылки / webhooks / ассеты (0)
+--
+-- _нет_
+--
+-- ## Парты / объекты (83)
+--
+-- - через `WaitForChild`/`FindFirstChild`: `PlayerGui`
+-- - идентификаторы в коде: `Activate`, `Active`, `Afk`, `Anti`, `AntiAfk`, `Auto4`, `BackgroundColor3`, `Backpack`, `Bar`, `BlackMarket`, `BorderColor3`, `Button2Down`, `Button2Up`, `CFrame`, `CashButton`, `CashHolder`, `Character`, `Color3`, `CurrentCamera`, `Delete`, `Destroy`, `Double`, `Draggable`, `DriedUpCat`, `Enum`, `Equip`, `EquipDW`, `Farm`, `Font`, `Gains`, `GetChildren`, `GetService`, `Gucci`, `Gui`, `HUD`, `Hud`, `Idled`, `Info`, `Instance`, `Instances`
+--======================================================================
+-- КОНЕЦ PARTS.md
+--======================================================================
+-- РАЗДЕЛ 2/2: восстановленный код (дословно)
+--======================================================================
+-- Gui to Lua -- Version: 3.2 -- Instances: local ScreenGui = Instance.new("ScreenGui") local Frame = Instance.new("Frame") local Info = Instance.new("TextLabel") local equip = Instance.new("TextButton") local lift = Instance.new("TextButton") local deletehud = Instance.new("TextButton") local close = Instance.new("TextButton") local AntiAfk = Instance.new("TextButton") --Properties: ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui") Frame.Parent = ScreenGui Frame.BackgroundColor3 = Color3.fromRGB(0, 0, 127) Frame.BorderColor3 = Color3.fromRGB(255, 255, 255) Frame.Position = UDim2.new(0.340173632, 0, 0.109336607, 0) Frame.Size = UDim2.new(0, 365, 0, 468) Info.Name = "Info" Info.Parent = Frame Info.BackgroundColor3 = Color3.fromRGB(0, 0, 127) Info.Position = UDim2.new(0.08421731, 0, 0.118445188, 0) Info.Size = UDim2.new(0, 300, 0, 50) Info.Font = Enum.Font.SpecialElite Info.Text = "Gucci's Farm" Info.TextColor3 = Color3.fromRGB(255, 255, 255) Info.TextScaled = true Info.TextSize = 14.000 Info.TextStrokeColor3 = Color3.fromRGB(0, 71, 61) Info.TextWrapped = true equip.Name = "equip" equip.Parent = Frame equip.BackgroundColor3 = Color3.fromRGB(0, 0, 127) equip.BorderColor3 = Color3.fromRGB(255, 255, 255) equip.Position = UDim2.new(0.257131338, 0, 0.287386566, 0) equip.Size = UDim2.new(0, 172, 0, 50) equip.Font = Enum.Font.SciFi equip.Text = "EquipDW" equip.TextColor3 = Color3.fromRGB(255, 255, 255) equip.TextSize = 30.000 equip.TextWrapped = true lift.Name = "lift" lift.Parent = Frame lift.BackgroundColor3 = Color3.fromRGB(0, 0, 127) lift.BorderColor3 = Color3.fromRGB(255, 255, 255) lift.Position = UDim2.new(0.262099504, 0, 0.461822569, 0) lift.Size = UDim2.new(0, 172, 0, 50) lift.Font = Enum.Font.SciFi lift.Text = "LiftDW" lift.TextColor3 = Color3.fromRGB(255, 255, 255) lift.TextSize = 30.000 lift.TextWrapped = true deletehud.Name = "deletehud" deletehud.Parent = Frame deletehud.BackgroundColor3 = Color3.fromRGB(0, 0, 127) deletehud.BorderColor3 = Color3.fromRGB(255, 255, 255) deletehud.Position = UDim2.new(0.263693094, 0, 0.63941735, 0) deletehud.Size = UDim2.new(0, 172, 0, 50) deletehud.Font = Enum.Font.SciFi deletehud.Text = "Delete Hud" deletehud.TextColor3 = Color3.fromRGB(255, 255, 255) deletehud.TextSize = 30.000 close.Name = "close" close.Parent = Frame close.BackgroundColor3 = Color3.fromRGB(170, 0, 0) close.Position = UDim2.new(0.906135142, 0, 0, 0) close.Size = UDim2.new(0, 34, 0, 30) close.Font = Enum.Font.SourceSans close.Text = "X" close.TextColor3 = Color3.fromRGB(0, 0, 0) close.TextSize = 30.000 AntiAfk.Name = "Anti Afk" AntiAfk.Parent = Frame AntiAfk.BackgroundColor3 = Color3.fromRGB(0, 0, 127) AntiAfk.BorderColor3 = Color3.fromRGB(255, 255, 255) AntiAfk.Position = UDim2.new(0.257534236, 0, 0.822649539, 0) AntiAfk.Size = UDim2.new(0, 172, 0, 50) AntiAfk.Font = Enum.Font.SciFi AntiAfk.Text = "Anti Afk" AntiAfk.TextColor3 = Color3.fromRGB(255, 255, 255) AntiAfk.TextSize = 30.000 -- Scripts: local function TSAFGUB_fake_script() -- ScreenGui.LocalScript 	local script = Instance.new('LocalScript', ScreenGui) 	--By DriedUpCat 	 	frame = script.Parent.Frame --Name of your frame 	frame.Draggable = true 	frame.Active = true 	frame.Selectable = true end coroutine.wrap(TSAFGUB_fake_script)() lift.MouseButton1Click:connect(function() 	_G.Auto4 = true 	while _G.Auto4 do 		wait(0.6) 		for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do 			if v.Name == "Double Weight" then v:Activate() end 		end 	end end) equip.MouseButton1Click:connect(function() 	_G.Equip = true 	while _G.Equip do 		wait() 		for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do 			if v.Name == "Double Weight" then v:Activate() 				v.Parent = game.Players.LocalPlayer.Character 			end 		end 	end end) deletehud.MouseButton1Down:connect(function() 	game:GetService("Players").LocalPlayer.PlayerGui.HUD.Frame.ProteinBuy:Destroy() 	game:GetService("Players").LocalPlayer.PlayerGui.HUD.Frame.OpenShop:Destroy() 	game:GetService("Players").LocalPlayer.PlayerGui.HUD.Frame.OpenReb:Destroy() 	game:GetService("Players").LocalPlayer.PlayerGui.HUD.Frame.ImageLabel:Destroy() 	game:GetService("Players").LocalPlayer.PlayerGui.HUD.Frame.OpenPack:Destroy() 	game:GetService("Players").LocalPlayer.PlayerGui.HUD.Frame.PopSound:Destroy() 	game:GetService("Players").LocalPlayer.PlayerGui.HUD.Frame.BlackMarket:Destroy() 	game:GetService("Players").LocalPlayer.PlayerGui.HUD.Frame.LiftRemind:Destroy() 	game:GetService("Players").LocalPlayer.PlayerGui.HUD.Frame.MuscleGain.Gains:Destroy() 	game:GetService("Players").LocalPlayer.PlayerGui.HUD.Frame.RebFrame:Destroy() 	game:GetService("Players").LocalPlayer.PlayerGui.HUD.Frame.ShopFrame:Destroy() 	game:GetService("Players").LocalPlayer.PlayerGui.HUD.Frame.OpenSkins:Destroy() 	game:GetService("Players").LocalPlayer.PlayerGui.HUD.Frame.Bar:Destroy() 	game:GetService("Players").LocalPlayer.PlayerGui.HUD.Frame.StrengthHolder.ImageLabel:Destroy() 	game:GetService("Players").LocalPlayer.PlayerGui.HUD.Frame.CashHolder:Destroy() 	game:GetService("Players").LocalPlayer.PlayerGui.HUD.Frame.CashButton:Destroy() end) close.MouseButton1Click:connect(function() 	close.Visible = true 	Frame.Visible = false 	close.Visible = false end) AntiAfk.MouseButton1Click:connect(function() 	local vu = game:GetService("VirtualUser") 	game:GetService("Players").LocalPlayer.Idled:connect(function() 		vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame) 		wait(0.4) 		vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame) 	end) end)

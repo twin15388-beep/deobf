@@ -242,3 +242,54 @@ Luau (CodeGen → `work/luau-build/codegen-obj/`, линковка с `obj/*.o` 
 - Инструменты: `rebuild_index.py` расширен разбором причин FAIL-статуса
   (backtick/continue/goto/артефакт); `build_luau.sh`/`build_ast.sh`/`luau_runner.cpp`
   — из фазы 1 (сборка `bin/luau`/`bin/luau-ast` из luau-src 0.744).
+
+## §6.1 Фаза 3 (2026-11-18): Blade Ball / Steal-a-Brainrot / 99 Nights — новые находки и отрицательные результаты
+
+### Каталог пополнили
+- **lifting_guccis_farm / inquisitor_hub** — `gzyomi/Inquisitor-HUB` → файл
+  `AllusiveBladeBallScript` (имя чужое): plain Gui-to-Lua v3.2, GUI «Gucci's Farm»
+  (лифтинг-игра): кнопки EquipDW/LiftDW (авто-активация «Double Weight»), удаление
+  HUD-кадров, Anti-Afk (VirtualUser). Нет обращений к сети/HttpGet. Lua 5.1 **OK**,
+  Luau AST **OK**. В Roblox не запускался; имена объектов привязаны к клиенту.
+
+### Отрицательные результаты (инструментально подтверждены)
+- `Oussama-008/BladeBallScripts/AutoParry.lua` (4 280 B, plain Lua): парсится
+  (lua51 OK, luau-ast OK), **но функционально сломан**: обработчики кликания
+  вызывают `AutoParry()`/`AutoSpam()`, которые объявлены ниже как
+  `local function` → в момент клика это вызов несуществующего глобального значения →
+  «attempt to call a nil value»; фичи не запускаются. Дальше —
+  `ReplicatedStorage.Events.Parry`, проверка имени части `Ball` — имена
+  неподтверждённые. В каталог НЕ включён.
+- `OfficialNebula/BladeBallScript` (moonsec_v3; `main.lua` 154 KB, `library.lua`
+  350 KB, репо публичный, starred): разобран штатной связкой
+  `moonsec-js-deobf` (namespace `work/moonsec-js-deobf`) → unluac. **Это вредоносный
+  лут.** Деобфусцированный `main.lua` (644 B): задаёт в `_G` `Usernames`
+  (whitelist из 3 ников), `min_rap = 100`, `pingEveryone = "Yes"`,
+  **жёстко заданный Discord-webhook (значение НЕ приводится, токен)**, после чего
+  тянет полезную нагрузку с `raw.githubusercontent.com/script-provider/BladeBallScript/.../library.lua`.
+  Частичный дамп `library.lua` (unluac упал на `Implicit return must have zero values`,
+  182 строки из ~сотен): гейт по PlaceId 13772394625 (Blade Ball), кик при ≥16 игроках,
+  кик на VIP-серверах, проверка trade-PIN: `ReplicatedStorage...WaitForChild("Packages")` →
+  `sleitnick_net@0.1.0` → `RF/ResetPINCode` с атакующим заданным PIN (жертве ставится
+  известное значение), ветка `identifyexecutor() == "Delta"` → вторая ступень с
+  `pastefy.app` (путь не приводится). **Сэмпл в каталог НЕ добавлен; webhook-токен
+  нигде в репозитории не хранится.** Не запускать; в Roblox код не исполнялся.
+  Это публичный случай «читерский скрипт = кража аккаунтов», репортить стоит
+  владельцам площадок самим (ScriptBlox «verified» у этой записи — проверка не чинит).
+- `xeno_hub.lua` (`ballj4359-pixel/Xeno-hub`, 63 B): загрузочный стаб
+  (`loadstring(HttpGet(pastefy.app/…))`), не инлайн, пропущен.
+- `collonroger/pigeonhub` (`99nights.lua` 407 KB, `Old99nights.lua` 339 KB,
+  `autofarmdiamonds.lua` 78 KB, `steal a brainrot 1-10m finder` 36 KB),
+  `kyruxv1/99nights-in-the-forest-script/99nitf` (138 KB),
+  `koalesanajlepsze/Steal-a-Brainrot-Script/rehgbuehvwe.txt` (754 KB, 225★):
+  обфускация wearedevs/25ms/«unknown». Проверено тулами: PSU — «no PSU payload»,
+  Luraph-deobf — `generic 0.00 unknown obfuscator`, CASCADE — «Failed to detect
+  obfuscator». Восстановить этой сборкой нельзя. Не включены.
+- `iTugixerSecunub/Steal-a-Brainrot-Hellstorm`: кода в репо нет (файл `.cs`, 3 байта).
+- `waliDiv/Blade-Ball-Script`, `bl-ball-tools/Blade-Ball-Scripts`, `BilixTap/fisch-script`,
+  `streamj642-afk/FischROBLOX`: только README/маркетинг; inline-тел нет.
+
+### Фон: публичные читерские репозитории содержат вредоносные тела
+См. также `mod_userlogs.lua` в shindo (RECOVERY.md) — тот же паттерн (вебхук, данные
+игроков). Ни один из этих URL/вебхук не вызывался из песочницы; ни один токен
+в репозиторий не попал.
